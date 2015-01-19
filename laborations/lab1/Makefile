@@ -1,7 +1,13 @@
-.PHONY : ship
+# Andreas, 2014-01-19 Makefile for lab1
 
-ship : lab1.html
-	scp $< abela@remote12.chalmers.se:/chalmers/groups/edu2009/www/www.cse.chalmers.se/year/2015/course/DAT151/laborations/lab1/
+.PHONY : all www testsuite
+
+all : www testsuite
+
+testsuite :
+	make -C testscript
+
+www : lab1.html
 
 %.html : %.txt
 	txt2tags $<
