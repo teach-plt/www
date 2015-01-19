@@ -1,0 +1,9 @@
+/*
+  NOTE: passing this program is *NOT REQUIRED*. It is very
+  hard because of a shift/reduce conflict with qualified
+  constants.
+*/
+
+int main() {
+	i < j;
+}

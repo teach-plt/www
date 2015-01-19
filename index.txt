@@ -1,0 +1,223 @@
+Programming Language Technology
+Course codes: Chalmers DAT151, DAT150, GU DIT230
+Spring Term 2015 (LP3)
+
+%!target:html
+
+Official URL: http://www.cse.chalmers.se/edu/course/DAT151/
+
+Google group: http://groups.google.com/group/plt-2015-lp3
+(**please provide your full name and date of birth when requesting membership!**)
+
+Studieportal:
+https://www.student.chalmers.se/sp/course?course_id=21767
+
+Last year course page:
+http://www.cse.chalmers.se/edu/year/2014/course/DAT151/index.html
+
+
+=News and changes=
+
+2015-01-13 First version of this page - mostly a copy of the 2014 material.
+           Updates forthcoming soon.
+
+
+=Schedule (tentative!)=
+
+All lectures are in HA2.
+
+Material: plt = course book, dragon = Dragon book.
+Slides follow closely the plt book.
+
+
+|| Date    | Time  | Title                             | Material                      ||
+| Tue 20/1 | 13-15 | Introduction: Compilation Phases  | [slides http://www.digitalgrammars.com/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
+| Thu 22/1 | 13-15 | Grammars                          | [slides http://www.digitalgrammars.com/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
+| Tue 27/1 | 13-15 | Hands-on with Lab 1               | [lab1 PM laborations/lab1/lab1.html]
+| Thu 29/1 | 13-15 | Theory of lexing and parsing      | [slides http://www.digitalgrammars.com/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
+| //Mon 2/2// | //23// | //Lab 1 deadline//            | //[lab1 PM laborations/lab1/lab1.html]//
+| Thu  5/2 | 13-15 | Type checking                     | [slides http://www.digitalgrammars.com/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
+| Tue 10/2 | 13-15 | Interpreters                      | [slides http://www.digitalgrammars.com/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
+| Thu 12/2 | 13-15 | Hands-on with Lab 2               | [lab2 PM laborations/lab2/lab2.html]
+| //Mon 16/2// | //23// | //Lab 2 deadline//           | //[lab2 PM laborations/lab2/lab2.html]//
+| Tue 17/2 | 13-15 | Code generation                   | [slides http://www.digitalgrammars.com/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
+| //Tue 17/2// | //15-17// | Hands-on with Lab 3, group 1, //in ED-3507//     | [lab3 PM laborations/lab3/lab3.html]
+| //Fri 20/2// | //13-15// | Hands-on with Lab 3, group 2, //in ED-3507//     | [lab3 PM laborations/lab3/lab3.html]
+| Tue 24/2 | 13-15 | The language design space         | [slides http://www.digitalgrammars.com/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1
+| //Wed 25/2// | //23// | //Lab 3 deadline//           | //[lab3 PM laborations/lab3/lab3.html]//
+| Thu 26/2 | 13-15 | Functional programming languages  | [slides http://www.digitalgrammars.com/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
+| Tue 3/3 | 13-15 | Hands-on with Lab 4                | [lab4 PM laborations/lab4/lab4.html]
+| Thu 5/3 | 13-15 | Preparing for the exam             | [Training Exam exams/exam-plt-2013-2.pdf]
+| //Tue 10/3// | //23// | //Lab 4 deadline//           | //[lab4 PM laborations/lab4/lab4.html]//
+| //Fri 13/3// | 14-18 | //Exam// (in house M)         | [old exams exams/]
+| //Sat 14/3// | //23// | //Final lab deadline//       | //all lab returns//
+
+The official course schema is in [Time Edit https://se.timeedit.net/web/chalmers/db1/public/ri1X30g69560Y7QQ05Z62X3Y0Yy6000311050Q785v585Z30X66Y628QY536727.html]
+
+
+
+
+=Description=
+
+The aim of the course is to give understanding of how programming
+languages are designed, documented, and implemented. The course covers
+the basic techniques and tools needed to write interpreters, and
+gives a summary introduction to compilation as well.  Those who have
+passed the course should be able to
++ define the lexical structure of programming languages by using
+  regular expressions, explain the functioning of finite automata,
+  and implement lexical analysers by using standard tools;
++ define the syntax of programming languages by using context-free
+  grammars, explain the principles of LL and LR parsing, and implement
+  parsers by using standard tools;
++ define and implement abstract syntax;
++ master the technique of syntax-directed translation and its
+  efficient implementation in their chosen programming language;
++ formulate typing rules and implement type checkers;
++ formulate operational semantic rules and implement interpreters;
++ write simple code generators;
++ be familiar with the basic implementation issues of both
+  imperative and functional languages;
++ design and implement special-purpose programming languages.
++ master the principles of polymorphic type checking by unification
++ implement an interpreter for a functional language
+
+
+=Teachers=
+
+[Andreas Abel http://www.cse.chalmers.se/~abela/], course responsible.
+
+John Camilleri,
+Mauricio Chimento,
+Daniel Hausknecht,
+Inari Listenmaa,
+assistants.
+
+
+The fastest way to get an answer is to mail the course's
+Google group
+http://groups.google.com/group/plt-2015-lp3.
+**Please provide your full name and date of birth when requesting membership!**
+Otherwise your request will be bounced back or ignored.
+
+=Google Group=
+
+If you have any general questions regarding the course, the labs or the exercises,
+please ask them in our
+Google group
+http://groups.google.com/group/plt-2015-lp3.
+This will reach all teachers and fellow students.
+If you are not yet member of the group, you have to
+- get a google account (if you don't have it yet)
+- go to http://groups.google.com/group/plt-2015-lp3.
+- request an invitation to the plt-2015-lp3 group.
+
+
+**You will have to give your real name and your person number (or date of birth) when you register,**
+**otherwise your membership is not approved.**
+This is necessary to identify you as a participant of the course.
+
+
+=Laboration times and supervision=
+
+Times:
+- Tuesday 15-17 (no class on 3 February) (Inari, Daniel) , in ED3507
+- Thursday 15-17 (no class on 19 February) (Daniel, Mauricio), in ED2480
+- Friday 13-15 (no class on 20 February) (Inari, Mauricio), in ED3507
+
+The lab rooms and supervision
+are available from Tuesday 20 January till 10 March.
+
+**Attendance in these classes is optional**.
+Normally, each student should attend **at most one** supervised laboration time each week.
+Since attendance is not compulsory, there may be room for more
+times. But, if there is lack of room, those who attend their first
+supervision of the week have priority to get a place and supervisor help.
+
+
+=Laborations (tentative!)=
+
+There will be four laborations, written individually or in
+pairs.
+- deadline 2/2:  [parser laborations/lab1/lab1.html]
+- deadline 16/2: [type checker and interpreter laborations/lab2/lab2.html]
+- deadline 25/2: [code generator laborations/lab3/lab3.html]
+- deadline 10/3: [functional language interpreter laborations/lab4/lab4.html]
+
+
+Reporting is done via
+Fire (OLD LINK: http://xdat09.ce.chalmers.se/plt/ CORRECT LINK TO APPEAR).
+Before reporting, you must run your program through a test suite,
+such as the one for [lab 1 laborations/lab1/testscript/].
+
+**Final deadline is Saturday 14 March** for all returned and corrected labs.
+No labs will be graded after this deadline.
+
+We guarantee two gradings per lab: one for the version submitted before the
+ordinary deadline for that lab, the other for a resubmission before
+the final deadline. If your first submission is after the lab
+deadline, only one grading is guaranteed.
+
+
+=Literature=
+
+The main book will be one that developed from earlier editions of this course:
+
+- Ranta:
+//Implementing Programming Languages. An Introductions to Compilers and Interpreters//,
+College Publications,
+London,
+2012.
+Web page (with extra material and links to selling sites):
+http://www.digitalgrammars.com/ipl-book/
+
+
+If you are really interested in the topic, for instance, if you want
+to continue with the Compiler Construction course, you should also
+consider //the Dragon book//,
+
+- Aho, Lam, Sethi & Ullman:
+//Compilers Principles, Techniques & Tools//
+**Second edition**,
+Pearson/Addison Wesley
+2007.
+
+
+Both books are available
+at web bookshops. The main book will also be sold at Cremona.
+
+
+
+
+=Exercises=
+
+There will be a new electronic system for self-study exercises. No
+exercise classes, no bonus points (as in some previous years).
+
+Here is a set of old
+[exercises http://www.digitalgrammars.com/ipl-book/course-exercises/exx.html]
+and [solutions http://www.digitalgrammars.com/ipl-book/course-exercises/sol.html].
+
+
+
+=Exam=
+
+Written exam, usual grading scales.
+**No more extra points from exercises.**
+
+Date: 20 March
+
+Time: 2:00 afternoon
+
+Place: M (Hörsalsvägen 5)
+
+
+The exam has the same structure as these [old exams exams/].
+
+
+=Software=
+
+BNF Converter, http://bnfc.digitalgrammars.com/
+
+Precompiled [Java tools (Cup and JLex) doc/javatools.tgz]
+

@@ -1,0 +1,56 @@
+Lab 1 Test Suite
+Programming Languages Technology, 2015
+Andreas Abel (andreas abel gu se)
+
+%!target:html
+
+= Introduction =
+
+Before you submit lab 1, your solution must pass the
+testsuite. This document describes how to obtain and use
+this testsuite.
+
+= Preparations =
+
+You will only need to do this this part once.
+
+
++ Download [lab1-testsuite.tar.gz lab1-testsuite.tar.gz].
+
++ Unpack the downloaded file:
+```
+$ tar -zxf lab1-testsuite.tar.gz
+```
+
++ Enter the ``lab1-testsuite`` directory:
+```
+$ cd lab1-testsuite
+```
+
++ Compile the test program:
+```
+$ ghc --make -o progs-test-lab1 progs-test-lab1.hs
+```
+
+
+= Running the testsuite =
+
+This is what you need to do to test your grammar.
+
+
++ Enter the ``lab1-testsuite`` directory (if you are not there already):
+```
+$ cd lab1-testsuite
+```
+
++ Run the ``progs-test-lab1`` with the path to your ``.cf`` file:
+```
+$ ./progs-test-lab1 path/to/your/file.cf
+```
+
+(where ``path/to/your/file.cf``) is the location of your
+grammar file.
+
+
+**NOTE:** The start category (entry point) of your grammar
+must be called ``Program``.

@@ -1,0 +1,397 @@
+Parser for C++
+Programming Languages Course, 2015, Laboration 1
+Andreas Abel (andreas abel gu se)
+
+%!target:html
+
+
+==News==
+
+2/2/2014 Updated the link to Fire: http://xdat09.ce.chalmers.se/plt/
+
+
+=Summary=
+
+The objective of this lab is to write a parser for a fragment
+of the C++ programming language. The parser should return
+an abstract syntax tree at success, and report an error
+with a line number at failure.
+
+Before the lab can be submitted, the parser has to pass some
+tests, which are given on the course web page via links
+later in this document.
+
+The recommended implementation of the parser is via a BNF
+grammar processed by the BNF Converter (BNFC) tool. The approximate
+size of the parser source code should be 100 rules.
+
+With BNFC, no more files than the grammar have to be written and submitted
+by the lab groups.
+
+
+
+=Method=
+
+Build the grammar gradually, so that you can parse
+the six test files in the given order: as your first
+goal, parse [the first test file test/hello.cc].
+then the second, and so on.
+
+When you have passed one level, just try to parse
+the next example with your current parser and examine
+the line at which it fails. In this way, you will find
+out what new grammar rules you need.
+
+After treating the six tests, run the
+[test script testscript/index.html] to
+make your parser perfect.
+
+You can use any code generator (Haskell, Java, C,...) from BNFC. It
+doesn't need to be the same language as you plan to use in later
+labs. However, if you use Haskell, you have the advantage of
+**info files**, which tell you exactly where the conflicts are.
+Assuming your grammar file is ``CPP.cf`` and you have called ``bnfc``
+on it, you can create an info file from the generated Happy file:
+```
+  happy -i ParCPP.y
+```
+The info file is now in ``ParCPP.info``. Moreover, you can produce a
+**debugging parser** by
+```
+  happy -da ParCPP.y
+```
+Running this parser shows a trace of the LR actions performed during parsing.
+
+
+=Language specification=
+
+It is suitable to explain and advisable to implement the parser top-down,
+starting with the largest units and proceeding to smaller ones.
+
+The specification differs in some places from the official C++
+specification.
+
+To help you get going, we have marked with a bold (**1**) those
+rules that are needed to parse [the first test file test/hello.cc].
+
+
+
+==Programs==
+
+A program is a sequence of definitions. (**1**)
+
+A program may also contain comments and preprocessor directives,
+which are just ignored by the parser (see below). (**1**)
+
+
+==Definitions==
+
+1. A function definition has a type, a name, an argument list, and a body.
+(**1**)
+A function can optionally be prefixed by ``inline``. Example:
+```
+  inline int foo(double x, int y)
+  {
+    return y + 9 ;
+  }
+```
+
+2. Many statements can be used as top-level definitions:
+- ``typedef`` statements
+- variable declarations and initializations
+- ``struct`` declarations
+
+
+3. Finally, definitions for using qualified constants are allowed, e.g.
+```
+  using std::vector ;
+```
+
+
+==Argument lists, declarations, and function bodies==
+
+An argument list is a comma-separated list of argument declarations.
+It is enclosed in parentheses ``(`` and ``)``. (**1**)
+
+An argument declaration always has a type. This type is optionally
+followed by an identifier or an identifier and an initialization,
+and optionally preceded by the specifier ``const``. The following
+are examples of argument declarations.
+```
+  int
+  int x
+  int x = 5
+  const int& x
+```
+Notice that argument declarations with multiple variables
+(``int x, y``) are not included. A declaration that occurs
+as a statement (as shown below), can also have multiple variables.
+But it must have at least one variable.
+
+(Added 4/2/2013:) The reference operator ``&`` is an optional part of the
+declaration, appearing right after the type. It can alternatively be
+defined as a type-forming constructor.
+
+A function body is either a list of statements enclosed
+in curly brackets ``{`` and ``}`` (**1**),
+or an empty body consisting
+of a semicolon ``;``.  Example:
+```
+  int foo(double x, int y) ;
+```
+
+
+==Statements==
+
+Any expression followed by a semicolon ``;`` can be used as a statement. (**1**)
+
+Any declaration followed by a semicolon ``;`` can be used as a statement.
+Declarations have the same form as argument declarations in functions,
+except that they can have more than one variable.
+
+Statements returning an expression (**1**), for example
+```
+  return i + 9 ;
+```
+While loops, with an expression in parentheses followed by a statement, for
+example:
+```
+  while (i < 10) ++i ;
+```
+Do-while loops, with an expression in parentheses after the loop body, for
+example:
+```
+  do ++i ; while (i < 10) ;
+```
+For loops, with a declaration and two expressions in parentheses followed
+by a statement. For example:
+```
+  for (int i = 0 ; i != 10 ; ++i) k = k + i ;
+```
+We do not require that any of the fields in parentheses may be empty.
+
+Conditionals: ``if`` with an expression in parentheses followed by
+a statement and optionally by ``else`` and a statement. Examples:
+```
+  if (x > 0) return x ;
+
+  if (x > 0) return x ; else return y ;
+```
+Blocks: any list of statement (including empty list) between
+curly brackets. For instance,
+```
+  {
+    int i = 2 ;
+    {
+    }
+    i++ ;
+  }
+```
+Type definitions: a type and a name for it. Example:
+```
+  typedef vector<string> Text ;
+```
+Structure definitions: a name and a list of declarations. Example:
+```
+  struct Student_info {
+    string name;
+    double final;
+    vector<double> homework;
+  } ;
+```
+Notice that the semicolon is obligatory in the end of a structure definition.
+Otherwise, semicolons are not used after curly brackets - but they are
+obligatory in all statements and definitions not ending with curly
+brackets.
+
+==Expressions==
+
+The following table gives the expressions,
+their precedence levels, and their associativity.
+The associativity left/right of mixfix, prefix, and postfix operators is forced,
+thus, it is displayed in parentheses.
+The associativity of binary operators is given as left, right, or none.
+As they are bracketed, the argument in an array index and
+the arguments in a function call can be expressions of any level.
+Otherwise, some
+subexpressions have to be one precedence level above of
+the main expression to implement the required the associativity.
+
+**Note**. The table is not exactly the same as in the C++ standard.
+
+|| level | expression forms                     | assoc   | explanation ||
+|  16    | literal                              | ---     | atomic expressions |
+|  15    | ``i``, ``c::i``, ``c::c::i``, ...    | ---     | qualified constants |
+|  15    | ``e[e]``                             | (left)  | indexing |
+|  15    | ``e(e,...,e)``                       | (left)  | function call |
+|  14    | ``e.e``, ``e->e``                    | left    | structure projection |
+|  14    | ``e++``, ``e--``                     | (right) | in/decrement |
+|  13    | ``++e``, ``--e``, ``*e``, ``!e``     | (left)  | in/decrement, dereference, negation |
+|  12    | ``e*e``, ``e/e``, ``e%e``            | left    | multiplication, division, remainder |
+|  11    | ``e+e``, ``e-e``                     | left    | addition, subtraction |
+|  10    | ``e<<e``, ``e>>e``                   | left    | left and right shift |
+|   9    | ``e<e``, ``e>e``, ``e>=e``, ``e<=e`` | none    | comparison |
+|   8    | ``e==e``, ``e!=e``                   | none    | (in)equality |
+|   4    | ``e&&e``                             | left    | conjunction |
+|   3    | ``e||e``                             | left    | disjunction |
+|   2    | ``e=e``, ``e+=e``, ``e-=e``          | right   | assignment |
+|   2    | ``e ? e : e``                        | right   | conditional |
+|   1    | ``throw e``                          | (right) | exception |
+
+Expressions needed for test (**1**):
+integer and string literal, qualified constant, left shift.
+
+Notice that it is syntactically permitted to increment and assign
+a value to any expression, not just variables (and other so-called
+lvalues).
+
+
+==Qualified constants and template instantiations==
+
+**Qualified constants** are constant names separated by ``::``. Names can
+be identifiers but also **template instantiations**, of the form
+```
+  ident < typelist >
+```
+where a typelist is a comma-separated list of types. Thus possible
+qualified constants include
+```
+  std::cout
+  std::vector<int>::const_iterator
+```
+One simple way to implement qualified constants is as
+nonempty lists separated by ``::``. The elements of the list
+are identifiers and template instantiations. Single identifier
+expressions come out as a special case of these lists.
+
+Qualified constants, but without templates, are needed in (**1**).
+
+
+
+==Types==
+
+Types are either qualified constants (including plain identifiers) or
+built-in types, of which we include the following:
+```
+  bool
+  double
+  int
+  void
+```
+Only the type ``int`` is needed in (**1**).
+
+(Added 4/2/2013:) The reference operator ``&`` can be defined as a
+postfix-operator forming types from types, e.g. ``int &``.
+
+
+==Literals==
+
+We include
+single-quoted character literals,
+double-quoted string literals,
+integer literals, and
+floating point literals.
+
+A string literal may consist of many can be concatenated strings
+and in this way divided over lines:
+```
+  "hello " "my little "
+  "world"
+
+```
+
+
+==Identifiers==
+
+An identifier is a letter followed by a list of letters, digits,
+and underscores.
+
+
+==Comments==
+
+There are three kinds of comments.
+- anything between tokens ``/*`` and ``*/``
+- anything from token ``//`` to the end of a line or the file
+- anything from token ``#`` to the end of a line or the file
+  (preprocessor directive)
+
+Comments cannot be nested.
+
+Comments are needed in (**1**).
+
+
+=Test programs=
+
+These programs are original code from the web page of the book
+//Accelerated C++// (A. Koenig & B. Moo, Addison-Wesley, 2000).
+
+- [First test/hello.cc]: "hello world"
+
+- [Second test/greet.cc]: ask the user's name and say hello to her
+
+- [Third test/med.cc]: compute the grade of a student
+
+- [Fourth test/grade.cc]: a smarter way to compute the grade
+
+- [Fifth test/palin.cc]: test if a string is a palindrome
+
+- [Sixth test/grammar.cc]: random-generate English sentences
+
+
+Once again: build the grammar gradually so that you can parse
+these files in this order.
+
+
+=Success criteria=
+
+Your grammar must pass the [test suite testscript/index.html].
+The test suite contains the example programs, as well
+as a number of programs which your parser must reject.
+
+The maximum number of 10 shift/reduce conflicts is permitted.
+The minimum of 2 is almost unavoidable (the "dangling ``else``",
+and template instantiation vs. less-than operator).
+But reduce/reduce conflicts are forbidden.
+
+
+= Submission =
+
+Submit your lab using [Fire http://xdat09.ce.chalmers.se/plt/].
+Do not submit your solution before it passes the test suite - it will
+be returned automatically.
+
+If you have any problems getting the test program to run,
+or if you think that there is an error in the test suite,
+contact the teachers of the course.
+
+
+
+=C++ features=
+
+Assuming you know some C but not C++, here is a summary of the extra features
+of C++ involved in this lab.
+
+Qualified names: ``s::n``, where ``s`` is a name space or a class.
+
+``using`` directives: license to use an unqualified name from a name space.
+
+IO streams: ``cout`` for output, ``cin`` for input. Output is
+produced by the left shift operator, input is read by the right shift.
+Example from [the second program test/greet.cc]:
+```
+  // read the name
+  std::string name;     // define `name'
+  std::cin >> name;     // read into `name'
+
+  // write a greeting
+  std::cout << "Hello, " << name  << "!" << std::endl;
+```
+
+Templates, e.g. generic types: ``vector<int>`` is a vector of integers.
+
+Arguments passed by reference (``&``),
+with the possibility of forbidding modification (``const``), e.g.
+(from [the sixth program test/grammar.cc])
+```
+  gen_aux(const Grammar& g, const string& word, vector<string>& ret)
+```

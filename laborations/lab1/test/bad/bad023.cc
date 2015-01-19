@@ -1,0 +1,3 @@
+struct bar {
+	<foo> baz;
+} ;
