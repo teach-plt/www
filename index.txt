@@ -18,6 +18,8 @@ http://www.cse.chalmers.se/edu/year/2014/course/DAT151/index.html
 
 =News and changes=
 
+2015-01-19 [Lab1 laborations/lab1/lab1.html] is up.  
+           To submit, first register at [Fire http://xdat09.ce.chalmers.se/plt/].
 2015-01-13 First version of this page - mostly a copy of the 2014 material.
            Updates forthcoming soon.
 
@@ -146,7 +148,7 @@ pairs.
 
 
 Reporting is done via
-Fire (OLD LINK: http://xdat09.ce.chalmers.se/plt/ CORRECT LINK TO APPEAR).
+[Fire http://xdat09.ce.chalmers.se/plt/].
 Before reporting, you must run your program through a test suite,
 such as the one for [lab 1 laborations/lab1/testscript/].
 
