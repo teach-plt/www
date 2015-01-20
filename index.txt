@@ -25,7 +25,7 @@ http://www.cse.chalmers.se/edu/year/2014/course/DAT151/index.html
            Updates forthcoming soon.
 
 
-=Schedule (tentative!)=
+=Schedule=
 
 All lectures are in HA2.
 
@@ -52,10 +52,12 @@ Slides follow closely the plt book.
 | Tue 3/3 | 13-15 | Hands-on with Lab 4                | [lab4 PM laborations/lab4/lab4.html]
 | Thu 5/3 | 13-15 | Preparing for the exam             | [Training Exam exams/exam-plt-2013-2.pdf]
 | //Tue 10/3// | //23// | //Lab 4 deadline//           | //[lab4 PM laborations/lab4/lab4.html]//
-| //Fri 13/3// | 14-18 | //Exam// (in house M)         | [old exams exams/]
 | //Sat 14/3// | //23// | //Final lab deadline//       | //all lab returns//
+| //Fri 20/3// | 14-18 | //Exam// (in house M)         | [old exams exams/]
+| //Wed 15/4// | 8.30-12.30 | //Exam// (in house M)         | [old exams exams/]
+| //Wed 19/8// | 14-18 | //Exam// (in house J)         | [old exams exams/]
 
-The official course schema is in [Time Edit https://se.timeedit.net/web/chalmers/db1/public/ri1X30g69560Y7QQ05Z62X3Y0Yy6000311050Q785v585Z30X66Y628QY536727.html]
+The official course schema is in [Time Edit https://se.timeedit.net/web/chalmers/db1/public/ri1X30g69560Y7QQ05Z62X3Y0Yy6000311050Q785v585Z30X66Y628QY536727.html].
 
 
 
@@ -124,9 +126,10 @@ This is necessary to identify you as a participant of the course.
 =Laboration times and supervision=
 
 Times:
-- Tuesday 15-17 (no class on 3 February) (Inari, Daniel) , in ED3507
-- Thursday 15-17 (no class on 19 February) (Daniel, Mauricio), in ED2480
-- Friday 13-15 (no class on 20 February) (Inari, Mauricio), in ED3507
+- Tuesday 15-17 (no class on 3 February) (Inari, Daniel) , in ED3507.
+- Thursday 15-17 (no class on 19 February) (Daniel, Mauricio), in ED2480.
+- Friday 13-15 (no class on 20 February) (Inari, Mauricio), in ED3507.
+
 
 The lab rooms and supervision
 are available from Tuesday 20 January till 10 March.
@@ -138,14 +141,14 @@ times. But, if there is lack of room, those who attend their first
 supervision of the week have priority to get a place and supervisor help.
 
 
-=Laborations (tentative!)=
+=Laborations=
 
 There will be four laborations, written individually or in
 pairs.
 - deadline 2/2:  [parser laborations/lab1/lab1.html]
-- deadline 16/2: [type checker and interpreter laborations/lab2/lab2.html]
-- deadline 25/2: [code generator laborations/lab3/lab3.html]
-- deadline 10/3: [functional language interpreter laborations/lab4/lab4.html]
+- deadline 16/2: [type checker and interpreter laborations/lab2/lab2.html]  (tentative!)
+- deadline 25/2: [code generator laborations/lab3/lab3.html]                  (tentative!)
+- deadline 10/3: [functional language interpreter laborations/lab4/lab4.html]  (tentative!)
 
 
 Reporting is done via
@@ -176,8 +179,8 @@ http://www.digitalgrammars.com/ipl-book/
 
 
 If you are really interested in the topic, for instance, if you want
-to continue with the Compiler Construction course, you should also
-consider //the Dragon book//,
+to continue with the [Compiler Construction http://www.cse.chalmers.se/edu/course/TDA282/] 
+course, you should also consider //the Dragon book//,
 
 - Aho, Lam, Sethi & Ullman:
 //Compilers Principles, Techniques & Tools//
@@ -190,23 +193,9 @@ Both books are available
 at web bookshops. The main book will also be sold at Cremona.
 
 
-
-
-=Exercises=
-
-There will be a new electronic system for self-study exercises. No
-exercise classes, no bonus points (as in some previous years).
-
-Here is a set of old
-[exercises http://www.digitalgrammars.com/ipl-book/course-exercises/exx.html]
-and [solutions http://www.digitalgrammars.com/ipl-book/course-exercises/sol.html].
-
-
-
 =Exam=
 
 Written exam, usual grading scales.
-**No more extra points from exercises.**
 
 Date: 20 March
 
@@ -214,8 +203,13 @@ Time: 2:00 afternoon
 
 Place: M (Hörsalsvägen 5)
 
-
 The exam has the same structure as these [old exams exams/].
+
+Further, here are some 
+[exercises http://www.digitalgrammars.com/ipl-book/course-exercises/exx.html]
+and [solutions http://www.digitalgrammars.com/ipl-book/course-exercises/sol.html]
+to prepare for the exam.
+
 
 
 =Software=
