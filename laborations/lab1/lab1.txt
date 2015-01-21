@@ -5,9 +5,7 @@ Andreas Abel (andreas abel gu se)
 %!target:html
 
 
-==News==
-
-2/2/2014 Updated the link to Fire: http://xdat09.ce.chalmers.se/plt/
+Submit your solution via [Fire http://xdat09.ce.chalmers.se/plt/].
 
 
 =Summary=
@@ -128,10 +126,6 @@ Notice that argument declarations with multiple variables
 as a statement (as shown below), can also have multiple variables.
 But it must have at least one variable.
 
-(Added 4/2/2013:) The reference operator ``&`` is an optional part of the
-declaration, appearing right after the type. It can alternatively be
-defined as a type-forming constructor.
-
 A function body is either a list of statements enclosed
 in curly brackets ``{`` and ``}`` (**1**),
 or an empty body consisting
@@ -206,27 +200,30 @@ brackets.
 
 ==Expressions==
 
+**(Associativities differ slightly from 2014 assignment!)**
+
 The following table gives the expressions,
 their precedence levels, and their associativity.
-The associativity left/right of mixfix, prefix, and postfix operators is forced,
-thus, it is displayed in parentheses.
-The associativity of binary operators is given as left, right, or none.
+The associativity of operators is given as left, right, or none.
+For binary operators, in general any of the three associativity is meaningful.
+For pre-, post-, and mixfix operators, at most one of 
+left or right associativity makes sense, and the alternative is non-associative.
 As they are bracketed, the argument in an array index and
 the arguments in a function call can be expressions of any level.
-Otherwise, some
-subexpressions have to be one precedence level above of
+Otherwise, some subexpressions have to be one precedence level above of
 the main expression to implement the required the associativity.
 
 **Note**. The table is not exactly the same as in the C++ standard.
 
+
 || level | expression forms                     | assoc   | explanation ||
 |  16    | literal                              | ---     | atomic expressions |
-|  15    | ``i``, ``c::i``, ``c::c::i``, ...    | ---     | qualified constants |
-|  15    | ``e[e]``                             | (left)  | indexing |
-|  15    | ``e(e,...,e)``                       | (left)  | function call |
+|  16    | ``i``, ``c::i``, ``c::c::i``, ...    | ---     | qualified constants |
+|  15    | ``e[e]``                             | left    | indexing |
+|  15    | ``e(e,...,e)``                       | none    | function call |
 |  14    | ``e.e``, ``e->e``                    | left    | structure projection |
-|  14    | ``e++``, ``e--``                     | (right) | in/decrement |
-|  13    | ``++e``, ``--e``, ``*e``, ``!e``     | (left)  | in/decrement, dereference, negation |
+|  14    | ``e++``, ``e--``                     | right   | in/decrement |
+|  13    | ``++e``, ``--e``, ``*e``, ``!e``     | left    | in/decrement, dereference, negation |
 |  12    | ``e*e``, ``e/e``, ``e%e``            | left    | multiplication, division, remainder |
 |  11    | ``e+e``, ``e-e``                     | left    | addition, subtraction |
 |  10    | ``e<<e``, ``e>>e``                   | left    | left and right shift |
@@ -236,7 +233,7 @@ the main expression to implement the required the associativity.
 |   3    | ``e||e``                             | left    | disjunction |
 |   2    | ``e=e``, ``e+=e``, ``e-=e``          | right   | assignment |
 |   2    | ``e ? e : e``                        | right   | conditional |
-|   1    | ``throw e``                          | (right) | exception |
+|   1    | ``throw e``                          | right   | exception |
 
 Expressions needed for test (**1**):
 integer and string literal, qualified constant, left shift.
@@ -270,8 +267,8 @@ Qualified constants, but without templates, are needed in (**1**).
 
 ==Types==
 
-Types are either qualified constants (including plain identifiers) or
-built-in types, of which we include the following:
+Types are either qualified constants (including plain identifiers),
+or type references, or built-in types, of which we include the following:
 ```
   bool
   double
@@ -280,7 +277,7 @@ built-in types, of which we include the following:
 ```
 Only the type ``int`` is needed in (**1**).
 
-(Added 4/2/2013:) The reference operator ``&`` can be defined as a
+The reference operator ``&`` is a
 postfix-operator forming types from types, e.g. ``int &``.
 
 
