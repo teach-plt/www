@@ -88,7 +88,7 @@ runTests = do
 testFrontendProg :: Bool -> FilePath -> IO Bool
 testFrontendProg good f = do
   let bad = not good
-      c   = "./testdriver " ++ f
+      c   = "." ++ pathSep : "testdriver " ++ f   -- WINDOWS
   putStrLn $ "Parsing " ++ f ++ "..."
   (out,err,s) <- runCommandStrWait c ""
   case lines err of
