@@ -335,7 +335,11 @@ prFile :: FilePath -> IO ()
 prFile f = do
   putStrLn $ "---------------- begin " ++ f ++ " ------------------"
   s <- readFile f
-  putStrLn $ color green s
+  let ls = lines s
+      n  = length $ show $ length ls
+      lineNo i = let s = show i in replicate (n - length s) ' ' ++ s
+      s' = unlines $ zipWith (\ i l -> lineNo i ++ ": " ++ l) [1..] ls
+  putStrLn $ color green s'
   putStrLn $ "----------------- end " ++ f ++ " -------------------"
 
 
