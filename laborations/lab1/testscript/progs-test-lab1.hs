@@ -195,7 +195,11 @@ catLefts xs = [x | Left x <- xs]
 type Color = Int
 
 color :: Color -> String -> String
+#if defined(mingw32_HOST_OS)
+color c s = s
+#else
 color c s = fgcol c ++ s ++ normal
+#endif
 
 highlight = "\ESC[7m"
 bold      = "\ESC[1m"
