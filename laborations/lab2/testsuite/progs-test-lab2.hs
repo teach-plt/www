@@ -51,12 +51,12 @@ listGoodProgs = listCCFiles "good"
 
 listBadProgs = listCCFiles "bad"
 
-listCCFiles dir = 
+listCCFiles dir =
     liftM (map (\f -> joinPath [dir,f]) . sort . filter ((=="cc") . getExt)) $ getDirectoryContents dir
 
 
 welcome :: IO ()
-welcome = do putStrLn $ "This is the test program for Programming Languages Lab 3"
+welcome = do putStrLn $ "This is the test program for Programming Languages Lab 2"
 
 
 runMake :: FilePath -> IO ()
@@ -64,7 +64,7 @@ runMake dir = do checkDirectoryExists dir
                  runCommandNoFail_ ("make -C " ++ quote dir) ""
 
 runTests :: FilePath -> IO ([Bool],[Bool])
-runTests dir = 
+runTests dir =
     do let prog = joinPath [dir,executable_name]
        checkFileExists prog
        goodProgs <- listGoodProgs
@@ -82,11 +82,11 @@ testBackendProg prog f =
        putStrLn $ "Running " ++ f ++ "..."
        (out,err,s) <- runCommandStrWait c input
        debug $ "Exit code: " ++ show s
-       if out == output 
+       if out == output
          then return True
          else do reportError c "invalid output" f input out err
-		 putStrLn "Expected output:"
-		 putStrLn $ color blue $ output
+                 putStrLn "Expected output:"
+                 putStrLn $ color blue $ output
                  return False
 
 testBadProgram :: FilePath -> FilePath -> IO Bool
@@ -108,7 +108,7 @@ testBadProgram prog f =
 --
 
 parseArgs :: [String] -> IO String
-parseArgs ["-debug",cfFile] = 
+parseArgs ["-debug",cfFile] =
     do writeIORef doDebug True
        return cfFile
 parseArgs [cfFile] = return cfFile
@@ -116,7 +116,7 @@ parseArgs _ = do hPutStrLn stderr "Usage: progs-test-lab3 <interpreter code dire
                  exitFailure
 
 mainOpts :: FilePath -> IO ()
-mainOpts dir = 
+mainOpts dir =
     do welcome
        runMake dir
        (good,bad) <- runTests dir
@@ -165,7 +165,7 @@ pathSep = '/'
 
 quote :: FilePath -> FilePath
 quote p = "'" ++ concatMap f p ++ "'"
-  where 
+  where
     f '\'' = "\\'"
     f c = [c]
 
@@ -209,9 +209,9 @@ blue = 6
 --
 
 runCommandStr :: String -- ^ command
-	      -> String -- ^ stdin data
-	      -> IO (String,String,ProcessHandle) -- ^ stdout, stderr, process
-runCommandStr c inStr = 
+              -> String -- ^ stdin data
+              -> IO (String,String,ProcessHandle) -- ^ stdout, stderr, process
+runCommandStr c inStr =
     do
     outVar <- newEmptyMVar
     errVar <- newEmptyMVar
@@ -234,8 +234,8 @@ runCommandStr c inStr =
 
 
 runCommandStrWait :: String -- ^ command
-		  -> String -- ^ stdin data
-		  -> IO (String,String,ExitCode) -- ^ stdout, stderr, process exit status
+                  -> String -- ^ stdin data
+                  -> IO (String,String,ExitCode) -- ^ stdout, stderr, process exit status
 runCommandStrWait c inStr =
     do
     debug $ "Running " ++ c
@@ -253,16 +253,16 @@ runCommandNoFail_ c f = runCommandNoFail c f >> return ()
 runCommandNoFail :: String -- ^ Command
                  -> FilePath -- ^ Input file
                  -> IO (String,String) -- ^ stdout and stderr
-runCommandNoFail e f = 
+runCommandNoFail e f =
     do
     let c = e ++ " " ++ f
     hPutStrLn stderr $ "Running " ++ c ++ "..."
     (out,err,s) <- runCommandStrWait c ""
     case s of
-	   ExitFailure x -> do
-			    reportError e ("with status " ++ show x) f "" out err
-			    exitFailure
-	   ExitSuccess -> return (out,err)
+           ExitFailure x -> do
+                            reportError e ("with status " ++ show x) f "" out err
+                            exitFailure
+           ExitSuccess -> return (out,err)
 
 --
 -- * Checking files and directories
@@ -272,63 +272,63 @@ checkFileExists :: FilePath -> IO ()
 checkFileExists f =
     do e <- doesFileExist f
        when (not e) $ do putStrLn $ color red $ quote f ++ " is not an existing file."
-		         exitFailure
+                         exitFailure
 
 checkDirectoryExists :: FilePath -> IO ()
 checkDirectoryExists f =
     do e <- doesDirectoryExist f
        when (not e) $ do putStrLn $ color red $ quote f ++ " is not an existing directory."
-		         exitFailure
+                         exitFailure
 
 --
 -- * Error reporting and output checking
 --
 
-reportErrorColor :: Color 
+reportErrorColor :: Color
                  -> String -- ^ command that failed
-	         -> String -- ^ how it failed
-	         -> FilePath -- ^ source file
-	         -> String -- ^ given input
-	         -> String -- ^ stdout output
-	         -> String -- ^ stderr output
-	         -> IO ()
+                 -> String -- ^ how it failed
+                 -> FilePath -- ^ source file
+                 -> String -- ^ given input
+                 -> String -- ^ stdout output
+                 -> String -- ^ stderr output
+                 -> IO ()
 reportErrorColor col c m f i o e =
     do
     putStrLn $ color col $ c ++ " failed: " ++ m
     when (not (null f)) $ prFile f
     when (not (null i)) $ do
-			  putStrLn "Given this input:"
-			  putStrLn $ color blue $ i
+                          putStrLn "Given this input:"
+                          putStrLn $ color blue $ i
     when (not (null o)) $ do
-			  putStrLn "It printed this to standard output:"
-			  putStrLn $ color blue $ o
+                          putStrLn "It printed this to standard output:"
+                          putStrLn $ color blue $ o
     when (not (null e)) $ do
-			  putStrLn "It printed this to standard error:"
-			  putStrLn $ color blue $ e
+                          putStrLn "It printed this to standard error:"
+                          putStrLn $ color blue $ e
 
 reportError :: String -- ^ command that failed
-	    -> String -- ^ how it failed
-	    -> FilePath -- ^ source file
-	    -> String -- ^ given input
-	    -> String -- ^ stdout output
-	    -> String -- ^ stderr output
-	    -> IO ()
+            -> String -- ^ how it failed
+            -> FilePath -- ^ source file
+            -> String -- ^ given input
+            -> String -- ^ stdout output
+            -> String -- ^ stderr output
+            -> IO ()
 reportError = reportErrorColor red
 
 prFile :: FilePath -> IO ()
 prFile f = do
-           e <- doesFileExist f           
+           e <- doesFileExist f
            when e $ do putStrLn $ "For input file " ++ f ++ ":"
-	               putStrLn $ "---------------- begin " ++ f ++ " ------------------" 
-	               s <- readFile f
-	               putStrLn $ color green s
-	               putStrLn $ "----------------- end " ++ f ++ " -------------------" 
+                       putStrLn $ "---------------- begin " ++ f ++ " ------------------"
+                       s <- readFile f
+                       putStrLn $ color green s
+                       putStrLn $ "----------------- end " ++ f ++ " -------------------"
 
 
 -- | Report how many tests passed.
 report :: String -> [Bool] -> IO ()
-report n rs = 
+report n rs =
   do let (p,t) = (length (filter id rs), length rs)
          c = if p == t then green else red
-     putStrLn $ color c $ 
+     putStrLn $ color c $
               n ++ "passed " ++ show p ++ " of " ++ show t ++ " tests"
