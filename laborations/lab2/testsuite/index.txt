@@ -1,0 +1,61 @@
+Lab 2 Test Suite
+Programming Languages Technology Course 2013
+Bjorn Bringert (2007)
+
+%!target:html
+
+= Introduction =
+
+Before you submit lab 2, your solution must pass the
+testsuite. This document describes how to obtain and use
+this testsuite.
+
+**NOTE:** After some time, we may chose to add more test 
+cases. We recommend that you use the latest
+version of the test suite to check your solution before submission.
+This helps you catch errors that you would otherwise have to wait
+for the grader to spot.
+
+If you encounter problems, send mail to the teachers or to the course
+Google group.
+
+
+= Preparations =
+
+You will only need to do this this part once.
+
+
++ Download [lab2-testsuite.tar.gz lab2-testsuite.tar.gz].
+
++ Unpack the downloaded file:
+```
+$ tar -zxf lab2-testsuite.tar.gz
+```
+
++ Enter the ``testsuite`` directory:
+```
+$ cd testsuite
+```
+
++ Compile the test program:
+```
+$ ghc -threaded --make -o progs-test-lab2 progs-test-lab2.hs
+```
+
+
+= Running the testsuite =
+
+This is what you need to do to test your grammar.
+
+
++ Enter the ``testsuite`` directory (if you are not there already):
+```
+$ cd testsuite
+```
+
++ Run ``progs-test-lab2`` with the path to the directory
+where your solution is located:
+
+```
+$ ./progs-test-lab2 path/to/your/solution/
+```
