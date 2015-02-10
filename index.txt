@@ -153,7 +153,7 @@ supervision of the week have priority to get a place and supervisor help.
 There will be four laborations, written individually or in
 pairs.
 - deadline 2/2:  [parser laborations/lab1/lab1.html]
-- deadline 16/2: [type checker and interpreter laborations/lab2/lab2.html]  (tentative!)
+- deadline 16/2: [type checker and interpreter laborations/lab2/lab2.html]
 - deadline 25/2: [code generator laborations/lab3/lab3.html]                  (tentative!)
 - deadline 10/3: [functional language interpreter laborations/lab4/lab4.html]  (tentative!)
 
