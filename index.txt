@@ -18,7 +18,14 @@ http://www.cse.chalmers.se/edu/year/2014/course/DAT151/index.html
 
 =News and changes=
 
-2015-01-19 [Lab1 laborations/lab1/lab1.html] is up.  
+2015-02-10 [Lab2 laborations/lab2/lab2.html]
+           now has the correct test program to compile under ghc-7.6 and up.
+           Also, it has seen minor modifications in the expression grammar.
+           (However, they are neutral wrt. the testsuite.
+           If you already started with the 2014 grammar, you can choose
+           to stick with it.)
+
+2015-01-19 [Lab1 laborations/lab1/lab1.html] is up.
            To submit, first register at [Fire http://xdat09.ce.chalmers.se/plt/].
 
 2015-01-13 First version of this page - mostly a copy of the 2014 material.
@@ -179,7 +186,7 @@ http://www.digitalgrammars.com/ipl-book/
 
 
 If you are really interested in the topic, for instance, if you want
-to continue with the [Compiler Construction http://www.cse.chalmers.se/edu/course/TDA282/] 
+to continue with the [Compiler Construction http://www.cse.chalmers.se/edu/course/TDA282/]
 course, you should also consider //the Dragon book//,
 
 - Aho, Lam, Sethi & Ullman:
@@ -205,7 +212,7 @@ Place: M (Hörsalsvägen 5)
 
 The exam has the same structure as these [old exams exams/].
 
-Further, here are some 
+Further, here are some
 [exercises http://www.digitalgrammars.com/ipl-book/course-exercises/exx.html]
 and [solutions http://www.digitalgrammars.com/ipl-book/course-exercises/sol.html]
 to prepare for the exam.
@@ -217,4 +224,3 @@ to prepare for the exam.
 BNF Converter, http://bnfc.digitalgrammars.com/
 
 Precompiled [Java tools (Cup and JLex) doc/javatools.tgz]
-

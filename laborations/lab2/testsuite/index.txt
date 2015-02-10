@@ -1,5 +1,5 @@
 Lab 2 Test Suite
-Programming Languages Technology Course 2013
+Programming Languages Technology Course 2015
 Bjorn Bringert (2007)
 
 %!target:html
@@ -10,7 +10,7 @@ Before you submit lab 2, your solution must pass the
 testsuite. This document describes how to obtain and use
 this testsuite.
 
-**NOTE:** After some time, we may chose to add more test 
+**NOTE:** After some time, we may chose to add more test
 cases. We recommend that you use the latest
 version of the test suite to check your solution before submission.
 This helps you catch errors that you would otherwise have to wait
