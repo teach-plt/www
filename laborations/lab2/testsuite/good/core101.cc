@@ -27,6 +27,3 @@ int main() {
   printBool(foo(0));
   return 0;
 }
-
-void printInt(int x) { }
-void printDouble(double x) { }
