@@ -82,7 +82,9 @@ testBackendProg prog f =
        putStrLn $ "Running " ++ f ++ "..."
        (out,err,s) <- runCommandStrWait c input
        debug $ "Exit code: " ++ show s
-       if out == output
+       -- Try to work around line ending problem
+       let removeCR = filter (/= '\r')
+       if removeCR out == removeCR output
          then return True
          else do reportError c "invalid output" f input out err
                  putStrLn "Expected output:"
@@ -90,18 +92,17 @@ testBackendProg prog f =
                  return False
 
 testBadProgram :: FilePath -> FilePath -> IO Bool
-testBadProgram prog f =
-    do input  <- readFileIfExists (f++".input")
-       output <- readFileIfExists (f++".output")
-       let c = prog ++ " " ++ f
-       putStrLn $ "Running " ++ f ++ "..."
-       (out,err,s) <- runCommandStrWait c input
-       debug $ "Exit code: " ++ show s
-       case lines out of
-           "TYPE ERROR":_ -> return True
-           "SYNTAX ERROR":_ -> return True
-           _ -> do reportError c "Passed bad program" f "" out err
-                   return False
+testBadProgram prog f = do
+  input  <- readFileIfExists (f++".input")
+  output <- readFileIfExists (f++".output")
+  let c = prog ++ " " ++ f
+  putStrLn $ "Running " ++ f ++ "..."
+  (out,err,s) <- runCommandStrWait c input
+  debug $ "Exit code: " ++ show s
+  if "TYPE ERROR" `isPrefixOf` out then return True else
+    if "SYNTAX ERROR" `isPrefixOf` out then return True else do
+      reportError c "Passed bad program" f "" out err
+      return False
 
 --
 -- * Main
