@@ -113,7 +113,7 @@ parseArgs ["-debug",cfFile] =
     do writeIORef doDebug True
        return cfFile
 parseArgs [cfFile] = return cfFile
-parseArgs _ = do hPutStrLn stderr "Usage: progs-test-lab3 <interpreter code directory>"
+parseArgs _ = do hPutStrLn stderr "Usage: progs-test-lab2 <interpreter code directory>"
                  exitFailure
 
 mainOpts :: FilePath -> IO ()
