@@ -1,0 +1,61 @@
+Lab 3 Test Suite
+Programming Languages Technology Course 2015
+Bjorn Bringert (2007)
+
+%!target:html
+
+= Introduction =
+
+Before you submit lab 3, your solution must pass the
+testsuite. This document describes how to obtain and use
+this testsuite.
+
+**NOTE:** After some time, we may chose to add more test
+cases. We recommend that you use the latest
+version of the test suite to check your solution before submission.
+This helps you catch errors that you would otherwise have to wait
+for the grader to spot.
+
+If you encounter problems, send mail to the teachers or to the course
+Google group.
+
+
+= Preparations =
+
+You will only need to do this this part once.
+
+
++ Download [lab3-testsuite.tar.gz lab3-testsuite.tar.gz].
+
++ Unpack the downloaded file:
+```
+$ tar -zxf lab3-testsuite.tar.gz
+```
+
++ Enter the ``lab3-testsuite`` directory:
+```
+$ cd lab3-testsuite
+```
+
++ Compile the test program:
+```
+$ make test
+```
+
+
+= Running the testsuite =
+
+This is what you need to do to test your grammar.
+
+
++ Enter the ``lab3-testsuite`` directory (if you are not there already):
+```
+$ cd lab3-testsuite
+```
+
++ Run ``progs-test-lab3`` with the path to the directory
+where your solution is located:
+
+```
+$ ./progs-test-lab3 path/to/your/solution/
+```
