@@ -1,0 +1,233 @@
+Code Generator for C/C++
+Programming Language Technology Course, 2015, Laboration 3
+Andreas Abel (andreas abel gu se)
+
+%!target:html
+
+%!postproc(html): #NEW <!-- NEW -->
+
+=Summary=
+
+The objective of this assignment is to write a code generator from a fragment
+of the C++ programming language to JVM, Java Virtual Machine.
+The code generator should produce Java class files, which
+can be run in the Java bytecode interpreter so that they
+correctly perform all their input and output actions.
+
+Before the work can be submitted, the program has to pass some
+tests, which are given on the course web page via links
+later in this document.
+
+**Since this lab assumes a type checker, it is enough to run the tests in**
+[the "good" directory ./testsuite/good].
+
+The recommended implementation is via a BNF
+grammar processed by the BNF Converter (BNFC) tool. The syntax
+tree created by the parser is first type checked by using the
+type checker created in [Lab 2 ../lab2/lab2.html].
+The code generator should then make another pass of the type-checked code.
+
+The type checker is moreover recommended to annotate the abstract syntax
+trees with types, needed in instruction selection.
+
+**However, it is probably a good idea to start with the lab2 type checker as it is**.
+Then one can get straight into the business of code generation.
+
+#NEW
+
+The approximate size of the grammar is 50 rules, and the code generator
+should be 100-300 lines, depending on the programming language
+used.
+
+All BNFC supported languages can be used, but guidance is guaranteed
+only for Haskell and Java.
+
+The code generator is partially characterized by compilation schemes in
+Chapter 6 of the PLT book. More JVM instructions are given in Appendix B.
+These explanations follow Jasmin assembler; the code generator may
+emit Jasmin assembly code into text files, which are then processed
+further by Jasmin to create class files.
+
+**Jasmin can be downloaded** [here http://jasmin.sourceforge.net/].
+
+
+
+#NEW
+
+=Method=
+
+The recommended procedure is two passes:
++ build a symbol table that for every function gives its type in a form
+  usable for JVM code generation;
++ compile the program by generating a class file containing every
+  source code function as a method.
+
+
+
+You can copy your ``CPP.cf`` grammar and the
+``TypeChecker`` module from Lab 2 to the same directory.
+
+
+
+#NEW
+
+=Language specification=
+
+The language is the same as in Lab 2, and you can use the
+grammar file [``CPP.cf`` ../lab2/CPP.cf].
+Also its type system is the same.
+
+There are four built-in functions:
+```
+  void   printInt(int x)        // print an integer and a newline in standard output
+  void   printDouble(double x)  // print a double and a newline in standard output
+  int    readInt()              // read an integer from standard input
+  double readDouble()           // read a double from standard input
+```
+These functions can be defined in a separate runtime class, which
+can be obtained e.g. from writing these functions in Java and
+compiling to a class file.
+
+**A ready-made Java file is**
+[here testsuite/Runtime.java].
+
+
+==Class structure==
+
+Boilerplate code, see PLT book, Chapter 6.
+
+
+
+==Functions==
+
+Methods in the class, ``main`` special, see Chapter 6.
+
+
+==Statements and expressions==
+
+The semantics is the same as in Lab 3. In other words,
+running the generated classes in ``java`` produces the same behaviour
+as running the source code in the ``lab2`` interpreter.
+
+
+
+=Solution format=
+
+==Input and output==
+
+The code generator must be a program called ``lab3``, which is
+executed by the command
+```
+  lab3 <SourceFile>
+```
+and produces a class (``.class``) file. It may do this by first generating
+Jasmin assembly code (a ``.j`` file) and then calling Jasmin on this code.
+Jasmin can be called by
+```
+  java -jar jasmin.jar <File>.j
+```
+
+The generated class file should have the same name and be **in the same directory** as the original source file:
+```
+  lab3 ../a/b/c.cc
+```
+This should produce a class file ``../a/b/c.class``.
+
+The output at failure is a code generator error, or a
+``TYPE ERROR`` as in Assignment 2, or a
+``SYNTAX ERROR`` as in Assignment 1.
+
+The input can be read not only from user typing on the
+terminal, but also from standard input redirected from
+a file or by ``echo``. For instance,
+```
+  ./java fibonacci <test-input
+  echo 20 | java fibonacci fibonacci.cc
+```
+
+
+#NEW
+
+==Example of success==
+
+Source file
+```
+// file good.cc
+
+int main ()
+{
+  int i = readInt() ; //5
+
+  printInt(i) ;   //5
+  printInt(i++) ; //5
+  printInt(i) ;   //6
+  printInt(++i) ; //7
+  printInt(i) ;   //7
+
+}
+```
+Running the compiler
+```
+  % lab3 good.cc
+  # produces good.class
+
+  % echo 3 | java good.class
+  3
+  3
+  4
+  5
+  5
+```
+
+
+#NEW
+
+==Compiling the code generator==
+
+The compiler is submitted as a source file package that can be
+compiled by typing ``make``.
+
+#NEW
+
+=Test programs=
+
+We also provide a [test suite ./testsuite/] for lab 3.
+
+This test suite only contains test files which deal with integers;
+passing all these tests is the **minimum required** for passing this lab.
+
+If you are ambitious, you can also try all the source files in the [lab2 testsuite ../lab2/testsuite/good].
+For this you will also need to handle doubles in your compiler.
+
+**Run your compiler and the generated code with the testsuite before submitting the assignment.**
+
+Download the entire [test suite folder ./testsuite/] and compile it using ``make``.
+The test script can then be run as follows:
+```
+  ./progs-test-lab3 ../path/to/solution/
+```
+
+**Tip**
+Make sure your classnames in Jasmin have simple names without slashes or dots.
+If the first line of your Jasmin file is ".class public x/y/z.cc",
+then Jasmin will compile it to a file ``x/y/z/cc.class``, regardless of what the name of the ``.j`` file is.
+The easiest option, and also what the test suite expects, is that your class name is just a string
+without any slashes or dots. In this example, just "z".
+
+
+=Success criteria=
+
+Your program must be compatible with the [test suite ./testsuite/] and pass all the tests.
+
+The solution must be written in an easily readable and
+maintainable way. In particular, tailoring it for the programs
+in the test suite is not maintainable!
+
+
+=Submission=
+
+Submit your lab by using Fire.
+
+If you have any problems getting the test program to run,
+or if you think that there is an error in the test suite,
+contact the teachers via the course Google group.
