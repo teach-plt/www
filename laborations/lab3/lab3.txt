@@ -14,12 +14,12 @@ The code generator should produce Java class files, which
 can be run in the Java bytecode interpreter so that they
 correctly perform all their input and output actions.
 
-Before the work can be submitted, the program has to pass some
-tests, which are given on the course web page via links
-later in this document.
-
-**Since this lab assumes a type checker, it is enough to run the tests in**
-[the "good" directory ./testsuite/good].
+The code generator is partially characterized by compilation schemes in
+Chapter 6 of the PLT book. More JVM instructions are given in Appendix B.
+These explanations follow Jasmin assembler; the code generator may
+emit Jasmin assembly code into text files, which are then processed
+further by Jasmin to create class files.
+**Jasmin can be downloaded** [here http://jasmin.sourceforge.net/], but is also included in the [test suite testsuite/lab3-testsuite.tar.gz].
 
 The recommended implementation is via a BNF
 grammar processed by the BNF Converter (BNFC) tool. The syntax
@@ -27,32 +27,33 @@ tree created by the parser is first type checked by using the
 type checker created in [Lab 2 ../lab2/lab2.html].
 The code generator should then make another pass of the type-checked code.
 
-The type checker is moreover recommended to annotate the abstract syntax
-trees with types, needed in instruction selection.
-
-**However, it is probably a good idea to start with the lab2 type checker as it is**.
-Then one can get straight into the business of code generation.
-
-#NEW
-
 The approximate size of the grammar is 50 rules, and the code generator
-should be 100-300 lines, depending on the programming language
+should be around 300-700 lines, depending on the programming language
 used.
-
 All BNFC supported languages can be used, but guidance is guaranteed
 only for Haskell and Java.
 
-The code generator is partially characterized by compilation schemes in
-Chapter 6 of the PLT book. More JVM instructions are given in Appendix B.
-These explanations follow Jasmin assembler; the code generator may
-emit Jasmin assembly code into text files, which are then processed
-further by Jasmin to create class files.
+Before the work can be submitted, the program has to pass some
+tests, which are given on the course web page via links
+later in this document.
 
-**Jasmin can be downloaded** [here http://jasmin.sourceforge.net/].
+==Restriction of the task==
 
+To pass the assignment, it is sufficient to treat the grammar of Lab 2
+**excluding doubles**.  Thus, operations involving type double need not
+be covered by the code generator.
 
+However, for the ambitious student, we recommend to extend the code
+generator also to doubles (after it works for integers and the
+statements).  The extension requires some extra work:
 
-#NEW
++ The type checker needs to annotate the abstract syntax with types,
+  such that the correct instruction (for int or double)
+  can be picked by the code generator.
++ As doubles are 64bit (whereas the other values have only 32bit), the
+  environment has to record the size of local variables (single word
+  or double word).
+
 
 =Method=
 
@@ -84,10 +85,9 @@ There are four built-in functions:
   int    readInt()              // read an integer from standard input
   double readDouble()           // read a double from standard input
 ```
-These functions can be defined in a separate runtime class, which
+These functions can be defined in a separate **runtime** class, which
 can be obtained e.g. from writing these functions in Java and
 compiling to a class file.
-
 **A ready-made Java file is**
 [here testsuite/Runtime.java].
 
@@ -201,13 +201,13 @@ For this you will also need to handle doubles in your compiler.
 
 **Run your compiler and the generated code with the testsuite before submitting the assignment.**
 
-Download the entire [test suite folder ./testsuite/] and compile it using ``make``.
+Download the entire [test suite folder ./testsuite/] or the [tarball ./testsuite/lab3-testsuite.tar.gz] and compile it using ``make``.
 The test script can then be run as follows:
 ```
   ./progs-test-lab3 ../path/to/solution/
 ```
 
-**Tip**
+**Tip:**
 Make sure your classnames in Jasmin have simple names without slashes or dots.
 If the first line of your Jasmin file is ".class public x/y/z.cc",
 then Jasmin will compile it to a file ``x/y/z/cc.class``, regardless of what the name of the ``.j`` file is.
@@ -217,7 +217,7 @@ without any slashes or dots. In this example, just "z".
 
 =Success criteria=
 
-Your program must be compatible with the [test suite ./testsuite/] and pass all the tests.
+Your program must be compatible with the [test suite ./testsuite/lab3-testsuite.tar.gz] and pass all the tests.
 
 The solution must be written in an easily readable and
 maintainable way. In particular, tailoring it for the programs
