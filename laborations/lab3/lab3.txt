@@ -308,7 +308,6 @@ compiled by typing ``make``.
 =Test programs=
 
 We also provide a [test suite ./testsuite/] for lab 3.
-
 This test suite only contains test files which deal with integers;
 passing all these tests is the **minimum required** for passing this lab.
 
@@ -325,10 +324,15 @@ The test script can then be run as follows:
 
 **Tip:**
 Make sure your classnames in Jasmin have simple names without slashes or dots.
-If the first line of your Jasmin file is ".class public x/y/z.cc",
-then Jasmin will compile it to a file ``x/y/z/cc.class``, regardless of what the name of the ``.j`` file is.
+If the first line of your Jasmin file is
+```
+.class public x/y/z.cc
+```
+then Jasmin will compile it to a file
+```x/y/z/cc.class```
+regardless of what the name of the ``.j`` file is.
 The easiest option, and also what the test suite expects, is that your class name is just a string
-without any slashes or dots. In this example, just "z".
+without any slashes or dots (in this example, just "z").
 
 
 =Success criteria=
