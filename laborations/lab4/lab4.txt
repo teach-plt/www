@@ -1,0 +1,225 @@
+Interpreter for a functional language
+Programming Language Technology Course, 2015, Laboration 4
+Andreas Abel (andreas abel gu se)
+
+%!target:html
+
+%!postproc(html): #NEW <!-- NEW -->
+
+
+=Summary=
+
+The objective of this lab is to write an interpreter for a small,
+untyped functional programming language.
+The interpreter should walk through programs
+and print out the value of the ``main`` function.
+
+Before the lab can be submitted, the interpreter has to pass some
+tests, which are given on the course web page via links
+later in this document.
+
+The recommended implementation is via a BNF
+grammar processed by the BNF Converter (BNFC) tool.
+No type checker is needed.
+
+#NEW
+
+The approximate size of the grammar is 15 rules, and the interpreter
+code should be about 100 lines, depending on the programming language
+used for the implementation. You can use
+[this grammar ./Fun.cf] if you want.
+
+All BNFC supported languages can be used, but guidance is guaranteed
+only for Haskell and Java 1.5.
+
+
+#NEW
+
+=Method=
+
+Use a ``Makefile`` similar to lab2. The interpreter should
+be compilable via calling
+```
+  make
+```
+Calling the interpreter should work by the command
+```
+  lab4 (-n|-v) <File>
+```
+The flag ``-n`` forces call-by-name evaluation, the flag
+``-v`` forces call-by-value. The default, i.e. when no flag
+is present, is call-by-value.
+
+
+#NEW
+
+=Language specification=
+
+The language is the same as in lecture notes, Chapter 7.
+
+The main category is ``Program``. A program is a sequence of **definitions**,
+which are terminated by semicolons. A definition is a function name followed by
+a (possibly empty) list of variable names followed by the equality sign ``=``
+followed by an **expression**:
+```
+  fun x1 ... xn = exp
+```
+Both ``fun`` and the variables ``x1`` ... ``xn`` are lexically identifiers.
+Thus ``fun`` is the function to be defined, and ``x1`` ... ``xn``
+are its arguments. These variables are considered **bound** in ``exp``. Notice that
+the all such definitions can be converted to definitions of just ``fun`` with
+a lambda abstraction over its arguments.
+
+Expressions are of the following forms
+
+|| precedence | expression  | example               ||
+|  3          | identifier  | ``foo``                |
+|  3          | integer     | ``512``                |
+|  2          | application | ``f x``                |
+|  1          | operation   | ``3 + x``              |
+|  0          | conditional | ``if c then a else b`` |
+|  0          | abstraction | ``\x -> x + 1``        |
+
+Applications and operations are left-associative. Abstractions are
+right-associative.
+
+The available operations are ``+, -, <``.
+
+Here is an example of a program in the language:
+```
+  -- example
+
+  mult x y =
+    if (y < 1) then 0 else if (y < 2) then x else (x + (mult x (y-1))) ;
+  fact = \x -> if (x < 3) then x else mult x (fact (x-1)) ;
+  main = fact 6 ;
+```
+Comments are line tails starting with ``--``.
+
+#NEW
+
+=Semantics=
+
+There is just one type of basic values: integers. Closures or
+abstraction expressions are also possible values of expressions.
+
+Evaluation is parametrized so that it can be performed in
+both call-by-value and call-by-name manners.
+
+The function defined in a definition is in scope in the entire
+program, including the expression part of that definition
+(which results in recursive and mutually recursive functions).
+
+The variables bound on the left-hand-side of a definition are
+in scope in the expression part of the definition.
+
+The variable ``x`` in an abstraction ``\x -> exp`` is bound in
+the body of the abstraction, i.e. ``exp``.
+
+Bindings made inside a scope overshadow those made outside.
+
+The operations ``+, -, <`` have their usual integer semantics.
+The comparison ``<`` has value 1 if it is true, 0 if false.
+
+The conditional ``if c then a else b`` is evaluated "lazily"
+so that if ``c`` has value 0, ``b`` is evaluated, otherwise
+``a`` is evaluated.
+
+The output of a program is the value of the ``main`` function, and
+it must be an integer.
+
+A program may also exit with an error, due to an unbound identifier.
+It should then say what identifier is unbound. It is also an error
+if the ``main`` function is missing or has wrong type.
+Arithmetic operations on non-integers are also errors, e.g.
+```
+  f x = x + x ;
+  main = f + f ;
+```
+All these errors occur at run time, because there is no type checker.
+
+
+#NEW
+
+=Example of success and failure=
+
+Source file
+```
+  -- file good.fun
+
+  mult x y =
+    if (y < 1) then 0 else if (y < 2) then x else (x + (mult x (y-1))) ;
+  fact = \x -> if (x < 3) then x else mult x (fact (x-1)) ;
+  main = fact 6 ;
+```
+Running the interpreter
+```
+  ./lab4 good.fun
+  720
+```
+Source file
+```
+  -- file bad.fun
+
+  mult x y =
+    if (y < 1) then 0 else if (y < 2) then x else (x + (mult x (y-1))) ;
+  fact = \x -> if (x < 3) then x else mul x (fact (x-1)) ;
+  main = fact 6 ;
+```
+Running the interpreter
+```
+  ./lab4 bad.fun
+  ERROR: unknown identifier mul
+```
+Source file
+```
+  -- file infinite.fun
+
+  grow x = 1 + grow x ;
+  first x y = x ;
+  main = first 5 (grow 4) ;
+```
+Running the interpreter
+```
+  ./lab4 infinite.fun
+  <infinite loop>
+
+  ./lab4 -n infinite.fun
+  5
+```
+
+
+#NEW
+
+=Compiling the interpreter=
+
+The interpreter is submitted as source files that can be compiled by typing ``make``.
+
+
+
+#NEW
+
+=Test programs=
+
+Run the programs in the [test suite testsuite.tgz] before submitting the lab.
+Include a log on the test run, showing the call of ``lab4`` for every program
+in the testsuite.
+
+
+=Success criteria=
+
+The interpreter must give acceptable results for the [test suite testsuite.tgz]
+and meet the specification in this document in all respects.
+
+All "good" programs must work with at least one of the evaluation strategies;
+need not work on both (because of loop or long time); see comments in
+test programs to see which one is expected to work.
+
+The solution must be written in an easily readable and maintainable way.
+
+
+=Submission=
+
+Submit your lab by using Fire.
+**Please include exactly all the files that are required for building your solution, including a Makefile.**
+Do not however submit any generated files, and kindly avoid using archives (upload each file individually).
