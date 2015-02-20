@@ -665,8 +665,7 @@ uninitialized variables.
 
 ==Compiling the interpreter==
 
-The interpreter is submitted as a source file package that can be
-compiled by typing ``make``.
+The interpreter is submitted as source files that can be compiled by typing ``make``.
 The file names must match the ready-made files in either the
 [Haskell package haskell/] or the [Java 1.5 package java1.5/].
 The simplest solution is to copy the contents of these files
@@ -702,8 +701,9 @@ in the test suite is not maintainable!
 
 =Submission=
 
-Submit your lab by using Fire,
-when Lab 2 is in place.
+Submit your lab by using Fire.
+**Please include exactly all the files that are required for building your solution, including a Makefile.**
+Do not however submit any generated files, and kindly avoid using archives (upload each file individually).
 
 If you have any problems getting the test program to run,
 or if you think that there is an error in the test suite,
