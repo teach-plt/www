@@ -18,6 +18,8 @@ http://www.cse.chalmers.se/edu/year/2014/course/DAT151/index.html
 
 =News and changes=
 
+2015-03-03 [Lab4 laborations/lab4/lab4.html] is up.
+
 2015-02-17 [Lab3 laborations/lab3/lab3.html] is up.
            Note that you have to submit //something// for the first deadline
            in order to resubmit to the final deadline.
@@ -160,8 +162,8 @@ There will be four laborations, written individually or in
 pairs.
 - deadline 2/2:  [parser laborations/lab1/lab1.html]
 - deadline 16/2: [type checker and interpreter laborations/lab2/lab2.html]
-- deadline 25/2: [code generator laborations/lab3/lab3.html]                  (tentative!)
-- deadline 10/3: [functional language interpreter laborations/lab4/lab4.html]  (tentative!)
+- deadline 2/3: [code generator laborations/lab3/lab3.html]
+- deadline 16/3: [functional language interpreter laborations/lab4/lab4.html]
 
 
 Reporting is done via
@@ -169,7 +171,7 @@ Reporting is done via
 Before reporting, you must run your program through a test suite,
 such as the one for [lab 1 laborations/lab1/testscript/].
 
-**Final deadline is Saturday 14 March** for all returned and corrected labs.
+**Final deadline is Saturday 21 March** for all returned and corrected labs.
 No labs will be graded after this deadline.
 
 We guarantee two gradings per lab: one for the version submitted before the

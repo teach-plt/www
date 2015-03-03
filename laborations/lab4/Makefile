@@ -4,8 +4,10 @@
 
 all : www testsuite
 
-testsuite :
-	make -C testsuite build-www
+testsuite : testsuite.tgz
+
+testsuite.tgz : testsuite/*.fun testsuite/progs-test-lab4.sh
+	tar czf $@ $^
 
 www : lab4.html
 
