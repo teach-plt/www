@@ -12,6 +12,9 @@ Google group: http://groups.google.com/group/plt-2015-lp2
 Studieportal:
 https://www.student.chalmers.se/sp/course?course_id=21767
 
+GU course description:
+http://kursplaner.gu.se/english/DIT231.pdf
+
 Last year course page:
 http://www.cse.chalmers.se/edu/year/2015/course/DAT151-lp3/index.html
 
