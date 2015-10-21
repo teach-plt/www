@@ -1,5 +1,5 @@
 Programming Language Technology
-Course codes: Chalmers DAT151, DAT150, GU DIT230
+Course codes: Chalmers - DAT151 (replaces DAT150), GU - DIT231 (replaces DIT230)
 Winter Term 2015 (LP2)
 
 %!target:html
@@ -10,7 +10,8 @@ Google group: http://groups.google.com/group/plt-2015-lp2
 (**please provide your full name and date of birth when requesting membership!**)
 
 Studieportal:
-https://www.student.chalmers.se/sp/course?course_id=21767
+https://www.student.chalmers.se/sp/course?course_id=23453
+% https://www.student.chalmers.se/sp/course?course_id=21767
 
 GU course description:
 http://kursplaner.gu.se/english/DIT231.pdf
@@ -21,9 +22,11 @@ http://www.cse.chalmers.se/edu/year/2015/course/DAT151-lp3/index.html
 
 =News and changes=
 
+2015-10-21 Andreas Abel is unable to run the course this time.
+           Fredrik Lindblad will do this instead. Andreas is still the examiner.
+
 2015-09-13 First version of this page - mostly a copy of the 2014/15 LP3 material.
            Updates forthcoming soon.
-
 
 =Tentative Schedule=
 
@@ -89,10 +92,12 @@ passed the course should be able to
 
 =Teachers=
 
-[Andreas Abel http://www.cse.chalmers.se/~abela/], course responsible.
+[Andreas Abel http://www.cse.chalmers.se/~abela/], course examiner.
+
+[Fredrik Lindblad https://www.chalmers.se/en/staff/Pages/fredrik-lindblad.aspx], contact and lectures.
 
 John Camilleri,
-Mauricio Chimento,
+% Mauricio Chimento,
 Daniel Hausknecht,
 Inari Listenmaa,
 assistants.
@@ -125,13 +130,16 @@ This is necessary to identify you as a participant of the course.
 =Laboration times and supervision=
 
 Times:
-- Tuesday 15-17 (no class on 3 February) (Inari, Daniel) , in ED3354.
-- Thursday 15-17 (no class on 19 February) (Daniel, Mauricio), in ED3354.
-- Friday 13-15 (no class on 20 February) (Inari, Mauricio), in ED3354.
+% - Tuesday 15-17 (no class on 3 February) (Inari, Daniel) , in ED3354.
+% - Thursday 15-17 (no class on 19 February) (Daniel, Mauricio), in ED3354.
+% - Friday 13-15 (no class on 20 February) (Inari, Mauricio), in ED3354.
+- Tuesday 15-17, in ED3354.
+- Thursday 15-17, in ED3354.
+- Friday 13-15, in ED3354.
 
 
-The lab rooms and supervision
-are available from Tuesday 20 January till 10 March.
+% The lab rooms and supervision
+% are available from Tuesday 20 January till 10 March.
 
 **Attendance in these classes is optional**.
 Normally, each student should attend **at most one** supervised laboration time each week.
@@ -155,8 +163,8 @@ Reporting is done via
 Before reporting, you must run your program through a test suite,
 such as the one for [lab 1 laborations/lab1/testscript/].
 
-**Final deadline is Saturday 21 March** for all returned and corrected labs.
-No labs will be graded after this deadline.
+% **Final deadline is Saturday 21 March** for all returned and corrected labs.
+% No labs will be graded after this deadline.
 
 We guarantee two gradings per lab: one for the version submitted before the
 ordinary deadline for that lab, the other for a resubmission before
@@ -196,11 +204,16 @@ at web bookshops. The main book will also be sold at Cremona.
 
 Written exam, usual grading scales.
 
-Date: 20 March
+Exam dates:
+ 15 Jan 2016 em H,
+ 06 Apr 2016 fm J,
+ 17 Aug 2016 em J 
 
-Time: 2:00 afternoon
+% Date: 20 March
 
-Place: M (Hörsalsvägen 5)
+% Time: 2:00 afternoon
+
+% Place: M (Hörsalsvägen 5)
 
 The exam has the same structure as these [old exams exams/].
 
