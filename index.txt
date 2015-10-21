@@ -4,7 +4,7 @@ Winter Term 2015 (LP2)
 
 %!target:html
 
-Official URL: http://www.cse.chalmers.se/edu/course/DAT151/
+Official URL: http://www.cse.chalmers.se/edu/course/DAT151-lp2/
 
 Google group: http://groups.google.com/group/plt-2015-lp2
 (**please provide your full name and date of birth when requesting membership!**)
@@ -17,7 +17,7 @@ GU course description:
 http://kursplaner.gu.se/english/DIT231.pdf
 
 Last year course page:
-http://www.cse.chalmers.se/edu/year/2015/course/DAT151-lp3/index.html
+http://www.cse.chalmers.se/edu/year/2015/course/DAT151/
 
 
 =News and changes=
