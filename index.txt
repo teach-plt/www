@@ -59,7 +59,7 @@ Slides follow closely the plt book.
 | //???// | 8.30-12.30 | //Exam// (in house M)         | [old exams exams/]
 | //???// | 14-18 | //Exam// (in house J)         | [old exams exams/]
 
-The official course schema is in [Time Edit https://se.timeedit.net/web/chalmers/db1/public/ri1X30g69560Y7QQ05Z62X3Y0Yy6000311050Q785v585Z30X66Y628QY536727.html].
+The official course schema is in [Time Edit https://se.timeedit.net/web/chalmers/db1/public/ri1X50gQ1560YvQQ05Z6372Y0Zy6007315Y53Q587.html].
 
 
 
