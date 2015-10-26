@@ -152,14 +152,14 @@ supervision of the week have priority to get a place and supervisor help.
 
 There will be four laborations, written individually or in
 pairs.
-- deadline 16/11:  [parser laborations/lab1/lab1.html]
-- deadline 30/11: [type checker and interpreter laborations/lab2/lab2.html]
-- deadline 14/12: [code generator laborations/lab3/lab3.html]
-- deadline 11/01: [functional language interpreter laborations/lab4/lab4.html]
+% - deadline 16/11:  [parser laborations/lab1/lab1.html]
+% - deadline 30/11: [type checker and interpreter laborations/lab2/lab2.html]
+% - deadline 14/12: [code generator laborations/lab3/lab3.html]
+% - deadline 11/01: [functional language interpreter laborations/lab4/lab4.html]
 
 
-Reporting is done via
-[Fire http://xdat09.ce.chalmers.se/plt/].
+Reporting is done via Fire.
+%[Fire http://xdat09.ce.chalmers.se/plt/].
 Before reporting, you must run your program through a test suite,
 such as the one for [lab 1 laborations/lab1/testscript/].
 
@@ -177,7 +177,7 @@ deadline, only one grading is guaranteed.
 The main book will be one that developed from earlier editions of this course:
 
 - Ranta:
-//Implementing Programming Languages. An Introductions to Compilers and Interpreters//,
+//Implementing Programming Languages. An Introduction to Compilers and Interpreters//,
 College Publications,
 London,
 2012.
