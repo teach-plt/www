@@ -160,8 +160,8 @@ pairs.
 
 Reporting is done via Fire.
 %[Fire http://xdat09.ce.chalmers.se/plt/].
-Before reporting, you must run your program through a test suite,
-such as the one for [lab 1 laborations/lab1/testscript/].
+Before reporting, you must run your program through a test suite.
+% such as the one for [lab 1 laborations/lab1/testscript/].
 
 % **Final deadline is Saturday 21 March** for all returned and corrected labs.
 % No labs will be graded after this deadline.
