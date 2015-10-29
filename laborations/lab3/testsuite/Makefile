@@ -30,7 +30,7 @@ lab3-testsuite.tar.gz : build-tarball.sh progs-test-lab3.hs Makefile Runtime.jav
 www : index.html
 
 %.html : %.txt
-	txt2tags $<
+	txt2tags --style=../../../style.css -t html $<
 
 
 # EOF

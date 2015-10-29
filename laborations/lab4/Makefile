@@ -12,6 +12,6 @@ testsuite.tgz : testsuite/*.fun testsuite/progs-test-lab4.sh
 www : lab4.html
 
 %.html : %.txt
-	txt2tags $<
+	txt2tags --style=../../style.css -t html $<
 
 # EOF

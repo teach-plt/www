@@ -10,6 +10,6 @@ testsuite :
 www : lab3.html
 
 %.html : %.txt
-	txt2tags $<
+	txt2tags --style=../../style.css -t html $<
 
 # EOF

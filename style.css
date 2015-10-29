@@ -1,0 +1,14 @@
+html {
+  margin: 0em;
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  background-color: #CFCFCF;
+}
+
+body {
+  position: absolute;
+  background-color: #F9F9F9;
+  margin: 0em 18%;
+  min-height: 100%;
+  box-shadow: 0em 0em 5em #424242;
+  padding: 2em 5em;
+}

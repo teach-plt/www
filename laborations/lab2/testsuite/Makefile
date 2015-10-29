@@ -12,6 +12,6 @@ lab2-testsuite.tar.gz : build-tarball.sh progs-test-lab2.hs bad/*.cc good/*.cc g
 www : index.html
 
 %.html : %.txt
-	txt2tags $<
+	txt2tags --style=../../../style.css -t html $<
 
 # EOF

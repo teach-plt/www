@@ -12,6 +12,6 @@ lab% :
 www : index.html
 
 %.html : %.txt
-	txt2tags $<
+	txt2tags --style=style.css -t html $<
 
 # EOF

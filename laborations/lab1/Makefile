@@ -5,11 +5,11 @@
 all : www testsuite
 
 testsuite :
-	make -C testscript
+	make -C testscript/
 
 www : lab1.html
 
 %.html : %.txt
-	txt2tags $<
+	txt2tags --style=../../style.css -t html $<
 
 # EOF
