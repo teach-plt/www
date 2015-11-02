@@ -5,7 +5,7 @@ Andreas Abel (andreas abel gu se)
 %!target:html
 
 
-Submit your solution via [Fire http://xdat09.ce.chalmers.se/plt/].
+Submit your solution via [Fire https://xdat09.ce.chalmers.se/2015/lp2/plt/].
 
 
 =Summary=
@@ -200,7 +200,7 @@ brackets.
 
 ==Expressions==
 
-**(Associativities differ slightly from 2014 assignment!)**
+%**(Associativities differ slightly from 2014 assignment!)**
 
 The following table gives the expressions,
 their precedence levels, and their associativity.
@@ -353,7 +353,7 @@ But reduce/reduce conflicts are forbidden.
 
 = Submission =
 
-Submit your lab using [Fire http://xdat09.ce.chalmers.se/plt/].
+Submit your lab using [Fire https://xdat09.ce.chalmers.se/2015/lp2/plt/].
 Do not submit your solution before it passes the test suite - it will
 be returned automatically.
 

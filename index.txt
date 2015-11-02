@@ -39,11 +39,9 @@ Slides follow closely the plt book.
 || Date    | Time  | Title                             | Material                      ||
 | Tue 03/11 | 13-15 | Introduction: Compilation Phases  | [slides http://www.digitalgrammars.com/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
 | Thu 05/11 | 13-15 | Grammars                          | [slides http://www.digitalgrammars.com/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
-| Tue 10/11 | 13-15 | Hands-on with Lab 1               |
-%[lab1 PM laborations/lab1/lab1.html]
+| Tue 10/11 | 13-15 | Hands-on with Lab 1               | [lab1 PM laborations/lab1/lab1.html]
 | Thu 12/11 | 13-15 | Theory of lexing and parsing      | [slides http://www.digitalgrammars.com/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
-| //Mon 16/11// | //23// | //Lab 1 deadline//            |
-%//[lab1 PM laborations/lab1/lab1.html]//
+| //Mon 16/11// | //23// | //Lab 1 deadline//            | //[lab1 PM laborations/lab1/lab1.html]//
 | Tue  17/11 | 13-15 | Type checking                     | [slides http://www.digitalgrammars.com/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
 | Thu 19/11 | 13-15 | Interpreters                      | [slides http://www.digitalgrammars.com/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
 | Tue 24/11 | 13-15 | Hands-on with Lab 2               |
@@ -160,10 +158,13 @@ supervision of the week have priority to get a place and supervisor help.
 
 There will be four laborations, written individually or in
 pairs.
-% - deadline 16/11:  [parser laborations/lab1/lab1.html]
-% - deadline 30/11: [type checker and interpreter laborations/lab2/lab2.html]
-% - deadline 14/12: [code generator laborations/lab3/lab3.html]
-% - deadline 11/01: [functional language interpreter laborations/lab4/lab4.html]
+ - [Lab 1 - parser laborations/lab1/lab1.html] (deadline 16/11)
+ - Lab 2 - type checker and interpreter (deadline 30/11)
+%[type checker and interpreter laborations/lab2/lab2.html]
+ - Lab 3 - code generator (deadline 14/12)
+%[code generator laborations/lab3/lab3.html]
+ - Lab 4 - functional language interpreter (deadline 11/01)
+%[functional language interpreter laborations/lab4/lab4.html]
 
 
 Reporting is done via [Fire https://xdat09.ce.chalmers.se/2015/lp2/plt/].
