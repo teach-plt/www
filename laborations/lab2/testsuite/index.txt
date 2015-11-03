@@ -37,7 +37,7 @@ $ tar -zxf lab2-testsuite.tar.gz
 $ cd testsuite
 ```
 
-+ Compile the test program:
++ Compile the test program using ``make`` or alternatively:
 ```
 $ ghc -threaded --make -o progs-test-lab2 progs-test-lab2.hs
 ```
