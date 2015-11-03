@@ -1,5 +1,5 @@
 Lab 2 Test Suite
-Programming Languages Technology Course 2015
+Programming Language Technology, 2015
 Bjorn Bringert (2007)
 
 %!target:html

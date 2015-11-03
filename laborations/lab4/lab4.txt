@@ -1,6 +1,5 @@
-Interpreter for a functional language
-Programming Language Technology Course, 2015, Laboration 4
-Andreas Abel (andreas abel gu se)
+Lab 4: Interpreter for a functional language
+Programming Language Technology, 2015
 
 %!target:html
 

@@ -1,6 +1,5 @@
 Lab 1 Test Suite
-Programming Languages Technology, 2015
-Andreas Abel (andreas abel gu se)
+Programming Language Technology, 2015
 
 %!target:html
 

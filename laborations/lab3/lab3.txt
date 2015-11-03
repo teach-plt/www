@@ -1,6 +1,5 @@
-Code Generator for C/C++
-Programming Language Technology Course, 2015, Laboration 3
-Andreas Abel (andreas abel gu se)
+Lab 3: Code Generator for C/C++
+Programming Language Technology, 2015
 
 %!target:html
 

@@ -1,6 +1,5 @@
-Type checker and interpreter for C/C++
-Programming Language Technology Course, 2015, Laboration 2
-Andreas Abel (andreas abel gu se)
+Lab 2: Type checker and interpreter for C/C++
+Programming Language Technology, 2015
 
 %!target:html
 

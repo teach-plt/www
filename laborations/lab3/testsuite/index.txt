@@ -1,6 +1,5 @@
 Lab 3 Test Suite
-Programming Languages Technology Course 2015
-Bjorn Bringert (2007)
+Programming Language Technology, 2015
 
 %!target:html
 

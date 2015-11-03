@@ -1,6 +1,5 @@
-Parser for C++
-Programming Languages Course, 2015, Laboration 1
-Andreas Abel (andreas abel gu se)
+Lab 1: Parser for C++
+Programming Language Technology, 2015
 
 %!target:html
 
@@ -206,7 +205,7 @@ The following table gives the expressions,
 their precedence levels, and their associativity.
 The associativity of operators is given as left, right, or none.
 For binary operators, in general any of the three associativity is meaningful.
-For pre-, post-, and mixfix operators, at most one of 
+For pre-, post-, and mixfix operators, at most one of
 left or right associativity makes sense, and the alternative is non-associative.
 As they are bracketed, the argument in an array index and
 the arguments in a function call can be expressions of any level.
