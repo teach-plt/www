@@ -15,28 +15,21 @@ import System.IO
 import System.Process
 import System.IO.Unsafe
 
--- needed in GHF 7.6 ----------------
+#if __GLASGOW_HASKELL__ >= 706
+-- needed in GHC 7.6
 import Control.Exception
-
 readFileIfExists :: FilePath -> IO String
 readFileIfExists f = catch (readFile f) exceptionHandler
    where exceptionHandler :: IOException -> IO String
          exceptionHandler _ = return ""
-
+#else
 -- whereas in GHC 7.4
-
---readFileIfExists :: FilePath -> IO String
---readFileIfExists f = catch (readFile f) (\_ -> return "")
-
-------------------------------------
-
-
+readFileIfExists :: FilePath -> IO String
+readFileIfExists f = catch (readFile f) (\_ -> return "")
+#endif
 
 -- Executable name
--- TODO: make an option
---EXEC_NAME :: String
 executable_name = "lab2"
-
 
 {-# NOINLINE doDebug #-}
 doDebug :: IORef Bool

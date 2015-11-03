@@ -1,5 +1,4 @@
 {-# OPTIONS_GHC -cpp #-}
-{-# LANGUAGE ScopedTypeVariables #-}
 
 -- GHC needs -threaded
 
@@ -15,14 +14,24 @@ import System.Exit
 import System.IO
 import System.Process
 import System.IO.Unsafe
-import Control.Exception
 
 import System.FilePath.Posix (takeBaseName, takeDirectory)
 
--- Executable name
---EXEC_NAME :: String
-executable_name = "lab3"
+#if __GLASGOW_HASKELL__ >= 706
+-- needed in GHC 7.6
+import Control.Exception
+readFileIfExists :: FilePath -> IO String
+readFileIfExists f = catch (readFile f) exceptionHandler
+   where exceptionHandler :: IOException -> IO String
+         exceptionHandler _ = return ""
+#else
+-- whereas in GHC 7.4
+readFileIfExists :: FilePath -> IO String
+readFileIfExists f = catch (readFile f) (\_ -> return "")
+#endif
 
+-- Executable name
+executable_name = "lab3"
 
 {-# NOINLINE doDebug #-}
 doDebug :: IORef Bool
@@ -254,9 +263,6 @@ checkDirectoryExists f =
     do e <- doesDirectoryExist f
        when (not e) $ do putStrLn $ color red $ quote f ++ " is not an existing directory."
 		         exitFailure
-
-readFileIfExists :: FilePath -> IO String
-readFileIfExists f = Control.Exception.catch (readFile f) (\(ex :: IOException) -> return "")
 
 --
 -- * Error reporting and output checking
