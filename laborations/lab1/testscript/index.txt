@@ -26,7 +26,8 @@ $ tar -zxf lab1-testsuite.tar.gz
 $ cd lab1-testsuite
 ```
 
-+ Compile the test program:
++ Compile the test program with ``make``, or alternatively:
+
 ```
 $ ghc --make -o progs-test-lab1 progs-test-lab1.hs
 ```

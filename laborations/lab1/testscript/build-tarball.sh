@@ -7,8 +7,9 @@ mkdir "$NAME/good"
 mkdir "$NAME/bad"
 
 cp progs-test-lab1.hs "$NAME"
-cp ../test/*.cc "$NAME/good"
-cp ../test/bad/*.cc "$NAME/bad"
+cp Makefile-test "$NAME"/Makefile
+cp ../test/*.cc "$NAME/good/"
+cp ../test/bad/*.cc "$NAME/bad/"
 
 tar -zcf "$NAME.tar.gz" "$NAME"
 

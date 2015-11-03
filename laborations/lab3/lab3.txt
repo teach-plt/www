@@ -18,7 +18,7 @@ Chapter 6 of the PLT book. More JVM instructions are given in Appendix B.
 These explanations follow Jasmin assembler; the code generator may
 emit Jasmin assembly code into text files, which are then processed
 further by Jasmin to create class files.
-**Jasmin can be downloaded** [here http://jasmin.sourceforge.net/], but is also included in the [test suite testsuite/lab3-testsuite.tar.gz].
+**Jasmin can be downloaded** [here http://jasmin.sourceforge.net/], but is also included in the test suite.
 
 The recommended implementation is via a BNF
 grammar processed by the BNF Converter (BNFC) tool. The syntax
@@ -337,7 +337,7 @@ without any slashes or dots (in this example, just "z").
 
 =Success criteria=
 
-Your program must be compatible with the [test suite ./testsuite/lab3-testsuite.tar.gz] and pass all the tests.
+Your program must be compatible with the [test suite ./testsuite/] and pass all the tests.
 
 The solution must be written in an easily readable and
 maintainable way. In particular, tailoring it for the programs
