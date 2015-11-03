@@ -215,13 +215,13 @@ Written exam, usual grading scales.
 Exam dates:
  15 Jan 2016 em H,
  06 Apr 2016 fm J,
- 17 Aug 2016 em J 
+ 17 Aug 2016 em J
 
 % Date: 20 March
 
 % Time: 2:00 afternoon
 
-% Place: M (Hörsalsvägen 5)
+% Place: M (HÃ¶rsalsvÃ¤gen 5)
 
 The exam has the same structure as these [old exams exams/].
 
@@ -236,4 +236,10 @@ to prepare for the exam.
 
 BNF Converter, http://bnfc.digitalgrammars.com/
 
-Precompiled [Java tools (Cup and JLex) doc/javatools.tgz]
+If using the Java backend, you will need the **Cup** and **JLex** libraries.
+You can download pre-compiled versions [here doc/javatools.tgz].
+Make sure they are placed in your classpath, for example by extracting to ``~/javatools/`` adding the following to ``.bashrc``:
+
+```
+  export CLASSPATH=.:~/javatools/:~/javatools/Cup/:${CLASSPATH}
+```
