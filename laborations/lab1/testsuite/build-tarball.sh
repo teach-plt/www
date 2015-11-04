@@ -8,8 +8,8 @@ mkdir "$NAME/bad"
 
 cp progs-test-lab1.hs "$NAME"
 cp Makefile-test "$NAME/Makefile"
-cp ../test/*.cc "$NAME/good/"
-cp ../test/bad/*.cc "$NAME/bad/"
+cp -p good/*.cc "$NAME/good/"
+cp -p bad/*.cc "$NAME/bad/"
 
 tar -zcf "$NAME.tar.gz" "$NAME"
 

@@ -5,7 +5,7 @@
 all : www testsuite
 
 testsuite :
-	make -C testsuite build-www
+	make -C testsuite
 
 www : lab3.html
 

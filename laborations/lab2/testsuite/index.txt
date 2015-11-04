@@ -1,6 +1,5 @@
 Lab 2 Test Suite
 Programming Language Technology, 2015
-Bjorn Bringert (2007)
 
 %!target:html
 
@@ -32,9 +31,9 @@ You will only need to do this this part once.
 $ tar -zxf lab2-testsuite.tar.gz
 ```
 
-+ Enter the ``testsuite`` directory:
++ Enter the ``lab2-testsuite`` directory:
 ```
-$ cd testsuite
+$ cd lab2-testsuite
 ```
 
 + Compile the test program using ``make`` or alternatively:
@@ -48,9 +47,9 @@ $ ghc -threaded --make -o progs-test-lab2 progs-test-lab2.hs
 This is what you need to do to test your grammar.
 
 
-+ Enter the ``testsuite`` directory (if you are not there already):
++ Enter the ``lab2-testsuite`` directory (if you are not there already):
 ```
-$ cd testsuite
+$ cd lab2-testsuite
 ```
 
 + Run ``progs-test-lab2`` with the path to the directory

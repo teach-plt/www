@@ -1,36 +1,17 @@
-# Goals to build the test program
+# John, 2015-11-04 Makefile for lab3 testsuite
 
-test : Runtime.class progs-test-lab3.hs
-	ghc -threaded --make -o progs-test-lab3 progs-test-lab3.hs
+.PHONY : all suite www
 
-Runtime.class : Runtime.java
-	javac Runtime.java
-
-clean :
-	rm -f *.j good*.class core*.class
-	rm -f good/*.j good/*.class
-
-
-# Goals to build the web page
-
-build-www : www suite
-#	@echo "*****************************************************"
-#	@echo "*                                                   *"
-#	@echo "*  NOTE: To build the test program, please invoke   *"
-#	@echo "*                                                   *"
-#	@echo "*      make test                                    *"
-#	@echo "*                                                   *"
-#	@echo "*****************************************************"
+all : suite www
 
 suite : lab3-testsuite.tar.gz
 
-lab3-testsuite.tar.gz : build-tarball.sh progs-test-lab3.hs Makefile Runtime.java jasmin.jar index.txt good/*.cc good/*.cc.*put
+lab3-testsuite.tar.gz : build-tarball.sh progs-test-lab3.hs Makefile-test Runtime.java jasmin.jar index.txt good/*.cc good/*.cc.*put
 	./build-tarball.sh
 
 www : index.html
 
 %.html : %.txt
 	txt2tags --style=../../../style.css -t html $<
-
 
 # EOF

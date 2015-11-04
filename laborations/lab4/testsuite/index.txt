@@ -1,0 +1,37 @@
+Lab 4 Test Suite
+Programming Language Technology, 2015
+
+%!target:html
+
+= Introduction =
+
+Before you submit lab 4, your solution must pass the
+testsuite. This document describes how to obtain and use
+this testsuite.
+
+= Preparations =
+
+You will only need to do this this part once.
+
++ Download [lab4-testsuite.tar.gz lab4-testsuite.tar.gz].
+
++ Unpack the downloaded file:
+```
+$ tar -zxf lab4-testsuite.tar.gz
+```
+
+
+= Running the testsuite =
+
+This is what you need to do to test your interpreter.
+
++ Enter the ``lab4-testsuite`` directory (if you are not there already):
+```
+$ cd lab4-testsuite
+```
+
++ Run ``progs-test-lab4.sh`` with the path to the directory where your solution is located:
+
+```
+$ ./progs-test-lab4.sh path/to/your/solution/
+```

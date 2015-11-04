@@ -5,7 +5,6 @@ Programming Language Technology, 2015
 
 %!postproc(html): #NEW <!-- NEW -->
 
-
 =Summary=
 
 The objective of this lab is to write an interpreter for a small,
@@ -21,8 +20,6 @@ The recommended implementation is via a BNF
 grammar processed by the BNF Converter (BNFC) tool.
 No type checker is needed.
 
-#NEW
-
 The approximate size of the grammar is 15 rules, and the interpreter
 code should be about 100 lines, depending on the programming language
 used for the implementation. You can use
@@ -30,9 +27,6 @@ used for the implementation. You can use
 
 All BNFC supported languages can be used, but guidance is guaranteed
 only for Haskell and Java 1.5.
-
-
-#NEW
 
 =Method=
 
@@ -48,9 +42,6 @@ Calling the interpreter should work by the command
 The flag ``-n`` forces call-by-name evaluation, the flag
 ``-v`` forces call-by-value. The default, i.e. when no flag
 is present, is call-by-value.
-
-
-#NEW
 
 =Language specification=
 
@@ -95,8 +86,6 @@ Here is an example of a program in the language:
 ```
 Comments are line tails starting with ``--``.
 
-#NEW
-
 =Semantics=
 
 There is just one type of basic values: integers. Closures or
@@ -136,9 +125,6 @@ Arithmetic operations on non-integers are also errors, e.g.
   main = f + f ;
 ```
 All these errors occur at run time, because there is no type checker.
-
-
-#NEW
 
 =Example of success and failure=
 
@@ -187,27 +173,19 @@ Running the interpreter
   5
 ```
 
-
-#NEW
-
 =Compiling the interpreter=
 
 The interpreter is submitted as source files that can be compiled by typing ``make``.
 
-
-
-#NEW
-
 =Test programs=
 
-Run the programs in the [test suite testsuite.tgz] before submitting the lab.
+Run the programs in the [test suite ./testsuite/] before submitting the lab.
 Include a log on the test run, showing the call of ``lab4`` for every program
 in the testsuite.
 
-
 =Success criteria=
 
-The interpreter must give acceptable results for the [test suite testsuite.tgz]
+The interpreter must give acceptable results for the [test suite ./testsuite/]
 and meet the specification in this document in all respects.
 
 All "good" programs must work with at least one of the evaluation strategies;

@@ -6,7 +6,7 @@ all : suite www
 
 suite : lab2-testsuite.tar.gz
 
-lab2-testsuite.tar.gz : build-tarball.sh progs-test-lab2.hs bad/*.cc good/*.cc good/*.cc.*put
+lab2-testsuite.tar.gz : build-tarball.sh progs-test-lab2.hs Makefile-test bad/*.cc good/*.cc good/*.cc.*put
 	./build-tarball.sh
 
 www : index.html

@@ -40,7 +40,7 @@ the line at which it fails. In this way, you will find
 out what new grammar rules you need.
 
 After treating the six tests, run the
-[test script testscript/index.html] to
+[test script testsuite/index.html] to
 make your parser perfect.
 
 You can use any code generator (Haskell, Java, C,...) from BNFC. It
@@ -340,7 +340,7 @@ these files in this order.
 
 =Success criteria=
 
-Your grammar must pass the [test suite testscript/index.html].
+Your grammar must pass the [test suite testsuite/index.html].
 The test suite contains the example programs, as well
 as a number of programs which your parser must reject.
 

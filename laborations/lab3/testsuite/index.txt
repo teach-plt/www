@@ -36,9 +36,9 @@ $ tar -zxf lab3-testsuite.tar.gz
 $ cd lab3-testsuite
 ```
 
-+ Compile the test program:
++ Compile the test program using ``make`` or alternatively:
 ```
-$ make test
+$ ghc -threaded --make -o progs-test-lab2 progs-test-lab2.hs
 ```
 
 

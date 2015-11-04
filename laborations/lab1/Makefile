@@ -5,7 +5,7 @@
 all : www testsuite
 
 testsuite :
-	make -C testscript/
+	make -C testsuite
 
 www : lab1.html
 
