@@ -1,0 +1,23 @@
+-- Mini.cf
+
+Prog. Program ::= [Stm] ;
+
+terminator Stm "" ;
+
+SDecl.  Stm ::= Type Ident ";"  ;
+SAss.   Stm ::= Ident "=" Exp ";" ;
+SBlock. Stm ::= "{" [Stm] "}" ;
+SPrint. Stm ::= "print" Exp  ";" ;
+
+EVar.    Exp1 ::= Ident ;
+EInt.    Exp1 ::= Integer ;
+EDouble. Exp1 ::= Double ;
+EAdd.    Exp  ::= Exp "+" Exp1 ;
+
+coercions Exp 1 ;
+
+TInt.    Type ::= "int" ;
+TDouble. Type ::= "double" ;
+
+-- for the annotating type checker
+internal ETyped. Exp1 ::= Type "(" Exp ")" ; 

@@ -1,6 +1,6 @@
 # .PHONY : ship all www lab1 lab2
 
-all : www lab1 lab2 lab3 lab4
+all : www lab1 lab2 lab3 lab4 mini
 
 ship : index.html
 	scp $< frelindb@remote12.chalmers.se:/chalmers/groups/edu2009/www/www.cse.chalmers.se/year/2015/course/DAT151-lp2/
@@ -8,6 +8,9 @@ ship : index.html
 
 lab% :
 	make -C laborations/$@
+
+mini :
+	make -C laborations/mini
 
 www : index.html
 

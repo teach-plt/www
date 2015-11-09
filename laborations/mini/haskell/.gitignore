@@ -1,0 +1,11 @@
+AbsMini.hs
+DocMini.*
+ErrM.hs
+LexMini.*
+ParMini.*
+PrintMini.hs
+SkelMini.hs
+TestMini.hs
+
+runmini
+compilemini

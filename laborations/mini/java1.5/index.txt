@@ -1,0 +1,68 @@
+Mini Interpreter / Compiler in Java
+Programming Language Technology, 2015
+
+%!target:html
+
+Make sure you have bnfc, JLex, and Cup available.
+
+=Interpreter=
+
+To compile the interpreter:
+
+```
+make interpreter
+```
+
+To run the interpreter:
+
+```
+./runmini ../ex.mini
+```
+
+
+=Compiler=
+
+To compile the compiler:
+
+```
+make compiler
+```
+
+To run the compiler:
+
+```
+./compilemini ../ex.mini
+```
+
+Make sure you have [``jasmin.jar`` ../../lab3/testsuite/jasmin.jar] available.
+This will create a Jasmin file (``Foo.j``) and call Java to compile it into a bytecode file (``Foo.class``).
+To run the generated JVM code:
+
+```
+java Foo
+```
+
+Make sure you have ``Runtime.class`` available. You can produce it by
+
+```
+javac ../Runtime.java -d .
+```
+
+Also make sure that your current directory (where ``Foo.class`` resides) is in the CLASSPATH.
+
+
+=Files=
+
+- ``compilemini``       = shell script that runs compilermini.java
+- ``compilemini.java``  = top level compiler
+- ``Compiler.java``      = code generator
+- ``TypeChecker.java``   = type checker
+- ``Interpreter.java``  = interpreter
+
+- ``annotcompilermini.java``      = type annotated top-level compiler (works for doubles as well)
+- ``AnnotCompiler.java``          = code generator using type annotations
+- ``AnnotatingTypeChecker.java``  = type checker that produces annotations; not quite complete
+
+- ``../Mini.cf``       = grammar of Mini, source file for bnfc
+- ``../ex.mini``       = example Mini program
+- ``../Runtime.java``  = runtime system for the compiler

@@ -1,0 +1,14 @@
+int x ;
+x = 6 ;
+int y ;
+y = x + 7 ;
+print y ;
+{
+  int y ;
+  y = 4 ;
+  print y ;
+  x = y ;
+  print x ;
+}
+print x ;
+print y;

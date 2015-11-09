@@ -1,0 +1,7 @@
+#!/bin/sh
+
+#dir=`dirname $0`
+#java -cp "$dir:$CLASSPATH" compilemini "$@"
+
+java compilemini "$1" >Foo.j
+java -jar jasmin.jar Foo.j
