@@ -171,11 +171,12 @@ An argument list may only use each variable once.
 
 ==Statements==
 
-Any expression followed by a semicolon ``;`` can be used as a statement.
+
+===Declaration===
 
 Any declaration followed by a semicolon ``;`` can be used as a statement.
 Declarations have one of the following formats:
-- type and one variable (as in function parameter lists):
+- type and one variable (as in function parameter lists)
 ```
   int i ;
 
@@ -189,8 +190,13 @@ Declarations have one of the following formats:
 ```
   int i = 6 ;
 ```
+
+
+
 **Typing**. The initializing expression must have the declared type.
 
+
+===Return Statement===
 
 Statements returning an expression, for example
 ```
@@ -198,6 +204,8 @@ Statements returning an expression, for example
 ```
 **Typing**. The type of the returned expression must be the same as
 the return type of the function in which it occurs.
+
+===While Loop===
 
 While loops, with an expression in parentheses followed by a statement, for
 example:
@@ -208,7 +216,9 @@ example:
 
 #NEW
 
-Conditionals: ``if`` with an expression in parentheses followed by
+===Conditional===
+
+``if`` with an expression in parentheses followed by
 a statement, ``else``, and another statement. Examples:
 ```
   if (x > 0) return x ; else return y ;
@@ -217,7 +227,8 @@ a statement, ``else``, and another statement. Examples:
 
 (No else-less if statements.)
 
-Blocks: any list of statements (including empty list) between
+===Block===
+Any list of statements (including empty list) between
 curly brackets. For instance,
 ```
   {
@@ -242,9 +253,9 @@ top-level block in the body.
 
 ==Expressions==
 
-**(Associativities differ slightly from 2014 assignment!)**
+%**(Associativities differ slightly from 2014 assignment!)**
 
-The following table gives the expressions,
+The following table gives the expressions constructs,
 their precedence levels, and their associativity.
 The associativity of operators is given as left, right, or none.
 For binary operators, in general any of the three associativity is meaningful.
@@ -708,9 +719,6 @@ If you have any problems getting the test program to run,
 or if you think that there is an error in the test suite,
 contact the teachers via the course Google group.
 
-If you have any problems getting the test program to run,
-or if you think that there is an error in the test suite,
-contact the teachers via the course Google group.
 
 
 
