@@ -98,7 +98,7 @@ A program is a sequence of definitions.
 A program may also contain comments and preprocessor directives,
 which are just ignored by the parser (see below).
 
-An interpretable program must have a function ``main`` of type ``int`
+An interpretable program must have a function ``main`` of type ``int``
 that takes no arguments.  It may or may not have a ``return`` statement.
 ```
   int main () {
@@ -593,10 +593,8 @@ files in either of
 
 ==Example of success==
 
-Source file
+Source file ``good.cc``:
 ```
-// file good.cc
-
 int main ()
 {
   int i = readInt() ; //5
@@ -609,7 +607,7 @@ int main ()
 
 }
 ```
-Running the interpreter
+Running the interpreter:
 ```
   % echo 3 | ./lab2 good.cc
   3
@@ -625,15 +623,13 @@ Running the interpreter
 
 ===Type error===
 
-Source file
+Source file ``bad.cc``:
 ```
-  // file bad.cc
-
-  int f (double c)
-  {
-    int n = 1 ;
-    while(c) ++n ;
-  }
+int f (double c)
+{
+  int n = 1 ;
+  while(c) ++n ;
+}
 ```
 Running the type checker
 ```
@@ -646,10 +642,8 @@ Running the type checker
 
 ===Interpreter error===
 
-Source file
+Source file ``bad.cc``:
 ```
-// file bad.cc
-
 int main ()
 {
   int i ;
@@ -659,7 +653,6 @@ int main ()
   printInt(i) ;
   printInt(++i) ;
   printInt(i) ;
-
 }
 ```
 Running the interpreter
@@ -667,8 +660,7 @@ Running the interpreter
   % lab2 bad.cc
   uninitialized variable x
 ```
-Thus it is assumed that the type checker does not detect
-uninitialized variables.
+Thus it is assumed that the type checker does not detect uninitialized variables.
 
 
 #NEW
@@ -722,7 +714,7 @@ contact the teachers via the course Google group.
 
 ==A hint on file structure==
 
-The easiest way to get started is to extend ready-made files in either of
+The easiest way to get started is to extend from one of the following templates:
 - [Haskell package haskell/]
 - [Java 1.5 package java1.5/]
 
