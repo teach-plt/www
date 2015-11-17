@@ -720,10 +720,6 @@ or if you think that there is an error in the test suite,
 contact the teachers via the course Google group.
 
 
-
-
-
-
 ==A hint on file structure==
 
 The easiest way to get started is to extend ready-made files in either of
@@ -733,7 +729,7 @@ The easiest way to get started is to extend ready-made files in either of
 
 One way to extend the files to the full language is to use the
 BNFC-generated skeleton as a template. You can also bootstrap them from the files in the
-[mini interpreter ../mini/].
+[mini interpreter ../mini/mini.html].
 
 In these packages, you only have to change three files:
 - ``CPP.cf``: the grammar; you can use [this one ./CPP.cf]
