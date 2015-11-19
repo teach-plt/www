@@ -56,6 +56,7 @@ Slides follow closely the plt book.
 | Thu 10/12 | 13-15 | The language design space         | [slides http://www.digitalgrammars.com/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
 | //Mon 14/12// | //23// | //Lab 3 deadline//           | //[lab3 PM laborations/lab3/lab3.html]//
 | Thu 17/12 | 13-15 | Preparing for the exam            | [Training Exam exams/exam-plt-2013-2.pdf]
+| 2016      |       |                                   |
 | //Mon 11/01// | //23// | //Lab 4 deadline//           | //[lab4 PM laborations/lab4/lab4.html]//
 | //Fri 15/01// | //14-18// | //Exam (in house H)//         | //[old exams exams/]//
 | //Sat 16/01// | //23// | //Final lab deadline//       | //all lab returns//
@@ -158,9 +159,9 @@ pairs.
  - [Lab 1 - parser laborations/lab1/lab1.html] (deadline 16/11)
  - [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 30/11)
 %[type checker and interpreter laborations/lab2/lab2.html]
- - Lab 3 - code generator (deadline 14/12)
+ - [Lab 3 - code generator laborations/lab3/lab3.html] (deadline 14/12)
 %[code generator laborations/lab3/lab3.html]
- - Lab 4 - functional language interpreter (deadline 11/01)
+ - [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 11/01 2016)
 %[functional language interpreter laborations/lab4/lab4.html]
 
 
