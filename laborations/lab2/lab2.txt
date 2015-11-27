@@ -82,10 +82,12 @@ argument and return types. For instance, the function header
 ```
   int f (double x, bool b)
 ```
-can create a symbol table entry
+can create a symbol table entry (not actual code):
+
 ```
-  f |-> ([double, bool], int)
+  f → ([double, bool], int)
 ```
+
 mapping the name ``f`` to a pair whose first component
 is the list of argument types and the second component is the
 return type.
@@ -381,10 +383,9 @@ The statements in the body are then executed in
 the order defined by their textual order as altered by ``while``
 loops and ``if`` conditions.
 
-The function returns a value, which is obtained from the ``return``
-statement. This statement can be assumed to be the last one in the
-function body. If the return type is ``void``, no return statement is
-required.
+The function returns a value, which is obtained from the ``return`` statement.
+After encountering a return, all the following statements in the function body should be ignored (not evaluated).
+If the return type is ``void``, no return statement is required.
 
 
 #NEW
@@ -439,8 +440,7 @@ If the value is ``false``, the statement after ``else`` is interpreted.
 
 A ``return`` statement is executed by evaluating its expression argument.
 The value is returned to the caller of the function, and no more
-statements in the function body are executed. You can assume that
-the ``return`` statement is always the last one in a function body.
+statements in the function body are executed.
 
 #NEW
 
