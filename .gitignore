@@ -3,3 +3,9 @@
 *.o
 \#*\#
 *.class
+
+# Don't commit HTML since it's all generated
+*.html
+
+# Ignore testsuite archives
+*.tar.gz
