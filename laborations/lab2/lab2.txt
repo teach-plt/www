@@ -140,8 +140,7 @@ All ``return`` statements in a function body must
 return an expression whose type is the
 return type of the function.
 
-You don't need to check that there actually is a ``return`` statement (you can do this
-optionally).
+You don't need to check that there actually is a ``return`` statement.
 
 
 #NEW
