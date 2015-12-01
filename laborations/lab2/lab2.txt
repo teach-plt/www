@@ -264,12 +264,13 @@ The associativity of operators is given as left, right, or none.
 For binary operators, in general any of the three associativity is meaningful.
 For pre-, post-, and mixfix operators, at most one of
 left or right associativity makes sense, and the alternative is non-associative.
-As they are bracketed, the argument in an array index and
+As they are bracketed,
 the arguments in a function call can be expressions of any level.
 Otherwise, some subexpressions have to be one precedence level above of
-the main expression to implement the required the associativity.
+the main expression to implement the required associativity.
 
 **Note**. The table is not exactly the same as in the C++ standard.
+Also note that these precedence levels are already implemented in the [provided grammar ./CPP.cf].
 
   || level   | expression forms                     | assoc | explanation   | type   ||
   |  15      | literal                              | -     | literal       | literal type
