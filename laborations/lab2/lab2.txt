@@ -108,9 +108,7 @@ that takes no arguments.  It may or may not have a ``return`` statement.
     ...
   }
 ```
-But this need not be checked in the type checker.
 
-#NEW
 
 ==Definitions==
 
