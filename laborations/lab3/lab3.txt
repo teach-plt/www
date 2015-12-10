@@ -320,6 +320,15 @@ The test script can then be run as follows:
   ./progs-test-lab3 ../path/to/solution/
 ```
 
+**Important:** the test suite requires that all code generation is finished before it can run the tests.
+In particular when using Haskell, use
+```
+  p <- runCommand <call jasmine here>
+  waitForProcess p
+```
+instead of a plain "runCommand" call to force it to wait for Jasmine to generate the .class file.
+
+
 **Tip:**
 Make sure your classnames in Jasmin have simple names without slashes or dots.
 If the first line of your Jasmin file is
