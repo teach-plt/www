@@ -320,15 +320,6 @@ The test script can then be run as follows:
   ./progs-test-lab3 ../path/to/solution/
 ```
 
-**Important:** the test suite requires that all code generation is finished before it can run the tests.
-In particular when using Haskell, use
-```
-  p <- runCommand <call jasmine here>
-  waitForProcess p
-```
-instead of a plain "runCommand" call to force it to wait for Jasmine to generate the .class file.
-
-
 **Tip:**
 Make sure your classnames in Jasmin have simple names without slashes or dots.
 If the first line of your Jasmin file is
@@ -342,6 +333,15 @@ x/y/z/cc.class
 regardless of what the name of the ``.j`` file is.
 The easiest option, and also what the test suite expects, is that your class name is just a string
 without any slashes or dots (in this example, just "z").
+
+**Important:**
+Make sure that your compiler waits for the Jasmin conversion to finish before exiting.
+In other words, it shouldn't exit before the ``.class`` file has been written.
+For example when using Haskell, you can do the following:
+```
+  p <- runCommand <call jasmin here>
+  waitForProcess p
+```
 
 
 =Success criteria=
