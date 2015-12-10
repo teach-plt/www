@@ -2,6 +2,7 @@ Lab 2: Type checker and interpreter for C/C++
 Programming Language Technology, 2015
 
 %!target:html
+%!encoding: utf-8
 
 %!postproc(html): #NEW <!-- NEW -->
 
@@ -82,10 +83,12 @@ argument and return types. For instance, the function header
 ```
   int f (double x, bool b)
 ```
-can create a symbol table entry
+can create a symbol table entry (not actual code):
+
 ```
-  f |-> ([double, bool], int)
+  f → ([double, bool], int)
 ```
+
 mapping the name ``f`` to a pair whose first component
 is the list of argument types and the second component is the
 return type.
@@ -98,16 +101,14 @@ A program is a sequence of definitions.
 A program may also contain comments and preprocessor directives,
 which are just ignored by the parser (see below).
 
-An interpretable program must have a function ``main`` of type ``int`
+An interpretable program must have a function ``main`` of type ``int``
 that takes no arguments.  It may or may not have a ``return`` statement.
 ```
   int main () {
     ...
   }
 ```
-But this need not be checked in the type checker.
 
-#NEW
 
 ==Definitions==
 
@@ -137,8 +138,7 @@ All ``return`` statements in a function body must
 return an expression whose type is the
 return type of the function.
 
-You don't need to check that there actually is a ``return`` statement (you can do this
-optionally).
+You don't need to check that there actually is a ``return`` statement.
 
 
 #NEW
@@ -171,11 +171,12 @@ An argument list may only use each variable once.
 
 ==Statements==
 
-Any expression followed by a semicolon ``;`` can be used as a statement.
+
+===Declaration===
 
 Any declaration followed by a semicolon ``;`` can be used as a statement.
 Declarations have one of the following formats:
-- type and one variable (as in function parameter lists):
+- type and one variable (as in function parameter lists)
 ```
   int i ;
 
@@ -189,8 +190,13 @@ Declarations have one of the following formats:
 ```
   int i = 6 ;
 ```
+
+
+
 **Typing**. The initializing expression must have the declared type.
 
+
+===Return Statement===
 
 Statements returning an expression, for example
 ```
@@ -198,6 +204,8 @@ Statements returning an expression, for example
 ```
 **Typing**. The type of the returned expression must be the same as
 the return type of the function in which it occurs.
+
+===While Loop===
 
 While loops, with an expression in parentheses followed by a statement, for
 example:
@@ -208,7 +216,9 @@ example:
 
 #NEW
 
-Conditionals: ``if`` with an expression in parentheses followed by
+===Conditional===
+
+``if`` with an expression in parentheses followed by
 a statement, ``else``, and another statement. Examples:
 ```
   if (x > 0) return x ; else return y ;
@@ -217,7 +227,8 @@ a statement, ``else``, and another statement. Examples:
 
 (No else-less if statements.)
 
-Blocks: any list of statements (including empty list) between
+===Block===
+Any list of statements (including empty list) between
 curly brackets. For instance,
 ```
   {
@@ -242,20 +253,21 @@ top-level block in the body.
 
 ==Expressions==
 
-**(Associativities differ slightly from 2014 assignment!)**
+%**(Associativities differ slightly from 2014 assignment!)**
 
-The following table gives the expressions,
+The following table gives the expressions constructs,
 their precedence levels, and their associativity.
 The associativity of operators is given as left, right, or none.
 For binary operators, in general any of the three associativity is meaningful.
 For pre-, post-, and mixfix operators, at most one of
 left or right associativity makes sense, and the alternative is non-associative.
-As they are bracketed, the argument in an array index and
+As they are bracketed,
 the arguments in a function call can be expressions of any level.
 Otherwise, some subexpressions have to be one precedence level above of
-the main expression to implement the required the associativity.
+the main expression to implement the required associativity.
 
 **Note**. The table is not exactly the same as in the C++ standard.
+Also note that these precedence levels are already implemented in the [provided grammar ./CPP.cf].
 
   || level   | expression forms                     | assoc | explanation   | type   ||
   |  15      | literal                              | -     | literal       | literal type
@@ -370,10 +382,9 @@ The statements in the body are then executed in
 the order defined by their textual order as altered by ``while``
 loops and ``if`` conditions.
 
-The function returns a value, which is obtained from the ``return``
-statement. This statement can be assumed to be the last one in the
-function body. If the return type is ``void``, no return statement is
-required.
+The function returns a value, which is obtained from the ``return`` statement.
+After encountering a return, all the following statements in the function body should be ignored (not evaluated).
+If the return type is ``void``, no return statement is required.
 
 
 #NEW
@@ -428,8 +439,7 @@ If the value is ``false``, the statement after ``else`` is interpreted.
 
 A ``return`` statement is executed by evaluating its expression argument.
 The value is returned to the caller of the function, and no more
-statements in the function body are executed. You can assume that
-the ``return`` statement is always the last one in a function body.
+statements in the function body are executed.
 
 #NEW
 
@@ -582,10 +592,8 @@ files in either of
 
 ==Example of success==
 
-Source file
+Source file ``good.cc``:
 ```
-// file good.cc
-
 int main ()
 {
   int i = readInt() ; //5
@@ -598,7 +606,7 @@ int main ()
 
 }
 ```
-Running the interpreter
+Running the interpreter:
 ```
   % echo 3 | ./lab2 good.cc
   3
@@ -614,15 +622,13 @@ Running the interpreter
 
 ===Type error===
 
-Source file
+Source file ``bad.cc``:
 ```
-  // file bad.cc
-
-  int f (double c)
-  {
-    int n = 1 ;
-    while(c) ++n ;
-  }
+int f (double c)
+{
+  int n = 1 ;
+  while(c) ++n ;
+}
 ```
 Running the type checker
 ```
@@ -635,10 +641,8 @@ Running the type checker
 
 ===Interpreter error===
 
-Source file
+Source file ``bad.cc``:
 ```
-// file bad.cc
-
 int main ()
 {
   int i ;
@@ -648,7 +652,6 @@ int main ()
   printInt(i) ;
   printInt(++i) ;
   printInt(i) ;
-
 }
 ```
 Running the interpreter
@@ -656,8 +659,7 @@ Running the interpreter
   % lab2 bad.cc
   uninitialized variable x
 ```
-Thus it is assumed that the type checker does not detect
-uninitialized variables.
+Thus it is assumed that the type checker does not detect uninitialized variables.
 
 
 #NEW
@@ -708,24 +710,17 @@ If you have any problems getting the test program to run,
 or if you think that there is an error in the test suite,
 contact the teachers via the course Google group.
 
-If you have any problems getting the test program to run,
-or if you think that there is an error in the test suite,
-contact the teachers via the course Google group.
-
-
-
-
 
 ==A hint on file structure==
 
-The easiest way to get started is to extend ready-made files in either of
+The easiest way to get started is to extend from one of the following templates:
 - [Haskell package haskell/]
 - [Java 1.5 package java1.5/]
 
 
 One way to extend the files to the full language is to use the
 BNFC-generated skeleton as a template. You can also bootstrap them from the files in the
-[mini interpreter ../mini/].
+[mini interpreter ../mini/mini.html].
 
 In these packages, you only have to change three files:
 - ``CPP.cf``: the grammar; you can use [this one ./CPP.cf]
