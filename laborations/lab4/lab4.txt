@@ -126,7 +126,9 @@ Arithmetic operations on non-integers are also errors, e.g.
 ```
 All these errors occur at run time, because there is no type checker.
 
-=Example of success and failure=
+=Examples=
+
+==Success==
 
 Source file
 ```
@@ -142,6 +144,9 @@ Running the interpreter
   ./lab4 good.fun
   720
 ```
+
+==Failure==
+
 Source file
 ```
   -- file bad.fun
@@ -156,6 +161,9 @@ Running the interpreter
   ./lab4 bad.fun
   ERROR: unknown identifier mul
 ```
+
+==Call-by-name vs. call-by-value==
+
 Source file
 ```
   -- file infinite.fun
