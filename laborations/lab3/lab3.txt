@@ -235,8 +235,9 @@ executed by the command
 ```
   lab3 <SourceFile>
 ```
-and produces a class (``.class``) file. It may do this by first generating
-Jasmin assembly code (a ``.j`` file) and then calling Jasmin on this code.
+and produces a class (``.class``) file.
+It may do this by first generating Jasmin assembly code (a ``.j`` file) and then calling Jasmin on this code.
+For help with building the Jasmin file, refer to the [Java bytecode instruction listings https://en.wikipedia.org/wiki/Java_bytecode_instruction_listings].
 Jasmin can be called by
 ```
   java -jar jasmin.jar <File>.j
