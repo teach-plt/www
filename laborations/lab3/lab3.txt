@@ -335,6 +335,15 @@ regardless of what the name of the ``.j`` file is.
 The easiest option, and also what the test suite expects, is that your class name is just a string
 without any slashes or dots (in this example, just "z").
 
+**Important:**
+Make sure that your compiler waits for the Jasmin conversion to finish before exiting.
+In other words, it shouldn't exit before the ``.class`` file has been written.
+For example when using Haskell, you can do the following:
+```
+  p <- runCommand <call jasmin here>
+  waitForProcess p
+```
+
 
 =Success criteria=
 
