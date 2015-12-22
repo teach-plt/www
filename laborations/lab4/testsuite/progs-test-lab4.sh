@@ -9,8 +9,10 @@ fi
 testdir=`pwd`
 codedir="${1}"
 
+set -o errexit
 cd $codedir
 make
+set +o errexit
 
 # Good tests
 arr[0]="good1.fun -v 7"
