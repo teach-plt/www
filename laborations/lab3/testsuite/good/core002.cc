@@ -7,4 +7,5 @@ int main() {
 }
 
 void foo() {
+  printInt(1);
 }

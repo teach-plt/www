@@ -11,7 +11,9 @@ int main() {
 
 void printBool(bool b) {
   if (b) {
+    printInt(1);
   } else {
+    printInt(0);
  }
 }
 
