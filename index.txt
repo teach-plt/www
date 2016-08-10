@@ -57,11 +57,11 @@ Slides follow closely the plt book.
 | Thu 17/12 | 13-15 | Preparing for the exam            | [Training Exam exams/exam-plt-2015-04-15.pdf]
 | 2016      |       |                                   |
 | //Mon 11/01// | //23// | //Lab 4 deadline//           | //[lab4 PM laborations/lab4/lab4.html]//
-| //Fri 15/01// | //14-18// | //Exam (in house H)//         | //[old exams exams/]//
+| //Fri 15/01// | //14-18// | //Exam (in H)//         | //[old exams exams/]//
 | //Sat 16/01// | //23// | //Final lab deadline//       | //all lab returns//
-| //Wed 06/04// | //8.30-12.30// | //Exam (in house J)//         | //[old exams exams/]//
+| //Wed 06/04// | //8.30-12.30// | //Exam (in M)//         | //[old exams exams/]//
 | //Fri 08/04// |                | //Late final lab deadline// |
-| //Wed 17/08// | //14-18// | //Exam (in house J)//         | //[old exams exams/]//
+| //Wed 17/08// | //14-18// | //Exam (in M)//         | //[old exams exams/]//
 
 The official course schema is in [Time Edit https://se.timeedit.net/web/chalmers/db1/public/ri1X50gQ1560YvQQ05Z6372Y0Zy6007315Y53Q587.html].
 
