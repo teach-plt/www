@@ -1,12 +1,13 @@
 Programming Language Technology
 Course codes: Chalmers - DAT151 (replaces DAT150), GU - DIT231 (replaces DIT230)
-Winter Term 2015 (LP2)
+Winter Term 2016 (LP2)
 
 %!target:html
+%!encoding:utf-8
 
-Official URL: http://www.cse.chalmers.se/edu/course/DAT151-lp2/
+Official URL: http://www.cse.chalmers.se/edu/course/DAT151/
 
-Google group: http://groups.google.com/group/plt-2015-lp2
+Google group: http://groups.google.com/group/plt-2016
 (**please provide your full name and date of birth when requesting membership!**)
 
 Studieportal:
@@ -20,13 +21,10 @@ Last year course page:
 http://www.cse.chalmers.se/edu/year/2015/course/DAT151/
 
 
-%=News and changes=
-%
-%2015-10-21 Andreas Abel is unable to run the course this time.
-%           Fredrik Lindblad will do this instead. Andreas is still examiner.
-%
-%2015-09-13 First version of this page - mostly a copy of the 2014/15 LP3 material.
-%           Updates forthcoming soon.
+=News and changes=
+
+2016-10-25 First version of this page - mostly a copy of the 2015 material.
+           Updates forthcoming soon.
 
 =Tentative Schedule=
 
@@ -37,33 +35,33 @@ Slides follow closely the plt book.
 
 
 || Date    | Time  | Title                             | Material                      ||
-| Tue 03/11 | 13-15 | Introduction: Compilation Phases  | [slides http://www.digitalgrammars.com/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
-| Thu 05/11 | 13-15 | Grammars                          | [slides http://www.digitalgrammars.com/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
-| Tue 10/11 | 13-15 | Hands-on with Lab 1               | [lab1 PM laborations/lab1/lab1.html]
-| Thu 12/11 | 13-15 | Theory of lexing and parsing      | [slides http://www.digitalgrammars.com/ipl-book/slides/3-slides-ipl-book.pdf], [parse table LR-parsetable.pdf], plt 3, dragon 3,4
-| //Mon 16/11// | //23// | //Lab 1 deadline//            | //[lab1 PM laborations/lab1/lab1.html]//
-| Tue  17/11 | 13-15 | Type checking                     | [slides http://www.digitalgrammars.com/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
-| Thu 19/11 | 13-15 | Interpreters                      | [slides http://www.digitalgrammars.com/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
-| Tue 24/11 | 13-14 | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/lab2.html]
-| Tue 24/11 | 14-15 | Hands-on with Lab 2 (Java)        | [lab2 PM laborations/lab2/lab2.html]
-| Thu 26/11 | 13-15 | Code generation                   | [slides http://www.digitalgrammars.com/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
-| //Mon 30/11// | //23// | //Lab 2 deadline//           | //[lab2 PM laborations/lab2/lab2.html]//
-| Tue 01/12 | 13-14 | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/lab3.html]
-| Tue 01/12 | 14-15 | Hands-on with Lab 3 (Java)        | [lab3 PM laborations/lab3/lab3.html]
-| Thu 03/12 | 13-15 | Functional programming languages  | [slides http://www.digitalgrammars.com/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
-| Tue 08/12 | 13-15 | Hands-on with Lab 4               | [lab4 PM laborations/lab4/lab4.html]
-| Thu 10/12 | 13-15 | The language design space         | [slides http://www.digitalgrammars.com/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
-| //Mon 14/12// | //23// | //Lab 3 deadline//           | //[lab3 PM laborations/lab3/lab3.html]//
-| Thu 17/12 | 13-15 | Preparing for the exam            | [Training Exam exams/exam-plt-2015-04-15.pdf]
-| 2016      |       |                                   |
-| //Mon 11/01// | //23// | //Lab 4 deadline//           | //[lab4 PM laborations/lab4/lab4.html]//
-| //Fri 15/01// | //14-18// | //Exam (in H)//         | //[old exams exams/]//
-| //Sat 16/01// | //23// | //Final lab deadline//       | //all lab returns//
-| //Wed 06/04// | //8.30-12.30// | //Exam (in M)//         | //[old exams exams/]//
-| //Fri 08/04// |                | //Late final lab deadline// |
-| //Wed 17/08// | //14-18// | //Exam (in M)//         | //[old exams exams/]//
+| Tue 01/11 | 13-15 | Introduction: Compilation Phases  | [slides http://www.digitalgrammars.com/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
+| Thu 03/11 | 13-15 | Grammars                          | [slides http://www.digitalgrammars.com/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
+| Tue 08/11 | 13-15 | Hands-on with Lab 1               | [lab1 PM laborations/lab1/lab1.html]
+| Thu 10/11 | 13-15 | Theory of lexing and parsing      | [slides http://www.digitalgrammars.com/ipl-book/slides/3-slides-ipl-book.pdf], [parse table LR-parsetable.pdf], plt 3, dragon 3,4
+| //Mon 14/11// | //23// | //Lab 1 deadline//            | //[lab1 PM laborations/lab1/lab1.html]//
+| Tue 15/11 | 13-15 | Type checking                     | [slides http://www.digitalgrammars.com/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
+| Thu 17/11 | 13-15 | Interpreters                      | [slides http://www.digitalgrammars.com/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
+| Tue 22/11 | 13-14 | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/lab2.html]
+| Tue 22/11 | 14-15 | Hands-on with Lab 2 (Java)        | [lab2 PM laborations/lab2/lab2.html]
+| Thu 24/11 | 13-15 | Code generation                   | [slides http://www.digitalgrammars.com/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
+| //Mon 28/11// | //23// | //Lab 2 deadline//           | //[lab2 PM laborations/lab2/lab2.html]//
+| Tue 29/11 | 13-14 | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/lab3.html]
+| Tue 29/11 | 14-15 | Hands-on with Lab 3 (Java)        | [lab3 PM laborations/lab3/lab3.html]
+| Thu 01/12 | 13-15 | Functional programming languages  | [slides http://www.digitalgrammars.com/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
+| Tue 06/12 | 13-15 | Hands-on with Lab 4               | [lab4 PM laborations/lab4/lab4.html]
+| Thu 08/12 | 13-15 | The language design space         | [slides http://www.digitalgrammars.com/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
+| //Mon 12/12// | //23// | //Lab 3 deadline//           | //[lab3 PM laborations/lab3/lab3.html]//
+| Thu 15/12 | 13-15 | Preparing for the exam            | [Training Exam exams/exam-plt-2016-04-15.pdf]
+| 2017      |       |                                   |
+| //Mon 09/01// | //23// | //Lab 4 deadline//           | //[lab4 PM laborations/lab4/lab4.html]//
+| //Wed 11/01// | //8:30-12:30// | //Exam//         | //[old exams exams/]//
+| //Sat 14/01// | //23// | //Final lab deadline//       | //all lab returns//
+| //Tue 11/04// | //8.30-12.30// | //Exam//         | //[old exams exams/]//
+| //Thu 06/04// |                | //Late final lab deadline// |
+| //Fir 24/08// | //14-18// | //Exam//         | //[old exams exams/]//
 
-The official course schema is in [Time Edit https://se.timeedit.net/web/chalmers/db1/public/ri1X50gQ1560YvQQ05Z6372Y0Zy6007315Y53Q587.html].
+The official course schema is in [Time Edit https://se.timeedit.net/web/chalmers/db1/public/ri10q29Q054Z5ZQ505663750yc065W7362Y63Q0Q7571QZ.html].
 
 
 
@@ -96,34 +94,36 @@ passed the course should be able to
 
 =Teachers=
 
-[Andreas Abel http://www.cse.chalmers.se/~abela/], course examiner.
+[Andreas Abel http://www.cse.chalmers.se/~abela/], course teacher and examiner.
 
-[Fredrik Lindblad https://www.chalmers.se/en/staff/Pages/fredrik-lindblad.aspx], contact and lectures.
+%[Fredrik Lindblad https://www.chalmers.se/en/staff/Pages/fredrik-lindblad.aspx], contact and lectures.
 
-John Camilleri,
+% John Camilleri,
 % Mauricio Chimento,
 Daniel Hausknecht,
-Inari Listenmaa,
+Andreas Lööw,
+Daniel Schoepe,
+% Inari Listenmaa,
 assistants.
 
 
-The fastest way to get an answer is to mail the course's
-Google group
-http://groups.google.com/group/plt-2015-lp2.
-**Please provide your full name and date of birth when requesting membership!**
-Otherwise your request will be bounced back or ignored.
+% The fastest way to get an answer is to mail the course's
+% Google group
+% http://groups.google.com/group/plt-2016.
+% **Please provide your full name and date of birth when requesting membership!**
+% Otherwise your request will be bounced back or ignored.
 
 =Google Group=
 
 If you have any general questions regarding the course, the labs or the exercises,
 please ask them in our
 Google group
-http://groups.google.com/group/plt-2015-lp2.
+http://groups.google.com/group/plt-2016.
 This will reach all teachers and fellow students.
 If you are not yet member of the group, you have to
 - get a google account (if you don't have it yet)
-- go to http://groups.google.com/group/plt-2015-lp2.
-- request an invitation to the plt-2015-lp2 group.
+- go to http://groups.google.com/group/plt-2016.
+- request an invitation to the plt-2016 group.
 
 
 **You will have to give your real name and your person number (or date of birth) when you register,**
@@ -134,16 +134,12 @@ This is necessary to identify you as a participant of the course.
 =Laboration times and supervision=
 
 Times:
-% - Tuesday 15-17 (no class on 3 February) (Inari, Daniel) , in ED3354.
-% - Thursday 15-17 (no class on 19 February) (Daniel, Mauricio), in ED3354.
-% - Friday 13-15 (no class on 20 February) (Inari, Mauricio), in ED3354.
-- Tuesday 15:15-17, in ED3354.
-- Thursday 15:15-17, in ED3354.
-- Friday 13:15-15, in ED3354.
+- Tuesday 15:15-17:00, in ED3354.
+- Thursday 15:15-17:00, in ED3354.
+- Friday 13:15-15:00, in ED3354.
 
-
-% The lab rooms and supervision
-% are available from Tuesday 20 January till 10 March.
+The lab rooms and supervision
+are available from Tue 1 November till Fri 16 December 2016.
 
 **Attendance in these classes is optional**.
 Normally, each student should attend **at most one** supervised laboration time each week.
@@ -156,16 +152,16 @@ supervision of the week have priority to get a place and supervisor help.
 
 There will be four laborations, written individually or in
 pairs.
- - [Lab 1 - parser laborations/lab1/lab1.html] (deadline 16/11)
- - [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 30/11)
+ - [Lab 1 - parser laborations/lab1/lab1.html] (deadline 14/11)
+ - [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 28/11)
 %[type checker and interpreter laborations/lab2/lab2.html]
- - [Lab 3 - code generator laborations/lab3/lab3.html] (deadline 14/12)
+ - [Lab 3 - code generator laborations/lab3/lab3.html] (deadline 12/12)
 %[code generator laborations/lab3/lab3.html]
- - [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 11/01 2016)
+ - [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 09/01 2017)
 %[functional language interpreter laborations/lab4/lab4.html]
 
 
-Reporting is done via [Fire https://xdat09.ce.chalmers.se/2015/lp2/plt/].
+Reporting is done via [Fire https://xdat09.ce.chalmers.se/2016/lp2/plt/].
 Before reporting, you must run your program through a test suite.
 % such as the one for [lab 1 laborations/lab1/testsuite/].
 
@@ -178,7 +174,7 @@ the final deadline. If your first submission is after the lab
 deadline, only one grading is guaranteed.
 
 If you didn't pass the labs by the end of the course you will have another opportunity in connection with the re-exam in April.
-The deadline will be Friday, April 8.
+The deadline will be Friday, April 7.
 If you intend to re-submit labs then, please contact the course responsible via email on March 31 at the latest.
 If you need help you should also contact the course responsible, not the teaching assistants.
 Note however that you can only expect limited support.
@@ -209,8 +205,8 @@ Pearson/Addison Wesley
 2007.
 
 
-Both books are available
-at web bookshops. The main book will also be sold at Cremona.
+Both books are available at web bookshops.
+The main book will also be sold at Cremona.
 
 
 =Exam=
@@ -218,14 +214,12 @@ at web bookshops. The main book will also be sold at Cremona.
 Written exam, usual grading scales.
 
 Exam dates:
- 15 Jan 2016 em H,
- 06 Apr 2016 fm J,
- 17 Aug 2016 em J
+ 11 Jan 2017 fm,
+ 11 Apr 2017 fm,
+ 24 Aug 2017 em
 
 % Date: 20 March
-
 % Time: 2:00 afternoon
-
 % Place: M (Hörsalsvägen 5)
 
 The exam has the same structure as these [old exams exams/].
@@ -239,7 +233,7 @@ to prepare for the exam.
 
 =Software=
 
-BNF Converter, http://bnfc.digitalgrammars.com/
+BNF Converter 2.8, http://bnfc.digitalgrammars.com/
 
 If using the Java backend, you will need the **Cup** and **JLex** libraries.
 You can download pre-compiled versions [here doc/javatools.tgz].
