@@ -11,11 +11,13 @@ Google group: http://groups.google.com/group/plt-2016
 (**please provide your full name and date of birth when requesting membership!**)
 
 Studieportal:
-https://www.student.chalmers.se/sp/course?course_id=23453
+https://www.student.chalmers.se/sp/course?course_id=24933
+% https://www.student.chalmers.se/sp/course?course_id=23453
 % https://www.student.chalmers.se/sp/course?course_id=21767
 
 GU course description:
 http://kursplaner.gu.se/english/DIT231.pdf
+https://gul.gu.se/public/courseId/74352/lang-sv/publicPage.do
 
 Last year course page:
 http://www.cse.chalmers.se/edu/year/2015/course/DAT151/
@@ -34,32 +36,32 @@ Material: plt = course book, dragon = Dragon book.
 Slides follow closely the plt book.
 
 
-|| Date    | Time  | Title                             | Material                      ||
-| Tue 01/11 | 13-15 | Introduction: Compilation Phases  | [slides http://www.digitalgrammars.com/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
-| Thu 03/11 | 13-15 | Grammars                          | [slides http://www.digitalgrammars.com/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
-| Tue 08/11 | 13-15 | Hands-on with Lab 1               | [lab1 PM laborations/lab1/lab1.html]
-| Thu 10/11 | 13-15 | Theory of lexing and parsing      | [slides http://www.digitalgrammars.com/ipl-book/slides/3-slides-ipl-book.pdf], [parse table LR-parsetable.pdf], plt 3, dragon 3,4
-| //Mon 14/11// | //23// | //Lab 1 deadline//            | //[lab1 PM laborations/lab1/lab1.html]//
-| Tue 15/11 | 13-15 | Type checking                     | [slides http://www.digitalgrammars.com/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
-| Thu 17/11 | 13-15 | Interpreters                      | [slides http://www.digitalgrammars.com/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
-| Tue 22/11 | 13-14 | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/lab2.html]
-| Tue 22/11 | 14-15 | Hands-on with Lab 2 (Java)        | [lab2 PM laborations/lab2/lab2.html]
-| Thu 24/11 | 13-15 | Code generation                   | [slides http://www.digitalgrammars.com/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
-| //Mon 28/11// | //23// | //Lab 2 deadline//           | //[lab2 PM laborations/lab2/lab2.html]//
-| Tue 29/11 | 13-14 | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/lab3.html]
-| Tue 29/11 | 14-15 | Hands-on with Lab 3 (Java)        | [lab3 PM laborations/lab3/lab3.html]
-| Thu 01/12 | 13-15 | Functional programming languages  | [slides http://www.digitalgrammars.com/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
-| Tue 06/12 | 13-15 | Hands-on with Lab 4               | [lab4 PM laborations/lab4/lab4.html]
-| Thu 08/12 | 13-15 | The language design space         | [slides http://www.digitalgrammars.com/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
-| //Mon 12/12// | //23// | //Lab 3 deadline//           | //[lab3 PM laborations/lab3/lab3.html]//
-| Thu 15/12 | 13-15 | Preparing for the exam            | [Training Exam exams/exam-plt-2016-04-15.pdf]
-| 2017      |       |                                   |
-| //Mon 09/01// | //23// | //Lab 4 deadline//           | //[lab4 PM laborations/lab4/lab4.html]//
-| //Wed 11/01// | //8:30-12:30// | //Exam//         | //[old exams exams/]//
-| //Sat 14/01// | //23// | //Final lab deadline//       | //all lab returns//
-| //Tue 11/04// | //8.30-12.30// | //Exam//         | //[old exams exams/]//
-| //Thu 06/04// |                | //Late final lab deadline// |
-| //Fir 24/08// | //14-18// | //Exam//         | //[old exams exams/]//
+|| Date         | Time           | Title                             | Material                      ||
+| Tue 01/11     | 13-15          | Introduction: Compilation Phases  | [slides http://www.digitalgrammars.com/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
+| Thu 03/11     | 13-15          | Grammars                          | [slides http://www.digitalgrammars.com/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
+| Tue 08/11     | 13-15          | Hands-on with Lab 1               | [lab1 PM laborations/lab1/lab1.html]
+| Thu 10/11     | 13-15          | Theory of lexing and parsing      | [slides http://www.digitalgrammars.com/ipl-book/slides/3-slides-ipl-book.pdf], [parse table LR-parsetable.pdf], plt 3, dragon 3,4
+| //Mon 14/11// | //23//         | //Lab 1 deadline//                | //[lab1 PM laborations/lab1/lab1.html]//
+| Tue 15/11     | 13-15          | Type checking                     | [slides http://www.digitalgrammars.com/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
+| Thu 17/11     | 13-15          | Interpreters                      | [slides http://www.digitalgrammars.com/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
+| Tue 22/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/lab2.html]
+| Tue 22/11     | 14-15          | Hands-on with Lab 2 (Java)        | [lab2 PM laborations/lab2/lab2.html]
+| Thu 24/11     | 13-15          | Code generation                   | [slides http://www.digitalgrammars.com/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
+| //Mon 28/11// | //23//         | //Lab 2 deadline//                | //[lab2 PM laborations/lab2/lab2.html]//
+| Tue 29/11     | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/lab3.html]
+| Tue 29/11     | 14-15          | Hands-on with Lab 3 (Java)        | [lab3 PM laborations/lab3/lab3.html]
+| Thu 01/12     | 13-15          | Functional programming languages  | [slides http://www.digitalgrammars.com/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
+| Tue 06/12     | 13-15          | Hands-on with Lab 4               | [lab4 PM laborations/lab4/lab4.html]
+| Thu 08/12     | 13-15          | The language design space         | [slides http://www.digitalgrammars.com/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
+| //Mon 12/12// | //23//         | //Lab 3 deadline//                | //[lab3 PM laborations/lab3/lab3.html]//
+| Thu 15/12     | 13-15          | Preparing for the exam            | [Training Exam exams/exam-plt-2016-04-15.pdf]
+| 2017          |                |                                   |
+| //Mon 09/01// | //23//         | //Lab 4 deadline//                | //[lab4 PM laborations/lab4/lab4.html]//
+| //Wed 11/01// | //8:30-12:30// | //Exam//                          | //[old exams exams/]//
+| //Sat 14/01// | //23//         | //Final lab deadline//            | //all lab returns//
+| //Tue 11/04// | //8.30-12.30// | //Exam//                          | //[old exams exams/]//
+| //Thu 06/04// |                | //Late final lab deadline//       |
+| //Fir 24/08// | //14-18//      | //Exam//                          | //[old exams exams/]//
 
 The official course schema is in [Time Edit https://se.timeedit.net/web/chalmers/db1/public/ri10q29Q054Z5ZQ505663750yc065W7362Y63Q0Q7571QZ.html].
 
@@ -214,9 +216,9 @@ The main book will also be sold at Cremona.
 Written exam, usual grading scales.
 
 Exam dates:
- 11 Jan 2017 fm,
- 11 Apr 2017 fm,
- 24 Aug 2017 em
+ 11 Jan 2017 fm J,
+ 11 Apr 2017 fm J,
+ 24 Aug 2017 em J.
 
 % Date: 20 March
 % Time: 2:00 afternoon
