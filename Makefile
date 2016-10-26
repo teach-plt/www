@@ -14,7 +14,7 @@ mini :
 
 www : index.html
 
-%.html : %.txt
+%.html : %.txt style.css
 	txt2tags --style=style.css -t html $<
 
 # EOF
