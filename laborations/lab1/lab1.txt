@@ -273,7 +273,9 @@ expressions come out as a special case of these lists.
 
 ==Types==
 
-+ Qualified constants, including plain identifiers (**1**), e.g. ``int``.
++ Built-in types: ``int`` (**1**), ``bool``, ``char``, ``double``, ``void``.
+
++ Qualified constants, including plain identifiers (**1**), e.g. ``string``.
 
 + Type references. (**4**)
 The reference operator ``&`` is a
