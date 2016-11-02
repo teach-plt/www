@@ -1,3 +1,3 @@
-inline foo(double x) {
+return foo(double x) {
 	return x + 9;
 }

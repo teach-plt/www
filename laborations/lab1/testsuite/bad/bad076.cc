@@ -1,1 +1,1 @@
-inline (cout << 5) bar () {}
+(cout << 5) bar () {}

@@ -1,2 +1,2 @@
-inline inline void printIt() {
+int void printIt() {
 }

@@ -100,11 +100,9 @@ which are just ignored by the parser (see below). (**1**)
 ==Definitions==
 
 + A **function** definition has a type, a name, an argument list, and a body.
-(**1**)
-
-A function can optionally be prefixed by ``inline``. Example:
+(**1**)  Example:
 ```
-  inline int foo(double x, int y)
+  int foo(double x, int y)
   {
     return y + 9 ;
   }

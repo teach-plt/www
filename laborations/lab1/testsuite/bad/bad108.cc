@@ -1,3 +1,3 @@
 int main () {
-	inline x;
+	typedef x;
 }

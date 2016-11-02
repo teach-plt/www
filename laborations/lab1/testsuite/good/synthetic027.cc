@@ -1,1 +1,1 @@
-inline int f();
+int f();
