@@ -9,3 +9,13 @@
 
 # Ignore testsuite archives
 *.tar.gz
+/laborations/lab1/testscript/lab1-test-dir/
+/laborations/lab4/testsuite.tgz
+/laborations/old-lab3/
+/laborations/old-lab4/
+/laborations/old-mini/
+/2007-index.txt
+/2012-index.txt
+/2014-index.txt
+/laborations/lab1/testscript/progs-test-lab1
+/laborations/lab2/testsuite/progs-test-lab2

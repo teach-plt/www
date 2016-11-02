@@ -48,8 +48,7 @@ Slides follow closely the plt book.
 || Date         | Time           | Title                             | Material                      ||
 | Tue 01/11     | 13-15          | Introduction: Compilation Phases  | [slides http://www.digitalgrammars.com/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
 | Thu 03/11     | 13-15          | Grammars                          | [slides http://www.digitalgrammars.com/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
-| Tue 08/11     | 13-15          | Hands-on with Lab 1               |  |
-% [lab1 PM laborations/lab1/lab1.html]
+| Tue 08/11     | 13-15          | Hands-on with Lab 1               | [lab1 PM laborations/lab1/lab1.html]
 | Thu 10/11     | 13-15          | Theory of lexing and parsing      | [slides http://www.digitalgrammars.com/ipl-book/slides/3-slides-ipl-book.pdf], [parse table LR-parsetable.pdf], plt 3, dragon 3,4
 | //Mon 14/11// | //23//         | //Lab 1 deadline//                |  |
 | Tue 15/11     | 13-15          | Type checking                     | [slides http://www.digitalgrammars.com/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
@@ -170,8 +169,8 @@ supervision of the week have priority to get a place and supervisor help.
 
 There will be four laborations, written individually or in
 pairs.
- - Lab 1 - parser  (deadline 14/11)
-% - [Lab 1 - parser laborations/lab1/lab1.html] (deadline 14/11)
+% - Lab 1 - parser  (deadline 14/11)
+- [Lab 1 - parser laborations/lab1/lab1.html] (deadline 14/11)
  - Lab 2 - type checker and interpreter (deadline 28/11)
 % - [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 28/11)
  - Lab 3 - code generator (deadline 12/12)
@@ -270,6 +269,7 @@ Student representatives for DAT151 Programming language technology.
 || Program | @student.chalmers.se | Name             ||
  | MPSOF   | nabah                | Omar Abu NABAH   |
  | TKDAT   | hermanh              | Herman HÖRNSTEIN |
- | MPCSN   | kemi                 | Robert KEMI      |
+% | MPCSN   | kemi                 | Robert KEMI      |
  | MPALG   | timonl               | Timon LAPAWCZYK  |
+ | MPALG   | erithor              | Erik THORSELL   |
  | MPALG   | yagublu              | Lamiya YAGUBLU   |
