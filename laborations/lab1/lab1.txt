@@ -3,6 +3,7 @@ Programming Language Technology, 2016
 
 %!target:html
 
+% Changes from 2015: removed structure definitions and 'inline'.
 
 Submit your solution via [Fire https://plt-lp2-16.frs.cse.chalmers.se/].
 
@@ -111,7 +112,6 @@ which are just ignored by the parser (see below). (**1**)
 + Some statements can be used as top-level definitions:
   - ``typedef`` statements (**6**)
   - variable declarations and initializations
-  - ``struct`` declarations
 
 + Finally, definitions for using qualified constants are allowed, (**2**) e.g.
 ```
@@ -205,18 +205,8 @@ curly brackets. (**3**)  For instance,
   typedef vector<string> Text ;
 ```
 
-+ **Structure definitions**: a name and a list of declarations. Example:
-```
-  struct Student_info {
-    string name;
-    double final;
-    vector<double> homework;
-  } ;
-```
 
-
-Notice that the semicolon is obligatory in the end of a structure definition.
-Otherwise, semicolons are not used after curly brackets - but they are
+Note: semicolons are not used after curly brackets, but they are
 obligatory in all statements and definitions not ending with curly
 brackets.
 
