@@ -1,4 +1,4 @@
-Lab 1: Parser for C++
+Lab 1: Parser for a fragment of C++
 Programming Language Technology, 2016
 
 %!target:html
@@ -45,7 +45,7 @@ After treating the six tests, run the
 make your parser perfect.
 
 You can use any code generator (Haskell, Java, C,...) from BNFC. It
-doesn't need to be the same language as you plan to use in later
+does not have to be the same language as you plan to use in later
 labs.
 
 ==Debugging==
@@ -58,7 +58,7 @@ on it, you can create an info file from the generated Happy file:
 happy -i ParCPP.y
 ```
 The info file is now in ``ParCPP.info``. Moreover, you can produce a
-**debugging parser** by adding the ``-d`` flag to Happy. Update your Makefile like so:
+**debugging parser** by adding the ``-d`` flag to Happy. Update your Makefile like this:
 ```
 happy -gcad ParCPP.y
 ```
@@ -66,7 +66,7 @@ And then run ``make`` again.
 Running this parser shows a trace of the LR actions performed during parsing.
 
 You can also get some debugging output when using the Java backend by calling CUPS with the ``-dump_states`` flag.
-Edit your ``Makefile`` like so:
+Edit your ``Makefile`` like this:
 ```
 CUPFLAGS = -nopositions -expect 100 -dump_states
 ```
@@ -355,7 +355,7 @@ contact the teachers of the course via the mailing list.
 
 
 
-=C++ features=
+=Appendix: C++ features=
 
 Assuming you know some C but not C++, here is a summary of the extra features
 of C++ involved in this lab.
