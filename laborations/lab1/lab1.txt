@@ -283,18 +283,15 @@ expressions come out as a special case of these lists.
 
 ==Types==
 
-**Types** are:
++ Qualified constants, including plain identifiers (**1**), e.g. ``int``.
 
-- Qualified constants, including plain identifiers (**1**), e.g. ``int``.
-
-- Type references. (**4**)
++ Type references. (**4**)
 The reference operator ``&`` is a
 postfix-operator forming types from types, e.g. ``int &``.
 
 
 ==Literals==
 
-We include:
 + **Integer** literals, e.g, ``0``, ``-3``, ``151``. (**1**)
 + **Floating point** literals. (**3**)
 + Single-quoted **character** literals. (**6**)
@@ -316,13 +313,9 @@ and underscores.  (**1**)
 
 ==Comments==
 
-There are three kinds of **comments**.
-+ **Block comment**: anything between tokens ``/*`` and ``*/``.
++ **Preprocessor directive**: anything from token ``#`` to the end of a line or the file.   (**1**)
 + **Line comment**: anything from token ``//`` to the end of a line or the file.  (**1**)
-+ **Pragma**: anything from token ``#`` to the end of a line or the file
-  (preprocessor directive).   (**1**)
-
-
++ **Block comment**: anything between tokens ``/*`` and ``*/``.
 Block comments cannot be nested.
 
 
