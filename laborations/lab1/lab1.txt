@@ -1,10 +1,10 @@
 Lab 1: Parser for C++
-Programming Language Technology, 2015
+Programming Language Technology, 2016
 
 %!target:html
 
 
-Submit your solution via [Fire https://xdat09.ce.chalmers.se/2015/lp2/plt/].
+Submit your solution via [Fire https://plt-lp2-16.frs.cse.chalmers.se/].
 
 
 =Summary=
@@ -22,7 +22,7 @@ The recommended implementation of the parser is via a BNF
 grammar processed by the BNF Converter (BNFC) tool. The approximate
 size of the parser source code should be 100 rules.
 
-With BNFC, no more files than the grammar have to be written and submitted
+With BNFC, just the grammar (.cf file) has to be written and submitted
 by the lab groups.
 
 
@@ -31,7 +31,7 @@ by the lab groups.
 
 Build the grammar gradually, so that you can parse
 the six test files in the given order: as your first
-goal, parse [the first test file test/hello.cc].
+goal, parse [the first test file testsuite/good/1-hello.cc].
 then the second, and so on.
 
 When you have passed one level, just try to parse
@@ -84,14 +84,14 @@ starting with the largest units and proceeding to smaller ones.
 The specification differs in some places from the official C++
 specification.
 
-To help you get going, we have marked with a bold (**1**) those
-rules that are needed to parse [the first test file test/hello.cc].
+To help you get going, we have marked with a bold (**//n//**) those
+rules that are needed to parse the //n//th test file.
 
 
 
 ==Programs==
 
-A program is a sequence of definitions. (**1**)
+A **program** is a sequence of definitions. (**1**)
 
 A program may also contain comments and preprocessor directives,
 which are just ignored by the parser (see below). (**1**)
@@ -99,8 +99,9 @@ which are just ignored by the parser (see below). (**1**)
 
 ==Definitions==
 
-1. A function definition has a type, a name, an argument list, and a body.
++ A **function** definition has a type, a name, an argument list, and a body.
 (**1**)
+
 A function can optionally be prefixed by ``inline``. Example:
 ```
   inline int foo(double x, int y)
@@ -109,13 +110,12 @@ A function can optionally be prefixed by ``inline``. Example:
   }
 ```
 
-2. Many statements can be used as top-level definitions:
-- ``typedef`` statements
-- variable declarations and initializations
-- ``struct`` declarations
++ Some statements can be used as top-level definitions:
+  - ``typedef`` statements (**6**)
+  - variable declarations and initializations
+  - ``struct`` declarations
 
-
-3. Finally, definitions for using qualified constants are allowed, e.g.
++ Finally, definitions for using qualified constants are allowed, (**2**) e.g.
 ```
   using std::vector ;
 ```
@@ -123,12 +123,13 @@ A function can optionally be prefixed by ``inline``. Example:
 
 ==Argument lists, declarations, and function bodies==
 
-An argument list is a comma-separated list of argument declarations.
-It is enclosed in parentheses ``(`` and ``)``. (**1**)
+- An **argument list** is a comma-separated list of argument declarations.
+It is enclosed in parentheses: ``(`` and ``)``. (**1**)
 
-An argument declaration always has a type. This type is optionally
+- An argument **declaration** always has a type. This type is optionally
 followed by an identifier or an identifier and an initialization,
-and optionally preceded by the specifier ``const``. The following
+and optionally preceded by the specifier ``const``.  (**4**)
+The following
 are examples of argument declarations.
 ```
   int
@@ -137,14 +138,14 @@ are examples of argument declarations.
   const int& x
 ```
 Notice that argument declarations with multiple variables
-(``int x, y``) are not included. A declaration that occurs
-as a statement (as shown below), can also have multiple variables.
-But it must have at least one variable.
+(``int x, y``) are not included. Exception see below:
+A declaration that occurs
+as a statement can also have one or more variables.
 
-A function body is either a list of statements enclosed
+- A **function body** is either a list of statements enclosed
 in curly brackets ``{`` and ``}`` (**1**),
 or an empty body consisting
-of a semicolon ``;``.  Example:
+of a semicolon (**6**).  Example:
 ```
   int foo(double x, int y) ;
 ```
@@ -152,42 +153,46 @@ of a semicolon ``;``.  Example:
 
 ==Statements==
 
-Any expression followed by a semicolon ``;`` can be used as a statement. (**1**)
++ Any **expression** followed by a semicolon ``;`` can be used as a statement. (**1**)
 
-Any declaration followed by a semicolon ``;`` can be used as a statement.
++ Any **declaration** followed by a semicolon ``;`` can be used as a statement. (**2**)
 Declarations have the same form as argument declarations in functions,
 except that they can have more than one variable.
 
-Statements returning an expression (**1**), for example
++ Statements **return**ing an expression (**1**), for example
 ```
   return i + 9 ;
 ```
-While loops, with an expression in parentheses followed by a statement, for
+
++ **While** loops, with an expression in parentheses followed by a statement. (**3**)  For
 example:
 ```
   while (i < 10) ++i ;
 ```
-Do-while loops, with an expression in parentheses after the loop body, for
+
++ **Do-while** loops, with an expression in parentheses after the loop body. (**6**)  For
 example:
 ```
   do ++i ; while (i < 10) ;
 ```
-For loops, with a declaration and two expressions in parentheses followed
-by a statement. For example:
+
++ **For** loops, with a declaration and two expressions in parentheses followed
+by a statement. (**6**)  For example:
 ```
   for (int i = 0 ; i != 10 ; ++i) k = k + i ;
 ```
 We do not require that any of the fields in parentheses may be empty.
 
-Conditionals: ``if`` with an expression in parentheses followed by
-a statement and optionally by ``else`` and a statement. Examples:
++ **Conditionals**: ``if`` with an expression in parentheses followed by
+a statement and optionally by ``else`` and a statement. (**3**)  Examples:
 ```
   if (x > 0) return x ;
 
   if (x > 0) return x ; else return y ;
 ```
-Blocks: any list of statement (including empty list) between
-curly brackets. For instance,
+
++ **Blocks**: any list of statement (including empty list) between
+curly brackets. (**3**)  For instance,
 ```
   {
     int i = 2 ;
@@ -196,11 +201,13 @@ curly brackets. For instance,
     i++ ;
   }
 ```
-Type definitions: a type and a name for it. Example:
+
++ **Type definitions**: a type and a name for it. (**3**)  Example:
 ```
   typedef vector<string> Text ;
 ```
-Structure definitions: a name and a list of declarations. Example:
+
++ **Structure definitions**: a name and a list of declarations. Example:
 ```
   struct Student_info {
     string name;
@@ -208,6 +215,8 @@ Structure definitions: a name and a list of declarations. Example:
     vector<double> homework;
   } ;
 ```
+
+
 Notice that the semicolon is obligatory in the end of a structure definition.
 Otherwise, semicolons are not used after curly brackets - but they are
 obligatory in all statements and definitions not ending with curly
@@ -231,37 +240,33 @@ the main expression to implement the required the associativity.
 **Note**. The table is not exactly the same as in the C++ standard.
 
 
-|| level | expression forms                     | assoc   | explanation ||
-|  16    | literal                              | ---     | atomic expressions |
-|  16    | ``i``, ``c::i``, ``c::c::i``, ...    | ---     | qualified constants |
-|  15    | ``e[e]``                             | left    | indexing |
-|  15    | ``e(e,...,e)``                       | none    | function call |
-|  14    | ``e.e``, ``e->e``                    | left    | structure projection |
-|  14    | ``e++``, ``e--``                     | right   | in/decrement |
-|  13    | ``++e``, ``--e``, ``*e``, ``!e``     | left    | in/decrement, dereference, negation |
-|  12    | ``e*e``, ``e/e``, ``e%e``            | left    | multiplication, division, remainder |
-|  11    | ``e+e``, ``e-e``                     | left    | addition, subtraction |
-|  10    | ``e<<e``, ``e>>e``                   | left    | left and right shift |
-|   9    | ``e<e``, ``e>e``, ``e>=e``, ``e<=e`` | none    | comparison |
-|   8    | ``e==e``, ``e!=e``                   | none    | (in)equality |
-|   4    | ``e&&e``                             | left    | conjunction |
-|   3    | ``e||e``                             | left    | disjunction |
-|   2    | ``e=e``, ``e+=e``, ``e-=e``          | right   | assignment |
-|   2    | ``e ? e : e``                        | right   | conditional |
-|   1    | ``throw e``                          | right   | exception |
+|| level | expression forms                     | assoc   | explanation | test ||
+|  16    | literal                              | ---     | atomic expressions |  (**1**)  |
+|  16    | ``i``, ``c::i``, ``c::c::i``, ...    | ---     | qualified constants |  (**1**)  |
+|  15    | ``e[e]``                             | left    | indexing |  (**3**)  |
+|  15    | ``e(e,...,e)``                       | none    | function call |  (**3**)  |
+|  14    | ``e.e``, ``e->e``                    | left    | structure projection |  (**3**)  |
+|  14    | ``e++``, ``e--``                     | right   | in/decrement |  |
+|  13    | ``++e``, ``--e``, ``*e``, ``!e``     | left    | in/decrement, dereference, negation |  (**6**)  |
+|  12    | ``e*e``, ``e/e``, ``e%e``            | left    | multiplication, division, remainder |  (**3**)  |
+|  11    | ``e+e``, ``e-e``                     | left    | addition, subtraction |  (**3**)  |
+|  10    | ``e<<e``, ``e>>e``                   | left    | left and right shift |  (**1**)  |
+|   9    | ``e<e``, ``e>e``, ``e>=e``, ``e<=e`` | none    | comparison |  (**6**)  |
+|   8    | ``e==e``, ``e!=e``                   | none    | (in)equality |  (**3**)  |
+|   4    | ``e&&e``                             | left    | conjunction |  (**6**)  |
+|   3    | ``e||e``                             | left    | disjunction |  (**6**)  |
+|   2    | ``e=e``, ``e+=e``, ``e-=e``          | right   | assignment |  (**3**)  |
+|   2    | ``e ? e : e``                        | right   | conditional |  (**3**)  |
+|   1    | ``throw e``                          | right   | exception |  (**4**)  |
 
-Expressions needed for test (**1**):
-integer and string literal, qualified constant, left shift.
-
-Notice that it is syntactically permitted to increment and assign
-a value to any expression, not just variables (and other so-called
-lvalues).
+Note that increment, decrement, and assignment are //syntactically// permitted
+on any expression, not just on variables (and other so-called //l-values//).
 
 
 ==Qualified constants and template instantiations==
 
-**Qualified constants** are constant names separated by ``::``. Names can
-be identifiers but also **template instantiations**, of the form
+**Qualified constants** are constant names separated by ``::`` such as ``std::cout``.
+Names can be identifiers (**1**) but also **template instantiations** (**3**), of the form
 ```
   ident < typelist >
 ```
@@ -276,36 +281,28 @@ nonempty lists separated by ``::``. The elements of the list
 are identifiers and template instantiations. Single identifier
 expressions come out as a special case of these lists.
 
-Qualified constants, but without templates, are needed in (**1**).
-
 
 
 ==Types==
 
-Types are either qualified constants (including plain identifiers),
-or type references, or built-in types, of which we include the following:
-```
-  bool
-  double
-  int
-  void
-```
-Only the type ``int`` is needed in (**1**).
+**Types** are:
 
+- Qualified constants, including plain identifiers (**1**), e.g. ``int``.
+
+- Type references. (**4**)
 The reference operator ``&`` is a
 postfix-operator forming types from types, e.g. ``int &``.
 
 
 ==Literals==
 
-We include
-single-quoted character literals,
-double-quoted string literals,
-integer literals, and
-floating point literals.
-
+We include:
++ **Integer** literals, e.g, ``0``, ``-3``, ``151``. (**1**)
++ **Floating point** literals. (**3**)
++ Single-quoted **character** literals. (**6**)
++ Double-quoted **string** literals. (**1**)
 A string literal may consist of many can be concatenated strings
-and in this way divided over lines:
+and in this way divided over lines (**3**):
 ```
   "hello " "my little "
   "world"
@@ -315,21 +312,20 @@ and in this way divided over lines:
 
 ==Identifiers==
 
-An identifier is a letter followed by a list of letters, digits,
-and underscores.
+An **identifier** is a letter followed by a list of letters, digits,
+and underscores.  (**1**)
 
 
 ==Comments==
 
-There are three kinds of comments.
-- anything between tokens ``/*`` and ``*/``
-- anything from token ``//`` to the end of a line or the file
-- anything from token ``#`` to the end of a line or the file
-  (preprocessor directive)
+There are three kinds of **comments**.
++ **Block comment**: anything between tokens ``/*`` and ``*/``.
++ **Line comment**: anything from token ``//`` to the end of a line or the file.  (**1**)
++ **Pragma**: anything from token ``#`` to the end of a line or the file
+  (preprocessor directive).   (**1**)
 
-Comments cannot be nested.
 
-Comments are needed in (**1**).
+Block comments cannot be nested.
 
 
 =Test programs=
@@ -337,17 +333,17 @@ Comments are needed in (**1**).
 These programs are original code from the web page of the book
 //Accelerated C++// (A. Koenig & B. Moo, Addison-Wesley, 2000).
 
-- [First test/hello.cc]: "hello world"
++ [First testsuite/good/1-hello.cc]: Print "Hello, world!".
 
-- [Second test/greet.cc]: ask the user's name and say hello to her
++ [Second testsuite/good/2-greet.cc]: Ask the user's name and say hello to him/her.
 
-- [Third test/med.cc]: compute the grade of a student
++ [Third testsuite/good/3-med.cc]: Compute the grade of a student.
 
-- [Fourth test/grade.cc]: a smarter way to compute the grade
++ [Fourth testsuite/good/4-grade.cc]: A smarter way to compute the grade.
 
-- [Fifth test/palin.cc]: test if a string is a palindrome
++ [Fifth testsuite/good/5-palin.cc]: Test if a string is a palindrome.
 
-- [Sixth test/grammar.cc]: random-generate English sentences
++ [Sixth testsuite/good/6-grammar.cc]: Random-generate English sentences.
 
 
 Once again: build the grammar gradually so that you can parse
@@ -360,7 +356,7 @@ Your grammar must pass the [test suite testsuite/index.html].
 The test suite contains the example programs, as well
 as a number of programs which your parser must reject.
 
-The maximum number of 10 shift/reduce conflicts is permitted.
+The maximum number of 10 **shift/reduce conflicts** is permitted.
 The minimum of 2 is almost unavoidable (the "dangling ``else``",
 and template instantiation vs. less-than operator).
 But reduce/reduce conflicts are forbidden.
@@ -374,7 +370,7 @@ be returned automatically.
 
 If you have any problems getting the test program to run,
 or if you think that there is an error in the test suite,
-contact the teachers of the course.
+contact the teachers of the course via the mailing list.
 
 
 
@@ -389,7 +385,7 @@ Qualified names: ``s::n``, where ``s`` is a name space or a class.
 
 IO streams: ``cout`` for output, ``cin`` for input. Output is
 produced by the left shift operator, input is read by the right shift.
-Example from [the second program test/greet.cc]:
+Example from [the second program testsuite/good/2-greet.cc]:
 ```
   // read the name
   std::string name;     // define `name'
@@ -403,7 +399,7 @@ Templates, e.g. generic types: ``vector<int>`` is a vector of integers.
 
 Arguments passed by reference (``&``),
 with the possibility of forbidding modification (``const``), e.g.
-(from [the sixth program test/grammar.cc])
+(from [the sixth program testsuite/good/6-grammar.cc])
 ```
   gen_aux(const Grammar& g, const string& word, vector<string>& ret)
 ```

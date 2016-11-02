@@ -44,7 +44,7 @@ int main()
 	vec_sz size = homework.size();
 	if (size == 0) {
 		cout << endl << "You must enter your grades.  "
-		                "Please try again." << endl;	
+		                "Please try again." << endl;
 		return 1;
 	}
 
