@@ -559,6 +559,23 @@ this value to the innermost occurrence of ``x``.
 
 =Lab format=
 
+==Solution templates==
+
+For Haskell and Java there are stubs that can be extended to the full
+solution.  Just download one of the following tar archives, unpack,
+write the code, test, pack the archive again, and submit to fire.
+
+- [Haskell package lab2-stub-haskell.tar.gz]
+- [Java 1.5 package lab2-stub-java1.5.tar.gz]
+
+
+These packages contain the grammar, stubs for type checker and
+interpreter, and suitable makefiles.  If you start from these stubs,
+you will likely match the requirements for the solution format as
+detailed in the following:
+
+#NEW
+
 ==Input and output==
 
 The interpreter must be a program called ``lab2``, which is
@@ -584,14 +601,29 @@ a file or by ``echo``. For instance,
   echo 20 | ./lab2 fibonacci.cc
 ```
 
-The easiest way to produce the proper format is to use the ready-made
-files in either of
-- [Haskell package haskell/]
-- [Java 1.5 package java1.5/]
 
+#NEW
+
+==Compiling the interpreter==
+
+The interpreter is submitted as archive of source files that can be compiled by typing ``make``.
+
+If you want to write the interpreter in another language, the
+procedure is the same: send a tar package
+and make sure the interpreter can be compiled in a normal Unix enviroment
+by typing ``make``.
 
 
 #NEW
+
+=Test programs=
+
+Run the [testsuite ./testsuite] before submitting the lab.
+
+If you have any problems getting the test program to run,
+or if you think that there is an error in the test suite,
+contact the teachers via the course Google group.
+
 
 ==Example of success==
 
@@ -665,30 +697,6 @@ Running the interpreter
 Thus it is assumed that the type checker does not detect uninitialized variables.
 
 
-#NEW
-
-==Compiling the interpreter==
-
-The interpreter is submitted as source files that can be compiled by typing ``make``.
-The file names must match the ready-made files in either the
-[Haskell package haskell/] or the [Java 1.5 package java1.5/].
-The simplest solution is to copy the contents of these files
-and replace the grammar, the type checker, and the interpreter
-by your own files.
-
-If you want to write the interpreter in another language, the
-procedure is the same: send a tar package
-and make sure the interpreter can be compiled in a normal Unix enviroment
-by typing ``make``.
-
-
-
-#NEW
-
-=Test programs=
-
-Run the [testsuite ./testsuite] before submitting the lab.
-
 
 =Success criteria=
 
@@ -707,25 +715,4 @@ in the test suite is not maintainable!
 
 Submit your lab by using Fire.
 **Please include exactly all the files that are required for building your solution, including a Makefile.**
-Do not however submit any generated files, and kindly avoid using archives (upload each file individually).
-
-If you have any problems getting the test program to run,
-or if you think that there is an error in the test suite,
-contact the teachers via the course Google group.
-
-
-==A hint on file structure==
-
-The easiest way to get started is to extend from one of the following templates:
-- [Haskell package haskell/]
-- [Java 1.5 package java1.5/]
-
-
-One way to extend the files to the full language is to use the
-BNFC-generated skeleton as a template. You can also bootstrap them from the files in the
-[mini interpreter ../mini/mini.html].
-
-In these packages, you only have to change three files:
-- ``CPP.cf``: the grammar; you can use [this one ./CPP.cf]
-- ``TypeChecker.hs`` or ``TypeChecker.java``, depending on your implementation language
-- ``Interpreter.hs`` or ``Interpreter.java``, depending on your implementation language
+Do not however submit any generated files.
