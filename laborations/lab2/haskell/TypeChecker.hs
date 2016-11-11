@@ -1,8 +1,13 @@
 module TypeChecker where
 
-import AbsCPP
-import PrintCPP
-import ErrM
+import Control.Monad
+
+import Data.Map (Map)
+import qualified Data.Map as Map
+
+import AbsCPP    -- OR: CPP.Abs
+import PrintCPP  -- OR: CPP.Print
+import ErrM      -- OR: CPP.ErrM
 
 
 typecheck :: Program -> Err ()

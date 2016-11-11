@@ -1,10 +1,9 @@
 import System.Environment (getArgs)
 import System.Exit (exitFailure)
 
-import AbsCPP
-import LexCPP
-import ParCPP
-import ErrM
+import LexCPP  -- OR: CPP.Lex
+import ParCPP  -- OR: CPP.Par
+import ErrM    -- OR: CPP.ErrM
 
 import TypeChecker
 import Interpreter

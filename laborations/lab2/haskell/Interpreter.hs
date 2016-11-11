@@ -1,11 +1,13 @@
 module Interpreter where
 
-import AbsCPP
-import PrintCPP
-import ErrM
-
 import Control.Monad
-import qualified Data.Map as M
+
+import Data.Map (Map)
+import qualified Data.Map as Map
+
+import AbsCPP     -- OR: import CPP.Abs
+import PrintCPP   -- OR: import CPP.Print
+import ErrM       -- OR: import CPP.ErrM
 
 interpret :: Program -> IO ()
 interpret p = putStrLn "no interpreter yet"
