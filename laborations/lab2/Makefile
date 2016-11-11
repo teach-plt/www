@@ -2,7 +2,7 @@
 
 .PHONY : all www testsuite
 
-all : www testsuite lab2-stub-java1.5.tar.gz
+all : www testsuite lab2-stub-java1.5.tar.gz lab2-stub-haskell.tar.gz
 
 testsuite :
 	make -C testsuite
@@ -15,6 +15,14 @@ lab2-stub-java1.5.tar.gz : \
   java1.5/Interpreter.java \
   java1.5/TypeChecker.java \
   java1.5/TypeException.java
+	tar czhf $@ $^
+
+lab2-stub-haskell.tar.gz : \
+  haskell/CPP.cf \
+  haskell/Makefile \
+  haskell/lab2.hs \
+  haskell/Interpreter.hs \
+  haskell/TypeChecker.hs
 	tar czhf $@ $^
 
 www : lab2.html
