@@ -83,13 +83,13 @@ argument and return types. For instance, the function header
 ```
   int f (double x, bool b)
 ```
-can create a symbol table entry (not actual code):
+will create a symbol table entry (not actual code)
 
 ```
-  f → ([double, bool], int)
+  f ↦ ([double, bool], int)
 ```
 
-mapping the name ``f`` to a pair whose first component
+that maps the name ``f`` to a pair whose first component
 is the list of argument types and the second component is the
 return type.
 
@@ -171,19 +171,22 @@ An argument list may only use each variable once.
 
 ==Statements==
 
+===Expression as Statement===
+
+Any expression followed by a semicolon ``;`` can be used as a statement.
+
+//Remark://
+While any expression is allowed, only expressions with some side
+effect make really sense here.  A side effect could be an assignment
+or a call to a function that makes some input or output action.
 
 ===Declaration===
 
-Any declaration followed by a semicolon ``;`` can be used as a statement.
 Declarations have one of the following formats:
-- type and one variable (as in function parameter lists)
+- type and one or more variables
 ```
   int i ;
-
-```
-- type and many variables
-```
-  int i, j ;
+  double x, y, z ;
 
 ```
 - type and one initialized variable
@@ -255,7 +258,7 @@ top-level block in the body.
 
 %**(Associativities differ slightly from 2014 assignment!)**
 
-The following table gives the expressions constructs,
+The following table gives the expression constructs,
 their precedence levels, and their associativity.
 The associativity of operators is given as left, right, or none.
 For binary operators, in general any of the three associativity is meaningful.
@@ -281,14 +284,14 @@ Also note that these precedence levels are already implemented in the [provided 
   |   8      | ``e==e``, ``e!=e``                   | none  | (in)equality  | bool
   |   4      | ``e&&e``                             | left  | conjunction   | bool
   |   3      | ``e||e``                             | left  | disjunction   | bool
-  |   2      | ``v=e``                              | right | assignment    | type of LHS
+  |   2      | ``v=e``                              | right | assignment    | type of left hand side
 
 
 #NEW
 
 **Typing rules**
 
-Integer, double, and boolean literals have their usual types,
+Integer, double, and boolean literals have their usual types.
 
 Variables have the type declared in the nearest enclosing block.
 A variable must be declared before it is used in an expression.
@@ -308,7 +311,7 @@ which is ``int``, ``double``, or ``bool``.
 Conjunction and disjunction apply to operands of type ``bool`` only.
 
 Assignments have the same type as the left-hand-side variable.
-Notice that only variables are used as left-hand-sides.
+Notice that only variables are used as left hand sides.
 
 (There are no qualified constants or template instantiations.)
 
@@ -419,19 +422,19 @@ the context stack at entrance, and popped at exit.
 
 A ``while`` statement, e.g.
 ```
-  while (1 < 10){
+  while (i < 10) {
     i++ ;
+    j-- ;
   }
 ```
 is interpreted so that the condition expression is first evaluated.
 If the value is ``true``, the body is interpreted in the resulting
 environment, and the ``while`` statement is executed again.
-If the value is ``false``, the statement after the ``while`` statement
-is interpreted.
+If the value is ``false``, the body is not interpreted.
 
 An ``if-else`` statement, e.g.
 ```
-  if (1 < 10) i++ ; else j++ ;
+  if (x < 10) i++ ; else printInt(j) ;
 ```
 is interpreted so that the condition expression is first evaluated.
 If the value is ``true``, the statement before ``else`` is interpreted.
@@ -469,7 +472,7 @@ the interpreter terminates with an error message
 ```
 A function call, e.g.
 ```
-  foo(8,9,true)
+  foo (x+y, i<0, i++)
 ```
 is interpreted by first evaluating its arguments from left to right.
 The environment is then looked up to find out how the function is
@@ -657,7 +660,7 @@ int main ()
 Running the interpreter
 ```
   % lab2 bad.cc
-  uninitialized variable x
+  uninitialized variable i
 ```
 Thus it is assumed that the type checker does not detect uninitialized variables.
 
