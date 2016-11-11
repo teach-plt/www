@@ -1,14 +1,14 @@
 import System.Environment (getArgs)
 import System.Exit (exitFailure)
 
-import LexCPP  -- OR: CPP.Lex
-import ParCPP  -- OR: CPP.Par
-import ErrM    -- OR: CPP.ErrM
+import CPP.Lex
+import CPP.Par
+import CPP.ErrM
 
 import TypeChecker
 import Interpreter
 
--- driver
+-- | Parse, type check, and interpret a program given by the @String@.
 
 check :: String -> IO ()
 check s = do
@@ -24,6 +24,8 @@ check s = do
           putStrLn err
           exitFailure
         Ok _ -> interpret tree
+
+-- | Main: read file passed by only command line argument and call 'check'.
 
 main :: IO ()
 main = do

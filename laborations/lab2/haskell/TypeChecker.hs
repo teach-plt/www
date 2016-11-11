@@ -5,9 +5,9 @@ import Control.Monad
 import Data.Map (Map)
 import qualified Data.Map as Map
 
-import AbsCPP    -- OR: CPP.Abs
-import PrintCPP  -- OR: CPP.Print
-import ErrM      -- OR: CPP.ErrM
+import CPP.Abs
+import CPP.Print
+import CPP.ErrM
 
 
 typecheck :: Program -> Err ()
