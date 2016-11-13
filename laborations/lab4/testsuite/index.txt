@@ -11,7 +11,7 @@ this testsuite.
 
 = Preparations =
 
-You will only need to do this this part once.
+You will only need to do this part once.
 
 + Download [lab4-testsuite.tar.gz lab4-testsuite.tar.gz].
 

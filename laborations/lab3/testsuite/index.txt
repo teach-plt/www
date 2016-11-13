@@ -21,7 +21,7 @@ Google group.
 
 = Preparations =
 
-You will only need to do this this part once.
+You will only need to do this part once.
 
 
 + Download [lab3-testsuite.tar.gz lab3-testsuite.tar.gz].
