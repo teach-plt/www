@@ -284,17 +284,18 @@ postfix-operator forming types from types, e.g. ``int &``.
 
 ==Literals==
 
-+ **Integer** literals, e.g, ``0``, ``20``, ``151``. (**1**)
-+ **Floating point** literals. (**3**)
-+ Single-quoted **character** literals. (**6**)
-+ Double-quoted **string** literals. (**1**)
-A string literal may consist of many can be concatenated strings
-and in this way divided over lines (**3**):
++ Non-negative **Integer** literals, e.g, ``0``, ``00``, ``20``, ``151``. (**1**)
++ Non-negative **Floating point** literals, e.g., ``01.10``, ``3.14``, ``10.0e10``, ``0.00e-00``, ``1.1e-80``. (**3**)
++ Single-quoted **character** literals, e.g. ``'0'``, ``'a'``, ``'"'``, ``'''``. (**6**)
++ Double-quoted **string** literals, e.g. ``"abc"``,
+``"This,\n is \"insane\"!"``, ``"LaTeX's \"\\newcommand\""``. (**1**)
+A string literal may consist of many double-quoted character sequences
+which will be concatenated.  The parts can be divided over lines (**3**).  E.g.,
 ```
   "hello " "my little "
   "world"
-
 ```
+will be parsed as string literal "hello my little world".
 
 
 ==Identifiers==
