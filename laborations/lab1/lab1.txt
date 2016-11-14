@@ -284,7 +284,7 @@ postfix-operator forming types from types, e.g. ``int &``.
 
 ==Literals==
 
-+ **Integer** literals, e.g, ``0``, ``-3``, ``151``. (**1**)
++ **Integer** literals, e.g, ``0``, ``20``, ``151``. (**1**)
 + **Floating point** literals. (**3**)
 + Single-quoted **character** literals. (**6**)
 + Double-quoted **string** literals. (**1**)
