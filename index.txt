@@ -4,6 +4,7 @@ Winter Term 2016 (LP2)
 
 %!target:html
 %!encoding:utf-8
+%!include: ''include.html''
 
 '''
 <p align="center">

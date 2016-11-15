@@ -2,6 +2,7 @@ Lab 2 Test Suite
 Programming Language Technology, 2016
 
 %!target:html
+%!include: ''../../../include.html''
 
 = Introduction =
 

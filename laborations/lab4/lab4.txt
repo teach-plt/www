@@ -2,6 +2,7 @@ Lab 4: Interpreter for a functional language
 Programming Language Technology, 2015
 
 %!target:html
+%!include: ''../../include.html''
 
 %!postproc(html): #NEW <!-- NEW -->
 

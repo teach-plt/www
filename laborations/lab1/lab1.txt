@@ -2,6 +2,7 @@ Lab 1: Parser for a fragment of C++
 Programming Language Technology, 2016
 
 %!target:html
+%!include: ''../../include.html''
 
 % Changes from 2015: removed structure definitions and 'inline'.
 
