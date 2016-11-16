@@ -1,5 +1,8 @@
 # Andreas, 2014-01-19 Makefile for lab1
 
+# Files which contribute to the generated .html
+deps=../../style.css ../../include.html ../../enhance_page.js
+
 .PHONY : all www testsuite
 
 all : www testsuite
@@ -9,7 +12,7 @@ testsuite :
 
 www : lab1.html
 
-%.html : %.txt
+%.html : %.txt $(deps)
 	txt2tags --style=../../style.css -t html $<
 
 

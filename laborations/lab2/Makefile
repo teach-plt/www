@@ -1,5 +1,8 @@
 # Andreas, 2014-02-09 Makefile for lab2
 
+# Files which contribute to the generated .html
+deps=../../style.css ../../include.html ../../enhance_page.js
+
 .PHONY : all www testsuite
 
 all : www testsuite lab2-stub-java1.5.tar.gz lab2-stub-haskell.tar.gz
@@ -27,7 +30,7 @@ lab2-stub-haskell.tar.gz : \
 
 www : lab2.html
 
-%.html : %.txt
+%.html : %.txt $(deps)
 	txt2tags --style=../../style.css -t html $<
 
 

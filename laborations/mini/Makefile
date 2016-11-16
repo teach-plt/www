@@ -1,5 +1,7 @@
 # John, 2015-11-09 Makefile for mini
 
+# Andreas, 2016-11-16 "mini" not maintained in PLT 2016 LP2
+
 .PHONY : all www
 
 all : www

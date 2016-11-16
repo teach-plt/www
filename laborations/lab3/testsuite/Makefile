@@ -1,5 +1,8 @@
 # John, 2015-11-04 Makefile for lab3 testsuite
 
+# Files which contribute to the generated .html
+deps=../../../style.css ../../../include.html ../../../enhance_page.js
+
 .PHONY : all suite www
 
 all : suite www
@@ -11,7 +14,7 @@ lab3-testsuite.tar.gz : build-tarball.sh progs-test-lab3.hs Makefile-test Runtim
 
 www : index.html
 
-%.html : %.txt
+%.html : %.txt $(deps)
 	txt2tags --style=../../../style.css -t html $<
 
 clean :
