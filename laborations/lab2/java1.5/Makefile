@@ -5,9 +5,8 @@ JAVAC_FLAGS = -sourcepath .
 
 JAVA = java
 
-# Name of generated .cup file for bnfc 2.8
-# Was CPP/CPP.cup for older versions of bnfc
-CUPFILE = CPP/_cup.cup
+# Name of generated .cup file for bnfc 2.8.1
+CUPFILE = CPP/CPP.cup
 
 .PHONY: bnfc lab2 clean distclean vclean
 
