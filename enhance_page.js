@@ -13,10 +13,12 @@ function generateSectionsMenu() {
   var menu = document.createElement("UL");
   menu.style.listStyleType = "none";
   menu.style.padding = "0em 0.5em 0.5em 0.5em";
-  var header = createLI();
-  header.textContent = "Sections";
-  header.style.textDecoration = "underline";
-  menu.appendChild(header);
+  // // Andreas, 2016-11-16, I like it better without heading.
+  // // The menu should be self-explaining.
+  // var header = createLI();
+  // header.textContent = "Sections";
+  // header.style.textDecoration = "underline";
+  // menu.appendChild(header);
 
   menu_div.appendChild(menu);
 
