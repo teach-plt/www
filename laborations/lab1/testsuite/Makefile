@@ -14,4 +14,7 @@ www : index.html
 %.html : %.txt
 	txt2tags --style=../../../style.css -t html $<
 
+clean :
+	rm -f index.html
+
 # EOF

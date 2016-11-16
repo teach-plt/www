@@ -12,4 +12,13 @@ www : lab4.html
 %.html : %.txt
 	txt2tags --style=../../style.css -t html $<
 
+
+clean : clean_index clean_testsuite
+
+clean_index :
+	rm -f lab4.html
+
+clean_testsuite :
+	make clean -C testsuite/
+
 # EOF

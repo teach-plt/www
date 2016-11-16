@@ -11,4 +11,7 @@ www : mini.html
 %.html : %.txt
 	txt2tags --style=../../style.css -t html $<
 
+clean :
+	rm -f mini.html haskell/index.html java1.5/index.html
+
 # EOF
