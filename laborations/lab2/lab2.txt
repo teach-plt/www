@@ -3,9 +3,8 @@ Programming Language Technology, 2016
 
 %!target:html
 %!encoding: utf-8
-%!include: ''../../include.html''
-
 %!postproc(html): #NEW <!-- NEW -->
+%!include: ''../../include.html''
 
 
 #NEW
