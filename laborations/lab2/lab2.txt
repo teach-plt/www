@@ -305,6 +305,9 @@ identifiers are used as functions.
 Increments and decrements only apply to variables.
 (This can be covered in the parser.)
 
+The arithmetical operations apply to two operands of the same type,
+which is ``int`` or ``double``.
+
 Comparison and (in)equality apply to two operands of the same type,
 which is ``int``, ``double``, or ``bool``.
 
