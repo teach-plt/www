@@ -32,7 +32,8 @@ Google group: http://groups.google.com/group/plt-2016
 =News and changes=
 
 : //2016-11-21//
-  Clairification of comparison operators in [lab2 laborations/lab2/lab2.html] text.
+  [lab2 laborations/lab2/lab2.html]: Clarification of comparison operators.
+  2 new test cases.
 
 : //2016-11-11//
   Due to popular demand, [lab2 laborations/lab2/lab2.html] has been released.
