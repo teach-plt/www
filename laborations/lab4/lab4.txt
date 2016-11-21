@@ -200,8 +200,8 @@ All "good" programs must work with at least one of the evaluation strategies;
 need not work on both (because of loop or long time); see comments in
 test programs to see which one is expected to work.
 
-The solution must be written in an easily readable and maintainable way.
-
+The solution must be written in an easily readable and maintainable way. In
+particular, tailoring it for the programs in the test suite is not maintainable!
 
 =Submission=
 

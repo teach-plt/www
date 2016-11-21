@@ -337,15 +337,17 @@ these files in this order.
 
 =Success criteria=
 
-Your grammar must pass the [test suite testsuite/index.html].
-The test suite contains the example programs, as well
-as a number of programs which your parser must reject.
+Your grammar must pass the [test suite testsuite/index.html] and meet the
+specification in this document in all respects. The test suite contains the
+example programs, as well as a number of programs which your parser must reject.
 
 The maximum number of 10 **shift/reduce conflicts** is permitted.
 The minimum of 2 is almost unavoidable (the "dangling ``else``",
 and template instantiation vs. less-than operator).
 But reduce/reduce conflicts are forbidden.
 
+The solution must be written in an easily readable and maintainable way. In
+particular, tailoring it for the programs in the test suite is not maintainable!
 
 = Submission =
 

@@ -348,12 +348,11 @@ For example when using Haskell, you can do the following:
 
 =Success criteria=
 
-Your program must be compatible with the [test suite ./testsuite/] and pass all the tests.
+Your program must be compatible with the [test suite ./testsuite/] and meet the
+specification in this document in all respects.
 
-The solution must be written in an easily readable and
-maintainable way. In particular, tailoring it for the programs
-in the test suite is not maintainable!
-
+The solution must be written in an easily readable and maintainable way. In
+particular, tailoring it for the programs in the test suite is not maintainable!
 
 =Submission=
 

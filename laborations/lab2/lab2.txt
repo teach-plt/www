@@ -703,16 +703,14 @@ Thus it is assumed that the type checker does not detect uninitialized variables
 
 =Success criteria=
 
-Your interpreter must pass the [testsuite ./testsuite].
-The test suite contains both good and bad programs.
-The good programs must be executed correctly, whereas the
-bad ones must fail in appropriate ways in either the type checker or
-the interpreter.
+Your interpreter must pass the [test suite ./testsuite] and meet the
+specification in this document in all respects. The test suite contains both
+good and bad programs. The good programs must be executed correctly, whereas the
+bad ones must fail in appropriate ways in either the type checker or the
+interpreter.
 
-The solution must be written in an easily readable and
-maintainable way. For instance, tailoring it for the programs
-in the test suite is not maintainable!
-
+The solution must be written in an easily readable and maintainable way. In
+particular, tailoring it for the programs in the test suite is not maintainable!
 
 =Submission=
 
