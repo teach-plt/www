@@ -307,10 +307,10 @@ identifiers are used as functions.
 Increments and decrements only apply to variables.
 (This can be covered in the parser.)
 
-The arithmetical operations apply to two operands of the same type,
+The arithmetical and comparison operations apply to two operands of the same type,
 which is ``int`` or ``double``.
 
-Comparison and (in)equality apply to two operands of the same type,
+Equality and inequality apply to two operands of the same type,
 which is ``int``, ``double``, or ``bool``.
 
 Conjunction and disjunction apply to operands of type ``bool`` only.
@@ -518,7 +518,7 @@ picky about the precision chosen, but suggest for simplicity
 that ``int`` should be ``int`` and ``double`` should be ``double``.
 
 
-Comparisons,
+Comparisons and equality tests,
 ```
   a <  b
   a >  b
@@ -529,7 +529,7 @@ Comparisons,
 ```
 are treated similarly to the arithmetic operations, using
 comparisons of the implementation language. The returned
-value is an integer.
+value is a boolean.
 
 Conjunction,
 ```
