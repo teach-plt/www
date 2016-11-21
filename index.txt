@@ -4,9 +4,9 @@ Winter Term 2016 (LP2)
 
 %!target:html
 %!encoding:utf-8
-%!include: ''include.html''
 
 '''
+<script src="enhance_page.js"></script>
 <p align="center">
 <a href="http://www.cse.chalmers.se/edu/course/DAT151/">
 http://www.cse.chalmers.se/edu/course/DAT151/</a>

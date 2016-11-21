@@ -4,8 +4,10 @@ Programming Language Technology, 2016
 %!target:html
 %!encoding: utf-8
 %!postproc(html): #NEW <!-- NEW -->
-%!include: ''../../include.html''
 
+'''
+<script src="../../enhance_page.js"></script>
+'''
 
 #NEW
 

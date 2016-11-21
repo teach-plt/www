@@ -2,7 +2,10 @@ Lab 2 Test Suite
 Programming Language Technology, 2016
 
 %!target:html
-%!include: ''../../../include.html''
+
+'''
+<script src="../../../enhance_page.js"></script>
+'''
 
 = Introduction =
 

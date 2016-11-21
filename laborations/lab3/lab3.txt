@@ -3,7 +3,10 @@ Programming Language Technology, 2015
 
 %!target:html
 %!postproc(html): #NEW <!-- NEW -->
-%!include: ''../../include.html''
+
+'''
+<script src="../../enhance_page.js"></script>
+'''
 
 
 =Summary=

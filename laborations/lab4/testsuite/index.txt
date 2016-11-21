@@ -2,7 +2,10 @@ Lab 4 Test Suite
 Programming Language Technology, 2015
 
 %!target:html
-%!include: ''../../../include.html''
+
+'''
+<script src="../../../enhance_page.js"></script>
+'''
 
 = Introduction =
 
