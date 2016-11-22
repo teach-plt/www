@@ -108,7 +108,7 @@ Methods in the class, ``main`` special, see Chapter 6.
 
 ==Statements and expressions==
 
-The semantics is the same as in Lab 3. In other words,
+The semantics is the same as in Lab 2. In other words,
 running the generated classes in ``java`` produces the same behaviour
 as running the source code in the ``lab2`` interpreter.
 
