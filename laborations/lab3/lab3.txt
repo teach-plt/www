@@ -47,7 +47,7 @@ To pass the assignment, it is sufficient to treat the grammar of Lab 2
 be covered by the code generator.
 
 However, for the ambitious student, we recommend to extend the code
-generator also to doubles (after it works for integers and the
+generator to also handle doubles (after it works for integers and the
 statements).  The extension requires some extra work:
 
 + The type checker needs to annotate the abstract syntax with types,
