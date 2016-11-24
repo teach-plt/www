@@ -43,29 +43,33 @@ debug s = do
   d <- readIORef doDebug
   if d then putStrLn s else return ()
 
-
-
+-- | Return all files with extension ".cc" in given directory.
+listCCFiles :: FilePath -> IO [FilePath]
 listCCFiles dir =
-    liftM (map (\f -> joinPath [dir,f]) . sort . filter ((=="cc") . getExt)) $ getDirectoryContents dir
+  liftM (map (\f -> joinPath [dir,f]) . sort . filter ((=="cc") . getExt)) $
+    getDirectoryContents dir
 
-
-
-
+-- | Run "make" in given directory.
 runMake :: FilePath -> IO ()
 runMake dir = do
   checkDirectoryExists dir
   runCommandNoFail_ ("make -C " ++ quote dir) ""
 
+-- | Run test on all ".cc" files in directory "good".
 runTests :: FilePath -> IO [Bool]
 runTests dir = do
-  let prog = joinPath [dir,executable_name]
+  let prog = joinPath [dir, executable_name]
   checkFileExists prog
   mapM (testBackendProg prog) =<< listCCFiles "good"
 
-testBackendProg :: FilePath -> FilePath -> IO Bool
+-- | Test given program on given test file.
+testBackendProg
+  :: FilePath  -- ^ Program (lab3).
+  -> FilePath  -- ^ Test file, e.g., good/good01.cc
+  -> IO Bool   -- ^ Test successful?
 testBackendProg prog f = do
-  input  <- readFileIfExists (f++".input")
-  output <- readFileIfExists (f++".output")
+  input  <- readFileIfExists (f ++ ".input")
+  output <- readFileIfExists (f ++ ".output")
 
   -- Code Gen
   let c = prog ++ " " ++ f
@@ -74,7 +78,6 @@ testBackendProg prog f = do
 
   -- Run code
   let c = "java -noverify -cp .:" ++ takeDirectory f ++ " " ++ takeBaseName f
-  -- let c = "java -cp .:" ++ takeDirectory f ++ " " ++ takeBaseName f
   (out,err,s) <- runCommandStrWait c input
   debug $ "Exit code: " ++ show s
   if out == output then return True else do
