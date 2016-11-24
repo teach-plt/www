@@ -116,29 +116,11 @@ main :: IO ()
 main = getArgs >>= parseArgs >>= mainOpts
 
 --
--- * List utilities
---
-
-grep :: String -> String -> [String]
-grep x = filter (x `isSubStringOf`) . lines
-  where isSubStringOf x = any (x `isPrefixOf`) . tails
-
---
 -- * Path name utilities
 --
 
 getExt :: FilePath -> String
 getExt = reverse . takeWhile (/='.') . reverse
-
-stripExt :: FilePath -> String
-stripExt p = if '.' `elem` p then p' else p
-  where p' = reverse $ drop 1 $ dropWhile (/='.') $ reverse p
-
-basename :: FilePath -> FilePath
-basename = reverse . takeWhile (not . isPathSep) . reverse
-
-isPathSep :: Char -> Bool
-isPathSep c = c == pathSep
 
 joinPath :: [String] -> FilePath
 joinPath = concat . intersperse [pathSep]
@@ -155,19 +137,6 @@ quote p = "'" ++ concatMap f p ++ "'"
   where
     f '\'' = "\\'"
     f c = [c]
-
---
--- * Either utilities
---
-
-isLeft :: Either a b -> Bool
-isLeft = either (const True) (const False)
-
-fromLeft :: Either a b -> a
-fromLeft =  either id (error "fromLeft: Right")
-
-catLefts :: [Either a b] -> [a]
-catLefts xs = [x | Left x <- xs]
 
 --
 -- * Terminal output colors
