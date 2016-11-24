@@ -41,7 +41,7 @@ doDebug = unsafePerformIO $ newIORef False
 debug :: String -> IO ()
 debug s = do
   d <- readIORef doDebug
-  if d then putStrLn s else return ()
+  when d $ putStrLn s
 
 -- | Return all files with extension ".cc" in given directory.
 listCCFiles :: FilePath -> IO [FilePath]
@@ -71,10 +71,9 @@ testBackendProg prog f = do
   input  <- readFileIfExists (f ++ ".input")
   output <- readFileIfExists (f ++ ".output")
 
-  -- Code Gen
-  let c = prog ++ " " ++ f
+  -- Running prog on f should generate file f.class
   putStrLn $ "Running " ++ f ++ "..."
-  (out,err,s) <- runCommandStrWait c ""
+  _ <- runCommandStrWait (prog ++ " " ++ f) ""
 
   -- Run code
   let c = "java -noverify -cp .:" ++ takeDirectory f ++ " " ++ takeBaseName f
@@ -91,13 +90,15 @@ testBackendProg prog f = do
 --
 
 parseArgs :: [String] -> IO String
-parseArgs ["-debug",cfFile] = do
-  writeIORef doDebug True
-  return cfFile
-parseArgs [cfFile] = return cfFile
-parseArgs _ = do
-  hPutStrLn stderr "Usage: progs-test-lab3 <interpreter code directory>"
-  exitFailure
+parseArgs args =
+  case args of
+    ["-debug", s] -> do
+      writeIORef doDebug True
+      return s
+    [s] -> return s
+    _ -> do
+      hPutStrLn stderr "Usage: progs-test-lab3 <interpreter code directory>"
+      exitFailure
 
 mainOpts :: FilePath -> IO ()
 mainOpts dir = do
