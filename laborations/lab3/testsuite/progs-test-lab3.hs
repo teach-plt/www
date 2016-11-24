@@ -265,15 +265,15 @@ runCommandNoFail e f = do
 
 checkFileExists :: FilePath -> IO ()
 checkFileExists f = do
-   e <- doesFileExist f
-   when (not e) $ do
-     putStrLn $ color red $ quote f ++ " is not an existing file."
-     exitFailure
+  e <- doesFileExist f
+  unless e $ do
+    putStrLn $ color red $ quote f ++ " is not an existing file."
+    exitFailure
 
 checkDirectoryExists :: FilePath -> IO ()
 checkDirectoryExists f = do
   e <- doesDirectoryExist f
-  when (not e) $ do
+  unless e $ do
     putStrLn $ color red $ quote f ++ " is not an existing directory."
     exitFailure
 
@@ -291,17 +291,17 @@ reportErrorColor
   -> String   -- ^ stderr output
   -> IO ()
 reportErrorColor col c m f i o e = do
-    putStrLn $ color col $ c ++ " failed: " ++ m
-    when (not (null f)) $ prFile f
-    when (not (null i)) $ do
-      putStrLn "Given this input:"
-      putStrLn $ color blue $ i
-    when (not (null o)) $ do
-      putStrLn "It printed this to standard output:"
-      putStrLn $ color blue $ o
-    when (not (null e)) $ do
-      putStrLn "It printed this to standard error:"
-      putStrLn $ color blue $ e
+  putStrLn $ color col $ c ++ " failed: " ++ m
+  unless (null f) $ prFile f
+  unless (null i) $ do
+    putStrLn "Given this input:"
+    putStrLn $ color blue $ i
+  unless (null o) $ do
+    putStrLn "It printed this to standard output:"
+    putStrLn $ color blue $ o
+  unless (null e) $ do
+    putStrLn "It printed this to standard error:"
+    putStrLn $ color blue $ e
 
 reportError
   :: String   -- ^ command that failed
