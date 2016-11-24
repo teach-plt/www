@@ -31,23 +31,40 @@ readFileIfExists :: FilePath -> IO String
 readFileIfExists f = catch (readFile f) (\_ -> return "")
 #endif
 
--- Executable name
+--
+-- * Main
+--
+
+main :: IO ()
+main = mainOpts =<< parseArgs =<< getArgs
+
+parseArgs :: [String] -> IO String
+parseArgs args =
+  case args of
+    ["-debug", s] -> do
+      writeIORef doDebug True
+      return s
+    [s] -> return s
+    _ -> do
+      hPutStrLn stderr "Usage: progs-test-lab3 <interpreter code directory>"
+      exitFailure
+
+mainOpts :: FilePath -> IO ()
+mainOpts dir = do
+  putStrLn $ "This is the (reduced) test program for Programming Languages Lab 3"
+  runCommandNoFail_ "rm -f */*.j */*.class" ""
+  runMake dir
+  good <- runTests dir
+  putStrLn ""
+  putStrLn "------------------------------------------------------------"
+  report "Good programs: " good
+
+--
+-- * Test driver
+--
+
+-- | Executable name
 executable_name = "lab3"
-
-{-# NOINLINE doDebug #-}
-doDebug :: IORef Bool
-doDebug = unsafePerformIO $ newIORef False
-
-debug :: String -> IO ()
-debug s = do
-  d <- readIORef doDebug
-  when d $ putStrLn s
-
--- | Return all files with extension ".cc" in given directory.
-listCCFiles :: FilePath -> IO [FilePath]
-listCCFiles dir =
-  liftM (map (\f -> joinPath [dir,f]) . sort . filter ((=="cc") . getExt)) $
-    getDirectoryContents dir
 
 -- | Run "make" in given directory.
 runMake :: FilePath -> IO ()
@@ -85,33 +102,26 @@ testBackendProg prog f = do
     putStrLn $ color blue $ output
     return False
 
+-- | Return all files with extension ".cc" in given directory.
+listCCFiles :: FilePath -> IO [FilePath]
+listCCFiles dir =
+  liftM (map (\f -> joinPath [dir,f]) . sort . filter ((=="cc") . getExt)) $
+    getDirectoryContents dir
+
 --
--- * Main
+-- * Debugging
 --
 
-parseArgs :: [String] -> IO String
-parseArgs args =
-  case args of
-    ["-debug", s] -> do
-      writeIORef doDebug True
-      return s
-    [s] -> return s
-    _ -> do
-      hPutStrLn stderr "Usage: progs-test-lab3 <interpreter code directory>"
-      exitFailure
+-- | Is debugging on?
+{-# NOINLINE doDebug #-}
+doDebug :: IORef Bool
+doDebug = unsafePerformIO $ newIORef False
 
-mainOpts :: FilePath -> IO ()
-mainOpts dir = do
-  putStrLn $ "This is the (reduced) test program for Programming Languages Lab 3"
-  runCommandNoFail_ "rm -f */*.j */*.class" ""
-  runMake dir
-  good <- runTests dir
-  putStrLn ""
-  putStrLn "------------------------------------------------------------"
-  report "Good programs: " good
-
-main :: IO ()
-main = getArgs >>= parseArgs >>= mainOpts
+-- | Print debug message if debugging is on.
+debug :: String -> IO ()
+debug s = do
+  d <- readIORef doDebug
+  when d $ putStrLn s
 
 --
 -- * Path name utilities
