@@ -44,14 +44,11 @@ debug s = do
   if d then putStrLn s else return ()
 
 
-listGoodProgs = listCCFiles "good"
 
 listCCFiles dir =
     liftM (map (\f -> joinPath [dir,f]) . sort . filter ((=="cc") . getExt)) $ getDirectoryContents dir
 
 
-welcome :: IO ()
-welcome = putStrLn $ "This is the (reduced) test program for Programming Languages Lab 3"
 
 
 runMake :: FilePath -> IO ()
@@ -63,10 +60,7 @@ runTests :: FilePath -> IO [Bool]
 runTests dir = do
   let prog = joinPath [dir,executable_name]
   checkFileExists prog
-  goodProgs <- listGoodProgs
-  good <- mapM (testBackendProg prog) goodProgs
-  return good
-
+  mapM (testBackendProg prog) =<< listCCFiles "good"
 
 testBackendProg :: FilePath -> FilePath -> IO Bool
 testBackendProg prog f = do
@@ -104,7 +98,7 @@ parseArgs _ = do
 
 mainOpts :: FilePath -> IO ()
 mainOpts dir = do
-  welcome
+  putStrLn $ "This is the (reduced) test program for Programming Languages Lab 3"
   runCommandNoFail_ "rm -f */*.j */*.class" ""
   runMake dir
   good <- runTests dir
