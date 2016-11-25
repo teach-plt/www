@@ -258,9 +258,8 @@ The generated class file should have the same name and be **in the same director
 ```
 This should produce a class file ``../a/b/c.class``.
 
-The output at failure is a code generator error, or a
-``TYPE ERROR`` as in Assignment 2, or a
-``SYNTAX ERROR`` as in Assignment 1.
+The output at failure is a code generator error, or
+``TYPE ERROR`` or ``SYNTAX ERROR`` as in Assignment 2.
 
 The input can be read not only from user typing on the
 terminal, but also from standard input redirected from
