@@ -48,7 +48,7 @@ $ ghc -threaded --make -o progs-test-lab2 progs-test-lab2.hs
 
 = Running the testsuite =
 
-This is what you need to do to test your grammar.
+This is what you need to do to test your solution.
 
 
 + Enter the ``lab3-testsuite`` directory (if you are not there already):
@@ -61,4 +61,14 @@ where your solution is located:
 
 ```
 $ ./progs-test-lab3 path/to/your/solution/
+```
+
+
+If you have implemented compilation of floating point operations,
+you can also test your compiler on the
+[full test suite of lab2 ../../lab2/testsuite/lab2-testsuite.tar.gz].
+To this end, invoke:
+
+```
+$ ./progs-test-lab3 path/to/your/solution/ path/to/lab2/testsuite/good
 ```
