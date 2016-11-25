@@ -332,8 +332,8 @@ The test script can then be run as follows:
 ==Jasmin tips==
 
 Jasmin is available on [Sourceforge http://jasmin.sourceforge.net/].
-Note there are also versions on [github https://github.com/Sable/jasmin] and
-ubuntu (`apt-get install jasmin-sable`).
+Note there are also versions on [Github https://github.com/Sable/jasmin] and
+Ubuntu (``apt-get install jasmin-sable``).
 
 % ; however, the testsuite you have to pass expects you to invoke Jasmin via `java -jar jasmin.jar`.
 
@@ -359,7 +359,7 @@ For example when using Haskell, you can do the following:
   p <- runCommand <call jasmin here>
   waitForProcess p
 ```
-or with library `process > 1.2.0.0`, simply:
+or with library process > 1.2.0.0, simply:
 ```
   callCommand <call jasmin here>
 ```
