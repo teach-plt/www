@@ -1,4 +1,5 @@
-{-# OPTIONS_GHC -cpp #-}
+{-# LANGUAGE CPP #-}
+{-# LANGUAGE TupleSections #-}
 
 -- GHC needs -threaded
 
@@ -6,6 +7,7 @@ import Control.Concurrent
 import Control.Monad
 
 import Data.Char
+import Data.Functor
 import Data.IORef
 import Data.List
 import Data.Maybe
@@ -38,23 +40,33 @@ readFileIfExists f = catch (readFile f) (\_ -> return "")
 main :: IO ()
 main = mainOpts =<< parseArgs =<< getArgs
 
-parseArgs :: [String] -> IO String
-parseArgs args =
-  case args of
-    ["-debug", s] -> do
-      writeIORef doDebug True
-      return s
-    [s] -> return s
-    _ -> do
-      hPutStrLn stderr "Usage: progs-test-lab3 <interpreter code directory>"
-      exitFailure
+-- | Filter out and process options, return the rest.
+parseArgs :: [String] -> IO [String]
+parseArgs args = do
+  let isOpt ('-':_) = True
+      isOpt _       = False
+  let (opts, rest) = partition isOpt args
+  processOpts opts
+  when (null rest) $ usage
+  return rest
 
-mainOpts :: FilePath -> IO ()
-mainOpts dir = do
+processOpts :: [String] -> IO ()
+processOpts = mapM_ $ \ arg -> case arg of
+  "-debug"  -> writeIORef doDebug True
+  "--debug" -> writeIORef doDebug True
+  _ -> usage
+
+usage :: IO a
+usage = do
+  hPutStrLn stderr "Usage: progs-test-lab3 <interpreter code directory> [<test case directory>]*"
+  exitFailure
+
+mainOpts :: [FilePath] -> IO ()
+mainOpts (progdir : testdirs) = do
   putStrLn $ "This is the (reduced) test program for Programming Languages Lab 3"
   runCommandNoFail_ "rm -f */*.j */*.class" ""
-  runMake dir
-  good <- runTests dir
+  runMake progdir
+  good <- runTests progdir testdirs
   putStrLn ""
   putStrLn "------------------------------------------------------------"
   report "Good programs: " good
@@ -72,12 +84,14 @@ runMake dir = do
   checkDirectoryExists dir
   runCommandNoFail_ ("make -C " ++ quote dir) ""
 
--- | Run test on all ".cc" files in directory "good".
-runTests :: FilePath -> IO [Bool]
-runTests dir = do
+-- | Run test on all ".cc" files in given directories (default "good").
+runTests :: FilePath -> [FilePath] -> IO [(FilePath,Bool)]
+runTests dir testdirs = do
   let prog = joinPath [dir, executable_name]
   checkFileExists prog
-  mapM (testBackendProg prog) =<< listCCFiles "good"
+  let dirs = if null testdirs then ["good"] else testdirs
+  files <- concat <$> mapM listCCFiles dirs
+  mapM (\ f -> (f,) <$> testBackendProg prog f) files
 
 -- | Test given program on given test file.
 testBackendProg
@@ -300,9 +314,12 @@ prFile f = do
     putStrLn $ color green s
     putStrLn $ "----------------- end " ++ f ++ " -------------------"
 
--- | Report how many tests passed.
-report :: String -> [Bool] -> IO ()
+-- | Report how many tests passed and which tests failed (if any).
+report :: String -> [(String,Bool)] -> IO ()
 report n rs = do
-  let (p,t) = (length (filter id rs), length rs)
+  let (pass, fail) = partition snd rs
+  let (p,t) = (length pass, length rs)
       c     = if p == t then green else red
   putStrLn $ color c $ n ++ "passed " ++ show p ++ " of " ++ show t ++ " tests"
+  unless (null fail) $
+    mapM_ (putStrLn . color red) $ "Failed tests:" : map fst fail
