@@ -278,8 +278,8 @@ Also note that these precedence levels are already implemented in the [provided 
   |  15      | literal                              | -     | literal       | literal type
   |  15      | identifier                           | -     | variable      | declared type
   |  15      | ``f(e,...,e)``                       | none  | function call | return type
-  |  14      | ``v++``, ``v--``                     | none  | in/decrement  | (sugar)
-  |  13      | ``++v``, ``--v``                     | none  | in/decrement  | (sugar)
+  |  14      | ``v++``, ``v--``                     | none  | in/decrement  | operand type (int or double)
+  |  13      | ``++v``, ``--v``                     | none  | in/decrement  | operand type (int or double)
   |  12      | ``e*e``, ``e/e``                     | left  | mult, div     | operand type (int or double)
   |  11      | ``e+e``, ``e-e``                     | left  | add, sub      | operand type (int or double)
   |   9      | ``e<e``, ``e>e``, ``e>=e``, ``e<=e`` | none  | comparison    | bool
@@ -304,8 +304,7 @@ must be the same as in the function declaration (thus the C++
 default argument rule is not applied). Notice that only
 identifiers are used as functions.
 
-Increments and decrements only apply to variables.
-(This can be covered in the parser.)
+Increments and decrements only apply to ``int`` and ``double`` variables.
 
 The arithmetical and comparison operations apply to two operands of the same type,
 which is ``int`` or ``double``.
