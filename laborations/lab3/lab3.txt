@@ -265,7 +265,7 @@ The input can be read not only from user typing on the
 terminal, but also from standard input redirected from
 a file or by ``echo``. For instance,
 ```
-  ./java fibonacci <test-input
+  java fibonacci <test-input
   echo 20 | java fibonacci fibonacci.cc
 ```
 
