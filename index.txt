@@ -31,6 +31,9 @@ Google group: http://groups.google.com/group/plt-2016
 
 =News and changes=
 
+: //2016-12-01//
+  [lab4 laborations/lab4/lab4.html] has been released.
+
 : //2016-11-25//
   [lab3 laborations/lab3/lab3.html] has been released.
 
@@ -71,10 +74,11 @@ Slides follow closely the plt book.
 | Tue 29/11     | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/lab3.html]
 | Tue 29/11     | 14-15          | Hands-on with Lab 3 (Java)        |  |
 | Thu 01/12     | 13-15          | Functional programming languages  | [slides http://www.digitalgrammars.com/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
-| Tue 06/12     | 13-15          | Hands-on with Lab 4               |  |
-% [lab4 PM laborations/lab4/lab4.html]
-| Thu 08/12     | 13-15          | The language design space         | [slides http://www.digitalgrammars.com/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
+%| Tue 06/12     | 13-15          | The language design space         | [slides http://www.digitalgrammars.com/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
+| Tue 06/12     | 13-15          | Type inference and polymorphism   | plt 7.7-9
+| Thu 08/12     | 13-15          | Hands-on with Lab 4               | [lab4 PM laborations/lab4/lab4.html]
 | //Mon 12/12// | //23//         | //Lab 3 deadline//                |  |
+| Tue 13/12     | 13-15          | Dependent types                   |  |
 | Thu 15/12     | 13-15          | Preparing for the exam            | [Training Exam exams/exam-plt-2016-04-15.pdf]
 || 2017 ||||
 | //Mon 09/01// | //23//         | //Lab 4 deadline//                |  |
@@ -184,8 +188,8 @@ pairs.
 - [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 28/11)
 % - Lab 3 - code generator (deadline 12/12)
 - [Lab 3 - code generator laborations/lab3/lab3.html] (deadline 12/12)
-- Lab 4 - functional language interpreter  (deadline 09/01 2017)
-% - [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 09/01 2017)
+% - Lab 4 - functional language interpreter  (deadline 09/01 2017)
+- [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 09/01 2017)
 
 
 
