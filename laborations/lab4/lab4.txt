@@ -12,6 +12,7 @@ Programming Language Technology, 2016
 
 The objective of this lab is to write an interpreter for a small,
 untyped functional programming language.
+This language is a tiny subset of Haskell.
 The interpreter should walk through programs
 and print out the value of the ``main`` function.
 
@@ -55,13 +56,21 @@ which are terminated by semicolons. A definition is a function name followed by
 a (possibly empty) list of variable names followed by the equality sign ``=``
 followed by an **expression**:
 ```
-  fun x1 ... xn = exp
+  f x1 ... xn = exp ;
 ```
-Both ``fun`` and the variables ``x1`` ... ``xn`` are lexically identifiers.
-Thus ``fun`` is the function to be defined, and ``x1`` ... ``xn``
+Both ``f`` and the variables ``x1`` ... ``xn`` are lexically identifiers.
+Thus ``f`` is the function to be defined, and ``x1`` ... ``xn``
 are its arguments. These variables are considered **bound** in ``exp``. Notice that
-the all such definitions can be converted to definitions of just ``fun`` with
+the all such definitions can be converted to definitions of just ``f`` with
 a lambda abstraction over its arguments.
+
+The last definition has a special form.  Its name is ``main`, it has no variables, and its
+body is a call to the (undefined) unary function ``print``.  For example:
+```
+  main = print (2 + 2) ;
+```
+The purpose of this special form is to make our language a subset of Haskell.
+You can run well-formed programs in Haskell to check the expected result.
 
 Expressions are of the following forms
 
@@ -85,7 +94,7 @@ Here is an example of a program in the language:
   mult x y =
     if (y < 1) then 0 else if (y < 2) then x else (x + (mult x (y-1))) ;
   fact = \x -> if (x < 3) then x else mult x (fact (x-1)) ;
-  main = fact 6 ;
+  main = print (fact 6) ;
 ```
 Comments are line tails starting with ``--``.
 
@@ -95,11 +104,13 @@ There is just one type of basic values: integers. Closures or
 abstraction expressions are also possible values of expressions.
 
 Evaluation is parametrized so that it can be performed in
-both call-by-value and call-by-name manners.
+both call-by-value and call-by-name.
 
 The function defined in a definition is in scope in the entire
 program, including the expression part of that definition
 (which results in recursive and mutually recursive functions).
+Exception: the ``main`` function is not in scope, thus,
+cannot be called from another function.
 
 The variables bound on the left-hand-side of a definition are
 in scope in the expression part of the definition.
@@ -116,16 +127,16 @@ The conditional ``if c then a else b`` is evaluated "lazily"
 so that if ``c`` has value 0, ``b`` is evaluated, otherwise
 ``a`` is evaluated.
 
-The output of a program is the value of the ``main`` function, and
-it must be an integer.
+The output of a program is the value of the expression passed to ``print``
+in the ``main`` function, and it must be an integer.
 
 A program may also exit with an error, due to an unbound identifier.
 It should then say what identifier is unbound. It is also an error
-if the ``main`` function is missing or has wrong type.
+if the ``main`` function is missing.
 Arithmetic operations on non-integers are also errors, e.g.
 ```
   f x = x + x ;
-  main = f + f ;
+  main = print (f + f) ;
 ```
 All these errors occur at run time, because there is no type checker.
 
@@ -135,16 +146,16 @@ All these errors occur at run time, because there is no type checker.
 
 Source file
 ```
-  -- file good.fun
+  -- file good.hs
 
   mult x y =
     if (y < 1) then 0 else if (y < 2) then x else (x + (mult x (y-1))) ;
   fact = \x -> if (x < 3) then x else mult x (fact (x-1)) ;
-  main = fact 6 ;
+  main = print (fact 6) ;
 ```
 Running the interpreter
 ```
-  ./lab4 good.fun
+  ./lab4 good.hs
   720
 ```
 
@@ -152,16 +163,16 @@ Running the interpreter
 
 Source file
 ```
-  -- file bad.fun
+  -- file bad.hs
 
   mult x y =
     if (y < 1) then 0 else if (y < 2) then x else (x + (mult x (y-1))) ;
   fact = \x -> if (x < 3) then x else mul x (fact (x-1)) ;
-  main = fact 6 ;
+  main = print (fact 6) ;
 ```
 Running the interpreter
 ```
-  ./lab4 bad.fun
+  ./lab4 bad.hs
   ERROR: unknown identifier mul
 ```
 
@@ -169,18 +180,18 @@ Running the interpreter
 
 Source file
 ```
-  -- file infinite.fun
+  -- file infinite.hs
 
   grow x = 1 + grow x ;
   first x y = x ;
-  main = first 5 (grow 4) ;
+  main = print (first 5 (grow 4)) ;
 ```
 Running the interpreter
 ```
-  ./lab4 infinite.fun
+  ./lab4 infinite.hs
   <infinite loop>
 
-  ./lab4 -n infinite.fun
+  ./lab4 -n infinite.hs
   5
 ```
 
@@ -210,4 +221,4 @@ particular, tailoring it for the programs in the test suite is not maintainable!
 
 Submit your lab by using Fire.
 **Please include exactly all the files that are required for building your solution, including a Makefile.**
-Do not however submit any generated files, and kindly avoid using archives (upload each file individually).
+Do not however submit any generated files.

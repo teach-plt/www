@@ -15,14 +15,15 @@ make
 set +o errexit
 
 # Good tests
-arr[0]="good1.fun -v 7"
-arr[1]="good2.fun -n 5"
-arr[2]="good3.fun -v 5050"
-arr[3]="good4.fun -v 720"
-arr[4]="good5.fun -n 0"
-arr[5]="good6.fun -v 1073741824"
-arr[6]="good7.fun -v 1"
-arr[7]="good8.fun -v 8"
+arr[0]="good1.hs -v 7"
+arr[1]="good2.hs -n 5"
+arr[2]="good3.hs -v 5050"
+arr[3]="good4.hs -v 720"
+arr[4]="good5.hs -n 0"
+arr[5]="good6.hs -v 1073741824"
+arr[6]="good7.hs -v 1"
+arr[7]="good8.hs -v 8"
+arr[8]="good9.hs -v 131072"
 
 for index in "${!arr[@]}"
 do
@@ -51,7 +52,7 @@ do
 done
 
 # Bad tests
-for F in `ls "${testdir}"/bad*.fun`
+for F in `ls "${testdir}"/bad*.hs`
 do
     echo -e "\033[34m""xxx" `basename ${F}` "xxx""\033[0m"
     ./lab4 "$F"
