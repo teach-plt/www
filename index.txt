@@ -34,6 +34,10 @@ Google group: http://groups.google.com/group/plt-2016
 : //2016-12-01//
   [lab4 laborations/lab4/lab4.html] has been released.
 
+: //2016-12-01//
+  The lecture had a mistake in the call-by-name evaluation rule for application.
+  The correct rule is in the PLT book on page 132.
+
 : //2016-11-25//
   [lab3 laborations/lab3/lab3.html] has been released.
 
@@ -192,6 +196,7 @@ pairs.
 - [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 09/01 2017)
 
 
+The labs are quite substantial, so please set aside at least 20 full working hours before the deadline.
 
 Reporting is done via [Fire https://plt-lp2-16.frs.cse.chalmers.se/].
 Before reporting, you must run your program through a test suite.
