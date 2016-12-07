@@ -4,6 +4,7 @@
 .super java/lang/Object
 
 .method public <init>()V
+   .limit locals 1
 
   aload_0
   invokespecial java/lang/Object/<init>()V
@@ -14,7 +15,8 @@
 ;; The java-style main method calls the cc main
 
 .method public static main([Ljava/lang/String;)V
-.limit locals 1
+  .limit locals 1
+  .limit stack  1
 
   invokestatic good03/main()I
   pop
@@ -26,7 +28,7 @@
 
 .method public static main()I
   .limit locals 3
-  .limit stack 10
+  .limit stack  3
 
 ;; int arg = readInt();
 
