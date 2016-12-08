@@ -24,6 +24,10 @@ arr[5]="good6.hs -v 1073741824"
 arr[6]="good7.hs -v 1"
 arr[7]="good8.hs -v 8"
 arr[8]="good9.hs -v 131072"
+arr[9]="good10.hs -v 1"
+arr[10]="good10.hs -n 1"
+arr[11]="good11.hs -v 1"
+arr[12]="good11.hs -n 1"
 
 for index in "${!arr[@]}"
 do
