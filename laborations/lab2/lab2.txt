@@ -211,6 +211,7 @@ Statements returning an expression, for example
 ```
 **Typing**. The type of the returned expression must be the same as
 the return type of the function in which it occurs.
+It cannot be ``void``.
 
 ===While Loop===
 
