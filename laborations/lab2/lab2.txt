@@ -167,6 +167,7 @@ in curly brackets ``{`` and ``}`` .
 **Typing rules**
 
 An argument list may only use each variable once.
+The type of a variable cannot be ``void``.
 
 
 #NEW
@@ -199,6 +200,7 @@ Declarations have one of the following formats:
 
 
 **Typing**. The initializing expression must have the declared type.
+The type cannot be ``void``.
 
 
 ===Return Statement===
