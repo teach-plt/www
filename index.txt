@@ -31,6 +31,9 @@ Google group: http://groups.google.com/group/plt-2016
 
 =News and changes=
 
+: //2017-01-03//
+  Restored [old exams exams.tgz] for exam preparation.
+
 : //2016-12-01//
   [lab4 laborations/lab4/lab4.html] has been released.
 
