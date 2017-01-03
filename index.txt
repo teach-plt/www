@@ -34,6 +34,9 @@ Google group: http://groups.google.com/group/plt-2016
 : //2017-01-03//
   Restored [old exams exams.tgz] for exam preparation.
 
+: //2016-12-16//
+  Collection of [errata https://github.com/andreasabel/plt-errata] for the PLT book.
+
 : //2016-12-01//
   [lab4 laborations/lab4/lab4.html] has been released.
 
@@ -41,21 +44,21 @@ Google group: http://groups.google.com/group/plt-2016
   The lecture had a mistake in the call-by-name evaluation rule for application.
   The correct rule is in the PLT book on page 132.
 
-: //2016-11-25//
-  [lab3 laborations/lab3/lab3.html] has been released.
-
-: //2016-11-21//
-  [lab2 laborations/lab2/lab2.html]: Clarification of comparison operators.
-  2 new test cases.
-
-: //2016-11-11//
-  Due to popular demand, [lab2 laborations/lab2/lab2.html] has been released.
-
-: //2016-10-31//
-  Please apply to be [teaching assistant http://www.chalmers.se/en/departments/cse/Pages/TeachingAssistants.aspx] for courses in Spring. Deadline: 13th November 2016!
-
-: //2016-10-25//
-  First version of this page - mostly a copy of the 2015 material.  Updates forthcoming soon.
+% : //2016-11-25//
+%   [lab3 laborations/lab3/lab3.html] has been released.
+%
+% : //2016-11-21//
+%   [lab2 laborations/lab2/lab2.html]: Clarification of comparison operators.
+%   2 new test cases.
+%
+% : //2016-11-11//
+%   Due to popular demand, [lab2 laborations/lab2/lab2.html] has been released.
+%
+% : //2016-10-31//
+%   Please apply to be [teaching assistant http://www.chalmers.se/en/departments/cse/Pages/TeachingAssistants.aspx] for courses in Spring. Deadline: 13th November 2016!
+%
+% : //2016-10-25//
+%   First version of this page - mostly a copy of the 2015 material.  Updates forthcoming soon.
 
 
 =Tentative Schedule=
