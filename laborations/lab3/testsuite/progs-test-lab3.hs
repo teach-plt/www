@@ -112,6 +112,8 @@ testBackendProg prog f = do
   debug $ "Exit code: " ++ show s
   if out == output then return True else do
     reportError c "invalid output" f input out err
+    putStrLn "Received output:"
+    putStrLn out
     putStrLn "Expected output:"
     putStrLn $ color blue $ output
     return False
