@@ -259,7 +259,8 @@ Exam dates:
 % Time: 2:00 afternoon
 % Place: M (Hörsalsvägen 5)
 
-The exam has the same structure as these [old exams exams/].
+The exam has the same structure as these [old exams exams/]
+(download as [archive exams.tgz]).
 
 Further, here are some
 [exercises http://www.digitalgrammars.com/ipl-book/course-exercises/exx.html]
