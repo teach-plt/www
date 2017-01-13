@@ -1,9 +1,11 @@
 *~
+*.aux
 *.bak
+*.class
 *.hi
+*.log
 *.o
 \#*\#
-*.class
 
 # Don't commit HTML since it's all generated
 *.html
@@ -24,3 +26,6 @@
 /laborations/lab2/haskell/CPP/
 /laborations/lab2/haskell/lab2
 /laborations/lab3/testsuite/*.j
+/laborations/lab2/testsuite/good/*.j
+/exams.tgz
+/laborations/lab3/testsuite/progs-test-lab3-jvm-verify
