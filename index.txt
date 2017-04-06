@@ -34,7 +34,9 @@ Google group: http://groups.google.com/group/plt-2016
 : //2017-04-05//
   Lab resubmission via Fire until 6 April.
 
-  Reexam on 11 April.
+  Reexam on 11 April in
+  [SB (Sven Hultins gata 6) https://student.portal.chalmers.se/sv/chalmersstudier/tentamen/Sidor/Hitta-tentasalen.aspx].
+
   Exam review on 25 April 10am room EDIT 8103
   (the conference room behind the EDIT lunch room on the top floor).
 
@@ -268,7 +270,7 @@ Written exam, usual grading scales.
 
 Exam dates:
  11 Jan 2017 fm J,
- 11 Apr 2017 fm J,
+ 11 Apr 2017 fm SB,
  24 Aug 2017 em J.
 
 % Date: 20 March
