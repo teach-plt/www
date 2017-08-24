@@ -31,6 +31,13 @@ Google group: http://groups.google.com/group/plt-2016
 
 =News and changes=
 
+: //2017-08-24//
+  Exam review on 12 September 13:30 **in office EDIT 6117**.
+   ([Solution exams/solutions-plt-2017-3.pdf])
+
+: //2017-08-21//
+  Reexam on 24 August 14:00 in M.
+
 : //2017-04-05//
   Lab resubmission via Fire until 6 April.
 
@@ -104,12 +111,13 @@ Slides follow closely the plt book.
 | Thu 15/12     | 13-15          | Preparing for the exam            | [Training Exam exams/exam-plt-2016-1.pdf]
 || 2017 ||||
 | //Mon 09/01// | //23//         | //Lab 4 deadline//                |  |
-| //Wed 11/01// | //8:30-12:30// | //Exam//                          | //[Solution exams/solutions-plt-2017-1.pdf]//
+| //Wed 11/01// | //8.30-12.30// | //Exam (M)//                      | //[Solution exams/solutions-plt-2017-1.pdf]//
 | //Mon 16/01// | //23//         | //Final lab deadline//            | //all lab returns//
 | //Thu 30/03// |                | //Lab resubmission intent deadline//       |  |
 | //Thu 06/04// |                | //Late final lab deadline//       |  |
-| //Tue 11/04// | //8.30-12.30// | //Exam//                          |  |
-| //Fri 24/08// | //14-18//      | //Exam//                          |  |
+| //Tue 11/04// | //8.30-12.30// | //Exam (SB)//                     | //[Solution exams/solutions-plt-2017-2.pdf]// |
+| //Fri 24/08// | //14-18//      | //Exam (M)//                      | //[Solution exams/solutions-plt-2017-3.pdf]// |
+| //Tue 12/09// | //13.30//      | //Exam review//                   |  |
 
 The official course schema is in [Time Edit https://se.timeedit.net/web/chalmers/db1/public/ri10q29Q054Z5ZQ505663750yc065W7362Y63Q0Q7571QZ.html].
 
