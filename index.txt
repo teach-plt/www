@@ -1,6 +1,6 @@
 Programming Language Technology
 DAT151 (Chalmers) / DIT231 (GU)
-Winter Term 2016 (LP2)
+Winter Term 2017 (LP2)
 
 %!target:html
 %!encoding:utf-8
@@ -13,12 +13,13 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 </p>
 '''
 
-Google group: http://groups.google.com/group/plt-2016
+Google group: http://groups.google.com/group/plt-2017
 //(please provide your full name and date of birth when requesting membership!)//
 
-[Fire https://plt-lp2-16.frs.cse.chalmers.se/]
+[Fire https://plt-lp2-17.frs.cse.chalmers.se/]
 /
-[Chalmers studieportal https://www.student.chalmers.se/sp/course?course_id=24933]
+[Chalmers studieportal https://www.student.chalmers.se/sp/course?course_id=26971]
+% https://www.student.chalmers.se/sp/course?course_id=24933
 % https://www.student.chalmers.se/sp/course?course_id=23453
 % https://www.student.chalmers.se/sp/course?course_id=21767
 /
@@ -26,58 +27,12 @@ Google group: http://groups.google.com/group/plt-2016
 /
 [GU course page stub https://gul.gu.se/public/courseId/74352/lang-sv/publicPage.do]
 /
-[Course page 2015 http://www.cse.chalmers.se/edu/year/2015/course/DAT151/]
+[Course page 2016 http://www.cse.chalmers.se/edu/year/2016/course/DAT151/]
 
 
 =News and changes=
-
-: //2017-08-24//
-  Exam review on 12 September 13:30 **in office EDIT 6117**.
-   ([Solution exams/solutions-plt-2017-3.pdf])
-
-: //2017-08-21//
-  Reexam on 24 August 14:00 in M.
-
-: //2017-04-05//
-  Lab resubmission via Fire until 6 April.
-
-  Reexam on 11 April in
-  [SB (Sven Hultins gata 6) https://student.portal.chalmers.se/sv/chalmersstudier/tentamen/Sidor/Hitta-tentasalen.aspx].
-
-  Exam review on 25 April 10am room EDIT 8103
-  (the conference room behind the EDIT lunch room on the top floor).
-
-: //2017-01-13//
-  Exam 1 [solution exams/solutions-plt-2017-1.pdf].
-
-: //2017-01-03//
-  Restored [old exams exams.tgz] for exam preparation.
-
-: //2016-12-16//
-  Collection of [errata https://github.com/andreasabel/plt-errata] for the PLT book.
-
-: //2016-12-01//
-  [lab4 laborations/lab4/lab4.html] has been released.
-
-: //2016-12-01//
-  The lecture had a mistake in the call-by-name evaluation rule for application.
-  The correct rule is in the PLT book on page 132.
-
-% : //2016-11-25//
-%   [lab3 laborations/lab3/lab3.html] has been released.
-%
-% : //2016-11-21//
-%   [lab2 laborations/lab2/lab2.html]: Clarification of comparison operators.
-%   2 new test cases.
-%
-% : //2016-11-11//
-%   Due to popular demand, [lab2 laborations/lab2/lab2.html] has been released.
-%
-% : //2016-10-31//
-%   Please apply to be [teaching assistant http://www.chalmers.se/en/departments/cse/Pages/TeachingAssistants.aspx] for courses in Spring. Deadline: 13th November 2016!
-%
-% : //2016-10-25//
-%   First version of this page - mostly a copy of the 2015 material.  Updates forthcoming soon.
+ : //2017-10-26//
+   First version of this page - mostly a copy of the 2016 material.  Updates forthcoming soon.
 
 
 =Tentative Schedule=
@@ -89,38 +44,48 @@ Slides follow closely the plt book.
 
 
 || Date         | Time           | Title                             | Material                      ||
-| Tue 01/11     | 13-15          | Compilation Phases / BNFC         | [slides http://www.digitalgrammars.com/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
-| Thu 03/11     | 13-15          | Grammars / Hands-on with Lab 1    | [slides http://www.digitalgrammars.com/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
-| Tue 08/11     | 13-15          | Theory of lexing                  | [lab1 PM laborations/lab1/lab1.html]
-| Thu 10/11     | 13-15          | Theory of lexing and parsing      | [slides http://www.digitalgrammars.com/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
-| //Mon 14/11// | //23//         | //Lab 1 deadline//                |  |
-| Tue 15/11     | 13-15          | Interpreting                      | [slides http://www.digitalgrammars.com/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
-| Thu 17/11     | 13-15          | Type checking                     | [slides http://www.digitalgrammars.com/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
-| Tue 22/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/lab2.html]
-| Tue 22/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
-| Thu 24/11     | 13-15          | Code generation                   | [slides http://www.digitalgrammars.com/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
-| //Mon 28/11// | //23//         | //Lab 2 deadline//                |  |
-| Tue 29/11     | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/lab3.html]
-| Tue 29/11     | 14-15          | Hands-on with Lab 3 (Java)        |  |
-| Thu 01/12     | 13-15          | Functional programming languages  | [slides http://www.digitalgrammars.com/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
-%| Tue 06/12     | 13-15          | The language design space         | [slides http://www.digitalgrammars.com/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
-| Tue 06/12     | 13-15          | Type inference and polymorphism   | plt 7.7-9
-| Thu 08/12     | 13-15          | Hands-on with Lab 4               | [lab4 PM laborations/lab4/lab4.html]
-| //Mon 12/12// | //23//         | //Lab 3 deadline//                |  |
-| Tue 13/12     | 13-15          | Dependent types (Agda)            | Agda demo [start ./BidirectionalTypeChecking-stub.agda] [finish ./BidirectionalTypeChecking.agda] |
-| Thu 15/12     | 13-15          | Preparing for the exam            | [Training Exam exams/exam-plt-2016-1.pdf]
-|| 2017 ||||
-| //Mon 09/01// | //23//         | //Lab 4 deadline//                |  |
-| //Wed 11/01// | //8.30-12.30// | //Exam (M)//                      | //[Solution exams/solutions-plt-2017-1.pdf]//
-| //Mon 16/01// | //23//         | //Final lab deadline//            | //all lab returns//
-| //Thu 30/03// |                | //Lab resubmission intent deadline//       |  |
-| //Thu 06/04// |                | //Late final lab deadline//       |  |
-| //Tue 11/04// | //8.30-12.30// | //Exam (SB)//                     | //[Solution exams/solutions-plt-2017-2.pdf]// |
-| //Fri 24/08// | //14-18//      | //Exam (M)//                      | //[Solution exams/solutions-plt-2017-3.pdf]// |
-| //Tue 12/09// | //13.30//      | //Exam review//                   |  |
+| Tue 31/10     | 13-15          | Compilation Phases / BNFC         | [slides http://www.digitalgrammars.com/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
+| Thu 02/11     | 13-15          | Grammars / Hands-on with Lab 1    | [slides http://www.digitalgrammars.com/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
+| Tue 07/11     | 13-15          | Theory of lexing                  |  |
+% [lab1 PM laborations/lab1/lab1.html]
+| Thu 09/11     | 13-15          | Theory of lexing and parsing      | [slides http://www.digitalgrammars.com/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
+| //Mon 13/11// | //23//         | //Lab 1 deadline//                |  |
+| Tue 14/11     | 13-15          | Interpreting                      | [slides http://www.digitalgrammars.com/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
+| Thu 16/11     | 13-15          | Type checking                     | [slides http://www.digitalgrammars.com/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
+| Tue 21/11     | 13-14          | Hands-on with Lab 2 (Haskell)     |  |
+% [lab2 PM laborations/lab2/lab2.html]
+| Tue 21/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
+| Thu 23/11     | 13-15          | Code generation                   | [slides http://www.digitalgrammars.com/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
+| //Mon 27/11// | //23//         | //Lab 2 deadline//                |  |
+| Tue 28/11     | 13-14          | Hands-on with Lab 3 (Haskell)     |  |
+% [lab3 PM laborations/lab3/lab3.html]
+| Tue 28/11     | 14-15          | Hands-on with Lab 3 (Java)        |  |
+| Thu 30/11     | 13-15          | Functional programming languages  | [slides http://www.digitalgrammars.com/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
+%| Tue 05/12     | 13-15          | The language design space         | [slides http://www.digitalgrammars.com/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
+| Tue 05/12     | 13-15          | Type inference and polymorphism   | plt 7.7-9
+| Thu 07/12     | 13-15          | Hands-on with Lab 4               |  |
+% [lab4 PM laborations/lab4/lab4.html]
+| //Mon 11/12// | //23//         | //Lab 3 deadline//                |  |
+| Tue 12/12     | 13-15          | Dependent types (Agda)            |  |
+% Agda demo [start ./BidirectionalTypeChecking-stub.agda] [finish ./BidirectionalTypeChecking.agda] |
+| Thu 14/12     | 13-15          | Preparing for the exam            |  |
+% [Training Exam exams/exam-plt-2017-1.pdf]
+|| 2018 ||||
+| //Mon 08/01// | //8.30-12.30// | //Exam (J)//                      |  |
+% //[Solution exams/solutions-plt-2017-1.pdf]//
+| //Fri 05/01// | //23//         | //Lab 4 deadline//                |  |
+| //Fri 19/01// | //23//         | //Final lab deadline//            | //all lab returns//
+| //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
+| //Thu 22/03// |                | //Late final lab deadline//       |  |
+| //Thu 05/04// | //8.30-12.30// | //Exam (J)//                      |  |
+% //[Solution exams/solutions-plt-2017-2.pdf]// |
+| //Thu 30/08// | //14-18//      | //Exam (J)//                      |  |
+% //[Solution exams/solutions-plt-2017-3.pdf]// |
+%| //Tue 12/09// | //13.30//      | //Exam review//                  |  |
 
-The official course schema is in [Time Edit https://se.timeedit.net/web/chalmers/db1/public/ri10q29Q054Z5ZQ505663750yc065W7362Y63Q0Q7571QZ.html].
+The official course schema is in [Time Edit https://se.timeedit.net/web/chalmers/db1/public/ri177255X90Z56Q5Z36g0Y65yZ036Y31Q07gQY5Q5076q072cQ.html].
 
+% https://se.timeedit.net/web/chalmers/db1/public/ri10q29Q054Z5ZQ505663750yc065W7362Y63Q0Q7571QZ.html].
 
 
 
@@ -159,15 +124,16 @@ passed the course should be able to
 % John Camilleri,
 % Mauricio Chimento,
 % Inari Listenmaa,
-[Daniel Hausknecht https://danielhausknecht.eu],
+% [Daniel Hausknecht https://danielhausknecht.eu],
 [Andreas Lööw http://www.cse.chalmers.se/~loow/],
 [Daniel Schoepe https://schoepe.org/~daniel/],
+[Fabian Ruch https://www.chalmers.se/en/staff/Pages/fabian-ruch.aspx],
 assistants.
 
 
 % The fastest way to get an answer is to mail the course's
 % Google group
-% http://groups.google.com/group/plt-2016.
+% http://groups.google.com/group/plt-2017.
 % **Please provide your full name and date of birth when requesting membership!**
 % Otherwise your request will be bounced back or ignored.
 
@@ -175,12 +141,12 @@ assistants.
 
 If you have any general questions regarding the course, the labs or the exercises,
 please ask them in our
-[Google group http://groups.google.com/group/plt-2016].
+[Google group http://groups.google.com/group/plt-2017].
 This will reach all teachers and fellow students.
 If you are not yet member of the group, you have to
 - get a google account (if you don't have it yet)
-- go to http://groups.google.com/group/plt-2016.
-- request an invitation to the plt-2016 group.
+- go to http://groups.google.com/group/plt-2017.
+- request an invitation to the plt-2017 group.
 
 
 **You will have to give your real name and your person number (or date of birth) when you register,**
@@ -193,13 +159,13 @@ This is necessary to identify you as a participant of the course.
 Lab supervision take place in
 [ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093].
 || Day | Time        | Supervisors |
- | Tue | 15:15-17:00 | AL DH |
- | Thu | 15:15-17:00 | DH DS |
+ | Tue | 15:15-17:00 | AL FR |
+ | Thu | 15:15-17:00 | FR DS |
  | Fri | 13:15-15:00 | DS AL |
 
 
 The lab rooms and supervision
-are available from Tue 1 November till Fri 16 December 2016.
+are available from Tue 31 October till Fri 15 December 2017.
 
 **Attendance in these classes is optional**.
 Normally, each student should attend **at most one** supervised laboration time each week.
@@ -213,18 +179,18 @@ supervision of the week have priority to get a place and supervisor help.
 There will be four laborations, written individually or in
 pairs.
 % - Lab 1 - parser  (deadline 14/11)
-- [Lab 1 - parser laborations/lab1/lab1.html] (deadline 14/11)
+% - [Lab 1 - parser laborations/lab1/lab1.html] (deadline 14/11)
 % - Lab 2 - type checker and interpreter (deadline 28/11)
-- [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 28/11)
+% - [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 28/11)
 % - Lab 3 - code generator (deadline 12/12)
-- [Lab 3 - code generator laborations/lab3/lab3.html] (deadline 12/12)
+% - [Lab 3 - code generator laborations/lab3/lab3.html] (deadline 12/12)
 % - Lab 4 - functional language interpreter  (deadline 09/01 2017)
-- [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 09/01 2017)
+% - [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 09/01 2017)
 
 
-The labs are quite substantial, so please set aside at least 20 full working hours before the deadline.
+The labs are quite substantial, so please set aside at least 30 full working hours before the deadline.
 
-Reporting is done via [Fire https://plt-lp2-16.frs.cse.chalmers.se/].
+Reporting is done via [Fire https://plt-lp2-17.frs.cse.chalmers.se/].
 Before reporting, you must run your program through a test suite.
 % such as the one for [lab 1 laborations/lab1/testsuite/].
 
@@ -237,8 +203,8 @@ the final deadline. If your first submission is after the lab
 deadline, only one grading is guaranteed.
 
 If you did not pass the labs by the end of the course you will have another opportunity in connection with the re-exam in April.
-The deadline will be Thursday, 6 April 2017.
-If you intend to re-submit labs then, please contact the course responsible via email on 30 March at the latest.
+The deadline will be Thursday, 22 March 2017.
+If you intend to re-submit labs then, please contact the course responsible via email on 15 March at the latest.
 If you need help you should also contact the course responsible, not the teaching assistants.
 Note however that you can only expect limited support.
 If you need a substantial amount of help, it is probably better to wait until next time the course is given.
@@ -255,6 +221,8 @@ The main book will be one that developed from earlier editions of this course:
   2012.
   Web page (with extra material and links to selling sites):
   http://www.digitalgrammars.com/ipl-book/
+
+  [Errata https://github.com/andreasabel/plt-errata/]
 
 
 If you are really interested in the topic, for instance, if you want
@@ -277,9 +245,9 @@ The main book will also be sold at Cremona.
 Written exam, usual grading scales.
 
 Exam dates:
- 11 Jan 2017 fm J,
- 11 Apr 2017 fm SB,
- 24 Aug 2017 em J.
+ 08 Jan 2017 fm J,
+ 05 Apr 2017 fm J,
+ 30 Aug 2017 em J.
 
 % Date: 20 March
 % Time: 2:00 afternoon
@@ -297,7 +265,9 @@ to prepare for the exam.
 
 =Software=
 
-BNF Converter 2.8.1, http://bnfc.digitalgrammars.com/
+BNF Converter 2.8.1, http://bnfc.digitalgrammars.com/ |
+[Hackage https://hackage.haskell.org/package/BNFC] |
+[github https://github.com/BNFC/bnfc]
 
 If using the Java backend, you will need the **Cup** and **JLex** libraries.
 You can download pre-compiled versions [here doc/javatools.tgz].
@@ -311,10 +281,10 @@ Make sure they are placed in your classpath, for example by extracting to ``~/ja
 
 Student representatives for DAT151 Programming language technology.
 
-|| Program | @student.chalmers.se | Name             ||
- | MPSOF   | nabah                | Omar Abu NABAH   |
- | TKDAT   | hermanh              | Herman HÖRNSTEIN |
-% | MPCSN   | kemi                 | Robert KEMI      |
- | MPALG   | timonl               | Timon LAPAWCZYK  |
- | MPALG   | erithor              | Erik THORSELL   |
- | MPALG   | yagublu              | Lamiya YAGUBLU   |
+% || Program | @student.chalmers.se | Name             ||
+%  | MPSOF   | nabah                | Omar Abu NABAH   |
+%  | TKDAT   | hermanh              | Herman HÖRNSTEIN |
+% % | MPCSN   | kemi                 | Robert KEMI      |
+%  | MPALG   | timonl               | Timon LAPAWCZYK  |
+%  | MPALG   | erithor              | Erik THORSELL   |
+%  | MPALG   | yagublu              | Lamiya YAGUBLU   |
