@@ -10,6 +10,7 @@ int main () {
 	false && i++ > 0;
 	printInt(i);
 	int j = 0;
+      // Lab 3 only comment:
       // Initialization of j would not be needed as the access of j
       // is in dead code, if compiled correctly.
       // However, the JVM bytecode verifier is picky and will complain.
