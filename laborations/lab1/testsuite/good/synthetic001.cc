@@ -1,1 +1,1 @@
-typedef a::b::c<d>::q foo;
+typedef a::b::c::q foo;

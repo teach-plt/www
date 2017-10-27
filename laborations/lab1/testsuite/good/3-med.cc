@@ -29,7 +29,7 @@ int main()
 	cout << "Enter all your homework grades, "
 	        "followed by end-of-file: ";
 
-	vector<double> homework;
+	vector_double homework;
 	double x;
 	// invariant: `homework' contains all the homework grades read so far
 	while (cin >> x)
@@ -37,9 +37,9 @@ int main()
 
 	// check that the student entered some homework grades
 #ifdef _MSC_VER
-	typedef std::vector<double>::size_type vec_sz;
+	typedef std::vector_double::size_type vec_sz;
 #else
-	typedef vector<double>::size_type vec_sz;
+	typedef vector_double::size_type vec_sz;
 #endif
 	vec_sz size = homework.size();
 	if (size == 0) {
@@ -65,4 +65,3 @@ int main()
 
 	return 0;
 }
-

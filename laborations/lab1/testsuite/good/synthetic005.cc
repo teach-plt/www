@@ -1,4 +1,4 @@
-/* We don't do structs anymore.
+/* We don't do structs anymore.  Nor template instantiations.
 But this tests for non-nesting block comments.
 /*
 struct s1 {};

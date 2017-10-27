@@ -9,7 +9,7 @@ Programming Language Technology, 2016
 
 % Changes from 2015: removed structure definitions and 'inline'.
 
-Submit your solution via [Fire https://plt-lp2-16.frs.cse.chalmers.se/].
+Submit your solution via [Fire https://plt-lp2-17.frs.cse.chalmers.se/].
 
 
 =Summary=
@@ -255,29 +255,34 @@ Note that increment, decrement, and assignment are //syntactically// permitted
 on any expression, not just on variables (and other so-called //l-values//).
 
 
-==Qualified constants and template instantiations==
+==Qualified constants==
 
-**Qualified constants** are constant names separated by ``::`` such as ``std::cout``.
-Names can be identifiers (**1**) but also **template instantiations** (**3**), of the form
+**Qualified constants** (**1**) are identifiers separated by ``::`` such as ``std::cout``.
+Qualified constants can simply implemented as nonempty lists separated by ``::``.
+The elements of the list are identifiers.
+Single identifier expressions come out as a special case of these lists.
+
+
+Note: in C++, identifiers in qualified constants can be followed by
+template instantiations of the form
 ```
   ident < typelist >
 ```
-where a typelist is a comma-separated list of types. Thus possible
-qualified constants include
+where a typelist is a comma-separated list of types. Thus, possible
+qualified constants in C++ include
 ```
-  std::cout
-  std::vector<int>::const_iterator
+  std::vector<t>::const_iterator
+  std::map<int,vector<string>>
 ```
-One simple way to implement qualified constants is as
-nonempty lists separated by ``::``. The elements of the list
-are identifiers and template instantiations. Single identifier
-expressions come out as a special case of these lists.
-
+However, it is not trivial to integrate this into our LR grammar,
+because the parser can confuse the initial part `std::vector<t` with the expression
+`e1<e2` where `e1` and `e2` are the (qualified) constants `std::vector` and `t`.
+Therefore, we leave template instantiations out of this assignment.
 
 
 ==Types==
 
-+ Built-in types: ``int`` (**1**), ``bool``, ``char``, ``double``, ``void``.
++ Built-in types: ``int`` (**1**), ``bool``, ``char``, ``double``, ``void``.x
 
 + Qualified constants, including plain identifiers (**1**), e.g. ``string``.
 
@@ -345,8 +350,7 @@ specification in this document in all respects. The test suite contains the
 example programs, as well as a number of programs which your parser must reject.
 
 The maximum number of 10 **shift/reduce conflicts** is permitted.
-The minimum of 2 is almost unavoidable (the "dangling ``else``",
-and template instantiation vs. less-than operator).
+The minimum of 1 is almost unavoidable (because of the "dangling ``else``").
 But reduce/reduce conflicts are forbidden.
 
 The solution must be written in an easily readable and maintainable way. In
@@ -354,7 +358,7 @@ particular, tailoring it for the programs in the test suite is not maintainable!
 
 = Submission =
 
-Submit your lab using [Fire https://plt-lp2-16.frs.cse.chalmers.se/].
+Submit your lab using [Fire https://plt-lp2-17.frs.cse.chalmers.se/].
 Do not submit your solution before it passes the test suite - it will
 be returned automatically.
 
@@ -385,11 +389,9 @@ Example from [the second program testsuite/good/2-greet.cc]:
   std::cout << "Hello, " << name  << "!" << std::endl;
 ```
 
-Templates, e.g. generic types: ``vector<int>`` is a vector of integers.
-
 Arguments passed by reference (``&``),
 with the possibility of forbidding modification (``const``), e.g.
 (from [the sixth program testsuite/good/6-grammar.cc])
 ```
-  gen_aux(const Grammar& g, const string& word, vector<string>& ret)
+  gen_aux(const Grammar& g, const string& word, vector_string& ret)
 ```

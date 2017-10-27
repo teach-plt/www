@@ -1,3 +1,3 @@
 int main () {
-	int foo = x<int>::i;
+	int foo = x::i;
 }

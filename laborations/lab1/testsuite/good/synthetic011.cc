@@ -4,5 +4,5 @@ int main() {
 	"foo";
 	"foo" "Bar";
 	"foo " "bar" "bazz";
-	a::b::c<int>::qx;	
+	a::b::cx::qx;
 }
