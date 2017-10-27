@@ -275,14 +275,14 @@ qualified constants in C++ include
   std::map<int,vector<string>>
 ```
 However, it is not trivial to integrate this into our LR grammar,
-because the parser can confuse the initial part `std::vector<t` with the expression
-`e1<e2` where `e1` and `e2` are the (qualified) constants `std::vector` and `t`.
+because the parser can confuse the initial part ``std::vector<t`` with the expression
+``e1<e2`` where ``e1`` and ``e2`` are the (qualified) constants ``std::vector`` and ``t``.
 Therefore, we leave template instantiations out of this assignment.
 
 
 ==Types==
 
-+ Built-in types: ``int`` (**1**), ``bool``, ``char``, ``double``, ``void``.x
++ Built-in types: ``int`` (**1**), ``bool``, ``char``, ``double``, ``void``.
 
 + Qualified constants, including plain identifiers (**1**), e.g. ``string``.
 
@@ -323,8 +323,9 @@ Block comments cannot be nested.
 
 =Test programs=
 
-These programs are original code from the web page of the book
+These programs are taken from the web page of the book
 //Accelerated C++// (A. Koenig & B. Moo, Addison-Wesley, 2000).
+To comply to our grammar, we have removed template instantiations.
 
 + [First testsuite/good/1-hello.cc]: Print "Hello, world!".
 
