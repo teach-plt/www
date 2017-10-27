@@ -311,6 +311,7 @@ Increments and decrements only apply to ``int`` and ``double`` variables.
 
 The arithmetical and comparison operations apply to two operands of the same type,
 which is ``int`` or ``double``.
+This means there are no implicit coercions from ``int`` to ``double``.
 
 Equality and inequality apply to two operands of the same type,
 which is ``int``, ``double``, or ``bool``.
