@@ -7,5 +7,3 @@ int main() {
   printInt(j);
   return j;
 }
-
-//void printInt(int x) { }

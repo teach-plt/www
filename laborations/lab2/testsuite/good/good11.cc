@@ -1,6 +1,6 @@
 //read numbers until 0 is read, and print their average
 
-int main () 
+int main ()
 {
   int sum = 0 ;
   int num = 0 ;

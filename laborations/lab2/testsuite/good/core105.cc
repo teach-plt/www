@@ -5,6 +5,3 @@ int main() {
 
   return x;
 }
-
-//void printInt(int x) { }
-

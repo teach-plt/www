@@ -6,12 +6,13 @@ int main() {
   printBool(true);
   printBool(false);
   return 0 ;
-
 }
 
 void printBool(bool b) {
   if (b) {
+    printInt(1);
   } else {
+    printInt(0);
  }
 }
 

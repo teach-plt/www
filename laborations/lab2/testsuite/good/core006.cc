@@ -7,8 +7,4 @@ int main () {
   printInt(x);
   printInt(y);
   return 0 ;
-
 }
-
-//void printInt(int x) { }
-//void printDouble(double x) { }

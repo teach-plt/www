@@ -9,7 +9,7 @@ int main () {
   }
 
   printBool(eq_bool(true,true) || dontCallMe(1));
-  printBool(4.0 > 50.0 && dontCallMe(2));
+  printBool(4 > 50 && dontCallMe(2));
 
   printBool(4 == x && eq_bool(true, false) && true);
 
@@ -52,6 +52,3 @@ bool eq_bool(bool x, bool y) {
 		r = not(y);
 	return r ;	
 }
-
-//void printInt(int x) { }
-//void printDouble(double x) { }

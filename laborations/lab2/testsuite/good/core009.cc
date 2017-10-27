@@ -4,12 +4,8 @@ int main() {
  int x = foo();
  printInt(x);
  return 0 ;
-
 }
 
 int foo() {
  return 10;
 }
-
-//void printInt(int x) { }
-//void printDouble(double x) { }

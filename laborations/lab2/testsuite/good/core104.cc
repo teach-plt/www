@@ -10,6 +10,3 @@ int main() {
 
   return x;
 }
-
-//void printInt(int x) { }
-//void printDouble(double x) { }

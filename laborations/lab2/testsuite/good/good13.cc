@@ -15,8 +15,8 @@ int main () {
 		if (iPrime && (n / i) * i == n) {
 			printInt(i);
 			n = n / i;
-		} else { 
-			i++; 
+		} else {
+			i++;
 		}
 	}
 

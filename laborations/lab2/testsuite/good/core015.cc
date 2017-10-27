@@ -16,6 +16,3 @@ int ev (int y) {
       e = 1 ;
   return e ;
 }
-
-//void printInt(int x) { }
-//void printDouble(double x) { }

@@ -8,8 +8,4 @@ int main () {
   }
   printInt(x);
   return 0 ;
-
 }
-
-//void printInt(int x) { }
-//void printDouble(double x) { }

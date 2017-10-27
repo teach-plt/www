@@ -14,5 +14,3 @@ int f(int x) {
   }
   return y ;
 }
-
-//void printInt(int x) { }
