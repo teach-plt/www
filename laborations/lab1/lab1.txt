@@ -216,43 +216,69 @@ brackets.
 
 ==Expressions==
 
-%**(Associativities differ slightly from 2014 assignment!)**
+**(Associativities differ slightly from 2016 assignment!)**
 
 The following table gives the expressions,
 their precedence levels, and their associativity.
-The associativity of operators is given as left, right, or none.
-For binary operators, in general any of the three associativity is meaningful.
-For pre-, post-, and mixfix operators, at most one of
-left or right associativity makes sense, and the alternative is non-associative.
-As they are bracketed, the argument in an array index and
-the arguments in a function call can be expressions of any level.
+The associativity of operators is given as "left" or "right".
+(C++ operators do not use "non"-associativity.)
+For binary operators, in general any of these associativities is meaningful.
+Prefix operators cannot be left associative,
+and postfix operators not right associative.
+The argument in an array index,
+the arguments in a function call,
+and the middle expression in the conditional
+can be expressions of any level,
+since they are bracketed.
 Otherwise, some subexpressions have to be one precedence level above of
 the main expression to implement the required the associativity.
 
-**Note**. The table is not exactly the same as in the C++ standard.
+%**Note**. The table is not exactly the same as in the C++ standard.
 
 
 || level | expression forms                     | assoc   | explanation | test ||
 |  16    | literal                              | ---     | atomic expressions |  (**1**)  |
-|  16    | ``i``, ``c::i``, ``c::c::i``, ...    | ---     | qualified constants |  (**1**)  |
+|  16    | ``x``, ``x::x``, ``x::x::x``, ...    | ---     | qualified constants |  (**1**)  |
 |  15    | ``e[e]``                             | left    | indexing |  (**3**)  |
-|  15    | ``e(e,...,e)``                       | none    | function call |  (**3**)  |
+|  15    | ``e(e,...,e)``                       | left    | function call |  (**3**)  |
 |  14    | ``e.e``, ``e->e``                    | left    | structure projection |  (**3**)  |
 |  14    | ``e++``, ``e--``                     | left    | in/decrement |  |
 |  13    | ``++e``, ``--e``, ``*e``, ``!e``     | right   | in/decrement, dereference, negation |  (**6**)  |
 |  12    | ``e*e``, ``e/e``, ``e%e``            | left    | multiplication, division, remainder |  (**3**)  |
 |  11    | ``e+e``, ``e-e``                     | left    | addition, subtraction |  (**3**)  |
 |  10    | ``e<<e``, ``e>>e``                   | left    | left and right shift |  (**1**)  |
-|   9    | ``e<e``, ``e>e``, ``e>=e``, ``e<=e`` | none    | comparison |  (**6**)  |
-|   8    | ``e==e``, ``e!=e``                   | none    | (in)equality |  (**3**)  |
+|   9    | ``e<e``, ``e>e``, ``e>=e``, ``e<=e`` | left    | comparison |  (**6**)  |
+|   8    | ``e==e``, ``e!=e``                   | left    | (in)equality |  (**3**)  |
 |   4    | ``e&&e``                             | left    | conjunction |  (**6**)  |
 |   3    | ``e||e``                             | left    | disjunction |  (**6**)  |
 |   2    | ``e=e``, ``e+=e``, ``e-=e``          | right   | assignment |  (**3**)  |
 |   2    | ``e ? e : e``                        | right   | conditional |  (**3**)  |
 |   1    | ``throw e``                          | right   | exception |  (**4**)  |
 
-Note that increment, decrement, and assignment are //syntactically// permitted
+Note that this grammar includes expressions that are meaningless.
+For instance, increment, decrement, and assignment are permitted
 on any expression, not just on variables (and other so-called //l-values//).
+(Meaningless expressions can be ruled out in later compilation phases,
+e.g., in the type-checking phase.)
+
+//Indexing// ``_[e]`` is treated as a postfix operator;
+the expression ``e`` is bracketed and can be of any level.
+Indexing is associative, i.e., ``e1[e2][e3]`` is allowed and means
+``(e1[e2])[e3]``.  It is necessarily //left// associative, since
+the other bracketing, ``e1([e2][e3])`` would be meaningless.
+//Function call// is similar to indexing.
+
+The //conditional// ``_ ? e : _`` is treated as a binary operator
+with a fixed "then"-expression ``e``.
+Right associativity for the conditional has the usual meaning:
+``c1 ? t1 : c2 ? t2 : e2`` is parsed as
+``c1 ? t1 : (c2 ? t2 : e2)`` and not as
+``(c1 ? t1 : c2) ? t2 : e2``.
+Note also that ``?`` and ``:`` act like left and right parenthesis, thus,
+parsing
+``c1 ? c2 ? t1 : e1 : e2`` succeeds effortlessly, yielding
+``c1 ? (c2 ? t1 : e1) : e2``.
+
 
 
 ==Qualified constants==
