@@ -39,7 +39,7 @@ The type checker and the interpreter code will be roughly
 300-800 lines together, depending on the programming language used.
 
 All BNFC supported languages can be used, but guidance is guaranteed
-only for Haskell and Java 1.5.
+only for Haskell and Java.
 
 The type system and the interpreter are partially characterized by
 formal rules in in the course lecture notes, chapters 4 and 5.
@@ -574,7 +574,7 @@ solution.  Just download one of the following tar archives, unpack,
 write the code, test, pack the archive again, and submit to fire.
 
 - [Haskell package lab2-stub-haskell.tar.gz]
-- [Java 1.5 package lab2-stub-java1.5.tar.gz]
+- [Java package lab2-stub-java.tar.gz]
 
 
 These packages contain the grammar, stubs for type checker and

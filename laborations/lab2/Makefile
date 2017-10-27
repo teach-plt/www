@@ -5,19 +5,19 @@ deps=../../style.css ../../include.html ../../enhance_page.js
 
 .PHONY : all www testsuite
 
-all : www testsuite lab2-stub-java1.5.tar.gz lab2-stub-haskell.tar.gz
+all : www testsuite lab2-stub-java.tar.gz lab2-stub-haskell.tar.gz
 
 testsuite :
 	make -C testsuite
 
-lab2-stub-java1.5.tar.gz : \
-  java1.5/CPP.cf \
-  java1.5/Makefile \
-  java1.5/lab2 \
-  java1.5/lab2.java \
-  java1.5/Interpreter.java \
-  java1.5/TypeChecker.java \
-  java1.5/TypeException.java
+lab2-stub-java.tar.gz : \
+  java/CPP.cf \
+  java/Makefile \
+  java/lab2 \
+  java/lab2.java \
+  java/Interpreter.java \
+  java/TypeChecker.java \
+  java/TypeException.java
 	tar czhf $@ $^
 
 lab2-stub-haskell.tar.gz : \
