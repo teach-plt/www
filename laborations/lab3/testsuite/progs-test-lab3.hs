@@ -54,6 +54,7 @@ processOpts :: [String] -> IO ()
 processOpts = mapM_ $ \ arg -> case arg of
   "-debug"  -> writeIORef doDebug True
   "--debug" -> writeIORef doDebug True
+  "--doubles" -> writeIORef includeDoubleTests True
   _ -> usage
 
 usage :: IO a
@@ -63,7 +64,8 @@ usage = do
 
 mainOpts :: [FilePath] -> IO ()
 mainOpts (progdir : testdirs) = do
-  putStrLn $ "This is the (reduced) test program for Programming Languages Lab 3"
+  putStrLn $ "This is the test program for Programming Languages Lab 3"
+  putStrLn $ "Make sure to include the --doubles flag if you also want to test programs including doubles."
   runCommandNoFail_ "rm -f */*.j */*.class" ""
   runMake progdir
   good <- runTests progdir testdirs
@@ -75,6 +77,9 @@ mainOpts (progdir : testdirs) = do
 -- * Test driver
 --
 
+-- | Whether to run tests involving doubles
+includeDoubleTests :: IORef Bool
+includeDoubleTests = unsafePerformIO $ newIORef False
 -- | Executable name
 executable_name = "lab3"
 
@@ -104,25 +109,34 @@ testBackendProg prog f = do
 
   -- Running prog on f should generate file f.class
   putStrLn $ "Running " ++ f ++ "..."
-  _ <- runCommandStrWait (prog ++ " " ++ f) ""
-
-  -- Run code
-  let c = "java -noverify -cp .:" ++ takeDirectory f ++ " " ++ takeBaseName f
-  (out,err,s) <- runCommandStrWait c input
-  debug $ "Exit code: " ++ show s
-  if out == output then return True else do
-    reportError c "invalid output" f input out err
-    putStrLn "Received output:"
-    putStrLn out
-    putStrLn "Expected output:"
-    putStrLn $ color blue $ output
+  let compilerCommand = prog ++ " " ++ f
+  (compilerOut, compilerErr, progRet) <- runCommandStrWait compilerCommand ""
+  if isExitFailure progRet then do
+    reportError compilerCommand "non-zero exit code" f input compilerOut compilerErr
     return False
+  else do
+  -- Run code
+    let javaCommand = "java -noverify -cp .:" ++ takeDirectory f ++ " " ++ takeBaseName f
+    (javaOut, javaErr, javaRet) <- runCommandStrWait javaCommand input
+    if isExitFailure javaRet then do
+      reportError javaCommand "non-zero exit code" f input javaOut javaErr
+      return False
+    else do
+      if javaOut == output then
+        return True
+      else do
+        reportError javaCommand "invalid output" f input javaOut javaErr
+        putStrLn "Expected output:"
+        putStrLn $ color blue $ output
+        return False
 
 -- | Return all files with extension ".cc" in given directory.
 listCCFiles :: FilePath -> IO [FilePath]
-listCCFiles dir =
-  liftM (map (\f -> joinPath [dir,f]) . sort . filter ((=="cc") . getExt)) $
+listCCFiles dir = do
+  doubles <- readIORef includeDoubleTests
+  liftM (map (\f -> joinPath [dir,f]) . sort . filter (doublesFilter doubles) . filter ((=="cc") . getExt)) $
     getDirectoryContents dir
+  where doublesFilter doubles filename = doubles || not (isPrefixOf "double--" filename)
 
 --
 -- * Debugging
@@ -188,6 +202,9 @@ blue  = 6
 -- * Various versions of runCommand
 --
 
+isExitFailure :: ExitCode -> Bool
+isExitFailure ExitSuccess = False
+isExitFailure ExitFailure{} = True
 runCommandStr
   :: String                           -- ^ command
   -> String                           -- ^ stdin data

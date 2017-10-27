@@ -317,12 +317,10 @@ The compiler is submitted as source files that can be compiled by typing ``make`
 
 =Test programs=
 
-We also provide a [test suite ./testsuite/] for lab 3.
-This test suite only contains test files which deal with integers;
-passing all these tests is the **minimum required** for passing this lab.
+We also provide a [test suite ./testsuite/] for lab 3 (with the same test cases as for lab 2).
+By default, no tests containing doubles will be run; passing all these tests is the **minimum required** for passing this lab.
 
-If you are ambitious, you can also try all the source files in the [lab2 test suite ../lab2/testsuite/good].
-For this you will also need to handle doubles in your compiler.
+If you are ambitious, run the test suite with the ``--doubles`` flag to also include the doubles tests.
 
 **Run your compiler and the generated code with the test suite before submitting the assignment.**
 
