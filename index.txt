@@ -46,8 +46,7 @@ Slides follow closely the plt book.
 || Date         | Time           | Title                             | Material                      ||
 | Tue 31/10     | 13-15          | Compilation Phases / BNFC         | [slides http://www.digitalgrammars.com/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
 | Thu 02/11     | 13-15          | Grammars / Hands-on with Lab 1    | [slides http://www.digitalgrammars.com/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
-| Tue 07/11     | 13-15          | Theory of lexing                  |  |
-% [lab1 PM laborations/lab1/lab1.html]
+| Tue 07/11     | 13-15          | Theory of lexing                  | [lab1 PM laborations/lab1/lab1.html]
 | Thu 09/11     | 13-15          | Theory of lexing and parsing      | [slides http://www.digitalgrammars.com/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
 | //Mon 13/11// | //23//         | //Lab 1 deadline//                |  |
 | Tue 14/11     | 13-15          | Interpreting                      | [slides http://www.digitalgrammars.com/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
@@ -71,9 +70,9 @@ Slides follow closely the plt book.
 | Thu 14/12     | 13-15          | Preparing for the exam            |  |
 % [Training Exam exams/exam-plt-2017-1.pdf]
 || 2018 ||||
+| //Fri 05/01// | //23//         | //Lab 4 deadline//                |  |
 | //Mon 08/01// | //8.30-12.30// | //Exam (J)//                      |  |
 % //[Solution exams/solutions-plt-2017-1.pdf]//
-| //Fri 05/01// | //23//         | //Lab 4 deadline//                |  |
 | //Fri 19/01// | //23//         | //Final lab deadline//            | //all lab returns//
 | //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
 | //Thu 22/03// |                | //Late final lab deadline//       |  |
@@ -159,9 +158,9 @@ This is necessary to identify you as a participant of the course.
 Lab supervision take place in
 [ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093].
 || Day | Time        | Supervisors |
- | Tue | 15:15-17:00 | AL FR |
+ | Tue | 15:15-17:00 | AL DS |
  | Thu | 15:15-17:00 | FR DS |
- | Fri | 13:15-15:00 | DS AL |
+ | Fri | 13:15-15:00 | FR AL |
 
 
 The lab rooms and supervision
@@ -179,13 +178,13 @@ supervision of the week have priority to get a place and supervisor help.
 There will be four laborations, written individually or in
 pairs.
 % - Lab 1 - parser  (deadline 14/11)
-% - [Lab 1 - parser laborations/lab1/lab1.html] (deadline 14/11)
-% - Lab 2 - type checker and interpreter (deadline 28/11)
-% - [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 28/11)
-% - Lab 3 - code generator (deadline 12/12)
-% - [Lab 3 - code generator laborations/lab3/lab3.html] (deadline 12/12)
-% - Lab 4 - functional language interpreter  (deadline 09/01 2017)
-% - [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 09/01 2017)
+- [Lab 1 - parser laborations/lab1/lab1.html] (deadline 13/11)
+- Lab 2 - type checker and interpreter (deadline 27/11)
+% - [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 27/11)
+- Lab 3 - code generator (deadline 11/12)
+% - [Lab 3 - code generator laborations/lab3/lab3.html] (deadline 11/12)
+- Lab 4 - functional language interpreter  (deadline 05/01 2018)
+% - [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 05/01 2018)
 
 
 The labs are quite substantial, so please set aside at least 30 full working hours before the deadline.
@@ -203,7 +202,7 @@ the final deadline. If your first submission is after the lab
 deadline, only one grading is guaranteed.
 
 If you did not pass the labs by the end of the course you will have another opportunity in connection with the re-exam in April.
-The deadline will be Thursday, 22 March 2017.
+The deadline will be Thursday, 22 March 2018.
 If you intend to re-submit labs then, please contact the course responsible via email on 15 March at the latest.
 If you need help you should also contact the course responsible, not the teaching assistants.
 Note however that you can only expect limited support.
@@ -245,9 +244,9 @@ The main book will also be sold at Cremona.
 Written exam, usual grading scales.
 
 Exam dates:
- 08 Jan 2017 fm J,
- 05 Apr 2017 fm J,
- 30 Aug 2017 em J.
+ 08 Jan 2018 fm J,
+ 05 Apr 2018 fm J,
+ 30 Aug 2018 em J.
 
 % Date: 20 March
 % Time: 2:00 afternoon
