@@ -34,6 +34,7 @@ Google group: http://groups.google.com/group/plt-2017
 
  : //2017-10-31//
    [Lab 1 laborations/lab1/lab1.html] is online.
+   Result of [live coding live-2017-10-31.zip] in lecture (has errors!).
 
  : //2017-10-26//
    First version of this page - mostly a copy of the 2016 material.  Updates forthcoming soon.
@@ -48,8 +49,8 @@ Slides follow closely the plt book.
 
 
 || Date         | Time           | Title                             | Material                      ||
-| Tue 31/10     | 13-15          | Compilation Phases / BNFC         | [slides http://www.digitalgrammars.com/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
-| Thu 02/11     | 13-15          | Grammars / Hands-on with Lab 1    | [slides http://www.digitalgrammars.com/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
+| Tue 31/10     | 13-15          | PL Design, Compilation Phases, calculator | [slides http://www.digitalgrammars.com/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1, [live coding live-2017-10-31.zip]
+| Thu 02/11     | 13-15          | Grammars / BNFC / Hands-on with Lab 1    | [slides http://www.digitalgrammars.com/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
 | Tue 07/11     | 13-15          | Theory of lexing                  | [lab1 PM laborations/lab1/lab1.html]
 | Thu 09/11     | 13-15          | Theory of lexing and parsing      | [slides http://www.digitalgrammars.com/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
 | //Mon 13/11// | //23//         | //Lab 1 deadline//                |  |
