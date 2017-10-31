@@ -1,5 +1,5 @@
 Lab 2: Type checker and interpreter for C/C++
-Programming Language Technology, 2016
+Programming Language Technology, 2017
 
 %!target:html
 %!encoding: utf-8
