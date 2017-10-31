@@ -31,6 +31,10 @@ Google group: http://groups.google.com/group/plt-2017
 
 
 =News and changes=
+
+ : //2017-10-31//
+   [Lab 1 laborations/lab1/lab1.html] is online.
+
  : //2017-10-26//
    First version of this page - mostly a copy of the 2016 material.  Updates forthcoming soon.
 

@@ -1,5 +1,5 @@
 Lab 1: Parser for a fragment of C++
-Programming Language Technology, 2016
+Programming Language Technology, 2017
 
 %!target:html
 
@@ -128,7 +128,7 @@ which are just ignored by the parser (see below). (**1**)
 - An **argument list** is a comma-separated list of argument declarations.
 It is enclosed in parentheses: ``(`` and ``)``. (**1**)
 
-- An argument **declaration** always has a type. This type is optionally
+- An **argument declaration** always has a type. This type is optionally
 followed by an identifier or an identifier and an initialization,
 and optionally preceded by the specifier ``const``.  (**4**)
 The following
@@ -157,9 +157,16 @@ of a semicolon (**6**).  Example:
 
 + Any **expression** followed by a semicolon ``;`` can be used as a statement. (**1**)
 
-+ Any **declaration** followed by a semicolon ``;`` can be used as a statement. (**2**)
-Declarations have the same form as argument declarations in functions,
-except that they can have more than one variable.
++ **Variable declarations** followed by a semicolon. (**2**)
+Variable declarations are similar to argument declarations in functions,
+except that they need at least one variable, and can have more than one variable.
+Examples:
+```
+  int x;
+  int x = 5, y, z = 3;
+  const int x, y = 0;
+  const int& x, y;
+```
 
 + Statements **return**ing an expression (**1**), for example
 ```
@@ -315,6 +322,11 @@ Therefore, we leave template instantiations out of this assignment.
 + Type references. (**4**)
 The reference operator ``&`` is a
 postfix-operator forming types from types, e.g. ``int &``.
+
+Note that from C++ 11, double references like ``int &&`` are also allowed.
+It is sufficient to support them with spaces between the ``&``s, e.g. ``int & &``.
+Otherwise, ``x && y;`` is ambiguous: it could be the declaration ``x & & y;``
+or a conjunction expression as statement.
 
 
 ==Literals==
