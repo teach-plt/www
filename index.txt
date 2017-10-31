@@ -280,10 +280,9 @@ Make sure they are placed in your classpath, for example by extracting to ``~/ja
 
 Student representatives for DAT151 Programming language technology.
 
-% || Program | @student.chalmers.se | Name             ||
-%  | MPSOF   | nabah                | Omar Abu NABAH   |
-%  | TKDAT   | hermanh              | Herman HÖRNSTEIN |
-% % | MPCSN   | kemi                 | Robert KEMI      |
-%  | MPALG   | timonl               | Timon LAPAWCZYK  |
-%  | MPALG   | erithor              | Erik THORSELL   |
-%  | MPALG   | yagublu              | Lamiya YAGUBLU   |
+|| Program | @student.chalmers.se | Name             ||
+| MPALG    | rahela               | Rahel Ahmed
+| MPALG    | rezaal               | Reza Alikhani Najafabadi
+| MPALG    | shruthi              | Shruthi Dinakaran
+| MPALG    | laro                 | Lars Olsson
+| MPCSN    | subasha              | Akilandeshwari Subash
