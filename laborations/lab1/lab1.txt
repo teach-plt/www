@@ -36,7 +36,7 @@ by the lab groups.
 
 Build the grammar gradually, so that you can parse
 the six test files in the given order: as your first
-goal, parse [the first test file testsuite/good/1-hello.cc].
+goal, parse [the first test file testsuite/good/1-hello.cc];
 then the second, and so on.
 
 When you have passed one level, just try to parse
