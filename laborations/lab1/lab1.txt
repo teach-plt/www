@@ -375,7 +375,7 @@ To comply to our grammar, we have removed template instantiations.
 
 + [Fifth testsuite/good/5-palin.cc]: Test if a string is a palindrome.
 
-+ [Sixth testsuite/good/6-grammar.cc]: Random-generate English sentences.
++ [Sixth testsuite/good/6-grammar.cc]: Randomly generate English sentences.
 
 
 Once again: build the grammar gradually so that you can parse
