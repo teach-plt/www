@@ -280,6 +280,15 @@ Make sure they are placed in your classpath, for example by extracting to ``~/ja
 ```
   export CLASSPATH=.:~/javatools/:~/javatools/Cup/:${CLASSPATH}
 ```
+On Debian-style Linux (like Ubuntu), the following now also works to install these libaries:
+```
+  sudo apt install jlex cup
+```
+Then the class path needs to be set as follows (bash):
+```
+  export CLASSPATH=.:/usr/share/java/JLex.jar:/usr/share/java/cup.jar
+
+```
 
 =Student representatives=
 
