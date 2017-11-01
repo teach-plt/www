@@ -70,7 +70,7 @@ And then run ``make`` again.
 Running this parser shows a trace of the LR actions performed during parsing.
 
 You can also get some debugging output when using the Java backend by calling CUPS with the ``-dump_states`` flag.
-Edit your ``Makefile`` like this:
+Edit your Makefile like this:
 ```
 CUPFLAGS = -nopositions -expect 100 -dump_states
 ```
