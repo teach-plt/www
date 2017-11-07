@@ -213,7 +213,7 @@ curly brackets. (**3**)  For instance,
 
 + **Type definitions**: a type and a name for it. (**3**)  Example:
 ```
-  typedef vector<string> Text ;
+  typedef vector_string Text ;
 ```
 
 
