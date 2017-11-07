@@ -598,14 +598,14 @@ The output at failure is an interpreter error, or a
 ``TYPE ERROR`` or a
 ``SYNTAX ERROR``,
 depending on the phase at which the error occurs.
-These error messages should also give some useful explanation, but we don't
-specify what exactly its format.
+These error messages should also give some useful explanation,
+which we leave to your imagination.
 
 The input can be read not only from user typing on the
 terminal, but also from standard input redirected from
 a file or by ``echo``. For instance,
 ```
-  ./lab2 fibonacci.cc <test-input
+  ./lab2 fibonacci.cc < test-input
   echo 20 | ./lab2 fibonacci.cc
 ```
 
