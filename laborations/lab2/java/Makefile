@@ -17,7 +17,7 @@ lab2:
 	chmod a+x lab2
 
 bnfc:
-	bnfc -java1.5 CPP.cf
+	bnfc -java CPP.cf
 	${JAVA} ${JAVA_FLAGS} JLex.Main CPP/Yylex
 	${JAVA} ${JAVA_FLAGS} java_cup.Main -nopositions -expect 100 $(CUPFILE)
 	mv sym.java parser.java CPP
