@@ -1,5 +1,5 @@
 Lab 3: Code Generator for C/C++
-Programming Language Technology, 2017
+[Programming Language Technology ../../index.html], 2017
 
 %!target:html
 %!postproc(html): #NEW <!-- NEW -->
