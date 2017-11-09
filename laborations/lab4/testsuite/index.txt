@@ -9,7 +9,7 @@ Programming Language Technology, 2017
 
 = Introduction =
 
-Before you submit lab 4, your solution must pass the
+Before you submit [lab 4 ../lab4.html], your solution must pass the
 testsuite. This document describes how to obtain and use
 this testsuite.
 
