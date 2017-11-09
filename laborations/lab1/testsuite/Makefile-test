@@ -1,6 +1,8 @@
 .PHONY : all
 
+HC_OPTS =
+
 all : progs-test-lab1
 
 progs-test-lab1 : progs-test-lab1.hs
-	ghc --make -o progs-test-lab1 progs-test-lab1.hs
+	ghc --make $(HC_OPTS) $< -o $@
