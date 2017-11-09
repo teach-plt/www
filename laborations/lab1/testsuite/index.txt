@@ -12,7 +12,7 @@ Programming Language Technology, 2017
 Before you submit lab 1, your solution must pass the
 testsuite. This document describes how to obtain and use
 this testsuite.
-g
+
 = Preparations =
 
 You will only need to do this part once.
