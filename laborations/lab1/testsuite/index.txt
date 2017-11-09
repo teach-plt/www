@@ -52,8 +52,8 @@ $ cd lab1-testsuite
 $ ./progs-test-lab1 path/to/your/file.cf
 ```
 
-(where ``path/to/your/file.cf``) is the location of your
-grammar file.
+(where ``path/to/your/file.cf`` is the location of your
+grammar file).
 
 
 **NOTE:** The start category (entry point) of your grammar
