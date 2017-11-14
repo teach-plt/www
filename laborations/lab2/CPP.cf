@@ -60,7 +60,7 @@ EAnd.    Exp4   ::= Exp4  "&&" Exp5  ;  -- Left assoc.
 
 EOr.     Exp3   ::= Exp3  "||" Exp4  ;  -- Left assoc.
 
-EAss.    Exp2   ::= Exp3  "="  Exp2  ;  -- Right assoc.
+EAss.    Exp2   ::= Id    "="  Exp2  ;  -- Right assoc.  Restricted to Id.
 
 -- Removed 0-1: throw, conditional
 
