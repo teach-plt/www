@@ -1,3 +1,5 @@
+-- Programs are lists of function definitions
+
 PDefs.   Program ::= [Def] ;
 
 DFun.    Def    ::= Type Id "(" [Arg] ")" "{" [Stm] "}" ;
@@ -7,6 +9,8 @@ terminator Def "" ;
 ADecl.   Arg    ::= Type Id ;
 
 separator Arg "," ;
+
+-- Statements
 
 SExp.    Stm    ::= Exp ";" ;
 SDecls.  Stm    ::= Type [Id] ";" ;
@@ -18,37 +22,53 @@ SIfElse. Stm    ::= "if" "(" Exp ")" Stm "else" Stm ;
 
 terminator Stm "" ;
 
+-- Expressions
+
 ETrue.   Exp15  ::= "true" ;
 EFalse.  Exp15  ::= "false" ;
 EInt.    Exp15  ::= Integer ;
 EDouble. Exp15  ::= Double ;
 EId.     Exp15  ::= Id ;
 
-EApp.    Exp15  ::= Id "(" [Exp] ")" ;
+EApp.    Exp14  ::= Id "(" [Exp] ")" ;  -- Restricted to Id.
 
-EPostIncr.  Exp14  ::= Exp15 "++" ;
-EPostDecr.  Exp14  ::= Exp15 "--" ;
+EPostIncr.  Exp14  ::= Exp14 "++" ;
+EPostDecr.  Exp14  ::= Exp14 "--" ;
 
 EPreIncr.   Exp13  ::= "++" Exp14 ;
 EPreDecr.   Exp13  ::= "--" Exp14 ;
 
-ETimes.  Exp12  ::= Exp12 "*"  Exp13 ;
-EDiv.    Exp12  ::= Exp12 "/"  Exp13 ;
-EPlus.   Exp11  ::= Exp11 "+"  Exp12 ;
-EMinus.  Exp11  ::= Exp11 "-"  Exp12 ;
-ELt.     Exp9   ::= Exp10 "<"  Exp10 ;
-EGt.     Exp9   ::= Exp10 ">"  Exp10 ;
-ELtEq.   Exp9   ::= Exp10 "<=" Exp10 ;
-EGtEq.   Exp9   ::= Exp10 ">=" Exp10 ;
-EEq.     Exp8   ::= Exp9  "==" Exp9 ;
-ENEq.    Exp8   ::= Exp9  "!=" Exp9 ;
-EAnd.    Exp4   ::= Exp4  "&&" Exp5 ;
-EOr.     Exp3   ::= Exp3  "||" Exp4 ;
-EAss.    Exp2   ::= Exp3  "="  Exp2 ;
+ETimes.  Exp12  ::= Exp12 "*"  Exp13 ;  -- Left assoc.
+EDiv.    Exp12  ::= Exp12 "/"  Exp13 ;  -- Left assoc.
+
+EPlus.   Exp11  ::= Exp11 "+"  Exp12 ;  -- Left assoc.
+EMinus.  Exp11  ::= Exp11 "-"  Exp12 ;  -- Left assoc.
+
+-- Removed 10: bit shift
+
+ELt.     Exp9   ::= Exp10 "<"  Exp10 ;  -- Non-assoc.
+EGt.     Exp9   ::= Exp10 ">"  Exp10 ;  -- Non-assoc.
+ELtEq.   Exp9   ::= Exp10 "<=" Exp10 ;  -- Non-assoc.
+EGtEq.   Exp9   ::= Exp10 ">=" Exp10 ;  -- Non-assoc.
+
+EEq.     Exp8   ::= Exp9  "==" Exp9  ;  -- Non-assoc.
+ENEq.    Exp8   ::= Exp9  "!=" Exp9  ;  -- Non-assoc.
+
+-- Removed 5-7: bit-wise operations
+
+EAnd.    Exp4   ::= Exp4  "&&" Exp5  ;  -- Left assoc.
+
+EOr.     Exp3   ::= Exp3  "||" Exp4  ;  -- Left assoc.
+
+EAss.    Exp2   ::= Exp3  "="  Exp2  ;  -- Right assoc.
+
+-- Removed 0-1: throw, conditional
 
 coercions Exp 15 ;
 
 separator Exp "," ;
+
+-- Types and identifiers
 
 rules Type   ::= "bool" | "int" | "double" | "void" ;
 
@@ -56,7 +76,8 @@ token Id (letter (letter | digit | '_')*) ;
 
 separator nonempty Id "," ;
 
+-- Comment syntax
+
 comment "#" ;
 comment "//" ;
 comment "/*" "*/" ;
-
