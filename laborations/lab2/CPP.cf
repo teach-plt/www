@@ -32,11 +32,11 @@ EId.     Exp15  ::= Id ;
 
 EApp.    Exp14  ::= Id "(" [Exp] ")" ;  -- Restricted to Id.
 
-EPostIncr.  Exp14  ::= Exp14 "++" ;
-EPostDecr.  Exp14  ::= Exp14 "--" ;
+EPostIncr.  Exp14  ::= Id "++" ;        -- Restricted to Id.
+EPostDecr.  Exp14  ::= Id "--" ;        -- Restricted to Id.
 
-EPreIncr.   Exp13  ::= "++" Exp14 ;
-EPreDecr.   Exp13  ::= "--" Exp14 ;
+EPreIncr.   Exp13  ::= "++" Id ;        -- Restricted to Id.
+EPreDecr.   Exp13  ::= "--" Id ;        -- Restricted to Id.
 
 ETimes.  Exp12  ::= Exp12 "*"  Exp13 ;  -- Left assoc.
 EDiv.    Exp12  ::= Exp12 "/"  Exp13 ;  -- Left assoc.
