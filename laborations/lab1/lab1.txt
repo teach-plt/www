@@ -244,10 +244,10 @@ the main expression to implement the required the associativity.
 
 
 || level | expression forms                     | assoc   | explanation | test ||
-|  16    | literal                              | ---     | atomic expressions |  (**1**)  |
-|  16    | ``x``, ``x::x``, ``x::x::x``, ...    | ---     | qualified constants |  (**1**)  |
-|  15    | ``e[e]``                             | left    | indexing |  (**3**)  |
-|  15    | ``e(e,...,e)``                       | left    | function call |  (**3**)  |
+|  15    | literal                              | ---     | atomic expressions |  (**1**)  |
+|  15    | ``x``, ``x::x``, ``x::x::x``, ...    | ---     | qualified constants |  (**1**)  |
+|  14    | ``e[e]``                             | left    | indexing |  (**3**)  |
+|  14    | ``e(e,...,e)``                       | left    | function call |  (**3**)  |
 |  14    | ``e.e``, ``e->e``                    | left    | structure projection |  (**3**)  |
 |  14    | ``e++``, ``e--``                     | left    | in/decrement |  |
 |  13    | ``++e``, ``--e``, ``*e``, ``!e``     | right   | in/decrement, dereference, negation |  (**6**)  |
