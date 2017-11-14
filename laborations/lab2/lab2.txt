@@ -1,5 +1,5 @@
 Lab 2: Type checker and interpreter for C/C++
-[Programming Language Technology ../../index.html], 2017
+Programming Language Technology, 2017
 
 %!target:html
 %!encoding: utf-8
@@ -8,8 +8,7 @@ Lab 2: Type checker and interpreter for C/C++
 '''
 <script src="../../enhance_page.js"></script>
 '''
-
-#NEW
+Second assignment of [Programming Language Technology ../../index.html] course.
 
 =Summary=
 
@@ -42,10 +41,8 @@ All BNFC supported languages can be used, but guidance is guaranteed
 only for Haskell and Java.
 
 The type system and the interpreter are partially characterized by
-formal rules in in the course lecture notes, chapters 4 and 5.
+formal rules in the course lecture notes, chapters 4 and 5.
 
-
-#NEW
 
 =Method=
 
@@ -61,8 +58,6 @@ In the interpreter, do a similar thing:
 + interpret the program by evaluating the expression ``main()``.
 
 
-#NEW
-
 =The type checker=
 
 ==Types==
@@ -76,8 +71,6 @@ Only the four built-in types
 ```
 are taken into account. Every expression has one of these types.
 
-
-#NEW
 
 Types of functions in the symbol table
 can be represented in any way that stores their
@@ -98,7 +91,7 @@ return type.
 
 ==Programs==
 
-A program is a sequence of definitions.
+A program is a sequence of function definitions.
 
 A program may also contain comments and preprocessor directives,
 which are just ignored by the parser (see below).
@@ -130,8 +123,6 @@ The language has four **built-in functions** dealing with input and output:
   double readDouble()           // read a double from standard input
 ```
 
-#NEW
-
 **Typing rules**
 
 The same function name may be used in at most one function definition.
@@ -142,8 +133,6 @@ return type of the function.
 
 You don't need to check that there actually is a ``return`` statement.
 
-
-#NEW
 
 ==Argument lists, declarations, and function bodies==
 
@@ -156,21 +145,19 @@ An argument declaration has a type and an identifier, for instance
 ```
 Notice that argument declarations with multiple variables
 (``int x, y``) are not included. A declaration that occurs
-as a statement (as shown below), can also have multiple variables.
-But it must have at least one variable.
+as a statement (as shown below), can also have more than one variable.
 
 A function body is a list of statements enclosed
 in curly brackets ``{`` and ``}`` .
 
-#NEW
-
 **Typing rules**
 
-An argument list may only use each variable once.
+An argument list may not declare the same variable more than once.
 The type of a variable cannot be ``void``.
-
-
-#NEW
+I.e., the following definition has two errors in the argument list.
+```
+int error (int x, void y, bool x) { ... }
+```
 
 ==Statements==
 
@@ -185,14 +172,14 @@ or a call to a function that makes some input or output action.
 
 ===Declaration===
 
-Declarations have one of the following formats:
+Variable declarations have one of the following formats:
 - type and one or more variables
 ```
   int i ;
   double x, y, z ;
 
 ```
-- type and one initialized variable
+- type and a single initialized variable
 ```
   int i = 6 ;
 ```
@@ -222,42 +209,52 @@ example:
 ```
 **Typing**. The expression must have type **bool**.
 
-#NEW
-
 ===Conditional===
 
 ``if`` with an expression in parentheses followed by
-a statement, ``else``, and another statement. Examples:
+a statement, ``else``, and another statement.
+(The else-branch cannot be omitted.)
+Example:
 ```
   if (x > 0) return x ; else return y ;
 ```
+
 **Typing**. The expression must have type **bool**.
 
-(No else-less if statements.)
 
 ===Block===
+
 Any list of statements (including empty list) between
 curly brackets. For instance,
 ```
   {
     int i = 2 ;
     {
+      int i = 3;
+      {
+      }
     }
     i++ ;
   }
 ```
 
 
-#NEW
-
 **Typing rules**
 
 A variable may only be declared once on the same block level.
-
 The parameters of a function have the same level as the
 top-level block in the body.
-
-#NEW
+For example, the following function contains both violations.
+```
+  int scope_violation (int x) {
+    int x = 1;
+    {
+      int y = 2;
+      int y;
+    }
+    return x;
+  }
+```
 
 ==Expressions==
 
@@ -280,7 +277,7 @@ Also note that these precedence levels are already implemented in the [provided 
   || level   | expression forms                     | assoc | explanation   | type   ||
   |  15      | literal                              | -     | literal       | literal type
   |  15      | identifier                           | -     | variable      | declared type
-  |  15      | ``f(e,...,e)``                       | none  | function call | return type
+  |  14      | ``f(e,...,e)``                       | none  | function call | return type
   |  14      | ``v++``, ``v--``                     | none  | in/decrement  | operand type (int or double)
   |  13      | ``++v``, ``--v``                     | none  | in/decrement  | operand type (int or double)
   |  12      | ``e*e``, ``e/e``                     | left  | mult, div     | operand type (int or double)
@@ -289,10 +286,8 @@ Also note that these precedence levels are already implemented in the [provided 
   |   8      | ``e==e``, ``e!=e``                   | none  | (in)equality  | bool
   |   4      | ``e&&e``                             | left  | conjunction   | bool
   |   3      | ``e||e``                             | left  | disjunction   | bool
-  |   2      | ``v=e``                              | right | assignment    | type of left hand side
+  |   2      | ``v=e``                              | right | assignment    | type of both sides
 
-
-#NEW
 
 **Typing rules**
 
@@ -318,12 +313,11 @@ which is ``int``, ``double``, or ``bool``.
 
 Conjunction and disjunction apply to operands of type ``bool`` only.
 
-Assignments have the same type as the left-hand-side variable.
+In assignments, both sides must have the same type,
+and this is then also the type of the assignment expression.
 Notice that only variables are used as left hand sides.
 
 (There are no qualified constants or template instantiations.)
-
-#NEW
 
 
 ==Literals==
@@ -331,8 +325,8 @@ Notice that only variables are used as left hand sides.
 We include integer literals and floating point literals.
 
 There are also two boolean literals, ``true`` and ``false``.
-Notice that the names ``true`` and ``false`` were not specified
-as literals in Lab 1, so you probably treated them as identifiers.
+(Notice that the names ``true`` and ``false`` were not specified
+as literals in Lab 1, so you probably treated them as identifiers there.)
 
 
 
@@ -367,17 +361,45 @@ There are four types of values:
 - a void value, which need never be shown
 
 
-Instead of boolean values, you may use integers.
-Then ``true`` can be interpreted as 1 and ``false`` as 0.
+%NOT RECOMMENDED:
+%Instead of boolean values, you may use integers.
+%Then ``true`` can be interpreted as 1 and ``false`` as 0.
 
-Values can be seen as a special case of expressions: as expressions
-that contain no variables and cannot be evaluated further.
-But it is recommended to have a separate datatype of values,
-in order to guarantee that evaluation always results in a value.
+% Values can be seen as a special case of expressions: as expressions
+% that contain no variables and cannot be evaluated further.
+% But it is recommended to have a separate datatype of values,
+% in order to guarantee that evaluation always results in a value.
 
-Thus, the evaluation of an expression in an environment should always
-result in a value.
+% Thus, the evaluation of an expression in an environment should always
+% result in a value.
 
+A value is the result of evaluating an expression in an environment.
+
+==Environments==
+
+The purpose of an environment is to bind variables to their values.
+Our environment is structured into a stack of environment blocks.
+Whenever we enter a new scope, we push a new block on the stack
+which we remove again when we leave the scope.
+
+Blocks are necessary to implement evaluation of recursive functions.
+For instance:
+```
+int factorial (int n) {
+  int r;
+  if (n < 2) return 1;
+  else {
+    r = factorial (n - 1);
+    return r * n;
+  }
+}
+```
+The evaluation of ``factorial(2)`` will bind ``n`` to ``2``, and
+then call ``factorial(1)``, which has to bind ``n`` to ``1``.
+It returns ``1`` which is bound to ``r`` but then we need
+the old value of ``n`` to correctly compute ``r * n``.
+Thus, we need a stack of environments to preserve the old bindings
+and access them again after we return from a function call.
 
 ==Programs==
 
@@ -386,7 +408,7 @@ Each function has a parameter list and a body, which
 is a sequence of statements.
 
 The evaluation of a function call starts by evaluating the arguments
-and building an environment where the received values are assigned
+and building a new environment block where the received values are assigned
 to the argument variables (a.k.a. parameters) of the function.
 
 The statements in the body are then executed in
@@ -397,10 +419,14 @@ The function returns a value, which is obtained from the ``return`` statement.
 After encountering a return, all the following statements in the function body should be ignored (not evaluated).
 If the return type is ``void``, no return statement is required.
 
+After the function has returned
+the environment block holding the bindings of the function parameters
+is removed.  This block should be on the top of the stack, thus, it can be simply popped.
 
-#NEW
 
 ==Statements==
+
+===Atomic statements===
 
 A declaration, e.g.
 ```
@@ -418,6 +444,12 @@ An expression statement, e.g.
 ```
 is evaluated, and its value is ignored.
 
+A ``return`` statement is executed by evaluating its expression argument.
+The value is returned to the caller of the function, and no more
+statements in the function body are executed.
+
+===Blocks===
+
 A block of statements, e.g.
 ```
   {
@@ -425,8 +457,10 @@ A block of statements, e.g.
     i++ ;
   }
 ```
-is interpreted in an environment where a new context is pushed on
-the context stack at entrance, and popped at exit.
+is interpreted in an environment where a new block is pushed on
+the environment stack at entrance, and popped at exit.
+
+===While-loops===
 
 A ``while`` statement, e.g.
 ```
@@ -440,19 +474,35 @@ If the value is ``true``, the body is interpreted in the resulting
 environment, and the ``while`` statement is executed again.
 If the value is ``false``, the body is not interpreted.
 
+The body of a ``while`` statements needs to be interpreted in a
+fresh context block even if it is just a single statement.
+Example:
+```
+  while (i > 0) int i = 0;
+```
+The ``i`` declared by the body is not identical with the ``i`` in
+the condition.  Thus, if the condition ``i > 0`` holds initially,
+this should be an infinite loop.
+
+===Conditionals===
+
 An ``if-else`` statement, e.g.
 ```
   if (x < 10) i++ ; else printInt(j) ;
 ```
 is interpreted so that the condition expression is first evaluated.
-If the value is ``true``, the statement before ``else`` is interpreted.
-If the value is ``false``, the statement after ``else`` is interpreted.
+If the value is ``true``, the then-branch (statement before ``else``) is interpreted.
+If the value is ``false``, the else-branch (statement after ``else``) is interpreted.
 
-A ``return`` statement is executed by evaluating its expression argument.
-The value is returned to the caller of the function, and no more
-statements in the function body are executed.
-
-#NEW
+Similar to ``while`` the branches of the ``if`` statement are fresh scopes
+and need to evaluated with new environment blocks.  For example:
+```
+  int i = 0;
+  if (i > 0) i++; else int i = 1;
+  printInt(i);
+```
+This snipped should print ``0`` and not ``1``, since the variable
+declared in the else-branch is a fresh ``i`` not the ``i`` declared above.
 
 ==Expressions==
 
@@ -473,11 +523,23 @@ A variable, e.g.
   x
 ```
 is evaluated by looking up its value in the innermost context where
-it occurs. If the variable is not in the context, or has no value there,
+it occurs. Concretely, the environment blocks are searched for a binding
+for ``x``, where the last added block is searched first.
+If the variable is not in the environment, or has no value there,
 the interpreter terminates with an error message
 ```
   uninitialized variable x
 ```
+Note that this error should be raised by the following snippet
+```
+  int x = 1;
+  {
+    int x;
+    printInt(x);
+  }
+```
+since the initialized ``x`` is shadowed by an uninitialized ``x``.
+
 A function call, e.g.
 ```
   foo (x+y, i<0, i++)
@@ -539,9 +601,9 @@ Conjunction,
   a && b
 ```
 is evaluated //lazily//: first ``a`` is evaluated. If the
-result is true (1), also ``b`` is evaluated, and the
+result is true, also ``b`` is evaluated, and the
 value of ``b`` is returned. However, if
-``a`` evaluates to false (0), then false
+``a`` evaluates to false, then false
 is returned without evaluating ``b``.
 
 Disjunction,
@@ -549,9 +611,9 @@ Disjunction,
   a || b
 ```
 is also evaluated lazily: first ``a`` is evaluated. If the
-result is false (0), also ``b`` is evaluated, and the
+result is false, also ``b`` is evaluated, and the
 value of ``b`` is returned. However, if
-``a`` evaluates to true (1), then true
+``a`` evaluates to true, then true
 is returned without evaluating ``b``.
 
 Assignment,
@@ -559,11 +621,9 @@ Assignment,
   x = a
 ```
 is evaluated by first evaluating ``a``. The resulting
-value is returned, but also the context is changed by assigning
+value is returned, but also the environment is changed by assigning
 this value to the innermost occurrence of ``x``.
 
-
-#NEW
 
 =Lab format=
 
@@ -581,8 +641,6 @@ These packages contain the grammar, stubs for type checker and
 interpreter, and suitable makefiles.  If you start from these stubs,
 you will likely match the requirements for the solution format as
 detailed in the following:
-
-#NEW
 
 ==Input and output==
 
@@ -610,8 +668,6 @@ a file or by ``echo``. For instance,
 ```
 
 
-#NEW
-
 ==Compiling the interpreter==
 
 The interpreter is submitted as archive of source files that can be compiled by typing ``make``.
@@ -621,8 +677,6 @@ procedure is the same: send a tar package
 and make sure the interpreter can be compiled in a normal Unix enviroment
 by typing ``make``.
 
-
-#NEW
 
 =Test programs=
 
@@ -658,8 +712,6 @@ Running the interpreter:
   5
   5
 ```
-
-#NEW
 
 ==Examples of failure==
 
