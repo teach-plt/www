@@ -25,7 +25,9 @@ Google group: http://groups.google.com/group/plt-2017
 /
 [GU course description http://kursplaner.gu.se/english/DIT231.pdf]
 /
-[GU course page stub https://gul.gu.se/public/courseId/74352/lang-sv/publicPage.do]
+[GU course page stub https://gul.gu.se/public/courseId/79766/coursePath/38212/38407/40149/ecp/lang-sv/publicPage.do]
+/
+[GU ad http://utbildning.gu.se/education/courses-and-programmes/Course_detail?courseId=DIT231]
 /
 [Course page 2016 http://www.cse.chalmers.se/edu/year/2016/course/DAT151/]
 

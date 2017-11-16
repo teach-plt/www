@@ -6,7 +6,7 @@ deps=style.css include.html enhance_page.js
 .PHONY : ship all www mini
   # lab1 lab2 lab3 lab4 ## .PHONY turns off lab% goals somehow
 
-all : www exams.tgz lab1 lab2 lab3 lab4 # mini
+all : exams.tgz lab1 lab2 lab3 lab4 www # www last for linkchecker
 
 ship : index.html
 #	scp $< frelindb@remote12.chalmers.se:/chalmers/groups/edu2009/www/www.cse.chalmers.se/year/2015/course/DAT151-lp2/
@@ -19,6 +19,9 @@ mini :
 	make -C laborations/mini
 
 www : index.html
+
+check : all
+	linkchecker --check-extern index.html
 
 %.html : %.txt $(deps)
 	txt2tags --style=style.css -t html $<
