@@ -7,6 +7,7 @@ mkdir "$NAME/good"
 mkdir "$NAME/bad"
 
 cp -p progs-test-lab2.hs "$NAME"
+cp -p prelude.cc "$NAME"
 cp Makefile-test "$NAME/Makefile"
 cp -p good/*.cc "$NAME/good/"
 cp -p good/*.cc.input "$NAME/good/"

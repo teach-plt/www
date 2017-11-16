@@ -122,6 +122,8 @@ The language has four **built-in functions** dealing with input and output:
   int    readInt()              // read an integer from standard input
   double readDouble()           // read a double from standard input
 ```
+(These functions are implemented in file [prelude.cc testsuite/prelude.cc].
+You can ``#include`` it in a test case if you want run the test through a C compiler.)
 
 **Typing rules**
 
