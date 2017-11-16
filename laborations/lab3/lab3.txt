@@ -77,9 +77,11 @@ You can copy your ``CPP.cf`` grammar and the
 
 =Language specification=
 
-The language is the same as in Lab 2, and you can use the
+The language is the same as in Lab 2, except the handling of uninitialized variables, and you can use the
 grammar file [``CPP.cf`` ../lab2/CPP.cf].
 Also its type system is the same.
+
+Programs using uninitialized variables fall under undefined behaviour in this lab, meaning that any semantics for such programs are allowed.
 
 There are four built-in functions:
 ```
@@ -108,7 +110,7 @@ Methods in the class, ``main`` special, see Chapter 6, or example below.
 
 ==Statements and expressions==
 
-The semantics is the same as in Lab 2. In other words,
+The semantics is the same as in Lab 2 (again, except for programs using uninitialized variables). In other words,
 running the generated classes in ``java`` produces the same behaviour
 as running the source code in the ``lab2`` interpreter.
 
