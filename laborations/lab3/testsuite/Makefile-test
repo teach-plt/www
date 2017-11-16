@@ -13,3 +13,4 @@ Runtime.class : Runtime.java
 clean :
 	rm -f *.j good*.class core*.class
 	rm -f good/*.j good/*.class
+	rm -f dir-for-path-test/one-more-dir/*.j dir-for-path-test/one-more-dir/*.class

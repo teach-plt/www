@@ -18,7 +18,7 @@ import System.Exit
 import System.IO
 import System.Process
 import System.IO.Unsafe
-import System.FilePath.Posix (takeBaseName, takeDirectory)
+import System.FilePath (takeBaseName, takeDirectory, replaceExtension)
 
 #if __GLASGOW_HASKELL__ >= 706
 -- needed in GHC 7.6
@@ -63,10 +63,11 @@ usage = do
   exitFailure
 
 mainOpts :: [FilePath] -> IO ()
-mainOpts (progdir : testdirs) = do
+mainOpts (progdir : dirs) = do
   putStrLn $ "This is the test program for Programming Languages Lab 3"
   putStrLn $ "Make sure to include the --doubles flag if you also want to test programs including doubles."
-  runCommandNoFail_ "rm -f */*.j */*.class" ""
+  let testdirs = if null dirs then ["good", "dir-for-path-test/one-more-dir"] else dirs
+  forM_ testdirs (\dir -> runCommandNoFail_ ("rm -f " ++ quote dir ++ "/*.j " ++ quote dir ++ "/*.class") "")
   runMake progdir
   good <- runTests progdir testdirs
   putStrLn ""
@@ -94,8 +95,7 @@ runTests :: FilePath -> [FilePath] -> IO [(FilePath,Bool)]
 runTests dir testdirs = do
   let prog = joinPath [dir, executable_name]
   checkFileExists prog
-  let dirs = if null testdirs then ["good"] else testdirs
-  files <- concat <$> mapM listCCFiles dirs
+  files <- concat <$> mapM listCCFiles testdirs
   mapM (\ f -> (f,) <$> testBackendProg prog f) files
 
 -- | Test given program on given test file.
@@ -115,20 +115,26 @@ testBackendProg prog f = do
     reportError compilerCommand "non-zero exit code" f input compilerOut compilerErr
     return False
   else do
-  -- Run code
-    let javaCommand = "java -noverify -cp .:" ++ takeDirectory f ++ " " ++ takeBaseName f
-    (javaOut, javaErr, javaRet) <- runCommandStrWait javaCommand input
-    if isExitFailure javaRet then do
-      reportError javaCommand "non-zero exit code" f input javaOut javaErr
-      return False
-    else do
-      if javaOut == output then
-        return True
-      else do
-        reportError javaCommand "invalid output" f input javaOut javaErr
-        putStrLn "Expected output:"
-        putStrLn $ color blue $ output
+    let expectedJavaClassFilePath = replaceExtension f ".class"
+    javaClassFileCreated <- doesFileExist expectedJavaClassFilePath
+    if javaClassFileCreated then do
+      -- Run code
+      let javaCommand = "java -noverify -cp .:" ++ takeDirectory f ++ " " ++ takeBaseName f
+      (javaOut, javaErr, javaRet) <- runCommandStrWait javaCommand input
+      if isExitFailure javaRet then do
+        reportError javaCommand "non-zero exit code" f input javaOut javaErr
         return False
+      else do
+        if javaOut == output then
+          return True
+        else do
+          reportError javaCommand "invalid output" f input javaOut javaErr
+          putStrLn "Expected output:"
+          putStrLn $ color blue $ output
+          return False
+    else do
+      reportError compilerCommand ("did not find any Java class file at \"" ++ expectedJavaClassFilePath ++ "\" (note that the output Java class file must be written to same directory as the input C++ file)") f input compilerOut compilerErr
+      return False
 
 -- | Return all files with extension ".cc" in given directory.
 listCCFiles :: FilePath -> IO [FilePath]

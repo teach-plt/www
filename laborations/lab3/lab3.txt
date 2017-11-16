@@ -255,13 +255,13 @@ or
 ```
   jasmin <File>.j
 ```
-if you have installed jasmin as a stand-alone program.
+if you have installed Jasmin as a stand-alone program.
 
 The generated class file should have the same name and be **in the same directory** as the original source file:
 ```
   lab3 ../a/b/c.cc
 ```
-This should produce a class file ``../a/b/c.class``.
+This should produce a class file ``../a/b/c.class``. This can be achieved using Jasmin's `-d` flag.
 
 The output at failure is a code generator error, or
 ``TYPE ERROR`` or ``SYNTAX ERROR`` as in Assignment 2.

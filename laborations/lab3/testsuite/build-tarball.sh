@@ -4,7 +4,7 @@ NAME=lab3-testsuite
 
 mkdir "$NAME"
 mkdir "$NAME/good"
-# mkdir "$NAME/bad"
+mkdir -p "$NAME/dir-for-path-test/one-more-dir"
 
 cp -p progs-test-lab3.hs "$NAME"
 cp -p jasmin.jar         "$NAME"
@@ -14,7 +14,7 @@ cp -p index.txt          "$NAME"
 cp -p good/*.cc        "$NAME/good/"
 cp -p good/*.cc.input  "$NAME/good/"
 cp -p good/*.cc.output "$NAME/good/"
-# cp -p bad/*.cc "$NAME/bad/"
+cp -p dir-for-path-test/one-more-dir/simple.cc "$NAME/dir-for-path-test/one-more-dir/"
 
 tar -zcf "$NAME.tar.gz" "$NAME"
 
