@@ -35,6 +35,11 @@ Google group: http://groups.google.com/group/plt-2017
 =News and changes=
 
  : //2017-11-18//
+   Change in text for [Lab 2 laborations/lab2/lab2.html]:
+   The ``return`` statement can also return a void value.
+   (If you stick to the old text and disallow this, it is also fine, but it makes more sense to allow it.)
+
+ : //2017-11-18//
    Ad: [Apply for teaching assistent LP3/4! http://www.gu.se/english/about_the_university/job-opportunities/vacancies-details/?id=1516]
    Deadline is 2017-11-30.
 
