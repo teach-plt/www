@@ -79,8 +79,10 @@ mainOpts (progdir : dirs) = do
 --
 
 -- | Whether to run tests involving doubles
+{-# NOINLINE includeDoubleTests  #-}
 includeDoubleTests :: IORef Bool
 includeDoubleTests = unsafePerformIO $ newIORef False
+
 -- | Executable name
 executable_name = "lab3"
 
