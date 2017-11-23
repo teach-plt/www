@@ -1,5 +1,5 @@
 Lab 3: Code Generator for C/C++
-[Programming Language Technology ../../index.html], 2017
+Programming Language Technology, 2017
 
 %!target:html
 %!postproc(html): #NEW <!-- NEW -->
@@ -7,7 +7,6 @@ Lab 3: Code Generator for C/C++
 '''
 <script src="../../enhance_page.js"></script>
 '''
-
 
 =Summary=
 
@@ -18,7 +17,7 @@ can be run in the Java bytecode interpreter so that they
 correctly perform all their input and output actions.
 
 The code generator is partially characterized by compilation schemes in
-Chapter 6 of the PLT book. More JVM instructions are given in Appendix B.
+Chapter 6 of the PLT book. More JVM instructions are given in Appendix B of the book.
 These explanations follow Jasmin assembler; the code generator may
 emit Jasmin assembly code into text files, which are then processed
 further by Jasmin to create class files.
@@ -36,9 +35,8 @@ used.
 All BNFC supported languages can be used, but guidance is guaranteed
 only for Haskell and Java.
 
-Before the work can be submitted, the program has to pass some
-tests, which are given on the course web page via links
-later in this document.
+Before the work can be submitted, the program has to pass
+the [test suite ./testsuite/].
 
 ==Restriction of the task==
 
@@ -385,3 +383,7 @@ Do not however submit any generated files.
 If you have any problems getting the test program to run,
 or if you think that there is an error in the test suite,
 contact the teachers via the course Google group.
+
+
+Back to main page of
+[Programming Language Technology ../../index.html].
