@@ -35,6 +35,9 @@ Google group: http://groups.google.com/group/plt-2017
 =News and changes=
 
  : //2017-11-23//
+   The code from today's "Hands-on for lab 2" session has been posted in the plt-2017 group.
+
+ : //2017-11-23//
    The schedule has been updated (see below).
 
  : //2017-11-18//
