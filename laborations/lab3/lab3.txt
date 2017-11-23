@@ -21,6 +21,7 @@ Chapter 6 of the PLT book. More JVM instructions are given in Appendix B of the 
 These explanations follow Jasmin assembler; the code generator may
 emit Jasmin assembly code into text files, which are then processed
 further by Jasmin to create class files.
+**Jasmin can be downloaded** [here http://jasmin.sourceforge.net/], but is also included in the test suite.
 
 The recommended implementation is via a BNF
 grammar processed by the BNF Converter (BNFC) tool. The syntax
@@ -329,15 +330,15 @@ The test script can then be run as follows:
   ./progs-test-lab3 ../path/to/solution/
 ```
 
-==Jasmin installation and tips==
+==Jasmin tips==
 
-Jasmin is available in various package repositories, you can use e.g. ``apt install jasmin-sable`` on Ubuntu, or ``brew install jasmin`` on Mac.
+Jasmin is available on [Sourceforge http://jasmin.sourceforge.net/].
+Note there are also versions on [Github https://github.com/Sable/jasmin] and
+Ubuntu (``apt-get install jasmin-sable``).
 
-If Jasmin is not available in your preferred package repository, you can instead use the copy included in the test suite (originally downloaded from [Sourceforge http://jasmin.sourceforge.net]). If you take this approach, you will get a jar file that you can invoke Java on; but it is important that you do not let environment details leak into your program and make your code computer-specific (such as relying on the jar file being in a specific directory).
+% ; however, the testsuite you have to pass expects you to invoke Jasmin via `java -jar jasmin.jar`.
 
-The recommended solution to this is to add the test suite's ``bin`` directory to your ``$PATH``, as a simple wrapper shell script (that just invokes the jar file) is available there. With this directory in your path, you will be able to invoke Jasmin as if you installed it with a package manager (i.e., you can just say ``jasmin`` as if invoking any other installed program).
-
-Further tips: Make sure your class names in Jasmin have simple names without slashes or dots.
+Make sure your class names in Jasmin have simple names without slashes or dots.
 If the first line of your Jasmin file is
 ```
 .class public x/y/z.cc
