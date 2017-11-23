@@ -9,7 +9,7 @@ all : suite www
 
 suite : lab3-testsuite.tar.gz
 
-lab3-testsuite.tar.gz : build-tarball.sh progs-test-lab3.hs Makefile-test Runtime.java jasmin.jar index.txt \
+lab3-testsuite.tar.gz : build-tarball.sh progs-test-lab3.hs Makefile-test Runtime.java bin/jasmin bin/jasmin.jar index.txt \
                         good/*.cc good/*.cc.*put dir-for-path-test/one-more-dir/simple.cc
 	./build-tarball.sh
 
