@@ -3,14 +3,19 @@
 # Files which contribute to the generated .html
 deps=../../../style.css ../../../include.html ../../../enhance_page.js
 
-.PHONY : all suite www
+.PHONY : good all suite www
 
-all : suite www
+all : good suite www
 
-suite : lab3-testsuite.tar.gz
+good :
+	rm -rf good
+	./build-good.sh
 
+suite : good lab3-testsuite.tar.gz
+
+# good/*.cc good/*.cc.*put
 lab3-testsuite.tar.gz : build-tarball.sh progs-test-lab3.hs Makefile-test Runtime.java jasmin.jar index.txt \
-                        good/*.cc good/*.cc.*put dir-for-path-test/one-more-dir/simple.cc
+                        good dir-for-path-test/one-more-dir/simple.cc
 	./build-tarball.sh
 
 www : index.html
