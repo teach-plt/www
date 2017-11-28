@@ -259,7 +259,7 @@ The generated class file should have the same name and be **in the same director
 ```
   lab3 ../a/b/c.cc
 ```
-This should produce a class file ``../a/b/c.class``. This can be achieved using Jasmin's `-d` flag.
+This should produce a class file ``../a/b/c.class``. This can be achieved using Jasmin's ``-d`` flag.
 
 The output at failure is a code generator error, or
 ``TYPE ERROR`` or ``SYNTAX ERROR`` as in Assignment 2.
@@ -333,8 +333,7 @@ The test script can then be run as follows:
 ==Jasmin tips==
 
 Jasmin is available on [Sourceforge http://jasmin.sourceforge.net/].
-Note there are also versions on [Github https://github.com/Sable/jasmin] and
-Ubuntu (``apt-get install jasmin-sable``).
+Note that there are also versions on e.g. Ubuntu (``apt install jasmin-sable``) and Mac (``brew install jasmin``).
 
 % ; however, the testsuite you have to pass expects you to invoke Jasmin via `java -jar jasmin.jar`.
 
