@@ -42,7 +42,7 @@ $ cd lab3-testsuite
 
 + Compile the test program using ``make`` or alternatively:
 ```
-$ ghc -threaded --make -o progs-test-lab2 progs-test-lab2.hs
+$ ghc -threaded --make -o progs-test-lab3 progs-test-lab3.hs
 ```
 
 
