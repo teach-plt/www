@@ -8,7 +8,6 @@ Programming Language Technology, 2017
 '''
 <script src="../../enhance_page.js"></script>
 '''
-Second assignment of [Programming Language Technology ../../index.html] course.
 
 =Summary=
 
