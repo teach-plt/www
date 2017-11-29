@@ -14,7 +14,7 @@ good :
 suite : good lab3-testsuite.tar.gz
 
 # good/*.cc good/*.cc.*put
-lab3-testsuite.tar.gz : build-tarball.sh progs-test-lab3.hs Makefile-test Runtime.java jasmin.jar index.txt \
+lab3-testsuite.tar.gz : build-tarball.sh progs-test-lab3.hs Makefile-test Runtime.java jasmin.jar \
                         good dir-for-path-test/one-more-dir/simple.cc
 	./build-tarball.sh
 
