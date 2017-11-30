@@ -6,6 +6,9 @@ int niam() {
 }
 
 int main() {
-  printInt(niam());
-  return 0;
+  {
+    printInt(niam());
+    return 0;
+  }
+  printInt(2);
 }
