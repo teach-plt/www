@@ -68,7 +68,7 @@ for bad in "${testdir}"/bad*.hs; do
     echo -e "\033[34mxxx" "$(basename "$bad")" "xxx\033[0m"
     result=$(./lab4 "$bad" 2>&1)
     echo "$result"
-    if echo "$result" | grep -E "^(INTERPRETER ERROR|java.lang.RuntimeException)" > /dev/null; then
+    if echo "$result" | grep -Ei "^(INTERPRETER ERROR|java.lang.RuntimeException|ERROR)" > /dev/null; then
 	((badpass+=1))
     fi
     echo
