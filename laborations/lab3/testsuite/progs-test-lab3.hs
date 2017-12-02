@@ -59,7 +59,8 @@ processOpts = mapM_ $ \ arg -> case arg of
 
 usage :: IO a
 usage = do
-  hPutStrLn stderr "Usage: progs-test-lab3 <interpreter code directory> [<test case directory>]*"
+  hPutStrLn stderr "Usage: progs-test-lab3 [-debug|--debug] [--doubles]"
+  hPutStrLn stderr "           interpreter_code_directory [test_case_directory ...]"
   exitFailure
 
 mainOpts :: [FilePath] -> IO ()

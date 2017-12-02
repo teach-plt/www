@@ -110,7 +110,7 @@ parseArgs :: [String] -> IO String
 parseArgs ["-debug", cfFile] = cfFile <$ writeIORef doDebug True
 parseArgs [cfFile]           = return cfFile
 parseArgs _                  = do
-  hPutStrLn stderr "Usage: progs-test-lab1 file.cf"
+  hPutStrLn stderr "Usage: progs-test-lab1 [-debug] cf_file"
   exitFailure
 
 mainOpts :: FilePath -> IO ()

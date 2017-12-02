@@ -2,7 +2,7 @@
 # Test suite for lab 4
 
 if [ "$#" -ne 1 ]; then
-    echo "usage: $0 <path-to-solution>"
+    echo "Usage: $0 path_to_solution"
     exit
 fi
 
