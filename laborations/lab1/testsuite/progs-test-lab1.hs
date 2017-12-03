@@ -1,8 +1,7 @@
-{-# OPTIONS_GHC -cpp #-}
+{-# LANGUAGE CPP #-}
 
 -- GHC needs -threaded
 
-import Control.Concurrent
 import Control.Monad
 
 import Data.Char
@@ -11,6 +10,7 @@ import Data.List
 
 import System.Directory
 import System.Environment
+import System.FilePath
 import System.Exit
 import System.IO
 import System.Process
@@ -32,9 +32,9 @@ listBadProgs  = listCCFiles $ joinPath ["..","bad"]
 
 listCCFiles :: FilePath -> IO [FilePath]
 listCCFiles dir =
-  map (\ f -> joinPath [dir,f]) .
+  map (\f -> joinPath [dir,f]) .
   sort .
-  filter (("cc" ==) . getExt) <$> getDirectoryContents dir
+  filter ((".cc" ==) . takeExtension) <$> listDirectory dir
 
 
 welcome :: IO ()
@@ -44,18 +44,18 @@ welcome = do
 
 runBNFC :: IO Int
 runBNFC = do
-  (out,_) <- runCommandNoFail "bnfc" "Cpp.cf"
+  (out,_) <- runPrgNoFail "bnfc" [] "Cpp.cf"
   let r = case grep "rules accepted" out of
             []   -> 0
             l:_  -> read $ takeWhile isDigit l
   return r
 
 runAlex :: IO ()
-runAlex = runCommandNoFail_ "alex" "LexCpp.x"
+runAlex = runPrgNoFail_ "alex" [] "LexCpp.x"
 
 runHappy :: IO [String]
 runHappy = do
-  (_,err) <- runCommandNoFail "happy -i" "ParCpp.y"
+  (_,err) <- runPrgNoFail "happy" ["-i"] "ParCpp.y"
   return $ grep "conflict" err
 
 writeDriver :: IO ()
@@ -72,9 +72,9 @@ writeDriver = writeFile "testdriver.hs" $ unlines
 
 compileDriver :: IO ()
 #ifdef HC_OPTS
-compileDriver = runCommandNoFail_ ("ghc --make " ++ HC_OPTS ++ " -o testdriver") "testdriver.hs"
+compileDriver = runPrgNoFail_ "ghc" (["--make"] ++ words HC_OPTS ++ ["-o", "testdriver"]) "testdriver.hs"
 #else
-compileDriver = runCommandNoFail_ "ghc --make -o testdriver" "testdriver.hs"
+compileDriver = runPrgNoFail_ "ghc" ["--make", "-o", "testdriver"] "testdriver.hs"
 #endif
 
 runTests :: IO ([Bool],[Bool])
@@ -89,18 +89,18 @@ runTests = do
 testFrontendProg :: Bool -> FilePath -> IO Bool
 testFrontendProg good f = do
   let bad = not good
-      c   = "." ++ pathSep : "testdriver " ++ f   -- WINDOWS
+      prg = "." </> "testdriver"
   putStrLn $ "Parsing " ++ f ++ "..."
-  (out,err,_) <- runCommandStrWait c ""
+  -- TODO: Should maybe check exit code here
+  (_,out,err) <- readProcessWithExitCode prg [f] ""
   case lines err of
-    "OK":_    | good -> do return True
-              | bad  -> do reportError c "passed BAD program" f "" out err
+    "OK":_    | good -> return True
+              | bad  -> do reportError prg "passed BAD program" f "" out err
                            return False
-    "ERROR":_ | good -> do reportError c "" f "" out err
+    "ERROR":_ | good -> do reportError prg "" f "" out err
                            return False
-              | bad  -> do --reportErrorColor green c "failed bad program" f "" out err
-                           return True
-    _                -> do reportError c "invalid output" f "" out err
+              | bad  -> return True
+    _                -> do reportError prg "invalid output" f "" out err
                            return False
 
 --
@@ -156,46 +156,6 @@ isSubStringOf :: String -> String -> Bool
 isSubStringOf x = any (x `isPrefixOf`) . tails
 
 --
--- * Path name utilities
---
-
-getExt :: FilePath -> String
-getExt = reverse . takeWhile (/='.') . reverse
-
-stripExt :: FilePath -> String
-stripExt p = if '.' `elem` p then p' else p
-  where p' = reverse $ drop 1 $ dropWhile (/='.') $ reverse p
-
-basename :: FilePath -> FilePath
-basename = reverse . takeWhile (not . isPathSep) . reverse
-
-isPathSep :: Char -> Bool
-isPathSep c = c == pathSep
-
-joinPath :: [String] -> FilePath
-joinPath = concat . intersperse [pathSep]
-
-pathSep :: Char
-#if defined(mingw32_HOST_OS)
-pathSep = '\\'
-#else
-pathSep = '/'
-#endif
-
---
--- * Either utilities
---
-
-isLeft :: Either a b -> Bool
-isLeft = either (const True) (const False)
-
-fromLeft :: Either a b -> a
-fromLeft =  either id (error "fromLeft: Right")
-
-catLefts :: [Either a b] -> [a]
-catLefts xs = [x | Left x <- xs]
-
---
 -- * Terminal output colors
 --
 
@@ -225,83 +185,31 @@ green = 2
 blue  = 4
 
 --
--- * Simple pipes
+-- * Run programs
 --
 
-type Pipe = Chan (Either Char ())
+runPrgNoFail_ :: FilePath -- ^ Executable
+              -> [String] -- ^ Flags
+              -> FilePath -- ^ Filename
+              -> IO ()
+runPrgNoFail_ exe flags file = runPrgNoFail exe flags file >> return ()
 
-pipeGetContents :: Pipe -> IO String
-pipeGetContents p = do
-  s <- getChanContents p
-  return $ map fromLeft $ takeWhile isLeft s
-
-pipeWrite :: Pipe -> String -> IO ()
-pipeWrite p s = writeList2Chan p (map Left s)
-
--- close the pipe for writing
-pipeClose :: Pipe -> IO ()
-pipeClose p = writeChan p (Right ())
-
-
---
--- * Various versions of runCommand
---
-
-runCommandChan
-  :: String -- ^ command
-  -> IO (Pipe,Pipe,Pipe,ProcessHandle) -- ^ stdin, stdout, stderr, process
-runCommandChan c = do
- inC  <- newChan
- outC <- newChan
- errC <- newChan
- (pin,pout,perr,p) <- runInteractiveCommand c
- _ <- forkIO (pipeGetContents inC >>= hPutStr pin >> hClose pin)
- _ <- forkIO (hGetContents pout >>= pipeWrite outC >> pipeClose outC)
- _ <- forkIO (hGetContents perr >>= pipeWrite errC >> pipeClose errC)
- return (inC,outC,errC,p)
-
-runCommandStr
-  :: String -- ^ command
-  -> String -- ^ stdin data
-  -> IO (String,String,ProcessHandle) -- ^ stdout, stderr, process
-runCommandStr c inStr = do
-  (inC,outC,errC,p) <- runCommandChan c
-  _   <- forkIO (pipeWrite inC inStr >> pipeClose inC)
-  out <- pipeGetContents outC
-  err <- pipeGetContents errC
-  return (out,err,p)
-
-runCommandStrWait
-  :: String -- ^ command
-  -> String -- ^ stdin data
-  -> IO (String,String,ExitCode) -- ^ stdout, stderr, process exit status
-runCommandStrWait c inStr = do
-  debug $ "Running " ++ show c
-  (out,err,p) <- runCommandStr c inStr
-  s <- waitForProcess p
-  debug $ "Standard output:\n" ++ out
-  debug $ "Standard error:\n" ++ err
-  return (out,err,s)
-
-runCommandNoFail_
-  :: String   -- ^ Command
-  -> FilePath -- ^ Input file
-  -> IO ()
-runCommandNoFail_ c f = runCommandNoFail c f >> return ()
-
-runCommandNoFail
-  :: String             -- ^ Command
-  -> FilePath           -- ^ Input file
-  -> IO (String,String) -- ^ stdout and stderr
-runCommandNoFail e f = do
-  let c = e ++ " " ++ f
+runPrgNoFail :: FilePath -- ^ Executable
+             -> [String] -- ^ Flag
+             -> FilePath -- ^ Filename
+             -> IO (String,String) -- ^ stdout and stderr
+runPrgNoFail exe flags file = do
+  let c = showCommandForUser exe (flags ++ [file])
   hPutStrLn stderr $ "Running " ++ c ++ "..."
-  (out,err,s) <- runCommandStrWait c ""
+  (s,out,err) <- readProcessWithExitCode exe (flags ++ [file]) ""
   case s of
     ExitFailure x -> do
-      reportError e ("with status " ++ show x) f "" out err
+      reportError exe ("with status " ++ show x) file "" out err
       exitFailure
-    ExitSuccess -> return (out,err)
+    ExitSuccess -> do
+      debug $ "Standard output:\n" ++ out
+      debug $ "Standard error:\n" ++ err
+      return (out,err)
 
 --
 -- * Error reporting and output checking
