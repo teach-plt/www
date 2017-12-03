@@ -97,7 +97,7 @@ compiling to a class file.
 
 ==Class structure==
 
-Boilerplate code, see PLT book, Chapter 6, or example below.
+Boilerplate code, see the PLT book, Chapter 6, or the example below.
 
 
 

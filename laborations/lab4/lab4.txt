@@ -49,7 +49,7 @@ is present, is call-by-value.
 
 =Language specification=
 
-The language is the same as in lecture notes, Chapter 7.
+The language is the same as in the lecture notes, Chapter 7.
 
 The main category is ``Program``. A program is a sequence of **definitions**,
 which are terminated by semicolons. A definition is a function name followed by
