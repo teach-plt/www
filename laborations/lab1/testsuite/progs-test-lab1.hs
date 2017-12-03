@@ -89,6 +89,8 @@ runTests = do
 testFrontendProg :: Bool -> FilePath -> IO Bool
 testFrontendProg good f = do
   let bad = not good
+      -- For some reason this executable name, without .exe, works on Windows;
+      -- I think this is because we are in the same directory as the executable
       prg = "." </> "testdriver"
   putStrLn $ "Parsing " ++ f ++ "..."
   -- TODO: Should maybe check exit code here
