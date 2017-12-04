@@ -220,6 +220,8 @@ supervision of the week have priority to get a place and supervisor help.
 
 There will be four laborations, written individually or in
 pairs.
+You have to pass the labs to pass the course.
+However, the course grade is determined solely by the exam.
 % - Lab 1 - parser  (deadline 14/11)
 - [Lab 1 - parser laborations/lab1/lab1.html] (deadline 13/11)
 % - Lab 2 - type checker and interpreter (deadline 27/11)
