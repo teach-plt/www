@@ -35,7 +35,7 @@ Google group: http://groups.google.com/group/plt-2017
 =News and changes=
 
  : //2017-12-05//
-   [Lab 4 laborations/lab3/lab4.html] is online.
+   [Lab 4 laborations/lab4/lab4.html] is online.
 
  : //2017-11-23//
    [Lab 3 laborations/lab3/lab3.html] is online.
