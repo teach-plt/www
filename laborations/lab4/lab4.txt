@@ -64,7 +64,7 @@ are its arguments. These variables are considered **bound** in ``exp``. Notice t
 the all such definitions can be converted to definitions of just ``f`` with
 a lambda abstraction over its arguments.
 
-The last definition has a special form.  Its name is ``main`, it has no variables, and its
+The last definition has a special form.  Its name is ``main``, it has no variables, and its
 body is a call to the (undefined) unary function ``print``.  For example:
 ```
   main = print (2 + 2) ;
