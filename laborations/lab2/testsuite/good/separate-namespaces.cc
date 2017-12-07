@@ -1,4 +1,4 @@
-int x(int x) { return 0; }
+int x(bool x) { return 0; }
 
 int main() {
   int x = 5;
