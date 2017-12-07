@@ -74,7 +74,11 @@ writeDriver = writeFile "testdriver.hs" $ unlines
   ]
 
 compileDriver :: IO ()
+#ifdef HC_OPTS
+compileDriver = runCommandNoFail_ ("ghc --make " ++ HC_OPTS ++ " -o testdriver") "testdriver.hs"
+#else
 compileDriver = runCommandNoFail_ "ghc --make -o testdriver" "testdriver.hs"
+#endif
 
 runTests :: IO ([Bool],[Bool])
 runTests = do
