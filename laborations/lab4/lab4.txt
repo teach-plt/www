@@ -32,21 +32,6 @@ used for the implementation. You can use
 All BNFC supported languages can be used, but guidance is guaranteed
 only for Haskell and Java 1.5.
 
-=Method=
-
-Use a ``Makefile`` similar to lab2. The interpreter should
-be compilable via calling
-```
-  make
-```
-Calling the interpreter should work by the command
-```
-  lab4 (-n|-v) <File>
-```
-The flag ``-n`` forces call-by-name evaluation, the flag
-``-v`` forces call-by-value. The default, i.e. when no flag
-is present, is call-by-value.
-
 =Language specification=
 
 The language is the same as in the lecture notes, Chapter 7.
@@ -140,9 +125,26 @@ Arithmetic operations on non-integers are also errors, e.g.
 ```
 All these errors occur at run time, because there is no type checker.
 
-=Examples=
+=Method=
 
-==Success==
+==Input and output==
+
+Calling the interpreter should work by the command
+```
+  lab4 [-n|-v] <File>
+```
+The flag ``-n`` forces call-by-name evaluation, the flag
+``-v`` forces call-by-value. The default, i.e. when no flag
+is present, is call-by-value.
+
+The output at success must be just the output defined by the
+interpreter.
+
+The output at failure is an ``INTERPRETER ERROR``. The error message
+should also give some useful explanation, which we leave to your
+imagination.
+
+==Example of success==
 
 Source file
 ```
@@ -159,7 +161,7 @@ Running the interpreter
   720
 ```
 
-==Failure==
+==Example of failure==
 
 Source file
 ```
@@ -173,10 +175,10 @@ Source file
 Running the interpreter
 ```
   ./lab4 bad.hs
-  ERROR: unknown identifier mul
+  INTERPRETER ERROR: unknown identifier mul
 ```
 
-==Call-by-name vs. call-by-value==
+==Example of call-by-name vs. call-by-value==
 
 Source file
 ```
@@ -195,9 +197,13 @@ Running the interpreter
   5
 ```
 
-=Compiling the interpreter=
+==Compiling the interpreter==
 
-The interpreter is submitted as source files that can be compiled by typing ``make``.
+Use a ``Makefile`` similar to lab2. The interpreter should
+be compilable via calling
+```
+  make
+```
 
 =Test programs=
 
