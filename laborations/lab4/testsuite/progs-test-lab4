@@ -43,7 +43,7 @@ for good in "${arr[@]}"; do
     echo -e "\033[34m--- $file ---\033[0m"
     echo "     Mode: $mode"
     echo "Expecting: $expect"
-    result=$(./lab4 "$mode" "$testdir"/good/"$file")
+    result=$(timeout 5s ./lab4 "$mode" "$testdir"/good/"$file")
     exitval=$?
 
     if [ $exitval -ne 0 ]; then
@@ -66,7 +66,7 @@ badpass=0
 for bad in "${testdir}"/bad/*.hs; do
     ((badtot+=1))
     echo -e "\033[34mxxx" "$(basename "$bad")" "xxx\033[0m"
-    result=$(./lab4 "$bad" 2>&1)
+    result=$(timeout 5s ./lab4 "$bad" 2>&1)
     echo "$result"
     if echo "$result" | grep -Ei "^(INTERPRETER ERROR|java.lang.RuntimeException|ERROR)" > /dev/null; then
 	((badpass+=1))
