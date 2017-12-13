@@ -1,14 +1,9 @@
 grm = Fun
 dir = $(grm)
 bnfc_output = $(patsubst %,$(dir)/%,Abs.hs ErrM.hs Print.hs Lex.x Par.y Test.hs)
-main-is = lab4.hs
-executable = $(patsubst %.hs,%,$(main-is))
-source_files = $(main-is) Interpreter.hs
-object_files = $(patsubst %.hs,%.o,$(source_files)) $(patsubst %.hs,%.hi,$(source_files))
 alex_file = $(dir)/Lex
 happy_file = $(dir)/Par
-
-HC_OPTS =
+test_file = ./lab4
 
 bnfc=$(HOME)/.cabal/bin/bnfc
 BNFC_OPTS =
@@ -16,12 +11,36 @@ BNFC_OPTS =
   # --profile # DOES NOT WORK
   # --haskell-gadt
 
-.PHONY: build
+.PHONY: build test
 
-build : $(alex_file).hs $(happy_file).hs $(executable)
+build : $(alex_file).hs $(happy_file).hs $(test_file)
 
-$(executable) : $(source_files) # $(alex_file).hs $(happy_file).hs
-	ghc --make $(HC_OPTS) $(main-is) -o $(executable)
+lab4 : lab4.hs Interpreter.hs # $(alex_file).hs $(happy_file).hs
+	ghc --make lab4.hs -o lab4
+
+test : $(test_file)
+	$(test_file) test/good1.hs
+	$(test_file) -n test/good1.hs
+	$(test_file) -n test/good2.hs
+	$(test_file) test/good3.hs
+	$(test_file) -n test/good3.hs
+	$(test_file) test/good4.hs
+#	$(test_file) -n test/good4.hs
+	$(test_file) -n test/good5.hs
+	$(test_file) test/good6.hs
+#	$(test_file) -n test/good6.hs
+	$(test_file) test/good7.hs
+#	$(test_file) -n test/good7.hs
+	$(test_file) test/good8.hs
+	$(test_file) -n test/good8.hs
+	$(test_file) test/good9.hs
+	$(test_file) -n test/good9.hs
+	! $(test_file) test/bad1.hs
+	! $(test_file) test/bad2.hs
+	! $(test_file) test/bad3.hs
+	! $(test_file) test/bad4.hs
+	! $(test_file) test/bad5.hs
+	! $(test_file) test/bad6.hs
 
 
 $(bnfc_output): $(grm).cf
@@ -40,6 +59,6 @@ debug:
 	@echo "bnfc_output = $(bnfc_output)"
 
 clean:
-	rm -rf $(dir) GRM.txt $(executable) $(object_files)
+	rm -rf bnfc
 
 # EOF

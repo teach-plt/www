@@ -5,33 +5,48 @@ JAVAC_FLAGS = -sourcepath .
 
 JAVA = java
 
-# Name of generated .cup file for bnfc 2.8.1
-CUPFILE = Fun/Fun.cup
+# Name of generated .cup file for bnfc 2.8 master
+CUPFILE = Fun/_cup.cup
 
-grm = Fun
-dir = $(grm)
-bnfc_output = $(patsubst %,$(dir)/%,VisitSkel.java Absyn/EApp.java Absyn/Def.java Absyn/EAbs.java Absyn/EAdd.java Absyn/EVar.java Absyn/Main.java Absyn/DDef.java Absyn/EInt.java Absyn/EIf.java Absyn/Exp.java Absyn/DMain.java Absyn/ListIdent.java Absyn/ESub.java Absyn/Program.java Absyn/Prog.java Absyn/ELt.java Absyn/ListDef.java FoldVisitor.java Test.java ComposVisitor.java PrettyPrinter.java AbstractVisitor.java AllVisitor.java Yylex $(CUPFILE))
-jlex_file = $(dir)/Yylex
-cup_files = $(dir)/parser.java $(dir)/sym.java
+test_file = ./lab4
 
-.PHONY: lab4 clean distclean vclean
+.PHONY: bnfc lab4 clean distclean vclean
 
-default: lab4
+default: bnfc lab4
 
-all: lab4
+all: bnfc lab4 test
 
-lab4.class : $(jlex_file).java $(cup_files) Interpreter.java lab4.java
+test : $(test_file)
+	-$(test_file) test/good1.hs
+	-$(test_file) -n test/good1.hs
+	-$(test_file) -n test/good2.hs
+	-$(test_file) test/good3.hs
+	-$(test_file) -n test/good3.hs
+	-$(test_file) test/good4.hs
+#	-$(test_file) -n test/good4.hs
+	-$(test_file) -n test/good5.hs
+	-$(test_file) test/good6.hs
+#	-$(test_file) -n test/good6.hs
+	-$(test_file) test/good7.hs
+#	-$(test_file) -n test/good7.hs
+	-$(test_file) test/good8.hs
+	-$(test_file) -n test/good8.hs
+	-$(test_file) test/good9.hs
+	-$(test_file) -n test/good9.hs
+	-! $(test_file) test/bad1.hs
+	-! $(test_file) test/bad2.hs
+	-! $(test_file) test/bad3.hs
+	-! $(test_file) test/bad4.hs
+	-! $(test_file) test/bad5.hs
+	-! $(test_file) test/bad6.hs
+
+lab4:
 	${JAVAC} ${JAVAC_FLAGS} lab4.java
+	chmod a+x lab4
 
-lab4: lab4.class
-
-$(bnfc_output) : $(grm).cf
+bnfc:
 	bnfc -java1.5 Fun.cf
-
-$(jlex_file).java : $(jlex_file)
 	${JAVA} ${JAVA_FLAGS} JLex.Main Fun/Yylex
-
-$(cup_files) : $(CUPFILE)
 	${JAVA} ${JAVA_FLAGS} java_cup.Main -nopositions -expect 100 $(CUPFILE)
 	mv sym.java parser.java Fun
 
