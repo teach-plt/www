@@ -1,7 +1,7 @@
 Prog. Program ::= [Def] Main;
 
-DDef. Def  ::= Ident [Ident] "=" Exp ;
 DMain.Main ::= "main" "=" "print" Exp3 ";";
+DDef. Def  ::= Ident [Ident] "=" Exp ;
 
 terminator Def ";" ;
 
@@ -20,7 +20,3 @@ coercions Exp 3 ;
 
 comment "--" ;
 comment "{-" "-}" ;
-
-
-
-

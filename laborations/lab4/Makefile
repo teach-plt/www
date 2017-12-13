@@ -5,25 +5,10 @@ deps=../../style.css ../../include.html ../../enhance_page.js
 
 .PHONY : all www testsuite
 
-all : www testsuite lab4-stub-java.tar.gz lab4-stub-haskell.tar.gz
+all : www testsuite
 
 testsuite :
 	make -C testsuite
-
-lab4-stub-java.tar.gz : \
-  java/Fun.cf \
-  java/Makefile \
-  java/lab4 \
-  java/lab4.java \
-  java/Interpreter.java
-	tar czhf $@ $^
-
-lab4-stub-haskell.tar.gz : \
-  haskell/Fun.cf \
-  haskell/Makefile \
-  haskell/lab4.hs \
-  haskell/Interpreter.hs
-	tar czhf $@ $^
 
 www : lab4.html
 
