@@ -1,0 +1,4 @@
+#!/bin/sh
+
+dir=`dirname $0`
+exec java -Xss32m -cp "$dir:$CLASSPATH" lab4 "$@"

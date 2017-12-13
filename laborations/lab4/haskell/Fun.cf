@@ -1,0 +1,26 @@
+Prog. Program ::= [Def] Main;
+
+DDef. Def  ::= Ident [Ident] "=" Exp ;
+DMain.Main ::= "main" "=" "print" Exp3 ";";
+
+terminator Def ";" ;
+
+terminator Ident "" ;
+
+EVar. Exp3 ::= Ident ;
+EInt. Exp3 ::= Integer ;
+EApp. Exp2 ::= Exp2 Exp3 ;
+EAdd. Exp1 ::= Exp1 "+" Exp2 ;
+ESub. Exp1 ::= Exp1 "-" Exp2 ;
+ELt.  Exp1 ::= Exp1 "<" Exp2 ;
+EIf.  Exp  ::= "if" Exp1 "then" Exp1 "else" Exp ;
+EAbs. Exp  ::= "\\" Ident "->" Exp ;
+
+coercions Exp 3 ;
+
+comment "--" ;
+comment "{-" "-}" ;
+
+
+
+
