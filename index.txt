@@ -121,6 +121,7 @@ Slides follow closely the plt book.
 | //Fri 05/01// | //23//         | //Lab 4 deadline//                |  |
 | //Mon 08/01// | //8.30-12.30// | //Exam (J)//                      |  |
 % //[Solution exams/solutions-plt-2017-1.pdf]//
+| //Tue 16/01// | //10.30-12.00// | //Exam review, EDIT 6128// |  |
 | //Fri 19/01// | //23//         | //Final lab deadline//            | //all lab returns//
 | //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
 | //Thu 22/03// |                | //Late final lab deadline//       |  |
