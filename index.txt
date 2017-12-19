@@ -29,6 +29,10 @@ Google group: http://groups.google.com/group/plt-2017
 /
 [GU ad http://utbildning.gu.se/education/courses-and-programmes/Course_detail?courseId=DIT231]
 /
+[GU kursplan http://kursplaner.gu.se/pdf/kurs/sv/DIT231]
+/
+[GU course plan http://kursplaner.gu.se/pdf/kurs/en/DIT231]
+/
 [Course page 2016 http://www.cse.chalmers.se/edu/year/2016/course/DAT151/]
 
 
@@ -158,7 +162,6 @@ passed the course should be able to
 + write simple code generators;
 + be familiar with the basic implementation issues of both
   imperative and functional languages;
-+ design and implement special-purpose programming languages;
 + master the principles of polymorphic type checking by unification;
 + implement an interpreter for a functional language.
 
