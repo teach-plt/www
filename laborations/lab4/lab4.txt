@@ -30,7 +30,7 @@ used for the implementation. You can use
 [this grammar ./Fun.cf] if you want.
 
 All BNFC supported languages can be used, but guidance is guaranteed
-only for Haskell and Java 1.5.
+only for Haskell and Java.
 
 =Language specification=
 
