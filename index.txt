@@ -37,6 +37,8 @@ Google group: http://groups.google.com/group/plt-2017
 
 
 =News and changes=
+ : //2017-12-19//
+   The exam will be held 8 January 2018, 8.30-12.30 in building M on the Johanneberg campus.
 
  : //2017-12-13//
    In the last lecture, we will walk through an
@@ -123,7 +125,7 @@ Slides follow closely the plt book.
 | Thu 14/12     | 13-15          | Preparing for the exam            | [Training Exam exams/exam-plt-2017-3.pdf] |
 || 2018 ||||
 | //Fri 05/01// | //23//         | //Lab 4 deadline//                |  |
-| //Mon 08/01// | //8.30-12.30// | //Exam (J)//                      |  |
+| //Mon 08/01// | //8.30-12.30// | //Exam (building M)//                      |  |
 % //[Solution exams/solutions-plt-2017-1.pdf]//
 | //Tue 16/01// | //10.30-12.00// | //Exam review, EDIT 6128// |  |
 | //Fri 19/01// | //23//         | //Final lab deadline//            | //all lab returns//
