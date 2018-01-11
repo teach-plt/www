@@ -60,16 +60,22 @@ for good in "${arr[@]}"; do
     echo
 done
 
+function was_failure {
+    echo "$1" | grep -Ei "^(INTERPRETER ERROR|java.lang.RuntimeException|ERROR)" > /dev/null
+}
+
 # Bad tests
 badtot=0
 badpass=0
 for bad in "${testdir}"/bad/*.hs; do
     ((badtot+=1))
     echo -e "\033[34mxxx" "$(basename "$bad")" "xxx\033[0m"
-    result=$(./lab4 "$bad" 2>&1)
-    echo "$result"
-    if echo "$result" | grep -Ei "^(INTERPRETER ERROR|java.lang.RuntimeException|ERROR)" > /dev/null; then
-	((badpass+=1))
+    result1=$(./lab4 -v "$bad" 2>&1)
+    result2=$(./lab4 -n "$bad" 2>&1)
+    echo "CBV: $result1"
+    echo "CBN: $result2"
+    if was_failure "$result1" && was_failure "$result2"; then
+            ((badpass+=1))
     fi
     echo
 done
