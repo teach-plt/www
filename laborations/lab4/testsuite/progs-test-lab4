@@ -33,6 +33,7 @@ arr[14]="013.hs -v 1"
 arr[15]="014.hs -n 33"
 arr[16]="015.hs -v 1"
 arr[17]="015.hs -n 1"
+arr[18]="016.hs -n 16"
 
 goodtot=0
 goodpass=0
