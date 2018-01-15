@@ -31,6 +31,8 @@ arr[12]="011.hs -n 1"
 arr[13]="012.hs -v 0"
 arr[14]="013.hs -v 1"
 arr[15]="014.hs -n 33"
+arr[16]="015.hs -v 1"
+arr[17]="015.hs -n 1"
 
 goodtot=0
 goodpass=0
