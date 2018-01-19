@@ -22,7 +22,7 @@ arr[3]="004.hs -v 720"
 arr[4]="005.hs -n 0"
 arr[5]="006.hs -v 1073741824"
 arr[6]="007.hs -v 1"
-arr[7]="008.hs -v 8"
+arr[7]="church.hs -v 8"
 arr[8]="009.hs -v 131072"
 arr[9]="010.hs -v 1"
 arr[10]="010.hs -n 1"
@@ -33,7 +33,7 @@ arr[14]="013.hs -v 1"
 arr[15]="014.hs -n 33"
 arr[16]="015.hs -v 1"
 arr[17]="015.hs -n 1"
-arr[18]="016.hs -n 16"
+arr[18]="ski.hs -n 16"
 
 goodtot=0
 goodpass=0
