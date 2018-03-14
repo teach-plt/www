@@ -38,6 +38,9 @@ Google group: http://groups.google.com/group/plt-2017
 
 =News and changes=
 
+ : //2018-03-14//
+   Fire is open for the late submission of labs.
+
  : //2018-01-16//
    [Exam text exams/exam-plt-2018-1.pdf] and [solution exams/solutions-plt-2018-1.pdf].
    I am very pleased with the outcome, thanks for studying well!
