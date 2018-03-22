@@ -38,6 +38,12 @@ Google group: http://groups.google.com/group/plt-2017
 
 =News and changes=
 
+ : //2018-03-22//
+   The Fire deadline for late submission has been extended until
+   Sunday 25th.
+
+   The reexam will be held 5 April in building SB.
+
  : //2018-03-14//
    Fire is open for the late submission of labs.
 
@@ -139,8 +145,8 @@ Slides follow closely the plt book.
 | //Tue 16/01// | //10.30-12.00// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
 | //Fri 19/01// | //23//         | //Final lab deadline//            | //all lab returns//
 | //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
-| //Thu 22/03// |                | //Late final lab deadline//       |  |
-| //Thu 05/04// | //8.30-12.30// | //Exam (J)//                      |  |
+| //Sun 25/03// |                | //Late final lab deadline//       |  |
+| //Thu 05/04// | //8.30-12.30// | //Exam (SB)//                      |  |
 % //[Solution exams/solutions-plt-2017-2.pdf]// |
 | //Thu 30/08// | //14-18//      | //Exam (J)//                      |  |
 % //[Solution exams/solutions-plt-2017-3.pdf]// |
