@@ -1,10 +1,15 @@
 # Makefile for slides (pdf) from txt
 
-.PHONY: 1 2 3 4 5 6 7 8
-
-slides: 1 2 3 4 5 6 7 8
-
-% : %-slides-ipl-book.pdf
+slides: \
+  0-slides-ipl-book.pdf \
+  1-slides-ipl-book.pdf \
+  2-slides-ipl-book.pdf \
+  3-slides-ipl-book.pdf \
+  4-slides-ipl-book.pdf \
+  5-slides-ipl-book.pdf \
+  6-slides-ipl-book.pdf \
+  7-slides-ipl-book.pdf \
+  8-slides-ipl-book.pdf
 
 %-slides-ipl-book.pdf : %-slides-ipl-book.txt
 	txt2tags -ttex $*-slides-ipl-book.txt

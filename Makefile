@@ -19,7 +19,7 @@ mini :
 	make -C laborations/mini
 
 ipl-book :
-	make -C ipl-book
+	make -C plt-book/ipl-book
 
 www : index.html
 

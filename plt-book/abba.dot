@@ -1,0 +1,27 @@
+digraph {
+
+rankdir = LR ;
+edge [len = 1.5] ;
+
+start[label = "", shape = "plaintext"]
+
+bb[label = "bb", style = "solid", shape = "circle"] ;
+ba[label = "ba", style = "solid", shape = "circle"] ;
+ab[label = "ab", style = "solid", shape = "doublecircle"] ;
+aa[label = "aa", style = "solid", shape = "doublecircle"] ;
+
+start -> bb ;
+
+bb -> ba [label = "a"] ;
+ba -> ab [label = "b"] ;
+ba -> aa [label = "a"] ;
+ab -> bb [label = "b"] ;
+ab -> ba [label = "a"] ;
+aa -> ab [label = "b"] ;
+
+edge [len = 2.5] ;
+
+aa -> aa [label = "a"] ;
+bb -> bb [label = "b"] ;
+
+}

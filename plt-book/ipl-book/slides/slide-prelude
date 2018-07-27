@@ -1,0 +1,113 @@
+\documentclass[a4paper,landscape]{slides}
+\usepackage[utf8]{inputenc}
+\usepackage{proof}
+\newcommand{\nnewslide}[1]{\newpage {\Huge \textbf{#1}}}
+\newcommand{\newslide}[1]{\newpage {\large \textbf{#1}}}
+\newcommand{\bequ}{\begin{quote}}
+\newcommand{\enqu}{\end{quote}}
+\newcommand{\eop}[1]{\mbox{\sl #1}}
+\newcommand{\square}[1]{\mbox{$#1^{2}$}}
+\newcommand{\even}{\eop{Even}}
+\newcommand{\odd}{\eop{Odd}}
+\newcommand{\sube}[2]{#1_{#2}}
+
+\setlength{\topmargin}{-20mm}
+\setlength{\oddsidemargin}{-8mm}
+\setlength{\evensidemargin}{-8mm}
+\setlength{\textwidth}{250mm}
+\setlength{\textheight}{170mm}
+\newcommand{\arrow}{\mbox{$\longrightarrow$} }
+\newcommand{\approximate}{\mbox{$\approx$} }
+%%%
+
+\usepackage[x11names,rgb]{xcolor}
+%\usepackage{tikz}
+%\usepackage{pgflibrarysnakes}
+%\usepackage{pgflibraryarrows}
+
+\usepackage{rotating}
+
+\newcommand{\keywrd}[1]{\index{#1}\textbf{#1}}
+
+%%\newcommand{\todoo}[1]{}
+%%\newcommand{\todoo}[1]{\marginpar{{\tiny #1}}}
+\newcommand{\todoo}[1]{{{\color{red} \tiny #1}}}
+
+\newcommand{\lindex}[1]{{\index{#1}}} % language index
+\newcommand{\sindex}[1]{{\index{#1}}} % symbol index
+
+\newcommand{\subscr}[2]{\mbox{\(#1_{#2}\)}}
+\newcommand{\superscr}[2]{\mbox{\(#1^{#2}\)}}
+\newcommand{\sugar}{\mbox{\(\;\equiv\!\equiv\;\;\)}}
+\newcommand{\allq}{\mbox{$\forall$}}
+%\newcommand{\computes}{\mbox{\(\;\leadsto\;\)}}
+\newcommand{\computes}{\mbox{\(\;\Downarrow\;\)}}
+
+\newcommand{\theexercise}{}
+
+\newcommand{\advanced}{\mbox{* }}
+\newcommand{\laborious}{\mbox{+ }}
+
+\newcommand{\doexercise}{\vspace{2mm}\noindent\textbf{Exercise}}
+
+\newcommand{\dohint}{\textbf{hint}}
+
+\newcommand{\anbncn}{$a^{n}b^{n}c^{n}$}
+\newcommand{\ambncmdn}{$a^{m}b^{n}c^{m}d^{n}$}
+
+\renewcommand{\multicolumn}[3]{#3} %work around a bug in txt2tags > 2.5
+
+\newcommand{\sembrack}[1]{[\![#1]\!]}
+\newcommand{\subex}[2]{#1_{#2}}
+\newcommand{\commentOut}[1]{}
+%\newcommand{\eop}[1]{\mbox{\textsl{#1}}}
+\newcommand{\ttop}[1]{\mbox{\texttt{#1}}}
+
+%%
+\newcommand{\beco}{\begin{quote}}
+\newcommand{\enco}{\end{quote}}
+
+\newcommand{\angles}[1]{\langle#1\rangle} % angle brackets, in math mode
+\newcommand{\pseu}[1]{\mbox{\textsl{#1}}} %pseudocode function
+\newcommand{\pseuk}[1]{\mbox{{\bf #1}}} %pseudocode keyword
+\newcommand{\ind}{\mbox{\hspace{4mm}}} %indentation in pseudocode
+\newcommand{\return}{\pseuk{return}}
+\newcommand{\infert}{\pseu{infer}}
+\newcommand{\checkt}{\pseu{check}}
+\newcommand{\lookup}{\pseu{lookup}}
+\newcommand{\lookupVar}{\pseu{lookupVar}}
+\newcommand{\lookupFun}{\pseu{lookupFun}}
+\newcommand{\valid}{\pseu{valid}}
+\newcommand{\eval}{\pseu{eval}}
+\newcommand{\exec}{\pseu{exec}}
+\newcommand{\compile}{\pseu{compile}}
+\newcommand{\ifp}{\pseuk{if}}
+\newcommand{\elsep}{\pseuk{else}}
+\newcommand{\forEach}{\pseuk{for each}}
+\newcommand{\intp}{\pseu{int}}
+\newcommand{\doublep}{\pseu{double}}
+\newcommand{\stringp}{\pseu{string}}
+\newcommand{\emit}{\pseu{emit}}
+\newcommand{\newLabel}{\pseu{newLabel}}
+\newcommand{\Val}{\pseu{Val}}
+\newcommand{\Env}{\pseu{Env}}
+\newcommand{\Stm}{\pseu{Stm}}
+\newcommand{\Stms}{\pseu{Stms}}
+\newcommand{\Type}{\pseu{Type}}
+\newcommand{\FunType}{\pseu{FunType}}
+\newcommand{\Void}{\pseu{Void}}
+\newcommand{\Def}{\pseu{Def}}
+\newcommand{\Exp}{\pseu{Exp}}
+\newcommand{\Program}{\pseu{Program}}
+\newcommand{\Ident}{\pseu{Ident}}
+\newcommand{\extend}{\pseu{extend}}
+\newcommand{\extendVar}{\pseu{extendVar}}
+\newcommand{\extendFun}{\pseu{extendFun}}
+\newcommand{\newBlock}{\pseu{newBlock}}
+\newcommand{\exitBlock}{\pseu{exitBlock}}
+\newcommand{\emptyEnv}{\pseu{emptyEnv}}
+\newcommand{\mgu}{\pseu{mgu}}
+\newcommand{\fresh}{\pseu{fresh}}
+
+\newcommand{\begit}{\begin{itemize}}
+\newcommand{\enit}{\end{itemize}}

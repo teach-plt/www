@@ -1,0 +1,74 @@
+digraph {
+
+rankdir = LR ;
+
+lbnf[label = "LBNF", shape = "diamond"] ;
+
+haskell[label = "Haskell", shape = "ellipse"] ;
+java[label = "Java", shape = "ellipse"] ;
+c[label = "C", shape = "ellipse"] ;
+cpp[label = "C++", shape = "ellipse"] ;
+cs[label = "C#", shape = "ellipse"] ;
+ocaml[label = "OCaml", shape = "ellipse"] ;
+
+lexer[label = "lexer", shape = "rectangle"] ;
+parser[label = "parser", shape = "rectangle"] ;
+ast[label = "abstract syntax", shape = "rectangle"] ;
+case[label = "case skeleton", shape = "rectangle"] ;
+pp[label = "pretty-printer", shape = "rectangle"] ;
+doc[label = "document", shape = "rectangle"] ;
+
+lbnf -> haskell ;
+lbnf -> java ;
+lbnf -> c ;
+lbnf -> cpp ;
+lbnf -> cs ;
+lbnf -> ocaml ;
+
+haskell -> lexer ;
+haskell -> parser ;
+haskell -> ast ;
+haskell -> case ;
+haskell -> pp ;
+haskell -> doc ;
+
+java -> lexer ;
+java -> parser ;
+java -> ast ;
+java -> case ;
+java -> pp ;
+java -> doc ;
+
+c -> lexer ;
+c -> parser ;
+c -> ast ;
+c -> case ;
+c -> pp ;
+c -> doc ;
+
+cpp -> lexer ;
+cpp -> parser ;
+cpp -> ast ;
+cpp -> case ;
+cpp -> pp ;
+cpp -> doc ;
+
+cs -> lexer ;
+cs -> parser ;
+cs -> ast ;
+cs -> case ;
+cs -> pp ;
+cs -> doc ;
+
+ocaml -> lexer ;
+ocaml -> parser ;
+ocaml -> ast ;
+ocaml -> case ;
+ocaml -> pp ;
+ocaml -> doc ;
+
+
+
+
+
+}

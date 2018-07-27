@@ -1,0 +1,20 @@
+digraph {
+
+rankdir = LR ;
+
+start[label = "", shape = "plaintext"]
+
+init[label = "init", style = "solid", shape = "circle"] ;
+b[label = "", style = "solid", shape = "circle"] ;
+c[label = "", style = "solid", shape = "circle"] ;
+ab[label = "", style = "solid", shape = "doublecircle"] ;
+ac[label = "", style = "solid", shape = "doublecircle"] ;
+
+start -> init ;
+
+init -> b [label = "a"] ;
+init -> c [label = "a"] ;
+b -> ab [label = "b"] ;
+c -> ac [label = "c"] ;
+
+}
