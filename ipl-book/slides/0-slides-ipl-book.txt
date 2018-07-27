@@ -1,0 +1,1225 @@
+Implementing Programming Languages. An Introduction to Compilers and Interpreters
+Aarne Ranta
+Short slide presentation for the book release, June 2012
+
+%!Encoding:utf8
+%!postproc(tex): "\\documentclass{article}" ""
+%!postproc(tex): "colorlinks=true" "colorlinks=true,citecolor=black"
+%!postproc(tex): "urlcolor=blue" "urlcolor=black,linkcolor=black"
+%%!postproc(tex): "Implementing Programming" "Implementing \\\\ Programming"
+%%!postproc(tex): "An Introduction to Compilers and Interpreters" "\\\\ {\Large An Introduction to Compilers and Interpreters}"
+%!postproc(tex) : "\\subsection\*" "\\newslide"
+%!postproc(tex) : "\\section\*" "\\nnewslide"
+
+%%!postproc(tex): "\\section" "\\chapter"
+%%!postproc(tex): "\\subsection" "\\section"
+%!postproc(tex): "#BEQU" "begin{quote}"
+%!postproc(tex): "#ENQU" "end{quote}"
+%!postproc(tex): "#BECE" "begin{center}"
+%!postproc(tex): "#ENCE" "end{center}"
+%!postproc(tex): "#NEW" "clearpage"
+%!postproc(tex): "#TINY" "tiny"
+%!postproc(tex): "#SMALL" "small"
+%!postproc(tex): "#NORMAL" "normalsize"
+%!postproc(tex): "#NOINDENT" "noindent"
+%!postproc(tex): "#ENDDOC" "end{document}"
+%!postproc(tex): #FURTHER "mbox{}"
+%!postproc(tex): "#BERE" "begin{quote}"
+%!postproc(tex): "#ENRE" "end{quote}"
+
+
+'''
+\newcommand{\indxbf}[1]{\index{#1}{\textbf{#1}}}
+\newcommand{\ixbf}[2]{\index{#2}{\textbf{#1}}}
+\newcommand{\ixnobf}[2]{\index{#2}{#1}}
+\newcommand{\closure}[2]{#1\{#2\}}
+\newcommand{\seqarr}{\vdash}
+\newcommand{\larrow}{.}
+
+
+'''
+
+
+'''
+\begin{center}
+\includegraphics[width=0.4\textwidth]{../ipl-cover.png}
+\end{center}
+'''
+
+#SMALL
+Aarne Ranta, 
+//Implementing Programming Languages. An Introduction to Compilers and Interpreters//,
+with an appendix coauthored by Markus Forsberg,
+College Publications, London, 2012. ISBN 978-1-84890-064-6
+
+
+#NEW
+
+
+Preface
+
+1 Compilation Phases 
+
+2 Grammars 
+
+3 Lexing and Parsing* 
+
+4 Type Checking 
+
+5 Interpreters 
+
+6 Compiling to machine code 
+
+7 Functional Programming Languages 
+
+8 The Language Design Space 
+
+A BNFC Quick Reference
+
+B Some JVM Instructions
+
+C Summary of the Assignments
+
+D Further Reading
+
+
+#NORMAL
+
+
+
+=Preface=
+
+
+==A different book==
+
+Thinner (225 pp)
+
+Cheaper (11 GBP)
+
+More pure theory (semantics, inference rules) 
+
+More actual practice (how to write code)
+
+Low-level details left to standard tools (BNFC, Yacc, Lex)
+
+
+
+==Theory-based practical approach==
+
+Theory works as **blueprint** for code
+
+Grammars, inference rules  
+''$\longrightarrow$'' 
+Haskell/Java code
+
+
+==Goals==
+
+Build your own languages
+
+Understand how existing languages work
+
+The whole chain from human to machine
+
+
+
+
+==Background==
+
+Courses: Compiler Construction 2002--2006, 
+Programming Language Technology 2007--
+
+Previous lecturers: Ulf Norell, Marcin Benke, Thomas Hallgren, Lennart Augustsson, 
+Thomas Jonsson, Niklas Röjemo
+
+Assistants: Grégoire Détrez, Arnar Birgisson, Ramona Enache, 
+Krasimir Angelov, Michał Pałka, Jean-Philippe Bernardy,
+Kristoffer Hedberg, Anders Mörtberg, 
+Daniel Hedin, Håkan Burden, Kuchi Prasad, 
+Björn Bringert, Josef Svenningsson
+
+BNFC contributors: Krasimir Angelov, Björn Bringert, 
+Johan Broberg, Paul Callaghan, 
+Markus Forsberg, Ola Frid, 
+Peter Gammie, Patrik Jansson, Kristofer Johannisson, 
+Antti-Juhani Kaijanaho, Ulf Norell, Michael Pellauer
+
+Book: Rodolphe Lepigre, Jan Smith, Jane Spurr
+
+
+=Compilation Phases=
+
+
+==From language to binary==
+
+```
+  0 = 0
+  1 = 1
+  2 = 10
+  3 = 11
+  4 = 100
+```
+
+#NEW
+
+```
+  A =  65 = 1000001
+  B =  66 = 1000010
+  C =  67 = 1000011
+```
+
+```
+  + =  96 = 0110 0000
+  * = 104 = 0110 1000
+```
+ 
+
+#NEW
+
+``5 + 6 = 0000 0101    0110 0000    0000 0110``  
+
+??
+
+#NEW
+
+#BEQU
+``5 + 6`` ''$\Longrightarrow$'' ``5 6 +``
+#ENQU
+#BEQU
+``(5 + 6) * 7`` ''$\Longrightarrow$'' ``5 6 + 7 *``
+
+``5 + (6 * 7)`` ''$\Longrightarrow$'' ``5 6 7 * +``
+#ENQU
+
+#NEW
+
+
+
+
+
+```
+  5 + 6
+``` 
+''$\Longrightarrow$'' 
+```
+  bipush 5 bipush 6 iadd      (bipush = 16 = 0001 0000)
+```
+''$\Longrightarrow$'' 
+```
+  0001 0000  0000 0101  0001 0000  0000 0110  0110 0000
+```
+
+
+#NEW
+
+'''
+\rule{180mm}{0.2mm}\ human
+
+human language
+
+%\hspace{50mm}  
+ML \hspace{80mm} Haskell
+
+%\hspace{50mm}  
+Lisp \hspace{80mm}  Prolog
+
+C++ \hspace{80mm}   Java
+
+C
+
+assembler
+
+machine language 
+ 
+\rule{180mm}{0.2mm}\ machine
+
+'''
+|  ``57+6*result``      |           | **character string**
+|                       |           |
+|  ''$\downarrow\;$''   | //lexer//  |
+|                       |          |
+|  ``57 + 6 * result``  |         | **token string**
+|                       |         |
+|  ''$\downarrow\;$''   | //parser//  |
+|                       |         |
+|  ``(+ 57 (* 6 result))``  |       | **syntax tree**
+|                           |    |
+|  ''$\downarrow\;$''  | //type checker//  |
+|                      |          |
+|  ``([i +] 57 ([i *] 6 [i result]))``  |  | **annotated tree**
+|                                |  |
+|  ''$\downarrow\;$''  | //code generator//  |
+|                     |  |
+| ``bipush 57 bipush 6``      |  | **assembly code**
+| ``iload 10 imul iadd``       |  | 
+|  ''$\downarrow\;$''  | //assembler//  |
+| ``00010000 00111001 00010000 00000110`` |  | **machine code**
+| ``00010101 00001010 01101000 01100000`` |  | 
+
+
+
+
+==Theory and practice==
+
+|| phase | theory |
+| lexer  | finite automata
+| parser | context-free grammars
+| type checker | type systems
+| interpreter  | operational semantics
+| code generator | compilation schemes
+
+
+=Grammars=
+
+==Assignment: a parser for C++ ==
+
+```
+// a small C++ program
+#include <iostream>
+
+int main()
+{
+    std::cout << "Hello, world!" << std::endl;
+    return 0;
+}
+```
+
+#NEW
+
+#TINY
+
+```
+#include "split.h"
+#include <time.h>
+
+using std::istream;           using std::cin;
+using std::copy;              using std::cout;
+using std::endl;              using std::find;
+using std::getline;           using std::logic_error;
+using std::map;               using std::string;
+using std::vector;            using std::domain_error;
+using std::rand;
+
+typedef vector<string> Rule;
+typedef vector<Rule> Rule_collection;
+typedef map<string, Rule_collection> Grammar;
+
+// read a grammar from a given input stream
+Grammar read_grammar(istream& in)
+{
+    Grammar ret;
+    string line;
+
+    // read the input
+    while (getline(in, line)) {
+
+        // `split' the input into words
+        vector<string> entry = split(line);
+
+        if (!entry.empty())
+            // use the category to store the associated rule
+            ret[entry[0]].push_back(
+                Rule(entry.begin() + 1, entry.end()));
+    }
+    return ret;
+}
+
+void gen_aux(const Grammar&, const string&, vector<string>&);
+
+int nrand(int);
+
+vector<string> gen_sentence(const Grammar& g)
+{
+    vector<string> ret;
+    gen_aux(g, "<sentence>", ret);
+    return ret;
+}
+
+bool bracketed(const string& s)
+{
+    return s.size() > 1 && s[0] == '<' && s[s.size() - 1] == '>';
+}
+
+void
+gen_aux(const Grammar& g, const string& word, vector<string>& ret)
+{
+
+    if (!bracketed(word)) {
+        ret.push_back(word);
+    } else {
+        // locate the rule that corresponds to `word'
+        Grammar::const_iterator it = g.find(word);
+        if (it == g.end())
+            throw logic_error("empty rule");
+
+        // fetch the set of possible rules
+        const Rule_collection& c = it->second;
+
+        // from which we select one at random
+        const Rule& r = c[nrand(c.size())];
+
+        // recursively expand the selected rule
+        for (Rule::const_iterator i = r.begin(); i != r.end(); ++i)
+            gen_aux(g, *i, ret);
+    }
+}
+
+int main()
+{
+    // generate the sentence
+    vector<string> sentence = gen_sentence(read_grammar(cin));
+
+    // write the first word, if any
+#ifdef _MSC_VER
+    std::vector<string>::const_iterator it = sentence.begin();
+#else
+    vector<string>::const_iterator it = sentence.begin();
+#endif
+    if (!sentence.empty()) {
+        cout << *it;
+        ++it;
+    }
+
+    // write the rest of the words, each preceded by a space
+    while (it != sentence.end()) {
+        cout << " " << *it;
+        ++it;
+    }
+
+    cout << endl;
+    return 0;
+}
+
+// return a random integer in the range `[0,' `n)'
+int nrand(int n)
+{
+    if (n <= 0 || n > RAND_MAX)
+        throw domain_error("Argument to nrand is out of range");
+
+    const int bucket_size = RAND_MAX / n;
+    int r;
+
+    do r = rand() / bucket_size;
+    while (r >= n);
+
+    return r;
+}
+```
+
+
+#NORMAL
+
+
+
+
+
+
+=Lexing and Parsing*=
+
+
+==Size explosion==
+
+``(a|b)* a (a|b)``
+
+'''
+\includegraphics[width=0.5\textwidth]{../../nabba.png}
+'''
+
+#NEW
+
+'''
+ 
+\includegraphics[width=0.7\textwidth]{../../abba.png}
+
+'''
+
+==Matching parentheses==
+
+''\[\{ a^n b^n | n = 0,1,2\ldots\}\]''
+
+
+If ''$\subex{s}{m} = \subex{s}{n}$'' for some ''$m \neq n$'', then
+'''
+\begin{center}
+\includegraphics[width=0.5\textwidth]{../../parenth.png}
+\end{center}
+%
+'''
+
+
+
+
+=Type Checking=
+
+==Inference rules==
+
+'''
+\[
+\frac{
+  a : \eop{bool} \;\;   b : \eop{bool}
+}{
+a \,\ttop{\&\&}\, b : \eop{bool}
+}
+\]
+'''
+
+==From inference rules to code==
+
+'''
+\[
+\frac{
+  \subex{J}{1} \; \ldots \; \subex{J}{n}
+}{
+J
+}
+\]
+'''
+
+#BEQU
+//To check ''$J$'', check ''$\subex{J}{1},\ldots,\subex{J}{n}$''//.
+#ENQU
+'''
+\beco
+$  J : $\\
+$\ind    \subex{J}{1} $\\
+$\ind    \ldots $\\
+$\ind    \subex{J}{n} $
+\enco
+'''
+
+
+
+==Overloading and type conversion==
+
+'''
+\[
+\frac{
+  \Gamma \seqarr a : t \;\;   \Gamma \seqarr b : u
+}{
+\Gamma \seqarr a \,\ttop{+}\, b : \pseu{max}(t,u)
+}\;\;
+\mbox{if}\; t, u \in \{\ttop{int}, \ttop{double}, \ttop{string}\}
+\]
+
+\vspace{10mm}
+
+$\ttop{int} < \ttop{double} < \ttop{string}$
+'''
+
+
+==Exercise==
+
+```
+  1 + 2 + "hello" + 1 + 2
+```
+
+==A solution==
+
+```
+  (((1 + 2) + "hello") + 1) + 2 
+
+= (( 3      + "hello") + 1) + 2 
+
+= ("3hello"            + 1) + 2 
+
+= "3hello1"                 + 2 
+
+= "3hello12"
+```
+
+
+
+
+=Interpreters=
+
+
+==From operational semantics to interpreter code==
+
+'''
+\[
+\frac{
+  \gamma \seqarr a \Downarrow u \;\;\;   \gamma \seqarr b \Downarrow v
+}{
+  \gamma \seqarr a \,\ttop{*}\, b \Downarrow u \times v
+}
+\]
+\begin{center}
+\beco
+$  \eval(\gamma, a \ttop{*} b) : $\\
+$\ind    u := \eval(\gamma, a) $\\
+$\ind    v := \eval(\gamma, b) $\\
+$\ind    \return\; u \times v$
+\enco
+\end{center}
+'''
+```
+  eval env (EMul a b) = do       public Integer eval (EMul p, Env env) {
+    u <- eval env a                  Integer u = eval(p.exp_1, env) ;
+    v <- eval env b                  Integer v = eval(p.exp_2, env) ;
+    return (u * v)                   return u * v ;
+                                     }
+```
+
+==Side effects==
+
+'''
+\[
+\gamma \seqarr e \Downarrow \angles{v,\gamma'}
+\]
+'''
+
+
+
+==Pre- and post-increments==
+
+'''
+\[
+\frac{
+}{
+  \gamma \seqarr \ttop{++}x \Downarrow \angles{v + 1,\gamma(x := v + 1)}
+} \;\;\mbox{if $x := v$ in $\gamma$}
+\]
+\vspace{10mm}
+\[
+\frac{
+}{
+  \gamma \seqarr x\ttop{++} \Downarrow \angles{v,\gamma(x := v + 1)}
+} \;\;\mbox{if $x := v$ in $\gamma$}
+\]
+'''
+
+==Exercise==
+
+#BECE
+``x++ - ++x`` 
+#ENCE
+
+
+==A solution==
+
+'''
+\[
+\frac{
+  x := 1 \seqarr \ttop{x++} \Downarrow \angles{1, x := 2} \;\;\;   
+  x := 2 \seqarr \ttop{++x} \Downarrow \angles{3, x := 3}
+}{
+  x := 1 \seqarr \ttop{x++}\,\ttop{-}\,\ttop{++x} \Downarrow \angles{-2, x := 3}
+}
+\]
+'''
+
+
+==However==
+
+In **C**, the evaluation order of operands is unspecified. 
+
+What other value could the expression ``x++ - ++x`` get?
+
+
+
+
+
+==Interpreting Java bytecode*==
+
+'''
+\begin{center}
+\begin{tabular}{llllll}
+$\langle\ttop{bipush}\;v,$ & $P,V,S\rangle$ & $\longrightarrow$ & 
+  $\langle P+1,$ & $V,$ & $S.v\rangle$
+\\
+$\langle\ttop{iadd},$  & $P,V,S.v.w\rangle$ & $\longrightarrow$ & 
+  $\langle P+1,$ & $V,$ & $S.v+w\rangle$
+\\
+$\langle\ttop{imul},$  & $P,V,S.v.w\rangle$ & $\longrightarrow$ & 
+  $\langle P+1,$ & $V,$ & $S.v\times w\rangle$
+\\
+$\langle\ttop{iload}\,i,$  & $P,V,S\rangle$ & $\longrightarrow$ & 
+  $\langle P+1,$ & $V,$ & $S.V(i)\rangle$
+\\
+$\langle\ttop{istore}\,i,$  & $P,V,S.v\rangle$ & $\longrightarrow$ & 
+  $\langle P+1,$ & $V(i:=v),$ & $S\rangle$
+\\
+$\langle\ttop{goto}\,L,$  & $P,V,S\rangle$ & $\longrightarrow$ & 
+  $\langle P(L),$ & $V,$ & $S\rangle$
+\\
+$\langle\ttop{ifeq}\,L,$  & $P,V,S.0\rangle$ & $\longrightarrow$ & 
+  $\langle P(L),$ & $V,$ & $S\rangle$
+\\
+$\langle\ttop{ifeq}\,L,$  & $P,V,S.v\rangle$ & $\longrightarrow$ & 
+  $\langle P(L),$ & $V,$ & $S\rangle \; (v \neq 0)$
+\end{tabular}
+\end{center}
+'''
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+=Code Generation=
+
+==The semantic gap==
+
+|| high-level code  | machine code    |
+| statement         | instruction     |
+| expression        | instruction     |
+| variable          | memory address  |
+| value             | bit vector               |
+| type              | memory layout            |
+| control structure | jump                     |
+| function          | subroutine               |
+| tree structure    | linear structure         |
+
+
+
+==Compilation schemes==
+
+'''
+\beco
+$  \compile(\gamma, [a * b : t]):$\\
+$\ind    c := \compile(\gamma,a) $\\
+$\ind    d := \compile(\gamma,b) $\\
+$\ind    \ifp \; t = \intp  $\\
+$\ind\ind       \return \; c \; d \; \ttop{imul} $\\
+$\ind    \elsep  $\\
+$\ind\ind       \return \; c \; d \; \ttop{dmul} $\\
+\enco
+'''
+
+==Compositionality==
+
+'''
+\[
+  T (C \subex{t}{1} \ldots \subex{t}{n}) = f(T(\subex{t}{1}), \ldots, T(\subex{t}{n}))
+\]
+'''
+
+
+
+
+==Code optimization*==
+
+Constant folding:
+```
+  int age = 26 * 365 + 7 * 366 + 31 + 28 + 4 ;
+```
+''$\Longrightarrow$''
+```
+  int age = 12115 ;
+```
+
+
+==Pitfalls==
+'''
+\[
+e-e \Longrightarrow 0
+\]
+'''
+
+#NEW
+
+```
+  i++ - i++
+```
+
+```
+  1/x - 1/x
+```
+
+
+
+==Peephole optimization==
+
+| ``bipush 5`` |                       |               |                       | ''\mbox{}''    
+| ``bipush 6`` |                       | ``bipush 5``  |                       |            
+| ``bipush 7`` | ''$\Longrightarrow$'' | ``bipush 42`` | ''$\Longrightarrow$'' | ``bipush 47`` 
+| ``imul``     |                       | ``iadd``      |                       |    
+| ``iadd``     |                       |               |                       |    
+
+
+==Register allocation==
+
+```
+  int x = 1 ; 
+  int y = 2 ; 
+  printInt(y) ; 
+  int z = 3 ;   
+  printInt(x + z) ;
+  y = z - x ;      
+  z = f(y) ;       
+  printInt(y) ;
+  return ;
+```
+How many registers are needed for the three variables ``x``, ``y``,
+and ``z``?
+
+
+==Register allocation==
+
+```
+  int x = 1 ;       // x     live
+  int y = 2 ;       // x y   live
+  printInt(y) ;     // x     live
+  int z = 3 ;       // x   z live
+  printInt(x + z) ; // x   z live
+  y = z - x ;       //   y   live
+  z = f(y) ;        //   y   live
+  printInt(y) ;
+  return ;
+```
+The answer is **two**, because ``y`` and ``z`` are never **live** at the same
+time. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+=Functional Programming Languages=
+
+
+
+==Function definitions==
+
+```
+  doub x    = x + x ;
+  twice f x = f (f x) ;
+  quadruple = twice doub ;
+  main      = twice quadruple 2 ;
+```
+
+==Evaluation==
+
+```
+    main 
+  = twice quadruple 2
+  = quadruple (quadruple 2)
+  = twice doub (twice doub 2)
+  = doub (doub (doub (doub 2)))
+  = doub (doub (doub (2 + 2)))
+  = doub (doub (doub 4))
+  = doub (doub (4 + 4))
+  = doub (doub 8)
+  = doub (8 + 8)
+  = doub 16
+  = 16 + 16
+  = 32
+```
+
+
+
+==Closures==
+
+```
+  (x*x + 2*x + 1){x := 8}
+```
+
+
+
+==Call by value vs. call by name==
+
+'''
+\[
+\frac{
+  \gamma \seqarr f \Downarrow \closure{(\lambda x \larrow e)}{\delta}
+ \;\;\;\;\;
+  \gamma \seqarr a \Downarrow u
+ \;\;\;\;\;
+  \delta, x := u \seqarr e \Downarrow v
+}{
+  \gamma \seqarr (f\,a) \Downarrow v
+}
+\]
+
+\[
+\frac{
+  \gamma \seqarr f \Downarrow \closure{(\lambda x \rightarrow e)}{\delta}
+ \;\;\; 
+  \delta,x := \closure{a}{\gamma} \seqarr e \Downarrow v
+}{
+  \gamma \seqarr (f\,a) \Downarrow v
+}
+\]
+'''
+
+
+==The difference==
+
+```
+  infinite = 1 + infinite
+  first x y = x
+  main = first 5 infinite
+```
+
+==With call by value==
+
+```
+  main 
+  = first 5 infinite
+  = (\x -> \y -> x) 5 (1 + infinite)
+  = (\y -> 5) (1 + infinite)
+  = (\y -> 5) (2 + infinite)
+  ...
+```
+
+==With call by name==
+
+```
+  main 
+  = first 5 infinite
+  = (\x -> \y -> x) 5 infinite
+  = (\y -> 5) infinite
+  = 5
+```
+
+
+
+
+==Type checking by unification*==
+
+Type inference of
+```
+  \x -> (x x)
+```
+creates substitution
+'''
+\[
+\{v := v \rightarrow u\}
+\]
+'''
+only satisfied by an "infinite type"
+'''
+\[(\ldots(v \rightarrow u)\ldots\rightarrow u) \rightarrow u\]
+'''
+prevented by **occurs check**.
+
+
+==Exercise==
+
+Even if 
+```
+  \x -> (x x)
+``` 
+fails to type check, a "self-application" is legal in 
+```
+  (\x -> x)(\x -> x)
+```
+Why?
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%+How simple can a language be*+
+
+
+=The Language Design Space=
+
+How simple can a language be?
+
+
+
+==Pure lambda calculus*==
+
+```
+  Exp ::= Ident | Exp Exp | "\" Ident "->" Exp
+```
+
+==Church numerals==
+
+```
+  0 = \f -> \x -> x
+  1 = \f -> \x -> f x
+  2 = \f -> \x -> f (f x)
+  3 = \f -> \x -> f (f (f x))
+  ...
+```
+```
+  PLUS = \m -> \n -> \f -> \x -> n f (m f x)
+```
+
+
+
+==Brainf*ck==
+ 
+| ``>`` | increment the pointer |
+| ``<`` | decrement the pointer
+| ``+`` | increment the byte at the pointer
+| ``-`` | decrement the byte at the pointer
+| ``.`` | output the byte at the pointer
+| ``,`` | input a byte and store it in the byte at the pointer
+| ``[`` | jump forward past the matching ``]`` if the byte at the pointer is 0
+| ``]`` | jump backward to the matching ``[`` unless the byte at the pointer is 0
+
+
+==Print the ASCII character set==
+
+```
+  .+[.+]
+```
+
+==Print Hello==
+
+```
+  ++++++++++               Set counter 10 for iteration
+  [>+++++++>++++++++++<<-] Set up 7 and 10 on array and iterate
+  >++.                     Print 'H'
+  >+.                      Print 'e'
+  +++++++.                 Print 'l'
+  .                        Print 'l'
+  +++.                     Print 'o'
+```
+
+
+
+==BNFC as a domain-specific language==
+
+#BEQU
+//The number of bugs per line is independent of programming language.//
+#ENQU
+(Eric S. Raymond)
+
+  || format       |  CPP.cf |  Haskell |  Java 1.5 |   C++ |     raw C++ |
+  | files         |       1 |        9 |        55 |    12 |          12
+  | lines         |      63 |      999 |      3353 |  5382 |        9424
+  | chars         |    1548 |    28516 |     92947 | 96587 |      203659
+  | chars target/src |    1 |       18 |        60 |    62 |         132
+
+
+
+
+==Compiling natural language*==
+
+The ultimate limit of bringing a language close to humans!
+
+Computer application of the 1940's
+
+Translation
+
+Human-computer interaction
+
+
+==Case study: a query language*==
+
+//Is any even number prime?// ''\\''
+Yes.
+
+//Which numbers greater than 100 and smaller than 150 are prime?// ''\\''
+101, 103, 107, 109, 113, 127, 131, 137, 139, 149.
+
+
+#SMALL
+
+==A BNF grammar==
+
+```
+-- general part
+
+  QWhich.     Query    ::= "which" Kind "is" Property ;
+  QWhether.   Query    ::= "is" Term Property ;
+  TAll.       Term     ::= "every" Kind ;
+  TAny.       Term     ::= "any" Kind ;
+  PAnd.       Property ::= Property "and" Property ;
+  POr.        Property ::= Property "or"  Property ;
+  PNot.       Property ::= "not" Property ;
+  KProperty.  Kind     ::= Property Kind ;
+
+-- specific part
+
+  KNumber.    Kind     ::= "number" ;
+  PEven.      Property ::= "even" ;
+```
+
+#NORMAL
+
+
+==Query abstract syntax in GF==
+
+```
+abstract Query = {
+cat
+  Query ;
+  Kind ;
+  Property ;
+  Term ;
+fun
+  QWhich   : Kind -> Property -> Query ;    -- which numbers are prime
+  QWhether : Term -> Property -> Query ;    -- is any number prime
+  TAll : Kind -> Term ;                     -- all numbers
+  TAny : Kind -> Term ;                     -- any number
+  PAnd : Property -> Property -> Property ; -- even and prime
+  POr  : Property -> Property -> Property ; -- even or odd
+  PNot : Property -> Property ;             -- not prime
+  KProperty : Property -> Kind -> Kind ;    -- even number
+}
+```
+
+#SMALL
+
+==Query English==
+
+```
+concrete QueryEng of Query = {
+lincat
+  Query = Str ;
+  Kind = Number => Str ;
+  Property = {s : Str ; p : Fix} ;
+  Term = {s : Str ; n : Number} ;
+param
+  Fix = Pre | Post ;
+  Number = Sg | Pl ;
+lin
+  QWhich kind property = "which" ++ kind ! Pl ++ be ! Pl ++ property.s ;
+  QWhether term property = be ! term.n ++ term.s ++ property.s ;
+  TAll kind = {s = "all" ++ kind ! Pl ; n = Pl} ;
+  TAny kind = {s = "any" ++ kind ! Sg ; n = Sg} ;
+  PAnd p q = {s = p.s ++ "and" ++ q.s ; p = fix2 p.p q.p} ;
+  POr p q = {s = p.s ++ "or" ++ q.s ; p = fix2 p.p q.p} ;
+  PNot p = {s = "not" ++ p.s ; p = Post} ;
+  KProperty property kind = \\n => case property.p of {
+    Pre  => property.s ++ kind ! n ;
+    Post => kind ! n ++ property.s 
+    } ;
+  -- ...
+}
+```
+
+#NORMAL
+
+==Denotational semantics==
+
+#BEQU
+'''
+$(\eop{QWhich kind prop})^{*} = \{x | x \in \eop{kind}^{*}, \eop{prop}^{*}(x)\}$
+
+$(\eop{QWhether term prop})^{*} = \eop{term}^{*}(\eop{prop}^{*})$
+
+$(\eop{TAll kind})^{*} = \lambda p . (\forall x)(x \in \eop{kind}^{*} \supset \eop{p}(x))$
+
+$(\eop{TAny kind})^{*} = \lambda p . (\exists x)(x \in \eop{kind}^{*} \& \eop{p}(x))$
+
+$(\eop{TAnd p q})^{*} = \lambda x . \eop{p}^{*}(x) \& \eop{q}^{*}(x)$
+
+$(\eop{TOr p q})^{*} = \lambda x . \eop{p}^{*}(x) \vee \eop{q}^{*}(x)$
+
+$(\eop{TNot p})^{*} = \lambda x . \sim \eop{p}^{*}(x)$
+
+$(\eop{KProperty prop kind})^{*} = \{x | x \in \eop{kind}^{*}, \eop{prop}^{*}(x)\}$
+
+$(\eop{TInteger i})^{*} = \lambda p . \eop{p}^{*}(i)$
+'''
+#ENQU
+
+==Compiling to Haskell==
+
+```
+concrete QueryHs of Query = {
+lincat
+  Query, Kind, Property, Term, Element = Str ;
+lin
+  QWhich kind prop = "[x | x <-" ++ kind ++ "," ++ prop ++ "x" ++ "]" ;
+  QWhether term prop = term ++ prop ;
+  TAll kind = parenth ("\\p -> and [p x | x <-" ++ kind ++ ", p x]") ;
+  TAny kind = parenth ("\\p -> or  [p x | x <-" ++ kind ++ ", p x]") ;
+  PAnd p q = parenth ("\\x ->" ++ p ++ "x &&" ++ q ++ "x") ;
+  POr p q = parenth ("\\x ->" ++ p ++ "x ||" ++ q ++ "x") ;
+  PNot p = parenth ("\\x -> not" ++ parenth (p ++ "x")) ;
+  KProperty prop kind = "[x | x <-" ++ kind ++ "," ++ prop ++ "x" ++ "]" ;
+oper
+  parenth : Str -> Str = \s -> "(" ++ s ++ ")" ;
+}
+```
+
+
+==Answer by translation==
+
+```
+  > p -lang=Eng "which even numbers are prime" | l -lang=Hs
+
+  [x | x <- [x | x <- [0 .. 1000] , even x ] , 
+    ( \x -> x > 1 && all (\y -> mod x y /=0) [2..div x 2] ) x ]
+```
+
+==The end user program==
+
+File ``query``:
+```
+  #!/bin/bash
+  ghc -e "$(echo "p -lang=Eng \"$1\" | pt -number=1 \
+    | l -lang=Hs" | gf -run MathQueryEng.gf MathQueryHs.gf)"
+```
+Now:
+```
+  ./query "is any even number prime"
+  True
+
+  ./query "which numbers greater than 100 and smaller than 150 are prime"
+  [101,103,107,109,113,127,131,137,139,149]
+```
+
+
+
+
+
+
+==Compilation phases in machine translation==
+
+**Lexical analysis**: recognize and classify words.
+
+**Parsing**: build an abstract syntax tree.
+
+**Semantic analysis**: disambiguate; add information to tree.
+
+**Generation**: linearize to target language.
+
+
+
+==Word sense disambiguation==
+
+English //drug//, French //médicament// (medical drug)
+or //drogue// (narcotic drug)
+#BEQU
+//the company produces drugs against malaria//
+#ENQU
+#BEQU
+//la société produit des médicaments contre le paludisme//
+#ENQU
+
+
+==Syntactic ambiguity==
+#BEQU
+//I ate a pizza with shrimps//
+
+//I ate a pizza with friends//
+#ENQU
+
+#BEQU
+//pizza with shrimps from waters without salt from countries in Asia//
+#ENQU
+42 analyses!
+
+Cf. **dangling else**
+```
+  if (x < 0) if (y > 0) x = y ; else y = x ;
+```
+
+==Statistical language models==
+
+
+//drogues contre le paludisme//
+
+is less common than 
+
+//médicaments contre le paludisme//
+
+==Hybrid systems==
+
+Combinations of rules and statistics
+
+Hard/unsolvable problems such as optimization 
+
+Compiler construction is much more cautious than NLP:
+- anything that affects semantics is based on firm knowledge 
+- statistics is just a possible source of extra performance
+ 
+
+#ENDDOC

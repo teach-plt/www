@@ -1,0 +1,1337 @@
+Chapter 7: Functional Programming Languages
+Aarne Ranta
+Slides for the book "Implementing Programming Languages. An Introduction to Compilers and Interpreters", College Publications, 2012.
+
+%!Encoding:utf8
+%!postproc(tex): "\\documentclass{article}" ""
+%!postproc(tex): "\\begin{figure}" ""
+%!postproc(tex): "\\end{figure}" ""
+%!postproc(tex): "colorlinks=true" "colorlinks=true,citecolor=black"
+%!postproc(tex): "urlcolor=blue" "urlcolor=black,linkcolor=black"
+%%!postproc(tex): "Implementing Programming" "Implementing \\\\ Programming"
+%%!postproc(tex): "An Introduction to Compilers and Interpreters" "\\\\ {\Large An Introduction to Compilers and Interpreters}"
+%!postproc(tex) : "\\subsection\*" "\\newslide"
+%!postproc(tex) : "\\section\*" "\\nnewslide"
+%!postproc(tex) : "\\subsection" "\\newslide"
+%!postproc(tex) : "\\section" "\\nnewslide"
+
+%%!postproc(tex): "\\section" "\\chapter"
+%%!postproc(tex): "\\subsection" "\\section"
+%!postproc(tex): "#BEQU" "begin{quote}"
+%!postproc(tex): "#ENQU" "end{quote}"
+%!postproc(tex): "#BECE" "begin{center}"
+%!postproc(tex): "#ENCE" "end{center}"
+%!postproc(tex): "#NEW" "clearpage"
+%!postproc(tex): "#TINY" "tiny"
+%!postproc(tex): "#SMALL" "small"
+%!postproc(tex): "#NORMAL" "normalsize"
+%!postproc(tex): "#NOINDENT" "noindent"
+%!postproc(tex): "#ENDDOC" "end{document}"
+%!postproc(tex): #FURTHER "mbox{}"
+%!postproc(tex): "#BERE" "begin{quote}"
+%!postproc(tex): "#ENRE" "end{quote}"
+
+
+'''
+\newcommand{\indxbf}[1]{\index{#1}{\textbf{#1}}}
+\newcommand{\ixbf}[2]{\index{#2}{\textbf{#1}}}
+\newcommand{\ixnobf}[2]{\index{#2}{#1}}
+\newcommand{\closure}[2]{#1\{#2\}}
+\newcommand{\seqarr}{\vdash}
+\newcommand{\larrow}{.}
+'''
+
+
+
+Fun: a language that is much simpler but in many ways more powerful than an imperative language.
+
+A fragment of Haskell, with a grammar that has less than 15 rules.
+
+But there are conceptual challenges
+- recursion
+- call by name
+- closures
+- polymorphic type inference
+
+
+Concepts and tools needed for Assignment 5.
+
+
+++Programming paradigms++
+
+**Imperative**, a.k.a. **procedural**: a program is a series of **statements** that affect a **state**. 
+
+Functional: a program is just an expression.
+- executing a program is just evaluation
+- no state is needed
+
+
+But also imperative programs evaluate expressions. 
+Thus functional programming only
+uses a subset of what imperative programs use.
+
+
+++Example of a functional program++
+
+In Haskell, and also in Assignment 5:
+```
+  doub x    = x + x ;
+  twice f x = f (f x) ;
+  quadruple = twice doub ;
+  main      = twice quadruple 2 ;
+```
+A program is a sequence of function definitions.
+
+``main`` prints an integer (in Haskell, it is more general).
+
+
+++The syntax of function applications++
+
+Haskell: just put the function and its arguments one after the other,
+'''
+\[
+f \, x \, y \, z
+\]
+'''
+C (and ordinary mathematics), use parentheses and commas,
+'''
+\[
+f(x, y, z)
+\]
+'''
+
+
+++Walk through the computation of main++
+
+```
+    main 
+  = twice quadruple 2
+  = quadruple (quadruple 2)
+  = twice doub (twice doub 2)
+  = doub (doub (doub (doub 2)))
+  = doub (doub (doub (2 + 2)))
+  = doub (doub (doub 4))
+  = doub (doub (4 + 4))
+  = doub (doub 8)
+  = doub (8 + 8)
+  = doub 16
+  = 16 + 16
+  = 32
+```
+At each step, we replace some part of the expression by its
+definition, or variables by their actual arguments. 
+
+The replacement operation is called **substitution**.
+
+
+++First-order functions++
+
+The ``doub`` function can be defined in C and Java as well: 
+```
+  // doub x    = x + x
+
+  int doub (int x)
+  {
+    return x + x ;
+  }
+```
+But this mechanism is restricted to what is called 
+**first-order functions**: 
+the arguments cannot themselves be functions.
+
+
+++Second-order functions++
+
+Possible in  C++ (as in Haskell): take functions as arguments, as the ``twice`` function does
+```
+  // twice f x = f (f x)
+
+  int twice(int f (int n), int x) 
+  {
+    return f(f(x)) ;
+  }
+```
+
+++Functions as values++
+
+In a functional language, functions are **first-class citizens**, just like numbers: 
+- function expressions have values even without arguments
+- functions can be arguments of functions
+- functions can be return values
+
+
+In C++, a function cannot be a return value:
+```
+  // quadruple = twice doub
+
+  // not possible in V++:
+  (int f (int x)) quadruple()
+  {
+    return twice(doub) ;
+  }
+```
+
+
+#NEW
+
+We must pass an additional argument, which enables ``quadruple`` to return an integer and not a function:
+```
+  int quadruple(int x)
+  {
+    return twice(doub, x) ;
+  }
+```
+This corresponds to another definition in Haskell:
+```
+  quadruple x = twice doub x
+```
+This definition has the same meaning as the one without ``x``.
+
+
+
+++Function types++
+
+We write a two-place integer function``max``
+```
+  max : Int -> Int -> Int
+```
+(Haskell uses a double colon ``::`` for typing, but we stick to a
+single ``:``.)
+
+The notation is right-associative, and hence equivalent to
+```
+  max : Int -> (Int -> Int)
+```
+The typing rule for function applications is:
+'''
+\[
+\frac{
+  \Gamma \seqarr f : A \rightarrow B \;\;\;
+  \Gamma \seqarr a : A
+}{
+  \Gamma \seqarr f \, a : B
+}
+\]
+'''
+
+
+++Partial application++
+
+The typing rule permits
+```
+  max 4 : Int -> Int
+```
+This is a function that returns the maximum of its argument and 4. Notice
+
+Application is left-associative: ``max 4 5`` is the same as ``(max 4) 5``.
+
+
+++The tuple type++
+
+One could also force total application by using a **tuple** of arguments:
+```
+  maxt : (Int * Int) -> Int
+```
+Tuples are a type of its own, with the following typing rule:
+'''
+\[
+\frac{
+  \Gamma \seqarr a : A \;\;\;\;\;
+  \Gamma \seqarr b : B
+}{
+  \Gamma \seqarr (a,b) : A \ttop{*} B
+}
+\]
+'''
+
+++Currying++
+
+An equivalence between functions over tuples and two-place functions:
+'''
+\[
+  (A * B) \rightarrow C    \Longleftrightarrow    A \rightarrow B \rightarrow C
+\]
+'''
+Converting the first to the second is called **currying**, with reference to Haskell B. Curry.
+
+Currying simplifies the semantics and implementation 
+of programming languages: it is enough to 
+work with one-place functions!
+
+
+
+++Anonymous functions++
+
+In imperative languages, functions must be explicitly defined and given names.
+
+In a functional language, any expression can be turned into an**anonymous functions**,
+by **lambda abstraction**: 
+```
+  timesNine = twice (\x -> x + x + x)
+```
+Syntactically, a **lambda abstract** is an expression 
+'''
+\[
+\lambda x \larrow e
+\]
+'''
+(using ''$\lambda$'' instead of ``\``). The typing rule for lambda abstracts.
+'''
+\[
+\frac{
+  \Gamma, x : A \seqarr e : B
+}{
+  \Gamma \seqarr \lambda x \larrow e : A \rightarrow B
+}
+\]
+'''
+
+++Function definitions as syntactic sugar++
+
+It is enough to have definitions of constance, because a function definition
+'''
+\[
+  f \, \subex{x}{1}\, \ldots \, \subex{x}{n} = e
+\]
+'''
+can be expressed as the definition of a constant as a lambda
+abstract,
+'''
+\[
+  f = \lambda\subex{x}{1}. \, \ldots \, \lambda\subex{x}{n}.e
+\]
+'''
+Also this simplifies the implementation: the environment need only map identifiers to
+types (in the type checker) or values (in the interpreter).
+
+
+#NEW
+
+As C++ has no anonymous functions, we cannot write ``timesNine`` directly, 
+but have to define a named tripling function first:
+```
+  // triple x = x + x + x
+  int triple(int x) 
+  {
+    return x + x + x ;
+  }
+
+  // timesNine = twice triple
+  int timesNine(int x)
+  {
+    return twice(triple, x) ;
+  }
+```
+But there is an experimental **Lambda Library** in C++ permitting anonymous functions.
+
+
+
+++Our language++
+
+We can start with only four expression forms:
+```
+  Exp ::= 
+     Ident                        -- variables, constants
+   | Integer                      -- integer literals
+   | "(" "\" Ident "->" Exp ")"   -- abstractions
+   | "(" Exp Exp ")"              -- applications
+```
+
+++Operational semantics++ 
+
+Judgements of the usual form,
+'''
+\[
+\gamma \seqarr e \Downarrow v
+\]
+'''
+read, "in the environment ''$\gamma$'', the expression
+''$e$'' evaluates to the value ''$v$''". 
+
+Notice that evaluation cannot change the environment!
+
+Thus we have a **purely functional language**, 
+a language without side effects.
+
+
+The environment is a set of values assigned to variables,
+'''
+\[
+x := v, \; y := w, \ldots
+\]
+'''
+
+
+++Values++
+
+We need to be more general now, because we need function as values.
+
+The simplest view: 
+- //values are expressions//
+- evaluation converts an expression to another expression 
+- evaluation stops when it cannot proceed further
+
+
+The resulting expression is often simpler, as in
+'''
+\[
+2 + 3 * 8 \;\Downarrow\; 26
+\]
+'''
+But it can also be more complex, as in
+'''
+\[
+\ttop{replicate 20 1} \;\Downarrow\; \ttop{[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}
+\]
+'''
+
+
+++What is a value++
+
+``2 + 3 * 8`` 
+
+is not a value, because the evaluation can proceed.
+
+''$2^{31}-1$'' 
+
+can be more interesting a value than 2147483647 as an //answer//, because it is more informative. 
+
+``2 + 3 * x`` 
+
+is a value, in the sense that we cannot take it any further, because known what ``x`` is. 
+
+In another sense, it isn't: we were expecting to get a number,
+but we don't have one yet. We must first give a value to ``x`` and then
+perform multiplication and addition.
+
+
+++Free variables++
+
+A value may not contain **free variables**, which could get any values.
+
+**Bound variables** are different. They are the ones appearing in lambda bindings. 
+
+The precise definition of the set ''\eop{free}'', free variables of an expression: 
+'''
+\bequ
+$\eop{free}(x) = \{ x \}$
+\\
+$\eop{free}(i) = \{ \}$
+\\
+$\eop{free}(f\;a) = \eop{free}(f) \cup \eop{free}(a)$
+\\
+$\eop{free}(\lambda x . b) = \eop{free}(b) -\{ x \}$
+\enqu
+'''
+An expression that has no free variables (i.e. ''$\eop{free}(e) = \{ \}$'') 
+is a **closed expression**.
+
+An expression that does have free variables is an **open expression**.
+
+
+++Closures++
+
+Notice: the closed expressions are those where all
+variables are bound by lambdas. 
+
+Special case: expressions with no variables.
+
+Approximation of values: closed expressions.
+
+In addition to lambda, it makes sense to close an expression by just giving
+values of its free variables. For instance,
+```
+  (2 + 3 * x){x := 8}
+```
+The general form: a **closure** is an expression ''$e$'' with an environmen ''$\gamma$'':
+'''
+\[
+\closure{e}{\gamma}
+\]
+'''
+
+
+++Values revisited++
+
+We will use two kinds of values:
+- integers
+- closures of lambda abstracts
+
+
+Special case: closed lambda abstract (with an empty closure).
+
+
+++Operational semantics++
+
+Variables: 
+'''
+\[
+\frac{
+}{
+  \gamma \seqarr x \Downarrow v
+}\;\; x := v \mbox{ is in } \gamma
+\]
+'''
+Integer literals:
+'''
+\[
+  \gamma \seqarr i \Downarrow i
+\]
+'''
+Lambda abstracts:
+'''
+\[
+  \gamma \seqarr (\lambda x \larrow e) \Downarrow \closure{(\lambda x \larrow e)}{\gamma}
+\]
+'''
+Function applications:
+'''
+\[
+\frac{
+  \gamma \seqarr f \Downarrow \closure{(\lambda x \larrow e)}{\delta}
+ \;\;\;\;\;
+  \gamma \seqarr a \Downarrow u
+ \;\;\;\;\;
+  \delta, x := u \seqarr e \Downarrow v
+}{
+  \gamma \seqarr (f\,a) \Downarrow v
+}
+\]
+'''
+ (That's all!)
+
+++Some explanations++
+
+Abstractions: the body of the lambda abstract may contain variables
+than the one bound by the lambda. These variables get their values in
+the environment.
+
+Applications: this comes out as a modification of the imperative rule in Chapter 5,
+'''
+\[
+\frac{
+  \gamma \seqarr a \Downarrow  u
+ \;\;\;\;\; 
+  x := u \seqarr \subex{s}{1}\ldots\subex{s}{n} \Downarrow v
+}{
+  \gamma \seqarr f(a) \Downarrow v
+}\;\;\mbox{if $V \; f (T \, x) \{ \subex{s}{1} \ldots \subex{s}{n}  \}$ in $\gamma$}
+\]
+'''
+Modifications:
+- now enough to consider functions with one argument
+- evaluation has no side effects now
+- the function body: in the imperative
+  language, it is a sequence of statements, 
+  ''$\subex{s}{1} \ldots \subex{s}{n}$'';
+  in the functional language, it is a lambda abstraction body ''$e$'',
+  which is an expression.
+- the function ''$f$'': in the imperative language, it is always an
+  explicitly defined function symbol; in the functional language, it can
+  be any expression (for instance, a lambda abstract or an application).
+
+
+Thus the evaluation of ''$f$'' is not simply a look-up in the
+function table. But we can just replace the look-up by a step of evaluating the expression
+''$f$''. This evaluation results in a closure,
+with a lambda abstract ''$\lambda x \larrow e$'' and an environment ''$\delta$''. 
+Then ''$(f\,a)$'' is computed by evaluating ''$e$'' in an environment where 
+the variable ''$x$'' is set to the value of the argument ''$a$''.
+
+
+
+++Example++
+
+Assume the function definition
+```
+  doub x = x + x
+```
+which means the same as
+```
+  doub = \x -> x + x
+```
+Compute ``doub 4`` as follows:
+'''
+\[
+\frac{
+  \seqarr \ttop{doub} \Downarrow \closure{(\lambda x \larrow x + x)}{}
+ \;\;\;
+  \seqarr 4 \Downarrow 4
+ \;\;\; 
+  x := 4 \seqarr x + x \Downarrow 8
+}{
+  \seqarr (\ttop{doub}\,4) \Downarrow 8
+}
+\]
+'''
+The applied function has no free variables. But this is just a limiting case. 
+
+
+++Example showing the need of closures++
+
+A two-place function,
+```
+  plus x y = x + y
+```
+Evaluation of the expression ``plus 3 4`` (i.e. ``((plus 3) 4)``):
+'''
+\tiny
+
+\[
+\infer{
+  \seqarr ((\ttop{plus}\,3)\,4) \Downarrow 7
+}{
+  \infer{
+    \seqarr (\ttop{plus}\,3) \Downarrow \closure{(\lambda y \larrow x + y)}{x := 3}
+  }{
+    \seqarr \ttop{plus} \Downarrow \closure{(\lambda x \larrow \lambda y \larrow x + y)}{}
+    &
+    \seqarr 3 \Downarrow 3 
+    &
+    x := 3 \seqarr 
+      (\lambda y \larrow x + y) \Downarrow \closure{(\lambda y \larrow x + y)}{x := 3}
+  }
+  &
+  \seqarr 4 \Downarrow 4
+  &
+  x := 3, y := 4 \seqarr x + y \Downarrow 7
+}
+\]
+\normalsize
+'''
+
+
+
+++Call by value vs. call by name++
+
+**Call by value**:  evaluate the argument first, then the body (as above):
+'''
+\[
+\frac{
+  \gamma \seqarr f \Downarrow \closure{(\lambda x \larrow e)}{\delta}
+ \;\;\;\;\;
+  \gamma \seqarr a \Downarrow u
+ \;\;\;\;\;
+  \delta, x := u \seqarr e \Downarrow v
+}{
+  \gamma \seqarr (f\,a) \Downarrow v
+}
+\]
+'''
+**Call by name**: the body with unevaluated argument:
+'''
+\[
+\frac{
+  \gamma \seqarr f \Downarrow \closure{(\lambda x \rightarrow e)}{\delta}
+ \;\;\; 
+  \delta,x := \closure{a}{\gamma} \seqarr e \Downarrow v
+}{
+  \gamma \seqarr (f\,a) \Downarrow v
+}
+\]
+'''
+Notice that ''$\gamma$''  is the proper way to close the expression ''$a$'', because it is the environment
+in which ''$a$'' would be evaluated if we were performing call by value.
+
+
+++Examples++
+
+The difference is enorbous! Consider
+```
+  infinite = 1 + infinite
+  first x y = x
+  main = first 5 infinite
+```
+With call by value, 
+```
+  main 
+  = first 5 infinite
+  = (\x -> \y -> x) 5 (1 + infinite)
+  = (\y -> 5) (1 + infinite)
+  = (\y -> 5) (2 + infinite)
+  ...
+```
+which leads to non-termination. Even though the function ``first`` ignores
+its second argument, call-by-value requires this argument to be evaluated.
+
+
+#NEW
+
+With call by name, 
+```
+  main 
+  = first 5 infinite
+  = (\x -> \y -> x) 5 infinite
+  = (\y -> 5) infinite
+  = 5
+```
+There is no attempt to evaluate the second argument, because it is not needed
+by ``first``.
+
+
+Call-by-value and call-by-name
+are just two possible orders. But call-by-name has the property that
+it is "the most terminating" one: if there is //any// order
+that makes the evaluation of an expression terminate, then
+call-by-name is such an order.
+
+
+++Disadvantages of call by name++
+
+It may lead to some expressions getting evaluated
+many times: once for each time the argument is used.
+
+Example:
+```
+  doub x = x + x
+
+  doub (doub 8)
+  = doub 8 + doub 8  -- by name
+  = 8 + 8 + 8 + 8
+  = 32
+
+  doub (doub 8)
+  = doub 16          -- by value
+  = 16 + 16
+  = 32
+```
+
+
+++Call by need++
+
+An intermediate strategy, used in Haskell.
+
+As in call by name, the expression is not
+evaluated when it is put to the environment.
+
+But when the value is needed for the first time,
+the result of evaluation is saved in the environment, and the
+next look-up of the variable will not need to compute it again.
+
+To make this possible, evaluation changes the environment - just like
+in imperative languages.
+
+
+
+++Implementing an interpreter: the language++
+
+An extended language with two primitive forms of expressions: infix operations and if-then-else.
+```
+  Exp3 ::= Ident
+  Exp3 ::= Integer
+  Exp2 ::= Exp2 Exp3 
+  Exp1 ::= Exp1 "+" Exp2
+  Exp1 ::= Exp1 "-" Exp2
+  Exp1 ::= Exp1 "<" Exp2
+  Exp  ::= "if" Exp1 "then" Exp1 "else" Exp
+  Exp  ::= "\\" Ident "->" Exp 
+```
+A program is a sequence of function definitions, each of which has the form
+'''
+\[
+  f \, \subex{x}{1}\, \ldots \, \subex{x}{n} = e\, ;
+\]
+'''
+
+
+++An example program++
+
+The function ``pow`` defines powers of 2 by recursion. 
+```
+  doub x = x + x ;
+  pow x = if (x < 1) then 1 else doub (pow (x-1)) ; 
+  main = pow 30 ;
+```
+
+++Execution of programs++
+
+Evaluate the expression ``main``. 
+
+Environment: all functions mapped to their definitions. 
+
+Each definition looks like a closure, with an empty environment. For instance, the example program
+above creates the following environment:
+```
+  doub := (\x -> x + x){}
+  pow  := (\x -> if (x < 1) then 1 else doub (pow (x-1))){} 
+  main := (pow 30){}
+```
+Notice the empty environments ``{}`` in the values (closures) of each function.
+
+(Putting the function definitions in these environments would be impossible: just try this with
+the recursive function ``pow``!)
+
+
+++Operations on environments++
+
+'''
+\begin{center}
+\begin{tabular}{lll}
+\Val  &     \pseu{lookup} &  $(\Ident\; x, \Env\;\gamma)$
+\\
+\Env  &     \pseu{update} &  $(\Env\;\gamma, \Ident\;x, \Val\; v)$
+\end{tabular}
+\end{center}
+'''
+The ``lookup`` function has to implement the **overshadowing** of identifiers:
+- a variable overshadows a function symbol;
+- an inner variable overshadows an outer variable.
+
+
+
+The latter follows from the simple rule that, in ''$\lambda x \rightarrow e$'', 
+the //free occurrences// of ''$x$'' get bound in ''$e$''. 
+
+
+#NEW
+
+**Quiz**: what is the value of
+```
+  (\x -> \x -> x + x) 2 3
+```
+
+
+#NEW
+
+Answer: in the expression
+```
+  \x -> \x -> x + x
+```
+it is the second lambda that binds both variables in ``x + x``. We get
+```
+(\x -> \x -> x + x) 2 3
+  =  ((\x -> x + x){x := 2}) 3
+  =   (\x -> x + x) 3
+  =          3 + 3
+  =            6
+```
+
+
+++Syntax-directed interpreter code++
+
+Integer literal:
+'''
+\beco
+$\eval(\gamma,i): $\\
+$\ind \return\; i$
+\enco
+'''
+Alternatively, we can return ''$i\{\}$'', if we uniformly want closures as values.
+
+Variable expressions: 
+'''
+\beco
+$\eval(\gamma,x): $\\
+$\ind e\{\delta\} := \lookup(\gamma,x)$\\
+$\ind \eval(\angles{\eop{functions}(\gamma),\delta},e)$
+\enco
+'''
+We split the environment into a pair 
+''$\angles{\eop{functions},\eop{variables}}$'',
+with separate storage for functions and variables. 
+
+
+#NEW
+
+Arithmetic operations: reduced to integer operations in the implementation 
+language:
+'''
+\beco
+$\eval(\gamma,a + b): $\\
+$\ind u := \eval(\gamma,a) $\\
+$\ind v := \eval(\gamma,b) $\\
+$\ind \return\; u + v$
+\enco
+'''
+``<`` has a similar rule, returning 1 if the comparison is true, 0 if it is false.
+
+
+#NEW
+
+Conditionals:
+interpreted lazily, even if call by value is the general strategy:
+'''
+\beco
+$\eval(\gamma,\ttop{if}\; c \;\ttop{then}\; a \;\ttop{else}\; b): $\\
+$\ind u := \eval(\gamma,c) $\\
+$\ind \pseuk{if}\; u = 1$\\
+$\ind\ind  \eval(\gamma,a)$\\
+$\ind\pseuk{else}$\\ 
+$\ind\ind  \eval(\gamma,b)$
+\enco
+'''
+
+
+#NEW
+
+Abstractions: return closures with the variables of the current environment,
+'''
+\beco
+$\eval(\gamma,\lambda x . b): $\\
+$\ind \return\; (\lambda x. b)\{ \pseu{variables}(\gamma)\} $
+\enco
+'''
+Notice that we take only the variables of the environment into the closure, not
+the function symbols.
+
+
+#NEW
+
+Application is the most complex case. 
+
+A general rule for both
+call by value and call by name. The decision is made in just one point:
+when deciding what value to use for the bound variable when evaluating the body.
+'''
+\beco
+$\eval(\gamma, (f \; a)): $\\
+$\ind (\lambda x. b)\{\delta\} := \eval(\gamma, f)$\\
+$\ind \pseuk{if}\; \pseu{call\_by\_value}$\\
+$\ind\ind  u := \eval(\gamma,a)$\\
+$\ind\pseuk{else}$\\ 
+$\ind\ind  u := \; a \{ \pseu{variables}(\gamma) \}$\\
+$\ind \eval(\pseu{update}(\angles{\eop{functions}(\gamma),\delta},x,u),b)$
+\enco
+'''
+
+
+++Implementing an interpreter++
+
+Less than 100 lines of Haskell code or a little more Java code. 
+
+The interpreter can
+be made parametrized on evaluation strategy, which is passed as a flag when
+the interpreter is called. 
+
+
+
+++Type checking functional languages* ++
+
+Our language has a type system known as the
+**simply typed lambda calculus**. 
+
+Two kinds of types:
+- basic types, such as ``int``;
+- function types ''$A \rightarrow B$'', where ''$A$'' and ''$B$'' are types.
+
+
+The power comes from the unconstrained
+generation of function types from any other types:
+```
+  int -> int
+  (int -> int) -> int
+  int -> (int -> int)
+  ((int -> int) -> int) -> int
+```
+
+
+++Type checking++
+
+Abstraction rule:
+'''
+\[
+\frac{
+  \Gamma, x : A \seqarr b : B
+}{
+  \Gamma \seqarr \lambda x \larrow b : A \rightarrow B
+}
+\]
+'''
+Type checking is easy:
+'''
+\beco
+$\checkt(\Gamma,\lambda x . b, A \rightarrow B): $\\
+$\ind \checkt(\extend(\Gamma,x, A), b, B)$
+\enco
+'''
+
+
+++Type inference++
+
+But what about type inference? Example:
+```
+  \x -> x
+```
+has infinitely many types:
+```
+  int                 -> int
+  (int -> int)        -> (int -> int)
+  (int -> int -> int) -> (int -> int -> int)
+```
+In fact, it has all types of the form
+```
+  A -> A
+```
+Hence it is //impossible// to do type inference
+for all expressions - if we expect a
+unique type.
+
+
+++Typed abstraction++
+
+One way to solve the type inference problem is to include
+type information in syntax:
+'''
+\[
+\lambda x : t \larrow b
+\]
+'''
+
+
+
+++Polymorphism* ++
+
+But a more common solution is a **polymorphic type system**:
+one and the same expression can have many types,
+usually depending on a **type variable**.
+
+Introduced in ML in the 1970's, inherited
+by Haskell in the 1990's. 
+
+Inspired the **template system** C and the **generics** of Java.
+
+
+++Templates and generics++
+
+Simplest possible example: the identity function, in C++
+```
+  // id : A -> A, id = \x -> x
+  template<class A> A id(A x)
+  {
+    return x ;
+  }
+```
+and in Java
+```
+  // id : A -> A, id = \x -> x
+  public static <A> A id(A x)
+  {
+    return x ;
+  }
+```
+In both cases, ``A`` is a type variable.
+(C++ and Java use capital letters, Haskell uses small letters.)
+
+
+++The most general type++
+
+In C++ and Java, //calls// to polymorphic functions must indicate the actual
+types. This makes type inference easy.
+
+In ML and Haskell, this is not required. But type inference works even then! 
+
+**Hindley-Milner polymorphism** has an algorithm that computes
+**the most general type**. Examples:
+```
+  (\x -> x)             : a -> a
+  (\x -> \y -> x)       : a -> b -> a
+  (\f -> \x -> f (f x)) : (a -> a) -> a -> a 
+  (\x -> x + x)         : int -> int
+```
+Notice: different variables mean more generality than the same variable.
+For example, ``a -> b`` is more general than ``a -> a``.
+
+
+++How to infer the most general type++
+
+Start by introducing a variable ``t`` for the type of the expression:
+```
+  (\f -> \x -> f (f x)) : t
+```
+Since the expression is a double abstraction, ``t`` must be a function type:
+```
+  t = a -> b -> c
+```
+The body of the expression must of course obey this type:
+```
+  f (f x) : c
+```
+Since ``f`` is used as a function here, it must have a function type:
+```
+  f : d -> e
+```
+But since ``f`` is the variable bound by the first lambda, we also have
+```
+  f : a
+```
+and hence,
+```
+  a = d -> e
+```
+Thus the result of applying ``f`` must have type ``e``. But it must also 
+have type ``c``, because ``f (f x) : c``. What is more, it must also have type
+``d``, because ``f`` can be applied to its own result. Hence
+```
+  c = e = d
+```
+The type of ``x`` is on one hand ``b`` (as the second abstracted variable),
+on the other hand ``d`` (because ``f`` applies to ``x``). Hence
+```
+  c = e = b = d
+```
+and, since ``a = d -> e``,
+```
+  a = d -> d
+```
+We can now conclude with
+```
+  t = (d -> d) -> d -> d
+```
+as the most general type.
+
+
+++Mechanizing type inference++
+
+The procedure above was completely heuristic - a little bit like solving a Sudoku.
+
+But there is a mechanical algorithm, using **unification** - a general method for
+solving a set of equations.
+
+Unification takes two types (with variables) and returns 
+a **substitution**, mapping type variables to types.
+
+We will define the main type inference
+'''
+\beco
+$\angles{\pseu{Subst},\pseu{Type}} \;  \infert (\Exp \; e)$
+\enco
+'''
+and the auxiliary function finding **most general unifier**,
+'''
+\beco
+$\pseu{Subst} \; \mgu \; (\Type\; t, \Type\; u)$
+\enco
+'''
+
+
+++Substitution vs. context++
+
+Substitution: type variables to types.
+
+Context: expression variables to types (as in Chapter 4).
+
+We will keep the context implicit in the pseudocode, accessible by the functions
+'''
+\beco
+$\pseu{Type}\;  \lookup\; (\Ident \; x)$  // look up type of variable in context
+
+$\pseu{Void}\;  \extend\; (\Ident \; x, \; \Type\; t)$ // put new variable to context
+
+$\pseu{Void}\;  \pseu{free}\; (\Ident \; x)$ // remove variable from context
+\enco
+'''
+We also need, in the course of type inference
+'''
+\beco
+$\pseu{Ident}\;  \fresh\; ()$ // generate a new type variable
+\enco
+'''
+
+++Applying a substitution to a type++
+
+We write
+'''
+\[
+t \gamma
+\]
+'''
+for applying ''$\gamma$'' to ''$t$'', which means replacing the 
+type variables in ''$t$'' with their values given in
+''$\gamma$''. 
+
+Example:
+#BECE
+``(a -> c -> d){a:= d -> d, c:=d, b:=d}`` ''$\Downarrow$'' ``(d -> d) -> d -> d``
+#ENCE
+(applied at one point in the type inference example above)
+
+
+++Code for type inference++
+
+Constants and variables are simple, and return the empty substitution ''$\{\}$'':
+'''
+\beco
+$  \infert (i) : $ \\
+$\ind    \return\; \angles{\{\}, \pseu{Int}}$
+\enco
+
+\beco
+$  \infert (x) : $\\
+$\ind    t := \lookup (x) $\\
+$\ind    \return\; \angles{\{\}, t}$
+\enco
+'''
+
+#NEW
+Lambda abstracts:
+'''
+\beco
+$  \infert (\lambda x . b) : $\\
+$\ind    a := \fresh ()$ // variable for the type of x
+\\
+$\ind    \extend (x,a) $
+\\
+$\ind    \angles{\gamma,t} := \infert (b) $  // infer the type of the body 
+\\
+$\ind    \pseu{free} (x) $ // the new variable no more in scope
+\\
+$\ind    \return \; \angles{\gamma, a\gamma \rightarrow t}$
+\enco
+%
+'''
+Application: two slides later.
+
+
+++Example++
+
+We can now infer the type of the identity function mechanically:
+'''
+\beco
+$  \infert (\lambda x . x) : $\\
+$\ind    a := \fresh ()$\\
+$\ind    \extend (x,a) $\\
+$\ind    \angles{\{\},a} := \infert (x) $ // in context $x : a$\\
+$\ind    \return \; \angles{\{\}, a\{\} \rightarrow a}$
+\enco
+'''
+By applying the empty substitution, we get the final type ''$a \rightarrow a$''.
+
+
+++Type inference for function application++
+
+'''
+\beco
+$  \infert (f \; a) : $\\
+$\ind    \angles{\subex{\gamma}{1},\subex{t}{1}} := \infert (f) $ // infer type of function
+
+$\ind    \angles{\subex{\gamma}{2},\subex{t}{2}} := \infert (a) $ // infer type of argument
+ 
+$\ind    v := \fresh ()$ // variable for the return type
+
+$\ind    \subex{\gamma}{3} := 
+           \mgu(\subex{t}{1}\subex{\gamma}{2}, \; \subex{t}{2} \rightarrow v) $ // combine information
+
+$\ind    \return \; \angles{
+            \subex{\gamma}{3} \circ \subex{\gamma}{2} \circ \subex{\gamma}{1},\;
+            v\subex{\gamma}{3}}$
+\enco
+'''
+All information is finally gathered in the **composition of substitutions** 
+''$\subex{\gamma}{3}\circ\subex{\gamma}{2}\circ\subex{\gamma}{1}$''.
+
+Similar to the usual composition of functions:
+'''
+\[
+t (\delta\circ\gamma) = (t \gamma)\delta 
+\]
+'''
+
+
+++Defining unification++
+
+The function ''\pseu{mgu}'' takes two types and returns their
+**most general unifier**.
+
+This is a substitution ''$\gamma$'' that gives the same result
+when applied to any of the two types:
+'''
+\[
+t (\mgu(t,u)) = u (\mgu(t,u))
+\]
+'''
+Of course, ''\pseu{mgu}'' can also fail, if the types are not unifiable.
+
+Unification is defined by pattern matching on the type.
+
+
+#NEW
+
+'''
+\small
+\beco
+$\pseu{Subst} \; \mgu \; (\Type\; t, \Type\; u)$
+
+$\mgu (\subex{a}{1}\rightarrow\subex{b}{1},\;
+       \subex{a}{2}\rightarrow\subex{b}{2}) : $ // both are function types\\
+$\ind    \subex{\gamma}{1} := \mgu(\subex{a}{1},\;\subex{a}{2})$\\
+$\ind    \subex{\gamma}{2} := 
+           \mgu(\subex{b}{1}\subex{\gamma}{1},\;\subex{b}{2}\subex{\gamma}{1})$\\
+$\ind    \return \; \subex{\gamma}{2} \circ \subex{\gamma}{1}$
+
+$\mgu (v,t) : $ // the first type is a type variable\\
+$\ind    \pseuk{if}\; t = v$\\
+$\ind\ind    \return \; \{\}$\\
+$\ind    \pseuk{else if}\; \pseu{occurs}(v,t)$\\
+$\ind\ind    \pseu{fail}\; (\mbox{"occurs check"})$\\
+$\ind    \pseuk{else}$\\
+$\ind\ind    \return \; \{v := t\}$
+
+$\mgu (t,v) : $ // the second type is a type variable\\
+$\ind \mgu (v,t)$
+
+$\mgu (t,u) : $ // other cases: succeeds only for equal types\\
+$\ind    \pseuk{if}\; t = u$\\
+$\ind\ind    \return \; \{\}$\\
+$\ind    \pseuk{else}$\\
+$\ind\ind    \pseu{fail}\; (\mbox{"types not unifiable"})$\\
+\enco
+\normalsize
+'''
+
+
+++When does unification fail?++
+
+1. If the types are syntactically different, e.g.  
+- ``Int`` vs. ``Double``
+- ``Int`` vs. ``a -> b``
+
+
+2. By **occurs check**: if the type variable ''$v$'' occurs in
+the type ''$t$'', then  ''$t$''  and ''$v$''  are not unifiable. 
+- ''$v$'' vs. ''$v \rightarrow u$''
+
+
+Without occurs check, we would get
+'''
+\[
+\{v := v \rightarrow u\}
+\]
+'''
+which would need an "infinite type"  
+''$(\ldots(v \rightarrow u)\ldots\rightarrow u) \rightarrow u$''
+
+
+++Another example++
+
+Type inference for function applications, with occurs check:
+'''
+\beco
+$  \infert (\lambda x . (x \; x)) : $\\
+$\ind    a := \fresh ()$\\
+$\ind    \angles{\gamma,t} := \infert (x \; x):$ // in context $x : a$ \\ 
+$\ind\ind    \angles{\{\},a} := \infert (x)$ \\
+$\ind\ind    \angles{\{\},a} := \infert (x)$ \\
+$\ind\ind    b := \fresh ()$\\
+$\ind\ind    \gamma := \mgu(a, a \rightarrow b):$\\
+$\ind\ind\ind    \pseu{fail}\; (\mbox{"occurs check"})$\\
+\enco
+'''
+On the last line, ''\pseu{mgu}'' fails because of occurs check:
+''$a$'' cannot unify with ''$a \rightarrow b$''.
+
+
+++Self-application++
+
+A function cannot be applied to itself: occurs check blocks 
+```
+  \x -> (x x)
+``` 
+Quiz: however, a "self-application" is completely legal in 
+```
+  (\x -> x)(\x -> x)
+```
+Can you explain why?
+
+
+
+

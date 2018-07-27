@@ -1,0 +1,370 @@
+Exercises
+Implementing Programming Languages (Programming Language Technology Course 2007-2012)
+
+%!target:html
+
+%!postproc(html): #NEW <!-- NEW -->
+
+#NEW
+
+==Chapter 1: Compilation Phases==
+
+1. The following C code has around six errors (some of them depend on
+what you count as an error). Locate the errors and
+explain at which compiler phase they are (or should be) 
+revealed.
+```
+  /* this is a buggy hello world program
+
+  int main ()
+  {
+    int i ;
+    int j = k + 1 ;
+    int a[] = {1,2,3}
+    j = a + 6 ;
+    a[4] = 7 ;
+    printf("hello world\n) ; 
+  }
+```
+
+2. Decode the following representation of a JVM program
+to show (a) the corresponding assembly code and (b)
+a Java expression from which it can be obtained. 
+```
+  0001 0000 1111 1111 0001 0000 0010 0000
+  0110 0100 0001 0000 0000 1001 0110 1000
+```
+Use the key in lecture 1.
+All codes are found in the on-line 
+[JVM specification http://java.sun.com/docs/books/vmspec/2nd-edition/html/Instructions2.doc.html]
+
+
+
+==Chapter 2: Grammars==
+
+3. Consider the context-free grammar
+```
+  SWhile. Stm  ::= "while" "(" Exp ")" Stm ;
+  SExp.   Stm  ::= Exp ";" ;
+  EAss.   Exp  ::= Ident "=" Exp ;
+  EGt.    Exp1 ::= Exp2 ">" Exp2 ;
+  EIdent. Exp2 ::= Ident ;
+  EInt.   Exp2 ::= Integer ;
+  _.      Exp  ::= Exp1 ;
+  _.      Exp1 ::= Exp2 ;
+  _.      Exp2 ::= "(" Exp ")" ;
+```
+Show the parse tree and abstract syntax tree of the string
+```
+  while (x > y) y = x = 3 ;
+```
+
+
+4. Write an unambiguous context-free grammar for nonnegative
+numbers in the decimal notation (0,1,2,...,2007,...). Show
+the syntax tree of the number 2007.
+
+
+5. Write a grammar for a subset of unix shell scripts:
+- a script is a sequence of command lines
+- a command line is either of 
+  - a single command
+  - a pipe: a sequence of commands separated by ``|``
+  - any of the above followed by optional one or both of the redirections 
+    (``<`` or ``>`` followed by a file name)
+
+
+- a command is a command name followed by an optional sequence of options
+  and an optional sequence of arguments
+- an option is ``-`` followed by an identifier
+- a command name is an identifier
+- an argument is a file name
+
+
+You don't have to specify the structure of identifiers and file names,
+but can use the basic categories ``Ident`` and ``File``.
+
+
+6. Implement a parser for Lisp in BNFC.
+It should be able to parse the code example in 
+[``http://lib.store.yahoo.net/lib/paulgraham/jmc.lisp`` http://lib.store.yahoo.net/lib/paulgraham/jmc.lisp] - which is actually a complete Lisp interpreter!
+
+
+
+==Chapter 3: Lexing and parsing==
+
+7. Implement a parser for regular expressions in BNFC. The
+parser should be able to correctly recognize the expression
+```
+  (letter | '_') (letter | digit | '_')*
+```
+and any other expression combining the same operators.
+As for precedences, Kleene star binds stronger than sequence,
+which binds stronger than union.
+
+8. Write a regular expression for comments of the form ``/*`` ... ``*/``,
+where ``/*`` inside double quotes does not start a comment. 
+
+9. Construct an NFA and DFA for comments as in the previous exercise.
+
+10. Write a program that removes tags from an HTML document, using one of
+the standard lexer tools. Start by writing a regular expression for tags.
+Test your program with the [course web page ../index.html].
+
+
+11. Trace the LR parsing of the statement
+```
+  if (x + y > 4) if (true) {x = y = y - 1 ;} else 8 ;
+```
+in the grammar
+```
+  Stm   ::= "if" "(" Exp ")" Stm "else" Stm ;
+  Stm   ::= "if" "(" Exp ")" Stm ;
+  Stm   ::= "{" [Stm] "}"
+  Stm   ::= Exp ";"
+  Exp2  ::= Integer
+  Exp2  ::= Ident
+  Exp1  ::= Exp1 "+" Exp2
+  Exp1  ::= Exp1 "-" Exp2
+  Exp   ::= Exp1 ">" Exp1
+  Exp   ::= Ident "=" Exp
+  [Stm] ::= 
+  [Stm] ::= Stm [Stm]
+  Exp2  ::= "(" Exp ")"
+  Exp1  ::= Exp2
+  Exp   ::= Exp1
+```
+Do this by showing the evolution of the stack and the
+input, and whether shift or reduce actions are taken.
+
+
+12. Consider the language ``'X'*``, i.e. sequences of
+symbol ``X``. Write two context-free grammars for it:
+one left-recursive and one right-recursive. With both
+grammars, trace the LR parsing of the string ``XXXX``.
+What can you say about the memory consumption of the
+two processes?
+
+
+13. Write a calculator for the four floating point
+operations (``+ - * /``) by using the semantic actions
+in one of the standard parser tools (Happy, CUP, Bison).
+You can start by writing an expression grammar in BNFC
+and then modify the generated parser file.
+
+To make the usage of the calculator smooth, also
+accept input without a decimal point, e.g. ``3 * 3.14``.
+The usual operator precedences must of course be followed.
+
+
+14. Semantic actions can be used to make the parser manage languages
+that are not context-free. Write a Happy/JLex/Cup program that
+implements a parser for a copy language, where valid expressions
+are sequences of identifiers (``Ident``), with any such sequence
+followed by itself:
+```
+  {x x | x : Ident*}
+```
+For instance, ``foo bar foo foo bar foo`` is a valid expression, but
+``foo bar foo bar foo`` isn't. What is the time complexity of the parser?
+
+
+==Chapter 4: Type checking==
+
+15. Using the grammar of Question 11,
+write a syntax-directed thanslator
+that returns a symbol table indicating the number of occurrences of each
+identifier that occurs in the program (i.e. a ``Stm``). For instance, in
+the program
+```
+  {
+    x = 3 ;
+    x = 2 - x - y ;
+    if (x > y) {x = x-1 ;}
+  }
+```
+the identifier ``x`` occurs 6 times and y occurs 2 times.
+
+
+16. Using the typing rules of Chapter 4,
+write a derivation of the validity of the statement
+```
+  while (x > 4) {x = x-1 ;}
+```
+You will need a context and a couple of extra typing rules.
+
+
+17. Write typing rules for the following constructs of C/C++, which
+are not covered by Lab 2.
+- conditional expressions ``e ? e : e``
+- operator assignments ``x+=e, x-=e``
+- assignment to an array position ``e[i] = e``
+
+
+
+==Chapter 5: Interpreter==
+
+18. Trace the evolution of the state (the values of variables)
+when executing the following program statement by statement.
+```
+int main () 
+{
+  int low,hi,mx ;
+  low = 1 ;
+  hi  = low ;
+  mx  = 20 ;
+  printInt(low) ;
+  while (hi < mx) {
+    printInt(hi) ;
+    hi  = low + hi ;
+    low = hi - low ;
+    }
+}
+```
+
+19. Write the big-step semantic rules for ``if`` statements,
+both with and without ``else``. Take care of all possible
+side effects that expressions can have.
+
+20. ``if`` statements without ``else`` are easy to translate into
+``if`` statements with ``else``. Show how.
+
+But the inverse is more tricky. Show a counterexample to the following 
+translation
+```
+   if (exp) stm1 else stm2   ==> if (exp)  stm1
+                                 if (!exp) stm2
+```
+and give a one that always works.
+
+21. Consider the subset of JVM consisting of the
+following instructions.
+```
+  bipush n  -- push byte constant n
+  iadd      -- add two integers; pop the operands and push the result
+  imul      -- multiply two integers; pop the operands and push the result
+  istore x  -- store value in stack address x and pop it
+  iload x   -- push value from stack address x
+  dup       -- duplicate the top of the stack
+  iprint    -- print the top-most integer and pop it 
+               (macro for an ``invokestatic/runtime/iprint(I)V``)
+```
+Trace the evolution of the stack with the following code.
+```
+  bipush 6
+  istore 0
+  bipush 5
+  iload 0
+  dup
+  iadd
+  iadd
+  dup
+  iprint
+  istore 0
+```
+Hint: if you do question 5 first, you will get this one for free!
+
+
+22. Write an interpreter for the subset of JVM consisting of the
+instructions in the previous question. Notice that you only need
+integer values in the stack.
+
+You can use pseudocode or real program code. Is your interpreter
+closer to big step or small step semantics?
+
+
+
+==Chapter 6: Code generation==
+
+23. Write compilation schemes for 
+- the four arithmetic operations for integers
+- integer constants
+- printing integers (use  ``invokestatic runtime/iprint(I)V``, which prints
+  the top of the stack)
+
+
+Apply these schemes to compile the expression
+```
+  printInt((1 + 3*5)/2)
+```
+
+24. Design and implement an environment that supports
+- a block-structured symbol table for variable addresses,
+  with methods for adding variables, looking up their addresses,
+  introducing new blocks, and throwing away blocks at exit
+- a counter for labels, with a method for getting a new label
+
+
+Show how the environment changes when compiling the code
+```
+  int i ;
+  int j ;
+  if (i < j) i++ ; else j++ ;
+```
+You don't need to show the code yet - this belongs to the later
+questions.
+
+25. Write compilation schemes for expressions and statements
+with integer variables:
+- declarations 
+- assignments
+- increments
+- initializations 
+
+
+Be careful to distinguish between pre- and postincrement!
+
+26. Write compilation schemes for 
+- comparison with ``<`` and ``>``
+- ``&&`` and ``||`` with lazy semantics
+- ``while`` loops and ``if-else`` statements. 
+
+
+You don't need to think about optimizations.
+
+27. Put everything together and show the code generated from the two 
+programs below. The easiest way to produce the code is certainly
+by running your compiler!
+
+Once you have a program, called ``ex5``, you can use it to
+generate a ``class`` file by running the script 
+[``jass`` jvm/jass] on it. Then you can execute this file with
+```
+  java Main
+```
+You need all files from the [``jvm`` jvm.tgz] directory to run ``jass``
+(a header, a footer, and a runtime support class).
+
+Here are the two test files. If you haven't written a compiler, you
+can answer this question by hand-written code.
+```
+// fibonacci.cc
+int main () 
+{
+  int low,hi,mx ;
+  low = 1 ;
+  hi  = low ;
+  mx  = 500000 ;
+  printInt(low) ;
+  while (hi < mx) {
+    printInt(hi) ;
+    hi  = low + hi ;
+    low = hi - low ;
+    }
+}
+```
+
+```
+// lazy.cc
+int main ()
+{
+  int i = 1 ;
+  bool b = (++i > 2) && (++i > 0) ;
+  printInt(i) ; // 2
+  printInt(++i) ; // 3
+  printInt(i++) ; // 3
+  printInt(i) ; // 4
+  b = (i > 5) || (++i > 0) ;
+  printInt(i) ; // 5
+}
+```

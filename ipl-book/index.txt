@@ -1,0 +1,228 @@
+Implementing Programming Languages
+An Introduction to Compilers and Interpreters
+by Aarne Ranta, with an appendix coauthored by Markus Forsberg
+
+
+%!Encoding:utf8
+
+'''
+<center>
+
+<p>
+
+<img src="ipl-cover.png" width="256mm">
+
+</center>
+'''
+
+
+
+=Publication Details=
+
+Aarne Ranta, 
+//Implementing Programming Languages.//
+//An Introduction to Compilers and Interpreters//,
+with an appendix coauthored by Markus Forsberg,
+College Publications, London, 2012.
+ISBN 978-1-84890-064-6
+
+[Publisher's web page http://www.collegepublications.co.uk/computing/?00016]
+
+
+=Where to buy=
+
+[amazon.com http://www.amazon.com/Implementing-Programming-Languages-Introduction-Interpreters/dp/1848900643/ref=sr_1_5?ie=UTF8&qid=1337270998&sr=8-5] $18.00
+
+[amazon.co.uk http://www.amazon.co.uk/Implementing-Programming-Languages-Introduction-Interpreters/dp/1848900643/ref=sr_1_1?ie=UTF8&qid=1358841845&sr=8-1]
+£11.00
+
+[adlibris.se http://www.adlibris.com/se/product.aspx?isbn=1848900643] SEK 163
+
+[cremona.se http://www.cremona.se/se/search.php] SEK 135
+
+[College Publications http://www.collegepublications.co.uk/], Volume 16 in
+[Computing series http://www.collegepublications.co.uk/computing/]
+
+
+=Authors=
+
+Aarne Ranta, http://www.cse.chalmers.se/~aarne/
+
+Markus Forsberg, http://spraakbanken.gu.se/personal/markus/
+
+University of Gothenburg, Sweden
+
+
+=Purpose=
+
+This book is meant as a **text book** for Computer Science students,
+years 2 and later.
+
+It is also usable as a **self-study book**, and to some extent, as 
+a **manual to the BNFC tool** 
+([BNF Converter http://bnfc.digitalgrammars.com/]).
+
+The book is based on material created for the course 
+[Programming Language Technology http://www.cse.chalmers.se/edu/course/DAT150/]
+at Chalmers University of Technology and University of Gothenburg, Sweden.
+The course has been given by the author yearly since 2007. The book also covers
+some material for the continuation course
+[Compiler Construction http://www.cse.chalmers.se/edu/course/TDA282/],
+which the author taught in 2002 to 2006.
+
+
+
+
+=Description=
+
+Implementing a programming language means bridging the gap from
+the programmer's high-level thinking to the machine's zeros and ones. 
+If this is done in an efficient and reliable way,
+programmers can concentrate on the actual problems they have to solve, 
+rather than on the details of machines. But understanding the whole
+chain from languages to machines is still an essential part of the training
+of any serious programmer. It will result in a more competent programmer, 
+who will moreover be able to develop new languages. A new language is often the
+best way to solve a problem, and less difficult than it may sound.
+
+This book follows a theory-based practical approach, where
+theoretical models serve as blueprint for actual coding.
+The reader is guided to build compilers and interpreters
+in a well-understood and scalable way. The solutions are
+moreover portable to different implementation languages. 
+Much of the actual code is automatically generated from a 
+grammar of the language, by using the BNF Converter tool. 
+The rest can be written in Haskell or Java, for which the book 
+gives detailed guidance, but with some adaptation also in C, C++, C#, 
+or OCaml, which are supported by the BNF Converter.  
+
+The main focus of the book is on standard imperative and functional 
+languages: a subset of C++ and a subset of Haskell are the source
+languages, and Java Virtual Machine is the main target. Simple Intel
+x86 native code compilation is shown to completes the chain from 
+language to machine. The last chapter leaves the standard paths and 
+explores the space of language design ranging from minimal Turing-complete 
+languages to human-computer interaction in natural language.
+
+[Table of Contents ipl-toc.txt]
+
+
+=Assignments=
+
+Here are preliminary versions of some assignments; full versions
+coming soon. In particular, the test suites and the code templates 
+will be extended.
+
+1. [Parser for C++ assignments/assignment1/assignment1.html]
+
+2. [Type Checker for CPP assignments/assignment2/assignment2.html]
+
+3. [Interpreter for CPP assignments/assignment3/assignment3.html]
+
+4. [Code Generator for CPP assignments/assignment4/assignment4.html]
+
+5. [Interpreter for Fun assignments/assignment5/assignment5.html]
+
+6. [A Special-Purpose Language  assignments/assignment6/assignment6.html]
+
+
+
+=Slides=
+
+[Chapter 1, Compilation Phases slides/1-slides-ipl-book.pdf]
+
+[Chapter 2, Grammars slides/2-slides-ipl-book.pdf]
+
+[Chapter 3, Lexing and parsing slides/3-slides-ipl-book.pdf]
+
+[Chapter 4, Type checking slides/4-slides-ipl-book.pdf]
+
+[Chapter 5, Interpreters slides/5-slides-ipl-book.pdf]
+
+[Chapter 6, Code generation slides/6-slides-ipl-book.pdf]
+
+[Chapter 7, Functional programming languages slides/7-slides-ipl-book.pdf]
+
+[Chapter 8, The language design space slides/8-slides-ipl-book.pdf]
+
+
+
+
+=Exercises=
+
+[Electronic self-study exercises ./exercises]
+
+A set of [exercises course-exercises/exx.html] from a related course,
+and [solutions course-exercises/sol.html] to some of them.
+
+
+
+=Code examples=
+
+[CPP grammar ./examples/CPP.cf] (Chapter 2)
+
+[Query language ./examples/query/] (Chapter 8); also as a [web demo http://www.grammaticalframework.org/~hallgren/Talks/GF/Tutorial2012/Ex4/answer.html]
+
+
+
+=Links to software=
+
+[BNFC http://bnfc.digitalgrammars.com/]
+
+[Precompiled Java tools (Cup and JLex) http://www.cse.chalmers.se/edu/course/DAT150/doc/javatools.tgz]
+
+[Jasmin http://jasmin.sourceforge.net/]
+
+[GF http://www.grammaticalframework.org/]
+
+
+
+=Links to on-line reference publications=
+
+Paul Carter, 
+[A Tutorial on PC assembly http://www.drpaulcarter.com/pcasm/].
+
+Paul Graham,
+[essays http://paulgraham.com/articles.html]
+
+Mark Jones,
+[Typing Haskell in Haskell http://web.cecs.pdx.edu/~mpj/thih/thih.pdf]
+
+Xavier Leroy, 
+[Compiling Functional Languages http://pauillac.inria.fr/~xleroy/talks/compilation-agay.pdf]
+
+Simon Peyton Jones and David Lester,
+[Implementing Functional Languages: a Tutorial, http://research.microsoft.com/en-us/um/people/simonpj/papers/pj-lester-book/]
+
+Eric Raymond,
+[The Art of Unix Programming, http://www.catb.org/~esr/writings/taoup/html/]
+
+R. Stallman, 
+[Using and Porting the GNU Compiler Collection http://gcc.gnu.org/onlinedocs/gcc-2.95.3/gcc.html]
+
+S. Thompson, 
+[Type Theory and Functional Programming http://www.cs.kent.ac.uk/people/staff/sjt/TTFP/ttfp.pdf]
+
+
+
+=Errata=
+
+p. 10 (and also later): it is stated that Python is an untyped
+language. By this we mean that Python has no compile-time type checking.
+But it does have a run-time notion of types, known as dynamic typing.
+
+p. 27: too many classes in the Java example have the name ``EAdd``. Should be ``EAdd``, ``EASub``, ``EMul``, ``EDiv``.
+
+p. 73: in ``checkExp`` code, ``if (typ2 = typ)`` should be ``if (typ2 == typ)`` 
+
+p. 92: in the last rule for ``ifeq`` //L//, the code pointer should become //P//+1 when //v != 0//
+
+p. 170: the ``lin`` rules for ``TAll`` and ``TAny`` generate a bogus condition. The proper rules are:
+```
+  TAll kind = parenth ("\\p -> and [p x | x <-" ++ kind ++ "]") ;
+  TAny kind = parenth ("\\p -> or  [p x | x <-" ++ kind ++ "]") ;
+```
+
+Please send your errata to [Aarne Ranta http://www.cse.chalmers.se/~aarne/]!
+
+

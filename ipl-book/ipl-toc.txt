@@ -1,0 +1,119 @@
+Implementing Programming Languages
+An Introduction to Compilers and Interpreters
+by Aarne Ranta, with an appendix coauthored by Markus Forsberg
+College Publications, London, 2012.
+
+
+1 Compilation Phases 
+1.1 From language to binary 
+1.2 Levels of languages 
+1.3 Compilation and interpretation 
+1.4 Compilation phases 
+1.5 Compiler errors 
+1.6 More compiler phases 
+1.7 Theory and practice 
+1.8 The scope of the techniques 
+
+2 Grammars 
+2.1 Defining a language 
+2.2 Using BNFC 
+2.3 Rules, categories, and trees 
+2.4 Precedence levels 
+2.5 Abstract and concrete syntax 
+2.6 Abstract syntax in Haskell 
+2.7 Abstract syntax in Java 
+2.8 List categories 
+2.9 Specifying the lexer 
+2.10 Working out a grammar 
+
+3 Lexing and Parsing* 
+3.1 The theory of formal languages 
+3.2 Regular languages and finite automata 
+3.3 The compilation of regular expressions 
+3.4 Properties of regular languages 
+3.5 Context-free grammars and parsing 
+3.6 LL(k) parsing 
+3.7 LR(k) parsing 
+3.8 Finding and resolving conflicts 
+3.9 The limits of context-free grammars 
+
+4 Type Checking 
+4.1 The purposes of type checking 
+4.2 Specifying a type checker 
+4.3 Type checking and type inference 
+4.4 Context, environment, and side conditions 
+4.5 Proofs in a type system 
+4.6 Overloading and type conversions 
+4.7 The validity of statements and function definitions 
+4.8 Declarations and block structures 
+4.9 Implementing a type checker 
+4.10 Annotating type checkers 
+4.11 Type checker in Haskell 
+4.12 Type checker in Java 
+
+5 Interpreters 
+5.1 Specifying an interpreter 
+5.2 Side effects 
+5.3 Statements 
+5.4 Programs, function definitions, and function calls 
+5.5 Laziness 
+5.6 Implementing the interpreter 
+5.7 Interpreting Java bytecode* 
+5.8 Objects and memory management* 
+
+6 Compiling to machine code 
+6.1 The semantic gap 
+6.2 Specifying the code generator 
+6.3 The compilation environment 
+6.4 Simple expressions and statements 
+6.5 Expressions and statements with jumps 
+6.6 Compositionality 
+6.7 Function calls and definitions 
+6.8 Putting together a class file 
+6.9 Implementing code generation 
+6.10 Compiling to native code* 
+6.11 Code optimization* 
+
+7 Functional Programming Languages 
+7.1 Programming paradigms 
+7.2 Functions as values 
+7.3 Anonymous functions 
+7.4 Evaluating expressions 
+7.5 Call by value vs. call by name 
+7.6 Implementing an interpreter 
+7.7 Type checking functional languages* 
+7.8 Polymorphism* 
+7.9 Polymorphic type checking with unification* 
+
+8 The Language Design Space 
+8.1 How simple can a language be? 
+8.2 Pure lambda calculus as a programming language* 
+8.3 Another Turing-complete language* 
+8.4 Criteria for a good programming language 
+8.5 Domain-specific languages 
+8.6 Embedded languages* 
+8.7 Case study: BNFC as a domain-specific language 
+8.8 Using BNFC for implementing languages 
+8.9 Compiling natural language* 
+8.10 Case study: a query language* 
+8.11 Grammatical Framework, GF* 
+8.12 A GF grammar for queries* 
+8.13 The answering machine* 
+8.14 The limits of grammars* 
+
+A BNFC Quick Reference
+A.1 The BNFC tool 
+A.2 Overview of LBNF 
+A.3 Abstract syntax conventions 
+A.4 Lexer Definitions 
+A.5 Pragmas 
+A.6 Macros 
+A.7 Semantic definitions 
+A.8 Layout syntax 
+A.9 The BNF grammar of LBNF 
+
+B Some JVM Instructions
+
+C Summary of the Assignments
+
+D Further Reading
