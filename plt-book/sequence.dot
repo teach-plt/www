@@ -1,0 +1,22 @@
+digraph {
+
+rankdir = LR ;
+
+start[label = "", shape = "plaintext"]
+
+init[label = "init", shape = "circle"] ;
+a1[label = "", style = "dashed", shape = "circle"] ;
+a2[label = "", style = "dashed", shape = "doublecircle"] ;
+b1[label = "", style = "dashed", shape = "circle"] ;
+b2[label = "", style = "dashed", shape = "doublecircle"] ;
+end[label = "", shape = "doublecircle"] ;
+
+start -> init ;
+
+init -> a1 [label = "ε"] ;
+a1 -> a2  [label = "A", style = "dashed"] ;
+a2 -> b1  [label = "ε"] ;
+b1 -> b2  [label = "B", style = "dashed"] ;
+b2 -> end  [label = "ε"] ;
+
+}

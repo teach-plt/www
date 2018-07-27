@@ -1,0 +1,16 @@
+digraph {
+
+rankdir = LR ;
+
+start[label = "", shape = "plaintext"]
+
+mn[label = "",   style = "solid", shape = "circle"] ;
+mm[label = "",   style = "solid", shape = "doublecircle"] ;
+nn[label = "",   style = "solid", shape = "doublecircle"] ;
+
+start -> mn [label = "m a's", style = "dotted"] ;
+start -> mn [label = "n a's", style = "dotted"] ;
+mn    -> mm [label = "m a's", style = "dotted"] ;
+mn    -> nn [label = "n a's", style = "dotted"] ;
+
+}

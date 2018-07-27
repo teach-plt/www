@@ -1,0 +1,34 @@
+digraph {
+
+rankdir = LR ;
+
+start[label = "", shape = "plaintext"]
+
+init[label = "0", shape = "circle"] ;
+1[shape = "circle"] ;
+2[shape = "circle"] ;
+3[shape = "circle"] ;
+4[shape = "circle"] ;
+5[shape = "circle"] ;
+6[shape = "circle"] ;
+7[shape = "circle"] ;
+8[shape = "circle"] ;
+9[shape = "doublecircle"] ;
+
+start -> init ;
+
+init -> 1 [label = "ε"] ;
+init -> 5 [label = "ε"] ;
+
+1 -> 2  [label = "a"] ;
+2 -> 3  [label = "ε"] ;
+3 -> 4  [label = "b"] ;
+5 -> 6  [label = "a"] ;
+6 -> 7  [label = "ε"] ;
+7 -> 8  [label = "c"] ;
+
+
+4 -> 9  [label = "ε"] ;
+8 -> 9  [label = "ε"] ;
+
+}

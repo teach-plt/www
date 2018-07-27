@@ -1,0 +1,29 @@
+digraph {
+
+rankdir = LR ;
+
+start[label = "", shape = "plaintext"]
+
+init[shape = "circle"] ;
+int[label = "int", shape = "doublecircle"] ;
+ident[label = "ident", shape = "doublecircle"] ;
+
+string[label = "string", shape = "doublecircle"] ;
+string1[label = "", shape = "circle"] ;
+string2[label = "", shape = "circle"] ;
+
+start -> init ;
+
+init -> int [label = "[0..9]"] ;
+int  -> int [label = "[0..9]"] ;
+
+init  -> ident [label = "[A..Za..z]"] ;
+ident -> ident [label = "[_0..9A..Za..z]"] ;
+
+init -> string1 [label = "\""] ;
+string1  -> string1 [label = "char - [\"\\]"] ;
+string1  -> string  [label = "\""] ;
+string1  -> string2 [label = "\\"] ;
+string2  -> string1 [label = "[\"\\]"] ;
+
+}

@@ -1,0 +1,13 @@
+digraph {
+
+rankdir = LR ;
+
+start[label = "", shape = "plaintext"]
+
+end[label = "", shape = "doublecircle"] ;
+
+start -> init ;
+
+init -> end [label = "a"] ;
+
+}

@@ -1,0 +1,27 @@
+graph {
+n0[label = "Exp", style = "solid", shape = "plaintext"] ;
+n0_0[label = "Exp", style = "solid", shape = "plaintext"] ;
+n0 -- n0_0 [style = "solid"];
+n0_0_0[label = "Exp1", style = "solid", shape = "plaintext"] ;
+n0_0 -- n0_0_0 [style = "solid"];
+n0_0_0_0[label = "Exp2", style = "solid", shape = "plaintext"] ;
+n0_0_0 -- n0_0_0_0 [style = "solid"];
+n0_0_0_0_0[label = "5", style = "solid", shape = "plaintext"] ;
+n0_0_0_0 -- n0_0_0_0_0 [style = "solid"];
+n1_0[label = "+", style = "solid", shape = "plaintext"] ;
+n0 -- n1_0 [style = "solid"];
+n2_0[label = "Exp1", style = "solid", shape = "plaintext"] ;
+n0 -- n2_0 [style = "solid"];
+n0_2_0[label = "Exp1", style = "solid", shape = "plaintext"] ;
+n2_0 -- n0_2_0 [style = "solid"];
+n0_0_2_0[label = "Exp2", style = "solid", shape = "plaintext"] ;
+n0_2_0 -- n0_0_2_0 [style = "solid"];
+n0_0_0_2_0[label = "6", style = "solid", shape = "plaintext"] ;
+n0_0_2_0 -- n0_0_0_2_0 [style = "solid"];
+n1_2_0[label = "*", style = "solid", shape = "plaintext"] ;
+n2_0 -- n1_2_0 [style = "solid"];
+n2_2_0[label = "Exp2", style = "solid", shape = "plaintext"] ;
+n2_0 -- n2_2_0 [style = "solid"];
+n0_2_2_0[label = "7", style = "solid", shape = "plaintext"] ;
+n2_2_0 -- n0_2_2_0 [style = "solid"];
+}
