@@ -207,20 +207,5 @@ S. Thompson,
 
 =Errata=
 
-p. 10 (and also later): it is stated that Python is an untyped
-language. By this we mean that Python has no compile-time type checking.
-But it does have a run-time notion of types, known as dynamic typing.
-
-p. 27: too many classes in the Java example have the name ``EAdd``. Should be ``EAdd``, ``EASub``, ``EMul``, ``EDiv``.
-
-p. 73: in ``checkExp`` code, ``if (typ2 = typ)`` should be ``if (typ2 == typ)``
-
-p. 92: in the last rule for ``ifeq`` //L//, the code pointer should become //P//+1 when //v != 0//
-
-p. 170: the ``lin`` rules for ``TAll`` and ``TAny`` generate a bogus condition. The proper rules are:
-```
-  TAll kind = parenth ("\\p -> and [p x | x <-" ++ kind ++ "]") ;
-  TAny kind = parenth ("\\p -> or  [p x | x <-" ++ kind ++ "]") ;
-```
-
-Please send your errata to [Aarne Ranta http://www.cse.chalmers.se/~aarne/]!
+See [plt-errata https://github.com/andreasabel/plt-errata/] for known errors
+in the book, and to report new errata.
