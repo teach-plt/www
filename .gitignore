@@ -6,12 +6,25 @@
 *.log
 *.o
 \#*\#
+a.out
 
 # Don't commit HTML since it's all generated
 *.html
 
 # Ignore testsuite archives
 *.tar.gz
+
+# Ignore IPL book sources
+CVS
+
+# Temporarily ignored directories
+/doc/
+/exercises/
+/lectures/
+/plt-book/
+
+# Individual ignores
+
 /laborations/lab1/testscript/lab1-test-dir/
 /laborations/lab1/testsuite/lab1-test-dir/
 /laborations/lab4/testsuite.tgz
@@ -32,4 +45,3 @@
 /laborations/lab2/testsuite/good/*.j
 /exams.tgz
 /laborations/lab3/testsuite/progs-test-lab3-jvm-verify
-/laborations/lab2/testsuite/good/a.out
