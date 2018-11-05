@@ -353,13 +353,14 @@ Then the class path needs to be set as follows (bash):
 
 =Student representatives=
 
-Student representatives for DAT151 Programming language technology.
+[Student representatives https://student.portal.chalmers.se/en/chalmersstudies/courseinformation/courseevaluation/Pages/default.aspx]
+for DAT151 Programming language technology.
 
 || Program | @student.chalmers.se | Name             ||
 (TO BE CONFIRMED)
 
-% MPALG   cjohnell@gmail.com      Carl Johnell
-% MPCSN   kouchibin@gmail.com     Chibin Kou
-% MPALG   daniel.odin@gmail.com   Daniel Odin
-% UTBYTE  up201505870@fe.up.pt    Afonso Raposo Pereira
-% MPCOM   yibo@student.chalmers.se        Yibo Wu
+% MPALG   carjohne                  Carl Johnell           % cjohnell@gmail.com
+% MPCSN   kouchibin@gmail.com       Chibin Kou
+% MPALG   odind                     Daniel Odin            % daniel.odin@gmail.com
+% UTBYTE  afonsor                   Afonso Raposo Pereira  % up201505870@fe.up.pt
+% MPCOM   yibo@student.chalmers.se  Yibo Wu
