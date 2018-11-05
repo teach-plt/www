@@ -248,8 +248,8 @@ There will be four laborations, written individually or in
 pairs.
 You have to pass the labs to pass the course.
 However, the course grade is determined solely by the exam.
-- Lab 1 - parser  (deadline 19/11)
-% - [Lab 1 - parser laborations/lab1/lab1.html] (deadline 19/11)
+% - Lab 1 - parser  (deadline 19/11)
+- [Lab 1 - parser laborations/lab1/lab1.html] (deadline 19/11)
 - Lab 2 - type checker and interpreter (deadline 03/12)
 % - [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 03/12)
 - Lab 3 - code generator (deadline 17/12)
@@ -258,7 +258,7 @@ However, the course grade is determined solely by the exam.
 % - [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 10/01 2018)
 
 
-The labs are quite substantial, so please set aside at least 30 full working hours before the deadline.
+The labs are quite substantial, so please set aside at least 30 full working hours (4 full working days) before the deadline.
 
 Reporting is done via [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
 Before reporting, you must run your program through a test suite.

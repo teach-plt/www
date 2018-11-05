@@ -9,7 +9,7 @@ Programming Language Technology, 2018
 
 % Changes from 2015: removed structure definitions and 'inline'.
 
-Submit your solution via [Fire https://plt-lp2-17.frs.cse.chalmers.se/].
+Submit your solution via [Fire https://plt-lp2-2018.fire.cse.chalmers.se/].
 
 
 =Summary=
@@ -223,8 +223,6 @@ brackets.
 
 ==Expressions==
 
-**(Associativities differ slightly from 2016 assignment!)**
-
 The following table gives the expressions,
 their precedence levels, and their associativity.
 The associativity of operators is given as "left" or "right".
@@ -243,47 +241,49 @@ the main expression to implement the required the associativity.
 %**Note**. The table is not exactly the same as in the C++ standard.
 
 
-|| level | expression forms                     | assoc   | explanation | test ||
-|  15    | literal                              | ---     | atomic expressions |  (**1**)  |
-|  15    | ``x``, ``x::x``, ``x::x::x``, ...    | ---     | qualified constants |  (**1**)  |
-|  14    | ``e[e]``                             | left    | indexing |  (**3**)  |
-|  14    | ``e(e,...,e)``                       | left    | function call |  (**3**)  |
-|  14    | ``e.e``, ``e->e``                    | left    | structure projection |  (**3**)  |
-|  14    | ``e++``, ``e--``                     | left    | in/decrement |  |
-|  13    | ``++e``, ``--e``, ``*e``, ``!e``     | right   | in/decrement, dereference, negation |  (**6**)  |
-|  12    | ``e*e``, ``e/e``, ``e%e``            | left    | multiplication, division, remainder |  (**3**)  |
-|  11    | ``e+e``, ``e-e``                     | left    | addition, subtraction |  (**3**)  |
-|  10    | ``e<<e``, ``e>>e``                   | left    | left and right shift |  (**1**)  |
-|   9    | ``e<e``, ``e>e``, ``e>=e``, ``e<=e`` | left    | comparison |  (**6**)  |
-|   8    | ``e==e``, ``e!=e``                   | left    | (in)equality |  (**3**)  |
-|   4    | ``e&&e``                             | left    | conjunction |  (**6**)  |
-|   3    | ``e||e``                             | left    | disjunction |  (**6**)  |
-|   2    | ``e=e``, ``e+=e``, ``e-=e``          | right   | assignment |  (**3**)  |
-|   2    | ``e ? e : e``                        | right   | conditional |  (**3**)  |
-|   1    | ``throw e``                          | right   | exception |  (**4**)  |
+|| level | expression forms                     |  assoc   | explanation | test ||
+|  15    | literal                              |  ---     | atomic expressions |  (**1**)  |
+|  15    | ``x``, ``x::x``, ``x::x::x``, ...    |  ---     | qualified constants |  (**1**)  |
+|  14    | ``e[e]``                             |  left    | indexing |  (**3**)  |
+|  14    | ``e(e,...,e)``                       |  left    | function call |  (**3**)  |
+|  14    | ``e.e``, ``e->e``                    |  left    | structure projection |  (**3**)  |
+|  14    | ``e++``, ``e--``                     |  left    | in/decrement |  ---  |
+|  13    | ``++e``, ``--e``, ``*e``, ``!e``     |  right   | in/decrement, dereference, negation |  (**6**)  |
+|  12    | ``e*e``, ``e/e``, ``e%e``            |  left    | multiplication, division, remainder |  (**3**)  |
+|  11    | ``e+e``, ``e-e``                     |  left    | addition, subtraction |  (**3**)  |
+|  10    | ``e<<e``, ``e>>e``                   |  left    | left and right shift |  (**1**)  |
+|   9    | ``e<e``, ``e>e``, ``e>=e``, ``e<=e`` |  left    | comparison |  (**6**)  |
+|   8    | ``e==e``, ``e!=e``                   |  left    | (in)equality |  (**3**)  |
+|   4    | ``e&&e``                             |  left    | conjunction |  (**6**)  |
+|   3    | ``e||e``                             |  left    | disjunction |  (**6**)  |
+|   2    | ``e=e``, ``e+=e``, ``e-=e``          |  right   | assignment |  (**3**)  |
+|   2    | ``e ? e : e``                        |  right   | conditional |  (**3**)  |
+|   1    | ``throw e``                          |  right   | exception |  (**4**)  |
 
 Note that this grammar includes expressions that are meaningless.
-For instance, increment, decrement, and assignment are permitted
-on any expression, not just on variables (and other so-called //l-values//).
-(Meaningless expressions can be ruled out in later compilation phases,
-e.g., in the type-checking phase.)
+For instance, it permits increment, decrement, and assignment
+on any expression, but it makes only sense on so-called //l-values//
+such as variables and array positions.
+Meaningless expressions can be ruled out in later compilation phases,
+e.g., in the type-checking phase, and at that point, good error messages
+can be given (rather than just //parse error//).
 
 //Indexing// ``_[e]`` is treated as a postfix operator;
 the expression ``e`` is bracketed and can be of any level.
-Indexing is associative, i.e., ``e1[e2][e3]`` is allowed and means
-``(e1[e2])[e3]``.  It is necessarily //left// associative, since
-the other bracketing, ``e1([e2][e3])`` would be meaningless.
+Indexing is associative, i.e., ``e[e1][e2]`` is allowed and means
+``(e[e1])[e2]``.  It is necessarily //left// associative, since
+the other bracketing, ``e([e1][e2])`` would be meaningless.
 //Function call// is similar to indexing.
 
-The //conditional// ``_ ? e : _`` is treated as a binary operator
+The //conditional// ``_?e:_`` is treated as a binary operator
 with a fixed "then"-expression ``e``.
 Right associativity for the conditional has the usual meaning:
 ``c1 ? t1 : c2 ? t2 : e2`` is parsed as
 ``c1 ? t1 : (c2 ? t2 : e2)`` and not as
 ``(c1 ? t1 : c2) ? t2 : e2``.
-Note also that ``?`` and ``:`` act like left and right parenthesis, thus,
-parsing
-``c1 ? c2 ? t1 : e1 : e2`` succeeds effortlessly, yielding
+Note also that ``?`` and ``:`` act like left and right parenthesis.
+Thus,
+``c1 ? c2 ? t1 : e1 : e2``, while being confusing, it is unambiguous, meaning
 ``c1 ? (c2 ? t1 : e1) : e2``.
 
 
@@ -325,7 +325,7 @@ postfix-operator forming types from types, e.g. ``int &``.
 
 Note that from C++ 11, double references like ``int &&`` are also allowed.
 It is sufficient to support them with spaces between the ``&``s, e.g. ``int & &``.
-Otherwise, ``x && y;`` is ambiguous: it could be the declaration ``x & & y;``
+Otherwise, ``x && y;`` would be ambiguous: it could be the declaration ``x & & y;``
 or a conjunction expression as statement.
 
 
@@ -353,8 +353,8 @@ and underscores.  (**1**)
 
 ==Comments==
 
-+ **Preprocessor directive**: anything from token ``#`` to the end of a line or the file.   (**1**)
-+ **Line comment**: anything from token ``//`` to the end of a line or the file.  (**1**)
++ **Preprocessor directive**: anything from token ``#`` to the end of the line.   (**1**)
++ **Line comment**: anything from token ``//`` to the end of the line.  (**1**)
 + **Block comment**: anything between tokens ``/*`` and ``*/``.
 Block comments cannot be nested.
 
@@ -397,8 +397,8 @@ particular, tailoring it for the programs in the test suite is not maintainable!
 
 = Submission =
 
-Submit your lab using [Fire https://plt-lp2-17.frs.cse.chalmers.se/].
-Do not submit your solution before it passes the test suite - it will
+Submit your lab using [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
+Do not submit your solution before it passes the test suite, lest it
 be returned automatically.
 
 If you have any problems getting the test program to run,
