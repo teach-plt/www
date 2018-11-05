@@ -330,12 +330,38 @@ to prepare for the exam.
 
 =Software=
 
-BNF Converter 2.8.2, http://bnfc.digitalgrammars.com/ |
+BNF Converter 2.8 http://bnfc.digitalgrammars.com/ |
 [Hackage https://hackage.haskell.org/package/BNFC] |
 [github https://github.com/BNFC/bnfc]
 
-If using the Java backend, you will need the **Cup** and **JLex** libraries.
-You can download pre-compiled versions [here (NOT YET!) doc/javatools.tgz].
+You can compile the latest version of BNFC (2.8.2) from its Haskell sources via
+```
+  cabal update
+  cabal install BNFC
+```
+You might find a suitable binary distribution for an older version of BNFC (2.8).
+
+If using the Java backend, you will need the **CUP** and **JLex** libraries.
+CUP has seen incompatible changes in its interface; thus, the version you need
+may depend on your BNFC version.
+
+==Instructions for BNFC 2.8.2 (uses CUP v0.11b)==
+
+Download the JAVA archives for
+[CUP v11b doc/java-cup-11b.jar],
+[CUP v11b runtime doc/java-cup-11b-runtime.jar], and JLex, contained in
+[javatools doc/javatools.jar].
+Make sure they are placed in your classpath, for example by storing these jars in
+``$HOME/java-lib/`` and adding the following to ``.bashrc``:
+```
+  export CLASSPATH=.:${HOME}/java-lib/java-cup-11b.jar:${HOME}/java-lib/java-cup-11b-runtime.jar:${HOME}/java-lib/javatools.jar:${CLASSPATH}
+```
+The order matters since ``javatools.jar`` also contains an older version of CUP;
+make sure that ``javatools.jar`` comes last in the search path.
+
+==Instructions for BNFC <= 2.8.1 (uses CUP v0.10k)==
+
+You can download pre-compiled versions [here doc/javatools.tgz].
 Make sure they are placed in your classpath, for example by extracting to ``~/javatools/`` adding the following to ``.bashrc``:
 
 ```
