@@ -345,7 +345,7 @@ If using the Java backend, you will need the **CUP** and **JLex** libraries.
 CUP has seen incompatible changes in its interface; thus, the version you need
 may depend on your BNFC version.
 
-==Instructions for BNFC 2.8.2 (uses CUP v0.11b)==
+===Instructions for BNFC 2.8.2 (uses CUP v0.11b)===
 
 Download the JAVA archives for
 [CUP v11b doc/java-cup-11b.jar],
@@ -359,7 +359,7 @@ Make sure they are placed in your classpath, for example by storing these jars i
 The order matters since ``javatools.jar`` also contains an older version of CUP;
 make sure that ``javatools.jar`` comes last in the search path.
 
-==Instructions for BNFC <= 2.8.1 (uses CUP v0.10k)==
+===Instructions for BNFC <= 2.8.1 (uses CUP v0.10k)===
 
 You can download pre-compiled versions [here doc/javatools.tgz].
 Make sure they are placed in your classpath, for example by extracting to ``~/javatools/`` adding the following to ``.bashrc``:
@@ -374,7 +374,6 @@ On Debian-style Linux (like Ubuntu), the following now also works to install the
 Then the class path needs to be set as follows (bash):
 ```
   export CLASSPATH=.:/usr/share/java/JLex.jar:/usr/share/java/cup.jar
-
 ```
 
 =Student representatives=
