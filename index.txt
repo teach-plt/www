@@ -13,27 +13,23 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 </p>
 '''
 
-=THIS PAGE IS UNDER CONSTRUCTION.  CONTENT NOT UP TO DATE YET.=
-
 Google group: http://groups.google.com/group/plt-2018
 //(please provide your full name and date of birth when requesting membership!)//
 
-[Fire https://plt-lp2-18.frs.cse.chalmers.se/]
+[Fire https://plt-lp2-18.fire.cse.chalmers.se/]
 /
 [Chalmers studieportal https://www.student.chalmers.se/sp/course?course_id=26971]
 % https://www.student.chalmers.se/sp/course?course_id=24933
 % https://www.student.chalmers.se/sp/course?course_id=23453
 % https://www.student.chalmers.se/sp/course?course_id=21767
 /
-[GU course description http://kursplaner.gu.se/english/DIT231.pdf]
-/
-[GU course page stub https://gul.gu.se/public/courseId/79766/coursePath/38212/38407/40149/ecp/lang-sv/publicPage.do]
+[GU course page stub (NOT YET) https://gul.gu.se/public/courseId/79766/coursePath/38212/38407/40149/ecp/lang-sv/publicPage.do]
 /
 [GU ad http://utbildning.gu.se/education/courses-and-programmes/Course_detail?courseId=DIT231]
 /
 [GU kursplan http://kursplaner.gu.se/pdf/kurs/sv/DIT231]
 /
-[GU course plan http://kursplaner.gu.se/pdf/kurs/en/DIT231]
+[GU course description http://kursplaner.gu.se/pdf/kurs/en/DIT231]
 /
 [Course page 2017 http://www.cse.chalmers.se/edu/year/2017/course/DAT151/]
 
@@ -95,7 +91,7 @@ Google group: http://groups.google.com/group/plt-2018
 %    [Lab 1 laborations/lab1/lab1.html] is online.
 %    Result of [live coding live-2017-10-31.zip] in lecture (has errors!).
 
- : //2018-10-09//
+ : //2018-11-05//
     First version of this page - mostly a copy of the 2017 material.  Updates forthcoming soon.
 
 
@@ -230,14 +226,14 @@ This is necessary to identify you as a participant of the course.
 
 Lab supervision take place in
 [ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093].
-|| Day | Time        | Supervisors |
- | Tue | 15:15-17:00 | AL IB |
- | Thu | 15:15-17:00 | FR DS |
- | Fri | 13:15-15:00 | FR AL |
+|| Day | Time        | Supervisors (tentative) |
+ | Tue | 15:15-17:00 | AL FR |
+ | Thu | 15:15-17:00 | DS IB |
+ | Fri | 13:15-15:00 | AL FR |
 
 
 The lab rooms and supervision
-are available from Tue 06 November till Fri 21 December 2018.
+are available from Thu 08 November till Fri 21 December 2018.
 
 **Attendance in these classes is optional**.
 Normally, each student should attend **at most one** supervised laboration time each week.
@@ -264,7 +260,7 @@ However, the course grade is determined solely by the exam.
 
 The labs are quite substantial, so please set aside at least 30 full working hours before the deadline.
 
-Reporting is done via [Fire https://plt-lp2-18.frs.cse.chalmers.se/].
+Reporting is done via [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
 Before reporting, you must run your program through a test suite.
 % such as the one for [lab 1 laborations/lab1/testsuite/].
 
@@ -318,9 +314,9 @@ The main book will also be sold at Cremona.
 Written exam, usual grading scales.
 
 Exam dates:
- 14 Jan 2018 fm J,
- 25 Apr 2018 fm J,
- 29 Aug 2018 em J.
+ 14 Jan 2019 fm J,
+ 25 Apr 2019 fm J,
+ 29 Aug 2019 em J.
 
 The exam has the same structure as these [old exams exams/]
 (download as [archive exams.tgz]).
@@ -334,12 +330,12 @@ to prepare for the exam.
 
 =Software=
 
-BNF Converter 2.8.1, http://bnfc.digitalgrammars.com/ |
+BNF Converter 2.8.2, http://bnfc.digitalgrammars.com/ |
 [Hackage https://hackage.haskell.org/package/BNFC] |
 [github https://github.com/BNFC/bnfc]
 
 If using the Java backend, you will need the **Cup** and **JLex** libraries.
-You can download pre-compiled versions [here doc/javatools.tgz].
+You can download pre-compiled versions [here (NOT YET!) doc/javatools.tgz].
 Make sure they are placed in your classpath, for example by extracting to ``~/javatools/`` adding the following to ``.bashrc``:
 
 ```
@@ -360,3 +356,10 @@ Then the class path needs to be set as follows (bash):
 Student representatives for DAT151 Programming language technology.
 
 || Program | @student.chalmers.se | Name             ||
+(TO BE CONFIRMED)
+
+% MPALG   cjohnell@gmail.com      Carl Johnell
+% MPCSN   kouchibin@gmail.com     Chibin Kou
+% MPALG   daniel.odin@gmail.com   Daniel Odin
+% UTBYTE  up201505870@fe.up.pt    Afonso Raposo Pereira
+% MPCOM   yibo@student.chalmers.se        Yibo Wu
