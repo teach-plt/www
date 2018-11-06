@@ -87,12 +87,11 @@ Google group: http://groups.google.com/group/plt-2018
 %    You are free to attend the [DATE-IT 2017 company contact fair https://www.date-it.se/].
 %    Lab session will take place!
 %
-%  : //2017-10-31//
-%    [Lab 1 laborations/lab1/lab1.html] is online.
-%    Result of [live coding live-2017-10-31.zip] in lecture (has errors!).
+ : //2018-11-06//
+   Result of [live coding live/2018/lec1-happy-live-2018.zip] in lecture (not the best solution!).  Contains a documented ``Makefile``, explaining the basic rule format of make files and their execution.
 
  : //2018-11-05//
-    First version of this page - mostly a copy of the 2017 material.  Updates forthcoming soon.
+   First version of this page - mostly a copy of the 2017 material.  Updates forthcoming soon.
 
 
 =Tentative Schedule=
