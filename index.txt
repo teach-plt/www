@@ -291,7 +291,7 @@ The main book will be one that developed from earlier editions of this course:
 
 
 If you are really interested in the topic, for instance, if you want
-to continue with the [Compiler Construction http://www.cse.chalmers.se/edu/course/TDA282/]
+to continue with the [Compiler Construction http://www.cse.chalmers.se/edu/course/TDA283/]
 course, you should also consider //the Dragon book//,
 
 : Aho, Lam, Sethi & Ullman
