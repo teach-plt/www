@@ -213,6 +213,7 @@ If you are not yet member of the group, you have to
 - go to http://groups.google.com/group/plt-2018
 - request an invitation to the plt-2018 group (make sure to use "apply for membership" rather than "contact the owner")
 
+
 **You will have to give your real name and your person number (or date of birth) when you register, otherwise your membership is not approved.**
 This is necessary to identify you as a participant of the course.
 Please also indicate whether you are GU or Chalmers student.
