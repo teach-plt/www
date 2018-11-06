@@ -104,9 +104,12 @@ Slides follow closely the plt book.
 
 
 || Date         | Time           | Title                             | Material                      ||
-| Tue 06/11     | 13-15          | PL Design, Compilation Phases, calculator | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1, [live coding live-2017-10-31.zip]
-| Thu 08/11     | 13-15          | Grammars / BNFC / Hands-on with Lab 1    | [code live-2-bnfc.zip] [slides plt-book/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
-| Tue 13/11     | 13-15          | Formal languages and parsing                  | [LL parser code LL-parsing.zip]
+| Tue 06/11     | 13-15          | PL Design, Compilation Phases, calculator | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
+%, [live coding live-2017-10-31.zip]
+| Thu 08/11     | 13-15          | Grammars / BNFC / Hands-on with Lab 1    | [slides plt-book/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
+% [code live-2-bnfc.zip]
+| Tue 13/11     | 13-15          | Formal languages and parsing                  |  |
+%[LL parser code LL-parsing.zip]
 %| Thu 15/11     | 10-16       | [DATE-IT 2017 fair https://www.date-it.se/] | No class! |
 | Thu 15/11     | 13-15          | Theory of lexing     | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
 | //Mon 19/11// | //23//         | //Lab 1 deadline//                | [lab1 PM laborations/lab1/lab1.html] |
@@ -115,7 +118,8 @@ Slides follow closely the plt book.
 %| Thu 22/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
 | Thu 22/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
 %| Tue 27/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
-| Tue 27/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/lab2.html]
+| Tue 27/11     | 13-14          | Hands-on with Lab 2 (Haskell)     |  |
+%[lab2 PM laborations/lab2/lab2.html]
 | Tue 27/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
 %| Thu 29/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/lab2.html]
 %| Thu 29/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
@@ -131,7 +135,8 @@ Slides follow closely the plt book.
 %| Tue 11/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
 % %| Tue 11/12     | 13-15          | The language design space         | [slides plt-book/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
 | Tue 11/12     | 13-15          | Type inference and polymorphism   | plt 7.7-9
-| Thu 13/12     | 13-15          | Hands-on with Lab 4               | [lab4 PM laborations/lab4/lab4.html]
+| Thu 13/12     | 13-15          | Hands-on with Lab 4               |  |
+%[lab4 PM laborations/lab4/lab4.html]
 | //Mon 17/12// | //23//         | //Lab 3 deadline//                |  |
 %| Tue 18/12     | 13-15          | Type inference. A taste of dependent types | Agda demo [Verified compilation ./JVM.agda] |
 | Tue 18/12     | 13-15          | Dependent types (Agda)            |  |
@@ -352,7 +357,7 @@ Download the JAVA archives for
 [CUP v11b runtime doc/java-cup-11b-runtime.jar], and JLex, contained in
 [javatools doc/javatools.jar].
 Make sure they are placed in your classpath, for example by storing these jars in
-``$HOME/java-lib/`` and adding the following to ``.bashrc``:
+``$HOME/java-lib/`` and adding the following to ``.bashrc`` (single line):
 ```
   export CLASSPATH=.:${HOME}/java-lib/java-cup-11b.jar:${HOME}/java-lib/java-cup-11b-runtime.jar:${HOME}/java-lib/javatools.jar:${CLASSPATH}
 ```
@@ -382,10 +387,9 @@ Then the class path needs to be set as follows (bash):
 for DAT151 Programming language technology.
 
 || Program | @student.chalmers.se | Name             ||
-(TO BE CONFIRMED)
-
-% MPALG   carjohne                  Carl Johnell           % cjohnell@gmail.com
+| MPALG | carjohne | Carl Johnell |
 % MPCSN   kouchibin@gmail.com       Chibin Kou
-% MPALG   odind                     Daniel Odin            % daniel.odin@gmail.com
-% UTBYTE  afonsor                   Afonso Raposo Pereira  % up201505870@fe.up.pt
+| MPALG | odind | Daniel Odin |
+| UTBYTE | afonsor | Afonso Raposo Pereira |
 % MPCOM   yibo@student.chalmers.se  Yibo Wu
+(MORE TO FOLLOW)

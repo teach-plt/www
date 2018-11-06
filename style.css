@@ -5,10 +5,24 @@ html {
 }
 
 body {
-  position: absolute;
+  /* position: absolute; */  /* messes up layout since 2018-11-05 */
   background-color: #F9F9F9;
   margin: 0em 13%;
-  min-height: 100%;
+  /* min-height: 100%; */  /* no difference */
   box-shadow: 0em 0em 5em #424242;
   padding: 2em 5em;
+}
+
+/* From https://perishablepress.com/wrapping-content/
+   Wrap long <pre> lines.
+*/
+pre {
+  white-space: pre;           /* CSS 2.0 */
+  white-space: pre-wrap;      /* CSS 2.1 */
+  white-space: pre-line;      /* CSS 3.0 */
+  white-space: -pre-wrap;     /* Opera 4-6 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap;  /* HP Printers */
+  word-wrap: break-word;      /* IE 5+ */
 }
