@@ -103,8 +103,7 @@ Slides follow closely the plt book.
 
 
 || Date         | Time           | Title                             | Material                      ||
-| Tue 06/11     | 13-15          | PL Design, Compilation Phases, calculator | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
-%, [live coding live-2017-10-31.zip]
+| Tue 06/11     | 13-15          | PL Design, Compilation Phases, calculator | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1,[live coding live/2018/lec1-happy-live-2018.zip]
 | Thu 08/11     | 13-15          | Grammars / BNFC / Hands-on with Lab 1    | [slides plt-book/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
 % [code live-2-bnfc.zip]
 | Tue 13/11     | 13-15          | Formal languages and parsing                  |  |
