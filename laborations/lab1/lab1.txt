@@ -9,7 +9,7 @@ Programming Language Technology, 2018
 
 % Changes from 2015: removed structure definitions and 'inline'.
 
-Submit your solution via [Fire https://plt-lp2-2018.fire.cse.chalmers.se/].
+Submit your solution via [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
 
 
 =Summary=
