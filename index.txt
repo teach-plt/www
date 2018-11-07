@@ -292,6 +292,27 @@ In particular, make sure you understand all parts of the solution
 % If you need a substantial amount of help, it is probably better to wait until next time the course is given.
 
 
+=Exam=
+
+The written exam determines the course grade, the usual grading scales apply:
+Chalmers: 5, 4, 3, U; Gothenburg University: VG, G, U.
+
+Exam dates:
+ 14 Jan 2019 fm J,
+ 25 Apr 2019 fm J,
+ 29 Aug 2019 em J.
+
+The exam tests the understanding of the course contents from a more high-level view,
+e.g., the underlying theoretical concepts.
+The exam has the same structure as these [old exams exams/]
+(download as [archive exams.tgz]).
+
+Further, here are some
+[exercises plt-book/ipl-book/course-exercises/exx.html]
+and [solutions plt-book/ipl-book/course-exercises/sol.html]
+to prepare for the exam.
+
+
 =Literature=
 
 The main book will be one that developed from earlier editions of this course:
@@ -320,23 +341,6 @@ course, you should also consider //the Dragon book//,
 Both books are available at web bookshops.
 The main book will also be sold at Cremona.
 
-
-=Exam=
-
-Written exam, usual grading scales.
-
-Exam dates:
- 14 Jan 2019 fm J,
- 25 Apr 2019 fm J,
- 29 Aug 2019 em J.
-
-The exam has the same structure as these [old exams exams/]
-(download as [archive exams.tgz]).
-
-Further, here are some
-[exercises plt-book/ipl-book/course-exercises/exx.html]
-and [solutions plt-book/ipl-book/course-exercises/sol.html]
-to prepare for the exam.
 
 
 
