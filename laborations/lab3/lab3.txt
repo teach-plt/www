@@ -320,6 +320,8 @@ The compiler is submitted as source files that can be compiled by typing ``make`
 
 =Test programs=
 
+//If you have any problems getting the test program to run, or if you think that there is an error in the test suite, contact the teachers of the course via the mailing list.//
+
 We also provide a [test suite ./testsuite/] for lab 3 (with the same test cases as for lab 2).
 By default, no tests containing doubles will be run; passing all these tests is the **minimum required** for passing this lab.
 
@@ -405,7 +407,3 @@ make
   + Make sure step 5 succeeds without errors.
 - Do not submit any generated files.
 - Submit your lab using [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
-
-If you have any problems getting the test program to run,
-or if you think that there is an error in the test suite,
-contact the teachers via the course Google group.

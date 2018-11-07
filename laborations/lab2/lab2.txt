@@ -685,12 +685,9 @@ by typing ``make``.
 
 =Test programs=
 
+//If you have any problems getting the test program to run, or if you think that there is an error in the test suite, contact the teachers of the course via the mailing list.//
+
 Run the [testsuite ./testsuite/] before submitting the lab.
-
-If you have any problems getting the test program to run,
-or if you think that there is an error in the test suite,
-contact the teachers via the course Google group.
-
 
 ==Example of success==
 
