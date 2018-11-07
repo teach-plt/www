@@ -75,10 +75,6 @@ Google group: http://groups.google.com/group/plt-2018
 %   The ``return`` statement can also return a void value.
 %   (If you stick to the old text and disallow this, it is also fine, but it makes more sense to allow it.)
 
-% : //2017-11-18//
-%   Ad: [Apply for teaching assistent LP3/4! http://www.gu.se/english/about_the_university/job-opportunities/vacancies-details/?id=1516]
-%   Deadline is 2017-11-30.
-
 % : //2017-11-14//
 %   [Lab 2 laborations/lab2/lab2.html] is online.
 
@@ -87,6 +83,11 @@ Google group: http://groups.google.com/group/plt-2018
 %    You are free to attend the [DATE-IT 2017 company contact fair https://www.date-it.se/].
 %    Lab session will take place!
 %
+
+ : //2018-11-07//
+   Ad: [Apply for undergraduate teaching assistent LP3/4! https://www.gu.se/english/about_the_university/job-opportunities/vacancies-details/?id=3345]
+   Deadline is 2018-11-30.
+
  : //2018-11-07//
    Clarified lab submission and grading.
 
