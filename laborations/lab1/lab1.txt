@@ -404,6 +404,7 @@ particular, tailoring it for the programs in the test suite is not maintainable!
 - Do not submit any generated files.
 - Submit your lab using [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
 
+
 =Appendix: C++ features=
 
 Assuming you know some C but not C++, here is a summary of the extra features
