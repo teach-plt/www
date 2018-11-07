@@ -8,6 +8,9 @@ Programming Language Technology, 2018
 <script src="../../enhance_page.js"></script>
 '''
 
+Back to main page of
+[Programming Language Technology ../../index.html].
+
 =Summary=
 
 The objective of this assignment is to write a code generator from a fragment
@@ -375,14 +378,34 @@ particular, tailoring it for the programs in the test suite is not maintainable!
 
 =Submission=
 
-Submit your lab by using Fire.
-**Please include exactly all the files that are required for building your solution, including a Makefile.**
-Do not however submit any generated files.
+- Do not submit your solution before it passes the test suite, lest it
+  be returned automatically.
+- **Please include exactly all the files that are required for building your solution, including a Makefile.**
+  To verify this you can follow the following 6 steps.
+  + Create an empty folder
+```
+TMPDIR=`mktemp -d`
+```
+  + Copy your solution to the created folder
+```
+cp lab3.tar.gz $TMPDIR/
+```
+  + Change to the created folder
+```
+cd $TMPDIR
+```
+  + Unpack your solution
+```
+tar xzf lab3.tar.gz
+```
+  + Build your solution
+```
+make
+```
+  + Make sure step 5 succeeds without errors.
+- Do not submit any generated files.
+- Submit your lab using [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
 
 If you have any problems getting the test program to run,
 or if you think that there is an error in the test suite,
 contact the teachers via the course Google group.
-
-
-Back to main page of
-[Programming Language Technology ../../index.html].
