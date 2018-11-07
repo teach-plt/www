@@ -87,6 +87,9 @@ Google group: http://groups.google.com/group/plt-2018
 %    You are free to attend the [DATE-IT 2017 company contact fair https://www.date-it.se/].
 %    Lab session will take place!
 %
+ : //2018-11-07//
+   Clarified lab submission and grading.
+
  : //2018-11-06//
    Result of [live coding live/2018/lec1-happy-live-2018.zip] in lecture (not the best solution!).  Contains a documented ``Makefile``, explaining the basic rule format of make files and their execution.
 
@@ -103,7 +106,7 @@ Slides follow closely the plt book.
 
 
 || Date         | Time           | Title                             | Material                      ||
-| Tue 06/11     | 13-15          | PL Design, Compilation Phases, calculator | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1,[live coding live/2018/lec1-happy-live-2018.zip]
+| Tue 06/11     | 13-15          | PL Design, Compilation Phases, calculator | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1, [live coding live/2018/lec1-happy-live-2018.zip]
 | Thu 08/11     | 13-15          | Grammars / BNFC / Hands-on with Lab 1    | [slides plt-book/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
 % [code live-2-bnfc.zip]
 | Tue 13/11     | 13-15          | Formal languages and parsing                  |  |
@@ -145,7 +148,7 @@ Slides follow closely the plt book.
 | //Mon 14/01// | //8.30-12.30// | //Exam (J)//             |  |
 %[Exam exams/exam-plt-2018-1.pdf] |
 %| //Tue 16/01// | //10.30-12.00// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
-| //Mon 21/01// | //23//         | //Final lab deadline//            | //all lab returns//
+| //Thu 24/01// | //23//         | //Final lab deadline//            | //all lab returns//
 %| //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
 %| //Sun 25/03// |                | //Late final lab deadline//       |  |
 | //Thu 25/04// | //8.30-12.30// | //Exam (J)//                      |  |
@@ -154,8 +157,9 @@ Slides follow closely the plt book.
 % //[Solution exams/solutions-plt-2017-3.pdf]// |
 %| //Tue 12/09// | //13.30//      | //Exam review//                  |  |
 
-The official course schema is in [Time Edit https://se.timeedit.net/web/chalmers/db1/public/ri177255X90Z56Q5Z36g0Y65yZ036Y31Q07gQY5Q5076q072cQ.html].
-
+The official course schema is in [Time Edit
+https://cloud.timeedit.net/chalmers/web/public/ri107355X61Z56Q5Z36g0Y65yZ036Y31Q07gQY5Q5576q573cQ.html].
+% https://se.timeedit.net/web/chalmers/db1/public/ri177255X90Z56Q5Z36g0Y65yZ036Y31Q07gQY5Q5076q072cQ.html
 % https://se.timeedit.net/web/chalmers/db1/public/ri10q29Q054Z5ZQ505663750yc065W7362Y63Q0Q7571QZ.html].
 
 
@@ -250,23 +254,35 @@ However, the course grade is determined solely by the exam.
 % - [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 03/12)
 - Lab 3 - code generator (deadline 17/12)
 % - [Lab 3 - code generator laborations/lab3/lab3.html] (deadline 17/12)
-- Lab 4 - functional language interpreter  (deadline 10/01 2018)
-% - [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 10/01 2018)
+- Lab 4 - functional language interpreter  (deadline 10/01/2019)
+% - [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 10/01/2019)
 
 
 The labs are quite substantial, so please set aside at least 30 full working hours (4 full working days) before the deadline.
 
 Reporting is done via [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
-Before reporting, you must run your program through a test suite.
-% such as the one for [lab 1 laborations/lab1/testsuite/].
-
-% **Final deadline is Saturday 21 March** for all returned and corrected labs.
-% No labs will be graded after this deadline.
+Before submitting your solution, run your program through the provided **test suite**.
+Also, make sure that your submission contains all necessary files
+and the **build succeeds**.  For instance, if you are submitting an archive,
+unpack the archive in a fresh directory and check the build there.
 
 We guarantee two gradings per lab: one for the version submitted before the
 ordinary deadline for that lab, the other for a resubmission before
-the final deadline. If your first submission is after the lab
-deadline, only one grading is guaranteed.
+the final deadline.
+If your first submission does not build or does not pass the testsuite,
+you will just get //fails testsuite// as grading.
+
+Note: **You have to submit //something// by the first deadline**,
+otherwise Fire will not allow a (re)submission for the final deadline.
+(In the worst case, if you absolutely did not manage to work on the lab
+before the first deadline, submit an empty solution.)
+
+As part of the grading, you may be asked to explain your solution in person
+to a course teacher.  Be prepared to get a call for such an explanation meeting.
+In particular, make sure you understand all parts of the solution
+(good documentation helps!).
+
+
 
 % If you did not pass the labs by the end of the course you will have another opportunity in connection with the re-exam in April.
 % The deadline will be Thursday, 22 March 2018.
