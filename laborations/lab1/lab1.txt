@@ -361,6 +361,8 @@ Block comments cannot be nested.
 
 =Test programs=
 
+//If you have any problems getting the test program to run, or if you think that there is an error in the test suite, contact the teachers of the course via the mailing list.//
+
 These programs are taken from the web page of the book
 //Accelerated C++// (A. Koenig & B. Moo, Addison-Wesley, 2000).
 To comply to our grammar, we have removed template instantiations.
@@ -401,11 +403,6 @@ particular, tailoring it for the programs in the test suite is not maintainable!
   be returned automatically.
 - Do not submit any generated files.
 - Submit your lab using [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
-
-
-If you have any problems getting the test program to run,
-or if you think that there is an error in the test suite,
-contact the teachers of the course via the mailing list.
 
 =Appendix: C++ features=
 
