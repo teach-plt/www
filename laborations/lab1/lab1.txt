@@ -9,9 +9,6 @@ Programming Language Technology, 2018
 
 % Changes from 2015: removed structure definitions and 'inline'.
 
-Submit your solution via [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
-
-
 =Summary=
 
 The objective of this lab is to write a parser for a fragment

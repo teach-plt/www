@@ -375,7 +375,7 @@ particular, tailoring it for the programs in the test suite is not maintainable!
 
 =Submission=
 
-Submit your lab by using Fire.
+Submit your lab using [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
 **Please include exactly all the files that are required for building your solution, including a Makefile.**
 Do not however submit any generated files.
 
