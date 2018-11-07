@@ -158,8 +158,7 @@ Slides follow closely the plt book.
 % //[Solution exams/solutions-plt-2017-3.pdf]// |
 %| //Tue 12/09// | //13.30//      | //Exam review//                  |  |
 
-The official course schema is in [Time Edit
-https://cloud.timeedit.net/chalmers/web/public/ri107355X61Z56Q5Z36g0Y65yZ036Y31Q07gQY5Q5576q573cQ.html].
+The official course schema is in [Time Edit https://cloud.timeedit.net/chalmers/web/public/ri107355X61Z56Q5Z36g0Y65yZ036Y31Q07gQY5Q5576q573cQ.html].
 % https://se.timeedit.net/web/chalmers/db1/public/ri177255X90Z56Q5Z36g0Y65yZ036Y31Q07gQY5Q5076q072cQ.html
 % https://se.timeedit.net/web/chalmers/db1/public/ri10q29Q054Z5ZQ505663750yc065W7362Y63Q0Q7571QZ.html].
 
