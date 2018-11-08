@@ -100,7 +100,9 @@ Google group: http://groups.google.com/group/plt-2018
 
 =Tentative Schedule=
 
-All lectures are in **[HC2 http://maps.chalmers.se/#23e2df72-cbb9-4aff-825a-1a282e9618d6]**, starting at **13:15**.
+Tuesday lectures are in **[HC2 http://maps.chalmers.se/#23e2df72-cbb9-4aff-825a-1a282e9618d6]**,
+Thursday lectures in **[HA1 http://maps.chalmers.se/#971e00c6-6f9a-46ce-9894-687adb1fa8ea]**,
+starting at **13:15**.
 
 Material: plt = course book, dragon = Dragon book.
 Slides follow closely the plt book.
