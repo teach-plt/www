@@ -368,7 +368,8 @@ Download the JAVA archives for
 [CUP v11b doc/java-cup-11b.jar],
 [CUP v11b runtime doc/java-cup-11b-runtime.jar], and JLex, contained in
 [javatools doc/javatools.jar].
-Make sure they are placed in your classpath, for example by storing these jars in
+Make sure they are placed in your classpath, for example (Linux / MAC OS)
+by storing these jars in
 ``$HOME/java-lib/`` and adding the following to ``.bashrc`` (single line):
 ```
   export CLASSPATH=.:${HOME}/java-lib/java-cup-11b.jar:${HOME}/java-lib/java-cup-11b-runtime.jar:${HOME}/java-lib/javatools.jar:${CLASSPATH}
@@ -379,7 +380,8 @@ make sure that ``javatools.jar`` comes last in the search path.
 ===Instructions for BNFC <= 2.8.1 (uses CUP v0.10k)===
 
 You can download pre-compiled versions [here doc/javatools.tgz].
-Make sure they are placed in your classpath, for example by extracting to ``~/javatools/`` adding the following to ``.bashrc``:
+Make sure they are placed in your classpath, for example (Linux / MAC OS)
+by extracting to ``~/javatools/`` adding the following to ``.bashrc``:
 
 ```
   export CLASSPATH=.:~/javatools/:~/javatools/Cup/:${CLASSPATH}
