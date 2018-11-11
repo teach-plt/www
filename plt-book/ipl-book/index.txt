@@ -10,7 +10,7 @@ by Aarne Ranta, with an appendix coauthored by Markus Forsberg
 
 <p>
 
-<img src="ipl-cover.png" width="256mm">
+<img src="ipl-cover.png" width="256mm" alt="Front cover">
 
 </center>
 '''
