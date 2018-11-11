@@ -2,6 +2,7 @@ Lab 4: Interpreter for a functional language
 Programming Language Technology, 2018
 
 %!target:html
+%!encoding: utf-8
 %!postproc(html): #NEW <!-- NEW -->
 
 '''

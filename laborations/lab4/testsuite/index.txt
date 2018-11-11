@@ -2,6 +2,7 @@ Lab 4 Test Suite
 Programming Language Technology, 2018
 
 %!target:html
+%!encoding: utf-8
 
 '''
 <script src="../../../enhance_page.js"></script>

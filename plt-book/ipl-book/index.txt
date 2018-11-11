@@ -3,7 +3,7 @@ An Introduction to Compilers and Interpreters
 by Aarne Ranta, with an appendix coauthored by Markus Forsberg
 
 
-%!Encoding:utf8
+%!Encoding:utf-8
 
 '''
 <center>
