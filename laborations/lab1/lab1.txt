@@ -400,7 +400,7 @@ particular, tailoring it for the programs in the test suite is not maintainable!
 
 = Submission =
 
-- Do not submit your solution before it passes the test suite, lest it
+- Do not submit your solution before it passes the [test suite testsuite/index.html], lest it
   be returned automatically.
 - Do not submit any generated files.
 - Submit your lab using [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
