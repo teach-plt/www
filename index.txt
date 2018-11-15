@@ -18,12 +18,14 @@ Google group: http://groups.google.com/group/plt-2018
 
 [Fire https://plt-lp2-18.fire.cse.chalmers.se/]
 /
-[Chalmers studieportal https://www.student.chalmers.se/sp/course?course_id=26971]
+[Chalmers studieportal https://www.student.chalmers.se/sp/course?course_id=27798]
+% https://www.student.chalmers.se/sp/course?course_id=26971
 % https://www.student.chalmers.se/sp/course?course_id=24933
 % https://www.student.chalmers.se/sp/course?course_id=23453
 % https://www.student.chalmers.se/sp/course?course_id=21767
 /
-[GU course page stub (NOT YET) https://gul.gu.se/public/courseId/79766/coursePath/38212/38407/40149/ecp/lang-sv/publicPage.do]
+[GU course page stub https://gul.gu.se/courseId/85497/contentStart.do]
+% https://gul.gu.se/public/courseId/79766/coursePath/38212/38407/40149/ecp/lang-sv/publicPage.do]
 /
 [GU ad http://utbildning.gu.se/education/courses-and-programmes/Course_detail?courseId=DIT231]
 /
