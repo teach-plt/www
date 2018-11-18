@@ -78,7 +78,7 @@ theory of formal languages:
 ++The theory of formal languages++
 
 A formal language is, mathematically, just any set of 
-''\ixbf{sequences of symbols}{sequence of symbols}'', 
+''\ixbf{sequences of symbols}{sequence of symbols}''.
 
 **Symbols** are just elements from any finite set, such as the 128 7-bit ASCII characters.
 
@@ -218,7 +218,7 @@ Input: a regular expression written by just the five basic operators.
 Output: an NFA which has exactly one initial state and
 exactly one final state. 
 
-The "exactly one" condition is makes it easy to combine the automata.
+The "exactly one" condition makes it easy to combine the automata.
 
 The NFA's use **epsilon transitions**, which consume no input,
 marked with the symbol ''$\epsilon$''.
