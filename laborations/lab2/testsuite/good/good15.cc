@@ -19,4 +19,6 @@ int main () {
 	} else {
 		printInt (42);
 	}
+
+	return 0;
 }

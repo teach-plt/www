@@ -8,4 +8,5 @@ int main ()
   printInt(++i) ; //7
   printInt(i) ;   //7
 
+  return 0;
 }

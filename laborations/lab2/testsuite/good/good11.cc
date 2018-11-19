@@ -11,4 +11,5 @@ int main ()
   }
   printInt(sum/num) ;
 
+  return 0;
 }

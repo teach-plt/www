@@ -13,4 +13,6 @@ int main() {
 	}
 	printInt(x);
 	printInt(y);
+
+	return 0;
 }

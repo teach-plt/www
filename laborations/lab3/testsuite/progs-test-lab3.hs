@@ -3,35 +3,23 @@
 
 -- GHC needs -threaded
 
-import Control.Concurrent
+import Control.Exception
 import Control.Monad
 
-import Data.Char
-import Data.Functor
 import Data.IORef
 import Data.List
-import Data.Maybe
 
 import System.Directory
 import System.Environment
+import System.FilePath
 import System.Exit
 import System.IO
 import System.Process
 import System.IO.Unsafe
-import System.FilePath (takeBaseName, takeDirectory, replaceExtension)
 
-#if __GLASGOW_HASKELL__ >= 706
--- needed in GHC 7.6
-import Control.Exception
-readFileIfExists :: FilePath -> IO String
-readFileIfExists f = catch (readFile f) exceptionHandler
-   where exceptionHandler :: IOException -> IO String
-         exceptionHandler _ = return ""
-#else
--- whereas in GHC 7.4
-readFileIfExists :: FilePath -> IO String
-readFileIfExists f = catch (readFile f) (\_ -> return "")
-#endif
+-- Executable name
+-- You might have to add .exe here if you are using Windows
+executable_name = "lab3"
 
 --
 -- * Main
@@ -52,24 +40,27 @@ parseArgs args = do
 
 processOpts :: [String] -> IO ()
 processOpts = mapM_ $ \ arg -> case arg of
-  "-debug"  -> writeIORef doDebug True
   "--debug" -> writeIORef doDebug True
   "--doubles" -> writeIORef includeDoubleTests True
+  "--no-make" -> writeIORef doMake False
   _ -> usage
 
 usage :: IO a
 usage = do
-  hPutStrLn stderr "Usage: progs-test-lab3 [-debug|--debug] [--doubles]"
+  hPutStrLn stderr "Usage: progs-test-lab3 [--debug] [--doubles]"
   hPutStrLn stderr "           interpreter_code_directory [test_case_directory ...]"
   exitFailure
 
 mainOpts :: [FilePath] -> IO ()
 mainOpts (progdir : dirs) = do
-  putStrLn $ "This is the test program for Programming Languages Lab 3"
-  putStrLn $ "Make sure to include the --doubles flag if you also want to test programs including doubles."
+  putStrLn "This is the test program for Programming Languages Lab 3"
+  doubles <- readIORef includeDoubleTests
+  unless doubles $ putStrLn "Make sure to include the --doubles flag if you also want to test programs including doubles."
   let testdirs = if null dirs then ["good", "dir-for-path-test/one-more-dir"] else dirs
-  forM_ testdirs (\dir -> runCommandNoFail_ ("rm -f " ++ quote dir ++ "/*.j " ++ quote dir ++ "/*.class") "")
-  runMake progdir
+  -- Cleanup files from old runs
+  forM_ testdirs (flip cleanDirectory [".j", ".class"])
+  domake <- readIORef doMake
+  when domake $ runMake progdir
   good <- runTests progdir testdirs
   putStrLn ""
   putStrLn "------------------------------------------------------------"
@@ -84,14 +75,16 @@ mainOpts (progdir : dirs) = do
 includeDoubleTests :: IORef Bool
 includeDoubleTests = unsafePerformIO $ newIORef False
 
--- | Executable name
-executable_name = "lab3"
+-- | Whether to run make
+{-# NOINLINE doMake  #-}
+doMake :: IORef Bool
+doMake = unsafePerformIO $ newIORef True
 
 -- | Run "make" in given directory.
 runMake :: FilePath -> IO ()
 runMake dir = do
   checkDirectoryExists dir
-  runCommandNoFail_ ("make -C " ++ quote dir) ""
+  runPrgNoFail_ "make" ["-C"] dir
 
 -- | Run test on all ".cc" files in given directories (default "good").
 runTests :: FilePath -> [FilePath] -> IO [(FilePath,Bool)]
@@ -103,49 +96,48 @@ runTests dir testdirs = do
 
 -- | Test given program on given test file.
 testBackendProg
-  :: FilePath  -- ^ Program (lab3).
-  -> FilePath  -- ^ Test file, e.g., good/good01.cc
-  -> IO Bool   -- ^ Test successful?
+  :: FilePath  -- ^ Program
+  -> FilePath  -- ^ Test file
+  -> IO Bool
 testBackendProg prog f = do
   input  <- readFileIfExists (f ++ ".input")
   output <- readFileIfExists (f ++ ".output")
 
   -- Running prog on f should generate file f.class
   putStrLn $ "Running " ++ f ++ "..."
-  let compilerCommand = prog ++ " " ++ f
-  (compilerOut, compilerErr, progRet) <- runCommandStrWait compilerCommand ""
-  if isExitFailure progRet then do
-    reportError compilerCommand "non-zero exit code" f input compilerOut compilerErr
+  (compilerRet, compilerOut, compilerErr) <- readProcessWithExitCode prog [f] ""
+  if isExitFailure compilerRet then do
+    reportError prog "non-zero exit code" f input compilerOut compilerErr
     return False
   else do
     let expectedJavaClassFilePath = replaceExtension f ".class"
     javaClassFileCreated <- doesFileExist expectedJavaClassFilePath
     if javaClassFileCreated then do
       -- Run code
-      let javaCommand = "java -noverify -cp .:" ++ takeDirectory f ++ " " ++ takeBaseName f
-      (javaOut, javaErr, javaRet) <- runCommandStrWait javaCommand input
+      let classpath = ['.', classpathSep] ++ takeDirectory f
+      (javaRet, javaOut, javaErr) <- readProcessWithExitCode "java" ["-noverify", "-cp", classpath, takeBaseName f] input
       if isExitFailure javaRet then do
-        reportError javaCommand "non-zero exit code" f input javaOut javaErr
+        reportError "java" "non-zero exit code" f input javaOut javaErr
         return False
       else do
         if javaOut == output then
           return True
         else do
-          reportError javaCommand "invalid output" f input javaOut javaErr
+          reportError "java" "invalid output" f input javaOut javaErr
           putStrLn "Expected output:"
           putStrLn $ color blue $ output
           return False
     else do
-      reportError compilerCommand ("did not find any Java class file at \"" ++ expectedJavaClassFilePath ++ "\" (note that the output Java class file must be written to same directory as the input C++ file)") f input compilerOut compilerErr
+      reportError prog ("did not find any Java class file at \"" ++ expectedJavaClassFilePath ++ "\" (note that the output Java class file must be written to same directory as the input C++ file)") f input compilerOut compilerErr
       return False
 
 -- | Return all files with extension ".cc" in given directory.
 listCCFiles :: FilePath -> IO [FilePath]
 listCCFiles dir = do
   doubles <- readIORef includeDoubleTests
-  liftM (map (\f -> joinPath [dir,f]) . sort . filter (doublesFilter doubles) . filter ((=="cc") . getExt)) $
-    getDirectoryContents dir
-  where doublesFilter doubles filename = doubles || not (isPrefixOf "double--" filename)
+  liftM (map (\f -> joinPath [dir,f]) . sort . filter (doublesFilter doubles) . filter ((==".cc") . takeExtension)) $
+    listDirectory dir
+  where doublesFilter doubles filename = doubles || not (isPrefixOf "double__" filename)
 
 --
 -- * Debugging
@@ -163,20 +155,20 @@ debug s = do
   when d $ putStrLn s
 
 --
--- * Path name utilities
+-- * Utilities
 --
 
-getExt :: FilePath -> String
-getExt = reverse . takeWhile (/='.') . reverse
+cleanDirectory :: FilePath -> [String] -> IO ()
+cleanDirectory path exts = listDirectory path >>=
+                           mapM_ (\f -> do let pathf = path </> f
+                                           isFile <- doesFileExist pathf
+                                           when (takeExtension f `elem` exts && isFile) $ removeFile pathf)
 
-joinPath :: [String] -> FilePath
-joinPath = concat . intersperse [pathSep]
-
-pathSep :: Char
+classpathSep :: Char
 #if defined(mingw32_HOST_OS)
-pathSep = '\\'
+classpathSep = ';'
 #else
-pathSep = '/'
+classpathSep = ':'
 #endif
 
 quote :: FilePath -> FilePath
@@ -184,6 +176,11 @@ quote p = "'" ++ concatMap f p ++ "'"
   where
     f '\'' = "\\'"
     f c = [c]
+
+readFileIfExists :: FilePath -> IO String
+readFileIfExists f = catch (readFile f) exceptionHandler
+   where exceptionHandler :: IOException -> IO String
+         exceptionHandler _ = return ""
 
 --
 -- * Terminal output colors
@@ -208,75 +205,36 @@ green = 2
 blue  = 6
 
 --
--- * Various versions of runCommand
+-- * Run programs
 --
 
 isExitFailure :: ExitCode -> Bool
 isExitFailure ExitSuccess = False
 isExitFailure ExitFailure{} = True
-runCommandStr
-  :: String                           -- ^ command
-  -> String                           -- ^ stdin data
-  -> IO (String,String,ProcessHandle) -- ^ stdout, stderr, process
-runCommandStr c inStr = do
-  outVar <- newEmptyMVar
-  errVar <- newEmptyMVar
-  (pin,pout,perr,p) <- runInteractiveCommand c
 
-  forkIO $ do
-    debug "Writing input..."
-    hPutStr pin inStr
-    hClose pin
-    debug "Wrote input."
+runPrgNoFail_ :: FilePath -- ^ Executable
+              -> [String] -- ^ Flags
 
-  forkIO $ do
-    debug "Reading output..."
-    s <- hGetContents pout
-    putMVar outVar s
-    debug "Read output."
+              -> FilePath -- ^ Filename
+              -> IO ()
+runPrgNoFail_ exe flags file = runPrgNoFail exe flags file >> return ()
 
-  forkIO $ do
-    debug "Reading error..."
-    s <- hGetContents perr
-    putMVar errVar s
-    debug "Read error."
-
-  out <- takeMVar outVar
-  err <- takeMVar errVar
-  return (out,err,p)
-
-
-runCommandStrWait
-  :: String                      -- ^ command
-  -> String                      -- ^ stdin data
-  -> IO (String,String,ExitCode) -- ^ stdout, stderr, process exit status
-runCommandStrWait c inStr = do
-  debug $ "Running " ++ c
-  (out,err,p) <- runCommandStr c inStr
-  s <- waitForProcess p
-  debug $ "Standard output:\n" ++ out
-  debug $ "Standard error:\n" ++ err
-  return (out,err,s)
-
-runCommandNoFail_
-  :: String   -- ^ Command
-  -> FilePath -- ^ Input file
-  -> IO ()
-runCommandNoFail_ c f = runCommandNoFail c f >> return ()
-
-runCommandNoFail
-  :: String             -- ^ Command
-  -> FilePath           -- ^ Input file
-  -> IO (String,String) -- ^ stdout and stderr
-runCommandNoFail e f = do
-  let c = e ++ " " ++ f
+runPrgNoFail :: FilePath -- ^ Executable
+             -> [String] -- ^ Flag
+             -> FilePath -- ^ Filename
+             -> IO (String,String) -- ^ stdout and stderr
+runPrgNoFail exe flags file = do
+  let c = showCommandForUser exe (flags ++ [file])
   hPutStrLn stderr $ "Running " ++ c ++ "..."
-  (out,err,s) <- runCommandStrWait c ""
+  (s,out,err) <- readProcessWithExitCode exe (flags ++ [file]) ""
   case s of
     ExitFailure x -> do
-      reportError e ("with status " ++ show x) f "" out err
+      reportError exe ("with status " ++ show x) file "" out err
       exitFailure
-    ExitSuccess -> return (out,err)
+    ExitSuccess -> do
+      debug $ "Standard output:\n" ++ out
+      debug $ "Standard error:\n" ++ err
+      return (out,err)
 
 --
 -- * Checking files and directories

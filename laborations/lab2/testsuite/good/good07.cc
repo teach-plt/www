@@ -13,4 +13,5 @@ int main ()
     d-- ;
   }
 
+  return 0;
 }

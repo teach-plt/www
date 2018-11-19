@@ -13,4 +13,6 @@ int main () {
 	    hi = lo + hi ;
 	    lo = hi - lo ;
 	}
+
+	return 0;
     }
