@@ -6,7 +6,7 @@ Programming Language Technology, 2018
 %!postproc(html): #NEW <!-- NEW -->
 
 '''
-<script src="../../enhance_page.js"></script>
+<script src="../../enhance_page.js" type="text/javascript"></script>
 '''
 
 Back to main page of

@@ -6,7 +6,7 @@ Winter Term 2018 (LP2)
 %!encoding:utf-8
 
 '''
-<script src="enhance_page.js"></script>
+<script src="enhance_page.js" type="text/javascript"></script>
 <p align="center">
 <a href="http://www.cse.chalmers.se/edu/course/DAT151/">
 http://www.cse.chalmers.se/edu/course/DAT151/</a>
