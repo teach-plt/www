@@ -249,7 +249,7 @@ cd $TMPDIR
 ```
   + Unpack your solution
 ```
-tar xzf lab4.tar.gz
+tar --strip-components=1 -xzf lab4.tar.gz
 ```
   + Build your solution
 ```

@@ -791,7 +791,7 @@ cd $TMPDIR
 ```
   + Unpack your solution
 ```
-tar xzf lab2.tar.gz
+tar --strip-components=1 -xzf lab2.tar.gz
 ```
   + Build your solution
 ```
