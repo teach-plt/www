@@ -9,13 +9,12 @@ JAVA = java
 CUPFILE = CPP/_cup.cup
 # WAS: CUPFILE = CPP/CPP.cup
 
-.PHONY: bnfc lab2 clean distclean vclean
+.PHONY: bnfc clean distclean vclean
 
-all: bnfc lab2
+all: bnfc lab2.class
 
-lab2:
-	${JAVAC} ${JAVAC_FLAGS} lab2.java
-	chmod a+x lab2
+%.class: %.java
+	${JAVAC} ${JAVAC_FLAGS} $<
 
 bnfc:
 	bnfc -java CPP.cf
