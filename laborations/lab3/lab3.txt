@@ -406,5 +406,9 @@ tar --strip-components=1 -xzf lab3.tar.gz
 make
 ```
   + Make sure step 5 succeeds without errors.
+  + Make sure your solution has been built
+```
+./lab3
+```
 - Do not submit any generated files.
 - Submit your lab using [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
