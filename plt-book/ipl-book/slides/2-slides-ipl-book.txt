@@ -124,7 +124,7 @@ Type
 ```
   bnfc -m Calc.cf
 ```
-to process the file \texttt{Calc.cf}.
+to process the file ``Calc.cf``.
 
 
 #NEW
@@ -260,7 +260,7 @@ Fixing it:
   export CLASSPATH=.:/usr/local/java/Cup:/usr/local/java
 ```
 
-++Runnins the Java parser++
+++Running the Java parser++
 
 ```
   echo "5 + 6 * 7" | java Calc/Test
@@ -849,7 +849,7 @@ Simplest way: just use **predefined token types** as categories:
 
 
 
-++User-defined tokan types++
+++User-defined token types++
 
 By **regular expressions**.
 
