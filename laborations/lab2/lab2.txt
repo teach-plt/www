@@ -354,7 +354,7 @@ Comments cannot be nested.
 
 =The interpreter=
 
-The top-level interpreter is run by by evaluating the expression ``main()``.
+The top-level interpreter is run by evaluating the expression ``main()``.
 The return value is ignored.
 
 ==Values==
