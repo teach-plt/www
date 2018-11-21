@@ -1,4 +1,5 @@
 # Makefile for PLT lab 2
+.PHONY: sdist clean distclean
 
 lab2: lab2.hs TypeChecker.hs Interpreter.hs CPP/Test
 	ghc --make lab2.hs -o lab2
@@ -15,11 +16,17 @@ CPP/Lex.hs: CPP/Lex.x
 CPP/Test: CPP/Test.hs CPP/Par.hs CPP/Lex.hs
 	ghc --make $< -o $@
 
+lab2.tar.gz: CPP.cf Makefile lab2.hs Interpreter.hs TypeChecker.hs
+	tar --transform='s,^,lab2/,' -czhf $@ $^
+
+sdist: lab2.tar.gz
+
 clean:
 	-rm -f CPP/*.log CPP/*.aux CPP/*.hi CPP/*.o CPP/*.dvi
 
 distclean: clean
 	-rm -f CPP/Doc.* CPP/Lex.* CPP/Par.* CPP/Layout.* CPP/Skel.* CPP/Print.* CPP/Test.* CPP/Abs.* CPP/Test CPP/ErrM.* CPP/SharedString.* CPP/ComposOp.* CPP/CPP.dtd CPP/XML.*
 	-rmdir -p CPP/
+	-rm -f lab2.tar.gz
 
 # EOF

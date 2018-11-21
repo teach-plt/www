@@ -9,7 +9,7 @@ JAVA = java
 CUPFILE = CPP/_cup.cup
 # WAS: CUPFILE = CPP/CPP.cup
 
-.PHONY: bnfc clean distclean vclean
+.PHONY: bnfc sdist clean distclean vclean
 
 all: bnfc lab2.class
 
@@ -26,7 +26,13 @@ clean:
 	 -rm -f CPP/Absyn/*.class CPP/*.class
 	 -rm -f .dvi CPP.aux CPP.log CPP.ps  *.class
 
+lab2.tar.gz: CPP.cf Makefile lab2 lab2.java Interpreter.java TypeChecker.java TypeException.java
+	tar --transform='s,^,lab2/,' -czhf $@ $^
+
+sdist: lab2.tar.gz
+
 distclean: vclean
+	-rm -f lab2.tar.gz
 
 vclean: clean
 	 -rm -f CPP/Absyn/*.java

@@ -10,23 +10,14 @@ all : www testsuite lab2-stub-java.tar.gz lab2-stub-haskell.tar.gz
 testsuite :
 	make -C testsuite
 
-lab2-stub-java.tar.gz : \
-  java/CPP.cf \
-  java/Makefile \
-  java/lab2 \
-  java/lab2.java \
-  java/Interpreter.java \
-  java/TypeChecker.java \
-  java/TypeException.java
-	tar czhf $@ $^
+%/lab2.tar.gz:
+	make -C $(@D) sdist
 
-lab2-stub-haskell.tar.gz : \
-  haskell/CPP.cf \
-  haskell/Makefile \
-  haskell/lab2.hs \
-  haskell/Interpreter.hs \
-  haskell/TypeChecker.hs
-	tar czhf $@ $^
+lab2-stub-java.tar.gz : java/lab2.tar.gz
+	cp $< $@
+
+lab2-stub-haskell.tar.gz : haskell/lab2.tar.gz
+	cp $< $@
 
 www : lab2.html
 
