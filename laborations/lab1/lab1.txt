@@ -283,8 +283,8 @@ Right associativity for the conditional has the usual meaning:
 ``c1 ? t1 : (c2 ? t2 : e2)`` and not as
 ``(c1 ? t1 : c2) ? t2 : e2``.
 Note also that ``?`` and ``:`` act like left and right parenthesis.
-Thus,
-``c1 ? c2 ? t1 : e1 : e2``, while being confusing, it is unambiguous, meaning
+Thus, ``e`` can be of any level and, for instance,
+``c1 ? c2 ? t1 : e1 : e2``, while being confusing, is unambiguous, meaning
 ``c1 ? (c2 ? t1 : e1) : e2``.
 
 
