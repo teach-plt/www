@@ -1,8 +1,36 @@
-# Makefile for PLT lab 2
+# Makefile for PLT lab 2 in Haskell
+
+## Variables
+###########################################################################
+
+# Files of solution.  Add more files as needed.  'lab2.hs'  has to be first!
+files=lab2.hs CPP.cf Makefile TypeChecker.hs Interpreter.hs
+
+# Choose one of the following definitions of variable tarlab2:
+
+# GNU tar syntax (Linux)
+# tarlab2=tar --transform='s,^,lab2/,'
+
+# BSD tar syntax (Mac OS X)
+tarlab2=tar -s',^,lab2/,'
+
+# Note:
+# The --transform option is only supported by GNU tar.
+# BSD tar (Mac OS X) has a similar option -s.
+# Name of GNU tar executable: tar on Linux, gtar on Mac (if installed).
+
+###########################################################################
+
+# List of goals not corresponding to file names.
 .PHONY: sdist clean distclean
 
-lab2: lab2.hs TypeChecker.hs Interpreter.hs CPP/Test
+# 'lab2' is default goal and needs to remain first goal in this file!
+# The extra dependency CPP/Test ensures that the parser is built from CPP.cf
+
+lab2: $(files) CPP/Test
 	ghc --make lab2.hs -o lab2
+
+# Rules to build the parser:
 
 CPP/Test.hs CPP/Lex.x CPP/Layout.hs CPP/Par.y : CPP.cf
 	bnfc --haskell -d $<
@@ -16,10 +44,14 @@ CPP/Lex.hs: CPP/Lex.x
 CPP/Test: CPP/Test.hs CPP/Par.hs CPP/Lex.hs
 	ghc --make $< -o $@
 
-lab2.tar.gz: CPP.cf Makefile lab2.hs Interpreter.hs TypeChecker.hs
-	tar --transform='s,^,lab2/,' -czhf $@ $^
+# Rules for shipping the solution:
 
 sdist: lab2.tar.gz
+
+lab2.tar.gz: $(files)
+	$(tarlab2) -czhf $@ $^
+
+# Rules for cleaning generated files:
 
 clean:
 	-rm -f CPP/*.log CPP/*.aux CPP/*.hi CPP/*.o CPP/*.dvi
