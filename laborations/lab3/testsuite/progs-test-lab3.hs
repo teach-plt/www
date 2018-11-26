@@ -114,7 +114,11 @@ testBackendProg prog f = do
     javaClassFileCreated <- doesFileExist expectedJavaClassFilePath
     if javaClassFileCreated then do
       -- Run code
-      let classpath = ['.', classpathSep] ++ takeDirectory f
+      -- A. Abel, 2018-11-26: put test file directory first in classpath.
+      -- This avoids problems if there are stale .class files
+      -- in the directory indicated by "." (the current directory).
+      let classpath = takeDirectory f ++ [classpathSep, '.']
+      -- let classpath = ['.', classpathSep] ++ takeDirectory f
       (javaRet, javaOut, javaErr) <- readProcessWithExitCode "java" ["-noverify", "-cp", classpath, takeBaseName f] input
       if isExitFailure javaRet then do
         reportError "java" "non-zero exit code" f input javaOut javaErr
