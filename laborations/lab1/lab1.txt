@@ -329,6 +329,7 @@ It is sufficient to support them with spaces between the ``&``s, e.g. ``int & &`
 Otherwise, ``x && y;`` would be ambiguous: it could be the declaration ``x & & y;``
 or a conjunction expression as statement.
 
+It is sufficient to support references and double references in the grammar.  However, it is also fine to allow arbitrary stacking of the reference operator, as for instance in ``char & & & &``.
 
 ==Literals==
 
