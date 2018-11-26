@@ -16,10 +16,10 @@ CUPFILE = CPP/_cup.cup
 # Choose one of the following definitions of variable tarlab2:
 
 # GNU tar syntax (Linux)
-# tarlab2=tar --transform='s,^,lab2/,'
+tarlab2=tar --transform='s,^,lab2/,'
 
 # BSD tar syntax (Mac OS X)
-tarlab2=tar -s',^,lab2/,'
+# tarlab2=tar -s',^,lab2/,'
 
 # Note:
 # The --transform option is only supported by GNU tar.

@@ -9,10 +9,10 @@ files=lab2.hs CPP.cf Makefile TypeChecker.hs Interpreter.hs
 # Choose one of the following definitions of variable tarlab2:
 
 # GNU tar syntax (Linux)
-# tarlab2=tar --transform='s,^,lab2/,'
+tarlab2=tar --transform='s,^,lab2/,'
 
 # BSD tar syntax (Mac OS X)
-tarlab2=tar -s',^,lab2/,'
+# tarlab2=tar -s',^,lab2/,'
 
 # Note:
 # The --transform option is only supported by GNU tar.
