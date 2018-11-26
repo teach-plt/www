@@ -6,19 +6,6 @@
 # Files of solution.  Add more files as needed.  'lab2.hs'  has to be first!
 files=lab2.hs CPP.cf Makefile TypeChecker.hs Interpreter.hs
 
-# Choose one of the following definitions of variable tarlab2:
-
-# GNU tar syntax (Linux)
-tarlab2=tar --transform='s,^,lab2/,'
-
-# BSD tar syntax (Mac OS X)
-# tarlab2=tar -s',^,lab2/,'
-
-# Note:
-# The --transform option is only supported by GNU tar.
-# BSD tar (Mac OS X) has a similar option -s.
-# Name of GNU tar executable: tar on Linux, gtar on Mac (if installed).
-
 ###########################################################################
 
 # List of goals not corresponding to file names.
@@ -48,8 +35,13 @@ CPP/Test: CPP/Test.hs CPP/Par.hs CPP/Lex.hs
 
 sdist: lab2.tar.gz
 
+tmpdir := $(shell mktemp -d)
 lab2.tar.gz: $(files)
-	$(tarlab2) -czhf $@ $^
+	# The --transform option is only supported by GNU tar.
+	# tar --transform='s,^,lab2/,' -czhf $@ $^
+	mkdir $(tmpdir)/lab2
+	cp $^ $(tmpdir)/lab2/
+	tar -C $(tmpdir) -czhf $@ lab2
 
 # Rules for cleaning generated files:
 

@@ -13,19 +13,6 @@ CUPFILE = CPP/_cup.cup
 # Older BNFC versions may need:
 # CUPFILE = CPP/CPP.cup
 
-# Choose one of the following definitions of variable tarlab2:
-
-# GNU tar syntax (Linux)
-tarlab2=tar --transform='s,^,lab2/,'
-
-# BSD tar syntax (Mac OS X)
-# tarlab2=tar -s',^,lab2/,'
-
-# Note:
-# The --transform option is only supported by GNU tar.
-# BSD tar (Mac OS X) has a similar option -s.
-# Name of GNU tar executable: tar on Linux, gtar on Mac (if installed).
-
 ###########################################################################
 
 # List of goals not corresponding to file names.
@@ -47,8 +34,13 @@ bnfc:
 
 sdist: lab2.tar.gz
 
+tmpdir := $(shell mktemp -d)
 lab2.tar.gz: CPP.cf Makefile lab2 lab2.java Interpreter.java TypeChecker.java TypeException.java
-	$(tarlab2) -czhf $@ $^
+	# The --transform option is only supported by GNU tar.
+	# tar --transform='s,^,lab2/,' -czhf $@ $^
+	mkdir $(tmpdir)/lab2
+	cp $^ $(tmpdir)/lab2/
+	tar -C $(tmpdir) -czhf $@ lab2
 
 # Rules for cleaning generated files:
 
