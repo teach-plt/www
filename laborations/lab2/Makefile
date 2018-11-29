@@ -3,15 +3,15 @@
 # Files which contribute to the generated .html
 deps=../../style.css ../../include.html ../../enhance_page.js
 
-.PHONY : all www testsuite
+.PHONY : all www testsuite java haskell
 
-all : www testsuite lab2-stub-java.tar.gz lab2-stub-haskell.tar.gz
+all : www testsuite java haskell lab2-stub-java.tar.gz lab2-stub-haskell.tar.gz
 
 testsuite :
 	make -C testsuite
 
-%/lab2.tar.gz:
-	make -C $(@D) sdist
+java haskell :
+	make -C $@ sdist
 
 lab2-stub-java.tar.gz : java/lab2.tar.gz
 	cp $< $@
