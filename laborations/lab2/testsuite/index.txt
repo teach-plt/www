@@ -28,6 +28,12 @@ Google group.
 
 You will only need to do this part once.
 
++ Make sure that at least version 1.2.5.0 (December 2015) of the
+  Haskell package [directory https://hackage.haskell.org/package/directory]
+  is installed:
+```
+$ ghc-pkg latest directory
+```
 
 + Download [lab2-testsuite.tar.gz lab2-testsuite.tar.gz].
 
