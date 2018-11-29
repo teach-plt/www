@@ -9,5 +9,7 @@ int main ()
     ret = i * ret ;
     ++i ;
   }
+
   printInt(ret) ;
+  return 0 ;
 }

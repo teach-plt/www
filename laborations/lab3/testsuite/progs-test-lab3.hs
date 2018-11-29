@@ -119,7 +119,7 @@ testBackendProg prog f = do
       -- in the directory indicated by "." (the current directory).
       let classpath = takeDirectory f ++ [classpathSep, '.']
       -- let classpath = ['.', classpathSep] ++ takeDirectory f
-      (javaRet, javaOut, javaErr) <- readProcessWithExitCode "java" ["-noverify", "-cp", classpath, takeBaseName f] input
+      (javaRet, javaOut, javaErr) <- readProcessWithExitCode "java" ["-cp", classpath, takeBaseName f] input
       if isExitFailure javaRet then do
         reportError "java" "non-zero exit code" f input javaOut javaErr
         return False

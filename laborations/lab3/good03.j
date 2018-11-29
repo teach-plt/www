@@ -89,7 +89,7 @@ iload_1
 invokestatic Runtime/printInt(I)V
 nop
 
-;; // return 0
+;; return 0
 
 iconst_0
 ireturn
