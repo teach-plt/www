@@ -234,7 +234,7 @@ particular, tailoring it for the programs in the test suite is not maintainable!
 - Do not submit your solution before it passes the [test suite testsuite/index.html], lest it
   be returned automatically.
 - **Please include exactly all the files that are required for building your solution, including a Makefile.**
-  To verify this you can follow the following 6 steps (on Windows, the tools used here are provided by [Cygwin https://www.cygwin.com/]).
+  To verify this you can follow the following 7 steps (on Windows, the tools used here are provided by [Cygwin https://www.cygwin.com/]).
   + Create an empty folder
 ```
 TMPDIR=`mktemp -d`
