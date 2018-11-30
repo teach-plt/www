@@ -19,7 +19,10 @@ CUPFILE = CPP/_cup.cup
 .PHONY: bnfc sdist clean distclean vclean
 
 # As first goal is default goal, this goal needs to remain first.
-all: bnfc lab2.class
+all: bnfc lab2 lab2.class
+
+lab2: lab2.hs
+	ghc --make -cpp $< -o $@
 
 %.class: %.java
 	${JAVAC} ${JAVAC_FLAGS} $<
@@ -35,7 +38,7 @@ bnfc:
 sdist: lab2.tar.gz
 
 tmpdir := $(shell mktemp -d)
-lab2.tar.gz: CPP.cf Makefile lab2 lab2.java Interpreter.java TypeChecker.java TypeException.java
+lab2.tar.gz: CPP.cf Makefile lab2.hs lab2.java Interpreter.java TypeChecker.java TypeException.java
 	# The --transform option is only supported by GNU tar.
 	# tar --transform='s,^,lab2/,' -czhf $@ $^
 	mkdir $(tmpdir)/lab2
@@ -47,6 +50,7 @@ lab2.tar.gz: CPP.cf Makefile lab2 lab2.java Interpreter.java TypeChecker.java Ty
 clean:
 	 -rm -f CPP/Absyn/*.class CPP/*.class
 	 -rm -f .dvi CPP.aux CPP.log CPP.ps  *.class
+	 -rm -f lab2.hi lab2.o lab2.exe lab2
 
 vclean: clean
 	 -rm -f CPP/Absyn/*.java
