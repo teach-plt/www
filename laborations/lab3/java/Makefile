@@ -37,17 +37,16 @@ java        = ${JAVA}  ${JAVA_FLAGS}
 .PHONY : default all clean distclean vclean
 
 # As the first goal is default goal, this goal needs to remain first.
-default : lab3
+default : lab3.class Runtime.class lab3
 
 # Build and ship
-all : lab3 sdist
+all : default sdist
 
 # Compiling the lab3 runner
 ###########################################################################
 
-lab3 : lab3.hs lab3.class Runtime.class
+lab3 : lab3.hs
 	ghc --make -cpp $< -o $@
-	touch $@
 
 # Rules for compiling lab3 classes (modify or add as needed)
 ###########################################################################

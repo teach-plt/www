@@ -36,15 +36,15 @@ java        = ${JAVA}  ${JAVA_FLAGS}
 .PHONY : default all clean distclean vclean
 
 # As the first goal is default goal, this goal needs to remain first.
-default : lab2
+default : lab2.class lab2
 
 # Build and ship
-all : lab2 sdist
+all : default sdist
 
 # Compiling the lab2 runner
 ###########################################################################
 
-lab2 : lab2.hs lab2.class
+lab2 : lab2.hs
 	ghc --make -cpp $< -o $@
 
 # Rules for compiling lab2 classes (modify or add as needed)
