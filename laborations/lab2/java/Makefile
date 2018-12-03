@@ -33,17 +33,22 @@ java        = ${JAVA}  ${JAVA_FLAGS}
 ###########################################################################
 
 # List of goals not corresponding to file names.
-.PHONY: default clean distclean vclean
+.PHONY : default all clean distclean vclean
 
 # As the first goal is default goal, this goal needs to remain first.
 default : lab2
 
-# Rules for compiling lab2 classes (modify or add as needed)
+# Build and ship
+all : lab2 sdist
+
+# Compiling the lab2 runner
 ###########################################################################
 
-lab2 : lab2.class
-	touch $@
-	chmod a+x $@
+lab2 : lab2.hs lab2.class
+	ghc --make -cpp $< -o $@
+
+# Rules for compiling lab2 classes (modify or add as needed)
+###########################################################################
 
 TypeChecker.class : TypeChecker.java TypeException.class CPP/Test.class
 	$(javac) $<
@@ -90,10 +95,10 @@ CPP/Test.class : CPP/Test.java CPP/parser.class CPP/sym.class CPP/Yylex.class
 # Rules for shipping the solution
 ###########################################################################
 
-sdist: lab2.tar.gz
+sdist : lab2.tar.gz
 
 tmpdir := $(shell mktemp -d)
-lab2.tar.gz: CPP.cf Makefile $(LABSRC)
+lab2.tar.gz : CPP.cf Makefile $(LABSRC)
 	mkdir $(tmpdir)/lab2
 	cp $^ $(tmpdir)/lab2/
 	tar -C $(tmpdir) -czhf $@ lab2
@@ -101,29 +106,30 @@ lab2.tar.gz: CPP.cf Makefile $(LABSRC)
 # Rules for cleaning generated files
 ###########################################################################
 
-clean:
+clean :
 	-rm -f CPP/Absyn/*.class CPP/*.class
 	-rm -f CPP.dvi CPP.aux CPP.log CPP.ps
 	-rm -f $(LABOBJ)
-	-rm -f lab2.exe lab2
+	-rm -f lab.hi lab.o lab2.exe lab2
 # Uncomment to also remove all .class files in current directory
 #	-rm -f *.class
 
 
-vclean: clean
+vclean : clean
 	-rm -f $(PARSERSRC)
+	-rm -f CPP/Absyn/*.bak CPP/*.bak
 	-rmdir CPP/Absyn/
 	-rm -f CPP.tex
 	-rm -f CPP/Yylex $(CUPFILE)
 	-rmdir -p CPP/
 
-distclean: vclean
+distclean : vclean
 	-rm -f lab2.tar.gz
 
 # Debugging the Makefile
 ###########################################################################
 
-debug:
+debug :
 	echo $(LABINNOBJ)
 
 # EOF
