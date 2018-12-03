@@ -102,8 +102,6 @@ compiling to a class file.
 
 When running your compiled programs, the Java bytecode you have generated will be automatically sanity-checked by a Java bytecode verifier (which is part of the JVM you are using). The verifier will e.g. check that there are no operand stack overflows or underflows and that all local variable uses and stores are valid. If your code does not pass the verifier, a ``java.lang.VerifyError`` exception will be thrown (with an often useful error message).
 
-It is part of the requirements of the lab that the code you generate must pass this built-in verification. Passing the verifier check means no additional work beyond generating correct code (such as not popping empty stacks etc.).
-
 ==Class structure==
 
 Boilerplate code, see the PLT book, Chapter 6, or the example below.
@@ -381,6 +379,11 @@ or with library process > 1.2.0.0, simply:
 
 Your program must be compatible with the [test suite ./testsuite/] and meet the
 specification in this document in all respects.
+
+The code you generate must pass the Java bytecode verification.
+Note: Passing the verifier check means
+no additional work beyond generating correct code (such as not popping
+empty stacks etc.).
 
 The solution must be written in an easily readable and maintainable way. In
 particular, tailoring it for the programs in the test suite is not maintainable!
