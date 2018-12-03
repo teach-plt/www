@@ -63,19 +63,12 @@ Google group: http://groups.google.com/group/plt-2018
 % : //2017-12-05//
 %   [Lab 4 laborations/lab4/lab4.html] is online.
 
-% : //2017-11-23//
-%   [Lab 3 laborations/lab3/lab3.html] is online.
+ : //2018-12-04//
+   [Lab 3 laborations/lab3/lab3.html] is online.
 
-% : //2017-11-23//
-%   The code from today's "Hands-on for lab 2" session has been posted in the plt-2017 group.
+ : //2018-11-27//
+   The code from today's "Hands-on for lab 2" session has been posted in the plt-2018 group.
 
-% : //2017-11-23//
-%   The schedule has been updated (see below).
-
-% : //2017-11-18//
-%   Change in text for [Lab 2 laborations/lab2/lab2.html]:
-%   The ``return`` statement can also return a void value.
-%   (If you stick to the old text and disallow this, it is also fine, but it makes more sense to allow it.)
 
  : //2018-11-20//
    [Lab 2 laborations/lab2/lab2.html] is online.
@@ -131,8 +124,7 @@ Slides follow closely the plt book.
 | Thu 29/11     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
 | //Mon 03/12// | //23//         | //Lab 2 deadline//                |  |
 %| Tue 04/12     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
-| Tue 04/12    | 13-14          | Hands-on with Lab 3 (Haskell)     |  |
-% [lab3 PM laborations/lab3/lab3.html]
+| Tue 04/12    | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/lab3.html]
 | Tue 04/12     | 14-15          | Hands-on with Lab 3 (Java)        |  |
 %| Thu 06/12     | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/lab3.html]
 %| Thu 06/12     | 14-15          | Hands-on with Lab 3 (Java)        |  |
@@ -256,8 +248,8 @@ However, the course grade is determined solely by the exam.
 - [Lab 1 - parser laborations/lab1/lab1.html] (deadline 19/11)
 % - Lab 2 - type checker and interpreter (deadline 03/12)
 - [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 03/12)
-- Lab 3 - code generator (deadline 17/12)
-% - [Lab 3 - code generator laborations/lab3/lab3.html] (deadline 17/12)
+% - Lab 3 - code generator (deadline 17/12)
+- [Lab 3 - code generator laborations/lab3/lab3.html] (deadline 17/12)
 - Lab 4 - functional language interpreter  (deadline 10/01/2019)
 % - [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 10/01/2019)
 
