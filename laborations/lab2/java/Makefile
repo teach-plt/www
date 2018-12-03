@@ -110,7 +110,7 @@ clean :
 	-rm -f CPP/Absyn/*.class CPP/*.class
 	-rm -f CPP.dvi CPP.aux CPP.log CPP.ps
 	-rm -f $(LABOBJ)
-	-rm -f lab.hi lab.o lab2.exe lab2
+	-rm -f lab2.hi lab2.o lab2.exe lab2
 # Uncomment to also remove all .class files in current directory
 #	-rm -f *.class
 
