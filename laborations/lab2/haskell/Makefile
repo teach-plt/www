@@ -37,8 +37,6 @@ sdist: lab2.tar.gz
 
 tmpdir := $(shell mktemp -d)
 lab2.tar.gz: $(files)
-	# The --transform option is only supported by GNU tar.
-	# tar --transform='s,^,lab2/,' -czhf $@ $^
 	mkdir $(tmpdir)/lab2
 	cp $^ $(tmpdir)/lab2/
 	tar -C $(tmpdir) -czhf $@ lab2
@@ -46,11 +44,11 @@ lab2.tar.gz: $(files)
 # Rules for cleaning generated files:
 
 clean:
-	-rm -f CPP/*.log CPP/*.aux CPP/*.hi CPP/*.o CPP/*.dvi
+	-rm -f CPP/*.log CPP/*.aux CPP/*.hi CPP/*.o CPP/*.dvi *.hi *.o
 
 distclean: clean
-	-rm -f CPP/Doc.* CPP/Lex.* CPP/Par.* CPP/Layout.* CPP/Skel.* CPP/Print.* CPP/Test.* CPP/Abs.* CPP/Test CPP/ErrM.* CPP/SharedString.* CPP/ComposOp.* CPP/CPP.dtd CPP/XML.*
+	-rm -f CPP/Doc.* CPP/Lex.* CPP/Par.* CPP/Layout.* CPP/Skel.* CPP/Print.* CPP/Test.* CPP/Abs.* CPP/Test CPP/ErrM.* CPP/SharedString.* CPP/ComposOp.* CPP/CPP.dtd CPP/XML.* CPP/*.bak
 	-rmdir -p CPP/
-	-rm -f lab2.tar.gz
+	-rm -f lab2.tar.gz lab2
 
 # EOF
