@@ -13,13 +13,18 @@ CUPFILE = CPP/_cup.cup
 # Older BNFC versions may need:
 # CUPFILE = CPP/CPP.cup
 
+PARSERSRC = $(wildcard CPP/Absyn/*.java CPP/*.java)
+PARSEROBJ = $(PARSERSRC:.java=.class)
+LABSRC    = TypeException.class TypeChecker.class Interpreter.class lab2.class
+LABOBJ    = $(LABSRC:.java=.class)
+
 ###########################################################################
 
 # List of goals not corresponding to file names.
 .PHONY: bnfc sdist clean distclean vclean
 
 # As first goal is default goal, this goal needs to remain first.
-all: bnfc lab2 lab2.class
+all: bnfc lab2 $(LABOBJ)
 
 lab2: lab2.hs
 	ghc --make -cpp $< -o $@
@@ -49,14 +54,15 @@ lab2.tar.gz: CPP.cf Makefile lab2.hs lab2.java Interpreter.java TypeChecker.java
 
 clean:
 	 -rm -f CPP/Absyn/*.class CPP/*.class
-	 -rm -f .dvi CPP.aux CPP.log CPP.ps  *.class
+	 -rm -f .dvi CPP.aux CPP.log CPP.ps
+	 -rm -f $(LABOBJ)
 	 -rm -f lab2.hi lab2.o lab2.exe lab2
 
 vclean: clean
-	 -rm -f CPP/Absyn/*.java
+	 -rm -f $(PARSERSRC)
 	 -rmdir CPP/Absyn/
 	 -rm -f CPP.tex CPP.dvi CPP.aux CPP.log CPP.ps
-	 -rm -f CPP/Yylex $(CUPFILE) CPP/Yylex.java CPP/VisitSkel.java CPP/ComposVisitor.java CPP/AbstractVisitor.java CPP/FoldVisitor.java CPP/AllVisitor.java CPP/PrettyPrinter.java CPP/Skeleton.java CPP/Test.java CPP/sym.java CPP/parser.java CPP/*.class
+	 -rm -f CPP/Yylex $(CUPFILE)
 	 -rmdir -p CPP/
 
 distclean: vclean
