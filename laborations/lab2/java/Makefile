@@ -98,7 +98,7 @@ CPP/Test.class : CPP/Test.java CPP/parser.class CPP/sym.class CPP/Yylex.class
 sdist : lab2.tar.gz
 
 tmpdir := $(shell mktemp -d)
-lab2.tar.gz : CPP.cf Makefile $(LABSRC)
+lab2.tar.gz : CPP.cf Makefile lab2.hs $(LABSRC)
 	mkdir $(tmpdir)/lab2
 	cp $^ $(tmpdir)/lab2/
 	tar -C $(tmpdir) -czhf $@ lab2
