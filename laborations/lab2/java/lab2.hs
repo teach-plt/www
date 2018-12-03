@@ -1,4 +1,4 @@
--- | OS-agnostic runner for PLT lab2 written in Haskell.
+-- | OS-agnostic runner for Java solutions of PLT labs.
 
 module Main where
 
@@ -6,6 +6,8 @@ import Data.Maybe
 import System.Environment
 import System.FilePath
 import System.Process
+
+-- | Name of the JVM.
 
 javaProg :: String
 javaProg = "java"
@@ -23,8 +25,13 @@ classpathSeparator = ';'
 classpathSeparator = ':'
 #endif
 
+-- | Concatenating class pathes.
+
 (<:>) :: String -> String -> String
 s <:> t = s ++ [classpathSeparator] ++ t
+
+-- | Run the class file with class path extended by the directory
+--   of the class file.
 
 main :: IO ()
 main = do
@@ -33,5 +40,5 @@ main = do
   classPath <- fromMaybe "" <$> lookupEnv "CLASSPATH"
   let cp      = dir <:> classPath
       cmdArgs = ["-cp",cp,className] ++ args
-      cmdLine = showCommandForUser javaProg cmdArgs
+      -- cmdLine = showCommandForUser javaProg cmdArgs
   callProcess javaProg cmdArgs
