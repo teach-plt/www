@@ -292,31 +292,28 @@ a file or by ``echo``. For instance,
 Source file
 ```
 // file good.cc
-
 int main ()
 {
-  int i = readInt() ; //5
+  int i = readInt() ; // 5
 
-  printInt(i) ;   //5
-  printInt(i++) ; //5
-  printInt(i) ;   //6
-  printInt(++i) ; //7
-  printInt(i) ;   //7
+  printInt(i) ;       // 5
+  printInt(i++) ;     // 5
+  printInt(i) ;       // 6
+  printInt(++i) ;     // 7
+  printInt(i) ;       // 7
 
   return 0 ;
 }
 ```
 Running the compiler
 ```
-  % lab3 good.cc
-  # produces good.class
-
-  % echo 3 | java good.class
-  3
-  3
-  4
-  5
-  5
+% lab3 good.cc # produces good.class
+% echo 5 | java good
+5
+5
+6
+7
+7
 ```
 
 
