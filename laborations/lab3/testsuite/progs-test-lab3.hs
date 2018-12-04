@@ -18,8 +18,12 @@ import System.Process
 import System.IO.Unsafe
 
 -- Executable name
--- You might have to add .exe here if you are using Windows
+-- You might have to add or remove .exe here if you are using Windows
+#if defined(mingw32_HOST_OS)
+executable_name = "lab3.exe"
+#else
 executable_name = "lab3"
+#endif
 
 --
 -- * Main
