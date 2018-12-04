@@ -386,12 +386,12 @@ Make sure that your compiler waits for the Jasmin conversion to finish before ex
 In other words, it shouldn't exit before the ``.class`` file has been written.
 For example when using Haskell, you can do the following:
 ```
-  p <- runCommand <call jasmin here>
-  waitForProcess p
+p <- runCommand <call jasmin here>
+waitForProcess p
 ```
-or with library process > 1.2.0.0, simply:
+or with at least version 1.2.0.0 (December 2013) of library [process https://hackage.haskell.org/package/process] installed, simply:
 ```
-  callCommand <call jasmin here>
+callCommand <call jasmin here>
 ```
 
 
