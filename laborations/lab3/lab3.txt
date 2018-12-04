@@ -24,8 +24,7 @@ The code generator is partially characterized by compilation schemes in
 Chapter 6 of the PLT book. More JVM instructions are given in Appendix B of the book.
 These explanations follow Jasmin assembler; the code generator may
 emit Jasmin assembly code into text files, which are then processed
-further by Jasmin to create class files.
-**Jasmin can be downloaded** [here http://jasmin.sourceforge.net/], but is also included in the test suite.
+further by [Jasmin #jasmin-tips] to create class files.
 
 The recommended implementation is via a BNF
 grammar processed by the BNF Converter (BNFC) tool. The syntax
@@ -360,10 +359,10 @@ The test script can then be run as follows:
   ./progs-test-lab3 ../path/to/solution/
 ```
 
-==Jasmin tips==
+==Jasmin tips==[jasmin-tips]
 
 Jasmin is available on [Sourceforge http://jasmin.sourceforge.net/].
-Note that there are also versions on e.g. Ubuntu (``apt install jasmin-sable``) and Mac (``brew install jasmin``).
+Note that version 2.4 is included in the [test suite ./testsuite/] and that there are also versions on e.g. Ubuntu (``apt install jasmin-sable``) and Mac (``brew install jasmin``).
 
 % ; however, the testsuite you have to pass expects you to invoke Jasmin via `java -jar jasmin.jar`.
 
