@@ -38,7 +38,9 @@ only for Haskell and Java.
 
 =Language specification=
 
-The language is the same as in the lecture notes, Chapter 7.
+The language is the same as in the PLT book, Chapter 7.
+
+==Syntax==
 
 The main category is ``Program``. A program is a sequence of **definitions**,
 which are terminated by semicolons. A definition is a function name followed by
@@ -47,7 +49,7 @@ followed by an **expression**:
 ```
   f x1 ... xn = exp ;
 ```
-Both ``f`` and the variables ``x1`` ... ``xn`` are lexically identifiers.
+Both ``f`` and the variables ``x1`` ... ``xn`` are lexical identifiers.
 Thus ``f`` is the function to be defined, and ``x1`` ... ``xn``
 are its arguments. These variables are considered **bound** in ``exp``. Notice that
 the all such definitions can be converted to definitions of just ``f`` with
@@ -63,37 +65,45 @@ You can run well-formed programs in Haskell to check the expected result.
 
 Expressions are of the following forms
 
-|| precedence | expression  | example               ||
-|  3          | identifier  | ``foo``                |
-|  3          | integer     | ``512``                |
-|  2          | application | ``f x``                |
-|  1          | operation   | ``3 + x``              |
-|  0          | conditional | ``if c then a else b`` |
-|  0          | abstraction | ``\x -> x + 1``        |
+|| precedence | expression  | syntax       | example               ||
+|  3          | identifier  | ``x``        | ``foo``                |
+|  3          | integer     | ``i``        | ``512``                |
+|  2          | application | ``e2 e3``    | ``f x``                |
+|  1          | operation   | ``e1 op e2`` | ``3 + x``              |
+|  0          | conditional | ``if e0 then e0 else e0`` | ``if c then a else b`` |
+|  0          | abstraction | ``\x -> e0`` | ``\x -> x + 1``        |
 
-Applications and operations are left-associative. Abstractions are
+Applications and operations are left-associative.
+Conditionals and abstractions are prefix operators and thus necessarily
 right-associative.
 
 The available operations are ``+, -, <``.
 
 Here is an example of a program in the language:
 ```
-  -- example
+  -- Multiplication with premature optimization.
 
   mult x y =
-    if (y < 1) then 0 else if (y < 2) then x else (x + (mult x (y-1))) ;
+    if (y < 1) then 0 else
+    if (y < 2) then x else
+    (x + (mult x (y-1))) ;
+
+  mult_with_less_parentheses x y =
+    if y < 1 then 0 else
+    if y < 2 then x else
+    x + mult_with_less_parentheses x (y-1) ;
+
+  -- The factorial function.
+
   fact = \x -> if (x < 3) then x else mult x (fact (x-1)) ;
+
+  -- Compute factorial of 6.
+
   main = print (fact 6) ;
 ```
-Comments are line tails starting with ``--``.
+Lines starting with ``--`` are comments.
 
-=Semantics=
-
-There is just one type of basic values: integers. Closures or
-abstraction expressions are also possible values of expressions.
-
-Evaluation is parametrized so that it can be performed in
-both call-by-value and call-by-name.
+==Scoping==
 
 The function defined in a definition is in scope in the entire
 program, including the expression part of that definition
@@ -109,6 +119,9 @@ the body of the abstraction, i.e. ``exp``.
 
 Bindings made inside a scope overshadow those made outside.
 
+==Semantics==
+
+There is just one type of basic values: integers.
 The operations ``+, -, <`` have their usual integer semantics.
 The comparison ``<`` has value 1 if it is true, 0 if false.
 
@@ -117,17 +130,30 @@ so that if ``c`` has value 0, ``b`` is evaluated, otherwise
 ``a`` is evaluated.
 
 The output of a program is the value of the expression passed to ``print``
-in the ``main`` function, and it must be an integer.
+in the ``main`` definition, and it must be an integer.
 
-A program may also exit with an error, due to an unbound identifier.
-It should then say what identifier is unbound. It is also an error
-if the ``main`` function is missing.
-Arithmetic operations on non-integers are also errors, e.g.
+Besides integer expressions, a program usually contains expressions
+that denote functions, which orginate from definitions and abstractions.
+Functions can be applied to arguments,
+be passed as arguments to other functions
+and also be the result of a function call.
+
+The interpretation of a program may exit with an error, in one of these cases:
+- The ``main`` function is missing.
+- An identifier is not bound.
+  It should then report the unbound identifier by name.
+- Something which is not a function is applied to an argument.
+- An arithmetic operation is attempted on non-integers are also errors, e.g.
 ```
   f x = x + x ;
   main = print (f + f) ;
 ```
+
+
 All these errors occur at run time, because there is no type checker.
+
+Evaluation is parametrized so that it can be performed in
+both call-by-value and call-by-name.
 
 =Method=
 
@@ -150,16 +176,15 @@ imagination.
 
 ==Example of success==
 
-Source file
+Source file:
 ```
-  -- file good.hs
+  -- File: good.hs
 
-  mult x y =
-    if (y < 1) then 0 else if (y < 2) then x else (x + (mult x (y-1))) ;
-  fact = \x -> if (x < 3) then x else mult x (fact (x-1)) ;
-  main = print (fact 6) ;
+  mult x y = if y < 1 then 0 else x + mult x (y-1) ;
+  fact     = \x -> if x < 3 then x else mult x (fact (x-1)) ;
+  main     = print (fact 6) ;
 ```
-Running the interpreter
+Running the interpreter:
 ```
   ./lab4 good.hs
   720
@@ -169,12 +194,11 @@ Running the interpreter
 
 Source file
 ```
-  -- file bad.hs
+  -- File: bad.hs
 
-  mult x y =
-    if (y < 1) then 0 else if (y < 2) then x else (x + (mult x (y-1))) ;
-  fact = \x -> if (x < 3) then x else mul x (fact (x-1)) ;
-  main = print (fact 6) ;
+  mult x y = if y < 1 then 0 else x + mult x (y-1) ;
+  fact     = \x -> if x < 3 then x else mul x (fact (x-1)) ;
+  main     = print (fact 6) ;
 ```
 Running the interpreter
 ```
@@ -184,15 +208,15 @@ Running the interpreter
 
 ==Example of call-by-name vs. call-by-value==
 
-Source file
+Source file:
 ```
-  -- file infinite.hs
+  -- File: infinite.hs
 
-  grow x = 1 + grow x ;
+  grow  x   = 1 + grow x ;
   first x y = x ;
-  main = print (first 5 (grow 4)) ;
+  main      = print (first 5 (grow 4)) ;
 ```
-Running the interpreter
+Running the interpreter:
 ```
   ./lab4 infinite.hs
   <infinite loop>
