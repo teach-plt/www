@@ -9,7 +9,7 @@ all : suite www
 
 suite : lab4-testsuite.tar.gz
 
-lab4-testsuite.tar.gz : build-tarball.sh bad/*.hs good/*.hs progs-test-lab4
+lab4-testsuite.tar.gz : build-tarball.sh bad/*.hs good/*.hs progs-test-lab4.sh progs-test-lab4.hs
 	./build-tarball.sh
 
 www : index.html
