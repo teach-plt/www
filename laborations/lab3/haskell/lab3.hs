@@ -1,5 +1,6 @@
 -- | lab3: Compiler from C-- to JAVA .class file.
 
+import System.Directory   (getHomeDirectory)
 import System.Environment (getArgs)
 import System.Exit        (exitFailure)
 import System.FilePath    (dropExtension, replaceExtension, splitFileName)
@@ -11,6 +12,21 @@ import qualified CPP.Abs   as A (Program)
 import qualified Annotated as T (Program)
 import qualified Compiler  as C (compile)
 import TypeChecker              (typecheck)
+
+callJasmin :: [String] -> IO ()
+callJasmin args = do
+  callProcess "jasmin" args
+  -- If `jasmin` is not in your PATH, you can try storing
+  -- `jasmin.jar` in, for instance, $HOME/java-lib/ and calling
+  -- `java -jar $HOME/java-lib/jasmin.jar' with the correct path
+  -- directly by replacing the above line with the following
+  -- three lines. The problem with adding `jasmin.jar` to a
+  -- CLASSPATH that already contains `java-cup.jar` is that both
+  -- define the class `parser`.
+  --
+  -- homeDirectory <- getHomeDirectory
+  -- let jasminPath = homeDirectory ++ "/java-lib/jasmin.jar"
+  -- callProcess "java" $ ["-jar", jasminPath] ++ args
 
 -- | Main: read file passed by only command line argument and run compiler pipeline.
 
@@ -58,4 +74,4 @@ compile file tree = do
   writeFile jfile jtext
   -- Call jasmin, but ask it to place .class file in dir
   -- rather than in the current directory.
-  callProcess "jasmin" ["-d", dir, jfile]
+  callJasmin ["-d", dir, jfile]

@@ -2,11 +2,34 @@
 // Annotating type checker for C-- and compiler to symbolic JVM assembly.
 
 import java.io.*;
+import java.util.*;
 import java_cup.runtime.*;
 import CPP.*;
 import CPP.Absyn.*;
 
 public class lab3 {
+  static void callJasmin(List<String> args) throws IOException, InterruptedException {
+      List<String> jasminCall = new ArrayList<String>(Arrays.asList("jasmin"));
+      // If `jasmin` is not in your PATH, you can try storing
+      // `jasmin.jar` in, for instance, $HOME/java-lib/ and calling
+      // `java -jar $HOME/java-lib/jasmin.jar' with the correct path
+      // directly by replacing the above line with the following
+      // three lines. The problem with adding `jasmin.jar` to a
+      // CLASSPATH that already contains `java-cup.jar` is that both
+      // define the class `parser`.
+      //
+      // String homeDirectory    = System.getProperty("user.home");
+      // String jasminPath       = homeDirectory + "/java-lib/jasmin.jar";
+      // List<String> jasminCall = new ArrayList<String>(Arrays.asList("java", "-jar", jasminPath));
+
+      jasminCall.addAll(args);
+      Process process = new ProcessBuilder(jasminCall).inheritIO().start();
+      int exitValue = process.waitFor();
+      if (exitValue != 0) {
+        System.err.println("Execution failed: " + String.join(" ", jasminCall));
+        System.exit(1);
+      }
+  }
 
   public static void main(String args[]) {
 
@@ -42,13 +65,7 @@ public class lab3 {
       writer.close();
 
       // Call jasmin to create .class file.
-      String[] jasminCall = new String[]{"jasmin", "-d", dir, jFile};
-      Process process = java.lang.Runtime.getRuntime().exec(jasminCall);
-      int exitValue = process.waitFor();
-      if (exitValue != 0) {
-        System.err.println("Execution failed: " + "jasmin -d " + dir + " " + jFile);
-        System.exit(1);
-      }
+      callJasmin(Arrays.asList("-d", dir, jFile));
     }
     catch (TypeException e) {
       System.out.println("TYPE ERROR");
