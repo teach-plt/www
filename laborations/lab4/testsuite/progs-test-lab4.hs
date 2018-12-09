@@ -21,7 +21,7 @@ echo :: MonadIO io => Text -> io ()
 echo = printf (s % "\n")
 
 was_failure :: Text -> Bool
-was_failure = not . null . match (begins $ choice ["INTERPRETER ERROR", "java.lang.RuntimeException", "ERROR"])
+was_failure = not . null . match (has $ choice ["ERROR", "java.lang.RuntimeException"])
 
 runGood :: Text -> (FilePath,Text,Text) -> IO (Sum Int)
 runGood lab4 good = do

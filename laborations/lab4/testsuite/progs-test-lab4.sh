@@ -53,7 +53,7 @@ for good in "${arr[@]}"; do
         echo -e "\033[31mError\033[0m"
     else
         if [ "$result" -eq "$expect" ]; then
-	    ((goodpass+=1))
+            ((goodpass+=1))
             echo -e "   Output: \033[32m$result\033[0m"
         else
             echo -e "   Output: \033[31m$result\033[0m"
@@ -64,7 +64,7 @@ for good in "${arr[@]}"; do
 done
 
 function was_failure {
-    echo "$1" | grep -Ei "^(INTERPRETER ERROR|java.lang.RuntimeException|ERROR)" > /dev/null
+    echo "$1" | grep -Ei "(ERROR|java.lang.RuntimeException)" > /dev/null
 }
 
 # Bad tests
@@ -78,7 +78,7 @@ for bad in "${testdir}"/bad/*.hs; do
     echo "CBV: $result1"
     echo "CBN: $result2"
     if was_failure "$result1" && was_failure "$result2"; then
-            ((badpass+=1))
+        ((badpass+=1))
     fi
     echo
 done
