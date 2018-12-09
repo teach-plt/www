@@ -60,8 +60,8 @@ Google group: http://groups.google.com/group/plt-2018
 %   In the last lecture, we will walk through an
 %   [example exam exams/exam-plt-2017-3.pdf].
 
-% : //2017-12-05//
-%   [Lab 4 laborations/lab4/lab4.html] is online.
+ : //2018-12-09//
+   [Lab 4 laborations/lab4/lab4.html] is online.
 
  : //2018-12-05//
    **Guest lecture** by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
@@ -139,8 +139,7 @@ Slides follow closely the plt book.
 | Tue 11/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
 % %| Tue 11/12     | 13-15          | The language design space         | [slides plt-book/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
 % | Tue 11/12     | 13-15          | Type inference and polymorphism   | plt 7.7-9
-| Thu 13/12     | 13-15          | Hands-on with Lab 4               |  |
-%[lab4 PM laborations/lab4/lab4.html]
+| Thu 13/12     | 13-15          | Hands-on with Lab 4               |  | [lab4 PM laborations/lab4/lab4.html]
 | //Mon 17/12// | //23//         | //Lab 3 deadline//                |  |
 %| Tue 18/12     | 13-15          | Type inference. A taste of dependent types | Agda demo [Verified compilation ./JVM.agda] |
 | Tue 18/12     | 13-15          | Dependent types (Agda)            |  |
@@ -257,8 +256,8 @@ However, the course grade is determined solely by the exam.
 - [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 03/12)
 % - Lab 3 - code generator (deadline 17/12)
 - [Lab 3 - code generator laborations/lab3/lab3.html] (deadline 17/12)
-- Lab 4 - functional language interpreter  (deadline 10/01/2019)
-% - [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 10/01/2019)
+% - Lab 4 - functional language interpreter  (deadline 10/01/2019)
+- [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 10/01/2019)
 
 
 The labs are quite substantial, so please set aside at least 30 full working hours (4 full working days) before the deadline.
