@@ -140,7 +140,7 @@ echo :: String -> IO ()
 echo = putStrLn
 
 was_failure :: String -> Bool
-was_failure = ("INTERPRETER ERROR" `isInfixOf`)
+was_failure = ("ERROR" `isInfixOf`) . map toUpper
 
 runGood :: FilePath -> (FilePath,String,String) -> IO (Sum Int)
 runGood lab4 good = do
