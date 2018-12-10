@@ -64,7 +64,7 @@ for good in "${arr[@]}"; do
 done
 
 function was_failure {
-    echo "$1" | grep -Ei "(ERROR|java.lang.RuntimeException)" > /dev/null
+    echo "$1" | grep -E "INTERPRETER ERROR" > /dev/null
 }
 
 # Bad tests
