@@ -101,7 +101,11 @@ testBadProgram prog f = do
 --
 
 main :: IO ()
-main = mainOpts =<< parseArgs =<< getArgs
+main = setup >> getArgs >>= parseArgs >>= mainOpts
+
+-- | In various contexts this is guessed incorrectly
+setup :: IO ()
+setup = hSetBuffering stdout LineBuffering
 
 -- | Filter out and process options, return the rest.
 parseArgs :: [String] -> IO [String]

@@ -142,7 +142,11 @@ mainOpts cfFile = do
   report "Bad programs:  " bad
 
 main :: IO ()
-main = getArgs >>= parseArgs >>= mainOpts
+main = setup >> getArgs >>= parseArgs >>= mainOpts
+
+-- | In various contexts this is guessed incorrectly
+setup :: IO ()
+setup = hSetBuffering stdout LineBuffering
 
 --
 -- * List utilities
