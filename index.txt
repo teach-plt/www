@@ -68,6 +68,7 @@ Google group: http://groups.google.com/group/plt-2018
    on domain-specific languages tomorrow, 2018-12-06!
    He will present a software-engineering perspective on PLT.
    (Schedule updated.)
+   //2018-12-10//: [Slides available http://www.cse.chalmers.se/~bergert/slides/guest_lecture_DSLs.pdf]
 
  : //2018-12-04//
    [Lab 3 laborations/lab3/lab3.html] is online.
