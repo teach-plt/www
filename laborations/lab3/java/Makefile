@@ -100,7 +100,7 @@ CPP/Test.class : CPP/Test.java CPP/parser.class CPP/sym.class CPP/Yylex.class
 sdist : lab3.tar.gz
 
 tmpdir := $(shell mktemp -d)
-lab3.tar.gz : CPP.cf Makefile lab3.hs $(LABSRC)
+lab3.tar.gz : CPP.cf Makefile lab3.hs lab3.sh lab3.bat $(LABSRC)
 	mkdir $(tmpdir)/lab3
 	cp $^ $(tmpdir)/lab3/
 	tar -C $(tmpdir) -czhf $@ lab3
