@@ -155,7 +155,22 @@ All these errors occur at run time, because there is no type checker.
 Evaluation is parametrized so that it can be performed in
 both call-by-value and call-by-name.
 
-=Method=
+=Lab format=
+
+==Solution templates==
+
+For Haskell and Java there are stubs that can be extended to the full
+solution.  Just download one of the following tar archives, unpack,
+write the code, test, pack the archive again, and submit to fire.
+
+- [Haskell package lab4-stub-haskell.tar.gz]
+- [Java package lab4-stub-java.tar.gz]
+
+
+These packages contain the grammar, stubs for the interpreter, and
+suitable makefiles.  If you start from these stubs, you will likely
+match the requirements for the solution format as detailed in the
+following:
 
 ==Input and output==
 
