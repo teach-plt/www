@@ -18,12 +18,29 @@ this testsuite.
 
 You will only need to do this part once.
 
+%+ Make sure that at least version 1.4.2 (January 2018) of the
+%  Haskell package [filepath https://hackage.haskell.org/package/filepath]
+%  is installed:
+%```
+%$ ghc-pkg latest filepath
+%```
+
 + Download [lab4-testsuite.tar.gz lab4-testsuite.tar.gz].
 
 + Unpack the downloaded file:
 ```
 $ tar -zxf lab4-testsuite.tar.gz
 ```
+
+%+ Enter the ``lab4-testsuite`` directory:
+%```
+%$ cd lab4-testsuite
+%```
+%
+%+ Compile the test program using ``make`` or alternatively:
+%```
+%$ ghc -threaded --make -o progs-test-lab4 progs-test-lab4.hs
+%```
 
 
 = Running the testsuite =
