@@ -18,6 +18,7 @@ import System.Process
 import System.IO.Unsafe
 
 -- Executable name
+executable_name :: FilePath
 -- You might have to add or remove .exe here if you are using Windows
 #if defined(mingw32_HOST_OS)
 executable_name = "lab3.exe"
@@ -30,21 +31,21 @@ executable_name = "lab3"
 --
 
 main :: IO ()
-main = setup >> getArgs >>= parseArgs >>= mainOpts
+main = setup >> getArgs >>= parseArgs >>= uncurry mainOpts
 
 -- | In various contexts this is guessed incorrectly
 setup :: IO ()
 setup = hSetBuffering stdout LineBuffering
 
--- | Filter out and process options, return the rest.
-parseArgs :: [String] -> IO [String]
+-- | Filter out and process options, return the argument and the rest.
+parseArgs :: [String] -> IO (String,[String])
 parseArgs args = do
   let isOpt ('-':_) = True
       isOpt _       = False
   let (opts, rest) = partition isOpt args
   processOpts opts
   when (null rest) $ usage
-  return rest
+  return (head rest,tail rest)
 
 processOpts :: [String] -> IO ()
 processOpts = mapM_ $ \ arg -> case arg of
@@ -59,8 +60,8 @@ usage = do
   hPutStrLn stderr "           interpreter_code_directory [test_case_directory ...]"
   exitFailure
 
-mainOpts :: [FilePath] -> IO ()
-mainOpts (progdir : dirs) = do
+mainOpts :: FilePath -> [FilePath] -> IO ()
+mainOpts progdir dirs = do
   putStrLn "This is the test program for Programming Languages Lab 3"
   doubles <- readIORef includeDoubleTests
   unless doubles $ putStrLn "Make sure to include the --doubles flag if you also want to test programs including doubles."
@@ -203,10 +204,13 @@ type Color = Int
 color :: Color -> String -> String
 color c s = fgcol c ++ s ++ normal
 
+highlight, bold, underline, normal :: String
 highlight = "\ESC[7m"
 bold      = "\ESC[1m"
 underline = "\ESC[4m"
 normal    = "\ESC[0m"
+
+fgcol, bgcol :: Color -> String
 fgcol col = "\ESC[0" ++ show (30+col) ++ "m"
 bgcol col = "\ESC[0" ++ show (40+col) ++ "m"
 
@@ -315,9 +319,9 @@ prFile f = do
 -- | Report how many tests passed and which tests failed (if any).
 report :: String -> [(String,Bool)] -> IO ()
 report n rs = do
-  let (pass, fail) = partition snd rs
-  let (p,t) = (length pass, length rs)
+  let (passed, failed) = partition snd rs
+  let (p,t) = (length passed, length rs)
       c     = if p == t then green else red
   putStrLn $ color c $ n ++ "passed " ++ show p ++ " of " ++ show t ++ " tests"
-  unless (null fail) $
-    mapM_ (putStrLn . color red) $ "Failed tests:" : map fst fail
+  unless (null failed) $
+    mapM_ (putStrLn . color red) $ "Failed tests:" : map fst failed

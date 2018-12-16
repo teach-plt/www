@@ -3,14 +3,11 @@
 -- GHC needs -threaded
 
 import Control.Concurrent
-import Control.Concurrent.Chan
 import Control.Monad
 
 import Data.Char
-import Data.Functor
 import Data.IORef
 import Data.List
-import Data.Maybe
 
 import System.Directory
 import System.Environment
@@ -29,11 +26,11 @@ debug s = do
   d <- readIORef doDebug
   when d $ putStrLn s
 
-
+listGoodProgs, listBadProgs :: IO [FilePath]
 listGoodProgs = listCCFiles $ joinPath ["..","good"]
+listBadProgs  = listCCFiles $ joinPath ["..","bad"]
 
-listBadProgs = listCCFiles $ joinPath ["..","bad"]
-
+listCCFiles :: FilePath -> IO [FilePath]
 listCCFiles dir =
   map (\ f -> joinPath [dir,f]) .
   sort .
@@ -47,7 +44,7 @@ welcome = do
 
 runBNFC :: IO Int
 runBNFC = do
-  (out,err) <- runCommandNoFail "bnfc" "Cpp.cf"
+  (out,_) <- runCommandNoFail "bnfc" "Cpp.cf"
   let r = case grep "rules accepted" out of
             []   -> 0
             l:_  -> read $ takeWhile isDigit l
@@ -58,7 +55,7 @@ runAlex = runCommandNoFail_ "alex" "LexCpp.x"
 
 runHappy :: IO [String]
 runHappy = do
-  (out,err) <- runCommandNoFail "happy -i" "ParCpp.y"
+  (_,err) <- runCommandNoFail "happy -i" "ParCpp.y"
   return $ grep "conflict" err
 
 writeDriver :: IO ()
@@ -94,7 +91,7 @@ testFrontendProg good f = do
   let bad = not good
       c   = "." ++ pathSep : "testdriver " ++ f   -- WINDOWS
   putStrLn $ "Parsing " ++ f ++ "..."
-  (out,err,s) <- runCommandStrWait c ""
+  (out,err,_) <- runCommandStrWait c ""
   case lines err of
     "OK":_    | good -> do return True
               | bad  -> do reportError c "passed BAD program" f "" out err
@@ -154,7 +151,9 @@ setup = hSetBuffering stdout LineBuffering
 
 grep :: String -> String -> [String]
 grep x = filter (x `isSubStringOf`) . lines
-  where isSubStringOf x = any (x `isPrefixOf`) . tails
+
+isSubStringOf :: String -> String -> Bool
+isSubStringOf x = any (x `isPrefixOf`) . tails
 
 --
 -- * Path name utilities
@@ -204,15 +203,18 @@ type Color = Int
 
 color :: Color -> String -> String
 #if defined(mingw32_HOST_OS)
-color c s = s
+color _ s = s
 #else
 color c s = fgcol c ++ s ++ normal
 #endif
 
+highlight, bold, underline, normal :: String
 highlight = "\ESC[7m"
 bold      = "\ESC[1m"
 underline = "\ESC[4m"
 normal    = "\ESC[0m"
+
+fgcol, bgcol :: Color -> String
 fgcol col = "\ESC[0" ++ show (30+col) ++ "m"
 bgcol col = "\ESC[0" ++ show (40+col) ++ "m"
 
@@ -253,9 +255,9 @@ runCommandChan c = do
  outC <- newChan
  errC <- newChan
  (pin,pout,perr,p) <- runInteractiveCommand c
- forkIO (pipeGetContents inC >>= hPutStr pin >> hClose pin)
- forkIO (hGetContents pout >>= pipeWrite outC >> pipeClose outC)
- forkIO (hGetContents perr >>= pipeWrite errC >> pipeClose errC)
+ _ <- forkIO (pipeGetContents inC >>= hPutStr pin >> hClose pin)
+ _ <- forkIO (hGetContents pout >>= pipeWrite outC >> pipeClose outC)
+ _ <- forkIO (hGetContents perr >>= pipeWrite errC >> pipeClose errC)
  return (inC,outC,errC,p)
 
 runCommandStr
@@ -264,7 +266,7 @@ runCommandStr
   -> IO (String,String,ProcessHandle) -- ^ stdout, stderr, process
 runCommandStr c inStr = do
   (inC,outC,errC,p) <- runCommandChan c
-  forkIO (pipeWrite inC inStr >> pipeClose inC)
+  _   <- forkIO (pipeWrite inC inStr >> pipeClose inC)
   out <- pipeGetContents outC
   err <- pipeGetContents errC
   return (out,err,p)
@@ -345,11 +347,12 @@ prFile f = do
   s <- readFile f
   let ls = lines s
       n  = length $ show $ length ls
-      lineNo i = let s = show i in replicate (n - length s) ' ' ++ s
-      s' = unlines $ zipWith (\ i l -> lineNo i ++ ": " ++ l) [1..] ls
+      s' = unlines $ zipWith (\ i l -> rightAlign n (show i) ++ ": " ++ l) [(1 :: Integer)..] ls
   putStrLn $ color green s'
   putStrLn $ "----------------- end " ++ f ++ " -------------------"
 
+rightAlign :: Int -> String -> String
+rightAlign w s = replicate (w - length s) ' ' ++ s
 
 -- | Report how many tests passed.
 report :: String -> [Bool] -> IO ()

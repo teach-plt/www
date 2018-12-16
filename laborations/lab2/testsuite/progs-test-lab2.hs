@@ -18,6 +18,7 @@ import System.Process
 import System.IO.Unsafe
 
 -- Executable name
+executable_name :: FilePath
 -- You might have to add or remove .exe here if you are using Windows
 #if defined(mingw32_HOST_OS)
 executable_name = "lab2.exe"
@@ -38,11 +39,11 @@ debug :: String -> IO ()
 debug s = do d <- readIORef doDebug
              if d then putStrLn s else return ()
 
-
+listGoodProgs, listBadProgs :: IO [FilePath]
 listGoodProgs = listCCFiles "good"
+listBadProgs  = listCCFiles "bad"
 
-listBadProgs = listCCFiles "bad"
-
+listCCFiles :: FilePath -> IO [FilePath]
 listCCFiles dir =
     liftM (map (\f -> joinPath [dir,f]) . sort . filter ((==".cc") . takeExtension)) $ listDirectory dir
 
@@ -107,15 +108,15 @@ main = setup >> getArgs >>= parseArgs >>= mainOpts
 setup :: IO ()
 setup = hSetBuffering stdout LineBuffering
 
--- | Filter out and process options, return the rest.
-parseArgs :: [String] -> IO [String]
+-- | Filter out and process options, return the argument.
+parseArgs :: [String] -> IO String
 parseArgs args = do
   let isOpt ('-':_) = True
       isOpt _       = False
   let (opts, rest) = partition isOpt args
   processOpts opts
   unless (length rest == 1) $ usage
-  return rest
+  return (head rest)
 
 processOpts :: [String] -> IO ()
 processOpts = mapM_ $ \ arg -> case arg of
@@ -128,8 +129,8 @@ usage = do
   hPutStrLn stderr "Usage: progs-test-lab2 [--debug] interpreter_code_directory"
   exitFailure
 
-mainOpts :: [FilePath] -> IO ()
-mainOpts [dir] =
+mainOpts :: FilePath -> IO ()
+mainOpts dir =
     do welcome
        domake <- readIORef doMake
        when domake $ runMake dir
@@ -167,10 +168,13 @@ type Color = Int
 color :: Color -> String -> String
 color c s = fgcol c ++ s ++ normal
 
+highlight, bold, underline, normal :: String
 highlight = "\ESC[7m"
 bold      = "\ESC[1m"
 underline = "\ESC[4m"
 normal    = "\ESC[0m"
+
+fgcol, bgcol :: Color -> String
 fgcol col = "\ESC[0" ++ show (30+col) ++ "m"
 bgcol col = "\ESC[0" ++ show (40+col) ++ "m"
 
