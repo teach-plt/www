@@ -50,6 +50,7 @@ CVS
 /laborations/lab3/haskell/CPP/
 /laborations/lab3/haskell/lab3
 /laborations/lab3/testsuite/*.j
+/laborations/lab3/testsuite/dir-for-path-test/one-more-dir/simple.j
 /laborations/lab3/testsuite/progs-test-lab3-jvm-verify
 
 /laborations/lab4/testsuite.tgz
