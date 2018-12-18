@@ -1,4 +1,5 @@
 *~
+*.agdai
 *.aux
 *.bak
 *.class
@@ -59,3 +60,4 @@ CVS
 /laborations/lab4/haskell/lab4
 /laborations/lab4/java/Fun/
 /laborations/lab4/java/lab4
+
