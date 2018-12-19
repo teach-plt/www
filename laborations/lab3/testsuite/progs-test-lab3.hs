@@ -20,11 +20,7 @@ import System.IO.Unsafe
 -- Executable name
 executable_name :: FilePath
 -- You might have to add or remove .exe here if you are using Windows
-#if defined(mingw32_HOST_OS)
-executable_name = "lab3.exe"
-#else
-executable_name = "lab3"
-#endif
+executable_name = "lab3" <.> exeExtension
 
 --
 -- * Main

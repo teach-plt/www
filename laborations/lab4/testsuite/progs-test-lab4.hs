@@ -1,4 +1,3 @@
-{-# LANGUAGE CPP               #-}
 {-# LANGUAGE ViewPatterns      #-}
 -- Test suite for lab 4
 import Control.Monad
@@ -17,11 +16,7 @@ import System.Process
 -- Executable name
 executable_name :: FilePath
 -- You might have to add or remove .exe here if you are using Windows
-#if defined(mingw32_HOST_OS)
-executable_name = "lab4.exe"
-#else
-executable_name = "lab4"
-#endif
+executable_name = "lab4" <.> exeExtension
 
 debug :: String -> IO ()
 debug = putStrLn
