@@ -190,7 +190,9 @@ usage = do
 main :: IO ()
 main = do
   testdir <- pwd
-  codedir <- parseArgs =<< getArgs
+  codedir <- makeAbsolute =<< parseArgs =<< getArgs
+  -- we will be inside codedir so progs-test-lab4.sh uses the
+  -- relative path ./executable_name
   let lab4 = codedir </> executable_name
 
   cd codedir
