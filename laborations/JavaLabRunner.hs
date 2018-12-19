@@ -48,6 +48,6 @@ main = do
   className <- getClassName
   classPath <- fromMaybe "" <$> lookupEnv "CLASSPATH"
   let cp      = dir <:> classPath
-      cmdArgs = ["-cp",cp,className] ++ args
+      cmdArgs = ["-Xss80m","-cp",cp,className] ++ args
       -- cmdLine = showCommandForUser javaProg cmdArgs
   callProcess javaProg cmdArgs

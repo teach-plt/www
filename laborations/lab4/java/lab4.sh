@@ -8,4 +8,4 @@
 # Rename this to  lab4  to use with the testsuite.
 
 dir=`dirname $0`
-exec java -cp "$dir:$CLASSPATH" lab4 "$@"
+exec java -Xss80m -cp "$dir:$CLASSPATH" lab4 "$@"

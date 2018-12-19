@@ -5,4 +5,4 @@ REM is found even when called from another directory.
 
 @echo off
 set dir=%~dp0
-java -cp "%dir%;%CLASSPATH%" lab4 %*
+java -Xss80m -cp "%dir%;%CLASSPATH%" lab4 %*
