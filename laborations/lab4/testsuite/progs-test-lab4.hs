@@ -6,6 +6,7 @@ import Control.Monad
 
 import Data.Char
 import Data.Function
+import Data.IORef
 import Data.List
 import Data.Maybe
 import Data.Monoid
@@ -16,6 +17,7 @@ import System.Environment
 import System.Exit
 import System.FilePath
 import System.IO
+import System.IO.Unsafe
 import System.Process
 
 -- Executable name
@@ -223,27 +225,33 @@ runBad lab4 bad = do
   echo ""
   return badpass
 
-type Options = Maybe TestSuite
+data Options = Options { makeFlag        :: Bool
+                       , testSuiteOption :: Maybe TestSuite }
+
+disableMake :: Options -> Maybe Options
+disableMake options = Just $ options { makeFlag = False }
 
 addGood :: String -> Options -> Maybe Options
-addGood (splitOn ',' -> [f,m,r]) options = Just $ Just $ maybe ([testCase],[]) (first (testCase:)) options
+addGood (splitOn ',' -> [f,m,r]) options = Just $ options { testSuiteOption = Just $ maybe ([testCase],[]) (first (testCase:)) $ testSuiteOption options }
   where
     testCase = (f,'-':m,r)
 addGood _                        _       = Nothing
 
 addBad :: FilePath -> Options -> Maybe Options
-addBad f options = Just $ Just $ maybe ([],[f]) (second (f:)) options
+addBad f options = Just $ options { testSuiteOption = Just $ maybe ([],[f]) (second (f:)) $ testSuiteOption options }
 
 optDescr :: [OptDescr (Options -> Maybe Options)]
-optDescr = [ Option ['g'] ["good"]  (ReqArg addGood "FILE,MODE,RESULT") "good test case FILE, call-by-name or -value MODE, expected RESULT"
-           , Option ['b'] ["bad"]   (ReqArg addBad  "FILE"            ) "bad test case FILE"
+optDescr = [ Option []    ["no-make"] (NoArg  disableMake               ) "do not run make"
+           , Option ['g'] ["good"]    (ReqArg addGood "FILE,MODE,RESULT") "good test case FILE, call-by-name or -value MODE, expected RESULT"
+           , Option ['b'] ["bad"]     (ReqArg addBad  "FILE"            ) "bad test case FILE"
            ]
 
 parseArgs :: [String] -> IO (FilePath,TestSuite)
 parseArgs argv = case getOpt RequireOrder optDescr argv of
   (o,[codedir],[]) -> do
-    let defaultOptions = Nothing
+    let defaultOptions = Options True Nothing
     options <- maybe usage return $ foldM (&) defaultOptions o
+    when (not $ makeFlag options) $ writeIORef doMake False
     let goodTests = [ ("good/001.hs",    "-v", "7"         )
                     , ("good/002.hs",    "-n", "5"         )
                     , ("good/003.hs",    "-v", "5050"      )
@@ -264,7 +272,7 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
                     , ("good/015.hs",    "-n", "1"         )
                     , ("good/ski.hs",    "-n", "16"        )
                     ]
-        testSuite              = fromMaybe (goodTests,["bad"]) options
+        testSuite              = fromMaybe (goodTests,["bad"]) $ testSuiteOption options
         listHSFiles d          = filter (".hs" `isExtensionOf`) <$> ls d
         expandPath  f          = doesDirectoryExist f >>= \b -> if b then listHSFiles f else return [f]
         expandPathGood (f,m,r) = map (\ f' -> (f',m,r)) <$> expandPath f
@@ -276,13 +284,18 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
 
 usage :: IO a
 usage = do
-  hPutStrLn stderr "Usage: progs-test-lab4 [-g|--good FILE,MODE,RESULT]... [-b|--bad FILE]..."
+  hPutStrLn stderr "Usage: progs-test-lab4 [--no-make] [-g|--good FILE,MODE,RESULT]... [-b|--bad FILE]..."
   hPutStrLn stderr "           path_to_solution" -- "The path to the directory where your solution is located"
   exitFailure
 
 -- | In various contexts this is guessed incorrectly
 setup :: IO ()
 setup = hSetBuffering stdout LineBuffering
+
+-- | Whether to run make
+{-# NOINLINE doMake  #-}
+doMake :: IORef Bool
+doMake = unsafePerformIO $ newIORef True
 
 type TestSuite = ([(FilePath,String,String)],[FilePath])
 
@@ -298,7 +311,8 @@ main = do
       lab4         = "." </> executable_name
 
   cd codedir
-  inproc "make" [] empty
+  domake <- readIORef doMake
+  when domake $ inproc "make" [] empty
 
   let goodtot = length goodTests'
       badtot  = length badTests'

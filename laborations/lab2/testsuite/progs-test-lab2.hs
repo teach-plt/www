@@ -162,7 +162,7 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
 
 usage :: IO ()
 usage = do
-  hPutStrLn stderr "Usage: progs-test-lab2 [--debug] [-g|--good FILE]... [-b|--bad FILE]... interpreter_code_directory"
+  hPutStrLn stderr "Usage: progs-test-lab2 [--debug] [--no-make] [-g|--good FILE]... [-b|--bad FILE]... interpreter_code_directory"
   exitFailure
 
 mainOpts :: FilePath -> TestSuite -> IO ()
