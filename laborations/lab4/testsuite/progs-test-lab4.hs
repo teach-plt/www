@@ -40,11 +40,12 @@ fgcol, bgcol :: Color -> String
 fgcol col = "\ESC[0" ++ show (30+col) ++ "m"
 bgcol col = "\ESC[0" ++ show (40+col) ++ "m"
 
-red, green, blue, black :: Color
+red, green, blue, cyan, black :: Color
 black = 0
 red = 1
 green = 2
-blue = 6
+blue = 4
+cyan = 6
 
 --
 -- * Run programs
@@ -100,13 +101,13 @@ reportErrorColor col c m i o e =
     putStrLn $ color col $ c ++ " failed: " ++ m
     when (not (null i)) $ do
                           putStrLn "Given this input:"
-                          putStrLn $ color blue $ i
+                          putStrLn $ color cyan $ i
     when (not (null o)) $ do
                           putStrLn "It printed this to standard output:"
-                          putStrLn $ color blue $ o
+                          putStrLn $ color cyan $ o
     when (not (null e)) $ do
                           putStrLn "It printed this to standard error:"
-                          putStrLn $ color blue $ e
+                          putStrLn $ color cyan $ e
 
 reportError :: String -- ^ command that failed
             -> String -- ^ how it failed
@@ -151,26 +152,26 @@ was_failure = ("ERROR" `isInfixOf`) . map toUpper
 runGood :: FilePath -> (FilePath,String,String) -> IO (Sum Int)
 runGood lab4 good = do
   let (file,mode,expect) = good
-  echo $ "\ESC[34m--- " <> basename file <> " ---\ESC[0m"
+  echo $ color blue $ "--- " <> basename file <> " ---"
   echo $ "     Mode: " <> mode
   echo $ "Expecting: " <> expect
   (exitval,stripEnd -> result,_) <- procStrictWithErr lab4 [mode, file] empty
   goodpass <- if (exitval /= ExitSuccess) then do
-                  echo "\ESC[31mError\ESC[0m"
+                  echo $ color red "Error"
                   return 0
               else
                   if (result == expect) then do
-                      echo $ "   Output: \ESC[32m" <> result <> "\ESC[0m"
+                      echo $ "   Output: " ++ color green result
                       return 1
                   else do
-                      echo $ "   Output: \ESC[31m" <> result <> "\ESC[0m"
+                      echo $ "   Output: " ++ color red result
                       return 0
   echo ""
   return goodpass
 
 runBad :: FilePath -> FilePath -> IO (Sum Int)
 runBad lab4 bad = do
-  echo $ "\ESC[34mxxx " <> basename bad <> " xxx\ESC[0m"
+  echo $ color blue $ "xxx " <> basename bad <> " xxx"
   (_,stdout1,stderr1) <- procStrictWithErr lab4 ["-v", bad] empty
   (_,stdout2,stderr2) <- procStrictWithErr lab4 ["-n", bad] empty
   let result1 = stripEnd $ stdout1 <> stderr1
