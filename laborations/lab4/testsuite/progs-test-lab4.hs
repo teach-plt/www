@@ -62,8 +62,9 @@ runPrgNoFail :: FilePath -- ^ Executable
              -> IO (String,String) -- ^ stdout and stderr
 runPrgNoFail exe flags input = do
   let c = showCommandForUser exe flags
-  hPutStrLn stderr $ "Running " ++ c ++ "..."
+  hPutStr stderr $ "Running " ++ c ++ "... "
   (s,out,err) <- readProcessWithExitCode exe flags input
+  hPutStrLnExitCode s stderr "."
   case s of
     ExitFailure x -> do
       reportError exe ("with status " ++ show x) input out err
@@ -76,6 +77,16 @@ runPrgNoFail exe flags input = do
 --
 -- * Error reporting and output checking
 --
+
+colorExitCode :: ExitCode -> String -> String
+colorExitCode ExitSuccess     = color green
+colorExitCode (ExitFailure _) = color red
+
+putStrLnExitCode :: ExitCode -> String -> IO ()
+putStrLnExitCode e = putStrLn . colorExitCode e
+
+hPutStrLnExitCode :: ExitCode -> Handle -> String -> IO ()
+hPutStrLnExitCode e h = hPutStrLn h . colorExitCode e
 
 reportErrorColor :: Color
                  -> String -- ^ command that failed

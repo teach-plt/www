@@ -64,8 +64,9 @@ testBackendProg :: FilePath -> FilePath -> IO Bool
 testBackendProg prog f =
     do input  <- readFileIfExists (f++".input")
        output <- readFileIfExists (f++".output")
-       putStrLn $ "Running " ++ f ++ "..."
+       putStr $ "Running " ++ f ++ "... "
        (s,out,err) <- readProcessWithExitCode prog [f] input
+       putStrLnExitCode s "."
        debug $ "Exit code: " ++ show s
        -- Try to work around line ending problem
        let removeCR = filter (/= '\r')
@@ -83,8 +84,9 @@ testBadProgram :: FilePath -> FilePath -> IO Bool
 testBadProgram prog f = do
   input  <- readFileIfExists (f++".input")
   --output <- readFileIfExists (f++".output")
-  putStrLn $ "Running " ++ f ++ "..."
+  putStr $ "Running " ++ f ++ "... "
   (s,out,err) <- readProcessWithExitCode prog [f] input
+  putStrLnExitCode s "."
   debug $ "Exit code: " ++ show s
   if "TYPE ERROR" `isPrefixOf` out then return True else
     if "SYNTAX ERROR" `isPrefixOf` out then return True else do
@@ -194,8 +196,9 @@ runPrgNoFail :: FilePath -- ^ Executable
              -> IO (String,String) -- ^ stdout and stderr
 runPrgNoFail exe flags file = do
   let c = showCommandForUser exe (flags ++ [file])
-  hPutStrLn stderr $ "Running " ++ c ++ "..."
+  hPutStr stderr $ "Running " ++ c ++ "... "
   (s,out,err) <- readProcessWithExitCode exe (flags ++ [file]) ""
+  hPutStrLnExitCode s stderr "."
   case s of
     ExitFailure x -> do
       reportError exe ("with status " ++ show x) file "" out err
@@ -224,6 +227,16 @@ checkDirectoryExists f =
 --
 -- * Error reporting and output checking
 --
+
+colorExitCode :: ExitCode -> String -> String
+colorExitCode ExitSuccess     = color green
+colorExitCode (ExitFailure _) = color red
+
+putStrLnExitCode :: ExitCode -> String -> IO ()
+putStrLnExitCode e = putStrLn . colorExitCode e
+
+hPutStrLnExitCode :: ExitCode -> Handle -> String -> IO ()
+hPutStrLnExitCode e h = hPutStrLn h . colorExitCode e
 
 reportErrorColor :: Color
                  -> String -- ^ command that failed

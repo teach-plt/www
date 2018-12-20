@@ -92,9 +92,10 @@ testFrontendProg good f = do
       -- For some reason this executable name, without .exe, works on Windows;
       -- I think this is because we are in the same directory as the executable
       prg = "." </> "testdriver"
-  putStrLn $ "Parsing " ++ f ++ "..."
+  putStr $ "Parsing " ++ f ++ "... "
   -- TODO: Should maybe check exit code here
-  (_,out,err) <- readProcessWithExitCode prg [f] ""
+  (s,out,err) <- readProcessWithExitCode prg [f] ""
+  putStrLnExitCode s "."
   case lines err of
     "OK":_    | good -> return True
               | bad  -> do reportError prg "passed BAD program" f "" out err
@@ -202,8 +203,9 @@ runPrgNoFail :: FilePath -- ^ Executable
              -> IO (String,String) -- ^ stdout and stderr
 runPrgNoFail exe flags file = do
   let c = showCommandForUser exe (flags ++ [file])
-  hPutStrLn stderr $ "Running " ++ c ++ "..."
+  hPutStr stderr $ "Running " ++ c ++ "... "
   (s,out,err) <- readProcessWithExitCode exe (flags ++ [file]) ""
+  hPutStrLnExitCode s stderr "."
   case s of
     ExitFailure x -> do
       reportError exe ("with status " ++ show x) file "" out err
@@ -216,6 +218,16 @@ runPrgNoFail exe flags file = do
 --
 -- * Error reporting and output checking
 --
+
+colorExitCode :: ExitCode -> String -> String
+colorExitCode ExitSuccess     = color green
+colorExitCode (ExitFailure _) = color red
+
+putStrLnExitCode :: ExitCode -> String -> IO ()
+putStrLnExitCode e = putStrLn . colorExitCode e
+
+hPutStrLnExitCode :: ExitCode -> Handle -> String -> IO ()
+hPutStrLnExitCode e h = hPutStrLn h . colorExitCode e
 
 reportErrorColor
   :: Color

@@ -109,8 +109,9 @@ testBackendProg prog f = do
   output <- readFileIfExists (f ++ ".output")
 
   -- Running prog on f should generate file f.class
-  putStrLn $ "Running " ++ f ++ "..."
+  putStr $ "Running " ++ f ++ "... "
   (compilerRet, compilerOut, compilerErr) <- readProcessWithExitCode prog [f] ""
+  putStrLnExitCode compilerRet "."
   if isExitFailure compilerRet then do
     reportError prog "non-zero exit code" f input compilerOut compilerErr
     return False
@@ -237,8 +238,9 @@ runPrgNoFail :: FilePath -- ^ Executable
              -> IO (String,String) -- ^ stdout and stderr
 runPrgNoFail exe flags file = do
   let c = showCommandForUser exe (flags ++ [file])
-  hPutStrLn stderr $ "Running " ++ c ++ "..."
+  hPutStr stderr $ "Running " ++ c ++ "... "
   (s,out,err) <- readProcessWithExitCode exe (flags ++ [file]) ""
+  hPutStrLnExitCode s stderr "."
   case s of
     ExitFailure x -> do
       reportError exe ("with status " ++ show x) file "" out err
@@ -269,6 +271,16 @@ checkDirectoryExists f = do
 --
 -- * Error reporting and output checking
 --
+
+colorExitCode :: ExitCode -> String -> String
+colorExitCode ExitSuccess     = color green
+colorExitCode (ExitFailure _) = color red
+
+putStrLnExitCode :: ExitCode -> String -> IO ()
+putStrLnExitCode e = putStrLn . colorExitCode e
+
+hPutStrLnExitCode :: ExitCode -> Handle -> String -> IO ()
+hPutStrLnExitCode e h = hPutStrLn h . colorExitCode e
 
 reportErrorColor
   :: Color
