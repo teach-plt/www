@@ -280,10 +280,16 @@ usage = do
   hPutStrLn stderr "           path_to_solution" -- "The path to the directory where your solution is located"
   exitFailure
 
+-- | In various contexts this is guessed incorrectly
+setup :: IO ()
+setup = hSetBuffering stdout LineBuffering
+
 type TestSuite = ([(FilePath,String,String)],[FilePath])
 
 main :: IO ()
 main = do
+  setup
+
   testdir <- pwd
   (codedir,(goodTests,badTests)) <- parseArgs =<< getArgs
   let adjustPath f = if isRelative f then joinPath [testdir,f] else f
