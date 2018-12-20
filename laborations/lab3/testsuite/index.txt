@@ -77,5 +77,5 @@ you can also test your compiler on the
 To this end, invoke:
 
 ```
-$ ./progs-test-lab3 path/to/your/solution/ path/to/lab2/testsuite/good
+$ ./progs-test-lab3 --test path/to/lab2/testsuite/good path/to/your/solution/
 ```

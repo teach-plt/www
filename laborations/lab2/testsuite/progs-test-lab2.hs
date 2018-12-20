@@ -2,13 +2,16 @@
 
 -- GHC needs -threaded
 
+import Control.Applicative
 import Control.Exception
 import Control.Monad
 
 import Data.Char
 import Data.IORef
 import Data.List
+import Data.Maybe
 
+import System.Console.GetOpt
 import System.Directory
 import System.Environment
 import System.FilePath
@@ -21,6 +24,24 @@ import System.IO.Unsafe
 executable_name :: FilePath
 -- You might have to add or remove .exe here if you are using Windows
 executable_name = "lab2" <.> exeExtension
+
+sequenceTuple :: Applicative f => (f a,f b) -> f (a,b)
+sequenceTuple = uncurry $ liftA2 (,)
+
+concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
+concatMapM f = fmap concat . mapM f
+
+both :: (a -> b) -> (a,a) -> (b,b)
+both f (a1,a2) = (f a1,f a2)
+
+bothM :: Applicative f => (a -> f b) -> (a,a) -> f (b,b)
+bothM f = sequenceTuple . both f
+
+first :: (a -> c) -> (a,b) -> (c,b)
+first f (a,b) = (f a,b)
+
+second :: (b -> c) -> (a,b) -> (a,c)
+second f (a,b) = (a,f b)
 
 {-# NOINLINE doDebug #-}
 doDebug :: IORef Bool
@@ -35,10 +56,6 @@ debug :: String -> IO ()
 debug s = do d <- readIORef doDebug
              if d then putStrLn s else return ()
 
-listGoodProgs, listBadProgs :: IO [FilePath]
-listGoodProgs = listCCFiles "good"
-listBadProgs  = listCCFiles "bad"
-
 listCCFiles :: FilePath -> IO [FilePath]
 listCCFiles dir =
     liftM (map (\f -> joinPath [dir,f]) . sort . filter ((==".cc") . takeExtension)) $ listDirectory dir
@@ -52,12 +69,12 @@ runMake :: FilePath -> IO ()
 runMake dir = do checkDirectoryExists dir
                  runPrgNoFail_ "make" ["-C"] dir
 
-runTests :: FilePath -> IO ([Bool],[Bool])
-runTests dir =
+type TestSuite = ([FilePath],[FilePath])
+
+runTests :: FilePath -> TestSuite -> IO ([Bool],[Bool])
+runTests dir (goodProgs,badProgs) =
     do let prog = joinPath [dir,executable_name]
        checkFileExists prog
-       goodProgs <- listGoodProgs
-       badProgs  <- listBadProgs
        good <- mapM (testBackendProg prog) goodProgs
        bad  <- mapM (testBadProgram prog) badProgs
        return (good,bad)
@@ -100,39 +117,59 @@ testBadProgram prog f = do
 --
 
 main :: IO ()
-main = setup >> getArgs >>= parseArgs >>= mainOpts
+main = setup >> getArgs >>= parseArgs >>= uncurry mainOpts
 
 -- | In various contexts this is guessed incorrectly
 setup :: IO ()
 setup = hSetBuffering stdout LineBuffering
 
+data Options = Options { debugFlag       :: Bool
+                       , makeFlag        :: Bool
+                       , testSuiteOption :: Maybe TestSuite }
+
+enableDebug :: Options -> Options
+enableDebug options = options { debugFlag = True }
+
+disableMake :: Options -> Options
+disableMake options = options { makeFlag = False }
+
+addGood, addBad :: FilePath -> Options -> Options
+addGood f options = options { testSuiteOption = Just $ maybe ([f],[]) (first  (f:)) $ testSuiteOption options }
+addBad  f options = options { testSuiteOption = Just $ maybe ([],[f]) (second (f:)) $ testSuiteOption options }
+
+optDescr :: [OptDescr (Options -> Options)]
+optDescr = [ Option []    ["debug"]   (NoArg  enableDebug       ) "print debug messages"
+           , Option []    ["no-make"] (NoArg  disableMake       ) "do not run make"
+           , Option ['g'] ["good"]    (ReqArg addGood     "FILE") "good test case FILE"
+           , Option ['b'] ["bad"]     (ReqArg addBad      "FILE") "bad test case FILE"
+           ]
+
 -- | Filter out and process options, return the argument.
-parseArgs :: [String] -> IO String
-parseArgs args = do
-  let isOpt ('-':_) = True
-      isOpt _       = False
-  let (opts, rest) = partition isOpt args
-  processOpts opts
-  unless (length rest == 1) $ usage
-  return (head rest)
+parseArgs :: [String] -> IO (FilePath,TestSuite)
+parseArgs argv = case getOpt RequireOrder optDescr argv of
+  (o,[cfFile],[]) -> do
+    let defaultOptions = Options False True Nothing
+        options = foldr ($) defaultOptions o
+    when (debugFlag options) $ writeIORef doDebug True
+    let testSuite    = fromMaybe (["good"],["bad"]) $ testSuiteOption options
+        expandPath f = doesDirectoryExist f >>= \b -> if b then listCCFiles f else return [f]
+    testSuite' <- bothM (concatMapM expandPath) testSuite
+    return (cfFile,testSuite')
+  (_,_,_) -> do
+    usage
+    exitFailure
 
-processOpts :: [String] -> IO ()
-processOpts = mapM_ $ \ arg -> case arg of
-  "--debug" -> writeIORef doDebug True
-  "--no-make" -> writeIORef doMake False
-  _ -> usage
-
-usage :: IO a
+usage :: IO ()
 usage = do
-  hPutStrLn stderr "Usage: progs-test-lab2 [--debug] interpreter_code_directory"
+  hPutStrLn stderr "Usage: progs-test-lab2 [--debug] [-g|--good FILE]... [-b|--bad FILE]... interpreter_code_directory"
   exitFailure
 
-mainOpts :: FilePath -> IO ()
-mainOpts dir =
+mainOpts :: FilePath -> TestSuite -> IO ()
+mainOpts dir testSuite =
     do welcome
        domake <- readIORef doMake
        when domake $ runMake dir
-       (good,bad) <- runTests dir
+       (good,bad) <- runTests dir testSuite
        putStrLn ""
        putStrLn "------------------------------------------------------------"
        report "Good programs: " good

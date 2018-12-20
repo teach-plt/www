@@ -8,7 +8,9 @@ import Control.Monad
 
 import Data.IORef
 import Data.List
+import Data.Maybe
 
+import System.Console.GetOpt
 import System.Directory
 import System.Environment
 import System.FilePath
@@ -22,6 +24,12 @@ executable_name :: FilePath
 -- You might have to add or remove .exe here if you are using Windows
 executable_name = "lab3" <.> exeExtension
 
+concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
+concatMapM f = fmap concat . mapM f
+
+whenM :: Monad m => m Bool -> m () -> m ()
+whenM mb m = mb >>= \b -> when b m
+
 --
 -- * Main
 --
@@ -33,40 +41,63 @@ main = setup >> getArgs >>= parseArgs >>= uncurry mainOpts
 setup :: IO ()
 setup = hSetBuffering stdout LineBuffering
 
+data Options = Options { debugFlag       :: Bool
+                       , doublesFlag     :: Bool
+                       , makeFlag        :: Bool
+                       , testSuiteOption :: Maybe TestSuite }
+
+enableDebug :: Options -> Options
+enableDebug options = options { debugFlag = True }
+
+enableDoubles :: Options -> Options
+enableDoubles options = options { doublesFlag = True }
+
+disableMake :: Options -> Options
+disableMake options = options { makeFlag = False }
+
+addTest :: FilePath -> Options -> Options
+addTest f options = options { testSuiteOption = Just $ maybe [f] (f:) $ testSuiteOption options }
+
+optDescr :: [OptDescr (Options -> Options)]
+optDescr = [ Option []    ["debug"]   (NoArg  enableDebug       ) "print debug messages"
+           , Option []    ["doubles"] (NoArg  enableDoubles     ) "include double tests"
+           , Option []    ["no-make"] (NoArg  disableMake       ) "do not run make"
+           , Option ['t'] ["test"]    (ReqArg addTest     "FILE") "good test case FILE"
+           ]
+
 -- | Filter out and process options, return the argument and the rest.
-parseArgs :: [String] -> IO (String,[String])
-parseArgs args = do
-  let isOpt ('-':_) = True
-      isOpt _       = False
-  let (opts, rest) = partition isOpt args
-  processOpts opts
-  when (null rest) $ usage
-  return (head rest,tail rest)
+parseArgs :: [String] -> IO (FilePath,TestSuite)
+parseArgs argv = case getOpt RequireOrder optDescr argv of
+  (o,[progdir],[]) -> do
+    let defaultOptions = Options False False True Nothing
+        options = foldr ($) defaultOptions o
+    when (debugFlag   options)    $ writeIORef doDebug            True
+    when (doublesFlag options)    $ writeIORef includeDoubleTests True
+    when (not $ makeFlag options) $ writeIORef doMake             False
+    let testSuite    = fromMaybe ["good", "dir-for-path-test/one-more-dir"] $ testSuiteOption options
+        expandPath f = doesDirectoryExist f >>= \b -> if b then listCCFiles f else return [f]
+    testSuite' <- concatMapM expandPath testSuite
+    return (progdir,testSuite')
+  (_,_,_) -> do
+    usage
+    exitFailure
 
-processOpts :: [String] -> IO ()
-processOpts = mapM_ $ \ arg -> case arg of
-  "--debug" -> writeIORef doDebug True
-  "--doubles" -> writeIORef includeDoubleTests True
-  "--no-make" -> writeIORef doMake False
-  _ -> usage
-
-usage :: IO a
+usage :: IO ()
 usage = do
-  hPutStrLn stderr "Usage: progs-test-lab3 [--debug] [--doubles]"
-  hPutStrLn stderr "           interpreter_code_directory [test_case_directory ...]"
+  hPutStrLn stderr "Usage: progs-test-lab3 [--debug] [--doubles] [-t|--test FILE]..."
+  hPutStrLn stderr "           interpreter_code_directory"
   exitFailure
 
-mainOpts :: FilePath -> [FilePath] -> IO ()
-mainOpts progdir dirs = do
+mainOpts :: FilePath -> TestSuite -> IO ()
+mainOpts progdir testSuite = do
   putStrLn "This is the test program for Programming Languages Lab 3"
   doubles <- readIORef includeDoubleTests
   unless doubles $ putStrLn "Make sure to include the --doubles flag if you also want to test programs including doubles."
-  let testdirs = if null dirs then ["good", "dir-for-path-test/one-more-dir"] else dirs
   -- Cleanup files from old runs
-  forM_ testdirs (flip cleanDirectory [".j", ".class"])
+  forM_ testSuite (\f -> cleanFiles $ map (replaceExtension f) [".j", ".class"])
   domake <- readIORef doMake
   when domake $ runMake progdir
-  good <- runTests progdir testdirs
+  good <- runTests progdir testSuite
   putStrLn ""
   putStrLn "------------------------------------------------------------"
   report "Good programs: " good
@@ -91,12 +122,13 @@ runMake dir = do
   checkDirectoryExists dir
   runPrgNoFail_ "make" ["-C"] dir
 
+type TestSuite = [FilePath]
+
 -- | Run test on all ".cc" files in given directories (default "good").
-runTests :: FilePath -> [FilePath] -> IO [(FilePath,Bool)]
-runTests dir testdirs = do
+runTests :: FilePath -> TestSuite -> IO [(FilePath,Bool)]
+runTests dir files = do
   let prog = joinPath [dir, executable_name]
   checkFileExists prog
-  files <- concat <$> mapM listCCFiles testdirs
   mapM (\ f -> (f,) <$> testBackendProg prog f) files
 
 -- | Test given program on given test file.
@@ -171,8 +203,13 @@ debug s = do
 cleanDirectory :: FilePath -> [String] -> IO ()
 cleanDirectory path exts = listDirectory path >>=
                            mapM_ (\f -> do let pathf = path </> f
-                                           isFile <- doesFileExist pathf
-                                           when (takeExtension f `elem` exts && isFile) $ removeFile pathf)
+                                           when (takeExtension f `elem` exts) $ cleanFile pathf)
+
+cleanFile :: FilePath -> IO ()
+cleanFile file = whenM (doesFileExist file) $ removeFile file
+
+cleanFiles :: [FilePath] -> IO ()
+cleanFiles = mapM_ cleanFile
 
 classpathSep :: Char
 #if defined(mingw32_HOST_OS)

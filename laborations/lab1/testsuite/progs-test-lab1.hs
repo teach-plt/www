@@ -2,12 +2,15 @@
 
 -- GHC needs -threaded
 
+import Control.Applicative
 import Control.Monad
 
 import Data.Char
 import Data.IORef
 import Data.List
+import Data.Maybe
 
+import System.Console.GetOpt
 import System.Directory
 import System.Environment
 import System.FilePath
@@ -15,6 +18,24 @@ import System.Exit
 import System.IO
 import System.Process
 import System.IO.Unsafe
+
+sequenceTuple :: Applicative f => (f a,f b) -> f (a,b)
+sequenceTuple = uncurry $ liftA2 (,)
+
+concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
+concatMapM f = fmap concat . mapM f
+
+both :: (a -> b) -> (a,a) -> (b,b)
+both f (a1,a2) = (f a1,f a2)
+
+bothM :: Applicative f => (a -> f b) -> (a,a) -> f (b,b)
+bothM f = sequenceTuple . both f
+
+first :: (a -> c) -> (a,b) -> (c,b)
+first f (a,b) = (f a,b)
+
+second :: (b -> c) -> (a,b) -> (a,c)
+second f (a,b) = (a,f b)
 
 {-# NOINLINE doDebug #-}
 doDebug :: IORef Bool
@@ -25,10 +46,6 @@ debug :: String -> IO ()
 debug s = do
   d <- readIORef doDebug
   when d $ putStrLn s
-
-listGoodProgs, listBadProgs :: IO [FilePath]
-listGoodProgs = listCCFiles $ joinPath ["..","good"]
-listBadProgs  = listCCFiles $ joinPath ["..","bad"]
 
 listCCFiles :: FilePath -> IO [FilePath]
 listCCFiles dir =
@@ -77,10 +94,10 @@ compileDriver = runPrgNoFail_ "ghc" (["--make"] ++ words HC_OPTS ++ ["-o", "test
 compileDriver = runPrgNoFail_ "ghc" ["--make", "-o", "testdriver"] "testdriver.hs"
 #endif
 
-runTests :: IO ([Bool],[Bool])
-runTests = do
-  goodProgs <- listGoodProgs
-  badProgs  <- listBadProgs
+type TestSuite = ([FilePath],[FilePath])
+
+runTests :: TestSuite -> IO ([Bool],[Bool])
+runTests (goodProgs,badProgs) = do
   good <- mapM (testFrontendProg True)  goodProgs
   bad  <- mapM (testFrontendProg False) badProgs
   return (good,bad)
@@ -110,26 +127,50 @@ testFrontendProg good f = do
 -- * Main
 --
 
-parseArgs :: [String] -> IO String
-parseArgs ["-debug", cfFile] = cfFile <$ writeIORef doDebug True
-parseArgs [cfFile]           = return cfFile
-parseArgs _                  = do
-  hPutStrLn stderr "Usage: progs-test-lab1 [-debug] cf_file"
-  exitFailure
+data Options = Options { debugFlag :: Bool, testSuiteOption :: Maybe TestSuite }
 
-mainOpts :: FilePath -> IO ()
-mainOpts cfFile = do
+enableDebug :: Options -> Options
+enableDebug options = options { debugFlag = True }
+
+addGood, addBad :: FilePath -> Options -> Options
+addGood f options = options { testSuiteOption = Just $ maybe ([f],[]) (first  (f:)) $ testSuiteOption options }
+addBad  f options = options { testSuiteOption = Just $ maybe ([],[f]) (second (f:)) $ testSuiteOption options }
+
+optDescr :: [OptDescr (Options -> Options)]
+optDescr = [ Option []    ["debug"] (NoArg  enableDebug       ) "print debug messages"
+           , Option ['g'] ["good"]  (ReqArg addGood     "FILE") "good test case FILE"
+           , Option ['b'] ["bad"]   (ReqArg addBad      "FILE") "bad test case FILE"
+           ]
+
+parseArgs :: [String] -> IO (FilePath,TestSuite)
+parseArgs argv = case getOpt RequireOrder optDescr argv of
+  (o,[cfFile],[]) -> do
+    let defaultOptions = Options False Nothing
+        options = foldr ($) defaultOptions o
+    when (debugFlag options) $ writeIORef doDebug True
+    let testSuite    = fromMaybe (["good"],["bad"]) $ testSuiteOption options
+        expandPath f = doesDirectoryExist f >>= \b -> if b then listCCFiles f else return [f]
+    testSuite' <- bothM (concatMapM expandPath) testSuite
+    return (cfFile,testSuite')
+  (_,_,_) -> do
+    hPutStrLn stderr "Usage: progs-test-lab1 [--debug] [-g|--good FILE]... [-b|--bad FILE]... cf_file"
+    exitFailure
+
+mainOpts :: FilePath -> TestSuite -> IO ()
+mainOpts cfFile testSuite = do
   welcome
   let dir = "lab1-test-dir"
   createDirectoryIfMissing True dir
   copyFile cfFile $ joinPath [dir,"Cpp.cf"]
   setCurrentDirectory dir
+  let adjustPath f = if isRelative f then joinPath ["..",f] else f
+      testSuite'   = both (map adjustPath) testSuite
   rules <- runBNFC
   runAlex
   msgs <- runHappy
   writeDriver
   compileDriver
-  (good,bad) <- runTests
+  (good,bad) <- runTests testSuite'
   putStrLn ""
   putStrLn "------------------------------------------------------------"
   putStrLn $ color (if rules > 150 then red else black) $ "Number of rules:         " ++ show rules
@@ -142,7 +183,7 @@ mainOpts cfFile = do
   report "Bad programs:  " bad
 
 main :: IO ()
-main = setup >> getArgs >>= parseArgs >>= mainOpts
+main = setup >> getArgs >>= parseArgs >>= uncurry mainOpts
 
 -- | In various contexts this is guessed incorrectly
 setup :: IO ()

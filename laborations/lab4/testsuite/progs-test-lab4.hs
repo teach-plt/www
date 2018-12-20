@@ -1,12 +1,16 @@
 {-# LANGUAGE CPP               #-}
 {-# LANGUAGE ViewPatterns      #-}
 -- Test suite for lab 4
+import Control.Applicative hiding (empty)
 import Control.Monad
 
 import Data.Char
+import Data.Function
 import Data.List
+import Data.Maybe
 import Data.Monoid
 
+import System.Console.GetOpt
 import System.Directory
 import System.Environment
 import System.Exit
@@ -18,6 +22,35 @@ import System.Process
 executable_name :: FilePath
 -- You might have to add or remove .exe here if you are using Windows
 executable_name = "lab4" <.> exeExtension
+
+sequenceTuple :: Applicative f => (f a,f b) -> f (a,b)
+sequenceTuple = uncurry $ liftA2 (,)
+
+concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
+concatMapM f = fmap concat . mapM f
+
+mapTuple :: (a -> c) -> (b -> d) -> (a,b) -> (c,d)
+mapTuple f g (a,b) = (f a,g b)
+
+mapTupleM :: Applicative f => (a -> f c) -> (b -> f d) -> (a,b) -> f (c,d)
+mapTupleM f g = sequenceTuple . mapTuple f g
+
+first :: (a -> c) -> (a,b) -> (c,b)
+first f = mapTuple f id
+
+second :: (b -> c) -> (a,b) -> (a,c)
+second f = mapTuple id f
+
+first3 :: (a -> d) -> (a,b,c) -> (d,b,c)
+first3 f (a,b,c) = (f a,b,c)
+
+splitOn :: Char -> String -> [String]
+splitOn _   "" = []
+splitOn sep s  = splitOn' s ""
+  where
+    splitOn' []     sub             = [reverse sub]
+    splitOn' (c:cs) sub | c == sep  = reverse sub:splitOn' cs ""
+                        | otherwise = splitOn' cs (c:sub)
 
 debug :: String -> IO ()
 debug = putStrLn
@@ -190,51 +223,81 @@ runBad lab4 bad = do
   echo ""
   return badpass
 
-parseArgs :: [String] -> IO FilePath
-parseArgs [d] = return d
-parseArgs _   = usage
+type Options = Maybe TestSuite
+
+addGood :: String -> Options -> Maybe Options
+addGood (splitOn ',' -> [f,m,r]) options = Just $ Just $ maybe ([testCase],[]) (first (testCase:)) options
+  where
+    testCase = (f,'-':m,r)
+addGood _                        _       = Nothing
+
+addBad :: FilePath -> Options -> Maybe Options
+addBad f options = Just $ Just $ maybe ([],[f]) (second (f:)) options
+
+optDescr :: [OptDescr (Options -> Maybe Options)]
+optDescr = [ Option ['g'] ["good"]  (ReqArg addGood "FILE,MODE,RESULT") "good test case FILE, call-by-name or -value MODE, expected RESULT"
+           , Option ['b'] ["bad"]   (ReqArg addBad  "FILE"            ) "bad test case FILE"
+           ]
+
+parseArgs :: [String] -> IO (FilePath,TestSuite)
+parseArgs argv = case getOpt RequireOrder optDescr argv of
+  (o,[codedir],[]) -> do
+    let defaultOptions = Nothing
+    options <- maybe usage return $ foldM (&) defaultOptions o
+    let goodTests = [ ("good/001.hs",    "-v", "7"         )
+                    , ("good/002.hs",    "-n", "5"         )
+                    , ("good/003.hs",    "-v", "5050"      )
+                    , ("good/004.hs",    "-v", "720"       )
+                    , ("good/005.hs",    "-n", "0"         )
+                    , ("good/006.hs",    "-v", "1073741824")
+                    , ("good/007.hs",    "-v", "1"         )
+                    , ("good/church.hs", "-v", "8"         )
+                    , ("good/009.hs",    "-v", "131072"    )
+                    , ("good/010.hs",    "-v", "1"         )
+                    , ("good/010.hs",    "-n", "1"         )
+                    , ("good/011.hs",    "-v", "1"         )
+                    , ("good/011.hs",    "-n", "1"         )
+                    , ("good/012.hs",    "-v", "0"         )
+                    , ("good/013.hs",    "-v", "1"         )
+                    , ("good/014.hs",    "-n", "33"        )
+                    , ("good/015.hs",    "-v", "1"         )
+                    , ("good/015.hs",    "-n", "1"         )
+                    , ("good/ski.hs",    "-n", "16"        )
+                    ]
+        testSuite              = fromMaybe (goodTests,["bad"]) options
+        listHSFiles d          = filter (".hs" `isExtensionOf`) <$> ls d
+        expandPath  f          = doesDirectoryExist f >>= \b -> if b then listHSFiles f else return [f]
+        expandPathGood (f,m,r) = map (\ f' -> (f',m,r)) <$> expandPath f
+    testSuite' <- mapTupleM (concatMapM expandPathGood) (concatMapM expandPath) testSuite
+    return (codedir,testSuite')
+  (_,_,_) -> do
+    _ <- usage
+    exitFailure
 
 usage :: IO a
 usage = do
-  hPutStrLn stderr "Usage: progs-test-lab4 path_to_solution" -- "The path to the directory where your solution is located"
+  hPutStrLn stderr "Usage: progs-test-lab4 [-g|--good FILE,MODE,RESULT]... [-b|--bad FILE]..."
+  hPutStrLn stderr "           path_to_solution" -- "The path to the directory where your solution is located"
   exitFailure
+
+type TestSuite = ([(FilePath,String,String)],[FilePath])
 
 main :: IO ()
 main = do
   testdir <- pwd
-  codedir <- makeAbsolute =<< parseArgs =<< getArgs
-  -- we will be inside codedir so progs-test-lab4.sh uses the
-  -- relative path ./executable_name
-  let lab4 = codedir </> executable_name
+  (codedir,(goodTests,badTests)) <- parseArgs =<< getArgs
+  let adjustPath f = if isRelative f then joinPath [testdir,f] else f
+      goodTests'   = map (first3 adjustPath) goodTests
+      badTests'    = map adjustPath          badTests
+      lab4         = "." </> executable_name
 
   cd codedir
   inproc "make" [] empty
 
-  let goodTests = [ (testdir </> "good/001.hs",    "-v", "7"         )
-                  , (testdir </> "good/002.hs",    "-n", "5"         )
-                  , (testdir </> "good/003.hs",    "-v", "5050"      )
-                  , (testdir </> "good/004.hs",    "-v", "720"       )
-                  , (testdir </> "good/005.hs",    "-n", "0"         )
-                  , (testdir </> "good/006.hs",    "-v", "1073741824")
-                  , (testdir </> "good/007.hs",    "-v", "1"         )
-                  , (testdir </> "good/church.hs", "-v", "8"         )
-                  , (testdir </> "good/009.hs",    "-v", "131072"    )
-                  , (testdir </> "good/010.hs",    "-v", "1"         )
-                  , (testdir </> "good/010.hs",    "-n", "1"         )
-                  , (testdir </> "good/011.hs",    "-v", "1"         )
-                  , (testdir </> "good/011.hs",    "-n", "1"         )
-                  , (testdir </> "good/012.hs",    "-v", "0"         )
-                  , (testdir </> "good/013.hs",    "-v", "1"         )
-                  , (testdir </> "good/014.hs",    "-n", "33"        )
-                  , (testdir </> "good/015.hs",    "-v", "1"         )
-                  , (testdir </> "good/015.hs",    "-n", "1"         )
-                  , (testdir </> "good/ski.hs",    "-n", "16"        )
-                  ]
-  badTests <- filter (".hs" `isExtensionOf`) <$> (ls $ testdir </> "bad")
-  let goodtot = length goodTests
-      badtot  = length badTests
-  goodpass <- mconcat <$> forM goodTests (runGood lab4)
-  badpass  <- mconcat <$> forM badTests  (runBad  lab4)
+  let goodtot = length goodTests'
+      badtot  = length badTests'
+  goodpass <- mconcat <$> forM goodTests' (runGood lab4)
+  badpass  <- mconcat <$> forM badTests'  (runBad  lab4)
 
   echo "### Summary ###"
   echo $ show (getSum goodpass) <> " of " <> show goodtot <> " good tests passed."
