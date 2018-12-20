@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP               #-}
 {-# LANGUAGE ViewPatterns      #-}
 -- Test suite for lab 4
 import Control.Monad
@@ -28,7 +29,11 @@ debug = putStrLn
 type Color = Int
 
 color :: Color -> String -> String
+#if defined(mingw32_HOST_OS)
+color _ s = s
+#else
 color c s = fgcol c ++ s ++ normal
+#endif
 
 highlight, bold, underline, normal :: String
 highlight = "\ESC[7m"
