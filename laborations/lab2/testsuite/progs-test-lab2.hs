@@ -150,7 +150,8 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
   (o,[cfFile],[]) -> do
     let defaultOptions = Options False True Nothing
         options = foldr ($) defaultOptions o
-    when (debugFlag options) $ writeIORef doDebug True
+    when (debugFlag options)      $ writeIORef doDebug True
+    when (not $ makeFlag options) $ writeIORef doMake  False
     let testSuite    = fromMaybe (["good"],["bad"]) $ testSuiteOption options
         expandPath f = doesDirectoryExist f >>= \b -> if b then listCCFiles f else return [f]
     testSuite' <- bothM (concatMapM expandPath) testSuite
