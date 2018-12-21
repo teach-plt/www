@@ -190,7 +190,7 @@ Variable declarations have one of the following formats:
 
 
 
-**Typing**. The initializing expression must have the declared type.
+**Typing**. The initializing expression must have the declared type in the //extended// context.
 The type cannot be ``void``.
 
 
@@ -543,7 +543,14 @@ Note that this error should be raised by the following snippet
     printInt(x);
   }
 ```
-since the initialized ``x`` is shadowed by an uninitialized ``x``.
+since the initialized ``x`` is shadowed by an uninitialized ``x``,
+and even by
+```
+  int x = 1 + x;
+```
+since the variable ``x`` is already declared but still undefined at
+the point when the initializing expression ``1 + x`` will be
+evaluated.
 
 A function call, e.g.
 ```
