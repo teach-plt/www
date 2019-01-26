@@ -47,8 +47,9 @@ Google group: http://groups.google.com/group/plt-2018
 % : //2018-03-14//
 %   Fire is open for the late submission of labs.
 
-% : //2018-01-16//
-%   [Exam text exams/exam-plt-2018-1.pdf] and [solution exams/solutions-plt-2018-1.pdf].
+: //2019-01-26//
+  [Exam text exams/exam-plt-2019-1.pdf] and [solution exams/solutions-plt-2019-1.pdf].
+
 %   I am very pleased with the outcome, thanks for studying well!
 
 %   Please submit outstanding lab solutions by Friday!
@@ -155,9 +156,8 @@ Slides follow closely the plt book.
 | Thu 20/12     | 13-15          | Preparing for the exam            | [Training Exam exams/exam-plt-2017-3.pdf] |
 || 2018 ||||
 | //Thu 10/01// | //23//         | //Lab 4 deadline//                |  |
-| //Mon 14/01// | //8.30-12.30// | //Exam (J)//             |  |
-%[Exam exams/exam-plt-2018-1.pdf] |
-%| //Tue 16/01// | //10.30-12.00// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
+| //Mon 14/01// | //8.30-12.30// | //Exam (J)//             | [Exam exams/exam-plt-2019-1.pdf] |
+| //Fri 01/02// | //10-11// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
 | //Thu 24/01// | //23//         | //Final lab deadline//            | //all lab returns//
 %| //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
 %| //Sun 25/03// |                | //Late final lab deadline//       |  |
