@@ -64,7 +64,7 @@ for good in "${arr[@]}"; do
 done
 
 function was_failure {
-    echo "$1" | grep -iE "ERROR" > /dev/null
+    echo "$1" | grep -iE "(ERROR|java.lang.RuntimeException)" > /dev/null
 }
 
 # Bad tests

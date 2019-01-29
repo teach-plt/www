@@ -187,7 +187,10 @@ echo :: String -> IO ()
 echo = putStrLn
 
 was_failure :: String -> Bool
-was_failure = ("ERROR" `isInfixOf`) . map toUpper
+was_failure out = or
+  [ "ERROR" `isInfixOf` map toUpper out
+  , "java.lang.RuntimeException"  `isInfixOf` out
+  ]
 
 runGood :: FilePath -> (FilePath,String,String) -> IO (Sum Int)
 runGood lab4 good = do
