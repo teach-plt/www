@@ -1,6 +1,9 @@
 {-# LANGUAGE CPP               #-}
 {-# LANGUAGE ViewPatterns      #-}
--- Test suite for lab 4
+
+-- | Test suite for lab 4
+
+import Control.Arrow (first, second, (***))
 import Control.Applicative hiding (empty)
 import Control.Monad
 
@@ -32,16 +35,10 @@ concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
 concatMapM f = fmap concat . mapM f
 
 mapTuple :: (a -> c) -> (b -> d) -> (a,b) -> (c,d)
-mapTuple f g (a,b) = (f a,g b)
+mapTuple = (***)
 
 mapTupleM :: Applicative f => (a -> f c) -> (b -> f d) -> (a,b) -> f (c,d)
 mapTupleM f g = sequenceTuple . mapTuple f g
-
-first :: (a -> c) -> (a,b) -> (c,b)
-first f = mapTuple f id
-
-second :: (b -> c) -> (a,b) -> (a,c)
-second f = mapTuple id f
 
 first3 :: (a -> d) -> (a,b,c) -> (d,b,c)
 first3 f (a,b,c) = (f a,b,c)
