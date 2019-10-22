@@ -18,13 +18,6 @@ this testsuite.
 
 You will only need to do this part once.
 
-%+ Make sure that at least version 1.4.2 (January 2018) of the
-%  Haskell package [filepath https://hackage.haskell.org/package/filepath]
-%  is installed:
-%```
-%$ ghc-pkg latest filepath
-%```
-
 + Download [lab4-testsuite.tar.gz lab4-testsuite.tar.gz].
 
 + Unpack the downloaded file:
@@ -32,15 +25,15 @@ You will only need to do this part once.
 $ tar -zxf lab4-testsuite.tar.gz
 ```
 
-%+ Enter the ``lab4-testsuite`` directory:
-%```
-%$ cd lab4-testsuite
-%```
-%
-%+ Compile the test program using ``make`` or alternatively:
-%```
-%$ ghc -threaded --make -o progs-test-lab4 progs-test-lab4.hs
-%```
++ Enter the ``lab4-testsuite`` directory:
+```
+$ cd lab4-testsuite
+```
+
++ Compile the test program using ``make`` or alternatively:
+```
+$ ghc --make -o progs-test-lab4 progs-test-lab4.hs
+```
 
 
 = Running the testsuite =
@@ -52,8 +45,8 @@ This is what you need to do to test your interpreter.
 $ cd lab4-testsuite
 ```
 
-+ Run ``progs-test-lab4.sh`` with the path to the directory where your solution is located:
++ Run ``progs-test-lab4`` with the path to the directory where your solution is located:
 
 ```
-$ ./progs-test-lab4.sh path/to/your/solution/
+$ ./progs-test-lab4 path/to/your/solution/
 ```
