@@ -2,7 +2,6 @@
 
 -- GHC needs -threaded
 
-import Control.Applicative
 import Control.Exception
 import Control.Monad
 
@@ -25,23 +24,21 @@ executable_name :: FilePath
 -- You might have to add or remove .exe here if you are using Windows
 executable_name = "lab2" <.> exeExtension
 
-sequenceTuple :: Applicative f => (f a,f b) -> f (a,b)
-sequenceTuple = uncurry $ liftA2 (,)
-
 concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
 concatMapM f = fmap concat . mapM f
 
-both :: (a -> b) -> (a,a) -> (b,b)
-both f (a1,a2) = (f a1,f a2)
+tripleM :: Monad m => (a -> m b) -> (a,a,a) -> m (b,b,b)
+tripleM f (x,y,z) = do
+  fx <- f x
+  fy <- f y
+  fz <- f z
+  return (fx, fy, fz)
 
-bothM :: Applicative f => (a -> f b) -> (a,a) -> f (b,b)
-bothM f = sequenceTuple . both f
+first :: (a -> d) -> (a,b,c) -> (d,b,c)
+first f (a,b,c) = (f a,b,c)
 
-first :: (a -> c) -> (a,b) -> (c,b)
-first f (a,b) = (f a,b)
-
-second :: (b -> c) -> (a,b) -> (a,c)
-second f (a,b) = (a,f b)
+second :: (b -> d) -> (a,b,c) -> (a,d,c)
+second f (a,b,c) = (a,f b,c)
 
 {-# NOINLINE doDebug #-}
 doDebug :: IORef Bool
@@ -60,57 +57,69 @@ listCCFiles :: FilePath -> IO [FilePath]
 listCCFiles dir =
     liftM (map (\f -> joinPath [dir,f]) . sort . filter ((==".cc") . takeExtension)) $ listDirectory dir
 
-
 welcome :: IO ()
 welcome = do putStrLn $ "This is the test program for Programming Languages Lab 2"
-
 
 runMake :: FilePath -> IO ()
 runMake dir = do checkDirectoryExists dir
                  runPrgNoFail_ "make" ["-C"] dir
 
-type TestSuite = ([FilePath],[FilePath])
+type TestSuite = ([FilePath],[FilePath],[FilePath])
 
-runTests :: FilePath -> TestSuite -> IO ([Bool],[Bool])
-runTests dir (goodProgs,badProgs) =
-    do let prog = joinPath [dir,executable_name]
-       checkFileExists prog
-       good <- mapM (testBackendProg prog) goodProgs
-       bad  <- mapM (testBadProgram prog) badProgs
-       return (good,bad)
+runTests :: FilePath -> TestSuite -> IO ([Bool],[Bool],[Bool])
+runTests dir (goodProgs,badProgs,badRuntimeProgs) = do
+  let prog = joinPath [dir,executable_name]
+  checkFileExists prog
+  good <- mapM (testGoodProgram prog) goodProgs
+  bad <- mapM (testBadProgram prog) badProgs
+  badRuntime <- mapM (testBadRuntimeProgram prog) badRuntimeProgs
+  return (good,bad,badRuntime)
 
-testBackendProg :: FilePath -> FilePath -> IO Bool
-testBackendProg prog f =
-    do input  <- readFileIfExists (f++".input")
-       output <- readFileIfExists (f++".output")
-       putStr $ "Running " ++ f ++ "... "
-       (s,out,err) <- readProcessWithExitCode prog [f] input
-       putStrLnExitCode s "."
-       debug $ "Exit code: " ++ show s
-       -- Try to work around line ending problem
-       let removeCR = filter (/= '\r')
-       if trim (removeCR out) == trim (removeCR output)
-         then if (trim (removeCR err) /= "")
-              then reportError prog "unexpected output on stderr" f input out err >>
-                   return False
-              else return True
-         else do reportError prog "invalid output" f input out err
-                 putStrLn "Expected output:"
-                 putStrLn $ color blue $ output
-                 return False
-
-testBadProgram :: FilePath -> FilePath -> IO Bool
-testBadProgram prog f = do
-  input  <- readFileIfExists (f++".input")
-  --output <- readFileIfExists (f++".output")
+testGoodProgram :: FilePath -> FilePath -> IO Bool
+testGoodProgram prog f = do
+  input <- readFileIfExists (f++".input")
+  output <- readFileIfExists (f++".output")
   putStr $ "Running " ++ f ++ "... "
   (s,out,err) <- readProcessWithExitCode prog [f] input
   putStrLnExitCode s "."
   debug $ "Exit code: " ++ show s
-  if "TYPE ERROR" `isPrefixOf` out then return True else
-    if "SYNTAX ERROR" `isPrefixOf` out then return True else do
-      reportError prog "Bad program passed type checking" f "" out err
-      return False
+  -- Try to work around line ending problem
+  let removeCR = filter (/= '\r')
+  if trim (removeCR out) == trim (removeCR output)
+    then if (trim (removeCR err) /= "")
+         then reportError prog "unexpected output on stderr" f input out err >>
+              return False
+         else return True
+    else do reportError prog "invalid output" f input out err
+            putStrLn "Expected output:"
+            putStrLn $ color blue $ output
+            return False
+
+testBadProgram :: FilePath -> FilePath -> IO Bool
+testBadProgram prog f = do
+  input <- readFileIfExists (f++".input")
+  putStr $ "Running " ++ f ++ "... "
+  (s,out,err) <- readProcessWithExitCode prog [f] input
+  putStrLnExitCode s "."
+  debug $ "Exit code: " ++ show s
+  if "TYPE ERROR" `isPrefixOf` out then
+    return True
+  else do
+    reportError prog "Ill-typed program passed type checking" f "" out err
+    return False
+
+testBadRuntimeProgram :: FilePath -> FilePath -> IO Bool
+testBadRuntimeProgram prog f = do
+  input <- readFileIfExists (f++".input")
+  putStr $ "Running " ++ f ++ "... "
+  (s,out,err) <- readProcessWithExitCode prog [f] input
+  putStrLnExitCode s "."
+  debug $ "Exit code: " ++ show s
+  if "INTERPRETER ERROR" `isPrefixOf` out then
+    return True
+  else do
+    reportError prog "Bad (type-correct) program ran to completion without error" f "" out err
+    return False
 
 --
 -- * Main
@@ -134,8 +143,8 @@ disableMake :: Options -> Options
 disableMake options = options { makeFlag = False }
 
 addGood, addBad :: FilePath -> Options -> Options
-addGood f options = options { testSuiteOption = Just $ maybe ([f],[]) (first  (f:)) $ testSuiteOption options }
-addBad  f options = options { testSuiteOption = Just $ maybe ([],[f]) (second (f:)) $ testSuiteOption options }
+addGood f options = options { testSuiteOption = Just $ maybe ([f],[],[]) (first  (f:)) $ testSuiteOption options }
+addBad  f options = options { testSuiteOption = Just $ maybe ([],[f],[]) (second (f:)) $ testSuiteOption options }
 
 optDescr :: [OptDescr (Options -> Options)]
 optDescr = [ Option []    ["debug"]   (NoArg  enableDebug       ) "print debug messages"
@@ -152,9 +161,9 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
         options = foldr ($) defaultOptions o
     when (debugFlag options)      $ writeIORef doDebug True
     when (not $ makeFlag options) $ writeIORef doMake  False
-    let testSuite    = fromMaybe (["good"],["bad"]) $ testSuiteOption options
+    let testSuite    = fromMaybe (["good"],["bad"],["bad-runtime"]) $ testSuiteOption options
         expandPath f = doesDirectoryExist f >>= \b -> if b then listCCFiles f else return [f]
-    testSuite' <- bothM (concatMapM expandPath) testSuite
+    testSuite' <- tripleM (concatMapM expandPath) testSuite
     return (cfFile,testSuite')
   (_,_,_) -> do
     usage
@@ -170,11 +179,12 @@ mainOpts dir testSuite =
     do welcome
        domake <- readIORef doMake
        when domake $ runMake dir
-       (good,bad) <- runTests dir testSuite
+       (good,bad,badRuntime) <- runTests dir testSuite
        putStrLn ""
        putStrLn "------------------------------------------------------------"
        report "Good programs: " good
-       report "Bad programs:  " bad
+       report "Bad programs: " bad
+       report "Bad runtime programs: " badRuntime
 
 --
 -- * Utilities

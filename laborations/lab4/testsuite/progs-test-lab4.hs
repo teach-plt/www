@@ -1,9 +1,6 @@
 {-# LANGUAGE CPP               #-}
 {-# LANGUAGE ViewPatterns      #-}
-
--- | Test suite for lab 4
-
-import Control.Arrow (first, second, (***))
+-- Test suite for lab 4
 import Control.Applicative hiding (empty)
 import Control.Monad
 
@@ -35,10 +32,16 @@ concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
 concatMapM f = fmap concat . mapM f
 
 mapTuple :: (a -> c) -> (b -> d) -> (a,b) -> (c,d)
-mapTuple = (***)
+mapTuple f g (a,b) = (f a,g b)
 
 mapTupleM :: Applicative f => (a -> f c) -> (b -> f d) -> (a,b) -> f (c,d)
 mapTupleM f g = sequenceTuple . mapTuple f g
+
+first :: (a -> c) -> (a,b) -> (c,b)
+first f = mapTuple f id
+
+second :: (b -> c) -> (a,b) -> (a,c)
+second f = mapTuple id f
 
 first3 :: (a -> d) -> (a,b,c) -> (d,b,c)
 first3 f (a,b,c) = (f a,b,c)
@@ -184,10 +187,7 @@ echo :: String -> IO ()
 echo = putStrLn
 
 was_failure :: String -> Bool
-was_failure out = or
-  [ "ERROR" `isInfixOf` map toUpper out
-  , "java.lang.RuntimeException"  `isInfixOf` out
-  ]
+was_failure = ("ERROR" `isInfixOf`) . map toUpper
 
 runGood :: FilePath -> (FilePath,String,String) -> IO (Sum Int)
 runGood lab4 good = do
@@ -259,6 +259,8 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
                     , ("good/005.hs",    "-n", "0"         )
                     , ("good/006.hs",    "-v", "1073741824")
                     , ("good/007.hs",    "-v", "1"         )
+                    , ("good/008.hs",    "-v", "210"       )
+                    , ("good/008.hs",    "-n", "210"       )
                     , ("good/church.hs", "-v", "8"         )
                     , ("good/009.hs",    "-v", "131072"    )
                     , ("good/010.hs",    "-v", "1"         )
@@ -271,6 +273,16 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
                     , ("good/015.hs",    "-v", "1"         )
                     , ("good/015.hs",    "-n", "1"         )
                     , ("good/ski.hs",    "-n", "16"        )
+                    , ("good/016.hs",    "-v", "18"        )
+                    , ("good/016.hs",    "-n", "18"        )
+                    , ("good/017.hs",    "-v", "2"         )
+                    , ("good/017.hs",    "-n", "2"         )
+                    , ("good/018.hs",    "-v", "2"         )
+                    , ("good/018.hs",    "-n", "2"         )
+                    , ("good/019.hs",    "-n", "0"         )
+                    , ("good/019.hs",    "-n", "0"         )
+                    , ("good/shadow.hs", "-n", "1"         )
+                    , ("good/shadow2.hs","-n", "1"         )
                     ]
         testSuite              = fromMaybe (goodTests,["bad"]) $ testSuiteOption options
         listHSFiles d          = filter (".hs" `isExtensionOf`) <$> ls d
