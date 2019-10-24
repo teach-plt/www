@@ -44,6 +44,10 @@ CVS
 /laborations/lab2/haskell/CPP/
 /laborations/lab2/haskell/lab2
 /laborations/lab2/testsuite/good/*.j
+/laborations/lab2/testsuite/good/*.cc.exe
+/laborations/lab2/testsuite/good/*.cc.tmp.cpp
+/laborations/lab2/testsuite/bad/*.cc.exe
+/laborations/lab2/testsuite/bad/*.cc.tmp.cpp
 /laborations/lab2/testsuite/progs-test-lab2
 
 /laborations/lab3/java/CPP/
@@ -60,4 +64,3 @@ CVS
 /laborations/lab4/haskell/lab4
 /laborations/lab4/java/Fun/
 /laborations/lab4/java/lab4
-

@@ -1,6 +1,6 @@
 Programming Language Technology
 DAT151 (Chalmers) / DIT231 (GU)
-Winter Term 2018 (LP2)
+Winter Term 2019 (LP2)
 
 %!target:html
 %!encoding:utf-8
@@ -13,100 +13,101 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 </p>
 '''
 
-Google group: http://groups.google.com/group/plt-2018
+Google group: http://groups.google.com/group/plt-2019
 //(please provide your full name and date of birth when requesting membership!)//
 
-[Fire https://plt-lp2-18.fire.cse.chalmers.se/]
+[Fire https://plt-lp2-19.fire.cse.chalmers.se/]
 /
-[Chalmers studieportal https://www.student.chalmers.se/sp/course?course_id=27798]
+[Chalmers studieportal https://www.student.chalmers.se/sp/course?course_id=29075]
+% https://www.student.chalmers.se/sp/course?course_id=27798
 % https://www.student.chalmers.se/sp/course?course_id=26971
 % https://www.student.chalmers.se/sp/course?course_id=24933
 % https://www.student.chalmers.se/sp/course?course_id=23453
 % https://www.student.chalmers.se/sp/course?course_id=21767
 /
-[GU course page stub https://gul.gu.se/courseId/85497/contentStart.do]
+% [GU course page stub https://gul.gu.se/courseId/85497/contentStart.do]
 % https://gul.gu.se/public/courseId/79766/coursePath/38212/38407/40149/ecp/lang-sv/publicPage.do]
-/
+% /
 [GU ad http://utbildning.gu.se/education/courses-and-programmes/Course_detail?courseId=DIT231]
 /
 [GU kursplan http://kursplaner.gu.se/pdf/kurs/sv/DIT231]
 /
 [GU course description http://kursplaner.gu.se/pdf/kurs/en/DIT231]
 /
-[Course page 2017 http://www.cse.chalmers.se/edu/year/2017/course/DAT151/]
+[Course page 2018 http://www.cse.chalmers.se/edu/year/2018/course/DAT151/]
 
 
 =News and changes=
 
-% : //2018-03-22//
+% : //2019-03-22//
 %   The Fire deadline for late submission has been extended until
 %   Sunday 25th.
 
 %   The reexam will be held 5 April in building SB.
 
-% : //2018-03-14//
+% : //2019-03-14//
 %   Fire is open for the late submission of labs.
 
-: //2019-01-26//
-  Exam review will be Fri 1 February 10am in EDIT 6128.
-  [Exam text exams/exam-plt-2019-1.pdf] and [solution exams/solutions-plt-2019-1.pdf].
+% : //2019-01-26//
+%   Exam review will be Fri 1 February 10am in EDIT 6128.
+%   [Exam text exams/exam-plt-2019-1.pdf] and [solution exams/solutions-plt-2019-1.pdf].
 
 %   I am very pleased with the outcome, thanks for studying well!
 
 %   Please submit outstanding lab solutions by Friday!
 
 % : //2017-12-19//
-%   The exam will be held 8 January 2018, 8.30-12.30 in building M on the Johanneberg campus.
+%   The exam will be held 8 January 2019, 8.30-12.30 in building M on the Johanneberg campus.
 
 % : //2017-12-13//
 %   In the last lecture, we will walk through an
 %   [example exam exams/exam-plt-2017-3.pdf].
 
- : //2018-12-18//
-   Live coding in Agda [start live/2018/lec13-live-start.agda] and [finish live/2018/lec13-live-finish.agda]
-   on verified compilation.
+%  : //2019-12-18//
+%    Live coding in Agda [start live/2019/lec13-live-start.agda] and [finish live/2019/lec13-live-finish.agda]
+%    on verified compilation.
 
- : //2018-12-16//
-   [Lab 4 stubs laborations/lab4/lab4.html#section3] for Haskell and Java are now available.
+%  : //2019-12-16//
+%    [Lab 4 stubs laborations/lab4/lab4.html#section3] for Haskell and Java are now available.
 
- : //2018-12-09//
-   [Lab 4 laborations/lab4/lab4.html] is online.
+%  : //2019-12-09//
+%    [Lab 4 laborations/lab4/lab4.html] is online.
 
- : //2018-12-05//
-   **Guest lecture** by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
-   on domain-specific languages tomorrow, 2018-12-06!
-   He will present a software-engineering perspective on PLT.
-   (Schedule updated.)
-   //2018-12-10//: [Slides available http://www.cse.chalmers.se/~bergert/slides/guest_lecture_DSLs.pdf]
+%  : //2019-12-05//
+%    **Guest lecture** by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
+%    on domain-specific languages tomorrow, 2019-12-06!
+%    He will present a software-engineering perspective on PLT.
+%    (Schedule updated.)
+%    //2019-12-10//: [Slides available http://www.cse.chalmers.se/~bergert/slides/guest_lecture_DSLs.pdf]
 
- : //2018-12-04//
-   [Lab 3 laborations/lab3/lab3.html] is online.
+%  : //2019-12-04//
+%    [Lab 3 laborations/lab3/lab3.html] is online.
 
- : //2018-11-27//
-   The code from today's "Hands-on for lab 2" session has been posted in the plt-2018 group.
+%  : //2019-11-27//
+%    The code from today's "Hands-on for lab 2" session has been posted in the plt-2019 group.
 
 
- : //2018-11-20//
-   [Lab 2 laborations/lab2/lab2.html] is online.
+%  : //2019-11-20//
+%    [Lab 2 laborations/lab2/lab2.html] is online.
 
-%  : //2017-11-07//
-%    No lecture on Thursday, 9th November!
-%    You are free to attend the [DATE-IT 2017 company contact fair https://www.date-it.se/].
-%    Lab session will take place!
-%
+% %  : //2017-11-07//
+% %    No lecture on Thursday, 9th November!
+% %    You are free to attend the [DATE-IT 2017 company contact fair https://www.date-it.se/].
+% %    Lab session will take place!
+% %
 
- : //2018-11-07//
-   Ad: [Apply for undergraduate teaching assistent LP3/4! https://www.gu.se/english/about_the_university/job-opportunities/vacancies-details/?id=3345]
-   Deadline is 2018-11-30.
+%  : //2019-11-07//
+%    Ad: [Apply for undergraduate teaching assistent LP3/4! https://www.gu.se/english/about_the_university/job-opportunities/vacancies-details/?id=3345]
+%    Deadline is 2019-11-30.
 
- : //2018-11-07//
-   Clarified lab submission and grading.
+%  : //2019-11-07//
+%    Clarified lab submission and grading.
 
- : //2018-11-06//
-   Result of [live coding live/2018/lec1-happy-live-2018.zip] in lecture (not the best solution!).  Contains a documented ``Makefile``, explaining the basic rule format of make files and their execution.
+%  : //2019-11-06//
+%    Result of [live coding live/2019/lec1-happy-live-2019.zip] in lecture (not the best solution!).  Contains a documented ``Makefile``, explaining the basic rule format of make files and their execution.
 
- : //2018-11-05//
-   First version of this page - mostly a copy of the 2017 material.  Updates forthcoming soon.
+ : //2019-10-22//
+   First version of this page - mostly a copy of the 2018 material.  Updates forthcoming soon.
 
 
 =Tentative Schedule=
@@ -120,46 +121,47 @@ Slides follow closely the plt book.
 
 
 || Date         | Time           | Title                             | Material                      ||
-| Tue 06/11     | 13-15          | PL Design, Compilation Phases, calculator | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1, [live coding live/2018/lec1-happy-live-2018.zip]
-| Thu 08/11     | 13-15          | Grammars / BNFC / Hands-on with Lab 1    | [slides plt-book/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
+| Tue 05/11     | 13-15          | PL Design, Compilation Phases, calculator | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
+%, [live coding live/2018/lec1-happy-live-2018.zip]
+| Thu 07/11     | 13-15          | Grammars / BNFC / Hands-on with Lab 1    | [slides plt-book/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
 % [code live-2-bnfc.zip]
-| Tue 13/11     | 13-15          | Formal languages and parsing                  |  |
+| Tue 12/11     | 13-15          | Formal languages and parsing                  |  |
 %[LL parser code LL-parsing.zip]
-%| Thu 15/11     | 10-16       | [DATE-IT 2017 fair https://www.date-it.se/] | No class! |
-| Thu 15/11     | 13-15          | Theory of lexing     | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
-| //Mon 19/11// | //23//         | //Lab 1 deadline//                | [lab1 PM laborations/lab1/lab1.html] |
-%| Tue 20/11     | 13-15          | Theory of lexing, LR parsing  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
-| Tue 20/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
-%| Thu 22/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
-| Thu 22/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
-%| Tue 27/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
-| Tue 27/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/lab2.html]
-| Tue 27/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
-%| Thu 29/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/lab2.html]
-%| Thu 29/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
-| Thu 29/11     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
-| //Mon 03/12// | //23//         | //Lab 2 deadline//                |  |
-%| Tue 04/12     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
-| Tue 04/12    | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/lab3.html]
-| Tue 04/12     | 14-15          | Hands-on with Lab 3 (Java)        |  |
-%| Thu 06/12     | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/lab3.html]
-%| Thu 06/12     | 14-15          | Hands-on with Lab 3 (Java)        |  |
-| Thu 06/12     | 13-15          | [Domain-specific languages http://www.cse.chalmers.se/~bergert/slides/guest_lecture_DSLs.pdf]  | Guest lecture by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
-%| Thu 06/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
-| Tue 11/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
-% %| Tue 11/12     | 13-15          | The language design space         | [slides plt-book/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
-% | Tue 11/12     | 13-15          | Type inference and polymorphism   | plt 7.7-9
-| Thu 13/12     | 13-15          | Hands-on with Lab 4               | [lab4 PM laborations/lab4/lab4.html]
-| //Mon 17/12// | //23//         | //Lab 3 deadline//                |  |
-%| Tue 18/12     | 13-15          | Type inference. A taste of dependent types | Agda demo [Verified compilation ./JVM.agda] |
-| Tue 18/12     | 13-15          | Dependent types (Agda)            | Live coding [start live/2018/lec13-live-start.agda] and [finish live/2018/lec13-live-finish.agda] |
+%| Thu 14/11     | 10-16       | [DATE-IT 2017 fair https://www.date-it.se/] | No class! |
+| Thu 14/11     | 13-15          | Theory of lexing     | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
+| //Mon 18/11// | //23//         | //Lab 1 deadline//                | [lab1 PM laborations/lab1/lab1.html] |
+%| Tue 19/11     | 13-15          | Theory of lexing, LR parsing  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
+| Tue 19/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
+%| Thu 21/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
+| Thu 21/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
+%| Tue 26/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
+| Tue 26/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/lab2.html]
+| Tue 26/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
+%| Thu 28/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/lab2.html]
+%| Thu 28/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
+| Thu 28/11     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
+| //Mon 02/12// | //23//         | //Lab 2 deadline//                |  |
+%| Tue 03/12     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
+| Tue 03/12    | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/lab3.html]
+| Tue 03/12     | 14-15          | Hands-on with Lab 3 (Java)        |  |
+%| Thu 05/12     | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/lab3.html]
+%| Thu 05/12     | 14-15          | Hands-on with Lab 3 (Java)        |  |
+%| Thu 05/12     | 13-15          | [Domain-specific languages http://www.cse.chalmers.se/~bergert/slides/guest_lecture_DSLs.pdf]  | Guest lecture by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
+%| Thu 05/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
+| Tue 10/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
+% %| Tue 10/12     | 13-15          | The language design space         | [slides plt-book/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
+% | Tue 10/12     | 13-15          | Type inference and polymorphism   | plt 7.7-9
+| Thu 12/12     | 13-15          | Hands-on with Lab 4               | [lab4 PM laborations/lab4/lab4.html]
+| //Mon 16/12// | //23//         | //Lab 3 deadline//                |  |
+%| Tue 17/12     | 13-15          | Type inference. A taste of dependent types | Agda demo [Verified compilation ./JVM.agda] |
+| Tue 17/12     | 13-15          | Dependent types (Agda)            | % Live coding [start live/2018/lec13-live-start.agda] and [finish live/2018/lec13-live-finish.agda] |
 % Agda demo [start ./BidirectionalTypeChecking-stub.agda] [finish ./BidirectionalTypeChecking.agda] |
-| Thu 20/12     | 13-15          | Preparing for the exam            | [Training Exam exams/exam-plt-2017-3.pdf] |
-|| 2018 ||||
-| //Thu 10/01// | //23//         | //Lab 4 deadline//                |  |
-| //Mon 14/01// | //8.30-12.30// | //Exam (J)//             | [Exam exams/exam-plt-2019-1.pdf] |
-| //Thu 24/01// | //23//         | //Final lab deadline//            | //all lab returns//
-| //Fri 01/02// | //10-11// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
+| Thu 19/12     | 13-15          | Preparing for the exam            | [Training Exam exams/exam-plt-2017-3.pdf] |
+|| 2019 ||||
+| //Thu 09/01// | //23//         | //Lab 4 deadline//                |  |
+| //Mon 13/01// | //8.30-12.30// | //Exam (J)//             | [Exam exams/exam-plt-2019-1.pdf] |
+| //Thu 23/01// | //23//         | //Final lab deadline//            | //all lab returns//
+%| //Fri 31/01// | //10-11// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
 %| //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
 %| //Sun 25/03// |                | //Late final lab deadline//       |  |
 | //Thu 25/04// | //8.30-12.30// | //Exam (J)//                      |  |
@@ -209,10 +211,11 @@ passed the course should be able to
 % Mauricio Chimento,
 % Inari Listenmaa,
 % [Daniel Hausknecht https://danielhausknecht.eu],
+% [Daniel Schoepe https://schoepe.org/~daniel/],
+% [Iulia Bastys https://www.chalmers.se/en/staff/Pages/bastys.aspx],
+[Mohammad Ahmadpanah https://www.chalmers.se/en/Staff/Pages/mohammad-ahmadpanah.aspx],
 [Andreas Lööw http://www.cse.chalmers.se/~loow/],
-[Daniel Schoepe https://schoepe.org/~daniel/],
 [Fabian Ruch https://www.chalmers.se/en/staff/Pages/fabian-ruch.aspx],
-[Iulia Bastys https://www.chalmers.se/en/staff/Pages/bastys.aspx],
 assistants.
 
 
@@ -220,12 +223,12 @@ assistants.
 
 If you have any general questions regarding the course, the labs or the exercises,
 please ask them in our
-[Google group http://groups.google.com/group/plt-2018].
+[Google group http://groups.google.com/group/plt-2019].
 This will reach all teachers and fellow students.
 If you are not yet member of the group, you have to
 - get a google account (if you don't have it yet)
-- go to http://groups.google.com/group/plt-2018
-- request an invitation to the plt-2018 group (make sure to use "apply for membership" rather than "contact the owner")
+- go to http://groups.google.com/group/plt-2019
+- request an invitation to the plt-2019 group (make sure to use "apply for membership" rather than "contact the owner")
 
 
 **You will have to give your real name and your person number (or date of birth) when you register, otherwise your membership is not approved.**
@@ -237,13 +240,13 @@ Please also indicate whether you are GU or Chalmers student.
 Lab supervision take place in
 [ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093].
 || Day | Time        | Supervisors (tentative) |
- | Tue | 15:15-17:00 | AL FR |
- | Thu | 15:15-17:00 | DS IB |
- | Fri | 13:15-15:00 | AL FR |
+ | Tue | 15:15-17:00 |  |
+ | Thu | 15:15-17:00 |  |
+ | Fri | 13:15-15:00 |  |
 
 
 The lab rooms and supervision
-are available from Thu 08 November till Fri 21 December 2018.
+are available from Thu 07 November till Fri 20 December 2019.
 
 **Attendance in these classes is optional**.
 Normally, each student should attend **at most one** supervised laboration time each week.
@@ -259,19 +262,19 @@ There will be four laborations, written in pairs.
 please contact the course responsible.)
 You have to pass the labs to pass the course.
 However, the course grade is determined solely by the exam.
-% - Lab 1 - parser  (deadline 19/11)
-- [Lab 1 - parser laborations/lab1/lab1.html] (deadline 19/11)
-% - Lab 2 - type checker and interpreter (deadline 03/12)
-- [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 03/12)
-% - Lab 3 - code generator (deadline 17/12)
-- [Lab 3 - code generator laborations/lab3/lab3.html] (deadline 17/12)
-% - Lab 4 - functional language interpreter  (deadline 10/01/2019)
-- [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 10/01/2019)
+% - Lab 1 - parser  (deadline 18/11)
+- [Lab 1 - parser laborations/lab1/lab1.html] (deadline 18/11)
+% - Lab 2 - type checker and interpreter (deadline 02/12)
+- [Lab 2 - type checker and interpreter laborations/lab2/lab2.html] (deadline 02/12)
+% - Lab 3 - code generator (deadline 16/12)
+- [Lab 3 - code generator laborations/lab3/lab3.html] (deadline 16/12)
+% - Lab 4 - functional language interpreter  (deadline 09/01/2019)
+- [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 09/01/2019)
 
 
 The labs are quite substantial, so please set aside at least 30 full working hours (4 full working days) before the deadline.
 
-Reporting is done via [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
+Reporting is done via [Fire https://plt-lp2-19.fire.cse.chalmers.se/].
 Before submitting your solution, run your program through the provided **test suite**.
 Also, make sure that your submission contains all necessary files
 and the **build succeeds**.  For instance, if you are submitting an archive,
@@ -296,7 +299,7 @@ In particular, make sure you understand all parts of the solution
 
 
 % If you did not pass the labs by the end of the course you will have another opportunity in connection with the re-exam in April.
-% The deadline will be Thursday, 22 March 2018.
+% The deadline will be Thursday, 22 March 2019.
 % If you intend to re-submit labs then, please contact the course responsible via email on 15 March at the latest.
 % If you need help you should also contact the course responsible, not the teaching assistants.
 % Note however that you can only expect limited support.
@@ -309,9 +312,9 @@ The written exam determines the course grade, the usual grading scales apply:
 Chalmers: 5, 4, 3, U; Gothenburg University: VG, G, U.
 
 Exam dates:
- 14 Jan 2019 fm J,
- 25 Apr 2019 fm J,
- 29 Aug 2019 em J.
+ 13 Jan 2020 fm J,
+ 07 Apr 2020 fm J,
+ 27 Aug 2020 em J.
 
 The exam tests the understanding of the course contents from a more high-level view,
 e.g., the underlying theoretical concepts.
@@ -361,7 +364,7 @@ BNF Converter 2.8 http://bnfc.digitalgrammars.com/ |
 [Hackage https://hackage.haskell.org/package/BNFC] |
 [github https://github.com/BNFC/bnfc]
 
-You can compile the latest version of BNFC (2.8.2) from its Haskell sources via
+You can compile the latest version of BNFC (2.8.3) from its Haskell sources via
 ```
   cabal update
   cabal install BNFC
@@ -372,7 +375,7 @@ If using the Java backend, you will need the **CUP** and **JLex** libraries.
 CUP has seen incompatible changes in its interface; thus, the version you need
 may depend on your BNFC version.
 
-===Instructions for BNFC 2.8.2 (uses CUP v0.11b)===
+===Instructions for BNFC 2.8.3 (uses CUP v0.11b)===
 
 Download the JAVA archives for
 [CUP v11b doc/java-cup-11b.jar],
@@ -411,9 +414,3 @@ Then the class path needs to be set as follows (bash):
 for DAT151 Programming language technology.
 
 || Program | @student.chalmers.se | Name ||
-| MPALG  | carjohne | Carl Johnell |
-| MPCSN  | chibin   | Chibin Kou |
-| MPALG  | odind    | Daniel Odin |
-| UTBYTE | afonsor  | Afonso Raposo Pereira |
-% MPCOM   yibo@student.chalmers.se  Yibo Wu
-(MORE TO FOLLOW)
