@@ -1,8 +1,3 @@
-int main() {
-  printInt(fac(5));
-  return 0 ;
-}
-
 int fac (int a) {
   int r;
   int n;
@@ -14,4 +9,9 @@ int fac (int a) {
     n = n - 1;
   }
   return r;
+}
+
+int main() {
+  printInt(fac(5));
+  return 0 ;
 }

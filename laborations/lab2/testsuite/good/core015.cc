@@ -1,10 +1,5 @@
 /* parity of positive integers by recursion */
 
-int main () {
-  printInt(ev(17)) ;
-  return 0 ;
-}
-
 int ev (int y) {
   int e ;
   if (y > 0)
@@ -15,4 +10,9 @@ int ev (int y) {
     else
       e = 1 ;
   return e ;
+}
+
+int main () {
+  printInt(ev(17)) ;
+  return 0 ;
 }

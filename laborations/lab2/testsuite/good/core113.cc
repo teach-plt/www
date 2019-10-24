@@ -1,9 +1,3 @@
-int main() {
-  printInt(f(45));
-  printInt(f(450));
-  return 0;
-}
-
 int f(int x) {
   int y ;
   if (x < 100) {
@@ -13,4 +7,10 @@ int f(int x) {
     y = x;
   }
   return y ;
+}
+
+int main() {
+  printInt(f(45));
+  printInt(f(450));
+  return 0;
 }

@@ -1,3 +1,5 @@
+#include "../prelude.cc"
+
 int main() {
   double d = 2.0;
   printDouble(d);
