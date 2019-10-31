@@ -7,7 +7,7 @@
 LABSRC    = TypeException.java TypeChecker.java Interpreter.java lab2.java
 
 # No need to edit these:
-PARSERSRC = $(wildcard CPP/Absyn/*.java CPP/*.java)
+PARSERSRC = $(wildcard CMM/Absyn/*.java CMM/*.java)
 PARSEROBJ = $(PARSERSRC:.java=.class)
 LABOBJ    = $(LABSRC:.java=.class)
 # Inner classes:
@@ -17,9 +17,9 @@ LABOBJ    = $(LABSRC:.java=.class)
 ###########################################################################
 
 # Name of generated .cup file for bnfc 2.8.1
-CUPFILE = CPP/_cup.cup
+CUPFILE = CMM/_cup.cup
 # Older BNFC versions may need:
-# CUPFILE = CPP/CPP.cup
+# CUPFILE = CMM/CMM.cup
 
 JAVAC       = javac
 JAVAC_FLAGS = -sourcepath .
@@ -50,38 +50,38 @@ lab2 : lab2.hs
 # Rules for compiling lab2 classes (modify or add as needed)
 ###########################################################################
 
-TypeChecker.class : TypeChecker.java TypeException.class CPP/Test.class
+TypeChecker.class : TypeChecker.java TypeException.class CMM/Test.class
 	$(javac) $<
 
-Interpreter.class : Interpreter.java CPP/Test.class
+Interpreter.class : Interpreter.java CMM/Test.class
 	$(javac) $<
 
-lab2.class : lab2.java TypeChecker.class Interpreter.class CPP/Test.class
+lab2.class : lab2.java TypeChecker.class Interpreter.class CMM/Test.class
 	$(javac) $<
 
 
 # Rules for creating the parser
 ###########################################################################
 
-# Create parser source via bnfc (dependency CPP.cf needs to be first).
-CPP/Yylex $(CUPFILE) CPP/Test.java : CPP.cf
+# Create parser source via bnfc (dependency CMM.cf needs to be first).
+CMM/Yylex $(CUPFILE) CMM/Test.java : CMM.cf
 	bnfc --java $<
 
 # Create parser and move it to the correct location.
-CPP/parser.java CPP/sym.java : $(CUPFILE)
-	$(java) java_cup.Main -package CPP $<
-	mv parser.java sym.java CPP/
+CMM/parser.java CMM/sym.java : $(CUPFILE)
+	$(java) java_cup.Main -package CMM $<
+	mv parser.java sym.java CMM/
 
 # Create lexer.
-CPP/Yylex.java : CPP/Yylex
+CMM/Yylex.java : CMM/Yylex
 	$(java) JLex.Main $<
 
 # Compile lexer.
-CPP/Yylex.class : CPP/Yylex.java CPP/sym.class
+CMM/Yylex.class : CMM/Yylex.java CMM/sym.class
 	$(javac) $<
 
 # Create parser test.
-CPP/Test.class : CPP/Test.java CPP/parser.class CPP/sym.class CPP/Yylex.class
+CMM/Test.class : CMM/Test.java CMM/parser.class CMM/sym.class CMM/Yylex.class
 	$(javac) $<
 
 
@@ -98,7 +98,7 @@ CPP/Test.class : CPP/Test.java CPP/parser.class CPP/sym.class CPP/Yylex.class
 sdist : lab2.tar.gz
 
 tmpdir := $(shell mktemp -d)
-lab2.tar.gz : CPP.cf Makefile lab2.hs lab2.sh lab2.bat $(LABSRC)
+lab2.tar.gz : CMM.cf Makefile lab2.hs lab2.sh lab2.bat $(LABSRC)
 	mkdir $(tmpdir)/lab2
 	cp $^ $(tmpdir)/lab2/
 	tar -C $(tmpdir) -czhf $@ lab2
@@ -107,8 +107,8 @@ lab2.tar.gz : CPP.cf Makefile lab2.hs lab2.sh lab2.bat $(LABSRC)
 ###########################################################################
 
 clean :
-	-rm -f CPP/Absyn/*.class CPP/*.class
-	-rm -f CPP.dvi CPP.aux CPP.log CPP.ps
+	-rm -f CMM/Absyn/*.class CMM/*.class
+	-rm -f CMM.dvi CMM.aux CMM.log CMM.ps
 	-rm -f $(LABOBJ)
 	-rm -f lab2.hi lab2.o lab2.exe lab2
 # Uncomment to also remove all .class files in current directory
@@ -117,11 +117,11 @@ clean :
 
 vclean : clean
 	-rm -f $(PARSERSRC)
-	-rm -f CPP/Absyn/*.bak CPP/*.bak
-	-rmdir CPP/Absyn/
-	-rm -f CPP.tex
-	-rm -f CPP/Yylex $(CUPFILE)
-	-rmdir -p CPP/
+	-rm -f CMM/Absyn/*.bak CMM/*.bak
+	-rmdir CMM/Absyn/
+	-rm -f CMM.tex
+	-rm -f CMM/Yylex $(CUPFILE)
+	-rmdir -p CMM/
 
 distclean : vclean
 	-rm -f lab2.tar.gz

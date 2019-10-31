@@ -4,7 +4,7 @@
 ###########################################################################
 
 # Files of solution.  Add more files as needed.  'lab2.hs'  has to be first!
-files=lab2.hs CPP.cf Makefile TypeChecker.hs Interpreter.hs
+files=lab2.hs CMM.cf Makefile TypeChecker.hs Interpreter.hs
 
 ###########################################################################
 
@@ -12,14 +12,14 @@ files=lab2.hs CPP.cf Makefile TypeChecker.hs Interpreter.hs
 .PHONY : sdist clean distclean
 
 # 'lab2' is default goal and needs to remain first goal in this file!
-# The extra dependency CPP/Test ensures that the parser is built from CPP.cf
+# The extra dependency CMM/Test ensures that the parser is built from CMM.cf
 
-lab2 : $(files) CPP/Test
+lab2 : $(files) CMM/Test
 	ghc --make lab2.hs -o lab2
 
 # Rules to build the parser:
 
-CPP/Test.hs CPP/Lex.x CPP/Par.y : CPP.cf
+CMM/Test.hs CMM/Lex.x CMM/Par.y : CMM.cf
 	bnfc --haskell -d $<
 
 %.hs : %.y
@@ -29,7 +29,7 @@ CPP/Test.hs CPP/Lex.x CPP/Par.y : CPP.cf
 %.hs : %.x
 	alex --ghc $<
 
-CPP/Test : CPP/Test.hs CPP/Par.hs CPP/Lex.hs
+CMM/Test : CMM/Test.hs CMM/Par.hs CMM/Lex.hs
 	ghc --make $< -o $@
 
 # Rules for shipping the solution:
@@ -45,11 +45,11 @@ lab2.tar.gz : $(files)
 # Rules for cleaning generated files:
 
 clean :
-	-rm -f CPP/*.log CPP/*.aux CPP/*.hi CPP/*.o CPP/*.dvi *.hi *.o
+	-rm -f CMM/*.log CMM/*.aux CMM/*.hi CMM/*.o CMM/*.dvi *.hi *.o
 
 distclean : clean
-	-rm -f CPP/Doc.* CPP/Lex.* CPP/Par.* CPP/Layout.* CPP/Skel.* CPP/Print.* CPP/Test.* CPP/Abs.* CPP/Test CPP/ErrM.* CPP/SharedString.* CPP/ComposOp.* CPP/CPP.dtd CPP/XML.* CPP/*.bak
-	-rmdir -p CPP/
+	-rm -f CMM/Doc.* CMM/Lex.* CMM/Par.* CMM/Layout.* CMM/Skel.* CMM/Print.* CMM/Test.* CMM/Abs.* CMM/Test CMM/ErrM.* CMM/SharedString.* CMM/ComposOp.* CMM/CMM.dtd CMM/XML.* CMM/*.bak
+	-rmdir -p CMM/
 	-rm -f lab2.tar.gz lab2
 
 # EOF

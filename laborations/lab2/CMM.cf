@@ -1,0 +1,12 @@
+PDefs.   Program ::= [Def] ;
+
+DFun.    Def     ::= "int" "main" "(" ")" "{" "}" ;  -- TODO: FIX ME!
+terminator Def "" ;
+
+-- ... TODO grammar ...
+
+-- Comment syntax
+
+comment "/*" "*/" ;
+comment "//" ;
+comment "#" ;

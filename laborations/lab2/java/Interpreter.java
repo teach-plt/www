@@ -1,4 +1,4 @@
-import CPP.Absyn.*;
+import CMM.Absyn.*;
 
 public class Interpreter {
 

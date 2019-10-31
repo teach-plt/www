@@ -1,9 +1,9 @@
 import System.Environment (getArgs)
 import System.Exit (exitFailure)
 
-import CPP.Lex
-import CPP.Par
-import CPP.ErrM
+import CMM.Lex
+import CMM.Par
+import CMM.ErrM
 
 import TypeChecker
 import Interpreter

@@ -30,19 +30,27 @@ CVS
 /2012-index.txt
 /2014-index.txt
 /exams.tgz
+
 /laborations/old-lab3/
 /laborations/old-lab4/
 /laborations/old-mini/
 
 /laborations/lab1/testscript/lab1-test-dir/
-/laborations/lab1/testsuite/lab1-test-dir/
 /laborations/lab1/testscript/progs-test-lab1
-/laborations/lab1/testsuite/progs-test-lab1
 
+/laborations/lab1/testsuite/lab1-test-dir/
+/laborations/lab1/testsuite/progs-test-lab1
+/laborations/lab1/testsuite/good/fractal.pgm
+/laborations/lab1/testsuite/good/fractal.ppm
+/laborations/lab1/testsuite/good/mandelbrot.exe
+
+/laborations/lab2/java/CMM/
 /laborations/lab2/java/CPP/
 /laborations/lab2/java/lab2
+/laborations/lab2/haskell/CMM/
 /laborations/lab2/haskell/CPP/
 /laborations/lab2/haskell/lab2
+
 /laborations/lab2/testsuite/good/*.j
 /laborations/lab2/testsuite/good/*.cc.exe
 /laborations/lab2/testsuite/good/*.cc.tmp.cpp
@@ -54,16 +62,15 @@ CVS
 /laborations/lab3/java/lab3
 /laborations/lab3/haskell/CPP/
 /laborations/lab3/haskell/lab3
+
 /laborations/lab3/testsuite/*.j
 /laborations/lab3/testsuite/dir-for-path-test/one-more-dir/simple.j
 /laborations/lab3/testsuite/progs-test-lab3-jvm-verify
 
-/laborations/lab4/testsuite.tgz
-/laborations/lab4/testsuite/progs-test-lab4
 /laborations/lab4/haskell/Fun/
 /laborations/lab4/haskell/lab4
 /laborations/lab4/java/Fun/
 /laborations/lab4/java/lab4
-/laborations/lab1/testsuite/good/fractal.pgm
-/laborations/lab1/testsuite/good/fractal.ppm
-/laborations/lab1/testsuite/good/mandelbrot.exe
+
+/laborations/lab4/testsuite.tgz
+/laborations/lab4/testsuite/progs-test-lab4
