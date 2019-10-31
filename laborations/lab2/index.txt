@@ -780,7 +780,7 @@ Thus it is assumed that the type checker does not detect uninitialized variables
 
 =Success criteria=
 
-Your interpreter must pass the [test suite ./testsuite/] and meet the
+Your interpreter must pass the [test suite ./testsuite/index.html] and meet the
 specification in this document in all respects. The test suite contains both
 good and bad programs. The good programs must be executed correctly, whereas the
 bad ones must fail in appropriate ways in either the type checker or the

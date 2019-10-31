@@ -1,5 +1,5 @@
 Lab 2 Test Suite
-Programming Language Technology, 2018
+Programming Language Technology, 2019
 
 %!target:html
 %!encoding: utf-8
@@ -10,7 +10,7 @@ Programming Language Technology, 2018
 
 = Introduction =
 
-Before you submit [lab 2 ../lab2.html], your solution must pass the
+Before you submit [lab 2 ../index.html], your solution must pass the
 testsuite. This document describes how to obtain and use
 this testsuite.
 
@@ -22,7 +22,7 @@ You will only need to do this part once.
 
 + Unpack the downloaded file:
 ```
-$ tar -zxf lab2-testsuite.tar.gz
+$ tar -xzf lab2-testsuite.tar.gz
 ```
 
 + Enter the ``lab2-testsuite`` directory:
