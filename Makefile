@@ -25,6 +25,7 @@ www : index.html
 
 check : all
 	linkchecker --check-extern index.html
+# pip install git+https://github.com/linkchecker/linkchecker.git@v9.4.0
 
 %.html : %.txt $(deps)
 	txt2tags --style=style.css -t html $<
