@@ -20,7 +20,7 @@ lab3-stub-java.tar.gz : java/lab3.tar.gz
 lab3-stub-haskell.tar.gz : haskell/lab3.tar.gz
 	cp $< $@
 
-www : lab3.html
+www : index.html
 
 %.html : %.txt $(deps)
 	txt2tags --style=../../style.css -t html $<
@@ -29,7 +29,7 @@ www : lab3.html
 clean : clean_index clean_stubs clean_testsuite
 
 clean_index :
-	rm -f lab3.html
+	rm -f index.html
 
 clean_stubs :
 	rm -f lab3-stub-haskell.tar.gz lab3-stub-java.tar.gz

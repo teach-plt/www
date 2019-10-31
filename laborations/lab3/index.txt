@@ -1,4 +1,4 @@
-Lab 3: Code Generator for C/C++
+Lab 3: Code Generator for C--
 Programming Language Technology, 2019
 
 %!target:html
@@ -14,8 +14,8 @@ Back to main page of
 
 =Summary=
 
-The objective of this assignment is to write a code generator from a fragment
-of the C++ programming language to JVM, Java Virtual Machine.
+The objective of this assignment is to write a code generator from a fragment C--
+of the C/C++ programming language to JVM, Java Virtual Machine.
 The code generator should produce Java class files, which
 can be run in the Java bytecode interpreter so that they
 correctly perform all their input and output actions.
@@ -352,14 +352,14 @@ The compiler is submitted as source files that can be compiled by typing ``make`
 
 //If you have any problems getting the test program to run, or if you think that there is an error in the test suite, contact the teachers of the course via the mailing list.//
 
-We also provide a [test suite ./testsuite/] for Lab 3 (with the same test cases as for [Lab 2 ../lab2/index.html]).
+We also provide a [test suite ./testsuite/index.html] for Lab 3 (with the same test cases as for [Lab 2 ../lab2/index.html]).
 By default, no tests containing doubles will be run; passing all these tests is the **minimum required** for passing this lab.
 
 If you are ambitious, run the test suite with the ``--doubles`` flag to also include the doubles tests.
 
 **Run your compiler and the generated code with the test suite before submitting the assignment.**
 
-Download the entire [test suite folder ./testsuite/] or the [tarball ./testsuite/lab3-testsuite.tar.gz] and compile it using ``make``.
+Download the entire [test suite folder ./testsuite/index.html] or the [tarball ./testsuite/lab3-testsuite.tar.gz] and compile it using ``make``.
 The test script can then be run as follows:
 ```
   ./progs-test-lab3 ../path/to/solution/
@@ -368,7 +368,7 @@ The test script can then be run as follows:
 ==Jasmin tips==[jasmin-tips]
 
 Jasmin is available on [Sourceforge http://jasmin.sourceforge.net/].
-Note that version 2.4 is included in the [test suite ./testsuite/] and that there are also versions on e.g. Ubuntu (``apt install jasmin-sable``) and Mac (``brew install jasmin``).
+Note that version 2.4 is included in the [test suite ./testsuite/index.html] and that there are also versions on e.g. Ubuntu (``apt install jasmin-sable``) and Mac (``brew install jasmin``).
 
 % ; however, the testsuite you have to pass expects you to invoke Jasmin via `java -jar jasmin.jar`.
 
@@ -402,7 +402,7 @@ callCommand <call jasmin here>
 
 =Success criteria=
 
-Your program must be compatible with the [test suite ./testsuite/] and meet the
+Your program must be compatible with the [test suite ./testsuite/index.html] and meet the
 specification in this document in all respects.
 
 The code you generate must pass the Java bytecode verification.
