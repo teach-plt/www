@@ -19,7 +19,7 @@ lab2-stub-java.tar.gz : java/lab2.tar.gz
 lab2-stub-haskell.tar.gz : haskell/lab2.tar.gz
 	cp $< $@
 
-www : lab2.html
+www : index.html
 
 %.html : %.txt $(deps)
 	txt2tags --style=../../style.css -t html $<
@@ -28,7 +28,7 @@ www : lab2.html
 clean : clean_index clean_testsuite
 
 clean_index :
-	rm -f lab2.html
+	rm -f index.html
 
 clean_testsuite :
 	make clean -C testsuite/
