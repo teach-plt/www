@@ -68,10 +68,10 @@ Google group: http://groups.google.com/group/plt-2019
 %    on verified compilation.
 
 %  : //2019-12-16//
-%    [Lab 4 stubs laborations/lab4/lab4.html#section3] for Haskell and Java are now available.
+%    [Lab 4 stubs laborations/lab4/index.html#section3] for Haskell and Java are now available.
 
 %  : //2019-12-09//
-%    [Lab 4 laborations/lab4/lab4.html] is online.
+%    [Lab 4 laborations/lab4/index.html] is online.
 
 %  : //2019-12-05//
 %    **Guest lecture** by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
@@ -151,7 +151,7 @@ Slides follow closely the plt book.
 | Tue 10/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
 % %| Tue 10/12     | 13-15          | The language design space         | [slides plt-book/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
 % | Tue 10/12     | 13-15          | Type inference and polymorphism   | plt 7.7-9
-| Thu 12/12     | 13-15          | Hands-on with Lab 4               | [lab4 PM laborations/lab4/lab4.html]
+| Thu 12/12     | 13-15          | Hands-on with Lab 4               | [lab4 PM laborations/lab4/index.html]
 | //Mon 16/12// | //23//         | //Lab 3 deadline//                |  |
 %| Tue 17/12     | 13-15          | Type inference. A taste of dependent types | Agda demo [Verified compilation ./JVM.agda] |
 | Tue 17/12     | 13-15          | Dependent types (Agda)            | % Live coding [start live/2018/lec13-live-start.agda] and [finish live/2018/lec13-live-finish.agda] |
@@ -269,7 +269,7 @@ However, the course grade is determined solely by the exam.
 % - Lab 3 - code generator (deadline 16/12)
 - [Lab 3 - code generator laborations/lab3/index.html] (deadline 16/12)
 % - Lab 4 - functional language interpreter  (deadline 09/01/2019)
-- [Lab 4 - functional language interpreter laborations/lab4/lab4.html] (deadline 09/01/2019)
+- [Lab 4 - functional language interpreter laborations/lab4/index.html] (deadline 09/01/2019)
 
 
 The labs are quite substantial, so please set aside at least 30 full working hours (4 full working days) before the deadline.

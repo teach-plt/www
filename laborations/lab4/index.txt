@@ -1,5 +1,5 @@
 Lab 4: Interpreter for a functional language
-Programming Language Technology, 2018
+Programming Language Technology, 2019
 
 %!target:html
 %!encoding: utf-8
@@ -252,13 +252,13 @@ be compilable via calling
 
 //If you have any problems getting the test program to run, or if you think that there is an error in the test suite, contact the teachers of the course via the mailing list.//
 
-Run the programs in the [test suite ./testsuite/] before submitting the lab.
+Run the programs in the [test suite ./testsuite/index.html] before submitting the lab.
 Include a log on the test run, showing the call of ``lab4`` for every program
 in the testsuite.
 
 =Success criteria=
 
-The interpreter must give acceptable results for the [test suite ./testsuite/]
+The interpreter must give acceptable results for the [test suite ./testsuite/index.html]
 and meet the specification in this document in all respects.
 
 All "good" programs must work with at least one of the evaluation strategies;
@@ -302,4 +302,4 @@ $ make
 $ ./lab4
 ```
 - Do not submit any generated files.
-- Submit your lab using [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
+- Submit your lab using [Fire https://plt-lp2-19.fire.cse.chalmers.se/].

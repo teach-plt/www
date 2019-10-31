@@ -1,5 +1,5 @@
 Lab 4 Test Suite
-Programming Language Technology, 2018
+Programming Language Technology, 2019
 
 %!target:html
 %!encoding: utf-8
@@ -10,7 +10,7 @@ Programming Language Technology, 2018
 
 = Introduction =
 
-Before you submit [lab 4 ../lab4.html], your solution must pass the
+Before you submit [lab 4 ../index.html], your solution must pass the
 testsuite. This document describes how to obtain and use
 this testsuite.
 

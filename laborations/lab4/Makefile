@@ -20,7 +20,7 @@ lab4-stub-java.tar.gz : java/lab4.tar.gz
 lab4-stub-haskell.tar.gz : haskell/lab4.tar.gz
 	cp $< $@
 
-www : lab4.html
+www : index.html
 
 %.html : %.txt $(deps)
 	txt2tags --style=../../style.css -t html $<
@@ -29,7 +29,7 @@ www : lab4.html
 clean : clean_index clean_testsuite
 
 clean_index :
-	rm -f lab4.html
+	rm -f index.html
 
 clean_testsuite :
 	make clean -C testsuite/
