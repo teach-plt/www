@@ -26,12 +26,17 @@ www : lab3.html
 	txt2tags --style=../../style.css -t html $<
 
 
-clean : clean_index clean_testsuite
+clean : clean_index clean_stubs clean_testsuite
 
 clean_index :
 	rm -f lab3.html
 
+clean_stubs :
+	rm -f lab3-stub-haskell.tar.gz lab3-stub-java.tar.gz
+	make -C haskell clean
+	make -C java clean
+
 clean_testsuite :
-	make clean -C testsuite/
+	make -C testsuite clean
 
 # EOF

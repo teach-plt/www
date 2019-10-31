@@ -1,5 +1,5 @@
 Lab 3: Code Generator for C/C++
-Programming Language Technology, 2018
+Programming Language Technology, 2019
 
 %!target:html
 %!encoding: utf-8
@@ -29,7 +29,7 @@ further by [Jasmin #jasmin-tips] to create class files.
 The recommended implementation is via a BNF
 grammar processed by the BNF Converter (BNFC) tool. The syntax
 tree created by the parser is first type checked by using the
-type checker created in [Lab 2 ../lab2/lab2.html].
+type checker created in [Lab 2 ../lab2/index.html].
 The code generator should then make another pass of the type-checked code.
 
 The approximate size of the grammar is 50 rules, and the code generator
@@ -39,11 +39,11 @@ All BNFC supported languages can be used, but guidance is guaranteed
 only for Haskell and Java.
 
 Before the work can be submitted, the program has to pass
-the [test suite ./testsuite/].
+the [test suite ./testsuite/index.html].
 
 ==Restriction of the task==
 
-To pass the assignment, it is sufficient to treat the grammar of Lab 2
+To pass the assignment, it is sufficient to treat the grammar of [Lab 2 ../lab2/index.html]
 **excluding doubles**.  Thus, operations involving type double need not
 be covered by the code generator.
 
@@ -69,8 +69,8 @@ The recommended procedure is two passes:
 
 
 
-You can copy your ``CPP.cf`` grammar and the
-``TypeChecker`` module from Lab 2 to the same directory.
+You can copy your ``CMM.cf`` grammar and the
+``TypeChecker`` module from [Lab 2 ../lab2/index.html] to the same directory.
 
 
 
@@ -78,11 +78,11 @@ You can copy your ``CPP.cf`` grammar and the
 
 =Language specification=
 
-The language is the same as in Lab 2, except the handling of uninitialized variables, and you can use the
-grammar file [``CPP.cf`` ../lab2/CPP.cf].
-Also its type system is the same.
+The language is the same as in [Lab 2 ../lab2/index.html], except the handling of uninitialized variables, and you can reuse the
+parser and type checker.
 
-Programs using uninitialized variables fall under undefined behaviour in this lab, meaning that any semantics for such programs are allowed.
+Programs using uninitialized variables fall under undefined behaviour
+in this lab, meaning that any semantics for such programs are allowed.
 
 There are four built-in functions:
 ```
@@ -99,7 +99,13 @@ compiling to a class file.
 
 ==Bytecode verification==
 
-When running your compiled programs, the Java bytecode you have generated will be automatically sanity-checked by a Java bytecode verifier (which is part of the JVM you are using). The verifier will e.g. check that there are no operand stack overflows or underflows and that all local variable uses and stores are valid. If your code does not pass the verifier, a ``java.lang.VerifyError`` exception will be thrown (with an often useful error message).
+When running your compiled programs, the Java bytecode you have
+generated will be automatically sanity-checked by a Java bytecode
+verifier (which is part of the JVM you are using). The verifier will
+e.g. check that there are no operand stack overflows or underflows and
+that all local variable uses and stores are valid. If your code does
+not pass the verifier, a ``java.lang.VerifyError`` exception will be
+thrown (with an often useful error message).
 
 ==Class structure==
 
@@ -115,7 +121,7 @@ For non-``void``-returning functions you are allowed to assume that returns are 
 
 ==Statements and expressions==
 
-The semantics is the same as in Lab 2 (again, except for programs using uninitialized variables). In other words,
+The semantics is the same as in [Lab 2 ../lab2/index.html] (again, except for programs using uninitialized variables). In other words,
 running the generated classes in ``java`` produces the same behaviour
 as running the source code in the ``lab2`` interpreter.
 
@@ -257,7 +263,7 @@ write the code, test, pack the archive again, and submit to fire.
 
 These packages contain the grammar, stubs for type checker and
 compiler, and suitable makefiles.
-(You probably want to adapt your type checker from lab 2,
+(You probably want to adapt your type checker from [Lab 2 ../lab2/index.html],
 rather than starting from scratch.
 But have a look at these stubs anyway, they contain code to invoke Jasmin.)
 The stubs match the requirements for the solution format as
@@ -346,7 +352,7 @@ The compiler is submitted as source files that can be compiled by typing ``make`
 
 //If you have any problems getting the test program to run, or if you think that there is an error in the test suite, contact the teachers of the course via the mailing list.//
 
-We also provide a [test suite ./testsuite/] for lab 3 (with the same test cases as for lab 2).
+We also provide a [test suite ./testsuite/] for Lab 3 (with the same test cases as for [Lab 2 ../lab2/index.html]).
 By default, no tests containing doubles will be run; passing all these tests is the **minimum required** for passing this lab.
 
 If you are ambitious, run the test suite with the ``--doubles`` flag to also include the doubles tests.
@@ -441,4 +447,4 @@ $ make
 $ ./lab3
 ```
 - Do not submit any generated files.
-- Submit your lab using [Fire https://plt-lp2-18.fire.cse.chalmers.se/].
+- Submit your lab using [Fire https://plt-lp2-19.fire.cse.chalmers.se/].

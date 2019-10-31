@@ -4,8 +4,8 @@
 import java.io.*;
 import java.util.*;
 import java_cup.runtime.*;
-import CPP.*;
-import CPP.Absyn.*;
+import CMM.*;
+import CMM.Absyn.*;
 
 public class lab3 {
   static void callJasmin(List<String> args) throws IOException, InterruptedException {
@@ -51,10 +51,10 @@ public class lab3 {
       // Parse
       l = new Yylex(new FileReader(srcFile)); // throws FileNotFoundException
       parser p = new parser(l);
-      CPP.Absyn.Program parseTree = p.pProgram();
+      CMM.Absyn.Program parseTree = p.pProgram();
 
       // Type check
-      CPP.Absyn.Program typedTree = new TypeChecker().typecheck(parseTree);
+      CMM.Absyn.Program typedTree = new TypeChecker().typecheck(parseTree);
 
       // Compile
       String jtext = new Compiler().compile(className, typedTree);

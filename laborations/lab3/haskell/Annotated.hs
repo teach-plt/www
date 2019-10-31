@@ -4,7 +4,7 @@
 
 module Annotated where
 
-import qualified CPP.Abs as A
+import qualified CMM.Abs as A
 
 -- This is a stub for typed ASTs produced by the type checker
 -- as input for the compiler.

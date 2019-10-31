@@ -1,5 +1,5 @@
 import java.util.*;
-import CPP.Absyn.*;
+import CMM.Absyn.*;
 
 public class Compiler
 {
@@ -8,7 +8,7 @@ public class Compiler
 
   // Compile C-- AST to a .j source file (returned as String).
   // name should be just the class name without file extension.
-  public String compile(String name, CPP.Absyn.Program p) {
+  public String compile(String name, CMM.Absyn.Program p) {
     // Initialize output
     output = new LinkedList();
 

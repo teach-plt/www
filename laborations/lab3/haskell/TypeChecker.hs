@@ -18,9 +18,9 @@ import Data.Map (Map)
 import qualified Data.Map as Map
 import qualified Data.Set as Set
 
-import CPP.Abs
-import CPP.Print (printTree)
-import CPP.ErrM  (Err(Ok, Bad))
+import CMM.Abs
+import CMM.Print (printTree)
+import CMM.ErrM  (Err(Ok, Bad))
 
 import qualified Annotated as A
 

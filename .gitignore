@@ -58,8 +58,10 @@ CVS
 /laborations/lab2/testsuite/bad/*.cc.tmp.cpp
 /laborations/lab2/testsuite/progs-test-lab2
 
+/laborations/lab3/java/CMM/
 /laborations/lab3/java/CPP/
 /laborations/lab3/java/lab3
+/laborations/lab3/haskell/CMM/
 /laborations/lab3/haskell/CPP/
 /laborations/lab3/haskell/lab3
 

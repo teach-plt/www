@@ -4,7 +4,7 @@
 ###########################################################################
 
 # Files of solution.  Add/remove files as needed.  'lab2.hs'  has to be first!
-files=lab3.hs CPP.cf Runtime.java Makefile Annotated.hs TypeChecker.hs Compiler.hs
+files=lab3.hs CMM.cf Runtime.java Makefile Annotated.hs TypeChecker.hs Compiler.hs
 
 ###########################################################################
 
@@ -16,22 +16,22 @@ default : lab3
 
 all : lab3 Runtime.class
 
-# The extra dependency CPP/Test ensures that the parser is built from CPP.cf
-lab3 : $(files) CPP/Test
+# The extra dependency CMM/Test ensures that the parser is built from CMM.cf
+lab3 : $(files) CMM/Test
 	ghc --make lab3.hs -o lab3
 
 # Rules to build the parser:
 
-CPP/Test.hs CPP/Lex.x CPP/Layout.hs CPP/Par.y : CPP.cf
+CMM/Test.hs CMM/Lex.x CMM/Layout.hs CMM/Par.y : CMM.cf
 	bnfc --haskell -d $<
 
-CPP/Par.hs: CPP/Par.y
+CMM/Par.hs: CMM/Par.y
 	happy -gcai $<
 
-CPP/Lex.hs: CPP/Lex.x
+CMM/Lex.hs: CMM/Lex.x
 	alex -g $<
 
-CPP/Test: CPP/Test.hs CPP/Par.hs CPP/Lex.hs
+CMM/Test: CMM/Test.hs CMM/Par.hs CMM/Lex.hs
 	ghc --make $< -o $@
 
 %.class : %.java
@@ -50,11 +50,11 @@ lab3.tar.gz: $(files)
 # Rules for cleaning generated files:
 
 clean:
-	-rm -f CPP/*.log CPP/*.aux CPP/*.hi CPP/*.o CPP/*.dvi *.hi *.o
+	-rm -f CMM/*.log CMM/*.aux CMM/*.hi CMM/*.o CMM/*.dvi *.hi *.o
 
 distclean: clean
-	-rm -f CPP/Doc.* CPP/Lex.* CPP/Par.* CPP/Layout.* CPP/Skel.* CPP/Print.* CPP/Test.* CPP/Abs.* CPP/Test CPP/ErrM.* CPP/SharedString.* CPP/ComposOp.* CPP/CPP.dtd CPP/XML.* CPP/*.bak
-	-rmdir -p CPP/
+	-rm -f CMM/Doc.* CMM/Lex.* CMM/Par.* CMM/Layout.* CMM/Skel.* CMM/Print.* CMM/Test.* CMM/Abs.* CMM/Test CMM/ErrM.* CMM/SharedString.* CMM/ComposOp.* CMM/CMM.dtd CMM/XML.* CMM/*.bak
+	-rmdir -p CMM/
 	-rm -f lab3.tar.gz lab3 Runtime.class
 
 # EOF
