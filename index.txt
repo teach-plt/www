@@ -154,7 +154,8 @@ Slides follow closely the plt book.
 | Thu 12/12     | 13-15          | Hands-on with Lab 4               | [lab4 PM laborations/lab4/index.html]
 | //Mon 16/12// | //23//         | //Lab 3 deadline//                |  |
 %| Tue 17/12     | 13-15          | Type inference. A taste of dependent types | Agda demo [Verified compilation ./JVM.agda] |
-| Tue 17/12     | 13-15          | Dependent types (Agda)            | % Live coding [start live/2018/lec13-live-start.agda] and [finish live/2018/lec13-live-finish.agda] |
+| Tue 17/12     | 13-15          | Dependent types (Agda)            |
+% Live coding [start live/2018/lec13-live-start.agda] and [finish live/2018/lec13-live-finish.agda] |
 % Agda demo [start ./BidirectionalTypeChecking-stub.agda] [finish ./BidirectionalTypeChecking.agda] |
 | Thu 19/12     | 13-15          | Preparing for the exam            | [Training Exam exams/exam-plt-2017-3.pdf] |
 || 2019 ||||
@@ -164,7 +165,7 @@ Slides follow closely the plt book.
 %| //Fri 31/01// | //10-11// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
 %| //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
 %| //Sun 25/03// |                | //Late final lab deadline//       |  |
-| //Thu 25/04// | //8.30-12.30// | //Exam (J)//                      |  |
+| //Tue 07/04// | //8.30-12.30// | //Exam (J)//                      |  |
 % //[Solution exams/solutions-plt-2017-2.pdf]// |
 | //Thu 29/08// | //14-18//      | //Exam (J)//                      |  |
 % //[Solution exams/solutions-plt-2017-3.pdf]// |
@@ -312,9 +313,9 @@ The written exam determines the course grade, the usual grading scales apply:
 Chalmers: 5, 4, 3, U; Gothenburg University: VG, G, U.
 
 Exam dates:
- 13 Jan 2020 fm J,
- 07 Apr 2020 fm J,
- 27 Aug 2020 em J.
+ 13 Jan 2020 am J,
+ 07 Apr 2020 am J,
+ 27 Aug 2020 pm J.
 
 The exam tests the understanding of the course contents from a more high-level view,
 e.g., the underlying theoretical concepts.
@@ -390,7 +391,7 @@ by storing these jars in
 The order matters since ``javatools.jar`` also contains an older version of CUP;
 make sure that ``javatools.jar`` comes last in the search path.
 
-===Instructions for BNFC <= 2.8.1 (uses CUP v0.10k)===
+===Instructions for BNFC ≤ 2.8.1 (uses CUP v0.10k)===
 
 You can download pre-compiled versions [here doc/javatools.tgz].
 Make sure they are placed in your classpath, for example (Linux / MAC OS)
