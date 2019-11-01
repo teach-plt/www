@@ -1,7 +1,9 @@
 {-# LANGUAGE CPP #-}
+{-# LANGUAGE LambdaCase #-}
 
 -- GHC needs -threaded
 
+import Control.Applicative
 import Control.Exception
 import Control.Monad
 
@@ -27,18 +29,14 @@ executable_name = "lab2" <.> exeExtension
 concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
 concatMapM f = fmap concat . mapM f
 
-tripleM :: Monad m => (a -> m b) -> (a,a,a) -> m (b,b,b)
-tripleM f (x,y,z) = do
-  fx <- f x
-  fy <- f y
-  fz <- f z
-  return (fx, fy, fz)
+tripleM :: Applicative m => (a -> m b) -> (a,a,a) -> m (b,b,b)
+tripleM f (x,y,z) = liftA3 (,,) (f x) (f y) (f z)
 
-first :: (a -> d) -> (a,b,c) -> (d,b,c)
-first f (a,b,c) = (f a,b,c)
+first3 :: (a -> d) -> (a,b,c) -> (d,b,c)
+first3 f (a,b,c) = (f a,b,c)
 
-second :: (b -> d) -> (a,b,c) -> (a,d,c)
-second f (a,b,c) = (a,f b,c)
+second3 :: (b -> d) -> (a,b,c) -> (a,d,c)
+second3 f (a,b,c) = (a,f b,c)
 
 {-# NOINLINE doDebug #-}
 doDebug :: IORef Bool
@@ -50,12 +48,22 @@ doMake :: IORef Bool
 doMake = unsafePerformIO $ newIORef True
 
 debug :: String -> IO ()
-debug s = do d <- readIORef doDebug
-             if d then putStrLn s else return ()
+debug s = do
+  d <- readIORef doDebug
+  when d $ putStrLn s
 
 listCCFiles :: FilePath -> IO [FilePath]
 listCCFiles dir =
-    liftM (map (\f -> joinPath [dir,f]) . sort . filter ((==".cc") . takeExtension)) $ listDirectory dir
+    -- liftM (map (\f -> joinPath [dir,f]) . sort . filter ((==".cc") . takeExtension)) $ listDirectory dir
+    sort . filter ((==".cc") . takeExtension) <$> listDirectoryRecursive dir
+
+listDirectoryRecursive :: FilePath -> IO [FilePath]
+listDirectoryRecursive dir = do
+  doesDirectoryExist dir >>= \case
+    False -> return []
+    True  -> do
+      fs <- map (dir </>) <$> listDirectory dir
+      (fs ++) <$> concatMapM listDirectoryRecursive fs
 
 welcome :: IO ()
 welcome = do putStrLn $ "This is the test program for Programming Languages Lab 2"
@@ -143,8 +151,8 @@ disableMake :: Options -> Options
 disableMake options = options { makeFlag = False }
 
 addGood, addBad :: FilePath -> Options -> Options
-addGood f options = options { testSuiteOption = Just $ maybe ([f],[],[]) (first  (f:)) $ testSuiteOption options }
-addBad  f options = options { testSuiteOption = Just $ maybe ([],[f],[]) (second (f:)) $ testSuiteOption options }
+addGood f options = options { testSuiteOption = Just $ maybe ([f],[],[]) (first3  (f:)) $ testSuiteOption options }
+addBad  f options = options { testSuiteOption = Just $ maybe ([],[f],[]) (second3 (f:)) $ testSuiteOption options }
 
 optDescr :: [OptDescr (Options -> Options)]
 optDescr = [ Option []    ["debug"]   (NoArg  enableDebug       ) "print debug messages"
