@@ -113,6 +113,8 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
    [Lab 1 laborations/lab1/index.html] and
    [Lab 2 laborations/lab2/index.html] descriptions online.
 
+   Labs are done in groups of 2.  Please look for a lab partner.
+
 % - mostly a copy of the 2018 material.  Updates forthcoming soon.
 
 
