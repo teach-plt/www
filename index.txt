@@ -18,6 +18,8 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 
 [Fire https://plt-lp2-19.fire.cse.chalmers.se/]
 /
+[Canvas https://chalmers.instructure.com/courses/7185]
+/
 [Chalmers studieportal https://www.student.chalmers.se/sp/course?course_id=29075]
 % https://www.student.chalmers.se/sp/course?course_id=27798
 % https://www.student.chalmers.se/sp/course?course_id=26971
