@@ -248,6 +248,34 @@ could compile to [good03.j good03.j] as follows:
 ```
 (The comments are only for seeing the connection between .cc and .j).
 
+A smarter compiler might generate the following better code
+for the ``while`` loop:
+```
+	;; while (i < arg + 1)
+
+	goto	L1
+L0:
+
+	;; ret = i * ret;
+
+	iload_2
+	iload_1
+	imul
+	istore_1
+
+	;; ++ i;
+
+	iinc	2 1
+L1:
+	iload_2
+	iload_0
+	iconst_1
+	iadd
+	if_icmplt	L0
+```
+This code has only 11 instructions instead of the 23 above.
+
+
 =Solution format=
 
 
