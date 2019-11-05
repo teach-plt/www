@@ -57,7 +57,7 @@ For building the parser with BNFC, an installation of a recent version (≥ 2.8)
 For automatic running of the testsuite, you'll need to generate and run Haskell code, requiring:
 - A recent version (8.x) of [GHC https://www.haskell.org/ghc/].
 - A recent version (3.x) of the [Alex https://www.haskell.org/alex/] lexer generator.
-- A recent version (2.19.x) of the [Happy https://www.haskell.org/happy/] parser generator.
+- A recent version (1.19.x) of the [Happy https://www.haskell.org/happy/] parser generator.
 
 
 It is recommended to install these all at once via the
