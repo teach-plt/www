@@ -693,9 +693,7 @@ executed by the command
 and prints its output to the standard output. The output at success
 must be just the output defined by the interpreter.
 
-The output at failure is an interpreter error, or a
-``TYPE ERROR`` or a
-``SYNTAX ERROR``,
+The output at failure is an ``INTERPRETER ERROR``, a ``TYPE ERROR`` or, a ``SYNTAX ERROR``,
 depending on the phase at which the error occurs.
 These error messages should also give some useful explanation,
 which we leave to your imagination.
@@ -788,6 +786,8 @@ int main ()
 Running the interpreter
 ```
   % lab2 bad.cc
+  INTERPRETER ERROR
+
   uninitialized variable i
 ```
 Thus it is assumed that the type checker does not detect uninitialized variables.
