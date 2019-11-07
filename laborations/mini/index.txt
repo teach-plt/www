@@ -1,11 +1,22 @@
-Mini Interpreter
-Programming Language Technology, 2015
+MiniJS Interpreter and Compiler
+Programming Language Technology, 2019
 
 %!target:html
+%!encoding: utf-8
+
+'''
+<script src="../../enhance_page.js" type="text/javascript"></script>
+'''
+
+Back to main page of
+[Programming Language Technology ../../index.html].
 
 =Summary=
 
-The mini interpreter is available in two versions:
+The [MiniJS ./src/index.html] interpreter and compiler is available in two versions:
 
-- [Haskell ./haskell/index.html]
-- [Java ./java1.5/index.html]
+- [Haskell ./src/haskell/index.html]
+- [Java ./src/java/index.html]
+
+
+[Download ./miniJS.zip] MiniJS.

@@ -5,7 +5,10 @@ deps=../../style.css ../../include.html ../../enhance_page.js
 
 .PHONY : all www
 
-all : www
+all : www miniJS.zip
+
+miniJS.zip : src
+	zip -r $@ src
 
 www : index.html
 	make -C src www
