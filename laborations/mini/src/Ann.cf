@@ -1,0 +1,33 @@
+-- Type-annotated syntax of MiniJS
+
+-- Programs are lists of statements.
+
+Prg. Program ::= [Stm] ;
+
+-- Statements are either assignments or print statements.
+-- Statements are terminated by a semicolon
+
+SAssign.  Stm ::= Ident "=" Type "(" Exp ")" ;
+SPrint.   Stm ::= "console.log" "(" Type "(" Exp ")" ")" ;
+
+terminator Stm ";" ;
+
+-- Expressions are operator trees over variables and literals.
+
+EInt.    Exp ::= Integer;
+EDouble. Exp ::= Double;
+EVar.    Exp ::= Type "(" Ident ")" ;
+EArith.  Exp ::= Type "(" Exp Op Exp ")" ;
+EI2D.    Exp ::= "coerce" "(" Exp ")" ;
+
+-- Types are Int and Double.
+
+TInt.    Type ::= "Int"    ;
+TDouble. Type ::= "Double" ;
+
+-- Arithmetical operators.
+
+Times.   Op ::= "*" ;
+Div.     Op ::= "/" ;
+Plus.    Op ::= "+" ;
+Minus.   Op ::= "-" ;

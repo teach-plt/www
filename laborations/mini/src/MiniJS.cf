@@ -1,0 +1,32 @@
+-- MiniJS, a tiny programming language à la Straightline (Andrew Appel).
+--
+-- The language features basic computation with integers and floating-point numbers,
+-- variable assignment, and a print statement.
+--
+-- The concrete syntax is compatible with JavaScript.
+
+-- Programs are lists of statements.
+
+Prg. Program ::= [Stm] ;
+
+-- Statements are either assignments or print statements.
+-- Statements are terminated by a semicolon
+
+SAssign.  Stm ::= Ident "=" Exp ;
+SPrint.   Stm ::= "console.log" "(" Exp ")" ;
+
+terminator Stm ";" ;
+
+-- Expressions are operator trees over variables and literals.
+
+EVar.    Exp2 ::= Ident;
+EInt.    Exp2 ::= Integer;
+EDouble. Exp2 ::= Double;
+
+ETimes.  Exp1 ::= Exp1 "*" Exp2 ;
+EDiv.    Exp1 ::= Exp1 "/" Exp2 ;
+
+EPlus.   Exp ::= Exp "+" Exp1 ;
+EMinus.  Exp ::= Exp "-" Exp1 ;
+
+coercions Exp 2;

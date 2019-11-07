@@ -1,0 +1,30 @@
+-- JVM instructions (excerpt)
+
+-- Int instructions
+
+ILoad.  Ins ::= "iload"  Integer ;
+IStore. Ins ::= "istore" Integer ;
+IAdd.   Ins ::= "iadd"           ;
+ISub.   Ins ::= "isub"           ;
+IMul.   Ins ::= "imul"           ;
+IDiv.   Ins ::= "idiv"           ;
+ILit.   Ins ::= "ldc"  Integer   ;
+
+-- Double instructions
+
+DLoad.  Ins ::= "dload"  Integer ;
+DStore. Ins ::= "dstore" Integer ;
+DAdd.   Ins ::= "dadd"           ;
+DSub.   Ins ::= "dsub"           ;
+DMul.   Ins ::= "dmul"           ;
+DDiv.   Ins ::= "ddiv"           ;
+DLit.   Ins ::= "ldc2_w" Double  ;
+
+-- conversion von Int to Double
+
+I2D.    Ins ::= "i2d" ;
+
+-- function call
+
+IPrint.  Ins ::= "invokestatic" "Runtime/print(I)V" ;
+DPrint.  Ins ::= "invokestatic" "Runtime/print(D)V" ;
