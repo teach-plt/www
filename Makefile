@@ -6,7 +6,7 @@ deps=style.css include.html enhance_page.js
 .PHONY : ship all www mini ipl-book
   # lab1 lab2 lab3 lab4 ## .PHONY turns off lab% goals somehow
 
-all : exams.tgz lab1 lab2 lab3 lab4 ipl-book www # www last for linkchecker
+all : exams.tgz mini lab1 lab2 lab3 lab4 ipl-book www # www last for linkchecker
 
 ship : index.html
 #	scp $< frelindb@remote12.chalmers.se:/chalmers/groups/edu2009/www/www.cse.chalmers.se/year/2015/course/DAT151-lp2/

@@ -102,11 +102,8 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %    Ad: [Apply for undergraduate teaching assistent LP3/4! https://www.gu.se/english/about_the_university/job-opportunities/vacancies-details/?id=3345]
 %    Deadline is 2019-11-30.
 
-%  : //2019-11-07//
-%    Clarified lab submission and grading.
-
-%  : //2019-11-06//
-%    Result of [live coding live/2019/lec1-happy-live-2019.zip] in lecture (not the best solution!).  Contains a documented ``Makefile``, explaining the basic rule format of make files and their execution.
+ : //2019-11-07//
+   [MiniJS laborations/mini/index.html] implementation in Haskell and Java.
 
  : //2019-11-02//
    First published version of this page.
@@ -129,7 +126,7 @@ Slides follow closely the plt book.
 
 
 || Date         | Time           | Title                             | Material                      ||
-| Tue 05/11     | 13-15          | PL Design, Compilation Phases, MiniJS | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1, live coding [start live/2019/live-1-mini-start.zip] [lecture live/2019/live-1-as-far-as-we-got.zip] [finish live/2019/live-1-mini-finish.zip]
+| Tue 05/11     | 13-15          | PL Design, Compilation Phases, [MiniJS laborations/mini/index.html] | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1, live coding [start live/2019/live-1-mini-start.zip] [lecture live/2019/live-1-as-far-as-we-got.zip] [finish live/2019/live-1-mini-finish.zip]
 %, [live coding live/2018/lec1-happy-live-2018.zip]
 | Thu 07/11     | 13-15          | Grammars / BNFC / Hands-on with Lab 1    | [slides plt-book/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
 % [code live-2-bnfc.zip]
