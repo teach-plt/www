@@ -10,7 +10,7 @@ Programming Language Technology, 2019
 
 = Introduction =
 
-Before you submit [lab 1 ../lab1.html], your solution must pass the
+Before you submit [lab 1 ../index.html], your solution must pass the
 testsuite. This document describes how to obtain and use
 this testsuite.
 
