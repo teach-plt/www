@@ -1,0 +1,4 @@
+EPlus.    Exp  ::= Exp "+" Exp1;
+EProd.    Exp  ::= Exp1;
+ETimes.   Exp1 ::= Exp1 "*" Integer;
+EInt.     Exp1 ::= Integer;
