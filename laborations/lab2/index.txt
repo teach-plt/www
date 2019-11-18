@@ -1,4 +1,4 @@
-Lab 2: Type checker and interpreter for C/C++
+Lab 2: Type checker and interpreter for C--
 Programming Language Technology, 2019
 
 %!target:html
