@@ -92,6 +92,10 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %  : //2019-11-20//
 %    [Lab 2 laborations/lab2/index.html] is online.
 
+ : //2019-11-22//
+   For lab2, we clarified in the lab text that there is no need to type annotate the code during type checking. Annotations will become relevant first in lab3.
+   We also removed an experimental test case (``bad-runtime/div0.cc``) that had accidentally ended up in the lab2 testsuite.
+
  : //2019-11-14//
    The parse table on page 53 of the plt book is incomplete, missing the goto actions.
    See instead a //happy// generated [LR parse table live/2019/LR-parsetable.txt] for
