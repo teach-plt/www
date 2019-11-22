@@ -93,7 +93,7 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %    [Lab 2 laborations/lab2/index.html] is online.
 
  : //2019-11-22//
-   We removed an outdated hint about "annotating" the code during type checking in lab2.
+   For lab2, we clarified in the lab text that there is no need to type annotate the code during type checking. Annotations will become relevant first in lab3.
    We also removed an experimental test case (``bad-runtime/div0.cc``) that had accidentally ended up in the lab2 testsuite.
 
  : //2019-11-14//

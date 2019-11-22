@@ -45,7 +45,7 @@ formal rules in the PLT book, chapters 4 and 5.
 
 In the type checker, the recommended procedure is two passes:
 + build a symbol table with all function types, including the built-in functions;
-+ type check the code by using this symbol table.
++ type check the code by using this symbol table. (Note that there is no need to type annotate the tree in this lab. Annotations will become relevant first in the next lab.)
 
 
 In the interpreter, do a similar thing:
