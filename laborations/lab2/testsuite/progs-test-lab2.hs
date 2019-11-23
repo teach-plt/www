@@ -113,13 +113,13 @@ testGoodProgram prog f = do
   -- Try to work around line ending problem
   let removeCR = filter (/= '\r')
   if (trim (removeCR err) /= "")
-  then reportError prog "unexpected output on stderr" (Just f) (nullMaybe input) (nullMaybe out) (nullMaybe err) >>
+  then reportError prog "unexpected output on stderr" (Just f) (Just input) (Just out) (nullMaybe err) >>
        return False
   else do docmp <- readIORef doCmp
           if docmp
           then if trim (removeCR out) == trim (removeCR output)
                then return True
-               else do reportError prog "invalid output" (Just f) (nullMaybe input) (nullMaybe out) (nullMaybe err)
+               else do reportError prog "invalid output" (Just f) (Just input) (Just out) (nullMaybe err)
                        putStrLn "Expected output:"
                        putStrLn $ color blue $ output
                        return False
