@@ -47,6 +47,11 @@ doDebug = unsafePerformIO $ newIORef False
 doMake :: IORef Bool
 doMake = unsafePerformIO $ newIORef True
 
+-- | Whether to compare actual with expected output
+{-# NOINLINE doCmp  #-}
+doCmp :: IORef Bool
+doCmp = unsafePerformIO $ newIORef True
+
 debug :: String -> IO ()
 debug s = do
   d <- readIORef doDebug
@@ -96,12 +101,15 @@ testGoodProgram prog f = do
   if (trim (removeCR err) /= "")
   then reportError prog "unexpected output on stderr" f input out err >>
        return False
-  else if trim (removeCR out) == trim (removeCR output)
-       then return True
-       else do reportError prog "invalid output" f input out err
-               putStrLn "Expected output:"
-               putStrLn $ color blue $ output
-               return False
+  else do docmp <- readIORef doCmp
+          if docmp
+          then if trim (removeCR out) == trim (removeCR output)
+               then return True
+               else do reportError prog "invalid output" f input out err
+                       putStrLn "Expected output:"
+                       putStrLn $ color blue $ output
+                       return False
+          else return True
 
 testBadProgram :: FilePath -> FilePath -> IO Bool
 testBadProgram prog f = do
@@ -123,11 +131,14 @@ testBadRuntimeProgram prog f = do
   (s,out,err) <- readProcessWithExitCode prog [f] input
   putStrLnExitCode s "."
   debug $ "Exit code: " ++ show s
-  if "INTERPRETER ERROR" `isPrefixOf` out then
-    return True
-  else do
-    reportError prog "Bad (type-correct) program ran to completion without error" f "" out err
-    return False
+  docmp <- readIORef doCmp
+  if docmp
+  then if "INTERPRETER ERROR" `isPrefixOf` out then
+         return True
+       else do
+         reportError prog "Bad (type-correct) program ran to completion without error" f "" out err
+         return False
+  else return True
 
 --
 -- * Main
@@ -142,6 +153,7 @@ setup = hSetBuffering stdout LineBuffering
 
 data Options = Options { debugFlag       :: Bool
                        , makeFlag        :: Bool
+                       , cmpFlag         :: Bool
                        , testSuiteOption :: Maybe TestSuite }
 
 enableDebug :: Options -> Options
@@ -150,6 +162,9 @@ enableDebug options = options { debugFlag = True }
 disableMake :: Options -> Options
 disableMake options = options { makeFlag = False }
 
+disableCmp :: Options -> Options
+disableCmp options = options { cmpFlag = False }
+
 addGood, addBad :: FilePath -> Options -> Options
 addGood f options = options { testSuiteOption = Just $ maybe ([f],[],[]) (first3  (f:)) $ testSuiteOption options }
 addBad  f options = options { testSuiteOption = Just $ maybe ([],[f],[]) (second3 (f:)) $ testSuiteOption options }
@@ -157,6 +172,7 @@ addBad  f options = options { testSuiteOption = Just $ maybe ([],[f],[]) (second
 optDescr :: [OptDescr (Options -> Options)]
 optDescr = [ Option []    ["debug"]   (NoArg  enableDebug       ) "print debug messages"
            , Option []    ["no-make"] (NoArg  disableMake       ) "do not run make"
+           , Option []    ["no-cmp"]  (NoArg  disableCmp        ) "do not compare actual with expected output"
            , Option ['g'] ["good"]    (ReqArg addGood     "FILE") "good test case FILE"
            , Option ['b'] ["bad"]     (ReqArg addBad      "FILE") "bad test case FILE"
            ]
@@ -165,10 +181,11 @@ optDescr = [ Option []    ["debug"]   (NoArg  enableDebug       ) "print debug m
 parseArgs :: [String] -> IO (FilePath,TestSuite)
 parseArgs argv = case getOpt RequireOrder optDescr argv of
   (o,[cfFile],[]) -> do
-    let defaultOptions = Options False True Nothing
+    let defaultOptions = Options False True True Nothing
         options = foldr ($) defaultOptions o
     when (debugFlag options)      $ writeIORef doDebug True
     when (not $ makeFlag options) $ writeIORef doMake  False
+    when (not $ cmpFlag  options) $ writeIORef doCmp   False
     let testSuite    = fromMaybe (["good"],["bad"],["bad-runtime"]) $ testSuiteOption options
         expandPath f = doesDirectoryExist f >>= \b -> if b then listCCFiles f else return [f]
     testSuite' <- tripleM (concatMapM expandPath) testSuite
@@ -179,7 +196,8 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
 
 usage :: IO ()
 usage = do
-  hPutStrLn stderr "Usage: progs-test-lab2 [--debug] [--no-make] [-g|--good FILE]... [-b|--bad FILE]... interpreter_code_directory"
+  hPutStrLn stderr "Usage: progs-test-lab2 [--debug] [--no-make] [--no-cmp] [-g|--good FILE]... [-b|--bad FILE]..."
+  hPutStrLn stderr "           interpreter_code_directory"
   exitFailure
 
 mainOpts :: FilePath -> TestSuite -> IO ()
