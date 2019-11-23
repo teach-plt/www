@@ -78,3 +78,25 @@ CVS
 
 /laborations/lab4/testsuite.tgz
 /laborations/lab4/testsuite/progs-test-lab4
+
+# Haskell
+dist
+dist-*
+cabal-dev
+*.hie
+*.chi
+*.chs.h
+*.dyn_o
+*.dyn_hi
+.hpc
+.hsenv
+.cabal-sandbox/
+cabal.sandbox.config
+*.prof
+*.hp
+*.eventlog
+.stack-work/
+cabal.project.local
+cabal.project.local~
+.HTF/
+.ghc.environment.*
