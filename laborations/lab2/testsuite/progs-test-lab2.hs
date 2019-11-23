@@ -93,15 +93,15 @@ testGoodProgram prog f = do
   debug $ "Exit code: " ++ show s
   -- Try to work around line ending problem
   let removeCR = filter (/= '\r')
-  if trim (removeCR out) == trim (removeCR output)
-    then if (trim (removeCR err) /= "")
-         then reportError prog "unexpected output on stderr" f input out err >>
-              return False
-         else return True
-    else do reportError prog "invalid output" f input out err
-            putStrLn "Expected output:"
-            putStrLn $ color blue $ output
-            return False
+  if (trim (removeCR err) /= "")
+  then reportError prog "unexpected output on stderr" f input out err >>
+       return False
+  else if trim (removeCR out) == trim (removeCR output)
+       then return True
+       else do reportError prog "invalid output" f input out err
+               putStrLn "Expected output:"
+               putStrLn $ color blue $ output
+               return False
 
 testBadProgram :: FilePath -> FilePath -> IO Bool
 testBadProgram prog f = do
