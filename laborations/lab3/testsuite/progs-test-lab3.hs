@@ -30,6 +30,20 @@ concatMapM f = fmap concat . mapM f
 whenM :: Monad m => m Bool -> m () -> m ()
 whenM mb m = mb >>= \b -> when b m
 
+whenJust :: Applicative m => Maybe a -> (a -> m ()) -> m ()
+whenJust (Just a) k = k a
+whenJust Nothing  _ = pure ()
+
+list :: [a] -> b -> ([a] -> b) -> b
+list [] b _ = b
+list as _ f = f as
+
+fromList :: [a] -> [a] -> [a]
+fromList as xs = list as xs id
+
+nullMaybe :: [a] -> Maybe [a]
+nullMaybe as = list as Nothing Just
+
 --
 -- * Main
 --
@@ -145,7 +159,7 @@ testBackendProg prog f = do
   (compilerRet, compilerOut, compilerErr) <- readProcessWithExitCode prog [f] ""
   putStrLnExitCode compilerRet "."
   if isExitFailure compilerRet then do
-    reportError prog "non-zero exit code" f input compilerOut compilerErr
+    reportError prog "non-zero exit code" (Just f) (nullMaybe input) (nullMaybe compilerOut) (nullMaybe compilerErr)
     return False
   else do
     let expectedJavaClassFilePath = replaceExtension f ".class"
@@ -159,18 +173,18 @@ testBackendProg prog f = do
       -- let classpath = ['.', classpathSep] ++ takeDirectory f
       (javaRet, javaOut, javaErr) <- readProcessWithExitCode "java" ["-cp", classpath, takeBaseName f] input
       if isExitFailure javaRet then do
-        reportError "java" "non-zero exit code" f input javaOut javaErr
+        reportError "java" "non-zero exit code" (Just f) (nullMaybe input) (nullMaybe javaOut) (nullMaybe javaErr)
         return False
       else do
         if javaOut == output then
           return True
         else do
-          reportError "java" "invalid output" f input javaOut javaErr
+          reportError "java" "invalid output" (Just f) (nullMaybe input) (nullMaybe javaOut) (nullMaybe javaErr)
           putStrLn "Expected output:"
           putStrLn $ color blue $ output
           return False
     else do
-      reportError prog ("did not find any Java class file at \"" ++ expectedJavaClassFilePath ++ "\" (note that the output Java class file must be written to same directory as the input C++ file)") f input compilerOut compilerErr
+      reportError prog ("did not find any Java class file at \"" ++ expectedJavaClassFilePath ++ "\" (note that the output Java class file must be written to same directory as the input C++ file)") (Just f) (nullMaybe input) (nullMaybe compilerOut) (nullMaybe compilerErr)
       return False
 
 -- | Return all files with extension ".cc" in given directory.
@@ -284,7 +298,7 @@ runPrgNoFail exe flags file = do
   hPutStrLnExitCode s stderr "."
   case s of
     ExitFailure x -> do
-      reportError exe ("with status " ++ show x) file "" out err
+      reportError exe ("with status " ++ show x) (Just file) Nothing (nullMaybe out) (nullMaybe err)
       exitFailure
     ExitSuccess -> do
       debug $ "Standard output:\n" ++ out
@@ -323,36 +337,35 @@ putStrLnExitCode e = putStrLn . colorExitCode e
 hPutStrLnExitCode :: ExitCode -> Handle -> String -> IO ()
 hPutStrLnExitCode e h = hPutStrLn h . colorExitCode e
 
-reportErrorColor
-  :: Color
-  -> String   -- ^ command that failed
-  -> String   -- ^ how it failed
-  -> FilePath -- ^ source file
-  -> String   -- ^ given input
-  -> String   -- ^ stdout output
-  -> String   -- ^ stderr output
-  -> IO ()
-reportErrorColor col c m f i o e = do
-  putStrLn $ color col $ c ++ " failed: " ++ m
-  unless (null f) $ prFile f
-  unless (null i) $ do
-    putStrLn "Given this input:"
-    putStrLn $ color blue $ i
-  unless (null o) $ do
-    putStrLn "It printed this to standard output:"
-    putStrLn $ color blue $ o
-  unless (null e) $ do
-    putStrLn "It printed this to standard error:"
-    putStrLn $ color blue $ e
+reportErrorColor :: Color
+                 -> String         -- ^ command that failed
+                 -> String         -- ^ how it failed
+                 -> Maybe FilePath -- ^ source file
+                 -> Maybe String   -- ^ given input
+                 -> Maybe String   -- ^ stdout output
+                 -> Maybe String   -- ^ stderr output
+                 -> IO ()
+reportErrorColor col c m f i o e =
+    do
+    putStrLn $ color col $ c ++ " failed: " ++ m
+    whenJust f prFile
+    whenJust i $ \i -> do
+                       putStrLn "Given this input:"
+                       putStrLn $ color blue $ fromList i "<nothing>"
+    whenJust o $ \o -> do
+                       putStrLn "It printed this to standard output:"
+                       putStrLn $ color blue $ fromList o "<nothing>"
+    whenJust e $ \e -> do
+                       putStrLn "It printed this to standard error:"
+                       putStrLn $ color blue $ fromList e "<nothing>"
 
-reportError
-  :: String   -- ^ command that failed
-  -> String   -- ^ how it failed
-  -> FilePath -- ^ source file
-  -> String   -- ^ given input
-  -> String   -- ^ stdout output
-  -> String   -- ^ stderr output
-  -> IO ()
+reportError :: String         -- ^ command that failed
+            -> String         -- ^ how it failed
+            -> Maybe FilePath -- ^ source file
+            -> Maybe String   -- ^ given input
+            -> Maybe String   -- ^ stdout output
+            -> Maybe String   -- ^ stderr output
+            -> IO ()
 reportError = reportErrorColor red
 
 prFile :: FilePath -> IO ()

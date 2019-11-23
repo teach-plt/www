@@ -54,6 +54,20 @@ splitOn sep s  = splitOn' s ""
     splitOn' (c:cs) sub | c == sep  = reverse sub:splitOn' cs ""
                         | otherwise = splitOn' cs (c:sub)
 
+whenJust :: Applicative m => Maybe a -> (a -> m ()) -> m ()
+whenJust (Just a) k = k a
+whenJust Nothing  _ = pure ()
+
+list :: [a] -> b -> ([a] -> b) -> b
+list [] b _ = b
+list as _ f = f as
+
+fromList :: [a] -> [a] -> [a]
+fromList as xs = list as xs id
+
+nullMaybe :: [a] -> Maybe [a]
+nullMaybe as = list as Nothing Just
+
 debug :: String -> IO ()
 debug = putStrLn
 
@@ -108,7 +122,7 @@ runPrgNoFail exe flags input = do
   hPutStrLnExitCode s stderr "."
   case s of
     ExitFailure x -> do
-      reportError exe ("with status " ++ show x) input out err
+      reportError exe ("with status " ++ show x) (nullMaybe input) (nullMaybe out) (nullMaybe err)
       exitFailure
     ExitSuccess -> do
       debug $ "Standard output:\n" ++ out
@@ -130,30 +144,30 @@ hPutStrLnExitCode :: ExitCode -> Handle -> String -> IO ()
 hPutStrLnExitCode e h = hPutStrLn h . colorExitCode e
 
 reportErrorColor :: Color
-                 -> String -- ^ command that failed
-                 -> String -- ^ how it failed
-                 -> String -- ^ given input
-                 -> String -- ^ stdout output
-                 -> String -- ^ stderr output
+                 -> String         -- ^ command that failed
+                 -> String         -- ^ how it failed
+                 -> Maybe String   -- ^ given input
+                 -> Maybe String   -- ^ stdout output
+                 -> Maybe String   -- ^ stderr output
                  -> IO ()
 reportErrorColor col c m i o e =
     do
     putStrLn $ color col $ c ++ " failed: " ++ m
-    when (not (null i)) $ do
-                          putStrLn "Given this input:"
-                          putStrLn $ color cyan $ i
-    when (not (null o)) $ do
-                          putStrLn "It printed this to standard output:"
-                          putStrLn $ color cyan $ o
-    when (not (null e)) $ do
-                          putStrLn "It printed this to standard error:"
-                          putStrLn $ color cyan $ e
+    whenJust i $ \i -> do
+                       putStrLn "Given this input:"
+                       putStrLn $ color blue $ fromList i "<nothing>"
+    whenJust o $ \o -> do
+                       putStrLn "It printed this to standard output:"
+                       putStrLn $ color blue $ fromList o "<nothing>"
+    whenJust e $ \e -> do
+                       putStrLn "It printed this to standard error:"
+                       putStrLn $ color blue $ fromList e "<nothing>"
 
-reportError :: String -- ^ command that failed
-            -> String -- ^ how it failed
-            -> String -- ^ given input
-            -> String -- ^ stdout output
-            -> String -- ^ stderr output
+reportError :: String         -- ^ command that failed
+            -> String         -- ^ how it failed
+            -> Maybe String   -- ^ given input
+            -> Maybe String   -- ^ stdout output
+            -> Maybe String   -- ^ stderr output
             -> IO ()
 reportError = reportErrorColor red
 

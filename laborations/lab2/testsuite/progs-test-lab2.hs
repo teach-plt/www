@@ -38,6 +38,20 @@ first3 f (a,b,c) = (f a,b,c)
 second3 :: (b -> d) -> (a,b,c) -> (a,d,c)
 second3 f (a,b,c) = (a,f b,c)
 
+whenJust :: Applicative m => Maybe a -> (a -> m ()) -> m ()
+whenJust (Just a) k = k a
+whenJust Nothing  _ = pure ()
+
+list :: [a] -> b -> ([a] -> b) -> b
+list [] b _ = b
+list as _ f = f as
+
+fromList :: [a] -> [a] -> [a]
+fromList as xs = list as xs id
+
+nullMaybe :: [a] -> Maybe [a]
+nullMaybe as = list as Nothing Just
+
 {-# NOINLINE doDebug #-}
 doDebug :: IORef Bool
 doDebug = unsafePerformIO $ newIORef False
@@ -99,13 +113,13 @@ testGoodProgram prog f = do
   -- Try to work around line ending problem
   let removeCR = filter (/= '\r')
   if (trim (removeCR err) /= "")
-  then reportError prog "unexpected output on stderr" f input out err >>
+  then reportError prog "unexpected output on stderr" (Just f) (nullMaybe input) (nullMaybe out) (nullMaybe err) >>
        return False
   else do docmp <- readIORef doCmp
           if docmp
           then if trim (removeCR out) == trim (removeCR output)
                then return True
-               else do reportError prog "invalid output" f input out err
+               else do reportError prog "invalid output" (Just f) (nullMaybe input) (nullMaybe out) (nullMaybe err)
                        putStrLn "Expected output:"
                        putStrLn $ color blue $ output
                        return False
@@ -121,7 +135,7 @@ testBadProgram prog f = do
   if "TYPE ERROR" `isPrefixOf` out then
     return True
   else do
-    reportError prog "Ill-typed program passed type checking" f "" out err
+    reportError prog "Ill-typed program passed type checking" (Just f) Nothing (nullMaybe out) (nullMaybe err)
     return False
 
 testBadRuntimeProgram :: FilePath -> FilePath -> IO Bool
@@ -136,7 +150,7 @@ testBadRuntimeProgram prog f = do
   then if "INTERPRETER ERROR" `isPrefixOf` out then
          return True
        else do
-         reportError prog "Bad (type-correct) program ran to completion without error" f "" out err
+         reportError prog "Bad (type-correct) program ran to completion without error" (Just f) Nothing (nullMaybe out) (nullMaybe err)
          return False
   else return True
 
@@ -281,7 +295,7 @@ runPrgNoFail exe flags file = do
   hPutStrLnExitCode s stderr "."
   case s of
     ExitFailure x -> do
-      reportError exe ("with status " ++ show x) file "" out err
+      reportError exe ("with status " ++ show x) (Just file) Nothing (nullMaybe out) (nullMaybe err)
       exitFailure
     ExitSuccess -> do
       debug $ "Standard output:\n" ++ out
@@ -319,33 +333,33 @@ hPutStrLnExitCode :: ExitCode -> Handle -> String -> IO ()
 hPutStrLnExitCode e h = hPutStrLn h . colorExitCode e
 
 reportErrorColor :: Color
-                 -> String -- ^ command that failed
-                 -> String -- ^ how it failed
-                 -> FilePath -- ^ source file
-                 -> String -- ^ given input
-                 -> String -- ^ stdout output
-                 -> String -- ^ stderr output
+                 -> String         -- ^ command that failed
+                 -> String         -- ^ how it failed
+                 -> Maybe FilePath -- ^ source file
+                 -> Maybe String   -- ^ given input
+                 -> Maybe String   -- ^ stdout output
+                 -> Maybe String   -- ^ stderr output
                  -> IO ()
 reportErrorColor col c m f i o e =
     do
     putStrLn $ color col $ c ++ " failed: " ++ m
-    when (not (null f)) $ prFile f
-    when (not (null i)) $ do
-                          putStrLn "Given this input:"
-                          putStrLn $ color blue $ i
-    when (not (null o)) $ do
-                          putStrLn "It printed this to standard output:"
-                          putStrLn $ color blue $ o
-    when (not (null e)) $ do
-                          putStrLn "It printed this to standard error:"
-                          putStrLn $ color blue $ e
+    whenJust f prFile
+    whenJust i $ \i -> do
+                       putStrLn "Given this input:"
+                       putStrLn $ color blue $ fromList i "<nothing>"
+    whenJust o $ \o -> do
+                       putStrLn "It printed this to standard output:"
+                       putStrLn $ color blue $ fromList o "<nothing>"
+    whenJust e $ \e -> do
+                       putStrLn "It printed this to standard error:"
+                       putStrLn $ color blue $ fromList e "<nothing>"
 
-reportError :: String -- ^ command that failed
-            -> String -- ^ how it failed
-            -> FilePath -- ^ source file
-            -> String -- ^ given input
-            -> String -- ^ stdout output
-            -> String -- ^ stderr output
+reportError :: String         -- ^ command that failed
+            -> String         -- ^ how it failed
+            -> Maybe FilePath -- ^ source file
+            -> Maybe String   -- ^ given input
+            -> Maybe String   -- ^ stdout output
+            -> Maybe String   -- ^ stderr output
             -> IO ()
 reportError = reportErrorColor red
 

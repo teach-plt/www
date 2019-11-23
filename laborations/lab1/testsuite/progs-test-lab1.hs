@@ -24,6 +24,20 @@ import System.IO.Unsafe
 grammar :: String
 grammar = "CMM"
 
+whenJust :: Applicative m => Maybe a -> (a -> m ()) -> m ()
+whenJust (Just a) k = k a
+whenJust Nothing  _ = pure ()
+
+list :: [a] -> b -> ([a] -> b) -> b
+list [] b _ = b
+list as _ f = f as
+
+fromList :: [a] -> [a] -> [a]
+fromList as xs = list as xs id
+
+nullMaybe :: [a] -> Maybe [a]
+nullMaybe as = list as Nothing Just
+
 {-# NOINLINE doDebug #-}
 doDebug :: IORef Bool
 doDebug = unsafePerformIO $ newIORef False
@@ -107,12 +121,12 @@ testFrontendProg good f = do
   putStrLnExitCode s "."
   case lines err of
     "OK":_    | good -> return True
-              | bad  -> False <$ reportError prg "passed BAD program" f "" out err
+              | bad  -> False <$ reportError prg "passed BAD program" (Just f) Nothing (nullMaybe out) (nullMaybe err)
 
-    "ERROR":_ | good -> False <$ reportError prg "" f "" out err
+    "ERROR":_ | good -> False <$ reportError prg "" (Just f) Nothing (nullMaybe out) (nullMaybe err)
 
               | bad  -> return True
-    _                -> False <$ reportError prg "invalid output" f "" out err
+    _                -> False <$ reportError prg "invalid output" (Just f) Nothing (nullMaybe out) (nullMaybe err)
 
 
 --
@@ -245,7 +259,7 @@ runPrgNoFail exe flags file = do
   hPutStrLnExitCode s stderr "."
   case s of
     ExitFailure x -> do
-      reportError exe ("with status " ++ show x) file "" out err
+      reportError exe ("with status " ++ show x) (Just file) Nothing (nullMaybe out) (nullMaybe err)
       exitFailure
     ExitSuccess -> do
       debug $ "Standard output:\n" ++ out
@@ -266,38 +280,35 @@ putStrLnExitCode e = putStrLn . colorExitCode e
 hPutStrLnExitCode :: ExitCode -> Handle -> String -> IO ()
 hPutStrLnExitCode e h = hPutStrLn h . colorExitCode e
 
-reportErrorColor
-  :: Color
-  -> String -- ^ command that failed
-  -> String -- ^ how it failed
-  -> FilePath -- ^ source file
-  -> String -- ^ given input
-  -> String -- ^ stdout output
-  -> String -- ^ stderr output
-  -> IO ()
+reportErrorColor :: Color
+                 -> String         -- ^ command that failed
+                 -> String         -- ^ how it failed
+                 -> Maybe FilePath -- ^ source file
+                 -> Maybe String   -- ^ given input
+                 -> Maybe String   -- ^ stdout output
+                 -> Maybe String   -- ^ stderr output
+                 -> IO ()
 reportErrorColor col c m f i o e =
     do
     putStrLn $ color col $ c ++ " failed: " ++ m
-    putStrLn $ "For source file " ++ f ++ ":"
-    prFile f
-    when (not (null i)) $ do
-      putStrLn "Given this input:"
-      putStrLn $ color blue $ i
-    when (not (null o)) $ do
-      putStrLn "It printed this to standard output:"
-      putStrLn $ color blue $ o
-    when (not (null e)) $ do
-      putStrLn "It printed this to standard error:"
-      putStrLn $ color blue $ e
+    whenJust f prFile
+    whenJust i $ \i -> do
+                       putStrLn "Given this input:"
+                       putStrLn $ color blue $ fromList i "<nothing>"
+    whenJust o $ \o -> do
+                       putStrLn "It printed this to standard output:"
+                       putStrLn $ color blue $ fromList o "<nothing>"
+    whenJust e $ \e -> do
+                       putStrLn "It printed this to standard error:"
+                       putStrLn $ color blue $ fromList e "<nothing>"
 
-reportError
-  :: String -- ^ command that failed
-  -> String -- ^ how it failed
-  -> FilePath -- ^ source file
-  -> String -- ^ given input
-  -> String -- ^ stdout output
-  -> String -- ^ stderr output
-  -> IO ()
+reportError :: String         -- ^ command that failed
+            -> String         -- ^ how it failed
+            -> Maybe FilePath -- ^ source file
+            -> Maybe String   -- ^ given input
+            -> Maybe String   -- ^ stdout output
+            -> Maybe String   -- ^ stderr output
+            -> IO ()
 reportError = reportErrorColor red
 
 prFile :: FilePath -> IO ()
