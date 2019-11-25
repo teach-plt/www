@@ -38,6 +38,9 @@ first3 f (a,b,c) = (f a,b,c)
 second3 :: (b -> d) -> (a,b,c) -> (a,d,c)
 second3 f (a,b,c) = (a,f b,c)
 
+third3 :: (c -> d) -> (a,b,c) -> (a,b,d)
+third3 f (a,b,c) = (a,b,f c)
+
 whenJust :: Applicative m => Maybe a -> (a -> m ()) -> m ()
 whenJust (Just a) k = k a
 whenJust Nothing  _ = pure ()
@@ -180,15 +183,17 @@ disableCmp :: Options -> Options
 disableCmp options = options { cmpFlag = False }
 
 addGood, addBad :: FilePath -> Options -> Options
-addGood f options = options { testSuiteOption = Just $ maybe ([f],[],[]) (first3  (f:)) $ testSuiteOption options }
-addBad  f options = options { testSuiteOption = Just $ maybe ([],[f],[]) (second3 (f:)) $ testSuiteOption options }
+addGood       f options = options { testSuiteOption = Just $ maybe ([f],[],[]) (first3  (f:)) $ testSuiteOption options }
+addBad        f options = options { testSuiteOption = Just $ maybe ([],[f],[]) (second3 (f:)) $ testSuiteOption options }
+addBadRuntime f options = options { testSuiteOption = Just $ maybe ([],[],[f]) (third3  (f:)) $ testSuiteOption options }
 
 optDescr :: [OptDescr (Options -> Options)]
-optDescr = [ Option []    ["debug"]   (NoArg  enableDebug       ) "print debug messages"
-           , Option []    ["no-make"] (NoArg  disableMake       ) "do not run make"
-           , Option []    ["no-cmp"]  (NoArg  disableCmp        ) "do not compare actual with expected output"
-           , Option ['g'] ["good"]    (ReqArg addGood     "FILE") "good test case FILE"
-           , Option ['b'] ["bad"]     (ReqArg addBad      "FILE") "bad test case FILE"
+optDescr = [ Option []    ["debug"]       (NoArg  enableDebug         ) "print debug messages"
+           , Option []    ["no-make"]     (NoArg  disableMake         ) "do not run make"
+           , Option []    ["no-cmp"]      (NoArg  disableCmp          ) "do not compare actual with expected output"
+           , Option ['g'] ["good"]        (ReqArg addGood       "FILE") "good test case FILE"
+           , Option ['b'] ["bad"]         (ReqArg addBad        "FILE") "bad test case FILE"
+           , Option ['r'] ["bad-runtime"] (ReqArg addBadRuntime "FILE") "bad-runtime test case FILE"
            ]
 
 -- | Filter out and process options, return the argument.
@@ -210,7 +215,8 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
 
 usage :: IO ()
 usage = do
-  hPutStrLn stderr "Usage: progs-test-lab2 [--debug] [--no-make] [--no-cmp] [-g|--good FILE]... [-b|--bad FILE]..."
+  hPutStrLn stderr "Usage: progs-test-lab2 [--debug] [--no-make] [--no-cmp]"
+  hPutStrLn stderr "           [-g|--good FILE]... [-b|--bad FILE]... [-r|--bad-runtime FILE]..."
   hPutStrLn stderr "           interpreter_code_directory"
   exitFailure
 
