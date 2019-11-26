@@ -447,7 +447,7 @@ Then the class path needs to be set as follows (bash):
 for DAT151 Programming language technology.
 
 || Program | @student.chalmers.se | Name ||
-| MPALG |         | Maria Kokkou |
+| MPALG | kokkou | Maria Kokkou |
 | TKDAT | ljerik  | Erik Ljungdahl |
 | MPCSN | marlofg | Martin Löfgren |
 
