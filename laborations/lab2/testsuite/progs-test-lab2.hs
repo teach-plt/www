@@ -75,9 +75,7 @@ debug s = do
   when d $ putStrLn s
 
 listCCFiles :: FilePath -> IO [FilePath]
-listCCFiles dir =
-    -- liftM (map (\f -> joinPath [dir,f]) . sort . filter ((==".cc") . takeExtension)) $ listDirectory dir
-    sort . filter ((==".cc") . takeExtension) <$> listDirectoryRecursive dir
+listCCFiles dir = sort . filter ((==".cc") . takeExtension) <$> listDirectoryRecursive dir
 
 listDirectoryRecursive :: FilePath -> IO [FilePath]
 listDirectoryRecursive dir = do
