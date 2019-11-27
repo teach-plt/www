@@ -63,8 +63,8 @@ data Options = Options { debugFlag       :: Bool
 enableDebug :: Options -> Options
 enableDebug options = options { debugFlag = True }
 
-enableDoubles :: Options -> Options
-enableDoubles options = options { doublesFlag = True }
+disableDoubles :: Options -> Options
+disableDoubles options = options { doublesFlag = False }
 
 disableMake :: Options -> Options
 disableMake options = options { makeFlag = False }
@@ -74,7 +74,7 @@ addTest f options = options { testSuiteOption = Just $ maybe [f] (f:) $ testSuit
 
 optDescr :: [OptDescr (Options -> Options)]
 optDescr = [ Option []    ["debug"]      (NoArg  enableDebug       ) "print debug messages"
-           , Option []    ["no-doubles"] (NoArg  enableDoubles     ) "exclude double tests"
+           , Option []    ["no-doubles"] (NoArg  disableDoubles    ) "exclude double tests"
            , Option []    ["no-make"]    (NoArg  disableMake       ) "do not run make"
            , Option ['t'] ["test"]       (ReqArg addTest     "FILE") "good test case FILE"
            ]
@@ -85,9 +85,9 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
   (o,[progdir],[]) -> do
     let defaultOptions = Options False False True Nothing
         options = foldr ($) defaultOptions o
-    when (debugFlag   options)    $ writeIORef doDebug            True
-    when (doublesFlag options)    $ writeIORef includeDoubleTests False
-    when (not $ makeFlag options) $ writeIORef doMake             False
+    when (debugFlag   options)       $ writeIORef doDebug            True
+    when (not $ doublesFlag options) $ writeIORef includeDoubleTests False
+    when (not $ makeFlag options)    $ writeIORef doMake             False
     let testSuite    = fromMaybe ["good", "dir-for-path-test/one-more-dir"] $ testSuiteOption options
         expandPath f = doesDirectoryExist f >>= \b -> if b then listCCFiles f else return [f]
     testSuite' <- concatMapM expandPath testSuite
