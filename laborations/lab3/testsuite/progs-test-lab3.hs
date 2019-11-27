@@ -1,5 +1,5 @@
 {-# LANGUAGE CPP #-}
-{-# LANGUAGE TupleSections #-}
+{-# LANGUAGE LambdaCase, TupleSections #-}
 
 -- GHC needs -threaded
 
@@ -73,10 +73,10 @@ addTest :: FilePath -> Options -> Options
 addTest f options = options { testSuiteOption = Just $ maybe [f] (f:) $ testSuiteOption options }
 
 optDescr :: [OptDescr (Options -> Options)]
-optDescr = [ Option []    ["debug"]   (NoArg  enableDebug       ) "print debug messages"
-           , Option []    ["doubles"] (NoArg  enableDoubles     ) "include double tests"
-           , Option []    ["no-make"] (NoArg  disableMake       ) "do not run make"
-           , Option ['t'] ["test"]    (ReqArg addTest     "FILE") "good test case FILE"
+optDescr = [ Option []    ["debug"]      (NoArg  enableDebug       ) "print debug messages"
+           , Option []    ["no-doubles"] (NoArg  enableDoubles     ) "exclude double tests"
+           , Option []    ["no-make"]    (NoArg  disableMake       ) "do not run make"
+           , Option ['t'] ["test"]       (ReqArg addTest     "FILE") "good test case FILE"
            ]
 
 -- | Filter out and process options, return the argument and the rest.
@@ -86,7 +86,7 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
     let defaultOptions = Options False False True Nothing
         options = foldr ($) defaultOptions o
     when (debugFlag   options)    $ writeIORef doDebug            True
-    when (doublesFlag options)    $ writeIORef includeDoubleTests True
+    when (doublesFlag options)    $ writeIORef includeDoubleTests False
     when (not $ makeFlag options) $ writeIORef doMake             False
     let testSuite    = fromMaybe ["good", "dir-for-path-test/one-more-dir"] $ testSuiteOption options
         expandPath f = doesDirectoryExist f >>= \b -> if b then listCCFiles f else return [f]
@@ -98,15 +98,13 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
 
 usage :: IO ()
 usage = do
-  hPutStrLn stderr "Usage: progs-test-lab3 [--debug] [--doubles] [--no-make] [-t|--test FILE]..."
+  hPutStrLn stderr "Usage: progs-test-lab3 [--debug] [--no-doubles] [--no-make] [-t|--test FILE]..."
   hPutStrLn stderr "           interpreter_code_directory"
   exitFailure
 
 mainOpts :: FilePath -> TestSuite -> IO ()
 mainOpts progdir testSuite = do
   putStrLn "This is the test program for Programming Languages Lab 3"
-  doubles <- readIORef includeDoubleTests
-  unless doubles $ putStrLn "Make sure to include the --doubles flag if you also want to test programs including doubles."
   -- Cleanup files from old runs
   forM_ testSuite (\f -> cleanFiles $ map (replaceExtension f) [".j", ".class"])
   domake <- readIORef doMake
@@ -123,7 +121,7 @@ mainOpts progdir testSuite = do
 -- | Whether to run tests involving doubles
 {-# NOINLINE includeDoubleTests  #-}
 includeDoubleTests :: IORef Bool
-includeDoubleTests = unsafePerformIO $ newIORef False
+includeDoubleTests = unsafePerformIO $ newIORef True
 
 -- | Whether to run make
 {-# NOINLINE doMake  #-}
@@ -187,13 +185,19 @@ testBackendProg prog f = do
       reportError prog ("did not find any Java class file at \"" ++ expectedJavaClassFilePath ++ "\" (note that the output Java class file must be written to same directory as the input C++ file)") (Just f) (nullMaybe input) (nullMaybe compilerOut) (nullMaybe compilerErr)
       return False
 
--- | Return all files with extension ".cc" in given directory.
 listCCFiles :: FilePath -> IO [FilePath]
 listCCFiles dir = do
   doubles <- readIORef includeDoubleTests
-  liftM (map (\f -> joinPath [dir,f]) . sort . filter (doublesFilter doubles) . filter ((==".cc") . takeExtension)) $
-    listDirectory dir
-  where doublesFilter doubles filename = doubles || not (isPrefixOf "double__" filename)
+  sort . filter (doublesFilter doubles) . filter ((==".cc") . takeExtension) <$> listDirectoryRecursive dir
+  where doublesFilter doubles filename = doubles || not (isInfixOf "double" filename || isInfixOf "subtyping" filename)
+
+listDirectoryRecursive :: FilePath -> IO [FilePath]
+listDirectoryRecursive dir = do
+  doesDirectoryExist dir >>= \case
+    False -> return []
+    True  -> do
+      fs <- map (dir </>) <$> listDirectory dir
+      (fs ++) <$> concatMapM listDirectoryRecursive fs
 
 --
 -- * Debugging
