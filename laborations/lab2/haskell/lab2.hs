@@ -1,3 +1,5 @@
+import Control.Exception
+
 import System.Environment (getArgs)
 import System.Exit (exitFailure)
 
@@ -23,7 +25,11 @@ check s = do
           putStrLn "TYPE ERROR"
           putStrLn err
           exitFailure
-        Ok _ -> interpret tree
+        Ok _ -> interpret tree `catch` \e -> case e of
+          ErrorCall err -> do
+            putStrLn "INTERPRETER ERROR"
+            putStrLn err
+            exitFailure
 
 -- | Main: read file passed by only command line argument and call 'check'.
 

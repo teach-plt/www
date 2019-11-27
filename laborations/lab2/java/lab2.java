@@ -23,7 +23,7 @@ public class lab2 {
             System.err.println(e.toString());
             System.exit(1);
         } catch (RuntimeException e) {
-            //            System.out.println("RUNTIME ERROR");
+            System.out.println("INTERPRETER ERROR");
             System.err.println(e.toString());
             System.exit(-1);
         } catch (IOException e) {
