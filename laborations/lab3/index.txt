@@ -380,10 +380,7 @@ The compiler is submitted as source files that can be compiled by typing ``make`
 
 //If you have any problems getting the test program to run, or if you think that there is an error in the test suite, contact the teachers of the course via the mailing list.//
 
-We also provide a [test suite ./testsuite/index.html] for Lab 3 (with the same test cases as for [Lab 2 ../lab2/index.html]).
-By default, no tests containing doubles will be run; passing all these tests is the **minimum required** for passing this lab.
-
-If you are ambitious, run the test suite with the ``--doubles`` flag to also include the doubles tests.
+We also provide a [test suite ./testsuite/index.html] for Lab 3 (with the same test cases as for [Lab 2 ../lab2/index.html]). Passing all these tests is the **minimum required** for passing this lab.
 
 **Run your compiler and the generated code with the test suite before submitting the assignment.**
 

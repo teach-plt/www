@@ -52,11 +52,3 @@ where your solution is located:
 ```
 $ ./progs-test-lab3 path/to/your/solution/
 ```
-
-
-If you have implemented compilation of floating point operations,
-invoke the test suite with the ``--doubles`` flag:
-
-```
-$ ./progs-test-lab3 --doubles path/to/your/solution/
-```
