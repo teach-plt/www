@@ -30,7 +30,8 @@ The recommended implementation is via a BNF
 grammar processed by the BNF Converter (BNFC) tool. The syntax
 tree created by the parser is first type checked by using the
 type checker created in [Lab 2 ../lab2/index.html].
-The code generator should then make another pass of the type-checked code.
+The code generator should then make a pass over the type-annotated
+syntax produced by the type checker.
 
 The approximate size of the grammar is 50 rules, and the code generator
 should be around 300-700 lines, depending on the programming language
@@ -41,40 +42,29 @@ only for Haskell and Java.
 Before the work can be submitted, the program has to pass
 the [test suite ./testsuite/index.html].
 
-==Restriction of the task==
-
-To pass the assignment, it is sufficient to treat the grammar of [Lab 2 ../lab2/index.html]
-**excluding doubles**.  Thus, operations involving type double need not
-be covered by the code generator.
-
-However, for the ambitious student, we recommend to extend the code
-generator to also handle doubles (after it works for integers and the
-statements).  The extension requires some extra work:
-
-+ The type checker needs to annotate the abstract syntax with types,
-  such that the correct instruction (for int or double)
-  can be picked by the code generator.
-+ As doubles are 64bit (whereas the other values have only 32bit), the
-  environment has to record the size of local variables (single word
-  or double word).
-
 
 =Method=
 
-The recommended procedure is two passes:
+The recommended procedure for the compiler is two passes:
+
 + build a symbol table that for every function gives its type in a form
   usable for JVM code generation;
 + compile the program by generating a class file containing every
   source code function as a method.
 
 
-
-You can copy your ``CMM.cf`` grammar and the
+You can start by copying your ``CMM.cf`` grammar and the
 ``TypeChecker`` module from [Lab 2 ../lab2/index.html] to the same directory.
 
+Then, modify the type checker to produce type-annotated abstract syntax,
+such that the correct instruction (for ``int`` or ``double``)
+can be picked by the code generator.
+The type-annotated syntax should also make clear where a conversion
+from int to double occurs, such that the conversion instruction ``i2d``
+can be placed by the code generator.
 
 
-#NEW
+
 
 =Language specification=
 
@@ -82,7 +72,7 @@ The language is the same as in [Lab 2 ../lab2/index.html], except the handling o
 parser and type checker.
 
 Programs using uninitialized variables fall under undefined behaviour
-in this lab, meaning that any semantics for such programs are allowed.
+in this lab, meaning that any semantics for such programs is allowed.
 
 There are four built-in functions:
 ```
@@ -322,7 +312,15 @@ The generated class file should have the same name and be **in the same director
 ```
   lab3 ../a/b/c.cc
 ```
-This should produce a class file ``../a/b/c.class``. This can be achieved using Jasmin's ``-d`` flag.
+This should produce a class file ``../a/b/c.class``.
+To instruct Jasmin to place the file ``c.class`` in the correct directory,
+use Jasmin's  option ``-d``, for instance, ``jasmin -d ../a/b ../a/b/c.j``.
+(Note: to //run// a class file in a subdirectory, that directory needs
+to be in the ``CLASSPATH``, e.g., ``java -cp ../a/b:path/to/runtime c``
+can be used to run ``../a/b/c.class`` without changing to its
+directory, assuming that ``Runtime.class`` is located in
+``path/to/runtime``.)
+
 
 The output at failure is a code generator error, or
 ``TYPE ERROR`` or ``SYNTAX ERROR`` as in Assignment 2.
@@ -336,7 +334,7 @@ a file or by ``echo``. For instance,
 ```
 
 
-#NEW
+
 
 ==Example of success==
 
@@ -368,13 +366,13 @@ Running the compiler:
 ```
 
 
-#NEW
+
 
 ==Compiling the code generator==
 
 The compiler is submitted as source files that can be compiled by typing ``make``.
 
-#NEW
+
 
 =Test programs=
 
