@@ -82,6 +82,9 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %    (Schedule updated.)
 %    //2019-12-10//: [Slides available http://www.cse.chalmers.se/~bergert/slides/guest_lecture_DSLs.pdf]
 
+ : //2019-12-03//
+   The test suite for lab 3 now includes a ``good/subtyping`` directory that contains tests for handling subtyping correctly.
+
  : //2019-11-29//
    [Lab 3 laborations/lab3/index.html] is online.
 
