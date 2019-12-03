@@ -4,6 +4,7 @@ NAME=lab3-testsuite
 
 mkdir "$NAME"
 mkdir "$NAME/good"
+mkdir "$NAME/good/subtyping"
 mkdir -p "$NAME/dir-for-path-test/one-more-dir"
 
 cp -p progs-test-lab3.hs "$NAME"
@@ -13,6 +14,9 @@ cp -p Makefile-test      "$NAME/Makefile"
 cp -p good/*.cc        "$NAME/good/"
 cp -p good/*.cc.input  "$NAME/good/"
 cp -p good/*.cc.output "$NAME/good/"
+cp -p good/subtyping/*.cc        "$NAME/good/subtyping/"
+#cp -p good/subtyping/*.cc.input  "$NAME/good/subtyping/" <-- currently none
+cp -p good/subtyping/*.cc.output "$NAME/good/subtyping/"
 cp -p dir-for-path-test/one-more-dir/simple.cc "$NAME/dir-for-path-test/one-more-dir/"
 
 tar -zcf "$NAME.tar.gz" "$NAME"
