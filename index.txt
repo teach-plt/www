@@ -157,7 +157,7 @@ Slides follow closely the plt book.
 %| Thu 21/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
 | Thu 21/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
 %| Tue 26/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
-| Tue 26/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/index.html]
+| Tue 26/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/index.html] [Monads https://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf] |
 | Tue 26/11     | 14-15          | Hands-on with Lab 2 (Java)        | [live coding live/2019/live-7-lab2.zip] |
 %| Thu 28/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/index.html]
 %| Thu 28/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
@@ -385,7 +385,7 @@ to continue with the [Compiler Construction http://www.cse.chalmers.se/edu/cours
 course, you should also consider //the Dragon book//,
 
 : Aho, Lam, Sethi & Ullman
-  //Compilers Principles, Techniques & Tools//
+  //Compilers Principles, Techniques & Tools//,
   **Second edition**,
   Pearson/Addison Wesley
   2007.
@@ -394,7 +394,15 @@ course, you should also consider //the Dragon book//,
 Both books are available at web bookshops.
 The main book will also be sold at Cremona.
 
+A good (yet slightly dated) introduction to monads in Haskell, useful for implementing interpreters, type checkers, and compilers, is this article:
 
+: Philip Wadler
+  [Monads for functional programming https://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf].
+  In //Advanced Functional Programming//,
+  First International Spring School on Advanced Functional Programming Techniques, Båstad, Sweden, May 24-30, 1995.
+
+
+It also contains an introduction to parser combinators.
 
 
 =Software=
@@ -414,7 +422,7 @@ If using the Java backend, you will need the **CUP** and **JLex** libraries.
 CUP has seen incompatible changes in its interface; thus, the version you need
 may depend on your BNFC version.
 
-===Instructions for BNFC 2.8.3 (uses CUP v0.11b)===
+===Instructions for BNFC 2.8.2/3 (uses CUP v0.11b)===
 
 Download the JAVA archives for
 [CUP v11b doc/java-cup-11b.jar],
