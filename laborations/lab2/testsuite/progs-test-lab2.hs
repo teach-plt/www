@@ -1,5 +1,6 @@
 {-# LANGUAGE CPP #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE TupleSections #-}
 
 -- GHC needs -threaded
 
@@ -94,13 +95,13 @@ runMake dir = do checkDirectoryExists dir
 
 type TestSuite = ([FilePath],[FilePath],[FilePath])
 
-runTests :: FilePath -> TestSuite -> IO ([Bool],[Bool],[Bool])
+runTests :: FilePath -> TestSuite -> IO ([(FilePath,Bool)],[(FilePath,Bool)],[(FilePath,Bool)])
 runTests dir (goodProgs,badProgs,badRuntimeProgs) = do
   let prog = joinPath [dir,executable_name]
   checkFileExists prog
-  good <- mapM (testGoodProgram prog) goodProgs
-  bad <- mapM (testBadProgram prog) badProgs
-  badRuntime <- mapM (testBadRuntimeProgram prog) badRuntimeProgs
+  good       <- mapM (\f -> (f,) <$> testGoodProgram       prog f) goodProgs
+  bad        <- mapM (\f -> (f,) <$> testBadProgram        prog f) badProgs
+  badRuntime <- mapM (\f -> (f,) <$> testBadRuntimeProgram prog f) badRuntimeProgs
   return (good,bad,badRuntime)
 
 testGoodProgram :: FilePath -> FilePath -> IO Bool
@@ -377,10 +378,15 @@ prFile f = do
                        putStrLn $ "----------------- end " ++ f ++ " -------------------"
 
 
--- | Report how many tests passed.
-report :: String -> [Bool] -> IO ()
-report n rs =
-  do let (p,t) = (length (filter id rs), length rs)
-         c = if p == t then green else red
-     putStrLn $ color c $
-              n ++ "passed " ++ show p ++ " of " ++ show t ++ " tests"
+-- | Report how many tests passed and which tests failed (if any).
+report :: String -> [(FilePath,Bool)] -> IO ()
+report n rs = do
+  let (passedTests,failedTests) = partition snd rs
+      (p,t) = (length passedTests, length rs)
+      successful = p == t
+      c = if successful then green else red
+  putStrLn $ color c $
+           n ++ "passed " ++ show p ++ " of " ++ show t ++ " tests"
+  when (not successful) $ do
+    putStrLn $ show (t - p) ++ " tests failed:"
+    forM_ failedTests $ \(fp,_) -> putStrLn $ "- " ++ fp
