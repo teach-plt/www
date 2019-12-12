@@ -6,6 +6,7 @@
 import Control.Exception
 import Control.Monad
 
+import Data.Char
 import Data.IORef
 import Data.List
 import Data.Maybe
@@ -174,7 +175,9 @@ testBackendProg prog f = do
         reportError "java" "non-zero exit code" (Just f) (nullMaybe input) (nullMaybe javaOut) (nullMaybe javaErr)
         return False
       else do
-        if javaOut == output then
+        -- Try to work around line ending problem
+        let removeCR = filter (/= '\r')
+        if trim (removeCR javaOut) == trim (removeCR output) then
           return True
         else do
           reportError "java" "invalid output" (Just f) (nullMaybe input) (nullMaybe javaOut) (nullMaybe javaErr)
@@ -217,6 +220,10 @@ debug s = do
 --
 -- * Utilities
 --
+
+trim :: String -> String
+trim = f . f
+  where f = reverse . dropWhile isSpace
 
 cleanDirectory :: FilePath -> [String] -> IO ()
 cleanDirectory path exts = listDirectory path >>=
