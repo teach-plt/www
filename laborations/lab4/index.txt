@@ -63,7 +63,7 @@ body is a call to the (undefined) unary function ``print``.  For example:
 The purpose of this special form is to make our language a subset of Haskell.
 You can run well-formed programs in Haskell to check the expected result.
 
-Expressions are of the following forms
+Expressions are of the following forms:
 
 || precedence | expression  | syntax       | example               ||
 |  3          | identifier  | ``x``        | ``foo``                |
@@ -81,7 +81,7 @@ The available operations are ``+, -, <``.
 
 Here is an example of a program in the language:
 ```
-  -- Multiplication with premature optimization.
+  -- Multiplication with unnecessary special case for y=1.
 
   mult x y =
     if (y < 1) then 0 else
