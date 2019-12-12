@@ -73,6 +73,9 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %    [Lab 4 stubs laborations/lab4/index.html#section3] for Haskell and Java are now available.
 
  : //2019-12-12//
+   A bug that caused some test (e.g. the tests in the subtyping directory) to not run has been fixed in the lab 3 test suite. Please re-download the test suite.
+
+ : //2019-12-12//
    [Lab 4 laborations/lab4/index.html] is online.
 
 %  : //2019-12-05//
