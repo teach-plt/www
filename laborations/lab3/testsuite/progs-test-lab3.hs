@@ -83,7 +83,7 @@ optDescr = [ Option []    ["debug"]      (NoArg  enableDebug       ) "print debu
 parseArgs :: [String] -> IO (FilePath,TestSuite)
 parseArgs argv = case getOpt RequireOrder optDescr argv of
   (o,[progdir],[]) -> do
-    let defaultOptions = Options False False True Nothing
+    let defaultOptions = Options False True True Nothing
         options = foldr ($) defaultOptions o
     when (debugFlag   options)       $ writeIORef doDebug            True
     when (not $ doublesFlag options) $ writeIORef includeDoubleTests False
