@@ -53,7 +53,7 @@ CVS
 /laborations/lab2/haskell/CPP/
 /laborations/lab2/haskell/lab2
 
-/laborations/lab2/testsuite/good/*.j
+/laborations/lab2/testsuite/good/**/*.j
 /laborations/lab2/testsuite/good/*.cc.exe
 /laborations/lab2/testsuite/good/*.cc.tmp.cpp
 /laborations/lab2/testsuite/bad/*.cc.exe
