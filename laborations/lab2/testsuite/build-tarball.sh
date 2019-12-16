@@ -21,6 +21,9 @@ cp -p good/subtyping/*.cc.output "$NAME/good/subtyping/"
 cp -p bad/*.cc "$NAME/bad/"
 cp -p bad-runtime/*.cc "$NAME/bad-runtime/"
 
-tar -zcf "$NAME.tar.gz" "$NAME"
+TAR=tar
+GTAR=gtar
+if ! command -v $TAR >/dev/null; then echo "Command not found: $TAR... Switching to $GTAR."; TAR=$GTAR; fi
+$TAR -zcf "$NAME.tar.gz" "$NAME"
 
 rm -rf "$NAME"

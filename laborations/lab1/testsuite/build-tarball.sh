@@ -11,6 +11,9 @@ cp Makefile-test "$DIR/Makefile"
 cp -p good/*.cc "$DIR/good/"
 cp -p bad/*.cc "$DIR/bad/"
 
-tar -czf "$DIR.tar.gz" "$DIR"
+TAR=tar
+GTAR=gtar
+if ! command -v $TAR >/dev/null; then echo "Command not found: $TAR... Switching to $GTAR."; TAR=$GTAR; fi
+$TAR -czf "$DIR.tar.gz" "$DIR"
 
 rm -rf "$DIR"
