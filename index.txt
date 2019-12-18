@@ -61,12 +61,12 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 % : //2017-12-19//
 %   The exam will be held 8 January 2019, 8.30-12.30 in building M on the Johanneberg campus.
 
-% : //2017-12-13//
-%   In the last lecture, we will walk through an
-%   [example exam exams/exam-plt-2017-3.pdf].
+ : //2019-12-18//
+   In the last lecture, we will walk through an
+   [example exam exams/exam-plt-2017-3.pdf].
 
  : //2019-12-18//
-    The live code for "hands on lab4" contains too much of the solution, thus, will not be published.  See the PLT book chapter 7.6 and this [Canvas post https://chalmers.instructure.com/courses/7185/discussion_topics/13646] for advice on the implementation.
+   The live code for "hands on lab4" contains too much of the solution, thus, will not be published.  See the PLT book chapter 7.6 and this [Canvas post https://chalmers.instructure.com/courses/7185/discussion_topics/13646] for advice on the implementation.
 
  : //2019-12-17//
    Live coding in Agda [start live/2019/live-13-JVM-start.agda] and [finish live/2019/live-13-JVM-finish.agda]
