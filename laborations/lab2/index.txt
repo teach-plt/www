@@ -831,7 +831,7 @@ $ tar --strip-components=1 -xzf lab2.tar.gz
 ```
   + Build your solution
 ```
-$ make
+$ make -B
 ```
   + Make sure step 5 succeeds without errors.
   + Make sure your solution has been built
