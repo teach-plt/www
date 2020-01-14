@@ -190,7 +190,7 @@ Slides follow closely the plt book.
 | //Mon 13/01// | //8.30-12.30// | //Exam (J)//             |  |
 %[Exam exams/exam-plt-2019-1.pdf] |
 | //Thu 23/01// | //23//         | //Final lab deadline//            | //all lab returns//
-| //Fr 24/01// | //13.30//      | //Exam review (EDIT Analysen, 3rd floor) // |  |
+| //Wed 29/01// | //10-11.30//      | //Exam review (EDIT 5128) // | [Solution exams/solutions-plt-2020-1.pdf] |
 %| //Fri 31/01// | //10-11// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
 %| //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
 %| //Sun 25/03// |                | //Late final lab deadline//       |  |
