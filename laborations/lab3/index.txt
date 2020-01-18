@@ -415,6 +415,10 @@ The easiest option, and also what the test suite expects,
 is that your class name is just a string
 without any slashes or dots (in this example, just "z").
 
+Also note that it seems that each statement in your Jasmin file needs
+to be **terminated** by a newline, in particular the last
+``.end method`` directive.
+
 **Important:**
 Make sure that your compiler waits for the Jasmin conversion to finish before exiting.
 In other words, it shouldn't exit before the ``.class`` file has been written.
