@@ -48,11 +48,14 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %   The reexam will be held 5 April in building SB.
 
 % : //2019-03-14//
-%   Fire is open for the late submission of labs.
+%   Fire % is open for the late submission of labs.
 
-% : //2019-01-26//
-%   Exam review will be Fri 1 February 10am in EDIT 6128.
-%   [Exam text exams/exam-plt-2019-1.pdf] and [solution exams/solutions-plt-2019-1.pdf].
+ : //2020-01-21//
+   Exam review will be Wed 29 January 10am in EDIT 5128.
+   [Exam text exams/exam-plt-2020-1.pdf] and [solution exams/solutions-plt-2020-1.pdf].
+
+   Deadline extension:
+   Lab 4 submission on Fire is now possible until the final deadline (23rd Jan).
 
 %   I am very pleased with the outcome, thanks for studying well!
 
@@ -190,7 +193,7 @@ Slides follow closely the plt book.
 | //Mon 13/01// | //8.30-12.30// | //Exam (J)//             |  |
 %[Exam exams/exam-plt-2019-1.pdf] |
 | //Thu 23/01// | //23//         | //Final lab deadline//            | //all lab returns//
-| //Wed 29/01// | //10-11.30//      | //Exam review (EDIT 5128) // | [Solution exams/solutions-plt-2020-1.pdf] |
+| //Wed 29/01// | //10-11.30//      | //Exam review (EDIT 5128)// | [Solution exams/solutions-plt-2020-1.pdf] |
 %| //Fri 31/01// | //10-11// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
 %| //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
 %| //Sun 25/03// |                | //Late final lab deadline//       |  |
