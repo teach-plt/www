@@ -50,6 +50,9 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 % : //2019-03-14//
 %   Fire % is open for the late submission of labs.
 
+ : //2020-01-25//
+   The deadline for all labs has been extended to 10th February.
+
  : //2020-01-21//
    Exam review will be Wed 29 January 10am in EDIT 5128.
    [Exam text exams/exam-plt-2020-1.pdf] and [solution exams/solutions-plt-2020-1.pdf].
