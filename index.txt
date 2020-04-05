@@ -45,7 +45,11 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %   The Fire deadline for late submission has been extended until
 %   Sunday 25th.
 
-%   The reexam will be held 5 April in building SB.
+  : //2020-04-05//
+   The reexam will be held 7 April on Canvas organized as
+   [course 9969 https://chalmers.instructure.com/courses/9969].
+   If you registered to the exam, you should have gotten an invitation
+   to this course.  Please read the instructions there.
 
 % : //2019-03-14//
 %   Fire % is open for the late submission of labs.
@@ -200,7 +204,7 @@ Slides follow closely the plt book.
 %| //Fri 31/01// | //10-11// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
 %| //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
 %| //Sun 25/03// |                | //Late final lab deadline//       |  |
-| //Tue 07/04// | //8.30-12.30// | //Exam (J)//                      |  |
+| //Tue 07/04// | //8.30-12.30// | //Exam (Canvas)//                      |  |
 % //[Solution exams/solutions-plt-2017-2.pdf]// |
 | //Thu 27/08// | //14-18//      | //Exam (J)//                      |  |
 % //[Solution exams/solutions-plt-2017-3.pdf]// |
