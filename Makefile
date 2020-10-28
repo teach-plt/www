@@ -1,7 +1,7 @@
 # Makefile for www structure of PLT
 
 # Files which contribute to index.html
-deps=style.css include.html enhance_page.js
+deps=style.css include.html enhance_page.js Makefile
 
 .PHONY : ship all www mini ipl-book
   # lab1 lab2 lab3 lab4 ## .PHONY turns off lab% goals somehow
@@ -27,8 +27,12 @@ check : all
 	linkchecker --check-extern index.html
 # pip install git+https://github.com/linkchecker/linkchecker.git@v9.4.0
 
-%.html : %.txt $(deps)
+# Note: this needs txt2tags version 2.6 (python2)
+# version 3.x produces different html (very different look)
+# and dumps a fixed CSS style into the generated html.
+index.html : %.html : %.txt $(deps)
 	txt2tags --style=style.css -t html $<
+# --toc
 
 exams.tgz : exams/*.pdf exams/*.txt exams/*.html exams/*.jpg
 	tar czf $@ $^
