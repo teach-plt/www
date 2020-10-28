@@ -184,7 +184,7 @@ Slides follow closely the plt book.
 %| Thu 19/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
 | Thu 19/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
 %| Tue 24/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
-| Tue 24/11     | 13-14          | Hands-on with Lab 2 (Haskell)     |
+| Tue 24/11     | 13-14          | Hands-on with Lab 2 (Haskell)     |  |
 %[lab2 PM laborations/lab2/index.html] [Monads https://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf] |
 | Tue 24/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
 %[live coding live/2019/live-7-lab2.zip] |
@@ -307,12 +307,12 @@ You are also welcome to answer questions by others.
 
 =Laboration times and supervision=
 
-Lab supervision take place on Zoom
+Lab supervision take place on Zoom.
 % in [ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093].
 || Day | Time        | Supervisors |
- | Tue | 15:15-17:00 | FR MA |
+ | Tue | 15:15-17:00 | OA MA |
  | Thu | 15:15-17:00 | AL MA |
- | Fri | 13:15-15:00 | AL FR |
+ | Fri | 13:15-15:00 | AL OA |
 
 
 % The lab rooms and supervision are
