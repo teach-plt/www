@@ -155,7 +155,7 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 
 =Tentative Schedule=
 
-Lectures take place on Zoom, link see [Canvas https://chalmers.instructure.com/courses/1078].
+Lectures take place on Zoom, link see [Canvas https://chalmers.instructure.com/courses/10787].
 
 % Tuesday lectures are in **[HC2 http://maps.chalmers.se/#23e2df72-cbb9-4aff-825a-1a282e9618d6]**,
 % Thursday lectures in **[HA1 http://maps.chalmers.se/#971e00c6-6f9a-46ce-9894-687adb1fa8ea]**,
@@ -392,9 +392,9 @@ The written exam determines the course grade, the usual grading scales apply:
 Chalmers: 5, 4, 3, U; Gothenburg University: VG, G, U.
 
 Exam dates:
- 11 Jan 2020 am J,
- 08 Apr 2020 am J,
- 26 Aug 2020 pm J.
+ 11 Jan 2021 am J,
+ 08 Apr 2021 am J,
+ 26 Aug 2021 pm J.
 
 The exam tests the understanding of the course contents from a more high-level view,
 e.g., the underlying theoretical concepts.
