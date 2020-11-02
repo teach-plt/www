@@ -37,11 +37,13 @@ debug s = do
   d <- readIORef doDebug
   when d $ putStrLn s
 
+-- | Get @.cc@ files in given directory (non-recursively) in alphabetical order.
 listCCFiles :: FilePath -> IO [FilePath]
-listCCFiles dir =
-  map (dir </>) .
-  List.sort .
-  filter ((".cc" ==) . takeExtension) <$> listDirectory dir
+listCCFiles dir
+  = map (dir </>)
+  . List.sort
+  . filter ((".cc" ==) . takeExtension)
+  <$> listDirectory dir
 
 
 welcome :: IO ()
@@ -294,16 +296,18 @@ blue  = 4
 -- * Run programs
 --
 
-runPrgNoFail_ :: FilePath -- ^ Executable
-              -> [String] -- ^ Flags
-              -> FilePath -- ^ Filename
-              -> IO ()
-runPrgNoFail_ exe flags file = runPrgNoFail exe flags file >> return ()
+runPrgNoFail_
+  :: FilePath -- ^ Executable
+  -> [String] -- ^ Flags
+  -> FilePath -- ^ Filename
+  -> IO ()    -- ^ (Output truncated.)
+runPrgNoFail_ exe flags file = () <$ runPrgNoFail exe flags file
 
-runPrgNoFail :: FilePath -- ^ Executable
-             -> [String] -- ^ Flag
-             -> FilePath -- ^ Filename
-             -> IO (String,String) -- ^ stdout and stderr
+runPrgNoFail
+  :: FilePath            -- ^ Executable
+  -> [String]            -- ^ Flags
+  -> FilePath            -- ^ Filename
+  -> IO (String, String) -- ^ stdout and stderr
 runPrgNoFail exe flags file = do
   let c = showCommandForUser exe (flags ++ [file])
   hPutStr stderr $ "Running " ++ c ++ "... "
