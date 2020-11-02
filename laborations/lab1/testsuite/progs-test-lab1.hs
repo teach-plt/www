@@ -140,11 +140,19 @@ defaultOptions = Options
   , optBad   = []
   }
 
+-- | Fallback is no tests are given on command line.
+defaultGood :: [FilePath]
+defaultGood = ["good"]
+
+-- | Fallback is no tests are given on command line.
+defaultBad :: [FilePath]
+defaultBad = ["bad"]
+
 optDescr :: [OptDescr (Options -> Options)]
 optDescr =
   [ Option []    ["debug"] (NoArg  enableDebug       ) "print debug messages"
-  , Option ['g'] ["good"]  (ReqArg addGood     "FILE") "good test case FILE"
-  , Option ['b'] ["bad"]   (ReqArg addBad      "FILE") "bad test case FILE"
+  , Option ['g'] ["good"]  (ReqArg addGood     "PATH") "good test case PATH"
+  , Option ['b'] ["bad"]   (ReqArg addBad      "PATH") "bad test case PATH"
   ]
 
 enableDebug :: Options -> Options
@@ -156,7 +164,7 @@ addBad  f o = o { optBad  = f : optBad  o }
 
 -- | If no test cases are given, assume standard test suites.
 testSuiteOption :: Options -> TestSuite
-testSuiteOption o = if null g && null b then (["good"], ["bad"]) else (g, b)
+testSuiteOption o = if null g && null b then (defaultGood, defaultBad) else (g, b)
   where
   g = optGood o
   b = optBad  o
@@ -172,13 +180,28 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
     return (cfFile, testSuite')
 
   (_,_,_) -> do
-    hPutStrLn stderr "Usage: progs-test-lab1 [--debug] [-g|--good FILE]... [-b|--bad FILE]... cf_file"
+    hPutStrLn stderr usage
     exitFailure
 
   where
   bothM :: Applicative f => (a -> f b) -> (a,a) -> f (b,b)
   bothM f (a1,a2) = (,) <$> f a1 <*> f a2
 
+usage :: String
+usage = unlines
+  [ "Usage: progs-test-lab1 [OPTIONS] FILE"
+  , ""
+  , "Test a parser given by LBNF grammar FILE to accept given good inputs and reject given bad inputs as provided by the OPTIONS."
+  , ""
+  , usageInfo "OPTIONS:" optDescr
+  , "Any PATH that is a directory is expanded to PATH/*.cc."
+  , "If neither good nor bad test cases are given, the default is: "  ++ defaultSuite
+  ]
+  where
+  defaultSuite = unwords $ concat
+    [ concatMap (\ f -> ["-g", f]) defaultGood
+    , concatMap (\ f -> ["-b", f]) defaultBad
+    ]
 
 mainOpts :: FilePath -> TestSuite -> IO ()
 mainOpts cfFile testSuite = do
