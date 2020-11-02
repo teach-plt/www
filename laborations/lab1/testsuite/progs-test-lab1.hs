@@ -27,6 +27,20 @@ import System.IO
 import System.Process
 import System.IO.Unsafe
 
+-- * Configuration
+------------------------------------------------------------------------
+
+-- | Default good tests if no tests (neither good nor bad) are given on command line.
+defaultGood :: [FilePath]
+defaultGood = ["good", "good-CMM"]
+
+-- | Default bad test if no tests (neither good nor bad) are given on command line.
+defaultBad :: [FilePath]
+defaultBad = ["bad"]
+
+-- * Components
+------------------------------------------------------------------------
+
 {-# NOINLINE doDebug #-}
 doDebug :: IORef Bool
 doDebug = unsafePerformIO $ newIORef False
@@ -139,14 +153,6 @@ defaultOptions = Options
   , optGood  = []
   , optBad   = []
   }
-
--- | Fallback is no tests are given on command line.
-defaultGood :: [FilePath]
-defaultGood = ["good"]
-
--- | Fallback is no tests are given on command line.
-defaultBad :: [FilePath]
-defaultBad = ["bad"]
 
 optDescr :: [OptDescr (Options -> Options)]
 optDescr =
