@@ -23,7 +23,7 @@ lab3 : $(files) CMM/Test
 # Rules to build the parser:
 
 CMM/Test.hs CMM/Lex.x CMM/Layout.hs CMM/Par.y : CMM.cf
-	bnfc --ghc -d $<
+	bnfc -d $<
 
 CMM/Par.hs: CMM/Par.y
 	happy -gcai $<

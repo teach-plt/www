@@ -1,12 +1,13 @@
+{-# LANGUAGE PatternSynonyms #-}
+
 import Control.Exception
 
 import System.Environment (getArgs)
-import System.Exit (exitFailure)
-import System.IO.Error (isUserError, ioeGetErrorString)
+import System.Exit        (exitFailure)
+import System.IO.Error    (isUserError, ioeGetErrorString)
 
-import CMM.Lex
-import CMM.Par
-import CMM.ErrM
+import CMM.Par            (pProgram, myLexer)
+import CMM.ErrM           (pattern Ok, pattern Bad)
 
 import TypeChecker
 import Interpreter

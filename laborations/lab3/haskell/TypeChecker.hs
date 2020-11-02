@@ -1,6 +1,7 @@
 {-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE TupleSections #-}
+{-# LANGUAGE LambdaCase       #-}
+{-# LANGUAGE PatternSynonyms  #-}
+{-# LANGUAGE TupleSections    #-}
 
 -- | Type checker for C--, producing typed syntax from ASTs.
 
@@ -20,7 +21,7 @@ import qualified Data.Set as Set
 
 import CMM.Abs
 import CMM.Print (printTree)
-import CMM.ErrM  (Err(Ok, Bad))
+import CMM.ErrM  (Err, pattern Bad, pattern Ok)
 
 import qualified Annotated as A
 

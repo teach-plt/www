@@ -20,7 +20,7 @@ lab4 : $(files) Fun/Test
 # Rules to build the parser:
 
 Fun/Test.hs Fun/Lex.x Fun/Par.y : Fun.cf
-	bnfc --ghc -d $<
+	bnfc -d $<
 
 %.hs : %.y
 	happy -gcai $<

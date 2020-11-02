@@ -1,3 +1,5 @@
+{-# LANGUAGE PatternSynonyms #-}
+
 import Control.Monad        (forM_, when)
 import Control.Monad.State  (StateT, execStateT, gets, modify, liftIO)
 import Control.Monad.Except (runExcept)
@@ -9,7 +11,7 @@ import System.Exit          (exitFailure, exitSuccess)
 import Fun.Abs              (Program)
 import Fun.Par              (pProgram, myLexer)
 import Fun.Print            (printTree)
-import Fun.ErrM             (Err(..))
+import Fun.ErrM             (Err, pattern Ok, pattern Bad)
 
 import Interpreter          (Strategy(..), interpret)
 

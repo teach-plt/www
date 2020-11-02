@@ -1,3 +1,5 @@
+{-# LANGUAGE PatternSynonyms #-}
+
 -- | lab3: Compiler from C-- to JAVA .class file.
 
 import System.Directory   (getHomeDirectory)
@@ -7,7 +9,7 @@ import System.FilePath    (dropExtension, replaceExtension, splitFileName)
 import System.Process     (callProcess)
 
 import CMM.Par                  (pProgram, myLexer)
-import CMM.ErrM                 (Err (Bad, Ok))
+import CMM.ErrM                 (Err, pattern Bad, pattern Ok)
 import qualified CMM.Abs   as A (Program)
 import qualified Annotated as T (Program)
 import qualified Compiler  as C (compile)
