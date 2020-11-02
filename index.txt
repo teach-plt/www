@@ -307,7 +307,7 @@ You are also welcome to answer questions by others.
 
 =Laboration times and supervision=
 
-Lab supervision take place on Zoom.
+Lab supervision workflow: Start a Zoom meeting with your personal Zoom ID and invite your group partner to join. To ask for help, sign up on the [Waglys digital waiting list http://www.waglys.com/bonlYD] with your 10-digit Zoom ID (as "6435657890" from "https://chalmers.zoom.us/j/6435657890"), so that the instructor/TA knows where to find you. Please make sure your meeting does **not** require password to get in.  Monitor the queue on the waiting list, the instructor/TA will join your Zoom meeting as soon as it's your turn.
 % in [ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093].
 || Day | Time        | Supervisors |
  | Tue | 15:15-17:00 | OA MA |
