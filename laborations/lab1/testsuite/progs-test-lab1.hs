@@ -9,11 +9,17 @@ import Control.Monad
 
 import Data.Char
 import Data.IORef
-import Data.List
+import qualified Data.List as List
 import Data.Maybe
 
 import System.Console.GetOpt
 import System.Directory
+  ( copyFile
+  , createDirectoryIfMissing
+  , doesDirectoryExist
+  , listDirectory              -- Requires ghc ≥ 7.10.3
+  , setCurrentDirectory
+  )
 import System.Environment
 import System.FilePath
 import System.Exit
@@ -24,20 +30,6 @@ import System.IO.Unsafe
 -- | Configure me!
 grammar :: String
 grammar = "CMM"
-
-whenJust :: Applicative m => Maybe a -> (a -> m ()) -> m ()
-whenJust (Just a) k = k a
-whenJust Nothing  _ = pure ()
-
-list :: [a] -> b -> ([a] -> b) -> b
-list [] b _ = b
-list as _ f = f as
-
-fromList :: [a] -> [a] -> [a]
-fromList as xs = list as xs id
-
-nullMaybe :: [a] -> Maybe [a]
-nullMaybe as = list as Nothing Just
 
 {-# NOINLINE doDebug #-}
 doDebug :: IORef Bool
@@ -51,23 +43,24 @@ debug s = do
 
 listCCFiles :: FilePath -> IO [FilePath]
 listCCFiles dir =
-  map (\f -> joinPath [dir,f]) .
-  sort .
+  map (dir </>) .
+  List.sort .
   filter ((".cc" ==) . takeExtension) <$> listDirectory dir
 
 
 welcome :: IO ()
 welcome = do
   putStrLn $ "This is the test program for Programming Languages Lab 1"
-  putStrLn $ color red  $ "NOTE: The start category in your grammar must be called 'Program'"
+  putStrLn $ color red $ "NOTE: The start category in your grammar must be called 'Program'"
 
+-- | Run @bnfc@ and return the number of rules of the grammar.
 runBNFC :: IO Int
 runBNFC = do
   (out,_) <- runPrgNoFail "bnfc" ["-d"] $ grammar <.> "cf"
-  let r = case grep "rules accepted" out of
+  -- Look for line "nnn rules accepted"
+  return $ case grep "rules accepted" out of
             []   -> 0
             l:_  -> read $ takeWhile isDigit l
-  return r
 
 runAlex :: IO ()
 runAlex = runPrgNoFail_ "alex" [] $ grammar </> "Lex.x"
@@ -118,16 +111,16 @@ testFrontendProg good f = do
       prg = "." </> "testdriver"
   putStr $ "Parsing " ++ f ++ "... "
   -- TODO: Should maybe check exit code here
-  (s,out,err) <- readProcessWithExitCode prg [f] ""
+  (s, out, err) <- readProcessWithExitCode prg [f] ""
   putStrLnExitCode s "."
   case lines err of
     "OK":_    | good -> return True
-              | bad  -> False <$ reportError prg "passed BAD program" (Just f) Nothing (nullMaybe out) (nullMaybe err)
+              | bad  -> False <$ reportError prg "passed BAD program" (Just f) Nothing out err
 
-    "ERROR":_ | good -> False <$ reportError prg "" (Just f) Nothing (nullMaybe out) (nullMaybe err)
+    "ERROR":_ | good -> False <$ reportError prg ""                   (Just f) Nothing out err
 
               | bad  -> return True
-    _                -> False <$ reportError prg "invalid output" (Just f) Nothing (nullMaybe out) (nullMaybe err)
+    _                -> False <$ reportError prg "invalid output"     (Just f) Nothing out err
 
 
 --
@@ -151,6 +144,7 @@ optDescr = [ Option []    ["debug"] (NoArg  enableDebug       ) "print debug mes
 
 parseArgs :: [String] -> IO (FilePath,TestSuite)
 parseArgs argv = case getOpt RequireOrder optDescr argv of
+
   (o,[cfFile],[]) -> do
     let defaultOptions = Options False Nothing
         options = foldr ($) defaultOptions o
@@ -159,9 +153,11 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
         expandPath f = doesDirectoryExist f >>= \b -> if b then listCCFiles f else return [f]
     testSuite' <- bothM ((concat <$>) . mapM expandPath) testSuite
     return (cfFile,testSuite')
+
   (_,_,_) -> do
     hPutStrLn stderr "Usage: progs-test-lab1 [--debug] [-g|--good FILE]... [-b|--bad FILE]... cf_file"
     exitFailure
+
   where
   bothM :: Applicative f => (a -> f b) -> (a,a) -> f (b,b)
   bothM f (a1,a2) = (,) <$> f a1 <*> f a2
@@ -172,9 +168,9 @@ mainOpts cfFile testSuite = do
   welcome
   let dir = "lab1-test-dir"
   createDirectoryIfMissing True dir
-  copyFile cfFile $ joinPath [dir, grammar <.> "cf"]
+  copyFile cfFile $ dir </> grammar <.> "cf"
   setCurrentDirectory dir
-  let adjustPath f = if isRelative f then joinPath ["..",f] else f
+  let adjustPath f = if isRelative f then ".." </> f else f
       testSuite'   = (map adjustPath *** map adjustPath) testSuite
   rules <- runBNFC
   runAlex
@@ -185,7 +181,7 @@ mainOpts cfFile testSuite = do
   putStrLn ""
   putStrLn "------------------------------------------------------------"
   putStrLn $ color (if rules > 150 then red else black) $ "Number of rules:         " ++ show rules
-  when (not (null msgs)) $ do
+  unless (null msgs) $ do
     mapM_ (putStrLn . color blue) msgs
     putStrLn $ "See " ++ joinPath [dir, grammar, "Par.info"]
                ++ " for information about the conflicts"
@@ -204,11 +200,9 @@ setup = hSetBuffering stdout LineBuffering
 -- * List utilities
 --
 
+-- | Return lines of second argument that contain the first argument.
 grep :: String -> String -> [String]
-grep x = filter (x `isSubStringOf`) . lines
-
-isSubStringOf :: String -> String -> Bool
-isSubStringOf x = any (x `isPrefixOf`) . tails
+grep x = filter (x `List.isInfixOf`) . lines
 
 --
 -- * Terminal output colors
@@ -260,7 +254,7 @@ runPrgNoFail exe flags file = do
   hPutStrLnExitCode s stderr "."
   case s of
     ExitFailure x -> do
-      reportError exe ("with status " ++ show x) (Just file) Nothing (nullMaybe out) (nullMaybe err)
+      reportError exe ("with status " ++ show x) (Just file) Nothing out err
       exitFailure
     ExitSuccess -> do
       debug $ "Standard output:\n" ++ out
@@ -281,35 +275,36 @@ putStrLnExitCode e = putStrLn . colorExitCode e
 hPutStrLnExitCode :: ExitCode -> Handle -> String -> IO ()
 hPutStrLnExitCode e h = hPutStrLn h . colorExitCode e
 
-reportErrorColor :: Color
-                 -> String         -- ^ command that failed
-                 -> String         -- ^ how it failed
-                 -> Maybe FilePath -- ^ source file
-                 -> Maybe String   -- ^ given input
-                 -> Maybe String   -- ^ stdout output
-                 -> Maybe String   -- ^ stderr output
-                 -> IO ()
-reportErrorColor col c m f i o e =
-    do
+reportErrorColor
+  :: Color
+  -> String         -- ^ command that failed
+  -> String         -- ^ how it failed
+  -> Maybe FilePath -- ^ source file
+  -> Maybe String   -- ^ given input
+  -> String         -- ^ stdout output
+  -> String         -- ^ stderr output
+  -> IO ()
+reportErrorColor col c m f i o e = do
     putStrLn $ color col $ c ++ " failed: " ++ m
-    whenJust f prFile
-    whenJust i $ \i -> do
-                       putStrLn "Given this input:"
-                       putStrLn $ color blue $ fromList i "<nothing>"
-    whenJust o $ \o -> do
-                       putStrLn "It printed this to standard output:"
-                       putStrLn $ color blue $ fromList o "<nothing>"
-    whenJust e $ \e -> do
-                       putStrLn "It printed this to standard error:"
-                       putStrLn $ color blue $ fromList e "<nothing>"
+    mapM_ prFile f
+    forM_ i $ \ i -> do
+      putStrLn "Given this input:"
+      putStrLn $ color blue $ if null i then "<nothing>" else i
+    unless (null o) $ do
+      putStrLn "It printed this to standard output:"
+      putStrLn $ color blue o
+    unless (null e) $ do
+      putStrLn "It printed this to standard error:"
+      putStrLn $ color blue e
 
-reportError :: String         -- ^ command that failed
-            -> String         -- ^ how it failed
-            -> Maybe FilePath -- ^ source file
-            -> Maybe String   -- ^ given input
-            -> Maybe String   -- ^ stdout output
-            -> Maybe String   -- ^ stderr output
-            -> IO ()
+reportError
+  :: String         -- ^ command that failed
+  -> String         -- ^ how it failed
+  -> Maybe FilePath -- ^ source file
+  -> Maybe String   -- ^ given input
+  -> String         -- ^ stdout output
+  -> String         -- ^ stderr output
+  -> IO ()
 reportError = reportErrorColor red
 
 prFile :: FilePath -> IO ()
@@ -328,7 +323,7 @@ rightAlign w s = replicate (w - length s) ' ' ++ s
 -- | Report how many tests passed and which tests failed (if any).
 report :: String -> [(FilePath,Bool)] -> IO ()
 report n rs = do
-  let (passedTests,failedTests) = partition snd rs
+  let (passedTests,failedTests) = List.partition snd rs
       (p,t) = (length passedTests, length rs)
       successful = p == t
       c = if successful then green else red
