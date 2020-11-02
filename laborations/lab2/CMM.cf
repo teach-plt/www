@@ -1,12 +1,99 @@
-PDefs.   Program ::= [Def] ;
+-- # Programs are lists of function definitions.
 
-DFun.    Def     ::= "int" "main" "(" ")" "{" "}" ;  -- TODO: FIX ME!
+PDefs.     Program ::= [Def] ;
+
+-- ## Function definition.
+
+DFun.      Def    ::= Type Id "(" [Arg] ")" "{" [Stm] "}" ;
 terminator Def "" ;
 
--- ... TODO grammar ...
+-- ## Function parameters.
 
--- Comment syntax
+ADecl.     Arg    ::= Type Id ;
+separator  Arg "," ;
 
-comment "/*" "*/" ;
-comment "//" ;
+-- # Statements.
+
+SExp.      Stm    ::= Exp ";" ;
+SDecls.    Stm    ::= Type [Id] ";" ;
+SInit.     Stm    ::= Type Id "=" Exp ";" ;
+SReturn.   Stm    ::= "return" Exp ";" ;
+SWhile.    Stm    ::= "while" "(" Exp ")" Stm ;
+SBlock.    Stm    ::= "{" [Stm] "}" ;
+SIfElse.   Stm    ::= "if" "(" Exp ")" Stm "else" Stm ;
+terminator Stm "" ;
+
+-- # Expressions.
+
+-- ## Atomic expressions.
+
+-- ### Literals.
+EBool.     Exp6  ::= BoolLit ;
+EInt.      Exp6  ::= Integer ;
+EDouble.   Exp6  ::= Double  ;
+
+-- ### Identifiers and function calls.
+EId.       Exp6  ::= Id      ;
+EApp.      Exp6  ::= Id "(" [Exp] ")" ;  -- Restricted to Id.
+
+-- ### Increment and decrement.
+EPost.     Exp6  ::= Id IncDecOp ;        -- Restricted to Id.
+EPre.      Exp6  ::= IncDecOp Id ;        -- Restricted to Id.
+
+-- ## Compound expressions.
+
+-- ### Multiplicative operations.
+EMul.      Exp5  ::= Exp5 MulOp  Exp6 ;  -- Left assoc.
+
+-- ### Additive operations.
+EAdd.      Exp4  ::= Exp4 AddOp  Exp5 ;  -- Left assoc.
+
+-- ### Comparison.
+ECmp.      Exp3  ::= Exp4 CmpOp  Exp4 ;  -- Non-assoc.
+
+-- ### Boolean operations.
+EAnd.      Exp2  ::= Exp2  "&&" Exp3  ;  -- Left assoc.
+EOr.       Exp1  ::= Exp1  "||" Exp2  ;  -- Left assoc.
+
+-- ### Assignment.
+EAss.      Exp   ::= Id    "="  Exp   ;  -- Right assoc.  Restricted to Id.
+
+coercions  Exp 6   ;
+separator  Exp "," ;  -- Function arguments are comma-separated.
+
+-- ## Operators.
+
+OInc.      IncDecOp ::=  "++" ;
+ODec.      IncDecOp ::=  "--" ;
+
+OTimes.    MulOp    ::=  "*"  ;
+ODiv.      MulOp    ::=  "/"  ;
+
+OPlus.     AddOp    ::=  "+"  ;
+OMinus.    AddOp    ::=  "-"  ;
+
+OLt.       CmpOp    ::=  "<"  ;
+OGt.       CmpOp    ::=  ">"  ;
+OLtEq.     CmpOp    ::=  "<=" ;
+OGtEq.     CmpOp    ::=  ">=" ;
+OEq.       CmpOp    ::=  "==" ;
+ONEq.      CmpOp    ::=  "!=" ;
+
+-- ## Boolean literals.
+
+LTrue .  BoolLit ::= "true" ;
+LFalse.  BoolLit ::= "false" ;
+
+-- # Types and identifiers
+
+rules Type   ::= "bool" | "int" | "double" | "void" ;
+
+token Id (letter (letter | digit | '_')*) ;
+
+separator nonempty Id "," ;
+
+-- # Comment syntax
+
 comment "#" ;
+comment "//" ;
+comment "/*" "*/" ;
