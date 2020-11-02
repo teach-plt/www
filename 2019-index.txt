@@ -1,0 +1,489 @@
+Programming Language Technology
+DAT151 (Chalmers) / DIT231 (GU)
+Winter Term 2019 (LP2)
+
+%!target:html
+%!encoding:utf-8
+
+'''
+<script src="enhance_page.js" type="text/javascript"></script>
+<p align="center">
+<a href="http://www.cse.chalmers.se/edu/course/DAT151/">
+http://www.cse.chalmers.se/edu/course/DAT151/</a>
+</p>
+'''
+
+% Google group: http://groups.google.com/group/plt-2019
+% //(please provide your full name and date of birth when requesting membership!)//
+
+[Fire https://plt-lp2-19.fire.cse.chalmers.se/]
+/
+[Canvas https://chalmers.instructure.com/courses/7185]
+/
+[Chalmers studieportal https://www.student.chalmers.se/sp/course?course_id=29075]
+% https://www.student.chalmers.se/sp/course?course_id=27798
+% https://www.student.chalmers.se/sp/course?course_id=26971
+% https://www.student.chalmers.se/sp/course?course_id=24933
+% https://www.student.chalmers.se/sp/course?course_id=23453
+% https://www.student.chalmers.se/sp/course?course_id=21767
+/
+% [GU course page stub https://gul.gu.se/courseId/85497/contentStart.do]
+% https://gul.gu.se/public/courseId/79766/coursePath/38212/38407/40149/ecp/lang-sv/publicPage.do]
+% /
+[GU ad http://utbildning.gu.se/education/courses-and-programmes/Course_detail?courseId=DIT231]
+/
+[GU kursplan http://kursplaner.gu.se/pdf/kurs/sv/DIT231]
+/
+[GU course description http://kursplaner.gu.se/pdf/kurs/en/DIT231]
+/
+[Course page 2018 http://www.cse.chalmers.se/edu/year/2018/course/DAT151/]
+
+
+=News and changes=
+
+  : //2020-08-17//
+   The second reexam will be held 27 August on Canvas organized as
+   [course 12065 https://chalmers.instructure.com/courses/12065].
+   If you registered to the exam, you should have gotten an invitation
+   to this course.  Please read the instructions there.
+
+% : //2019-03-22//
+%   The Fire deadline for late submission has been extended until
+%   Sunday 25th.
+
+  : //2020-04-05//
+   The reexam will be held 7 April on Canvas organized as
+   [course 9969 https://chalmers.instructure.com/courses/9969].
+   If you registered to the exam, you should have gotten an invitation
+   to this course.  Please read the instructions there.
+
+% : //2019-03-14//
+%   Fire % is open for the late submission of labs.
+
+ : //2020-01-25//
+   The deadline for all labs has been extended to 10th February.
+
+ : //2020-01-21//
+   Exam review will be Wed 29 January 10am in EDIT 5128.
+   [Exam text exams/exam-plt-2020-1.pdf] and [solution exams/solutions-plt-2020-1.pdf].
+
+   Deadline extension:
+   Lab 4 submission on Fire is now possible until the final deadline (23rd Jan).
+
+%   I am very pleased with the outcome, thanks for studying well!
+
+%   Please submit outstanding lab solutions by Friday!
+
+% : //2017-12-19//
+%   The exam will be held 8 January 2019, 8.30-12.30 in building M on the Johanneberg campus.
+
+ : //2019-12-18//
+   In the last lecture, we will walk through an
+   [example exam exams/exam-plt-2017-3.pdf].
+
+ : //2019-12-18//
+   The live code for "hands on lab4" contains too much of the solution, thus, will not be published.  See the PLT book chapter 7.6 and this [Canvas post https://chalmers.instructure.com/courses/7185/discussion_topics/13646] for advice on the implementation.
+
+ : //2019-12-17//
+   Live coding in Agda [start live/2019/live-13-JVM-start.agda] and [finish live/2019/live-13-JVM-finish.agda]
+   on verified compilation.
+
+%  : //2019-12-16//
+%    [Lab 4 stubs laborations/lab4/index.html#section3] for Haskell and Java are now available.
+
+ : //2019-12-12//
+   A bug that caused some test (e.g. the tests in the subtyping directory) to not run has been fixed in the lab 3 test suite. Please re-download the test suite.
+
+ : //2019-12-12//
+   [Lab 4 laborations/lab4/index.html] is online.
+
+%  : //2019-12-05//
+%    **Guest lecture** by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
+%    on domain-specific languages tomorrow, 2019-12-06!
+%    He will present a software-engineering perspective on PLT.
+%    (Schedule updated.)
+%    //2019-12-10//: [Slides available http://www.cse.chalmers.se/~bergert/slides/guest_lecture_DSLs.pdf]
+
+ : //2019-12-03//
+   The test suite for lab 3 now includes a ``good/subtyping``
+   directory that contains tests for handling subtyping correctly.
+
+   The code from today's "Hands-on for lab 3" session is [online live/2019/live-9-lab3.zip] (Haskell and Java).
+   (Note: should compile, but does not run!)
+
+ : //2019-11-29//
+   [Lab 3 laborations/lab3/index.html] is online.
+
+ : //2019-11-26//
+   The code from today's "Hands-on for lab 2" session is [online live/2019/live-7-lab2.zip] (Haskell and Java).
+
+
+%  : //2019-11-20//
+%    [Lab 2 laborations/lab2/index.html] is online.
+
+ : //2019-11-22//
+   For lab2, we clarified in the lab text that there is no need to type annotate the code during type checking. Annotations will become relevant first in lab3.
+   We also added test cases for error reporting of unused variables (see the directory ``bad-runtime``).
+
+ : //2019-11-14//
+   The parse table on page 53 of the plt book is incomplete, missing the goto actions.
+   See instead a //happy// generated [LR parse table live/2019/LR-parsetable.txt] for
+   this [LBNF grammar live/2019/LR.cf].
+
+% %  : //2017-11-07//
+% %    No lecture on Thursday, 9th November!
+% %    You are free to attend the [DATE-IT 2017 company contact fair https://www.date-it.se/].
+% %    Lab session will take place!
+% %
+
+%  : //2019-11-07//
+%    Ad: [Apply for undergraduate teaching assistent LP3/4! https://www.gu.se/english/about_the_university/job-opportunities/vacancies-details/?id=3345]
+%    Deadline is 2019-11-30.
+
+
+ : //2019-11-07//
+   [MiniJS laborations/mini/index.html] implementation in Haskell and Java.
+
+ : //2019-11-02//
+   First published version of this page.
+   [Lab 1 laborations/lab1/index.html] and
+   [Lab 2 laborations/lab2/index.html] descriptions online.
+
+   Labs are done in groups of 2.  Please look for a lab partner.
+
+% - mostly a copy of the 2018 material.  Updates forthcoming soon.
+
+
+=Tentative Schedule=
+
+Tuesday lectures are in **[HC2 http://maps.chalmers.se/#23e2df72-cbb9-4aff-825a-1a282e9618d6]**,
+Thursday lectures in **[HA1 http://maps.chalmers.se/#971e00c6-6f9a-46ce-9894-687adb1fa8ea]**,
+starting at **13:15**.
+
+Material: plt = course book, dragon = Dragon book.
+Slides follow closely the plt book.
+
+
+|| Date         | Time           | Title                             | Material                      ||
+| Tue 05/11     | 13-15          | PL Design, Compilation Phases, [MiniJS laborations/mini/index.html] | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1, live coding [start live/2019/live-1-mini-start.zip] [lecture live/2019/live-1-as-far-as-we-got.zip] [finish live/2019/live-1-mini-finish.zip]
+%, [live coding live/2018/lec1-happy-live-2018.zip]
+| Thu 07/11     | 13-15          | Grammars / BNFC / Hands-on with Lab 1    | [slides plt-book/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
+% [code live-2-bnfc.zip]
+| Tue 12/11     | 13-15          | Formal languages and parsing                  | [LR parse table live/2019/LR-parsetable.txt] for [grammar live/2019/LR.cf] |
+%[LL parser code LL-parsing.zip]
+%| Thu 14/11     | 10-16       | [DATE-IT 2017 fair https://www.date-it.se/] | No class! |
+| Thu 14/11     | 13-15          | Theory of lexing     | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
+| //Mon 18/11// | //23//         | //Lab 1 deadline//                | [lab1 PM laborations/lab1/index.html] |
+%| Tue 19/11     | 13-15          | Theory of lexing, LR parsing  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
+| Tue 19/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
+%| Thu 21/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
+| Thu 21/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
+%| Tue 26/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
+| Tue 26/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/index.html] [Monads https://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf] |
+| Tue 26/11     | 14-15          | Hands-on with Lab 2 (Java)        | [live coding live/2019/live-7-lab2.zip] |
+%| Thu 28/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/index.html]
+%| Thu 28/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
+| Thu 28/11     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
+| //Mon 02/12// | //23//         | //Lab 2 deadline//                |  |
+%| Tue 03/12     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
+| Tue 03/12    | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/index.html]
+| Tue 03/12     | 14-15          | Hands-on with Lab 3 (Java)        | [live coding live/2019/live-9-lab3.zip] |
+%| Thu 05/12     | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/index.html]
+%| Thu 05/12     | 14-15          | Hands-on with Lab 3 (Java)        |  |
+%| Thu 05/12     | 13-15          | [Domain-specific languages http://www.cse.chalmers.se/~bergert/slides/guest_lecture_DSLs.pdf]  | Guest lecture by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
+| Thu 05/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
+%| Tue 10/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
+% %| Tue 10/12     | 13-15          | The language design space         | [slides plt-book/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
+| Tue 10/12     | 13-15          | Type inference and polymorphism   | plt 7.7-9
+| Thu 12/12     | 13-15          | Hands-on with Lab 4               | [lab4 PM laborations/lab4/index.html]
+| //Mon 16/12// | //23//         | //Lab 3 deadline//                |  |
+%| Tue 17/12     | 13-15          | Type inference. A taste of dependent types | Agda demo [Verified compilation ./JVM.agda] |
+| Tue 17/12     | 13-15          | Dependent types (Agda)            | Live coding [start live/2019/live-13-JVM-start.agda] and [finish live/2019/live-13-JVM-finish.agda] |
+% Agda demo [start ./BidirectionalTypeChecking-stub.agda] [finish ./BidirectionalTypeChecking.agda] |
+| Thu 19/12     | 13-15          | Preparing for the exam            | [Training Exam exams/exam-plt-2017-3.pdf] |
+|| 2020 ||||
+| //Thu 09/01// | //23//         | //Lab 4 deadline//                |  |
+| //Mon 13/01// | //8.30-12.30// | //Exam (J)//             |  |
+%[Exam exams/exam-plt-2019-1.pdf] |
+| //Thu 23/01// | //23//         | //Final lab deadline//            | //all lab returns//
+| //Wed 29/01// | //10-11.30//      | //Exam review (EDIT 5128)// | [Solution exams/solutions-plt-2020-1.pdf] |
+%| //Fri 31/01// | //10-11// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
+%| //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
+%| //Sun 25/03// |                | //Late final lab deadline//       |  |
+| //Tue 07/04// | //8.30-12.30// | //Exam (Canvas)//                      |  |
+% //[Solution exams/solutions-plt-2017-2.pdf]// |
+| //Thu 27/08// | //14-18//      | //Exam// ([Canvas https://chalmers.instructure.com/courses/12065])                      |  |
+% //[Solution exams/solutions-plt-2017-3.pdf]// |
+%| //Tue 12/09// | //13.30//      | //Exam review//                  |  |
+
+The official course schema is in [Time Edit https://cloud.timeedit.net/chalmers/web/public/ri1f7XYQ63ZZ3YQvQc076310y5Y6057Zq7QQ.html].
+% https://cloud.timeedit.net/chalmers/web/public/ri107355X61Z56Q5Z36g0Y65yZ036Y31Q07gQY5Q5576q573cQ.html
+% https://se.timeedit.net/web/chalmers/db1/public/ri177255X90Z56Q5Z36g0Y65yZ036Y31Q07gQY5Q5076q072cQ.html
+% https://se.timeedit.net/web/chalmers/db1/public/ri10q29Q054Z5ZQ505663750yc065W7362Y63Q0Q7571QZ.html].
+
+
+
+=Description=
+
+The aim of the course is to give understanding of how programming
+languages are designed, documented, and implemented. The course covers
+the basic techniques and tools needed to write interpreters, and
+gives a summary introduction to compilation as well.  Those who have
+passed the course should be able to
++ define the lexical structure of programming languages by using
+  regular expressions, explain the functioning of finite automata,
+  and implement lexical analysers by using standard tools;
++ define the syntax of programming languages by using context-free
+  grammars, explain the principles of LL and LR parsing, and implement
+  parsers by using standard tools;
++ define and implement abstract syntax;
++ master the technique of syntax-directed translation and its
+  efficient implementation in their chosen programming language;
++ formulate typing rules and implement type checkers;
++ formulate operational semantic rules and implement interpreters;
++ write simple code generators;
++ be familiar with the basic implementation issues of both
+  imperative and functional languages;
++ master the principles of polymorphic type checking by unification;
++ implement an interpreter for a functional language.
+
+
+=Teachers=
+
+[Andreas Abel http://www.cse.chalmers.se/~abela/], responsible course teacher and examiner.
+
+%[Fredrik Lindblad https://www.chalmers.se/en/staff/Pages/fredrik-lindblad.aspx], contact and lectures.
+
+% John Camilleri,
+% Mauricio Chimento,
+% Inari Listenmaa,
+% [Daniel Hausknecht https://danielhausknecht.eu],
+% [Daniel Schoepe https://schoepe.org/~daniel/],
+% [Iulia Bastys https://www.chalmers.se/en/staff/Pages/bastys.aspx],
+[Mohammad Ahmadpanah (MA) https://www.chalmers.se/en/Staff/Pages/mohammad-ahmadpanah.aspx],
+[Andreas Lööw (AL) http://www.cse.chalmers.se/~loow/],
+[Fabian Ruch (FR) https://www.chalmers.se/en/staff/Pages/fabian-ruch.aspx],
+assistants.
+
+Questions regarding this class (organization, content, labs)
+should be asked publicly on the Canvas forum in the most cases.
+You are also welcome to answer questions by others.
+(Don't give away any lab solutions when you ask or answer questions!)
+
+
+% =Google Group=
+
+% If you have any general questions regarding the course, the labs or the exercises,
+% please ask them in our
+% [Google group http://groups.google.com/group/plt-2019].
+% This will reach all teachers and fellow students.
+% If you are not yet member of the group, you have to
+% - get a google account (if you don't have it yet)
+% - go to http://groups.google.com/group/plt-2019
+% - request an invitation to the plt-2019 group (make sure to use "apply for membership" rather than "contact the owner")
+
+
+% **You will have to give your real name and your person number (or date of birth) when you register, otherwise your membership is not approved.**
+% This is necessary to identify you as a participant of the course.
+% Please also indicate whether you are GU or Chalmers student.
+
+=Laboration times and supervision=
+
+Lab supervision take place in
+[ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093].
+|| Day | Time        | Supervisors |
+ | Tue | 15:15-17:00 | FR MA |
+ | Thu | 15:15-17:00 | AL MA |
+ | Fri | 13:15-15:00 | AL FR |
+
+
+The lab rooms and supervision
+are available from Thu 07 November till Fri 20 December 2019.
+
+**Attendance in these classes is optional**.
+Normally, each student should attend **at most one** supervised laboration time each week.
+Since attendance is not compulsory, there may be room for more
+times. But, if there is lack of room, those who attend their first
+supervision of the week have priority to get a place and supervisor help.
+
+
+=Laborations=
+
+There will be four laborations, written in pairs.
+(Individual solutions are accepted per exception,
+please contact the course responsible.)
+You have to pass the labs to pass the course.
+However, the course grade is determined solely by the exam.
+% - Lab 1 - parser  (deadline 18/11)
+- [Lab 1 - parser laborations/lab1/index.html] (deadline 18/11)
+% - Lab 2 - type checker and interpreter (deadline 02/12)
+- [Lab 2 - type checker and interpreter laborations/lab2/index.html] (deadline 02/12)
+% - Lab 3 - code generator (deadline 16/12)
+- [Lab 3 - code generator laborations/lab3/index.html] (deadline 16/12)
+% - Lab 4 - functional language interpreter  (deadline 09/01/2020)
+- [Lab 4 - functional language interpreter laborations/lab4/index.html] (deadline 09/01/2020)
+
+
+The labs are quite substantial, so please set aside at least 30 full working hours (4 full working days) before the deadline.  It is recommended to start at least 10 days before the deadline.
+
+It is recommended to use a version control system like ``git`` for
+code development.  In case you use cloud-based code hosting like e.g.
+[github https://github.com] or [bitbucket https://bitbucket.org], make
+sure your repository is __private__ to not give away your lab
+solution.  (Along the same lines, never post your solution on public
+fora and mailing lists!)
+
+Reporting is done via [Fire https://plt-lp2-19.fire.cse.chalmers.se/].
+Before submitting your solution, run your program through the provided **test suite**.
+Also, make sure that your submission contains all necessary files
+and the **build succeeds**.  For instance, if you are submitting an archive,
+unpack the archive in a fresh directory and check the build there.
+
+We guarantee two gradings per lab: one for the version submitted before the
+ordinary deadline for that lab, the other for a resubmission before
+the final deadline.
+If your first submission does not build or does not pass the testsuite,
+you will just get //fails testsuite// as grading.
+
+Note: **You have to submit //something// by the first deadline**,
+otherwise Fire will not allow a (re)submission for the final deadline.
+(In the worst case, if you absolutely did not manage to work on the lab
+before the first deadline, submit an empty solution.)
+
+As part of the grading, you may be asked to explain your solution in person
+to a course teacher.  Be prepared to get a call for such an explanation meeting.
+In particular, make sure you understand all parts of the solution
+(good documentation helps!).
+
+
+
+% If you did not pass the labs by the end of the course you will have another opportunity in connection with the re-exam in April.
+% The deadline will be Thursday, 22 March 2019.
+% If you intend to re-submit labs then, please contact the course responsible via email on 15 March at the latest.
+% If you need help you should also contact the course responsible, not the teaching assistants.
+% Note however that you can only expect limited support.
+% If you need a substantial amount of help, it is probably better to wait until next time the course is given.
+
+
+=Exam=
+
+The written exam determines the course grade, the usual grading scales apply:
+Chalmers: 5, 4, 3, U; Gothenburg University: VG, G, U.
+
+Exam dates:
+ 13 Jan 2020 am J,
+ 07 Apr 2020 am J,
+ 27 Aug 2020 pm J.
+
+The exam tests the understanding of the course contents from a more high-level view,
+e.g., the underlying theoretical concepts.
+The exam has the same structure as these [old exams exams/]
+(download as [archive exams.tgz]).
+
+Further, here are some
+[exercises plt-book/ipl-book/course-exercises/exx.html]
+and [solutions plt-book/ipl-book/course-exercises/sol.html]
+to prepare for the exam.
+
+
+=Literature=
+
+The main book will be one that developed from earlier editions of this course:
+
+: Aarne Ranta
+  //Implementing Programming Languages. An Introduction to Compilers and Interpreters//,
+  College Publications,
+  London,
+  2012.
+  [Web page (with extra material and links to selling sites) plt-book/ipl-book/]
+
+  [Errata https://github.com/andreasabel/plt-errata/]
+
+
+If you are really interested in the topic, for instance, if you want
+to continue with the [Compiler Construction http://www.cse.chalmers.se/edu/course/TDA283/]
+course, you should also consider //the Dragon book//,
+
+: Aho, Lam, Sethi & Ullman
+  //Compilers Principles, Techniques & Tools//,
+  **Second edition**,
+  Pearson/Addison Wesley
+  2007.
+
+
+Both books are available at web bookshops.
+The main book will also be sold at Cremona.
+
+A good (yet slightly dated) introduction to monads in Haskell, useful for implementing interpreters, type checkers, and compilers, is this article:
+
+: Philip Wadler
+  [Monads for functional programming https://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf].
+  In //Advanced Functional Programming//,
+  First International Spring School on Advanced Functional Programming Techniques, Båstad, Sweden, May 24-30, 1995.
+
+
+It also contains an introduction to parser combinators.
+
+
+=Software=
+
+BNF Converter 2.8 http://bnfc.digitalgrammars.com/ |
+[Hackage https://hackage.haskell.org/package/BNFC] |
+[github https://github.com/BNFC/bnfc]
+
+You can compile the latest version of BNFC (2.8.3) from its Haskell sources via
+```
+  cabal update
+  cabal install BNFC
+```
+You might find a suitable binary distribution for an older version of BNFC (2.8).
+
+If using the Java backend, you will need the **CUP** and **JLex** libraries.
+CUP has seen incompatible changes in its interface; thus, the version you need
+may depend on your BNFC version.
+
+===Instructions for BNFC 2.8.2/3 (uses CUP v0.11b)===
+
+Download the JAVA archives for
+[CUP v11b doc/java-cup-11b.jar],
+[CUP v11b runtime doc/java-cup-11b-runtime.jar], and JLex, contained in
+[javatools doc/javatools.jar].
+Make sure they are placed in your classpath, for example (Linux / MAC OS)
+by storing these jars in
+``$HOME/java-lib/`` and adding the following to ``.bashrc`` (single line):
+```
+  export CLASSPATH=.:${HOME}/java-lib/java-cup-11b.jar:${HOME}/java-lib/java-cup-11b-runtime.jar:${HOME}/java-lib/javatools.jar:${CLASSPATH}
+```
+The order matters since ``javatools.jar`` also contains an older version of CUP;
+make sure that ``javatools.jar`` comes last in the search path.
+
+===Instructions for BNFC ≤ 2.8.1 (uses CUP v0.10k)===
+
+You can download pre-compiled versions [here doc/javatools.tgz].
+Make sure they are placed in your classpath, for example (Linux / MAC OS)
+by extracting to ``~/javatools/`` adding the following to ``.bashrc``:
+
+```
+  export CLASSPATH=.:~/javatools/:~/javatools/Cup/:${CLASSPATH}
+```
+On Debian-style Linux (like Ubuntu), the following now also works to install these libaries:
+```
+  sudo apt install jlex cup
+```
+Then the class path needs to be set as follows (bash):
+```
+  export CLASSPATH=.:/usr/share/java/JLex.jar:/usr/share/java/cup.jar
+```
+
+=Student representatives=
+
+[Student representatives https://student.portal.chalmers.se/en/chalmersstudies/courseinformation/courseevaluation/Pages/default.aspx]
+for DAT151 Programming language technology.
+
+|| Program | @student.chalmers.se | Name ||
+| MPALG | kokkou | Maria Kokkou |
+| TKDAT | ljerik  | Erik Ljungdahl |
+| MPCSN | marlofg | Martin Löfgren |
+
+% | MPALG | kokkou.maria5@gmail.com     | Maria Kokkou |
+% MPALG	felixbrookie2@gmail.com	Felix Brookie
