@@ -143,13 +143,12 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %  : //2019-11-07//
 %    [MiniJS laborations/mini/index.html] implementation in Haskell and Java.
 
-%  : //2019-11-02//
+  : //2020-11-02//
+   [Lab 1 laborations/lab1/index.html] description online.
+
+   Labs are done in groups of 2.  Please look for a lab partner.
+
 %    First published version of this page.
-%    [Lab 1 laborations/lab1/index.html] and
-%    [Lab 2 laborations/lab2/index.html] descriptions online.
-
-%    Labs are done in groups of 2.  Please look for a lab partner.
-
 % - mostly a copy of the 2018 material.  Updates forthcoming soon.
 
 
@@ -180,10 +179,8 @@ Slides follow closely the plt book.
 | //Mon 16/11// | //23//         | //Lab 1 deadline//                |  |
 %[lab1 PM laborations/lab1/index.html] |
 %| Tue 17/11     | 13-15          | Theory of lexing, LR parsing  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
-| Tue 17/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
-%| Thu 19/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
-| Thu 19/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
-%| Tue 24/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
+| Tue 17/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
+| Thu 19/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
 | Tue 24/11     | 13-14          | Hands-on with Lab 2 (Haskell)     |  |
 %[lab2 PM laborations/lab2/index.html] [Monads https://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf] |
 | Tue 24/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
@@ -333,8 +330,8 @@ There will be four laborations, written in pairs.
 please contact the course responsible.)
 You have to pass the labs to pass the course.
 However, the course grade is determined solely by the exam.
-- Lab 1 - parser  (deadline 16/11)
-% - [Lab 1 - parser laborations/lab1/index.html] (deadline 16/11)
+% - Lab 1 - parser  (deadline 16/11)
+- [Lab 1 - parser laborations/lab1/index.html] (deadline 16/11)
 - Lab 2 - type checker and interpreter (deadline 30/11)
 % - [Lab 2 - type checker and interpreter laborations/lab2/index.html] (deadline 30/11)
 - Lab 3 - code generator (deadline 14/12)
@@ -470,7 +467,7 @@ Download the JAVA archives for
 [CUP v11b doc/java-cup-11b.jar],
 [CUP v11b runtime doc/java-cup-11b-runtime.jar], and JLex, contained in
 [javatools doc/javatools.jar].
-Make sure they are placed in your classpath, for example (Linux / MAC OS)
+Make sure they are placed in your classpath, for example (Linux / macOS)
 by storing these jars in
 ``$HOME/java-lib/`` and adding the following to ``.bashrc`` (single line):
 ```
@@ -482,7 +479,7 @@ make sure that ``javatools.jar`` comes last in the search path.
 ===Java/CUP Instructions for BNFC ≤ 2.8.1 (uses CUP v0.10k)===
 
 You can download pre-compiled versions [here doc/javatools.tgz].
-Make sure they are placed in your classpath, for example (Linux / MAC OS)
+Make sure they are placed in your classpath, for example (Linux / macOS)
 by extracting to ``~/javatools/`` adding the following to ``.bashrc``:
 
 ```
