@@ -1,9 +1,8 @@
-Lab 1: Parser for a fragment "C--" of C++
-Programming Language Technology, 2019
+Lab 1: Parser for a fragment of C++
+Programming Language Technology, 2020
 
 %!target:html
 %!encoding: utf-8
-%!postproc(html): #NEW <!-- NEW -->
 
 '''
 <script src="../../enhance_page.js" type="text/javascript"></script>
@@ -14,8 +13,8 @@ Back to main page of
 
 =Summary=
 
-The objective of this lab is to write a parser for a fragment
-"C--" of the C++ programming language. The parser should return
+The objective of this lab is to write an LR parser for a fragment
+of the C++ programming language. The parser should return
 an abstract syntax tree at success, and report an error
 with a line number at failure.
 
@@ -25,7 +24,7 @@ later in this document.
 
 The recommended implementation of the parser is via a BNF
 grammar processed by the BNF Converter (BNFC) tool. The approximate
-size of the parser source code should be around  50 rules.
+size of the parser source code should be 100 rules.
 
 With BNFC, just the grammar (.cf file) has to be written and submitted
 by the lab groups.
@@ -33,17 +32,32 @@ by the lab groups.
 =Method=
 
 Build the grammar gradually, so that you can parse
-the 3 test files in the given order: as your first
-goal, parse [the first test file testsuite/good/1-definitions.cc];
-then the [second testsuite/good/2-statements.cc], and
-finally the [third testsuite/good/3-mandelbrot.cc].
+the six test files in the given order: as your first
+goal, parse [the first test file testsuite/good/1-hello.cc];
+then the second, and so on.
 
-After treating the 3 tests, run the
-[test script testsuite/index.html] to
+When you have passed one level, just try to parse
+the next example with your current parser and examine
+the line at which it fails. In this way, you will find
+out what new grammar rules you need.
+
+After treating the six tests, run the
+[test suite testsuite/index.html] to
 make your parser perfect.
 
-You can use any code generator (Haskell, Java, C,...) from BNFC.
+You can use any BNFC backend that produces an **LR parser**.
 It need not be the language you use in later labs.
+The LR backends of BNFC are:
++ ``--haskell``, using the [Happy https://www.haskell.org/happy/] parser generator.
++ ``--java``, using [CUP http://www2.cs.tum.edu/projects/cup/].
++ ``--c`` and ``--cpp``, using [Bison https://www.gnu.org/software/bison/].
++ ``--ocaml``, using [``ocamlyacc`` https://caml.inria.fr/pub/docs/manual-ocaml/lexyacc.html].
++ ``--ocaml-menhir``, using [Menhir http://gallium.inria.fr/~fpottier/menhir/].
+
+
+The ``--java-antlr`` backend generates an **LL parser** via [ANTLR https://www.antlr.org/], so
+please do not use this backend for lab 1 as your grammar might then end up not being LR.
+
 
 ==Software requirements==
 
@@ -53,21 +67,25 @@ and [make files https://www.gnu.org/software/make/].
 
 For building the parser with BNFC, an installation of a recent version (≥ 2.8) of
 [BNFC http://bnfc.digitalgrammars.com/] is needed.
+The recommended version is 2.8.4.
 
 For automatic running of the testsuite, you'll need to generate and run Haskell code, requiring:
 - A recent version (8.x) of [GHC https://www.haskell.org/ghc/].
 - A recent version (3.x) of the [Alex https://www.haskell.org/alex/] lexer generator.
-- A recent version (1.19.x) of the [Happy https://www.haskell.org/happy/] parser generator.
+- A recent version (1.19.x or 1.20.x) of the [Happy https://www.haskell.org/happy/] parser generator.
 
 
-It is recommended to install these all at once via the
+It is recommended to install these via
+[Stack https://docs.haskellstack.org/en/stable/install_and_upgrade/]
+or all at once via the
 [Haskell platform https://www.haskell.org/platform/].
 
 In case you want to build your parser in Java, you need:
-- a Java compiler (``javac``) and interpreter (``java``), and, for the parser generation,
-- either [CUP http://www2.cs.tum.edu/projects/cup/]
-  and [JLex https://www.cs.princeton.edu/~appel/modern/java/JLex/]
-- or [ANTLR https://www.antlr.org/] (requires BNFC ≥ 2.8.2)
+- a Java compiler (``javac``) and interpreter (``java``),
+- the [CUP http://www2.cs.tum.edu/projects/cup/] parser generator, and,
+- for the lexer generation,
+  either [JFlex https://jflex.de/]
+  or [JLex https://www.cs.princeton.edu/~appel/modern/java/JLex/].
 
 
 See also the [Software ../../index.html#section10] section on the course homepage.
@@ -76,15 +94,19 @@ See also the [Software ../../index.html#section10] section on the course homepag
 
 If you use Haskell, you have the advantage of
 **info files**, which tell you exactly where the conflicts are.
-Assuming your grammar file is ``CMM.cf`` and you have called ``bnfc -d CMM.cf``,
-you can create an info file from the generated Happy file:
+Assuming your grammar file is ``CPP.cf`` and you have called ``bnfc -dm CPP.cf``,
+you can create an info file from the generated Happy file either by
 ```
-happy -i CMM/Par.y
+make
 ```
-The info file is now in ``CMM/Par.info``. Moreover, you can produce a
+(if the ``Makefile`` was created by BNFC ≥ 2.8.3) or manually via
+```
+happy -i CPP/Par.y
+```
+The info file is now in ``CPP/Par.info``. Moreover, you can produce a
 **debugging parser** by adding the ``-d`` flag to Happy. Update your Makefile like this:
 ```
-happy -gcad CMM/Par.y
+happy -gcaid CPP/Par.y
 ```
 And then run ``make`` again.
 Running this parser shows a trace of the LR actions performed during parsing.
@@ -96,7 +118,7 @@ CUPFLAGS = -nopositions -expect 100 -dump_states
 ```
 And then recompile your parser with:
 ```
-make -B CMM/sym.class 2> parser.info
+make -B CPP/sym.class 2> parser.info
 ```
 The ``parser.info`` file will contain some debugging information.
 Unfortunately this format is harder to read than the info file generated by Happy (above).
@@ -117,30 +139,20 @@ rules that are needed to parse the //n//th test file.
 
 ==Programs==
 
-A program is a sequence of function definitions.
-(**1**)
+A **program** is a sequence of definitions. (**1**)
 
 A program may also contain comments and preprocessor directives,
-which are just ignored by our parser (see below).
-(**1**)
+which are just ignored by the parser (see below). (**1**)
 
-//Remark://
-An interpretable program must have a function ``main`` of type ``int``
-that takes no arguments.  It may or may not have a ``return`` statement.
-```
-  int main () {
-    ...
-  }
-```
-However, the existence and format of ``main``
-is not ensured by the parser, but at a later stage (type checker).
+If you are using BNFC, the category for programs should be named
+``Program``, to comply with the expectations of the test
+[test suite testsuite/index.html].
 
 
 ==Definitions==
 
-A function definition has a type, a name, an argument list, and a body.
-(**1**)
-Example:
++ A **function** definition has a type, a name, an argument list, and a body.
+(**1**)  Example:
 ```
   int foo(double x, int y)
   {
@@ -148,172 +160,245 @@ Example:
   }
 ```
 
++ Some statements can be used as top-level definitions:
+  - ``typedef`` statements (**6**)
+  - variable declarations and initializations
 
-==Types==
-
-A type is one of the four built-in types:
-(**1**)
++ Finally, definitions for using qualified constants are allowed, (**2**) e.g.
 ```
-  int
-  double
-  bool
-  void
+  using std::vector ;
 ```
 
 
 ==Argument lists, declarations, and function bodies==
 
-An argument list is a comma-separated list of argument declarations.
-It is enclosed in parentheses ``(`` and ``)``.
-(**1**)
+- An **argument list** is a comma-separated list of argument declarations.
+It is enclosed in parentheses: ``(`` and ``)``. (**1**)
 
-An argument declaration has a type and an identifier, for instance
+- An **argument declaration** always has a type. This type is optionally
+followed by an identifier or an identifier and an initialization,
+and optionally preceded by the specifier ``const``.  (**4**)
+The following
+are examples of argument declarations.
 ```
+  int
   int x
+  int x = 5
+  const int& x
 ```
 Notice that argument declarations with multiple variables
-(``int x, y``) are not included. A declaration that occurs
-as a statement (as shown below), can also have more than one variable.
+(``int x, y``) are not included. Exception see below:
+A declaration that occurs
+as a statement can also have one or more variables.
 
-A function body is a list of statements enclosed
-in curly brackets ``{`` and ``}`` .
-(**1**)
+- A **function body** is either a list of statements enclosed
+in curly brackets ``{`` and ``}`` (**1**),
+or an empty body consisting
+of a semicolon (**6**).  Example:
+```
+  int foo(double x, int y) ;
+```
 
 
 ==Statements==
 
-Almost all statement forms belong to stage **2**.
++ Any **expression** followed by a semicolon ``;`` can be used as a statement. (**1**)
 
-
-===Declaration===
-
-Variable declarations have one of the following formats:
-- type and one
-(**1**)
-or more variables
-(**2**)
-```
-  int i ;
-  double x, y, z ;
-
-```
-- type and a single initialized variable
-(**2**)
-```
-  int i = 6 ;
-```
-
-
-===Expression as Statement===
-
-Any expression followed by a semicolon ``;`` can be used as a statement.
-(**2**)
++ **Variable declarations** followed by a semicolon. (**2**)
+Variable declarations are similar to argument declarations in functions,
+except that they need at least one variable, and can have more than one variable.
 Examples:
 ```
-  i = 3 ;
-  printInt(i) ;
+  int x;
+  int x = 5, y, z = 3;
+  const int x, y = 0;
+  const int& x, y;
 ```
 
-//Remark://
-While any expression is allowed, only expressions with some side
-effect make really sense here.  A side effect could be an assignment
-or a call to a function that makes some input or output action.
-
-===Return Statement===
-
-Statements returning an expression,
-(**2**)
-for example:
++ Statements **return**ing an expression (**1**), for example
 ```
   return i + 9 ;
 ```
 
-===Block===
++ **While** loops, with an expression in parentheses followed by a statement. (**3**)  For
+example:
+```
+  while (i < 10) ++i ;
+```
 
-Any list of statements (including empty list) between
-curly brackets.
-(**2**)
-For instance,
++ **Do-while** loops, with an expression in parentheses after the loop body. (**6**)  For
+example:
+```
+  do ++i ; while (i < 10) ;
+```
+
++ **For** loops, with a declaration and two expressions in parentheses followed
+by a statement. (**6**)  For example:
+```
+  for (int i = 0 ; i != 10 ; ++i) k = k + i ;
+```
+We do not require that any of the fields in parentheses may be empty.
+
++ **Conditionals**: ``if`` with an expression in parentheses followed by
+a statement and optionally by ``else`` and a statement. (**3**)  Examples:
+```
+  if (x > 0) return x ;
+
+  if (x > 0) return x ; else return y ;
+```
+
++ **Blocks**: any list of statement (including empty list) between
+curly brackets. (**3**)  For instance,
 ```
   {
     int i = 2 ;
     {
-      int i = 3 ;
-      {
-      }
     }
     i++ ;
   }
 ```
 
-===While Loop===
-
-While loops, with an expression in parentheses followed by a statement,
-(**2**)
-for example:
++ **Type definitions**: a type and a name for it. (**3**)  Example:
 ```
-  while (i < 10) ++i ;
-  while (condition) { x = x * 2 ; condition = (x < 1024) ; }
+  typedef vector_string Text ;
 ```
 
-===Conditional===
 
-``if`` with an expression in parentheses followed by
-a statement, ``else``, and another statement.
-(The else-branch cannot be omitted.)
-(**2**)
-Example:
-```
-  if (x > 0) return x ; else { y = y + 2 ; return y ; }
-```
-
+Note: semicolons are not used after curly brackets, but they are
+obligatory in all statements and definitions not ending with curly
+brackets.
 
 ==Expressions==
 
-Almost all expression forms belong to stage **3**.
-
-The following table gives the expression forms ``e``,
+The following table gives the expressions,
 their precedence levels, and their associativity.
-The associativity of operators is given as left, right, or none.
-For binary operators, in general any of the three associativity is meaningful.
-For pre-, post-, and mixfix operators, at most one of
-left or right associativity makes sense, and the alternative is non-associative.
-As they are bracketed,
-the arguments in a function call ``x(e,...,e)`` can be expressions of any level.
+The associativity of operators is given as "left" or "right".
+(C++ operators do not use "non"-associativity.)
+For binary operators, in general any of these associativities is meaningful.
+Prefix operators cannot be left associative,
+and postfix operators cannot be right associative.
+The argument in an array index,
+the arguments in a function call,
+and the middle expression in the conditional
+can be expressions of any level,
+since they are bracketed.
 Otherwise, some subexpressions have to be one precedence level above of
-the main expression to implement the required associativity.
+the main expression to implement the required the associativity.
 
-//Remark//. Precedence and associativity departs in some cases from the
-[C++ standard https://en.cppreference.com/w/cpp/language/operator_precedence],
-further, in/decrement and assignment is restricted to identifiers ``x``.
+%**Note**. The table is not exactly the same as in the C++ standard.
 
 
-  || level   | expression forms                     | assoc | explanation ||
-  |   6      | literal                              | -     | literal (**2**)
-  |   6      | identifier ``x``                     | -     | variable (**3**)
-  |   6      | ``x(e,...,e)``                       | none  | function call (**3**)
-  |   6      | ``x++``, ``x--``                     | none  | post in/decrement (**3**)
-  |   6      | ``++x``, ``--x``                     | none  | pre in/decrement (**3**)
-  |   5      | ``e*e``, ``e/e``                     | left  | mult, div (**3**)
-  |   4      | ``e+e``, ``e-e``                     | left  | add, sub (**3**)
-  |   3      | ``e<e``, ``e>e``, ``e>=e``, ``e<=e`` | none  | comparison (**3**)
-  |   3      | ``e==e``, ``e!=e``                   | none  | (in)equality (**3**)
-  |   2      | ``e&&e``                             | left  | conjunction (**3**)
-  |   1      | ``e||e``                             | left  | disjunction (**3**)
-  |   0      | ``x=e``                              | right | assignment (**3**)
+|| level | expression forms                     |  assoc   | explanation | test ||
+|  15    | literal                              |  ---     | atomic expressions |  (**1**)  |
+|  15    | ``x``, ``x::x``, ``x::x::x``, ...    |  ---     | qualified constants |  (**1**)  |
+|  14    | ``e[e]``                             |  left    | indexing |  (**3**)  |
+|  14    | ``e(e,...,e)``                       |  left    | function call |  (**3**)  |
+|  14    | ``e.e``, ``e->e``                    |  left    | structure projection |  (**3**)  |
+|  14    | ``e++``, ``e--``                     |  left    | in/decrement |  ---  |
+|  13    | ``++e``, ``--e``, ``*e``, ``!e``     |  right   | in/decrement, dereference, negation |  (**6**)  |
+|  12    | ``e*e``, ``e/e``, ``e%e``            |  left    | multiplication, division, remainder |  (**3**)  |
+|  11    | ``e+e``, ``e-e``                     |  left    | addition, subtraction |  (**3**)  |
+|  10    | ``e<<e``, ``e>>e``                   |  left    | left and right shift |  (**1**)  |
+|   9    | ``e<e``, ``e>e``, ``e>=e``, ``e<=e`` |  left    | comparison |  (**6**)  |
+|   8    | ``e==e``, ``e!=e``                   |  left    | (in)equality |  (**3**)  |
+|   4    | ``e&&e``                             |  left    | conjunction |  (**6**)  |
+|   3    | ``e||e``                             |  left    | disjunction |  (**6**)  |
+|   2    | ``e=e``, ``e+=e``, ``e-=e``          |  right   | assignment |  (**3**)  |
+|   2    | ``e ? e : e``                        |  right   | conditional |  (**3**)  |
+|   1    | ``throw e``                          |  right   | exception |  (**4**)  |
 
+Note that this grammar includes expressions that are meaningless.
+For instance, it permits increment, decrement, and assignment
+on any expression, but this makes only sense on so-called //l-values//
+such as variables and array positions.
+Meaningless expressions can be ruled out in later compilation phases,
+e.g., in the type-checking phase, and at that point, good error messages
+can be given (rather than just //parse error//).
+
+//Indexing// ``_[e]`` is treated as a postfix operator;
+the expression ``e`` is bracketed and can be of any level.
+Indexing is associative, i.e., ``e[e1][e2]`` is allowed and means
+``(e[e1])[e2]``.  It is necessarily //left// associative, since
+the other bracketing, ``e([e1][e2])`` would be meaningless.
+//Function call// is similar to indexing.
+
+The //conditional// ``_?e:_`` is treated as a binary operator
+with a fixed "then"-expression ``e``.
+Right associativity for the conditional has the usual meaning:
+``c1 ? t1 : c2 ? t2 : e2`` is parsed as
+``c1 ? t1 : (c2 ? t2 : e2)`` and not as
+``(c1 ? t1 : c2) ? t2 : e2``.
+Note also that ``?`` and ``:`` act like left and right parenthesis.
+Thus, ``e`` can be of any level and, for instance,
+``c1 ? c2 ? t1 : e1 : e2``, while being confusing, is unambiguous, meaning
+``c1 ? (c2 ? t1 : e1) : e2``.
+
+
+
+==Qualified constants==
+
+**Qualified constants** (**1**) are identifiers separated by ``::`` such as ``std::cout``.
+Qualified constants can simply implemented as nonempty lists separated by ``::``.
+The elements of the list are identifiers.
+Single identifier expressions come out as a special case of these lists.
+
+
+Note: in C++, identifiers in qualified constants can be followed by
+template instantiations of the form
+```
+  ident < typelist >
+```
+where a typelist is a comma-separated list of types. Thus, possible
+qualified constants in C++ include
+```
+  std::vector<t>::const_iterator
+  std::map<int,vector<string>>
+```
+However, it is not trivial to integrate this into our LR grammar,
+because the parser can confuse the initial part ``std::vector<t`` with the expression
+``e1<e2`` where ``e1`` and ``e2`` are the (qualified) constants ``std::vector`` and ``t``.
+Therefore, we leave template instantiations out of this assignment.
+
+
+==Types==
+
++ Built-in types: ``int`` (**1**), ``bool``, ``char``, ``double``, ``void``.
+
++ Qualified constants, including plain identifiers (**1**), e.g. ``string``.
+
++ Type references. (**4**)
+The reference operator ``&`` is a
+postfix-operator forming types from types, e.g. ``int &``.
+
+Note that from C++ 11, double references like ``int &&`` are also allowed.
+It is sufficient to support them with spaces between the ``&``s, e.g. ``int & &``.
+Otherwise, ``x && y;`` would be ambiguous: it could be the declaration ``x & & y;``
+or a conjunction expression as statement.
+
+It is sufficient to support references and double references in the grammar.  However, it is also fine to allow arbitrary stacking of the reference operator, as for instance in ``char & & & &``.
 
 
 ==Literals==
 
-The language features integer literals, floating point literals, and the
-boolean literals, ``true`` and ``false``.
-(**2**)
++ Non-negative **Integer** literals, e.g, ``0``, ``00``, ``20``, ``151``. (**1**)
++ Non-negative **Floating point** literals, e.g., ``01.10``, ``3.14``, ``10.0e10``, ``0.00e-00``, ``1.1e-80``. (**3**)
++ Single-quoted **character** literals, e.g. ``'0'``, ``'a'``, ``'"'``, ``'''``. (**6**)
++ Double-quoted **string** literals, e.g. ``"abc"``,
+``"This,\n is \"insane\"!"``, ``"LaTeX's \"\\newcommand\""``. (**1**)
+A string literal may consist of many double-quoted character sequences
+which will be concatenated.  The parts can be divided over lines (**3**).  E.g.,
+```
+  "hello " "my little "
+  "world"
+```
+will be parsed as string literal "hello my little world".
+
 
 ==Identifiers==
 
-An identifier is a letter followed by a list of letters, digits, and underscores.
-(**1**)
+An **identifier** is a letter followed by a list of letters, digits,
+and underscores.  (**1**)
+
 
 ==Comments==
 
@@ -327,18 +412,26 @@ There are three kinds of comments:
 Block comments cannot be nested.
 
 
-
-
 =Test programs=
 
-For incremental construction of the grammar, use these example files:
+Build the grammar gradually so that you can parse
+the following test files in the given order.
 
-+ [First testsuite/good/1-definitions.cc]: Empty function definitions.
+These programs are taken from the web page of the book
+//Accelerated C++// (A. Koenig & B. Moo, Addison-Wesley, 2000).
+To comply to our grammar, we have removed template instantiations.
 
-+ [Second testsuite/good/2-statements.cc]: Functions with statements, but only literal expressions.
++ [First testsuite/good/1-hello.cc]: Print "Hello, world!".
 
-+ [Third testsuite/good/3-mandelbrot.cc]: Compute a visualization of the Mandelbrot set as portable gray map (PGM).
-  Uses the full language (definitions, statements, expressions).
++ [Second testsuite/good/2-greet.cc]: Ask the user's name and say hello to him/her.
+
++ [Third testsuite/good/3-med.cc]: Compute the grade of a student.
+
++ [Fourth testsuite/good/4-grade.cc]: A smarter way to compute the grade.
+
++ [Fifth testsuite/good/5-palin.cc]: Test if a string is a palindrome.
+
++ [Sixth testsuite/good/6-grammar.cc]: Randomly generate English sentences.
 
 
 Finally, run your parser through the [test suite testsuite/index.html].
@@ -350,15 +443,45 @@ Your grammar must pass the [test suite testsuite/index.html] and meet the
 specification in this document in all respects. The test suite contains the
 example programs, as well as a number of programs which your parser must reject.
 
-The parser must not have any conflicts, neither **shift/reduce** nor **reduce/reduce**.
+The maximum number of 10 **shift/reduce conflicts** is permitted.
+The minimum of 1 is almost unavoidable (because of the "dangling ``else``").
+But reduce/reduce conflicts are forbidden.
 
 The solution must be written in an easily readable and maintainable way. In
 particular, tailoring it for the programs in the test suite is not maintainable!
-
 
 = Submission =
 
 - Do not submit your solution before it passes the [test suite testsuite/index.html], lest it
   be returned automatically.
 - Do not submit any generated files.
-- Submit your lab using [Fire https://plt-lp2-19.fire.cse.chalmers.se/].
+- Submit your lab using [Fire https://plt-lp2-20.fire.cse.chalmers.se/].
+
+
+=Appendix: C++ features=
+
+Assuming you know some C but not C++, here is a summary of the extra features
+of C++ involved in this lab.
+
+Qualified names: ``s::n``, where ``s`` is a name space or a class.
+
+``using`` directives: license to use an unqualified name from a name space.
+
+IO streams: ``cout`` for output, ``cin`` for input. Output is
+produced by the left shift operator, input is read by the right shift.
+Example from [the second program testsuite/good/2-greet.cc]:
+```
+  // read the name
+  std::string name;     // define `name'
+  std::cin >> name;     // read into `name'
+
+  // write a greeting
+  std::cout << "Hello, " << name  << "!" << std::endl;
+```
+
+Arguments passed by reference (``&``),
+with the possibility of forbidding modification (``const``), e.g.
+(from [the sixth program testsuite/good/6-grammar.cc])
+```
+  gen_aux(const Grammar& g, const string& word, vector_string& ret)
+```
