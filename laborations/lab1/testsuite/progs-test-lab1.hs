@@ -76,7 +76,7 @@ writeDriver = writeFile "testdriver.hs" $ unlines
   , "import System.Environment (getArgs)"
   , ""
   , "import " ++ grammar ++ ".Par (myLexer, pProgram)"
-  , "import " ++ grammar ++ ".ErrM (Err(Ok,Bad))"
+  , "import " ++ grammar ++ ".ErrM"
   , ""
   , "parse s = case pProgram (myLexer s) of"
   , "  Bad err  -> hPutStrLn stderr \"ERROR\" >> hPutStrLn stderr err"
