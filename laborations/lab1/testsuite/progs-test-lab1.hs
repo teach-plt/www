@@ -3,7 +3,7 @@
 
 -- GHC needs -threaded
 
-import Control.Arrow (first, second, (***))
+import Control.Arrow ((***))
 import Control.Applicative
 import Control.Monad
 
@@ -127,32 +127,49 @@ testFrontendProg good f = do
 -- * Main
 --
 
-data Options = Options { debugFlag :: Bool, testSuiteOption :: Maybe TestSuite }
+data Options = Options
+  { optDebug :: Bool        -- ^ Print debug information?
+  , optGood  :: [FilePath]  -- ^ Good tests.
+  , optBad   :: [FilePath]  -- ^ Bad tests.
+  }
 
-enableDebug :: Options -> Options
-enableDebug options = options { debugFlag = True }
-
-addGood, addBad :: FilePath -> Options -> Options
-addGood f options = options { testSuiteOption = Just $ maybe ([f],[]) (first  (f:)) $ testSuiteOption options }
-addBad  f options = options { testSuiteOption = Just $ maybe ([],[f]) (second (f:)) $ testSuiteOption options }
+defaultOptions :: Options
+defaultOptions = Options
+  { optDebug = False
+  , optGood  = []
+  , optBad   = []
+  }
 
 optDescr :: [OptDescr (Options -> Options)]
-optDescr = [ Option []    ["debug"] (NoArg  enableDebug       ) "print debug messages"
-           , Option ['g'] ["good"]  (ReqArg addGood     "FILE") "good test case FILE"
-           , Option ['b'] ["bad"]   (ReqArg addBad      "FILE") "bad test case FILE"
-           ]
+optDescr =
+  [ Option []    ["debug"] (NoArg  enableDebug       ) "print debug messages"
+  , Option ['g'] ["good"]  (ReqArg addGood     "FILE") "good test case FILE"
+  , Option ['b'] ["bad"]   (ReqArg addBad      "FILE") "bad test case FILE"
+  ]
+
+enableDebug :: Options -> Options
+enableDebug o = o { optDebug = True }
+
+addGood, addBad :: FilePath -> Options -> Options
+addGood f o = o { optGood = f : optGood o }
+addBad  f o = o { optBad  = f : optBad  o }
+
+-- | If no test cases are given, assume standard test suites.
+testSuiteOption :: Options -> TestSuite
+testSuiteOption o = if null g && null b then (["good"], ["bad"]) else (g, b)
+  where
+  g = optGood o
+  b = optBad  o
 
 parseArgs :: [String] -> IO (FilePath,TestSuite)
 parseArgs argv = case getOpt RequireOrder optDescr argv of
 
   (o,[cfFile],[]) -> do
-    let defaultOptions = Options False Nothing
-        options = foldr ($) defaultOptions o
-    when (debugFlag options) $ writeIORef doDebug True
-    let testSuite    = fromMaybe (["good"],["bad"]) $ testSuiteOption options
-        expandPath f = doesDirectoryExist f >>= \b -> if b then listCCFiles f else return [f]
-    testSuite' <- bothM ((concat <$>) . mapM expandPath) testSuite
-    return (cfFile,testSuite')
+    let options = foldr ($) defaultOptions o
+    when (optDebug options) $ writeIORef doDebug True
+    let expandPath f = doesDirectoryExist f >>= \b -> if b then listCCFiles f else return [f]
+    testSuite' <- bothM ((concat <$>) . mapM expandPath) $ testSuiteOption options
+    return (cfFile, testSuite')
 
   (_,_,_) -> do
     hPutStrLn stderr "Usage: progs-test-lab1 [--debug] [-g|--good FILE]... [-b|--bad FILE]... cf_file"
