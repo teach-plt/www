@@ -37,13 +37,14 @@ CVS
 
 /laborations/mini/miniJS.zip
 
+/laborations/lab?/testsuite/test-*
+
 /laborations/lab1/testscript/lab1-test-dir/
 /laborations/lab1/testscript/progs-test-lab1
 
 /laborations/lab1/testsuite/lab1-test-dir/
 /laborations/lab1/testsuite/lab1-test-dir#/
 /laborations/lab1/testsuite/progs-test-lab1
-/laborations/lab1/testsuite/test-*
 /laborations/lab1/testsuite/good/fractal.pgm
 /laborations/lab1/testsuite/good/fractal.ppm
 /laborations/lab1/testsuite/good/mandelbrot.exe

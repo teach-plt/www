@@ -1,5 +1,5 @@
 Lab 3: Code Generator for C--
-Programming Language Technology, 2019
+Programming Language Technology, 2020
 
 %!target:html
 %!encoding: utf-8
@@ -480,4 +480,4 @@ $ make -B
 $ ./lab3
 ```
 - Do not submit any generated files.
-- Submit your lab using [Fire https://plt-lp2-19.fire.cse.chalmers.se/].
+- Submit your lab using [Fire https://plt-lp2-20.fire.cse.chalmers.se/].

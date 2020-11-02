@@ -3,7 +3,7 @@
 # Files which contribute to the generated .html
 deps=../../../style.css ../../../include.html ../../../enhance_page.js
 
-.PHONY : all suite www test test-%
+.PHONY : all suite www test
 
 all : suite www
 

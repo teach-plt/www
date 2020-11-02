@@ -7,7 +7,7 @@ import Control.Monad
 import Data.Char
 import Data.Function
 import Data.IORef
-import Data.List
+import qualified Data.List as List
 import Data.Maybe
 import Data.Monoid
 
@@ -195,13 +195,48 @@ basename :: FilePath -> String
 basename = takeBaseName
 
 stripEnd :: String -> String
-stripEnd = dropWhileEnd isSpace
+stripEnd = List.dropWhileEnd isSpace
 
 echo :: String -> IO ()
 echo = putStrLn
 
 was_failure :: String -> Bool
-was_failure = ("ERROR" `isInfixOf`) . map toUpper
+was_failure = ("ERROR" `List.isInfixOf`) . map toUpper
+
+goodTests :: [ (FilePath, String, String) ]
+goodTests =
+  [ ("good/001.hs",    "-v", "7"         )
+  , ("good/002.hs",    "-n", "5"         )
+  , ("good/003.hs",    "-v", "5050"      )
+  , ("good/004.hs",    "-v", "720"       )
+  , ("good/005.hs",    "-n", "0"         )
+  , ("good/006.hs",    "-v", "1073741824")
+  , ("good/007.hs",    "-v", "1"         )
+  , ("good/008.hs",    "-v", "210"       )
+  , ("good/008.hs",    "-n", "210"       )
+  , ("good/church.hs", "-v", "8"         )
+  , ("good/009.hs",    "-v", "131072"    )
+  , ("good/010.hs",    "-v", "1"         )
+  , ("good/010.hs",    "-n", "1"         )
+  , ("good/011.hs",    "-v", "1"         )
+  , ("good/011.hs",    "-n", "1"         )
+  , ("good/012.hs",    "-v", "0"         )
+  , ("good/013.hs",    "-v", "1"         )
+  , ("good/014.hs",    "-n", "33"        )
+  , ("good/015.hs",    "-v", "1"         )
+  , ("good/015.hs",    "-n", "1"         )
+  , ("good/ski.hs",    "-n", "16"        )
+  , ("good/016.hs",    "-v", "18"        )
+  , ("good/016.hs",    "-n", "18"        )
+  , ("good/017.hs",    "-v", "2"         )
+  , ("good/017.hs",    "-n", "2"         )
+  , ("good/018.hs",    "-v", "2"         )
+  , ("good/018.hs",    "-n", "2"         )
+  , ("good/019.hs",    "-v", "0"         )
+  , ("good/019.hs",    "-n", "0"         )
+  , ("good/shadow.hs", "-n", "1"         )
+  , ("good/shadow2.hs","-n", "1"         )
+  ]
 
 runGood :: FilePath -> (FilePath,String,String) -> IO (Sum Int)
 runGood lab4 good = do
@@ -262,51 +297,19 @@ optDescr = [ Option []    ["no-make"] (NoArg  disableMake               ) "do no
 
 parseArgs :: [String] -> IO (FilePath,TestSuite)
 parseArgs argv = case getOpt RequireOrder optDescr argv of
+
   (o,[codedir],[]) -> do
     let defaultOptions = Options True Nothing
     options <- maybe usage return $ foldM (&) defaultOptions o
     when (not $ makeFlag options) $ writeIORef doMake False
-    let goodTests = [ ("good/001.hs",    "-v", "7"         )
-                    , ("good/002.hs",    "-n", "5"         )
-                    , ("good/003.hs",    "-v", "5050"      )
-                    , ("good/004.hs",    "-v", "720"       )
-                    , ("good/005.hs",    "-n", "0"         )
-                    , ("good/006.hs",    "-v", "1073741824")
-                    , ("good/007.hs",    "-v", "1"         )
-                    , ("good/008.hs",    "-v", "210"       )
-                    , ("good/008.hs",    "-n", "210"       )
-                    , ("good/church.hs", "-v", "8"         )
-                    , ("good/009.hs",    "-v", "131072"    )
-                    , ("good/010.hs",    "-v", "1"         )
-                    , ("good/010.hs",    "-n", "1"         )
-                    , ("good/011.hs",    "-v", "1"         )
-                    , ("good/011.hs",    "-n", "1"         )
-                    , ("good/012.hs",    "-v", "0"         )
-                    , ("good/013.hs",    "-v", "1"         )
-                    , ("good/014.hs",    "-n", "33"        )
-                    , ("good/015.hs",    "-v", "1"         )
-                    , ("good/015.hs",    "-n", "1"         )
-                    , ("good/ski.hs",    "-n", "16"        )
-                    , ("good/016.hs",    "-v", "18"        )
-                    , ("good/016.hs",    "-n", "18"        )
-                    , ("good/017.hs",    "-v", "2"         )
-                    , ("good/017.hs",    "-n", "2"         )
-                    , ("good/018.hs",    "-v", "2"         )
-                    , ("good/018.hs",    "-n", "2"         )
-                    , ("good/019.hs",    "-v", "0"         )
-                    , ("good/019.hs",    "-n", "0"         )
-                    , ("good/shadow.hs", "-n", "1"         )
-                    , ("good/shadow2.hs","-n", "1"         )
-                    ]
-        testSuite              = fromMaybe (goodTests,["bad"]) $ testSuiteOption options
-        listHSFiles d          = filter (".hs" `isExtensionOf`) <$> ls d
-        expandPath  f          = doesDirectoryExist f >>= \b -> if b then listHSFiles f else return [f]
-        expandPathGood (f,m,r) = map (\ f' -> (f',m,r)) <$> expandPath f
+    let testSuite              = fromMaybe (goodTests,["bad"]) $ testSuiteOption options
+    let listHSFiles d          = filter (".hs" `List.isSuffixOf`) <$> ls d
+    let expandPath  f          = doesDirectoryExist f >>= \b -> if b then listHSFiles f else return [f]
+    let expandPathGood (f,m,r) = map (\ f' -> (f',m,r)) <$> expandPath f
     testSuite' <- mapTupleM (concatMapM expandPathGood) (concatMapM expandPath) testSuite
     return (codedir,testSuite')
-  (_,_,_) -> do
-    _ <- usage
-    exitFailure
+
+  (_,_,_) -> usage
 
 usage :: IO a
 usage = do
