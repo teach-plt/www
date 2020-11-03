@@ -37,7 +37,7 @@ CVS
 
 /laborations/mini/miniJS.zip
 
-/laborations/lab?/testsuite/test-*
+/laborations/lab?/*/test-*.*.*
 
 /laborations/lab1/testscript/lab1-test-dir/
 /laborations/lab1/testscript/progs-test-lab1
