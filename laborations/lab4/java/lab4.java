@@ -1,5 +1,5 @@
-import Fun.*;
-import Fun.Absyn.*;
+import fun.*;
+import fun.Absyn.*;
 import java.io.*;
 
 public class lab4 {

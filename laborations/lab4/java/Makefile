@@ -7,7 +7,7 @@
 LABSRC    = Strategy.java Interpreter.java lab4.java
 
 # No need to edit these:
-LBNF      = Fun
+LBNF      = fun
 PARSERSRC = $(wildcard $(LBNF)/Absyn/*.java $(LBNF)/*.java)
 PARSEROBJ = $(PARSERSRC:.java=.class)
 LABOBJ    = $(LABSRC:.java=.class)

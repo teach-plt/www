@@ -1,6 +1,6 @@
 import java_cup.runtime.*;
-import CMM.*;
-import CMM.Absyn.*;
+import cmm.*;
+import cmm.Absyn.*;
 import java.io.*;
 
 public class lab2 {
@@ -14,7 +14,7 @@ public class lab2 {
         try {
             l = new Yylex(new FileReader(args[0]));
             parser p = new parser(l);
-            CMM.Absyn.Program parse_tree = p.pProgram();
+            cmm.Absyn.Program parse_tree = p.pProgram();
             new TypeChecker().typecheck(parse_tree);
             new Interpreter().interpret(parse_tree);
 

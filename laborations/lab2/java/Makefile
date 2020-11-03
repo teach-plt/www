@@ -7,7 +7,7 @@
 LABSRC    = TypeException.java TypeChecker.java Interpreter.java lab2.java
 
 # No need to edit these:
-PARSERSRC = $(wildcard CMM/Absyn/*.java CMM/*.java)
+PARSERSRC = $(wildcard cmm/Absyn/*.java cmm/*.java)
 PARSEROBJ = $(PARSERSRC:.java=.class)
 LABOBJ    = $(LABSRC:.java=.class)
 # Inner classes:
@@ -16,10 +16,8 @@ LABOBJ    = $(LABSRC:.java=.class)
 # Variables for the programming environment (edit as needed)
 ###########################################################################
 
-# Name of generated .cup file for bnfc 2.8.1
-CUPFILE = CMM/_cup.cup
-# Older BNFC versions may need:
-# CUPFILE = CMM/CMM.cup
+# Name of generated .cup file for bnfc ≥ 2.8.1
+CUPFILE = cmm/_cup.cup
 
 JAVAC       = javac
 JAVAC_FLAGS = -sourcepath .
@@ -50,38 +48,38 @@ lab2 : lab2.hs
 # Rules for compiling lab2 classes (modify or add as needed)
 ###########################################################################
 
-TypeChecker.class : TypeChecker.java TypeException.class CMM/Test.class
+TypeChecker.class : TypeChecker.java TypeException.class cmm/Test.class
 	$(javac) $<
 
-Interpreter.class : Interpreter.java CMM/Test.class
+Interpreter.class : Interpreter.java cmm/Test.class
 	$(javac) $<
 
-lab2.class : lab2.java TypeChecker.class Interpreter.class CMM/Test.class
+lab2.class : lab2.java TypeChecker.class Interpreter.class cmm/Test.class
 	$(javac) $<
 
 
 # Rules for creating the parser
 ###########################################################################
 
-# Create parser source via bnfc (dependency CMM.cf needs to be first).
-CMM/Yylex $(CUPFILE) CMM/Test.java : CMM.cf
+# Create parser source via bnfc (dependency cmm.cf needs to be first).
+cmm/Yylex $(CUPFILE) cmm/Test.java : cmm.cf
 	bnfc --java $<
 
 # Create parser and move it to the correct location.
-CMM/parser.java CMM/sym.java : $(CUPFILE)
-	$(java) java_cup.Main -package CMM $<
-	mv parser.java sym.java CMM/
+cmm/parser.java cmm/sym.java : $(CUPFILE)
+	$(java) java_cup.Main -package cmm $<
+	mv parser.java sym.java cmm/
 
 # Create lexer.
-CMM/Yylex.java : CMM/Yylex
+cmm/Yylex.java : cmm/Yylex
 	$(java) JLex.Main $<
 
 # Compile lexer.
-CMM/Yylex.class : CMM/Yylex.java CMM/sym.class
+cmm/Yylex.class : cmm/Yylex.java cmm/sym.class
 	$(javac) $<
 
 # Create parser test.
-CMM/Test.class : CMM/Test.java CMM/parser.class CMM/sym.class CMM/Yylex.class
+cmm/Test.class : cmm/Test.java cmm/parser.class cmm/sym.class cmm/Yylex.class
 	$(javac) $<
 
 
@@ -98,7 +96,7 @@ CMM/Test.class : CMM/Test.java CMM/parser.class CMM/sym.class CMM/Yylex.class
 sdist : lab2.tar.gz
 
 tmpdir := $(shell mktemp -d)
-lab2.tar.gz : CMM.cf Makefile lab2.hs lab2.sh lab2.bat $(LABSRC)
+lab2.tar.gz : cmm.cf Makefile lab2.hs lab2.sh lab2.bat $(LABSRC)
 	mkdir $(tmpdir)/lab2
 	cp $^ $(tmpdir)/lab2/
 	tar -C $(tmpdir) -czhf $@ lab2
@@ -107,8 +105,8 @@ lab2.tar.gz : CMM.cf Makefile lab2.hs lab2.sh lab2.bat $(LABSRC)
 ###########################################################################
 
 clean :
-	-rm -f CMM/Absyn/*.class CMM/*.class
-	-rm -f CMM.dvi CMM.aux CMM.log CMM.ps
+	-rm -f cmm/Absyn/*.class cmm/*.class
+	-rm -f cmm.dvi cmm.aux cmm.log cmm.ps
 	-rm -f $(LABOBJ)
 	-rm -f lab2.hi lab2.o lab2.exe lab2
 # Uncomment to also remove all .class files in current directory
@@ -117,11 +115,11 @@ clean :
 
 vclean : clean
 	-rm -f $(PARSERSRC)
-	-rm -f CMM/Absyn/*.bak CMM/*.bak
-	-rmdir CMM/Absyn/
-	-rm -f CMM.tex
-	-rm -f CMM/Yylex $(CUPFILE)
-	-rmdir -p CMM/
+	-rm -f cmm/Absyn/*.bak cmm/*.bak
+	-rmdir cmm/Absyn/
+	-rm -f cmm.tex
+	-rm -f cmm/Yylex $(CUPFILE)
+	-rmdir -p cmm/
 
 distclean : vclean
 	-rm -f lab2.tar.gz

@@ -38,6 +38,7 @@ CVS
 /laborations/mini/miniJS.zip
 
 /laborations/lab?/*/test-*.*.*
+/laborations/lab?/java/cmm/
 
 /laborations/lab1/testscript/lab1-test-dir/
 /laborations/lab1/testscript/progs-test-lab1
@@ -76,6 +77,7 @@ CVS
 
 /laborations/lab4/haskell/Fun/
 /laborations/lab4/haskell/lab4
+/laborations/lab4/java/fun/
 /laborations/lab4/java/Fun/
 /laborations/lab4/java/lab4
 

@@ -1,4 +1,4 @@
-import CMM.Absyn.*;
+import cmm.Absyn.*;
 import java.util.*;
 
 public class TypeChecker

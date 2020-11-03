@@ -1,5 +1,5 @@
 import java.util.*;
-import Fun.Absyn.*;
+import fun.Absyn.*;
 
 public class Interpreter {
 

@@ -1,4 +1,4 @@
-import CMM.Absyn.*;
+import cmm.Absyn.*;
 
 public class TypeChecker {
 
