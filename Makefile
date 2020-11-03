@@ -3,8 +3,7 @@
 # Files which contribute to index.html
 deps=style.css include.html enhance_page.js Makefile
 
-.PHONY : ship all www mini ipl-book
-  # lab1 lab2 lab3 lab4 ## .PHONY turns off lab% goals somehow
+.PHONY : ship all www mini ipl-book lab%
 
 all : exams.tgz mini lab1 lab2 lab3 lab4 ipl-book www # www last for linkchecker
 
@@ -36,6 +35,15 @@ index.html : %.html : %.txt $(deps)
 
 exams.tgz : exams/*.pdf exams/*.txt exams/*.html exams/*.jpg
 	tar czf $@ $^
+
+## Testing
+
+.PHONY : test
+
+test :
+	make -C laborations test
+
+## Cleaning
 
 clean : clean_index clean_lab1 clean_lab2 clean_lab3 clean_lab4 clean_mini
 

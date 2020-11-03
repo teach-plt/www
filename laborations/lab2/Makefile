@@ -24,6 +24,14 @@ www : index.html
 %.html : %.txt $(deps)
 	txt2tags --style=../../style.css -t html $<
 
+## Testing
+
+.PHONY : test
+
+test :
+	make -C testsuite test
+
+## Cleaning
 
 clean : clean_index clean_testsuite
 
