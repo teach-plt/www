@@ -32,6 +32,7 @@ www : index.html
 test :
 	make -C testsuite test
 	make -C haskell -f test.mk
+	make -C java
 
 ## Cleaning
 
