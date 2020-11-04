@@ -64,6 +64,9 @@ data Options = Options { debugFlag       :: Bool
 enableDebug :: Options -> Options
 enableDebug options = options { debugFlag = True }
 
+enableDoubles :: Options -> Options
+enableDoubles options = options { doublesFlag = True }
+
 disableDoubles :: Options -> Options
 disableDoubles options = options { doublesFlag = False }
 
@@ -75,6 +78,7 @@ addTest f options = options { testSuiteOption = Just $ maybe [f] (f:) $ testSuit
 
 optDescr :: [OptDescr (Options -> Options)]
 optDescr = [ Option []    ["debug"]      (NoArg  enableDebug       ) "print debug messages"
+           , Option []    ["doubles"]    (NoArg  enableDoubles     ) "include double tests"  -- default
            , Option []    ["no-doubles"] (NoArg  disableDoubles    ) "exclude double tests"
            , Option []    ["no-make"]    (NoArg  disableMake       ) "do not run make"
            , Option ['t'] ["test"]       (ReqArg addTest     "FILE") "good test case FILE"
