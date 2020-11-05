@@ -4,11 +4,13 @@ DIR=lab1-testsuite
 
 mkdir "$DIR"
 mkdir "$DIR/good"
+mkdir "$DIR/good-CMM"
 mkdir "$DIR/bad"
 
 cp progs-test-lab1.hs "$DIR"
 cp Makefile-test "$DIR/Makefile"
 cp -p good/*.cc "$DIR/good/"
+cp -p good-CMM/*.cc "$DIR/good-CMM/"
 cp -p bad/*.cc "$DIR/bad/"
 
 TAR=tar
