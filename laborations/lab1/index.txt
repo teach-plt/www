@@ -391,7 +391,7 @@ which will be concatenated.  The parts can be divided over lines (**3**).  E.g.,
   "hello " "my little "
   "world"
 ```
-will be parsed as string literal "hello my little world".
+is an alternative way to say "hello my little world".
 
 
 ==Identifiers==
