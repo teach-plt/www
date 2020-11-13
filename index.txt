@@ -117,8 +117,10 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %    The code from today's "Hands-on for lab 2" session is [online live/2019/live-7-lab2.zip] (Haskell and Java).
 
 
-% %  : //2019-11-20//
-% %    [Lab 2 laborations/lab2/index.html] is online.
+ : //2019-11-13//
+   [Lab 2 laborations/lab2/index.html] description is online.
+
+   It differs from the 2019 version in that an //annotating// type checker is needed.
 
 %  : //2019-11-22//
 %    For lab2, we clarified in the lab text that there is no need to type annotate the code during type checking. Annotations will become relevant first in lab3.
@@ -144,7 +146,7 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %    [MiniJS laborations/mini/index.html] implementation in Haskell and Java.
 
   : //2020-11-02//
-   [Lab 1 laborations/lab1/index.html] description online.
+   [Lab 1 laborations/lab1/index.html] description is online.
 
    Labs are done in groups of 2.  Please look for a lab partner.
 
@@ -180,8 +182,7 @@ Slides follow closely the plt book.
 %| Tue 17/11     | 13-15          | Theory of lexing, LR parsing  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
 | Tue 17/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
 | Thu 19/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
-| Tue 24/11     | 13-14          | Hands-on with Lab 2 (Haskell)     |  |
-%[lab2 PM laborations/lab2/index.html] [Monads https://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf] |
+| Tue 24/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/index.html] [Monads https://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf] |
 | Tue 24/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
 %[live coding live/2019/live-7-lab2.zip] |
 %| Thu 26/11     | 13-14          | Hands-on with Lab 2 (Haskell)     |  |
@@ -189,6 +190,7 @@ Slides follow closely the plt book.
 %| Thu 26/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
 | Thu 26/11     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
 | //Mon 30/11// | //23//         | //Lab 2 deadline//                |  |
+%[lab2 PM laborations/lab2/index.html] |
 %| Tue 01/12     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
 | Tue 01/12    | 13-14          | Hands-on with Lab 3 (Haskell)     |  |
 %[lab3 PM laborations/lab3/index.html]
@@ -331,8 +333,8 @@ You have to pass the labs to pass the course.
 However, the course grade is determined solely by the exam.
 % - Lab 1 - parser  (deadline 16/11)
 - [Lab 1 - parser laborations/lab1/index.html] (deadline 16/11)
-- Lab 2 - type checker and interpreter (deadline 30/11)
-% - [Lab 2 - type checker and interpreter laborations/lab2/index.html] (deadline 30/11)
+% - Lab 2 - type checker and interpreter (deadline 30/11)
+- [Lab 2 - type checker and interpreter laborations/lab2/index.html] (deadline 30/11)
 - Lab 3 - code generator (deadline 14/12)
 % - [Lab 3 - code generator laborations/lab3/index.html] (deadline 14/12)
 - Lab 4 - functional language interpreter  (deadline 08/01/2020)
