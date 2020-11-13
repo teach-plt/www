@@ -50,11 +50,16 @@ formal rules in the PLT book, chapters 4 and 5.
 
 In the type checker, the recommended procedure is two passes:
 + build a symbol table with all function types, including the built-in functions;
-+ type check the code by using this symbol table. (Note that there is no need to type annotate the tree in this lab. Annotations will become relevant first in the next lab.)
++ type check the code by using this symbol table, producing type-annotated code.
 
+
+(The requirement to produce type-annotated code is new in comparison
+to the version of lab 2 of 2019 and before.  Type-annotations are
+needed to insert coercions from ``int`` to ``double`` at the right
+places.)
 
 In the interpreter, do a similar thing:
-+ build a symbol table that provides for every function its source code syntax tree;
++ build a symbol table that provides for every function its type-annotated syntax tree;
   the built-in functions can be left out and treated separately in the rule for
   evaluating function calls;
 + interpret the program by evaluating the expression ``main()``.
@@ -189,8 +194,20 @@ Variable declarations have one of the following formats:
 
 
 
-**Typing**. The initializing expression must have the declared type in the //extended// context.
+**Typing**.
 The type cannot be ``void``.
+The initializing expression must have the declared type in the //extended// context.
+This means that a function like
+```
+  int foo () {
+    int i = i;
+    return i;
+  }
+```
+is well-typed.
+(Of course, this is not a meaningful program, since the variable ``i``
+is never initialized and thus has a undefined value.)
+
 //Note:// Due to subtyping, a ``double`` variable may also be initialized with an ``int`` expression.
 
 
@@ -623,6 +640,27 @@ appropriate operations of the implementation language. We are not
 picky about the precision chosen, but suggest for simplicity
 that ``int`` should be ``int`` and ``double`` should be ``double``.
 
+//Note://  Division behaves differently for integer than for floating
+point arguments.  If both arguments are of type integer, then integer
+division is applied, which truncates the result.  If at least one of
+the arguments is a floating point value, then floating point division
+is applied, which returns a floating point.  To choose the correct
+operation, static typing information is needed (provided by the type
+checker).  Consider the following example:
+```
+double divide (double x, double y) {
+  return x / y;
+}
+
+int main() {
+  printDouble (divide (5, 3));
+}
+```
+Without type information, this program prints ``1.0``
+(``printDouble(5/3)``), but with the correct coercions introduced by
+the type checker, it prints ``1.66667`` (or similar).  The integer literals ``5``
+and ``3`` need to be converted to floating point values when calling
+the function ``divide``.
 
 Comparisons and equality tests,
 ```
