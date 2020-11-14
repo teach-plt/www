@@ -1,6 +1,6 @@
-// Assigning int to double variable.
-
-int main () {
- double x = 1;
- return 0 ;
+int main() {
+  double d = 1;
+  d = d / 2;
+  printDouble(d);
+  return 0;
 }

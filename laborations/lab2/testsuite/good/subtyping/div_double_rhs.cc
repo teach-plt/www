@@ -1,5 +1,4 @@
 int main() {
-  double x;
-  x = 1.1 + 1;
+  printDouble(1 / 2.0);
   return 0;
 }
