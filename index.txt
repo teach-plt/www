@@ -116,6 +116,9 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %  : //2019-11-26//
 %    The code from today's "Hands-on for lab 2" session is [online live/2019/live-7-lab2.zip] (Haskell and Java).
 
+ : //2020-11-17//
+   The [script notes/type-checking.md] for lecture 5 (type checking) has been updated
+   to incorporate the changes made in the lecture.
 
  : //2020-11-13//
    [Lab 2 laborations/lab2/index.html] description is online.

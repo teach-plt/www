@@ -21,7 +21,9 @@ Introduction
 
     int main () {
       fun_t good = &main;    // Function pointer to main function
+      int i = (*good)();
       fun_t bad  = 12345678; // Function pointer to random address
+      int j = (*bad)();
     }
     ```
 
@@ -68,7 +70,7 @@ and C (in a suitable place).
 Typing of arithmetic expressions
 --------------------------------
 
-Judgement version 1: "expression e has type t"
+Judgement version 1: "expression `e` has type `t`"
 
     e : t
 
@@ -122,7 +124,7 @@ Example implementation:
         t == TInt
 
     check (EDiv e₁ e₂, t):
-        check (e₁, t) && check (e₂, t)
+        check (e₁, t) && check (e₂, t) && (t == TInt || t == TDouble)
 
     infer (EInt i):
         return TInt
@@ -141,6 +143,25 @@ Subtyping `t₁ ≤ t₂` is a preorder, i.e., a reflexive-transitive relation.
     e : t₁
     ------ t₁ ≤ t₂
     e : t₂
+
+Subtyping should be coherent, up-casting via an intermediate type
+should not make a difference:
+
+    short int i;
+    double x = (double)((int)i);
+    double y = (double)i;
+
+In practice, it often does.  E.g. with coercions to `string`:
+
+    int ≤ string             1 → "1"
+    int ≤ double ≤ string    1 → 1.0 → "1.0"
+
+Quiz: What is the value of this expression?
+
+    1 + 2 + "hello" + 1 + 2
+
+This should better be a type error!  The value should not depend on
+the associativity of "+".
 
 ### Elaboration in the type checker
 
@@ -161,6 +182,7 @@ Example implementation:
         else fail "expected int"
 
     check (EDiv e₁ e₂, t):
+        assert (t ∈ {TInt, TDouble})
         e₁' ← check (e₁, t)
         e₂' ← check (e₂, t)
         return (EDiv e₁' e₂')
@@ -204,6 +226,8 @@ Judgements version 1:
     ⊢ s            Statement s is well-typed
     ⊢ s₁...sₙ      Statement sequence s₁...sₙ is well-typed
 
+NB: ⊢ = "turnstile" (With TeX input mode: \vdash)
+
 Rules for conditional statements:
 
     e : bool    ⊢ s
@@ -230,7 +254,7 @@ Expressions as statements
 Return statements
 -----------------
 
-A return statement needs to have a return expression of the corrent type.
+A return statement needs to have a return expression of the correct type.
 ```c
 int main () {
   ...
@@ -280,15 +304,16 @@ Example:
   int f (double x) {
     int i = 2 ;
     int j = 5 ;
-    int i     ;    // illegal, i already declared in block
-    double x  ;    // illegal, x already declared in block
+    // int i;         // illegal, i already declared in block
+    // int x;         // illegal, x already declared in block
     {
-      double x;    // legal
-      int i = 3 ;  // shadows the previous variable i
+      int    x = 0;   // legal, shadows function parameter.
+      double i = 3 ;  // shadows the previous variable i
       {
-                   // Environment: (x:double,i:int,j:int).(x:double,i:int).()
+                   // Environment: (x:double,i:int,j:int).(x:int,i:double).()
       }
-      i = i + j;   // the inner i becomes 8
+      i = i + j;   // the inner i becomes 8.0
+      int k;
     }
     i++ ;          // the outer i becomes 3
     return i + j;
@@ -296,12 +321,12 @@ Example:
 ```
 
 Environments `Γ` are structured as stack of blocks.
-Each block `Δ` is a map from identifier to type.
+Each block `Δ` is a (partial and finite) map from identifier to type.
 
 Example: in the innermost block, the typing environment is a stack of three blocks
 
   1. `(x:double,i:int,j:int)`: function parameters and top local variables
-  2. `(x:double,i:int)`: variables declared in the first inner block
+  2. `(x:int,i:double)`: variables declared in the first inner block
   3. `()`: variables declared in the second inner block (none)
 
 Declaration statements like `int i, j;` declare a new block component `Δ = (i:int, j:int)`.
@@ -320,16 +345,24 @@ Judgements version 2:
 
 Rules for declarations and blocks.
 
-    ----------------------------------
-    Γ ⊢ᵗ⁰ t x₁,...,xₙ; ⇒ (x₁:t,...xₙ:t)
+    ------------------------------------- no xᵢ ∈ Δ
+    Γ.Δ ⊢ᵗ⁰ t x₁,...,xₙ; ⇒ (x₁:t,...xₙ:t)
 
-    Γ,x:t ⊢ e : t
-    ----------------------
-    Γ ⊢ᵗ⁰ t x = e; ⇒ (x:t)
+    Γ.(Δ,x:t) ⊢ e : t
+    ------------------------ x ∉ Δ
+    Γ.Δ ⊢ᵗ⁰ t x = e; ⇒ (x:t)
 
     Γ.() ⊢ᵗ⁰ ss ⇒ Δ
     -----------------
     Γ ⊢ᵗ⁰ { ss } ⇒ ()
+
+Valid but pointless example for initialization statement:
+```
+int main () {
+  int i = i;
+}
+```
+`t x = e` is sugar for `t x; x = e;`.
 
 Rules for sequences:
 
@@ -345,16 +378,15 @@ Branches need to be in new scope.
 
     Γ ⊢ᵗ⁰ e : bool    Γ. ⊢ᵗ⁰ s₁ ⇒ Δ₁    Γ. ⊢ᵗ⁰ s₂ ⇒ Δ₂
     -------------------------------------------------
-    Γ ⊢ᵗ⁰ if (e) s₁ else e₂
+    Γ ⊢ᵗ⁰ if (e) s₁ else e₂ ⇒ ()
 
     Γ ⊢ᵗ⁰ e : bool    Γ. ⊢ᵗ⁰ s ⇒ Δ
     -----------------------------
-    Γ ⊢ᵗ⁰ while (e) s
+    Γ ⊢ᵗ⁰ while (e) s ⇒ ()
 
 Example:
 ```
     int main () {
-      ...
       if (condition) int i = 1; else int j = 2;
       return i;
     }
@@ -426,10 +458,10 @@ Type-annotating checker: annotate each subexpression with its type.
     infer (Context Γ, Exp e): Maybe Exp
 
     infer (Γ, EDiv e₁ e₂):
-      ECast t₁ e₁ ← infer (Γ, e₁)
-      ECast t₂ e₂ ← infer (Γ, e₂)
+      ECast t₁ e₁' ← infer (Γ, e₁)
+      ECast t₂ e₂' ← infer (Γ, e₂)
       t = max t₁ t₂
-      return (ECast t (EDiv (ECast t₁ e₁) (ECast t₂ e₂)))
+      return (ECast t (EDiv (ECast t₁ e₁') (ECast t₂ e₂')))
   ```
 
 - Alternative 2: design a new abstract syntax which type-annotations
@@ -437,5 +469,6 @@ Type-annotating checker: annotate each subexpression with its type.
   ```
   TEDiv.     TExp ::= "div" Type TExp TExp;
 
-  TSReturn.  TStm ::= "return" Type Exp;
+  TSExp.     TStm ::= Type TExp ";" ;
+  TSReturn.  TStm ::= "return" Type TExp;
   ```
