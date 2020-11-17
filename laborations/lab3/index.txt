@@ -15,7 +15,7 @@ Back to main page of
 =Summary=
 
 The objective of this assignment is to write a code generator from a fragment C--
-of the C/C++ programming language to JVM, Java Virtual Machine.
+of the C/C++ programming language to JVM, the Java Virtual Machine.
 The code generator should produce Java class files, which
 can be run in the Java bytecode interpreter so that they
 correctly perform all their input and output actions.
@@ -55,13 +55,16 @@ The recommended procedure for the compiler is two passes:
 
 You can start by copying your ``CMM.cf`` grammar and the
 ``TypeChecker`` module from [Lab 2 ../lab2/index.html] to the same directory.
-
-Then, modify the type checker to produce type-annotated abstract syntax,
-such that the correct instruction (for ``int`` or ``double``)
-can be picked by the code generator.
-The type-annotated syntax should also make clear where a conversion
+Make sure that the type-annotated syntax indicates where a conversion
 from int to double occurs, such that the conversion instruction ``i2d``
 can be placed by the code generator.
+
+% Then, modify the type checker to produce type-annotated abstract syntax,
+% such that the correct instruction (for ``int`` or ``double``)
+% can be picked by the code generator.
+% The type-annotated syntax should also make clear where a conversion
+% from int to double occurs, such that the conversion instruction ``i2d``
+% can be placed by the code generator.
 
 
 
@@ -71,7 +74,7 @@ can be placed by the code generator.
 The language is the same as in [Lab 2 ../lab2/index.html], except the handling of uninitialized variables, and you can reuse the
 parser and type checker.
 
-Programs using uninitialized variables fall under undefined behaviour
+Programs using uninitialized variables fall under undefined behavior
 in this lab, meaning that any semantics for such programs is allowed.
 
 There are four built-in functions:
@@ -105,14 +108,16 @@ Boilerplate code, see the PLT book, Chapter 6, or the example below.
 
 Methods in the class, ``main`` special, see Chapter 6, or example below.
 
-Note that all returns must be explicit in Java bytecode, including returns from functions returning ``void``. (The bytecode verifier will complain if it is possible for a function to end without returning.)
+Note that all returns must be explicit in Java bytecode, including
+returns from functions returning ``void``. (The bytecode verifier will
+complain if it thinks that a function may end without returning.)
 
 For non-``void``-returning functions you are allowed to assume that returns are always properly placed by the programmer who wrote the input source code. However, for ``void``-returning functions you must consider the possibility that no explicit return statement was included in the program source code.
 
 ==Statements and expressions==
 
 The semantics is the same as in [Lab 2 ../lab2/index.html] (again, except for programs using uninitialized variables). In other words,
-running the generated classes in ``java`` produces the same behaviour
+running the generated classes in ``java`` produces the same behavior
 as running the source code in the ``lab2`` interpreter.
 
 ==Example==
@@ -192,7 +197,7 @@ could compile to [good03.j good03.j] as follows:
   iload_0
   iconst_1
   iadd           ;; arg + 1
-  if_icmplt L2   ;; test i < arg + 1
+  if_icmplt L2   ;; i < arg + 1 ?
   iconst_0
   goto L3
   L2:            ;; i < arg + 1 is true
@@ -280,10 +285,10 @@ write the code, test, pack the archive again, and submit to fire.
 
 
 These packages contain the grammar, stubs for type checker and
-compiler, and suitable makefiles.
-(You probably want to adapt your type checker from [Lab 2 ../lab2/index.html],
-rather than starting from scratch.
-But have a look at these stubs anyway, they contain code to invoke Jasmin.)
+compiler, code to invoke Jasmin, and suitable makefiles.
+% (You probably want to adapt your type checker from [Lab 2 ../lab2/index.html],
+% rather than starting from scratch.
+% But have a look at these stubs anyway, they contain code to invoke Jasmin.)
 The stubs match the requirements for the solution format as
 detailed in the following:
 
@@ -329,9 +334,11 @@ The input can be read not only from user typing on the
 terminal, but also from standard input redirected from
 a file or by ``echo``. For instance,
 ```
-  java fibonacci < test-input
-  echo 20 | java fibonacci fibonacci.cc
+  echo 20 | java good03
+  java good03 <<< 20
+  java good03 < input.txt
 ```
+(where ``input.txt`` might contain ``20``).
 
 
 
@@ -343,27 +350,36 @@ Source file:
 // file good.cc
 int main ()
 {
-  int i = readInt() ; // 5
+  int i = readInt() ; // e.g. 5
 
-  printInt(i) ;       // 5
-  printInt(i++) ;     // 5
-  printInt(i) ;       // 6
-  printInt(++i) ;     // 7
-  printInt(i) ;       // 7
+  printInt(i) ;       // e.g. 5
+  printInt(i++) ;     // e.g. 5
+  printInt(i) ;       // e.g. 6
+  printInt(++i) ;     // e.g. 7
+  printInt(i) ;       // e.g. 7
 
   return 0 ;
 }
 ```
 Running the compiler:
 ```
-% ls
-Runtime.class test
-% ls test/
-good.cc
-% lab3 test/good.cc # produces test/good.class
-% ls test/
-good.cc good.class
-% echo 5 | java -cp test:. good
+$ tree
+.
+├── Runtime.class
+└── test
+    └── good.cc
+
+$ lab3 test/good.cc
+
+$ tree
+.
+├── Runtime.class
+└── test
+    ├── good.cc
+    └── good.class
+
+
+$ echo 5 | java -cp test:. good
 5
 5
 6
@@ -382,9 +398,13 @@ The compiler is submitted as source files that can be compiled by typing ``make`
 
 =Test programs=
 
-//If you have any problems getting the test program to run, or if you think that there is an error in the test suite, contact the teachers of the course via the mailing list.//
+% //If you have any problems getting the test program to run, or if
+% you think that there is an error in the test suite, contact the
+% teachers of the course via the mailing list.//
 
-We also provide a [test suite ./testsuite/index.html] for Lab 3 (with the same test cases as for [Lab 2 ../lab2/index.html]). Passing all these tests is the **minimum required** for passing this lab.
+We also provide a [test suite ./testsuite/index.html] for Lab 3 (with
+the same test cases as for [Lab 2 ../lab2/index.html]). Passing all
+these tests is **required** for passing this lab.
 
 **Run your compiler and the generated code with the test suite before submitting the assignment.**
 
@@ -397,7 +417,10 @@ The test script can then be run as follows:
 ==Jasmin tips==[jasmin-tips]
 
 Jasmin is available on [Sourceforge http://jasmin.sourceforge.net/].
-Note that version 2.4 is included in the [test suite ./testsuite/index.html] and that there are also versions on e.g. Ubuntu (``apt install jasmin-sable``) and Mac (``brew install jasmin``).
+Note that version 2.4 is included in the
+[test suite ./testsuite/index.html] and that there are also versions on
+e.g. Ubuntu (``apt install jasmin-sable``)
+and macOS (``brew install jasmin``).
 
 % ; however, the testsuite you have to pass expects you to invoke Jasmin via `java -jar jasmin.jar`.
 
@@ -448,34 +471,37 @@ particular, tailoring it for the programs in the test suite is not maintainable!
 
 =Submission=
 
-- Do not submit your solution before it passes the [test suite testsuite/index.html], lest it
-  be returned automatically.
+% - Do not submit your solution before it passes the [test suite testsuite/index.html], lest it
+%   be returned automatically.
+- Check that your solution passes the [test suite testsuite/index.html].
+  Otherwise, you might not get feedback beyond "doesn't pass the testsuite".
 - **Please include exactly all the files that are required for building your solution, including a Makefile.**
-  To verify this you can follow the following 7 steps (on Windows,
+  To verify that you have included the necessary files you can follow the following 7 steps.
+  On Windows,
   the tools used here (``bash``, ``mktemp``, ``tar``, ``make``) are
-  provided by both [Cygwin https://www.cygwin.com/] and [MSYS http://www.mingw.org/wiki/MSYS]).
-  + Create an empty folder
+  provided by both [Cygwin https://www.cygwin.com/] and [MSYS http://www.mingw.org/wiki/MSYS].
+  + Create an empty folder:
 ```
 $ TMPDIR=`mktemp -d`
 ```
-  + Copy your solution to the created folder
+  + Copy your solution to the created folder:
 ```
 $ cp lab3.tar.gz $TMPDIR/
 ```
-  + Change to the created folder
+  + Change to the created folder:
 ```
 $ cd $TMPDIR
 ```
-  + Unpack your solution
+  + Unpack your solution:
 ```
 $ tar --strip-components=1 -xzf lab3.tar.gz
 ```
-  + Build your solution
+  + Build your solution:
 ```
 $ make -B
 ```
   + Make sure step 5 succeeds without errors.
-  + Make sure your solution has been built
+  + Make sure your solution has been built and can be run:
 ```
 $ ./lab3
 ```

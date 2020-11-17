@@ -12,10 +12,6 @@ public class Runtime {
         System.out.println(x);
     }
 
-    // public static void printString (String s) {
-    //     System.out.println(s);
-    // }
-
     public static int readInt () {
         return scan.nextInt();
     }
