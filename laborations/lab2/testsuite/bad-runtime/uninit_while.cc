@@ -9,6 +9,6 @@ int main() {
     else
       i = 10;
 
-    int k = j;
+    int k = j;  // Variable j is not initialized here.
   }
 }
