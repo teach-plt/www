@@ -134,10 +134,15 @@ testBadProgram prog f = do
   (s,out,err) <- readProcessWithExitCode prog [f] input
   putStrLnExitCode s "."
   debug $ "Exit code: " ++ show s
-  if "TYPE ERROR" `isPrefixOf` out then
+  -- A. Abel, 2020-11-18 more lenient checking for error report.
+  -- Can be in either stdout or stderr, and need not be the first thing that is printed.
+  if "TYPE ERROR" `isInfixOf` (out ++ err) then
     return True
   else do
-    reportError prog "Ill-typed program passed type checking" (Just f) Nothing (nullMaybe out) (nullMaybe err)
+    let msg = case s of
+          ExitSuccess{} -> "Ill-typed program passed type checking"
+          ExitFailure{} -> "Expected output TYPE ERROR, but this was not printed"
+    reportError prog msg (Just f) Nothing (nullMaybe out) (nullMaybe err)
     return False
 
 testBadRuntimeProgram :: FilePath -> FilePath -> IO Bool
@@ -148,13 +153,19 @@ testBadRuntimeProgram prog f = do
   putStrLnExitCode s "."
   debug $ "Exit code: " ++ show s
   docmp <- readIORef doCmp
-  if docmp
-  then if "INTERPRETER ERROR" `isPrefixOf` out then
-         return True
-       else do
-         reportError prog "Bad (type-correct) program ran to completion without error" (Just f) Nothing (nullMaybe out) (nullMaybe err)
-         return False
-  else return True
+  if not docmp then
+    return True
+  -- A. Abel, 2020-11-18 more lenient checking for error report.
+  -- Can be in either stdout or stderr, and need not be the first thing that is printed.
+  else if "INTERPRETER ERROR" `isInfixOf` (out ++ err) then
+    return True
+  else do
+    let msg = case s of
+          ExitSuccess{} -> "Bad (but type-correct) program ran to completion without error"
+          ExitFailure{} -> "Expected output INTERPRETER ERROR, but this was not printed"
+    reportError prog msg (Just f) Nothing (nullMaybe out) (nullMaybe err)
+    return False
+
 
 --
 -- * Main
