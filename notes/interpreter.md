@@ -13,6 +13,8 @@ Why an interpreter if we can have a compiler?
 - Can serve as a reference implementation.
 - (In the end, of a compilation chain, there is always _some_ interpreter.)
 
+An interpreter should be _compositional_!
+
 We interpret _type-checked_ programs only, since the meaning of
 overloaded operators depends on their type.
 
@@ -55,9 +57,10 @@ several blocks `δ` of `γ`.
 
 ```
 { double z = 3.14;       // (z=3.14)
-  { int z = 0;           // (z=3.14).(z=0)
-    int x = 1 + z;       // (z=3.14).(z=0,x=1)
-    printInt(x);
+  int    y = 1;          // (z=3.14,y=1)
+  { int z = 0;           // (z=3.14,y=1).(z=0)
+    int x = y + z;       // (z=3.14,y=1).(z=0,x=1)
+    printInt(x);         // 1
   }
 }
 ```
@@ -117,8 +120,8 @@ Rules.
     -------------- γ(x) = v
     γ ⊢ x ⇓ ⟨v; γ⟩
 
-    -------------------------------- γ(x) = v
-    γ ⊢ ++(int)x ⇓ ⟨v+1; γ[x = v+1]⟩
+    -------------------------------- γ(x) = i
+    γ ⊢ ++(int)x ⇓ ⟨i+1; γ[x = i+1]⟩
 
     γ ⊢ e ⇓ ⟨v; γ'⟩
     --------------------------
@@ -192,20 +195,20 @@ eval (EDiv TInt e₁ e₂) = do
   return (VInt (div i₁ i₂))
 
 interpret : Exp → Value
-interpret e = evalState e emptyEnv
+interpret e = evalState (eval e) emptyEnv
 ```
 
 The Haskell state monad is just sugar.  It is implemented roughly by:
 ```haskell
 type State s a = s → (a, s)
 
-get :: State s s
+get :: State s s                 -- s → (s, s)
 get s = (s, s)
 
-modify :: (s → s) → State s ()
+modify :: (s → s) → State s ()   -- s → ((), s)
 modify f s = ((), f s)
 
-return :: a → State s a
+return :: a → State s a          -- s → (a, s)
 return a s = (a, s)
 
 (do x ← p; q(x)) s = let
@@ -233,6 +236,84 @@ mathematical function?
 Hint:
 - The input and the output both could be a stream of strings.
 - Exceptions need to propagate.  (See `return` statement below.)
+
+
+Shortcutting
+------------
+
+What is wrong with this rule?
+
+    γ ⊢ e₁ ⇓ ⟨b₁;γ₁⟩    γ₁ ⊢ e₂ ⇓ ⟨b₂;γ₂⟩
+    ------------------------------------ b = b₁ ∧ b₂
+    γ ⊢ e₁ && e₂ ⇓ ⟨b;γ₂⟩
+
+Here are some examples where we would like to _shortcut_ computation:
+```
+  int b = 1;
+  if (b == 0 && the_goldbach_conjecture_holds_up_to_10E100) { ... }
+  int x = 0 * number_of_atoms_on_the_moon;
+```
+
+Short-cutting logical operators like `&&` is essentially used in C, e.g.:
+```
+  if (p != NULL && p[0] > 10)
+```
+Without short-cutting, the program would crash in `p[0]` by accessing
+a `NULL` pointer.
+
+Rules with short-cutting:
+
+    γ ⊢ e₁ ⇓ ⟨false, γ₁⟩
+    -------------------------
+    γ ⊢ e₁ && e₂ ⇓ ⟨false, γ₂⟩
+
+    γ ⊢ e₁ ⇓ ⟨true, γ₁⟩    γ₁ ⊢ e₂ ⇓ ⟨b, γ₂⟩
+    ----------------------------------------
+    γ ⊢ e₁ && e₂ ⇓ ⟨b;γ₂⟩
+
+The effects of `e₂` are not executed if `e₁` already evaluated to `false`.
+
+Example:
+```
+  while (x < 10 && f(x++)) { ... }
+```
+
+You can circumvent this by defining your own `and`:
+```
+  bool and(bool x, bool y) { return x && y; }
+
+  while (and(x < 10, f(x++))) { ... }
+```
+
+Digression on:  call-by-name  (call-by-need)  call-by-value
+- call-by-value: evaluate function arguments, pass values to function
+- call-by-name: pass expressions to function unevaluated (substitution)
+- call-by-need: like call-by-name, only evaluate each argument when it
+  is used the first time.
+  If it is used a second time, reuse the value computed the first time.
+
+Example 1:
+```
+double (x) = x + x
+double (1+2)
+```
+- call-by-value: `... = double (3) = 3 + 3 = 6`
+- call-by-name:  `... = (1+2) + (1+2) = 3 + (1+2) = 3 + 3 = 6`
+- call-by-need:  `... = let x=1+2 in x + x = let x = 3 in x + x = 3 + 3 = 6`
+
+Example 2:
+```
+zero (x) = 0
+zero (1+2)
+```
+- call-by-value: `... = double (3) = 0`
+- call-by-name:  `... = 0`
+- call-by-need:  `... = let x=1+2 in 0 = 0`
+
+
+Languages with effects (such as C/C++) mostly use call-by-value.
+Haskell is pure (no effects) and uses call-by-need, which refines call-by-name.
+
 
 
 Statements
@@ -263,8 +344,8 @@ Blocks.
 Variable declaration.
 
     γ.δ[x=null] ⊢ e ⇓ ⟨v, γ'.δ'⟩
-    ---------------------------------
-    γ.δ ⊢ t x = e;  ⇓ ⟨v, γ'.δ'[x=v]⟩
+    ----------------------------
+    γ.δ ⊢ t x = e;  ⇓ γ'.δ'[x=v]
 
 While.
 
@@ -273,6 +354,12 @@ While.
     γ ⊢ while (e) s ⇓ γ'
 
     γ ⊢ e ⇓ ⟨true; γ₁⟩    γ₁. ⊢ s ⇓ γ₂.δ    γ₂ ⊢ while e (s) ⇓ γ₃
+    -------------------------------------------------------------
+    γ ⊢ while (e) s ⇓ γ₃
+
+Or:
+
+    γ ⊢ e ⇓ ⟨true; γ₁⟩    γ₁ ⊢ { s } while e (s) ⇓ γ₃
     -------------------------------------------------------------
     γ ⊢ while (e) s ⇓ γ₃
 
@@ -340,6 +427,11 @@ Sequence: Propagate exception.
     γ ⊢ s ss ⇓ r
 
 Exercise:  How to change `while`?
+One solution:
+
+    γ ⊢ e ⇓ ⟨true; γ₁⟩    γ₁ ⊢ { s } while e (s) ⇓ r
+    -------------------------------------------------------------
+    γ ⊢ while (e) s ⇓ r
 
 Function call.
 
@@ -348,7 +440,7 @@ Function call.
     ...
     γₙ₋₁ ⊢ eₙ ⇓ ⟨vₙ, γₙ⟩
     (x₁=v₁,...,xₙ=vₙ) ⊢ ss ⇓ v
-    ------------------------------- δ(f) = t f (t₁ x₁,...,tₙ xₙ) { ss }
+    ------------------------------- σ(f) = t f (t₁ x₁,...,tₙ xₙ) { ss }
     γ ⊢ f(e₁,...,eₙ) ⇓ ⟨v, γₙ⟩
 
 To implement the side condition, we need a global map `σ` from
@@ -372,7 +464,7 @@ In Java, we can use Java's exception mechanism.
          return v
      }
 
-   evalStm(SReturn e):
+   execStm(SReturn e):
      v ← eval(e)
      throw new ReturnException(v)
 ```
@@ -390,16 +482,16 @@ eval (ECall f es) = do
   (Δ,ss) ← lookupFun f
   γ ← get
   put (makeEnv Δ vs)
-  evalStms ss `catchError` λ v → do
+  execStms ss `catchError` λ v → do
     put γ
     return v
 
-evalStm :: Stm → M ()
-evalStm (SReturn e) = do
+execStm :: Stm → M ()
+execStm (SReturn e) = do
   v ← eval e
   throwError v
 ```
-More in the hans-on lecture...
+More in the hands-on lecture...
 
 
 Programs
