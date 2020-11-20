@@ -93,8 +93,13 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %  : //2019-12-12//
 %    A bug that caused some test (e.g. the tests in the subtyping directory) to not run has been fixed in the lab 3 test suite. Please re-download the test suite.
 
-%  : //2019-12-12//
-%    [Lab 4 laborations/lab4/index.html] is online.
+ : //2020-11-20//
+   [Lab 4 laborations/lab4/index.html] description is online.
+
+ : //2020-11-20//
+   The [testsuite runner laborations/lab2/testsuite/progs-test-lab2.hs] for lab2
+   has been relaxed to look for ``TYPE ERROR`` and ``INTERPRETER ERROR``
+   anywhere in ``stdout`` and ``stderr``.
 
 % %  : //2019-12-05//
 % %    **Guest lecture** by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
@@ -339,8 +344,8 @@ However, the course grade is determined solely by the exam.
 - [Lab 2 - type checker and interpreter laborations/lab2/index.html] (deadline 30/11)
 % - Lab 3 - code generator (deadline 14/12)
 - [Lab 3 - code generator laborations/lab3/index.html] (deadline 14/12)
-- Lab 4 - functional language interpreter  (deadline 08/01/2020)
-% - [Lab 4 - functional language interpreter laborations/lab4/index.html] (deadline 08/01/2020)
+% - Lab 4 - functional language interpreter  (deadline 08/01/2020)
+- [Lab 4 - functional language interpreter laborations/lab4/index.html] (deadline 08/01/2020)
 
 
 The labs are quite substantial, so please set aside at least 30 full working hours (4 full working days) before the deadline.  It is recommended to start at least 10 days before the deadline.
