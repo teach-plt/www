@@ -443,9 +443,18 @@ Your grammar must pass the [test suite testsuite/index.html] and meet the
 specification in this document in all respects. The test suite contains the
 example programs, as well as a number of programs which your parser must reject.
 
-The maximum number of 10 **shift/reduce conflicts** is permitted.
-The minimum of 1 is almost unavoidable (because of the "dangling ``else``").
-But reduce/reduce conflicts are forbidden.
+Your grammar may **not** have any **reduce/reduce conflicts**.  If
+your grammar has **shift/reduce conflicts** but the parser works, you
+may leave these conflict in the grammar as long as you **document**
+each of the conflicts and explain why it arises and why it is
+harmless.  The documentation may be placed in suitable comments in the
+grammar file.
+
+For instance, you may get one shift/reduce conflict from the "dangling
+``else``".  It is fine to leave this conflict in as long as you
+explain why the parser still behaves correctly (i.e. why //shift// is
+always the correct action in the situations where a //reduce// would
+also be possible).
 
 The solution must be written in an easily readable and maintainable way. In
 particular, tailoring it for the programs in the test suite is not maintainable!
