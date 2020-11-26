@@ -1,7 +1,9 @@
 .PHONY: all
-all: index.html type-checking.html interpreter.html monads.html compilation.html
+all: index.html
 
-index.html :
+files = type-checking.html interpreter.html monads.html compilation.html
+
+index.html : $(files)
 	tree -H '.' -L 2 --noreport --charset utf-8 > $@
 # -L <depth>
 
