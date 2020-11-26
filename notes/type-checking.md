@@ -12,7 +12,7 @@ Introduction
 
 - Machine perspective:
   * Numeric types and arithmetic: 32/64bit word, signed/unsigned, float/integer
-    ```
+    ```c
     z = x / y;
     ```
   * Avoid runtime errors (e.g. by confusion of number and memory address)
@@ -42,7 +42,7 @@ Introduction
 
 ### Where types make a difference
 
-```
+```c
 ... divide(... x, ... y) { return x / y; }
 
 printDouble (divide (5, 3));
@@ -300,7 +300,7 @@ Variables and blocks
 Typing _environments_ (aka _contexts_) assign types to variables.
 
 Example:
-```
+```c
   int f (double x) {
     int i = 2 ;
     int j = 5 ;
@@ -357,7 +357,7 @@ Rules for declarations and blocks.
     Γ ⊢ᵗ⁰ { ss } ⇒ ()
 
 Valid but pointless example for initialization statement:
-```
+```c
 int main () {
   int i = i;
 }
@@ -400,7 +400,7 @@ Functions
 When calling a function, we need to provide arguments of the correct type.
 
 Global environment `Σ` (for function _signature_) maps function names to function types.
-```
+```c
    bool foo (int x, double y) { ... }
 ```
 Type of `foo` is `bool(int,double)` also written as `(int,double)→bool`.
@@ -466,9 +466,11 @@ Type-annotating checker: annotate each subexpression with its type.
 
 - Alternative 2: design a new abstract syntax which type-annotations
   in the needed places.
-  ```
+  ```lbnf
+  ...
   TEDiv.     TExp ::= "div" Type TExp TExp;
 
   TSExp.     TStm ::= Type TExp ";" ;
   TSReturn.  TStm ::= "return" Type TExp;
+  ...
   ```

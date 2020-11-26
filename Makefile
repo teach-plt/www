@@ -3,9 +3,9 @@
 # Files which contribute to index.html
 deps=style.css include.html enhance_page.js Makefile
 
-.PHONY : ship all www mini ipl-book lab%
+.PHONY : ship all www mini ipl-book lab% notes
 
-all : exams.tgz mini lab1 lab2 lab3 lab4 ipl-book www # www last for linkchecker
+all : exams.tgz mini lab1 lab2 lab3 lab4 ipl-book notes www # www last for linkchecker
 
 ship : index.html
 #	scp $< frelindb@remote12.chalmers.se:/chalmers/groups/edu2009/www/www.cse.chalmers.se/year/2015/course/DAT151-lp2/
@@ -19,6 +19,9 @@ mini :
 
 ipl-book :
 	make -C plt-book/ipl-book
+
+notes :
+	make -C notes
 
 www : index.html
 

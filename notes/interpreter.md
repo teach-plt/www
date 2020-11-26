@@ -36,7 +36,7 @@ Values are integer, floating-point, and boolean literals, or a special
 value `null` for being undefined.
 
 This would be a LBNF grammar for our values:
-```
+```bnfc
 VInt.    Value ::= Integer;
 VDouble. Value ::= Double;
 VBool.   Value ::= Bool;
@@ -55,7 +55,7 @@ Variable rule.
 Note that we take the value of the "topmost" `x` --- it may appear in
 several blocks `δ` of `γ`.
 
-```
+```c
 { double z = 3.14;       // (z=3.14)
   int    y = 1;          // (z=3.14,y=1)
   { int z = 0;           // (z=3.14,y=1).(z=0)
@@ -248,7 +248,7 @@ What is wrong with this rule?
     γ ⊢ e₁ && e₂ ⇓ ⟨b;γ₂⟩
 
 Here are some examples where we would like to _shortcut_ computation:
-```
+```c
   int b = 1;
   if (b == 0 && the_goldbach_conjecture_holds_up_to_10E100) { ... }
   int x = 0 * number_of_atoms_on_the_moon;
@@ -274,12 +274,12 @@ Rules with short-cutting:
 The effects of `e₂` are not executed if `e₁` already evaluated to `false`.
 
 Example:
-```
+```c
   while (x < 10 && f(x++)) { ... }
 ```
 
 You can circumvent this by defining your own `and`:
-```
+```c
   bool and(bool x, bool y) { return x && y; }
 
   while (and(x < 10, f(x++))) { ... }
