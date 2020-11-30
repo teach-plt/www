@@ -7,7 +7,8 @@ import qualified Data.Map as Map
 
 import CMM.Abs
 import CMM.Print
-import CMM.ErrM
 
-interpret :: Program -> IO ()
+import TypeChecker (AnnotatedProgram) -- TODO: choose flavor of typed ASTs
+
+interpret :: AnnotatedProgram -> IO ()
 interpret p = putStrLn "no interpreter yet"

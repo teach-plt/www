@@ -9,8 +9,8 @@ import System.IO.Error    (isUserError, ioeGetErrorString)
 import CMM.Par            (pProgram, myLexer)
 import CMM.ErrM           (pattern Ok, pattern Bad)
 
-import TypeChecker
-import Interpreter
+import TypeChecker        (typecheck)
+import Interpreter        (interpret)
 
 -- | Parse, type check, and interpret a program given by the @String@.
 
@@ -23,15 +23,19 @@ check s = do
       exitFailure
     Ok  tree -> do
       case typecheck tree of
-        Bad err -> do
+        Left err -> do
           putStrLn "TYPE ERROR"
           putStrLn err
           exitFailure
-        Ok _ -> catchJust (\e -> if isUserError e then Just (ioeGetErrorString e) else Nothing) (interpret tree) $
-          \err -> do
-            putStrLn "INTERPRETER ERROR"
-            putStrLn err
-            exitFailure
+        Right tree' -> catchUserError (interpret tree') $ \ err -> do
+          putStrLn "INTERPRETER ERROR"
+          putStrLn err
+          exitFailure
+
+  where
+  catchUserError :: IO a -> (String -> IO a) -> IO a
+  catchUserError = catchJust $ \ exc ->
+    if isUserError exc then Just (ioeGetErrorString exc) else Nothing
 
 -- | Main: read file passed by only command line argument and call 'check'.
 
