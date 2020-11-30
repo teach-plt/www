@@ -18,11 +18,11 @@ import TypeChecker              (typecheck)
 callJasmin :: [String] -> IO ()
 callJasmin args = do
   callProcess "jasmin" args
-  -- If `jasmin` is not in your PATH, you can try storing
-  -- `jasmin.jar` in, for instance, $HOME/java-lib/ and calling
+  -- If `jasmin` is not in your PATH, you can try to store
+  -- `jasmin.jar` in, for instance, $HOME/java-lib/ and call
   -- `java -jar $HOME/java-lib/jasmin.jar' with the correct path
-  -- directly by replacing the above line with the following
-  -- three lines. The problem with adding `jasmin.jar` to a
+  -- directly.  To this end, replace the above line with the following
+  -- three lines.  The problem with adding `jasmin.jar` to a
   -- CLASSPATH that already contains `java-cup.jar` is that both
   -- define the class `parser`.
   --
@@ -57,11 +57,11 @@ parse s =
 check :: A.Program -> IO T.Program
 check tree =
   case typecheck tree of
-    Bad err -> do
+    Left err -> do
       putStrLn "TYPE ERROR"
       putStrLn err
       exitFailure
-    Ok tree' -> return tree'
+    Right tree' -> return tree'
 
 -- | Compile and produce a .class file in the same directory as the source file.
 

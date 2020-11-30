@@ -21,11 +21,12 @@ import qualified Data.Set as Set
 
 import CMM.Abs
 import CMM.Print (printTree)
-import CMM.ErrM  (Err, pattern Bad, pattern Ok)
 
 import qualified Annotated as A
 
+type TypeError = String
+
 -- | Entry point of type checker.
 
-typecheck :: Program -> Err A.Program
-typecheck prg = Bad "Type checker not yet implemented"
+typecheck :: Program -> Either TypeError A.Program
+typecheck prg = Left "Type checker not yet implemented"

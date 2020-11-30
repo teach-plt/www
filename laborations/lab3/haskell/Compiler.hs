@@ -28,30 +28,42 @@ compile
 compile name _prg = header
   where
   header :: String
-  header = unlines
-    [ ";; BEGIN HEADER"
-    , ""
-    , ".class public " ++ name
-    , ".super java/lang/Object"
-    , ""
-    , ".method public <init>()V"
-    , "  .limit locals 1"
-    , ""
-    , "  aload_0"
-    , "  invokespecial java/lang/Object/<init>()V"
-    , "  return"
-    , ""
-    , ".end method"
-    , ""
-    , ".method public static main([Ljava/lang/String;)V"
-    , "  .limit locals 1"
-    , "  .limit stack  1"
-    , ""
-    , "  invokestatic " ++ name ++ "/main()I"
-    , "  pop"
-    , "  return"
-    , ""
-    , ".end method"
-    , ""
-    , ";; END HEADER"
+  header = unlines $ concat
+    [ [ ";; BEGIN HEADER"
+      , ""
+      , ".class public " ++ name
+      , ".super java/lang/Object"
+      , ""
+      , ".method public <init>()V"
+      , ".limit locals 1"
+      , ""
+      ]
+    , map indent
+      [ "aload_0"
+      , "invokespecial java/lang/Object/<init>()V"
+      , "return"
+      ]
+    , [ ""
+      , ".end method"
+      , ""
+      , ".method public static main([Ljava/lang/String;)V"
+      , ".limit locals 1"
+      , ".limit stack  1"
+      , ""
+      ]
+    , map indent
+      [ "invokestatic " ++ name ++ "/main()I"
+      , "pop"
+      , "return"
+      ]
+    , [ ""
+      , ".end method"
+      , ""
+      , ";; END HEADER"
+      ]
     ]
+
+-- | Indent non-empty lines.
+
+indent :: String -> String
+indent s = if null s then s else "\t" ++ s
