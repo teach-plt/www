@@ -274,7 +274,7 @@ This code has only 11 instructions instead of the 23 above.
 =Solution format=
 
 
-==Solution templates==
+==Solution templates==[stubs]
 
 For Haskell and Java there are stubs that can be extended to the full
 solution.  You may download one of the following tar archives, unpack,
@@ -285,7 +285,8 @@ write the code, test, pack the archive again, and submit to fire.
 
 
 These packages contain the grammar, stubs for type checker and
-compiler, code to invoke Jasmin, and suitable makefiles.
+compiler, code to invoke Jasmin, [`jasmin.jar` haskell/jasmin.jar]
+and suitable makefiles.
 % (You probably want to adapt your type checker from [Lab 2 ../lab2/index.html],
 % rather than starting from scratch.
 % But have a look at these stubs anyway, they contain code to invoke Jasmin.)
@@ -418,7 +419,10 @@ The test script can then be run as follows:
 
 Jasmin is available on [Sourceforge http://jasmin.sourceforge.net/].
 Note that version 2.4 is included in the
-[test suite ./testsuite/index.html] and that there are also versions on
+[stubs #stubs]
+%[Haskell stub lab3-stub-haskell.tar.gz] and
+%[Java stub lab3-stub-java.tar.gz]
+and that there are also versions on
 e.g. Ubuntu (``apt install jasmin-sable``)
 and macOS (``brew install jasmin``).
 

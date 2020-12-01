@@ -8,28 +8,6 @@ import cmm.*;
 import cmm.Absyn.*;
 
 public class lab3 {
-  static void callJasmin(List<String> args) throws IOException, InterruptedException {
-      List<String> jasminCall = new ArrayList<String>(Arrays.asList("jasmin"));
-      // If `jasmin` is not in your PATH, you can try storing
-      // `jasmin.jar` in, for instance, $HOME/java-lib/ and calling
-      // `java -jar $HOME/java-lib/jasmin.jar' with the correct path
-      // directly by replacing the above line with the following
-      // three lines. The problem with adding `jasmin.jar` to a
-      // CLASSPATH that already contains `java-cup.jar` is that both
-      // define the class `parser`.
-      //
-      // String homeDirectory    = System.getProperty("user.home");
-      // String jasminPath       = homeDirectory + "/java-lib/jasmin.jar";
-      // List<String> jasminCall = new ArrayList<String>(Arrays.asList("java", "-jar", jasminPath));
-
-      jasminCall.addAll(args);
-      Process process = new ProcessBuilder(jasminCall).inheritIO().start();
-      int exitValue = process.waitFor();
-      if (exitValue != 0) {
-        System.err.println("Execution failed: " + String.join(" ", jasminCall));
-        System.exit(1);
-      }
-  }
 
   public static void main(String args[]) {
 
@@ -86,6 +64,29 @@ public class lab3 {
                  + ", near \"" + l.buff() + "\" :");
       System.out.println("     " + e.getMessage());
       e.printStackTrace();
+      System.exit(1);
+    }
+  }
+
+  // Invoke the external assembler `jasmin` with the given args, waiting for it to finish.
+  static void callJasmin(List<String> args) throws IOException, InterruptedException {
+
+    // Path to this class file.
+    String myself     = lab3.class.getResource("lab3.class").getPath();
+    // Directory from which this class was started.
+    File   directory  = new File(myself).getParentFile();
+    // jasmin.jar should be in the same directory.
+    String jasminPath = new File(directory, "jasmin.jar").toString();
+    List<String> jasminCall = new ArrayList<String>(Arrays.asList( "java", "-jar", jasminPath ));
+
+    // Note: If `jasmin` is in your PATH, you can replace the above code by the simpler:
+    // List<String> jasminCall = new ArrayList<String>(Arrays.asList("jasmin"));
+
+    jasminCall.addAll(args);
+    Process process = new ProcessBuilder(jasminCall).inheritIO().start();
+    int exitValue = process.waitFor();
+    if (exitValue != 0) {
+      System.err.println("Execution failed: " + String.join(" ", jasminCall));
       System.exit(1);
     }
   }

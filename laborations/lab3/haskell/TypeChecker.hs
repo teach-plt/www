@@ -29,4 +29,4 @@ type TypeError = String
 -- | Entry point of type checker.
 
 typecheck :: Program -> Either TypeError A.Program
-typecheck prg = Left "Type checker not yet implemented"
+typecheck prg = return prg

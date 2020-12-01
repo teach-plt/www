@@ -3,8 +3,9 @@
 ## Variables
 ###########################################################################
 
-# Files of solution.  Add/remove files as needed.  'lab2.hs'  has to be first!
-files=lab3.hs CMM.cf Runtime.java Makefile Annotated.hs TypeChecker.hs Compiler.hs
+# Files of solution.  Add/remove files as needed.  'lab3.hs'  has to be first!
+files=lab3.hs jasmin.jar Runtime.java Makefile CMM.cf \
+  Annotated.hs TypeChecker.hs Compiler.hs
 
 ###########################################################################
 
