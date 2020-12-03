@@ -22,6 +22,8 @@ The abstract syntax corresponds to this LBNF grammar:
 
 (This grammar is ambiguous, a non-ambiguous grammar is given in lab 4).
 
+Example:  `x y z`  should be read `(x y) z`.
+
 ### A small extension of the lambda-calculus
 
 We consider an extension by `let`, numerals, and primitive operators:
@@ -46,7 +48,7 @@ But `let` is conceptually important.
 
 Convenient syntactic sugar:
 
-- multi-λ: `λ x₁ ... xₙ → e`
+- multi-λ: `λ x₁ ... xₙ → e` sugar for `λ x₁ → .... → λ xₙ → e`
 - let with arguments:
   `let f x₁ ... xₙ = e in ...` for `let f = λ x₁ ... xₙ → e in ...`
 
@@ -59,6 +61,14 @@ Example:
       twice  f     = comp f f
     in
         twice twice double 2
+
+Example:
+
+  never  f = λ x → x
+  once   f = λ x → f x
+  twice  f = λ x → f (f x)
+  thrice f = λ x → f (f (f x))
+
 
 ### Functional languages vs. imperative languages
 
@@ -82,7 +92,7 @@ Trying 3. `let twice f = comp f f in twice double` in C:
 - Attempt 1: illegal type
   ```c
   int twice (int f(int n)) (int x) {
-    return comp(f,f,x)
+    return comp(f,f,x);
   }
   ... twice(double) ...
   ```
@@ -151,7 +161,7 @@ This is formally a _small-step_ semantics `e ↦ e'`, called _reduction_.
 
 Reduction rules:
 
-    (λ x → f) e               ↦  f[x=e]
+    (λ x → f) e               ↦  f[x=e]             (named β by Alonzo Church)
     let x = e in f            ↦  f[x=e]
     let x₁=e₁;...;xₙ=eₙ in f  ↦  f[x₁=e₁;...;xₙ=eₙ]
 
@@ -195,9 +205,10 @@ Example:
         let x = 1 in (λ f x → f x) (λ y → x)
         ↦ let x = 1 in (λ x → f x)[f = λ y → x]
         = let x = 1 in λ x → (λ y → x) x
-        ↦ let x = 1 in λ x → y[y=x]
+        ↦ let x = 1 in λ x → x[y=x]
         = let x = 1 in λ x → x
-        ↦ λ x → x
+        ↦ (λ x → x)[x=1]
+        = λ x → x
 
 What goes wrong here?
 
@@ -240,7 +251,7 @@ This list may be called _environment_.
 Just like for C--, we can give a big step semantics `γ ⊢ e ⇓ v` for
 the lambda-calculus.  In terms of reduction this should mean:
 
-    let γ in e ↦* v
+    (let γ in e) ↦* v
 
 ### Call-by-value
 
@@ -278,6 +289,8 @@ Application:
      δ,x=v₂ ⊢ f ⇓ v
      ------------------------
      γ ⊢ e₁ e₂ ⇓ v
+
+Exercise:  Evaluate `(((λ x₁ → λ x₂ → λ x₃ → x₁ + x₃) 1) 2) 3`
 
 Rules for integer expressions:
 
@@ -327,17 +340,19 @@ Application:
 
 Rules for integer expressions: (unchanged).
 
-Comparing cbn with cbv:
+
+Comparing cbn (call-by-name) with cbv (call-by-value):
 
 - Arguments are _only_ evaluated when _needed_.
   This is an advantage if an argument is unused or only used under rare conditions.
   E.g.:
-  `and e₁ e₂ = if e₁ then false else e₂`
+  `and e₁ e₂ = if e₁ then e₂ else false`
 
 - Arguments are _every time_ evaluated when _needed_.
   This is a disadvantage if an argument is used twice or more.
   E.g.:
   `double x = x + x`
+
 
 Synthesis: _call-by-need_ (Haskell)
 
