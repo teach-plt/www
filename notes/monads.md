@@ -528,20 +528,52 @@ liftEval ev = ReaderT (\ r -> StateT (\ s -> lift (runStateT (runReaderT ev r) s
 Its "inverse" is needed to call `execs` from the evaluator of function calls:
 ```haskell
 runExec :: Exec a -> Eval (Either Val a)
-runExec ex = ReaderT (\ r -> StateT (\ s -> runExeptT (runStateT (runReaderT ev r) s)))
+```
 
+The idea is that exceptions thrown in a computation `Exec a` should be
+transformed into a `Left` result in the `Eval` monad, whereas regular
+termination of the computation manifests as `Right` result.  The
+problem is that exceptions do not carry the state, because
+```haskell
+StateT Env (ExceptT Val IO) a = Env -> IO (Either Val (a, Env)).
+```
+If we look at the relevant part of `Eval (Either Val a)`, this is
+```haskell
+StateT Env IO (Either Val a) = Env -> IO (Either Val a, Env).
+```
+So `runExec` needs a state to continue with after the exception.  In
+our case, we can even reset the state after a regular termination of
+the `Exec a` computation, since we do not need the state of a
+function's locals after the function returns.
+```haskell
+runExecAndReset :: Exec a -> Env -> Eval (Either Val a)
+runExecAndReset ex env =
+  ReaderT (\ r ->
+  StateT  (\ s -> do
+    r <- runExceptT (runStateT (runReaderT ex r) s)
+    case r of
+      Left  v       -> return (Left  v, env)
+      Right (a, _s) -> return (Right a, env)))
+```
+This gives the following implementation of the function call:
+```haskell
 eval (ECall f es) = do
   vs  <- evals es
   sig <- ask
   let (DFun _ _ params ss) = lookupFun f sig
   env <- get
   put (makeEnv params vs)
-  r <- runExec (execs ss)
-  put env
+  r <- runExecAndReset (execs ss) env
   case r of
     Left v  -> return v
     Right() -> runtimeError "Function did not return anything"
 ```
+
+Simplification
+--------------
+
+We developed `Exec` and `Eval` to capture the patterns found in our
+initial solution that used only the `IO` monad.
 
 Of course, it is possible to use the `Exec` monad also for the
 evaluator, even though the evaluator never raises an exception.
@@ -549,6 +581,8 @@ In this case, there is no need for `liftEval` nor `runExec`.
 Instead, we use `catchError` instead of `runExec` in the definition of
 `eval (ECall f es)`.
 
+This simplification is recommended, as the resulting interpreter
+implementation is easier to understand.
 
 Conclusion
 ----------

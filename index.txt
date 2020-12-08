@@ -93,6 +93,9 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %  : //2019-12-12//
 %    A bug that caused some test (e.g. the tests in the subtyping directory) to not run has been fixed in the lab 3 test suite. Please re-download the test suite.
 
+ : //2020-12-08//
+   The flawed `runExec` function has been fixed in the [monads script notes/monads.html].
+
  : //2020-11-21//
    A [script notes/monads.md] about the implementation of the interpreter in Haskell. This completes and extends the hints given in the plt book, and contains a tutorial on monads and monad transformers.
 
