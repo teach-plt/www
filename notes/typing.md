@@ -39,10 +39,16 @@ Examples:
         int → int
         int → int → int
 
+        ord(int → (int → int))
+          = max { ord(int)+1, ord(int → int) }
+          = max { ord(int)+1, ord(int)+1, ord(int) }
+          = max {1,1,0} = 1
+
   - 2nd order function: Accepts even 1st order functions
 
         (int → int) → int
         (int → int) → int → int
+        (int → int) → (int → int) → int
         (int → int → int) → int → int
 
   - 3rd order function: Has a 2nd order function as argument
@@ -52,6 +58,8 @@ Examples:
 
 Typing rules
 ------------
+
+Judgement:  `Γ ⊢ e : t`.
 
 Context Γ maps variables to types.
 
@@ -73,12 +81,33 @@ Context Γ maps variables to types.
         -------------
         Γ ⊢ f e : t
 
+  Alternatively:
+
+        Γ ⊢ f : s₁ → t
+        Γ ⊢ e : s₂
+        -------------- s₁ = s₂
+        Γ ⊢ f e : t
+
 - Let:
 
         Γ ⊢ e₁ : s
         Γ,x:s ⊢ e₂ : t
-        ------------------------
-        Γ ⊢ let x = e₁ in e₂ : t
+        --------------------------
+        Γ ⊢ (let x = e₁ in e₂) : t
+
+Example:  Deriving `⊢ λ f → λ x → f (f x) : (int → int) → int → int`
+
+                                                 -------------------  -------------
+                                                 ... ⊢ f : int → int  ... ⊢ x : int
+    --------------------------------------       ----------------------------------
+    f : int → int, x : int ⊢ f : int → int       f : int → int, x : int ⊢ f x : int
+    -------------------------------------------------------------------------------
+    f : int → int, x : int ⊢ f (f x) : int
+    -------------------------------------------
+    f : int → int  ⊢  λ x → f (f x) : int → int
+    -----------------------------------------------
+    ⊢ λ f → λ x → f (f x) : (int → int) → int → int
+
 
 ### Difficulties with implementing the typing rules
 
@@ -135,10 +164,92 @@ Solutions:
      + simple, good error messages
      - requires a lot of redundant type annotations from the user (like in Java)
 
+         C x = new C(e);
+         let x:int = 3 in x + x
+
+
   3. Inference with type variables
      * Treat the `???`s as variables for types
      * Collect constraints on the type variables
      * Solve constraints by _unification_
+
+Example:  Inferring the `comp` function.
+
+    ⊢ λ f → λ g → λ x → f (g x) : A
+    A = B → C
+    f:B ⊢  λ g → λ x → f (g x) : C
+    C = D → E
+    f:B, g:D ⊢  λ x → f (g x) : E
+    E = F → G
+    f:B, g:D, x:F ⊢ f (g x) : G
+    - f:B, g:D, x:F ⊢ f : H → G
+      B = H → G
+    - f:B, g:D, x:F ⊢ g x : H
+      * f:B, g:D, x:F ⊢ g : I → H
+        D = I → H
+      * f:B, g:D, x:F ⊢ x : I
+        F = I
+
+Constraints (solved constraints above the bar):
+
+    A = B → C
+    C = D → E
+    E = F → G
+    B = H → G
+    D = I → H
+    F = I
+
+    A = B → C
+    ---------
+    C = D → E
+    E = F → G
+    B = H → G
+    D = I → H
+    F = I
+
+    A = B → (D → E)
+    C = D → E
+    ---------
+    E = F → G
+    B = H → G
+    D = I → H
+    F = I
+
+    A = B → (D → (F → G))
+    C = D → (F → G)
+    E = F → G
+    ---------
+    B = H → G
+    D = I → H
+    F = I
+
+    A = (H → G) → (D → (F → G))
+    C = D → (F → G)
+    E = F → G
+    B = H → G
+    ---------
+    D = I → H
+    F = I
+
+    A = (H → G) → ((I → H) → (F → G))
+    C = (I → H) → (F → G)
+    E = F → G
+    B = H → G
+    D = I → H
+    ---------
+    F = I
+
+    A = (H → G) → ((I → H) → (I → G))
+    C = (I → H) → (I → G)
+    E = I → G
+    B = H → G
+    D = I → H
+    F = I
+    ---------
+
+    ⊢ λ f → λ g → λ x → f (g x) : (H → G) → ((I → H) → (I → G))
+    ⊢ λ f → λ g → λ x → f (g x) : ∀ α β γ. (β → γ) → ((α → β) → (α → γ))
+
 
 Type inference with type variables and unification
 --------------------------------------------------
@@ -150,7 +261,7 @@ Extended type grammar:
 
 A type that does not mention any type variable is called _closed_.
 
-A _substitution_ σ maps type variables to types.
+A _substitution_ `σ` maps type variables `X` to types `t`.
 The application of a substitution `σ` to a type `t` is written `tσ`.
 
      X       σ = σ(X)
@@ -162,7 +273,7 @@ Then `σ(Xᵢ) = sᵢ` and `σ(Y)=Y` if `Y ∉ {X₁,...Xₙ}`.
 
 Example:
 
-     (X → int)[X = Y → Z] = (Y → Z) → int
+     (X → U)[X = Y → int] = (Y → int) → U
 
 The application of a substitution `σ` to another substitution `τ` is written `τσ`.
 This is also called the _composition_ of substitutions and written `σ ∘ τ` (see book).
@@ -172,6 +283,14 @@ This is also called the _composition_ of substitutions and written `σ ∘ τ` (
 So:
 
      (τσ)(X) = (τ(X))σ
+
+Example for substitution composition:
+
+     [X=Y→int][Y=int] = [X=int→int,Y=int]
+
+        X[X=Y→int][Y=int] = (Y→int)[Y=int] = int → int
+        Y[X=Y→int][Y=int] = Y[Y=int] = int
+        Z[X=Y→int][Y=int] = Z[Y=int] = Z
 
 
 State of the type inference:
@@ -191,6 +310,9 @@ State of the type inference:
 
 Inference phase:  Build up store of constraints.
 
+    infer(Γ, x):
+      return lookup(Γ,x)
+
     infer(Γ, λx→e):
       s ← newTypeVariable
       t ← infer(Γ[x:s], e)
@@ -204,6 +326,20 @@ Inference phase:  Build up store of constraints.
            s' ← infer(Γ, e)
            equal(s,s')
            return t
+        X: s ← infer(Γ, e)
+           t ← newTypeVariable
+           equal(X,s→t)
+           return t
+
+Simplification of application case:
+
+    infer(Γ, f e):
+      r ← infer(Γ, f)
+      s ← infer(Γ, e)
+      t ← newTypeVariable
+      equal(r,s→t)
+      return t
+
 
 Solution phase:
 Try to find a substitution σ from type variables to types that solves all constraints.
@@ -212,8 +348,8 @@ State of solver:
 
 1. Constraint store:  Additional methods:
 
-         Bool solved()      -- is the store empty?
-         Constraint take()  -- extract a constraint, removing it from the store
+         Bool solved()                -- is the store empty?
+         Constraint takeConstraint()  -- extract a constraint, removing it from the store
 
 2. A substitution.
    Invariant:  The substitution is already applied to the state (constaints and itself).
@@ -226,11 +362,13 @@ State of solver:
 Algorithm:
 
     while (not solved()) {
-      (s ≐ t) ← take()
+      (s ≐ t) ← takeConstraint()
       unify(s,t)
     }
 
-    unify(X,X),
+Unification:
+
+    unify(X,X)
     unify(int, int):
        -- do nothing
 
@@ -238,17 +376,68 @@ Algorithm:
       equal(s₁,s₂)
       equal(t₁,t₂)
 
-    unify(int,s→t),
+    unify(int,s→t)
     unify(s→t,int):
       type error
 
-    unify(X,t),
+    unify(X,t)
     unify(t,X):
       if X occurs in t then type error
       else solveVar(X,t)
 
 
 Example:  Compute type of `twice`
+
+  - Inference phase
+
+        infer(ε, λ f → λ x → f (f x)) = F → X → Z
+        infer(f:F, λ x → f (f x)) = X → Z
+        infer(f:F,x:X, f (f x)) = Z
+        - infer(...,f) = F
+        - infer(...,f x) = Y
+          * infer (..., f) = F
+          * infer (..., x) = X
+          * F = X → Y
+          * result: Y
+        - F = Y → Z
+        - result Z
+
+  - Solving phase (substitution on top, constraints on bottom)
+
+        -------------
+        F = X → Y
+        F = Y → Z
+
+        F = X → Y
+        -------------
+        X → Y = Y → Z
+
+        F = X → Y
+        -------------
+        X = Y
+        Y = Z
+
+        F = Y → Y
+        X = Y
+        -------------
+        Y = Z
+
+    Final substitution:
+
+        F = Z → Z
+        X = Z
+        Y = Z
+        --------------
+
+  - Applied to computed type `F → X → Z` gives `(Z → Z) → Z → Z`.
+
+
+Example:  Compute type of `λ x → x x`
+
+    infer(ε, λ x → x x)
+    infer(x:X, x x)
+    X = X → Y
+    result: Y
 
 
 Polymorphism
@@ -265,13 +454,19 @@ Any instantiation of `X`, `Y`, `Z` gives a valid type.
     comp : ∀ α β γ.  (β → γ) → (α → β) → α → γ
 
 Extension of type-inference (sketch):
+
   - Extend the grammar by _universal_ variables `α`
     (`X` are _existential_ variables).
+
   - A type _scheme_ is of the form `∀ α₁...αₙ. t`
+
   - Context `Γ` maps variables `x` to schemes.
+
   - When we lookup a scheme in the context, `Γ(x)`,
     instantiate the scheme to fresh existential variables `X₁...Xₙ`.
+
   - When the type `t` of expression `e₁` in `let x = e₁ in e₂`
-    has unconstrained existential variables `X₁...Xₙ`, replace them
+    has unconstrained existential variables `X₁...Xₙ`
+    that do not appear in the current context `Γ`, replace them
     by universal variables `α₁...αₙ` and assign `x` the scheme
     `∀α₁...αₙ.t[α₁...αₙ/X₁...Xₙ]`.
