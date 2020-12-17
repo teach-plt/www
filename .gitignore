@@ -106,3 +106,5 @@ cabal.project.local
 cabal.project.local~
 .HTF/
 .ghc.environment.*
+/live/2020/Exam/
+/live/2020/Makefile

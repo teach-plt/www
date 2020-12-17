@@ -1,0 +1,26 @@
+-- Question 1
+
+Prg. Program ::= "int" "main" "(" ")" Block;
+
+Blk. Block ::= "{" [Stm] "}" ;
+terminator Stm "";
+
+SBlock.  Stm ::= Block ;
+SInit.   Stm ::= Type Ident "=" Exp ";" ;
+SExp.    Stm ::= Exp ";" ;
+SIfElse. Stm ::= "if" "(" Exp ")" Stm "else" Stm ;
+
+ETrue.     Exp1 ::= "true" ;
+EFalse.    Exp1 ::= "false" ;
+EInt.      Exp1 ::= Integer ;
+ECall.     Exp1 ::= Ident "(" [Exp] ")" ;
+EPostIncr. Exp1 ::= Ident "++" ;
+EPlus.     Exp  ::= Exp "+" Exp1 ;
+
+separator Exp "," ;
+coercions Exp 1;
+
+TInt.  Type ::= "int" ;
+TBool. Type ::= "bool" ;
+
+comment "#";
