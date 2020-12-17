@@ -253,8 +253,7 @@ be compilable via calling
 //If you have any problems getting the test program to run, or if you think that there is an error in the test suite, contact the teachers of the course via the mailing list.//
 
 Run the programs in the [test suite ./testsuite/index.html] before submitting the lab.
-Include a log on the test run, showing the call of ``lab4`` for every program
-in the testsuite.
+
 
 =Success criteria=
 
