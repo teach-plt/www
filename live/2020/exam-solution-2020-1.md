@@ -1,15 +1,10 @@
----
-title: Programming Language Technology DAT151/DIT231
-date: 2020-12-17 Training exam
-author: Andreas Abel
-abstract: We go through the exam of 2020-01-13.
----
+We go through the exam of 2020-01-13.
 
 
 Q1: Grammars
 ============
 
-see Exam.cf
+see [BNFC grammar](Exam.cf)
 
 
 Q2: Lexing
@@ -80,26 +75,23 @@ Q4: Type checking and evaluation
 
    - Rules
 
-        Γ. ⊢ ss ⇒ Γ.Δ
-        ------------------------
-        Γ ⊢ SBlock (Blk ss) ⇒ Γ
+         Γ. ⊢ ss ⇒ Γ.Δ
+         ------------------------
+         Γ ⊢ SBlock (Blk ss) ⇒ Γ
 
+         Γ.(Δ,x:t) ⊢ e : t
+         ------------------------------ x ∉ Δ
+         Γ.Δ ⊢ SInit t x e ⇒ Γ.(Δ,x:t)
 
-        Γ.(Δ,x:t) ⊢ e : t
-        ------------------------------ x ∉ Δ
-        Γ.Δ ⊢ SInit t x e ⇒ Γ.(Δ,x:t)
+         Γ ⊢ e : t
+         ---------------
+         Γ ⊢ SExp e ⇒ Γ
 
-
-        Γ ⊢ e : t
-        ---------------
-        Γ ⊢ SExp e ⇒ Γ
-
-
-        Γ ⊢ e : TBool
-        Γ. ⊢ s₁ ⇒ Γ.Δ
-        Γ. ⊢ s₂ ⇒ Γ.Δ
-        ------------------------
-        Γ ⊢ SIfElse e s₁ s₂ ⇒ Γ
+         Γ ⊢ e : TBool
+         Γ. ⊢ s₁ ⇒ Γ.Δ
+         Γ. ⊢ s₂ ⇒ Γ.Δ
+         ------------------------
+         Γ ⊢ SIfElse e s₁ s₂ ⇒ Γ
 
 
 2. Interpretation of expressions
@@ -241,11 +233,11 @@ Part 2. Small-step semantics
 Q6: Functional languages
 ========================
 
-1. a) no
-   b) no
-   c) yes
-   d) yes
-   e) yes   (modulo extra parenthesis)
+1. - a) no
+   - b) no
+   - c) yes
+   - d) yes
+   - e) yes   (modulo extra parenthesis)
 
 2. Call-by-name interpreter
 

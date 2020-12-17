@@ -22,6 +22,7 @@ ipl-book :
 
 notes :
 	make -C notes
+	make -C live
 
 www : index.html
 
