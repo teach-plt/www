@@ -23,10 +23,10 @@ Possible solutions:
 
 States:
 
-  - 0   haven't seen a or b yet  (initial state)
-  - a   seen a but not b
-  - b   seen b but not a
-  - ab  seen both a and b        (final state)
+  - 0  :  haven't seen a or b yet  (initial state)
+  - a  :  seen a but not b
+  - b  :  seen b but not a
+  - ab :  seen both a and b        (final state)
 
 Transition table:
 

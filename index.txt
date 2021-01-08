@@ -73,6 +73,19 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 
 % %   Please submit outstanding lab solutions by Friday!
 
+  : //2021-01-08//
+   The exam will be held 11 January on Canvas organized as
+   [course 13801 https://chalmers.instructure.com/courses/13801].
+   If you registered to the exam, you should have gotten an invitation
+   to this course.  Please read the instructions there.
+
+   Since the exam is open-book instead of the usual closed-book,
+   the style will be different, see last year's
+   [reexam exams/exam-plt-2020-2.pdf] and [solution exams/solutions-plt-2020-2.pdf].
+   You'll notice some questions that require you to write a
+   self-contained specification of a procedure
+   (e.g. interpreter or compiler).
+
 % % : //2017-12-19//
 % %   The exam will be held 8 January 2019, 8.30-12.30 in building M on the Johanneberg campus.
 
