@@ -73,6 +73,10 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 
 % %   Please submit outstanding lab solutions by Friday!
 
+  : //2021-01-13//
+  The exam got 97 submissions.
+  [Exam text exams/exam-plt-2020-1.pdf] and [solution exams/solutions-plt-2020-1.pdf].
+
   : //2021-01-08//
    The exam will be held 11 January on Canvas organized as
    [course 13801 https://chalmers.instructure.com/courses/13801].
