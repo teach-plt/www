@@ -62,9 +62,9 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %  : //2020-01-25//
 %    The deadline for all labs has been extended to 10th February.
 
-%  : //2020-01-21//
-%    Exam review will be Wed 29 January 10am in EDIT 5128.
-%    [Exam text exams/exam-plt-2020-1.pdf] and [solution exams/solutions-plt-2020-1.pdf].
+  : //2020-02-01//
+    Exam review will be Tue 2 Feb 13.30 on Zoom.
+    [More info and link on Canvas https://chalmers.instructure.com/courses/13801/discussion_topics/54505].
 
 %    Deadline extension:
 %    Lab 4 submission on Fire is now possible until the final deadline (23rd Jan).
@@ -74,21 +74,21 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 % %   Please submit outstanding lab solutions by Friday!
 
   : //2021-01-13//
-  The exam got 97 submissions.
-  [Exam text exams/exam-plt-2020-1.pdf] and [solution exams/solutions-plt-2020-1.pdf].
+    The exam got 97 submissions.
+    [Exam text exams/exam-plt-2020-1.pdf] and [solution exams/solutions-plt-2020-1.pdf].
 
   : //2021-01-08//
-   The exam will be held 11 January on Canvas organized as
-   [course 13801 https://chalmers.instructure.com/courses/13801].
-   If you registered to the exam, you should have gotten an invitation
-   to this course.  Please read the instructions there.
+    The exam will be held 11 January on Canvas organized as
+    [course 13801 https://chalmers.instructure.com/courses/13801].
+    If you registered to the exam, you should have gotten an invitation
+    to this course.  Please read the instructions there.
 
-   Since the exam is open-book instead of the usual closed-book,
-   the style will be different, see last year's
-   [reexam exams/exam-plt-2020-2.pdf] and [solution exams/solutions-plt-2020-2.pdf].
-   You'll notice some questions that require you to write a
-   self-contained specification of a procedure
-   (e.g. interpreter or compiler).
+    Since the exam is open-book instead of the usual closed-book,
+    the style will be different, see last year's
+    [reexam exams/exam-plt-2020-2.pdf] and [solution exams/solutions-plt-2020-2.pdf].
+    You'll notice some questions that require you to write a
+    self-contained specification of a procedure
+    (e.g. interpreter or compiler).
 
 % % : //2017-12-19//
 % %   The exam will be held 8 January 2019, 8.30-12.30 in building M on the Johanneberg campus.
