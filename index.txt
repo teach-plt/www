@@ -40,6 +40,12 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 
 =News and changes=
 
+  : //2021-04-06//
+    The first re-exam will be held 8 April 2021 on Canvas organized as
+    [course 14779 https://chalmers.instructure.com/courses/14779].
+    If you registered to the exam, you should have gotten an invitation
+    to this course.  Please read the instructions there.
+
 %   : //2020-08-17//
 %    The second reexam will be held 27 August on Canvas organized as
 %    [course 12065 https://chalmers.instructure.com/courses/12065].
@@ -253,7 +259,7 @@ Slides follow closely the plt book.
 %| //Fri 31/01// | //10-11// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
 %| //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
 %| //Sun 25/03// |                | //Late final lab deadline//       |  |
-| //Thu 08/04// | //8.30-12.30// | //First reexam// |  |
+| //Thu 08/04// | //8.30-12.30// | //First reexam ([Canvas https://chalmers.instructure.com/courses/14779])// |  |
 % //Exam (Canvas)//                      |  |
 % //[Solution exams/solutions-plt-2017-2.pdf]// |
 | //Thu 26/08// | //14-18//      | //Second reexam// |  |
