@@ -145,7 +145,7 @@ A program may also contain comments and preprocessor directives,
 which are just ignored by the parser (see below). (**1**)
 
 If you are using BNFC, the category for programs should be named
-``Program``, to comply with the expectations of the test
+``Program``, to comply with the expectations of the
 [test suite testsuite/index.html].
 
 
