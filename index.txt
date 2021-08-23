@@ -40,17 +40,17 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 
 =News and changes=
 
+  : //2021-08-23//
+   The second reexam will be held 26 August on Canvas organized as
+   [course 17081 https://chalmers.instructure.com/courses/17081].
+   If you registered to the exam, you should have gotten an invitation
+   to this course.  Please read the instructions there.
+
   : //2021-04-06//
     The first re-exam will be held 8 April 2021 on Canvas organized as
     [course 14779 https://chalmers.instructure.com/courses/14779].
     If you registered to the exam, you should have gotten an invitation
     to this course.  Please read the instructions there.
-
-%   : //2020-08-17//
-%    The second reexam will be held 27 August on Canvas organized as
-%    [course 12065 https://chalmers.instructure.com/courses/12065].
-%    If you registered to the exam, you should have gotten an invitation
-%    to this course.  Please read the instructions there.
 
 % % : //2019-03-22//
 % %   The Fire deadline for late submission has been extended until
