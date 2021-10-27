@@ -330,7 +330,7 @@ Assistants:
 - [Oskar Abrahamsson (OA) https://www.chalmers.se/en/staff/Pages/oskar-abrahamsson.aspx]
 - [Mohammad Ahmadpanah (MA) https://www.chalmers.se/en/Staff/Pages/mohammad-ahmadpanah.aspx]
 - [Shreyash Kad (SK) https://se.linkedin.com/in/shreyash-kad], ``shreyash student chalmers se`` //(insert @ and .)//
-- Anna Romeborn (AR), ``a romeborn gmail com`` //(insert @ and .)//
+- Anna Romeborn (AR), ``romeborn student chalmers se`` //(insert @ and .)//
 
 
 Questions regarding this class (organization, content, labs)
