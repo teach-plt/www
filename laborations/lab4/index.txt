@@ -31,7 +31,7 @@ No type checker is needed.
 The approximate size of the grammar is 15 rules, and the interpreter
 code should be about 100 lines, depending on the programming language
 used for the implementation. You can use
-[this grammar ./Fun.cf] if you want.
+grammar [``Fun.cf`` ./Fun.cf] if you want.
 
 All BNFC supported languages can be used, but guidance is guaranteed
 only for Haskell and Java.
@@ -250,7 +250,7 @@ be compilable via calling
 
 =Test programs=
 
-//If you have any problems getting the test program to run, or if you think that there is an error in the test suite, contact the teachers of the course via the mailing list.//
+%//If you have any problems getting the test program to run, or if you think that there is an error in the test suite, contact the teachers of the course via the mailing list.//
 
 Run the programs in the [test suite ./testsuite/index.html] before submitting the lab.
 

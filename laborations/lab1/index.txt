@@ -67,7 +67,7 @@ and [make files https://www.gnu.org/software/make/].
 
 For building the parser with BNFC, an installation of a recent version (≥ 2.8) of
 [BNFC http://bnfc.digitalgrammars.com/] is needed.
-The recommended version is 2.8.4.
+The recommended version is 2.9.3.
 
 For automatic running of the testsuite, you'll need to generate and run Haskell code, requiring:
 - A recent version (8.x) of [GHC https://www.haskell.org/ghc/].

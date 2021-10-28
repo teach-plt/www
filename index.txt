@@ -499,7 +499,6 @@ It also contains an introduction to parser combinators.
 
 =Software=
 
-BNF Converter 2.9 [Homepage https://bnfc.digitalgrammars.com/] |
 If you are solving the labs on your own Windows machine, you might have to obtain some
 command-line developer tools stemming from the Unix world, like ``make``, ``tar``, etc.
 (These are by default available on Linux and can be installed from Xcode on macOS.)
@@ -508,9 +507,12 @@ Windows Subsystem for Linux
 ([WSL https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux]).
 Other options are [MSYS2 https://www.msys2.org/] and [Cygwin https://www.cygwin.com/].
 
+==BNFC==
+
+We use the BNF Converter ([Homepage https://bnfc.digitalgrammars.com/] |
 [Hackage https://hackage.haskell.org/package/BNFC] |
 [Stackage https://www.stackage.org/package/BNFC] |
-[GitHub https://github.com/BNFC/bnfc]
+[GitHub https://github.com/BNFC/bnfc]).
 
 Download and installation instructions at https://bnfc.digitalgrammars.com/.
 

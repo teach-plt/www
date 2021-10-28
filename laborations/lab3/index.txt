@@ -285,7 +285,7 @@ write the code, test, pack the archive again, and submit to fire.
 
 
 These packages contain the grammar, stubs for type checker and
-compiler, code to invoke Jasmin, [`jasmin.jar` haskell/jasmin.jar]
+compiler, code to invoke Jasmin, [jasmin.jar haskell/jasmin.jar],
 and suitable makefiles.
 % (You probably want to adapt your type checker from [Lab 2 ../lab2/index.html],
 % rather than starting from scratch.
