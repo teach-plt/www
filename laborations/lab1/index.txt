@@ -466,7 +466,7 @@ particular, tailoring it for the programs in the test suite is not maintainable!
 - Do not submit your solution before it passes the [test suite testsuite/index.html], lest it
   be returned automatically.
 - Do not submit any generated files.
-- Submit your lab using [Fire https://plt-lp2-20.fire.cse.chalmers.se/].
+- Submit your lab using [Fire https://plt-lp2-21.fire.cse.chalmers.se/].
 
 
 =Appendix: C++ features=

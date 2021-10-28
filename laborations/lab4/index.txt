@@ -301,4 +301,4 @@ $ make -B
 $ ./lab4
 ```
 - Do not submit any generated files.
-- Submit your lab using [Fire https://plt-lp2-20.fire.cse.chalmers.se/].
+- Submit your lab using [Fire https://plt-lp2-21.fire.cse.chalmers.se/].
