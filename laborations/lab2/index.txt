@@ -853,9 +853,10 @@ particular, tailoring it for the programs in the test suite is not maintainable!
 - Do not submit your solution before it passes the [test suite testsuite/index.html], lest it
   be returned automatically.
 - **Please include exactly all the files that are required for building your solution, including a Makefile.**
-  To verify this you can follow the following 7 steps (on Windows,
+  To verify this you can follow the following 7 steps.
+  On Windows,
   the tools used here (``bash``, ``mktemp``, ``tar``, ``make``) are
-  provided by both [Cygwin https://www.cygwin.com/] and [MSYS http://www.mingw.org/wiki/MSYS]).
+  provided by both [Cygwin https://www.cygwin.com/] and [MSYS2 https://www.msys2.org/].
   + Create an empty folder
 ```
 $ TMPDIR=`mktemp -d`
