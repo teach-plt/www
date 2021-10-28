@@ -5,11 +5,11 @@ test : \
   test-8.0.2  \
   test-8.2.2  \
   test-8.4.4  \
-  test-8.6.4  \
+  test-8.6.5  \
   test-8.8.4  \
-  test-8.10.2 \
+  test-8.10.7 \
+  test-9.0.1  \
 # end test
-# NB: 8.6.5 would be the latest 8.6, but I (Andreas Abel) do not have it installed.
 
 test-% : lab2.hs TypeChecker.hs Interpreter.hs CMM/Lex.hs CMM/Par.hs
 	ghc-$* -fno-code $<
