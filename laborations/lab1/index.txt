@@ -285,8 +285,7 @@ since they are bracketed.
 Otherwise, some subexpressions have to be one precedence level above of
 the main expression to implement the required the associativity.
 
-%**Note**. The table is not exactly the same as in the C++ standard.
-
+**Note**. The precedences are not exactly the same as in the [C++ standard https://en.cppreference.com/w/cpp/language/operator_precedence], but very similar.
 
 || level | expression forms                     |  assoc   | explanation | test ||
 |  15    | literal                              |  ---     | atomic expressions |  (**1**)  |
