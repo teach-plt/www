@@ -219,8 +219,8 @@ Slides follow closely the plt book.
 
 
 || Date         | Time           | Title                             | Material                      ||
-| Tue 02/11     | 13-15          | PL Design, Compilation Phases | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1 |
-%, live coding [Calc live/2020/live-1-Calc-bnfc.zip]
+| Tue 02/11     | 13-15          | PL Design, Compilation Phases | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1, [code live/2021/live-1-Calc-bnfc.zip]
+%, live coding [Calc live/2021/live-1-Calc-bnfc.zip]
 % , [MiniJS laborations/mini/index.html]
 %, live coding [start live/2019/live-1-mini-start.zip] [lecture live/2019/live-1-as-far-as-we-got.zip] [finish live/2019/live-1-mini-finish.zip]
 %, [live coding live/2018/lec1-happy-live-2018.zip]
