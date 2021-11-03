@@ -185,6 +185,11 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 % %  : //2019-11-07//
 % %    [MiniJS laborations/mini/index.html] implementation in Haskell and Java.
 
+
+  : //2021-11-03//
+    Until further notice, lectures will be streamed on Zoom (link see Canvas).
+    On-campus attendance is recommended though, for a better lecture experience and better interaction.
+
 %   : //2020-11-02//
 %    [Lab 1 laborations/lab1/index.html] description is online.
 
@@ -582,7 +587,7 @@ for DAT151 Programming language technology.
 
 || Program | @student.chalmers.se | Name ||
 %| MPALG | burmanj@student.chalmers.se   | Joakim Burman     |
-%| MPCSN | yitaoddd@gmail.com            | Yitao Dong        |
+| MPCSN | yitao           | Yitao Dong        |
 %| MPALG | foraxel@student.chalmers.se   | Axel Forsman      |
 %| MPALG | johalinu@student.chalmers.se  | Linus Johansson   |
 %| MPALG | syedrahamatulla@gmail.com     | Rahamatullah Syed |
