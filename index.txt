@@ -232,9 +232,8 @@ Slides follow closely the plt book.
 %, live coding [start live/2019/live-1-mini-start.zip] [lecture live/2019/live-1-as-far-as-we-got.zip] [finish live/2019/live-1-mini-finish.zip]
 %, [live coding live/2018/lec1-happy-live-2018.zip]
 | Thu 04/11     | 13-15          | Grammars / BNFC / Hands-on with Lab 1    | [slides plt-book/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3, live coding [start live/2021/live-2-bnfc-start.zip] |
-| Tue 09/11     | 13-15          | Formal languages and parsing                  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4, [LR-table.txt notes/LR-table.txt] |
+| Tue 09/11     | 13-15          | Formal languages and parsing                  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4, [LL parser code live/2021/LL-parsing.zip] [LR-table.txt notes/LR-table.txt] |
 %[LR parse table live/2019/LR-parsetable.txt] for [grammar live/2019/LR.cf] |
-%[LL parser code LL-parsing.zip]
 %| Thu 11/11     | 10-16       | [DATE-IT 2017 fair https://www.date-it.se/] | No class! |
 | Thu 11/11     | 13-15          | Theory of lexing     | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
 | //Mon 15/11// | //23//         | //Lab 1 deadline//                |  |
