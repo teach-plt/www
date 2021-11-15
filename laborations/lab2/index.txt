@@ -152,6 +152,15 @@ return type of the function.
 
 You don't need to check that there actually is a ``return`` statement.
 
+**Bonus task:** Do check that each non-``void`` function (except
+``main``) returns, in the sense that every execution of the function
+code will reach a ``return`` statement.  In general, this is an
+undecidable question (cf. ``if (goldbachConjectureHolds) return 42;``),
+so the check should be conservative.
+E.g. ``if (e) s1; else s2;`` only reaches ``return``
+when //both// ``s1`` and ``s2`` reach ``return``
+(even if ``e`` is obviously ``true`` or ``false``).
+(Cf. Java, which does check for ``return``.)
 
 ==Argument lists, declarations, and function bodies==
 
