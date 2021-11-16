@@ -590,8 +590,9 @@ Then the class path needs to be set as follows (bash):
 for DAT151 Programming language technology.
 
 || Program | @student.chalmers.se | Name ||
-%| MPALG | burmanj@student.chalmers.se   | Joakim Burman     |
+| MPALG | burmanj   | Joakim Burman     |
 | MPCSN | yitao           | Yitao Dong        |
 %| MPALG | foraxel@student.chalmers.se   | Axel Forsman      |
 %| MPALG | johalinu@student.chalmers.se  | Linus Johansson   |
-%| MPALG | syedrahamatulla@gmail.com     | Rahamatullah Syed |
+| MPALG |      | Rahamatullah Syed |
+%syedrahamatulla@gmail.com
