@@ -417,6 +417,12 @@ There are four types of values:
 - a void value, which need never be shown.
 
 
+The type ``int`` should be able to hold signed 32bit integers (Java:
+``int`), but may have larger precision, e.g. 64bit or arbitrary
+precision (Haskell: ``Integer``).
+The type ``double`` should hold IEEE floating points of at least
+double precision (Java: ``double``, Haskell: ``Double``).
+
 %NOT RECOMMENDED:
 %Instead of boolean values, you may use integers.
 %Then ``true`` can be interpreted as 1 and ``false`` as 0.
@@ -563,7 +569,7 @@ and need to evaluated with new environment blocks.  For example:
   if (i > 0) i++; else int i = 1;
   printInt(i);
 ```
-This snipped should print ``0`` and not ``1``, since the variable
+This snippet should print ``0`` and not ``1``, since the variable
 declared in the else-branch is a fresh ``i`` not the ``i`` declared above.
 
 ==Expressions==
@@ -647,9 +653,7 @@ The arithmetic operations addition, subtraction, multiplication, and division,
 ```
 are interpreted by evaluating their operands from left to right.
 The resulting values are then added, subtracted, etc., by using
-appropriate operations of the implementation language. We are not
-picky about the precision chosen, but suggest for simplicity
-that ``int`` should be ``int`` and ``double`` should be ``double``.
+appropriate operations of the implementation language.
 
 //Note://  Division behaves differently for integer than for floating
 point arguments.  If both arguments are of type integer, then integer
