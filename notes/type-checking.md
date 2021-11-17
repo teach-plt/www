@@ -137,7 +137,7 @@ Example implementation:
 ### Coercion and subtyping
 
 `int` values can be coerced to `double` values.
-`int` is a subtype of `double`, written `int ≤ double`
+`int` is a subtype of `double`, written `int ≤ double`.
 Subtyping `t₁ ≤ t₂` is a preorder, i.e., a reflexive-transitive relation.
 
     e : t₁
@@ -345,7 +345,7 @@ Judgements version 2:
 
 Rules for declarations and blocks.
 
-    ------------------------------------- no xᵢ ∈ Δ
+    ------------------------------------- no xᵢ ∈ Δ, and xᵢ ≠ xⱼ when i ≠ j
     Γ.Δ ⊢ᵗ⁰ t x₁,...,xₙ; ⇒ (x₁:t,...xₙ:t)
 
     Γ.(Δ,x:t) ⊢ e : t
