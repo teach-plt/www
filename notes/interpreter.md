@@ -116,6 +116,18 @@ Judgement `γ ⊢ e ⇓ v` should be read as a function with inputs `γ` and
 In the last clause, `eval(γ,e₁)` and `eval(γ,e₂)` can be run in any
 order, even in parallel!
 
+### Correctness properties
+
+- Type soundness (weak correctness):
+  If `e : t` and `e ⇓ v` then `v : t`.
+  "If expression `e` has type `t` and `e` evaluates to value `v` then `v` also has type `t`."
+
+- Termination (strong correctness):
+  If `e : t` then `e ⇓ v` for some `v : t`.
+
+- Allowing non-termination:
+  If `e : t` then either evaluation of `e` diverges, or `e ⇓ v` with `v : t`.
+
 
 Effects
 -------
@@ -253,6 +265,23 @@ The Haskell state monad is just sugar.  It is implemented roughly by:
       in (b, s₂)
 ```
 N.B.: For the Haskell hacker: `(do x ← p; q x) = uncurry q . p`.
+
+
+### Correctness revisited
+
+We need to start with _good_ environments `γ : Γ`.
+This is defined pointwise: `γ(x) : Γ(x)` for all `x` in scope.
+
+- Type soundness (weak correctness):
+  If `Γ ⊢ e : t` and `γ : Γ` and `γ ⊢ e ⇓ ⟨v; γ'⟩` then `v : t` and `γ' : Γ`.
+  "If expression `e` has type `t` in context `Γ` and `γ` is an environment matching `Γ` and `e` evaluates to value `v` and `γ'` then `v` also has type `t` and `γ'` also matches `Γ`."
+
+- Termination (strong correctness):
+  If `Γ ⊢ e : t` and `γ : Γ` then `γ ⊢ e ⇓ ⟨v; γ'⟩` for some `v : t` and `γ' : Γ`.
+
+- Allowing non-termination:
+  ... (Exercise)
+
 
 ### I/O
 
