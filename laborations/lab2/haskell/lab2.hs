@@ -1,4 +1,4 @@
-{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE LambdaCase #-}
 
 import Control.Exception
 
@@ -7,7 +7,6 @@ import System.Exit        (exitFailure)
 import System.IO.Error    (isUserError, ioeGetErrorString)
 
 import CMM.Par            (pProgram, myLexer)
-import CMM.ErrM           (pattern Ok, pattern Bad)
 
 import TypeChecker        (typecheck)
 import Interpreter        (interpret)
@@ -17,11 +16,11 @@ import Interpreter        (interpret)
 check :: String -> IO ()
 check s = do
   case pProgram (myLexer s) of
-    Bad err  -> do
+    Left err  -> do
       putStrLn "SYNTAX ERROR"
       putStrLn err
       exitFailure
-    Ok  tree -> do
+    Right tree -> do
       case typecheck tree of
         Left err -> do
           putStrLn "TYPE ERROR"
@@ -41,8 +40,7 @@ check s = do
 
 main :: IO ()
 main = do
-  args <- getArgs
-  case args of
+  getArgs >>= \case
     [file] -> readFile file >>= check
     _      -> do
       putStrLn "Usage: lab2 <SourceFile>"
