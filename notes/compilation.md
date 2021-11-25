@@ -7,16 +7,16 @@ Infrastructure of the compiler
 Signature:
 - name and type of functions suitable for Jasmin
 - Jasmin types:
-  I: int
-  D: double
-  V: void
-  Z: boolean
+  * `I`: `int`
+  * `D`: `double`
+  * `V`: `void`
+  * `Z`: `boolean`
 
 Context (state):
-- generate new labels
-- allocate local variables; free variables when exiting a block
-- keep track of maximum stack use
-- append generated code (`emit`)
+1. generate new labels
+2. allocate local variables; free variables when exiting a block
+3. keep track of maximum stack use
+4. append generated code (`emit`)
 
 The `emit` function:
 - responsible for
@@ -37,34 +37,34 @@ An expression of type `t` is compiled to instructions whose effect is
 to leave a new value of type `t` on top of the stack, and leave the
 rest of the stack unchanged.
 
-```
-compileExp(EAdd t e₁ e₂):
-  compileExp(e₁)
-  compileExp(e₂)
-  emit(t-add)            -- either iadd or dadd
+```haskell
+  compileExp(EAdd t e₁ e₂):
+    compileExp(e₁)
+    compileExp(e₂)
+    emit(t-add)            -- either iadd or dadd
 
-compileExp(EVar x):
-  a <- lookupVar
-  emit(t-load a)         -- either iload or dload
+  compileExp(EVar x):
+    a <- lookupVar
+    emit(t-load a)         -- either iload or dload
 
-compileExp(EAss x e):
-  a <- lookupVar x
-  compileExp(e)
-  emit(t-store a)        -- either istore or dstore
-  -- Problem here
+  compileExp(EAss x e):
+    a <- lookupVar x
+    compileExp(e)
+    emit(t-store a)        -- either istore or dstore
+    -- Problem here
 ```
 (We omit `emit` in the following.)
 
 ## Compiler correctness
 
 JVM Small-step semantics without jumps:
+```
+    i : ⟨V,S⟩ → ⟨V',S'⟩
 
-  i : ⟨V,S⟩ → ⟨V',S'⟩
-
-  i      : JVM instruction (or instruction sequence)
-  V / V' : variable store before/after
-  S / S' : stack before/after
-
+    i      : JVM instruction (or instruction sequence)
+    V / V' : variable store before/after
+    S / S' : stack before/after
+```
 We say  γ ~ V  if environment γ translates to variable store V.
 
 Correctness statement (simplified):
@@ -80,21 +80,21 @@ Compiling statements
 A statement (sequence) is compiled to instructions whose effect on the
 stack is nil (no change).
 
-```
-compileStm(SInit t x e):
-  a <- newLocal t x
-  compileExp(e)
-  t-store a              -- either istore or dstore
+```haskell
+  compileStm(SInit t x e):
+    a <- newLocal t x
+    compileExp(e)
+    t-store a              -- either istore or dstore
 
-compileStm(SExp t e):
-  compileExp(e)
-  t-pop                  -- either pop or pop2
+  compileStm(SExp t e):
+    compileExp(e)
+    t-pop                  -- either pop or pop2
 
-compileStm(SBlock ss):
-  newBlock
-  for (s : ss)
-    compileStm(s)
-  popBlock
+  compileStm(SBlock ss):
+    newBlock
+    for (s : ss)
+      compileStm(s)
+    popBlock
 ```
 
 Correctness statement (simplified):
@@ -117,7 +117,7 @@ Example:
   while (i < j) {...}
 ```
 becomes
-```jasmin
+```scheme
   L0:            ;; beginning of loop, check condition
   iload_1        ;; i
   iload_0        ;; j
@@ -135,7 +135,7 @@ becomes
 
 We would like to skip the computation of the boolean value, but jump
 directly according to the condition:
-```jasmin
+```scheme
   L0:            ;; beginning of loop, check condition
   iload_1        ;; i
   iload_0        ;; j
@@ -153,7 +153,7 @@ compileBool (Exp e, Label Ltrue, Label Lfalse)
 ```
 
 For compiling control-flow, we use it as follows:
-```
+```haskell
 compileStm(SWhile e s):
   Lstart, Ltrue, Lfalse ← newLabel
   Lstart:
@@ -170,7 +170,7 @@ compileStm(SIfElse e s₁ s₂):
 `compileBool` is given by the following compilation schemes:
 
 - comparison operators:
-  ```
+  ```haskell
   compileBool(ELt int e₁ e₂, Ltrue, Lfalse):
     compileExp(e₁)
     compileExp(e₂)
@@ -182,7 +182,7 @@ compileStm(SIfElse e s₁ s₂):
    ```
 
 - logical operators:
-  ```
+  ```haskell
   compileBool(ETrue, Ltrue, Lfalse):
     goto ETrue
 
@@ -201,13 +201,13 @@ compileStm(SIfElse e s₁ s₂):
 
 Sometimes booleans need to be represented by 0 and 1,
 e.g. when assigning to a boolean variable:
-```
-compileExp(e) | typeOf(e) == bool:
-  Ltrue, Lfalse <- newLabel
-  iconst_1                       -- speculate "true"
-  compileBool(e, Ltrue, Lfalse)
-  Lfalse:                        -- no? change to "false"
-  pop
-  iconst_0
-  Ltrue:
+```haskell
+    compileExp(e) | typeOf(e) == bool:
+      Ltrue, Lfalse <- newLabel
+      iconst_1                       -- speculate "true"
+      compileBool(e, Ltrue, Lfalse)
+      Lfalse:                        -- no? change to "false"
+      pop
+      iconst_0
+      Ltrue:
 ```
