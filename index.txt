@@ -596,7 +596,7 @@ for DAT151 Programming language technology.
 
 || Program | @student.chalmers.se | Name ||
 | MPALG | burmanj   | Joakim Burman     |
-| MPALG |syedrahamatulla gmail com      | Rahamatullah Syed |
+| MPALG | syedrahamatulla gmail com      | Rahamatullah Syed |
 | MPCSN | yitao           | Yitao Dong        |
 | MPALG | erikbri         | Erik Brink        |
 %% No response
