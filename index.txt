@@ -387,7 +387,7 @@ Lab supervision workflow: Start a Zoom meeting and invite your group partner to 
 Lab supervision is also available in room [ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093] on Tue, Thu and Fri.
 || Day | Time        | Location     | Supervisors       |
  | Tue | 15:15-17:00 | Zoom, ED3354 | Mohammad, Andreas |
- | Wed | 15:15-17:00 | Zoom only    | Shreyash, Oskar   |
+% | Wed | 15:15-17:00 | Zoom only    | Shreyash, Oskar   |
  | Thu | 15:15-17:00 | Zoom, ED3354 | Mohammad, Anna    |
  | Fri | 13:15-15:00 | Zoom, ED3354 | Oskar, Anna       |
 
@@ -396,6 +396,8 @@ The lab rooms and supervision are
 % Supervision is
 available from Tue 02 Nov till Fri 17 Dec 2021,
 except for Fri 05 Nov which is a half-day.
+Extra supervision sessions (Zoom) are planned for January 2022, 15:15-17:00, at the following days:
+Tue 18th, Wed 19th, Jan 25th, Jan 26th.
 
 **Attendance in these classes is optional**.
 Normally, each student should attend **at most one** supervised laboration time each week.
