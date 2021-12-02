@@ -111,22 +111,25 @@ The essential feature of functional languages is not anonymous
 functions (via λ) but _partial application_, forming a new function by
 giving less arguments than the function arity.
 
-Example:  `let plus x y = x + y in plus 1` is the increment function.
+Example:  The increment function:
+```haskell
+    let plus x y = x + y in plus 1
+```
 Can be written as anonymous function `λ y → 1 + y`.
 
 ### Free and bound variables
 
 In `λ x → x y`, variable `y` is considered _free_ while `x` is _bound_ by the `λ`.
 In `let x = y in x`, `y` is free and `x` is bound by the `let`.
-`let` and `λ` are _binders_.
+Both `let` and `λ` are _binders_.
 
 Free variable computation:
-
+```
     FV(x)                        = {x}
     FV(f e)                      = FV(f) ∪ FV(e)
     FV(λ x → e)                  = FV(e) \ {x}
     FV(let x₁=e₁;...;xₙ=eₙ in f) = FV(e₁,...,eₙ) ∪ (FV(f) \ {x₁,...,xₙ})
-
+```
 An expression without free variables is called _closed_, otherwise _open_.
 For closed expression, we are interested in their _value_.
 
@@ -150,7 +153,7 @@ Reduction
 
 Idea: compute the value by _substituting_ function arguments for
 function parameters, and evaluating operations.
-
+```
     (λ x → 1 + x) 2
     ↦  1 + 2
     ↦  3
@@ -158,15 +161,15 @@ function parameters, and evaluating operations.
     let x = 2 in 1 + x
     ↦  1 + 2
     ↦  3
-
+```
 This is formally a _small-step_ semantics `e ↦ e'`, called _reduction_.
 
 Reduction rules:
-
-    (λ x → f) e               ↦  f[x=e]             (named β by Alonzo Church)
+```haskell
+    (λ x → f) e               ↦  f[x=e]    -- named β by Alonzo Church
     let x = e in f            ↦  f[x=e]
     let x₁=e₁;...;xₙ=eₙ in f  ↦  f[x₁=e₁;...;xₙ=eₙ]
-
+```
 The lhs (left hand side) is called a _redex_ (reducible expression)
 and the rhs (right hand side) its _reduct_.
 
@@ -183,18 +186,18 @@ _Strategy_ question: where and under which conditions can these rules be applied
 ### Substitution
 
 Substitution `f[x=e]` of course does not substitute bound occurrences of `x` in `f`:
-
-    (λ x → (λ x → x)) 1
+```
+      (λ x → (λ x → x)) 1
     ↦ (λ x → x)[x=1]
     = (λ x → x)
-
+```
 Still substitution has some pitfalls related to shadowing:
 
 Example:
 
 - Reducing the `let` first:
 
-        let x = 1 in (λ f x → f x) (λ y → x)
+          let x = 1 in (λ f x → f x) (λ y → x)
         ↦ ((λ f x → f x) (λ y → x))[x=1]
         = (λ f x → f x) (λ y → 1)
         ↦ (λ x → f x)[f = λ y → 1]
@@ -204,7 +207,7 @@ Example:
 
 - Reducing the `λ` first:
 
-        let x = 1 in (λ f x → f x) (λ y → x)
+          let x = 1 in (λ f x → f x) (λ y → x)
         ↦ let x = 1 in (λ x → f x)[f = λ y → x]
         = let x = 1 in λ x → (λ y → x) x
         ↦ let x = 1 in λ x → x[y=x]
@@ -224,10 +227,11 @@ Solutions:
 
    For evaluation of closed expressions, we can use strategies
    that respect this imperative.
+   E.g., call-by-value, call-by-name.
 
 2. Rename bound variables to avoid capture.
 
-         (λ x → f x)[f = λ y → x]
+           (λ x → f x)[f = λ y → x]
          = (λ z → f z)[f = λ y → x]
          = (λ z → (λ y → x) z)
          ↦ λ z → x
@@ -235,12 +239,14 @@ Solutions:
 Consistently renaming bound variables does not change the meaning of
 an expression.
 
-Nontermination:  There are terms that reduce to themselves!
+### Nontermination
 
-    (λ x → x x) (λ x → x x)
+There are terms that reduce to themselves!
+```
+      (λ x → x x) (λ x → x x)
     ↦ (x x)[x = (λ x → x x)]
     = (λ x → x x) (λ x → x x)
-
+```
 Such terms do not have a value.
 
 
@@ -261,41 +267,44 @@ The big-step semantics corresponding to the call-by-value strategy
 uses an environment of closed _values_, i.e., `γ` is of the form
 `x₁=v₁,...,xₙ=vₙ`.
 
-A value `v` is a closed expression which is a numeral or a function
-with an environment `let δ in λ x → f`.  The latter is called a
+A value `v` is a closed expression which is
+- a numeral (integer literal) `n`
+- or a function with an environment `let δ in λ x → f`.
+
+The latter is called a
 _closure_ and may be written `⟨λx→f; δ⟩` or `(λx→f){δ}` (IPL book).
 
-Evaluation rules:
+#### Evaluation rules:
 
 Variable:
-
+```
      ------------
      γ ⊢ x ⇓ γ(x)
-
+```
 Let:
-
-     γ ⊢ e₁ ⇓ v₁
+```
+     γ      ⊢ e₁ ⇓ v₁
      γ,x=v₁ ⊢ e₂ ⇓ v₂
      -------------------------
      γ ⊢ let x = e₁ in e₂ ⇓ v₂
-
+```
 Lambda:
-
+```
      --------------------------------
      γ ⊢ (λx → f) ⇓ (let γ in λx → f)
-
+```
 Application:
-
-     γ ⊢ e₁ ⇓ let δ in λx → f
-     γ ⊢ e₂ ⇓ v₂
+```
+     γ      ⊢ e₁ ⇓ let δ in λx → f
+     γ      ⊢ e₂ ⇓ v₂
      δ,x=v₂ ⊢ f ⇓ v
-     ------------------------
+     -----------------------------
      γ ⊢ e₁ e₂ ⇓ v
-
+```
 Exercise:  Evaluate `(((λ x₁ → λ x₂ → λ x₃ → x₁ + x₃) 1) 2) 3`
 
 Rules for integer expressions:
-
+```
      ---------
      γ ⊢ n ⇓ n
 
@@ -303,6 +312,7 @@ Rules for integer expressions:
      γ ⊢ e₂ ⇓ n₂
      ---------------- n = n₁ + n₂
      γ ⊢ e₁ + e₂ ⇓ n
+```
 
 
 ### Call-by-name
@@ -314,32 +324,32 @@ the form `x₁=c₁,...,xₙ=cₙ`.
 
 The evaluation judgement is still of the form `γ ⊢ e ⇓ v`.
 
-Evaluation rules:
+#### Evaluation rules:
 
 Variable:
-
+```
      δ ⊢ e ⇓ v
      ---------- γ(x) = let δ in e
      γ ⊢ x ⇓ v
-
+```
 Let:
-
+```
      γ,x=c ⊢ e₂ ⇓ v₂
      ------------------------- c = let γ in e₁
      γ ⊢ let x = e₁ in e₂ ⇓ v₂
-
+```
 Lambda:
-
+```
      --------------------------------
      γ ⊢ (λx → f) ⇓ (let γ in λx → f)
-
+```
 Application:
-
-     γ ⊢ e₁ ⇓ let δ in λx → f
+```
+     γ     ⊢ e₁ ⇓ let δ in λx → f
      δ,x=c ⊢ f ⇓ v
-     ------------------------ c = let γ in e₂
-     γ ⊢ e₁ e₂ ⇓ v
-
+     ----------------------------- c = let γ in e₂
+     γ     ⊢ e₁ e₂ ⇓ v
+```
 Rules for integer expressions: (unchanged).
 
 
