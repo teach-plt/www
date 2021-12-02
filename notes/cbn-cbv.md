@@ -8,38 +8,40 @@ At the core of functional languages is the λ-calculus.
 In pure λ-calculus, _everything is a function_.
 
 Expressions `e` of pure λ-calculus are given by this grammar:
-
+```haskell
     e,f ::= x        -- Variable
-          | λx → e   -- Function: abstraction of x in e
           | f e      -- Application of function f to argument e
-
+          | λx → e   -- Function: abstraction of x in e
+```
 This is a subset of the Haskell expression syntax.
 The abstract syntax corresponds to this LBNF grammar:
+```lbnf
+    EId.   Exp3 ::= Ident;
+    EApp.  Exp2 ::= Exp2 Exp3;
+    EAbs.  Exp  ::= "λ" Ident "→" Exp;
 
-    EId.  Exp ::= Ident;
-    EAbs. Exp ::= "λ" Ident "→" Exp;
-    EApp. Exp ::= Exp Exp;
-
-(This grammar is ambiguous, a non-ambiguous grammar is given in lab 4).
+    coercions Exp 3;
+```
 
 Example:  `x y z`  should be read `(x y) z`.
 
 ### A small extension of the lambda-calculus
 
 We consider an extension by `let`, numerals, and primitive operators:
-
+```haskell
      ...  | let x = e in f
           | let x₁ = e₁; ...; xₙ = eₙ in f
           | n                   -- E.g. 0,1,2..
           | e₁ op e₂            -- op could be +,-,...
+```
+```lbnf
+     ELet.  Exp  ::= "let" [Bind] "in" Exp;
+     EInt.  Exp3 ::= Integer;
+     EOp.   Exp1 ::= Exp1 Op Exp2;
 
-     ELet. Exp ::= "let" [Bind] "in" Exp;
-     EInt. Exp ::= Integer;
-     EOp.  Exp ::= Exp Op Exp;
-
-     Bind. Bind ::=  Ident "=" Exp;
+     Bind.  Bind ::=  Ident "=" Exp;
      separator Bind ";";
-
+```
 `let x = e in f` could be regarded just syntactic sugar for `(λ x → f) e`,
 and `let x₁ = e₁; ...; xₙ = eₙ in f` as sugar for
 `(λ x₁ → ... λ xₙ → f) e₁ ... eₙ`.
@@ -53,7 +55,7 @@ Convenient syntactic sugar:
   `let f x₁ ... xₙ = e in ...` for `let f = λ x₁ ... xₙ → e in ...`
 
 Example:
-
+```haskell
     let
       double x     = x + x
       comp   f g x = f (g x)
@@ -61,14 +63,14 @@ Example:
       twice  f     = comp f f
     in
         twice twice double 2
-
+```
 Example:
-
-  never  f = λ x → x
-  once   f = λ x → f x
-  twice  f = λ x → f (f x)
-  thrice f = λ x → f (f (f x))
-
+```haskell
+    never  f = λ x → x
+    once   f = λ x → f x
+    twice  f = λ x → f (f x)
+    thrice f = λ x → f (f (f x))
+```
 
 ### Functional languages vs. imperative languages
 
@@ -98,7 +100,7 @@ Trying 3. `let twice f = comp f f in twice double` in C:
   ```
 
 - Attempt 2: Cannot partially apply
-  ```
+  ```c
   int twice (int f(int n), int x) {
     return comp(f,f,x);
   }
@@ -346,7 +348,7 @@ Comparing cbn (call-by-name) with cbv (call-by-value):
 - Arguments are _only_ evaluated when _needed_.
   This is an advantage if an argument is unused or only used under rare conditions.
   E.g.:
-  `and e₁ e₂ = if e₁ then e₂ else false`
+  `e₁ && e₂ = if e₁ then e₂ else false`
 
 - Arguments are _every time_ evaluated when _needed_.
   This is a disadvantage if an argument is used twice or more.
