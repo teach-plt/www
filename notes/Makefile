@@ -10,4 +10,15 @@ index.html : $(files)
 %.html : %.md Makefile
 	pandoc -f gfm -t html -o $@ -s $<
 
+# visualize-cbn
+
+.PHONY: vis-text vis-js
+vis-text:
+	visualize-cbn -i twice-double.hs --show-trace --hide-prelude
+
+vis-js: twice-double.js
+
+%.js : %.hs
+	visualize-cbn -i $< --javascript $@ --hide-prelude
+
 # EOF

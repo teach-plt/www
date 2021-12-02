@@ -356,11 +356,39 @@ Comparing cbn (call-by-name) with cbv (call-by-value):
   `double x = x + x`
 
 
-Synthesis: _call-by-need_ (Haskell)
+### call-by-need
+
+Synthesis of call-by-name and call-by-value: _call-by-need_ (Haskell)
 
 - _lazy_: only evaluate when needed, but then store value
 - next time the value is needed, grab stored value
 - needs global heap rather than local environment
+
+Call-by-need example:
+```haskell
+    twice twice double 2
+
+    double = (\ x -> add x x)
+    comp   = (\ f -> \ g -> \ x -> f (g x))
+    twice  = (\ f -> comp f f)
+```
+
+Step visualization with https://github.com/well-typed/visualize-cbn:
+
+<div style="margin-left: 50px;">
+<a onclick="cbnPrev()"><button>Previous</button></a>
+<a onclick="cbnNext()"><button>Next</button></a>
+[step <span id="cbn_step">Step</span>, <span id="cbn_status">Status</span>]
+
+<table width="100%" border="0" cellpadding="0">
+<!-- style="border-collapse: collapse;"> -->
+<tr><td><div style="font-family: monospace;" id="cbn_term">Term</div></td></tr>
+<!--  border-bottom: 1px solid black; -->
+<tr><td><div style="font-family: monospace;" id="cbn_heap">Heap</div></td></tr>
+</table>
+
+<script type="text/javascript" src="twice-double.js"></script>
+</div>
 
 Literature to study call-by-need:
 
