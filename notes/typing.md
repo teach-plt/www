@@ -2,36 +2,37 @@ Typing the lambda calculus
 ==========================
 
 Lambda calculus with integers:
-
+```haskell
     e,f ::= x                 -- variable
           | λx → e            -- function abstraction
           | f e               -- application
           | let x = e₁ in e₂  -- local binding
           | n                 -- integer literal
           | e₁ op e₂          -- arithmetic operation
+```
 
 Simple types
 ------------
 
 Grammar for types:
-
-    t,s ::= int         -- base type of integers
-          | s → t       -- function type
-
+```haskell
+    t,s ::= int               -- base type of integers
+          | s → t             -- function type
+```
 Arrow associates to the _right_, so
-
+```
     r → s → t = r → (s → t)
-
+```
 Higher order functions:
-
+```
     twice : (int → int) → (int → int)
     twice = λ f → λ x → f (f x)
-
+```
 Order of a function type:
-
+```
     ord(int)   = 0
     ord(s → t) = max { ord(s) + 1, ord(t) }
-
+```
 Examples:
 
   - 1st order function:  Takes base values as inputs
@@ -145,7 +146,7 @@ Solutions:
 
   1. Bidirectional type-checking:
      * two modes: checking and inference
-     * check λs,
+     * check lambdas,
      * infer applications: infer function part, check argument part
      * `let x = e₁ in e₂`:
         - `e₁` needs to be inferred
@@ -156,17 +157,17 @@ Solutions:
 
   2. Typed λ  `λ(x:s) → e` and let `let x:s = e₁ in e₂`
      * Allows inferring λs and lets, e.g.
-
-        infer(Γ, λ(x:s)→e):
-          let t = infer(Γ[x:s], e)
-          return (s → t)
-
+       ```
+         infer(Γ, λ(x:s)→e):
+           let t = infer(Γ[x:s], e)
+           return (s → t)
+       ```
      + simple, good error messages
      - requires a lot of redundant type annotations from the user (like in Java)
-
+       ```
          C x = new C(e);
          let x:int = 3 in x + x
-
+       ```
 
   3. Inference with type variables
      * Treat the `???`s as variables for types
@@ -439,6 +440,7 @@ Example:  Compute type of `λ x → x x`
     X = X → Y
     result: Y
 
+The constraint `X = X → Y` is unsolvable as it violates the _occurs check_.
 
 Polymorphism
 ------------
