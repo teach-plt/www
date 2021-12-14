@@ -11,7 +11,6 @@ import System.Exit          (exitFailure, exitSuccess)
 import Fun.Abs              (Program)
 import Fun.Par              (pProgram, myLexer)
 import Fun.Print            (printTree)
-import Fun.ErrM             (Err, pattern Ok, pattern Bad)
 
 import Interpreter          (Strategy(..), interpret)
 
@@ -33,11 +32,11 @@ run strategy s = eval strategy =<< parse s
 
 parse :: String -> IO Program
 parse s = case pProgram (myLexer s) of
-  Bad err -> do
+  Left err -> do
     putStrLn "SYNTAX ERROR"
     putStrLn err
     exitFailure
-  Ok prg -> return prg
+  Right prg -> return prg
 
 
 -- | Interpret in call-by-value or call-by-name.
