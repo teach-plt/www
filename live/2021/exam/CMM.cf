@@ -1,0 +1,73 @@
+-- Write a labelled BNF grammar that covers the following kinds of constructs of C:
+-- • Program: int main() followed by a block
+
+Prg.  Program ::= "int" "main" "(" ")" Block;
+
+-- • Block: a sequence of statements enclosed between { and }
+
+Block. Block  ::= "{" [Stm] "}";
+
+[].    [Stm]  ::= ;
+(:).    [Stm]  ::= Stm [Stm];
+
+-- • Statement:
+-- – block
+
+SBlock.  Stm ::= Block;
+
+-- – initializing variable declaration, e.g., int x = e;
+
+SInit.   Stm ::= Type Ident "=" Exp ";" ;
+
+-- – statement formed from an expression by adding a semicolon ;
+
+SExp.    Stm ::= Exp ";" ;
+
+-- – if statement with else
+
+SIfElse. Stm ::= "if" "(" Exp ")" Stm "else" Stm ;
+
+-- • Expression:
+-- – boolean literal true or false
+
+ETrue.  Exp1 ::= "true";
+EFalse. Exp1 ::= "false";
+
+-- – integer literal
+
+EInt.   Exp1 ::= Integer;
+
+-- – function call with a list of comma-separated arguments
+
+ECall.  Exp1 ::= Ident "(" [Exp] ")" ;
+
+separator Exp "," ;
+
+-- – post-increment of an identifier, e.g., x++
+
+EIncr.  Exp1 ::= Ident "++" ;
+
+-- – addition (+), left associative
+
+EAdd.   Exp ::= Exp "+" Exp1;
+
+-- – parenthesized expression
+
+-- coercions Exp 1;
+_.      Exp  ::= Exp1;
+_.      Exp1 ::= "(" Exp ")";
+
+-- -- coercions Exp 2;
+-- _.      Exp  ::= Exp1;
+-- _.      Exp1 ::= Exp2;
+-- _.      Exp2 ::= "(" Exp ")";
+
+
+-- • Type: int or bool
+
+TInt.  Type ::= "int"  ;
+TBool. Type ::= "bool" ;
+
+-- Lines starting with # are comments.
+
+comment "#";

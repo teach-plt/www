@@ -108,3 +108,4 @@ cabal.project.local~
 .ghc.environment.*
 
 /laborations/lab4/testsuite/good/*.golden
+/live/2021/exam/CMM
