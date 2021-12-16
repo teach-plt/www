@@ -284,8 +284,8 @@ Slides follow closely the plt book.
 %Live coding [start live/2019/live-13-JVM-start.agda] and [finish live/2019/live-13-JVM-finish.agda] |
 % Agda demo [start ./BidirectionalTypeChecking-stub.agda] [finish ./BidirectionalTypeChecking.agda] |
 | //Wed 15/12// | //23//         | //Lab 3 deadline//                |  |
-| Thu 16/12     | 13-15          | Preparing for the exam            |  |
-% [Training exam exams/exam-plt-2020-1.pdf] [Answer Q1 live/2020/Exam.cf] [Q1.c live/2020/Q1.c] [Answer Q2-6 live/2020/exam-solution-2020-1.html] |
+| Thu 16/12     | 13-15          | Preparing for the exam            | [Training exam exams/exam-plt-2020-1.pdf] |
+% [Answer Q1 live/2020/Exam.cf] [Q1.c live/2020/Q1.c] [Answer Q2-6 live/2020/exam-solution-2020-1.html] |
 || 2022 ||||
 | //Mon 10/01// | //23//         | //Lab 4 deadline//                |  |
 | //Thu 13/01// | //8.30-12.30// | //Exam//             |  |
