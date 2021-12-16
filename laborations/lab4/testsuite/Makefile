@@ -3,19 +3,29 @@
 # Files which contribute to the generated .html
 deps=../../../style.css ../../../include.html ../../../enhance_page.js
 
+goodhs=$(wildcard good/*.hs)
+goodgolden=$(patsubst %.hs,%.golden,$(goodhs))
+
 .PHONY : all suite www test
 
-all : suite www
+all : good-haskell suite www
 
 suite : lab4-testsuite.tar.gz
 
-lab4-testsuite.tar.gz : build-tarball.sh bad/*.hs good/*.hs progs-test-lab4.hs progs-test-lab4.hs
+lab4-testsuite.tar.gz : build-tarball.sh bad/*.hs $(goodhs) progs-test-lab4.hs
 	./build-tarball.sh
 
 www : index.html
 
 %.html : %.txt $(deps)
 	txt2tags --style=../../../style.css -t html $<
+
+# Test good tests for valid Haskell by running them.
+
+good-haskell: $(goodgolden)
+
+%.golden : %.hs
+	runghc $< | tee $@
 
 # Test compilation of the test-suite runner under various GHC versions.
 # Needs at least 7.10.3 because of System.Directory.listDirectory.
@@ -36,6 +46,6 @@ test-% : progs-test-lab4.hs
 	touch $@
 
 clean :
-	rm -f index.html
+	rm -f index.html $(goodgolden)
 
 # EOF
