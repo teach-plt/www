@@ -223,8 +223,10 @@ goodTests =
   , ("good/012.hs",    "-v", "0"         )
   , ("good/013.hs",    "-v", "1"         )
   , ("good/014.hs",    "-n", "33"        )
-  , ("good/015.hs",    "-v", "1"         )
-  , ("good/015.hs",    "-n", "1"         )
+  -- The following test doesn't even type-check in Haskell,
+  -- so I removed it.  (Andreas A., 2021-12-16)
+  -- , ("good/015.hs",    "-v", "1"         )
+  -- , ("good/015.hs",    "-n", "1"         )
   , ("good/ski.hs",    "-n", "16"        )
   , ("good/016.hs",    "-v", "18"        )
   , ("good/016.hs",    "-n", "18"        )
