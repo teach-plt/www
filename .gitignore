@@ -107,3 +107,4 @@ cabal.project.local~
 .HTF/
 .ghc.environment.*
 
+/laborations/lab4/testsuite/good/*.golden
