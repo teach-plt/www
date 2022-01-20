@@ -82,9 +82,19 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 
 % % %   Please submit outstanding lab solutions by Friday!
 
-%   : //2021-01-13//
-%     The exam got 97 submissions.
-%     [Exam text exams/exam-plt-2021-1.pdf] and [solution exams/solutions-plt-2021-1.pdf].
+  : //2022-01-19//
+    Remember the final lab deadline on Friday 28th of January 2022.
+    The last supervision sessions (Zoom only) are offered Tuesday 25th and Wednesday 26th 15.15-17.00.
+
+  : //2022-01-19//
+    The exam got 90 submissions, with many excellent ones!
+    [Exam text exams/exam-plt-2022-1.pdf] and [solution exams/solutions-plt-2022-1.pdf].
+
+    Exam review will be held Monday 24 January 2022 13:30-15:00 in EDIT 6128.
+    If you are not able to show up in person, please email the course responsible
+    with subject "PLT 2022 exam review".
+    If this is during the exam review time, please also supply a zoom link, so that a remote
+    review can be facilitated on the spot.
 
 %   : //2021-01-08//
 %     The exam will be held 11 January on Canvas organized as
@@ -221,7 +231,7 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 % - mostly a copy of the 2018 material.  Updates forthcoming soon.
 
 
-=Tentative Schedule=
+=Schedule=
 
 % Lectures take place on Zoom, link see [Canvas https://chalmers.instructure.com/courses/16183].
 
@@ -287,10 +297,9 @@ Slides follow closely the plt book.
 | Thu 16/12     | 13-15          | Preparing for the exam            | [Training exam exams/exam-plt-2020-1.pdf] [Solution exams/solutions-plt-2020-1.pdf] [Answer Q1 live/2021/exam/CMM.cf] [Q1.c live/2021/exam/Q1.c] [Answer Q3-6 live/2021/exam/Answers.md] |
 || 2022 ||||
 | //Mon 10/01// | //23//         | //Lab 4 deadline//                |  |
-| //Thu 13/01// | //8.30-12.30// | //Exam//             |  |
-%[Exam exams/exam-plt-2019-1.pdf] |
+| //Thu 13/01// | //8.30-12.30// | //Exam//             | [Exam exams/exam-plt-2022-1.pdf] |
+| //Mon 24/01// | //13.30-15.00//      | //Exam review (EDIT 6128)// | [Solution exams/solutions-plt-2022-1.pdf] |
 | //Fri 28/01// | //23//         | //Final lab deadline//            | //all lab returns//
-%| //Wed 26/01// | //10-11.30//      | //Exam review (EDIT 5128)// | [Solution exams/solutions-plt-2020-1.pdf] |
 %| //Fri 28/01// | //10-11// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
 %| //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
 %| //Sun 25/03// |                | //Late final lab deadline//       |  |
