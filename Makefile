@@ -7,8 +7,9 @@ deps=style.css include.html enhance_page.js Makefile
 
 all : exams mini lab1 lab2 lab3 lab4 ipl-book notes www # www last for linkchecker
 
-ship : all
-	ssh abela@remote12.chalmers.se up-plt.sh
+ship :
+	ssh abela@remote12.chalmers.se -t 'bash -l -c up-plt.sh'
+#/chalmers/users/abela/bin/up-plt.sh
 
 # ship : index.html
 # #	scp $< frelindb@remote12.chalmers.se:/chalmers/groups/edu2009/www/www.cse.chalmers.se/year/2015/course/DAT151-lp2/
