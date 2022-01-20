@@ -3,13 +3,16 @@
 # Files which contribute to index.html
 deps=style.css include.html enhance_page.js Makefile
 
-.PHONY : ship all www mini ipl-book lab% notes
+.PHONY : all ship lab% mini ipl-book notes www
 
-all : exams.tgz mini lab1 lab2 lab3 lab4 ipl-book notes www # www last for linkchecker
+all : exams mini lab1 lab2 lab3 lab4 ipl-book notes www # www last for linkchecker
 
-ship : index.html
-#	scp $< frelindb@remote12.chalmers.se:/chalmers/groups/edu2009/www/www.cse.chalmers.se/year/2015/course/DAT151-lp2/
-	scp $< abela@remote12.chalmers.se:/chalmers/groups/edu2009/www/www.cse.chalmers.se/year/2019/course/DAT151/
+ship : all
+	ssh abela@remote12.chalmers.se up-plt.sh
+
+# ship : index.html
+# #	scp $< frelindb@remote12.chalmers.se:/chalmers/groups/edu2009/www/www.cse.chalmers.se/year/2015/course/DAT151-lp2/
+# 	scp $< abela@remote12.chalmers.se:/chalmers/groups/edu2009/www/www.cse.chalmers.se/year/2019/course/DAT151/
 
 lab% :
 	make -C laborations/$@
@@ -36,6 +39,12 @@ check : all
 index.html : %.html : %.txt $(deps)
 	txt2tags --style=style.css -t html $<
 # --toc
+
+## Exams
+
+.PHONY: exams
+exams : exams.tgz
+	make -C exams
 
 exams.tgz : exams/*.pdf exams/*.txt exams/*.html exams/*.jpg
 	tar czf $@ $^
