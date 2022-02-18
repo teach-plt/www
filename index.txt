@@ -301,8 +301,8 @@ Slides follow closely the plt book.
 | //Mon 24/01// | //13.30-15.00//      | //Exam review (EDIT 6128)// | [Solution exams/solutions-plt-2022-1.pdf] |
 | //Fri 28/01// | //23//         | //Final lab deadline//            | //all lab returns//
 %| //Fri 28/01// | //10-11// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
-%| //Thu 15/03// |                | //Lab resubmission intent deadline//       |  |
-%| //Sun 25/03// |                | //Late final lab deadline//       |  |
+| //Fri 25/03// |                | //Lab resubmission intent deadline//       |  |
+| //Mon 04/04// |                | //Late final lab deadline//       |  |
 | //Tue 12/04// | //8.30-12.30// | //First reexam// |  |
 % ([Canvas https://chalmers.instructure.com/courses/14779])// |  |
 % //Exam (Canvas)//                      |  |
@@ -392,6 +392,14 @@ You are also welcome to answer questions by others.
 =Laboration times and supervision=
 
 Lab supervision workflow: Start a Zoom meeting and invite your group partner to join. To ask for help, sign up on the [Waglys digital waiting list https://www.waglys.com/bonlYD] with your 10-digit Zoom ID (as "6435657890" from "https://chalmers.zoom.us/j/6435657890"), so that the TAs know where to find you. Please make sure your meeting does **not** require password to get in. A TA will join your Zoom meeting as soon as it's your turn.
+
+% Waglys sucks!
+% - No alerts when new requests come in.
+% - No feedback when one forgets to unlock the queue.
+% - No communication possibilities when the students make a mistake, e.g. a password protected zoom session.
+%
+% In the future, just a zoom session where students are taken to breakout rooms seems more robust.
+% Students can draw a "nummerlap" by putting their supervision request on the chat.
 
 Lab supervision is also available in room [ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093] on Tue, Thu and Fri.
 || Day | Time        | Location     | Supervisors       |
