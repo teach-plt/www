@@ -65,8 +65,8 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 % %    If you registered to the exam, you should have gotten an invitation
 % %    to this course.  Please read the instructions there.
 
-% % % : //2019-03-14//
-% % %   Fire % is open for the late submission of labs.
+ : //2022-03-01//
+   Fire is open for the late submission of labs.  Deadline: **2022-04-04**.
 
 % %  : //2020-01-25//
 % %    The deadline for all labs has been extended to 10th February.
