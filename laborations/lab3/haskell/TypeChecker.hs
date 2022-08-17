@@ -1,7 +1,4 @@
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE LambdaCase       #-}
-{-# LANGUAGE PatternSynonyms  #-}
-{-# LANGUAGE TupleSections    #-}
+{-# OPTIONS_GHC -Wno-unused-imports #-} -- Turn off unused import warning off in stub
 
 -- | Type checker for C--, producing typed syntax from ASTs.
 

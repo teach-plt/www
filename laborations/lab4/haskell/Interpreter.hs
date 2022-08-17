@@ -1,8 +1,9 @@
+{-# OPTIONS_GHC -Wno-unused-imports #-} -- Turn off unused import warning off in stub
+{-# OPTIONS_GHC -Wno-unused-matches #-} -- Turn off unused binding warning off in stub
+
 -- | Interpreter for lambda-calculus with if, +, -, <.
 --
 --   Strategy can be either call-by-value or call-by-name.
-
-{-# LANGUAGE LambdaCase #-}
 
 module Interpreter (interpret, Strategy(..)) where
 

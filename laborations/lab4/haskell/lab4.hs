@@ -1,4 +1,7 @@
-{-# LANGUAGE PatternSynonyms #-}
+{-# OPTIONS_GHC -Wno-name-shadowing #-}
+{-# OPTIONS_GHC -Wno-unused-imports #-} -- Turn off unused import warning off in stub
+
+-- | lab4: Interpreter for Fun language (extended lambda calculus).
 
 import Control.Monad        (forM_, when)
 import Control.Monad.State  (StateT, execStateT, gets, modify, liftIO)

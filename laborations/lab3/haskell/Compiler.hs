@@ -1,8 +1,4 @@
--- Optional: turn on warnings.
--- {-# OPTIONS_GHC -Wall #-}
-
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
+{-# OPTIONS_GHC -Wno-unused-imports #-} -- Turn off unused import warning off in stub
 
 -- | Compiler for C--, producing symbolic JVM assembler.
 

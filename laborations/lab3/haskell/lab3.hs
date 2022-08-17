@@ -1,5 +1,3 @@
-{-# LANGUAGE PatternSynonyms #-}
-
 -- | lab3: Compiler from C-- to JAVA .class file.
 
 import System.Environment (getArgs, getExecutablePath)
@@ -8,7 +6,6 @@ import System.FilePath    (dropExtension, replaceExtension, splitFileName, takeD
 import System.Process     (callProcess)
 
 import CMM.Par                  (pProgram, myLexer)
-import CMM.ErrM                 (Err, pattern Bad, pattern Ok)
 import qualified CMM.Abs   as A (Program)
 import qualified Annotated as T (Program)
 import qualified Compiler  as C (compile)
@@ -30,11 +27,11 @@ main = do
 parse :: String -> IO A.Program
 parse s =
   case pProgram (myLexer s) of
-    Bad err  -> do
+    Left err  -> do
       putStrLn "SYNTAX ERROR"
       putStrLn err
       exitFailure
-    Ok  tree -> return tree
+    Right tree -> return tree
 
 -- | Type check and return a type-annotated program.
 

@@ -1,0 +1,29 @@
+cabal-version:        2.4
+name:                 lab2
+version:              0.0
+
+executable lab2
+  main-is:            lab2.hs
+  hs-source-dirs:     .
+  other-modules:
+    Interpreter
+    TypeChecker
+    CMM.Abs
+    CMM.Lex
+    CMM.Par
+    CMM.Print
+
+  default-language:   Haskell2010
+  default-extensions:
+    LambdaCase
+    TupleSections
+
+  build-depends:
+      base       >= 4.9.1 && < 5
+    , array      >= 0.5.1 && < 0.6
+    , containers >= 0.5.7 && < 0.7
+    , mtl        >= 2.2.2 && < 2.3
+
+  ghc-options:
+    -Wall
+    -Wcompat

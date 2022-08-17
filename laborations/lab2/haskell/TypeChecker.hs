@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wno-unused-imports #-} -- Turn off unused import warning off in stub
+
 module TypeChecker where
 
 import Control.Monad

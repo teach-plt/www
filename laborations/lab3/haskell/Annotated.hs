@@ -1,5 +1,3 @@
-{-# LANGUAGE LambdaCase #-}
-
 -- | Typed syntax for C--.
 
 module Annotated where

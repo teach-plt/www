@@ -1,7 +1,6 @@
 # Test compilation of the stub under various GHC versions.
 
 test-goals = \
-  test-7.10.3 \
   test-8.0.2  \
   test-8.2.2  \
   test-8.4.4  \
@@ -13,7 +12,11 @@ test-goals = \
   test-9.4.1  \
 # end test
 
-test : $(test-goals)
+test : test-cabal $(test-goals)
+
+.PHONY: test-cabal
+test-cabal:
+	cabal build
 
 clean-tests :
 	@find . -name "test-*" -empty -delete
