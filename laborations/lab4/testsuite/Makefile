@@ -12,7 +12,7 @@ all : good-haskell suite www
 
 suite : lab4-testsuite.tar.gz
 
-lab4-testsuite.tar.gz : build-tarball.sh bad/*.hs $(goodhs) plt-test-lab4.hs
+lab4-testsuite.tar.gz : build-tarball.sh plt-test-lab4.cabal plt-test-lab4.hs bad/*.hs $(goodhs)
 	./build-tarball.sh
 
 www : index.html
@@ -30,20 +30,11 @@ good-haskell: $(goodgolden)
 # Test compilation of the test-suite runner under various GHC versions.
 # Needs at least 7.10.3 because of System.Directory.listDirectory.
 
-test : \
-  test-7.10.3 \
-  test-8.0.2  \
-  test-8.2.2  \
-  test-8.4.4  \
-  test-8.6.5  \
-  test-8.8.4  \
-  test-8.10.7 \
-  test-9.0.1  \
-# end test
+include ../../mk/test.mk
 
 test-% : plt-test-lab4.hs
 	ghc-$* -fno-code $<
-	touch $@
+	@touch $@
 
 clean :
 	rm -f index.html $(goodgolden)

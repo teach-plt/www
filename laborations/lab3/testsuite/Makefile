@@ -9,7 +9,7 @@ all : suite www
 
 suite : lab3-testsuite.tar.gz
 
-lab3-testsuite.tar.gz : build-tarball.sh plt-test-lab3.hs Makefile-test Runtime.java \
+lab3-testsuite.tar.gz : build-tarball.sh plt-test-lab3.cabal plt-test-lab3.hs Makefile-test Runtime.java \
                         good/**/*.cc good/**/*.cc.*put dir-for-path-test/one-more-dir/simple.cc
 	./build-tarball.sh
 
@@ -21,20 +21,11 @@ www : index.html
 # Test compilation of the test-suite runner under various GHC versions.
 # Needs at least 7.10.3 because of System.Directory.listDirectory.
 
-test : \
-  test-7.10.3 \
-  test-8.0.2  \
-  test-8.2.2  \
-  test-8.4.4  \
-  test-8.6.5  \
-  test-8.8.4  \
-  test-8.10.7 \
-  test-9.0.1  \
-# end test
+include ../../mk/test.mk
 
 test-% : plt-test-lab3.hs
 	ghc-$* -fno-code $<
-	touch $@
+	@touch $@
 
 clean :
 	rm -f index.html

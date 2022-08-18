@@ -9,6 +9,7 @@ mkdir "$NAME/bad"
 mkdir "$NAME/bad-runtime"
 
 cp -p plt-test-lab2.hs "$NAME"
+cp -p plt-test-lab2.cabal "$NAME"
 cp -p prelude.cc "$NAME"
 cp Makefile-test "$NAME/Makefile"
 

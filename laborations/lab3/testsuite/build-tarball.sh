@@ -8,6 +8,7 @@ mkdir "$NAME/good/subtyping"
 mkdir -p "$NAME/dir-for-path-test/one-more-dir"
 
 cp -p plt-test-lab3.hs "$NAME"
+cp -p plt-test-lab3.cabal "$NAME"
 cp -p prelude.cc         "$NAME"
 cp -p jasmin.jar         "$NAME"
 cp -p Runtime.java       "$NAME"
