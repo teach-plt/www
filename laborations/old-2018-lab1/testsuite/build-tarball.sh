@@ -6,7 +6,7 @@ mkdir "$NAME"
 mkdir "$NAME/good"
 mkdir "$NAME/bad"
 
-cp progs-test-lab1.hs "$NAME"
+cp plt-test-lab1.hs "$NAME"
 cp Makefile-test "$NAME/Makefile"
 cp -p good/*.cc "$NAME/good/"
 cp -p bad/*.cc "$NAME/bad/"

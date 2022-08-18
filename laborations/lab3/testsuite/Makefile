@@ -9,7 +9,7 @@ all : suite www
 
 suite : lab3-testsuite.tar.gz
 
-lab3-testsuite.tar.gz : build-tarball.sh progs-test-lab3.hs Makefile-test Runtime.java \
+lab3-testsuite.tar.gz : build-tarball.sh plt-test-lab3.hs Makefile-test Runtime.java \
                         good/**/*.cc good/**/*.cc.*put dir-for-path-test/one-more-dir/simple.cc
 	./build-tarball.sh
 
@@ -32,7 +32,7 @@ test : \
   test-9.0.1  \
 # end test
 
-test-% : progs-test-lab3.hs
+test-% : plt-test-lab3.hs
 	ghc-$* -fno-code $<
 	touch $@
 

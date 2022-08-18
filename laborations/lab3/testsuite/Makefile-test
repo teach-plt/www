@@ -2,9 +2,9 @@
 
 HC_OPTS = -threaded
 
-all : progs-test-lab3 Runtime.class
+all : plt-test-lab3 Runtime.class
 
-progs-test-lab3 : progs-test-lab3.hs
+plt-test-lab3 : plt-test-lab3.hs
 	ghc --make $(HC_OPTS) $< -o $@
 
 Runtime.class : Runtime.java

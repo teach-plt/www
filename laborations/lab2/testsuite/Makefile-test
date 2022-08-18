@@ -2,12 +2,12 @@
 
 HC_OPTS = -threaded
 
-all : progs-test-lab2
+all : plt-test-lab2
 
-progs-test-lab2 : progs-test-lab2.hs
+plt-test-lab2 : plt-test-lab2.hs
 	ghc --make $(HC_OPTS) $< -o $@
 
 clean :
-	rm -f progs-test-lab2
+	rm -f plt-test-lab2
 
 # EOF

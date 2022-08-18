@@ -9,7 +9,7 @@ all : suite www
 
 suite : lab2-testsuite.tar.gz
 
-lab2-testsuite.tar.gz : build-tarball.sh progs-test-lab2.hs Makefile-test bad/*.cc bad-runtime/*.cc good/**/*.cc good/**/*.cc.*put
+lab2-testsuite.tar.gz : build-tarball.sh plt-test-lab2.hs Makefile-test bad/*.cc bad-runtime/*.cc good/**/*.cc good/**/*.cc.*put
 	./build-tarball.sh
 
 www : index.html
@@ -31,7 +31,7 @@ test : \
   test-9.0.1  \
 # end test
 
-test-% : progs-test-lab2.hs
+test-% : plt-test-lab2.hs
 	ghc-$* -fno-code $<
 	touch $@
 

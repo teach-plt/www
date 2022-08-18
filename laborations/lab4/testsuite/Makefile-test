@@ -1,7 +1,7 @@
 .PHONY : all
 
 HC_OPTS =
-PROG    = progs-test-lab4
+PROG    = plt-test-lab4
 
 all : $(PROG)
 

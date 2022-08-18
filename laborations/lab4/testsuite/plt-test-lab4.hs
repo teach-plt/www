@@ -315,7 +315,7 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
 
 usage :: IO a
 usage = do
-  hPutStrLn stderr "Usage: progs-test-lab4 [--no-make] [-g|--good FILE,MODE,RESULT]... [-b|--bad FILE]..."
+  hPutStrLn stderr "Usage: plt-test-lab4 [--no-make] [-g|--good FILE,MODE,RESULT]... [-b|--bad FILE]..."
   hPutStrLn stderr "           path_to_solution" -- "The path to the directory where your solution is located"
   exitFailure
 

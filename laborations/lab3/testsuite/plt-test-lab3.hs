@@ -103,7 +103,7 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
 
 usage :: IO ()
 usage = do
-  hPutStrLn stderr "Usage: progs-test-lab3 [--debug] [--no-doubles] [--no-make] [-t|--test FILE]..."
+  hPutStrLn stderr "Usage: plt-test-lab3 [--debug] [--no-doubles] [--no-make] [-t|--test FILE]..."
   hPutStrLn stderr "           compiler_code_directory"
   exitFailure
 

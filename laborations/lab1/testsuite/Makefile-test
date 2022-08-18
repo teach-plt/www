@@ -2,7 +2,7 @@
 
 HC_OPTS = -threaded
 
-all : progs-test-lab1
+all : plt-test-lab1
 
-progs-test-lab1 : progs-test-lab1.hs
+plt-test-lab1 : plt-test-lab1.hs
 	ghc --make $(HC_OPTS) -cpp -DHC_OPTS="\"$(HC_OPTS)\"" $< -o $@

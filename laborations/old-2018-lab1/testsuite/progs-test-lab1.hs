@@ -153,7 +153,7 @@ parseArgs argv = case getOpt RequireOrder optDescr argv of
     testSuite' <- bothM (concatMapM expandPath) testSuite
     return (cfFile,testSuite')
   (_,_,_) -> do
-    hPutStrLn stderr "Usage: progs-test-lab1 [--debug] [-g|--good FILE]... [-b|--bad FILE]... cf_file"
+    hPutStrLn stderr "Usage: plt-test-lab1 [--debug] [-g|--good FILE]... [-b|--bad FILE]... cf_file"
     exitFailure
 
 mainOpts :: FilePath -> TestSuite -> IO ()

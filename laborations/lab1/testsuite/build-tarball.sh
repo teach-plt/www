@@ -7,7 +7,7 @@ mkdir "$DIR/good"
 mkdir "$DIR/good-CMM"
 mkdir "$DIR/bad"
 
-cp progs-test-lab1.hs "$DIR"
+cp plt-test-lab1.hs "$DIR"
 cp Makefile-test "$DIR/Makefile"
 cp -p good/*.cc "$DIR/good/"
 cp -p good-CMM/*.cc "$DIR/good-CMM/"

@@ -34,7 +34,7 @@ $ cd lab1-testsuite
 + Compile the test program with ``make``, or alternatively:
 
 ```
-$ ghc -threaded --make -o progs-test-lab1 progs-test-lab1.hs
+$ ghc -threaded --make -o plt-test-lab1 plt-test-lab1.hs
 ```
 
 
@@ -48,9 +48,9 @@ This is what you need to do to test your grammar.
 $ cd lab1-testsuite
 ```
 
-+ Run the ``progs-test-lab1`` with the path to your ``.cf`` file:
++ Run the ``plt-test-lab1`` with the path to your ``.cf`` file:
 ```
-$ ./progs-test-lab1 path/to/your/file.cf
+$ ./plt-test-lab1 path/to/your/file.cf
 ```
 
 where ``path/to/your/file.cf`` is the location of your

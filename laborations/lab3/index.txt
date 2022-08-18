@@ -412,7 +412,7 @@ these tests is **required** for passing this lab.
 Download the entire [test suite folder ./testsuite/index.html] or the [tarball ./testsuite/lab3-testsuite.tar.gz] and compile it using ``make``.
 The test script can then be run as follows:
 ```
-  ./progs-test-lab3 ../path/to/solution/
+  ./plt-test-lab3 ../path/to/solution/
 ```
 
 ==Jasmin tips==[jasmin-tips]

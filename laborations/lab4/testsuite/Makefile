@@ -12,7 +12,7 @@ all : good-haskell suite www
 
 suite : lab4-testsuite.tar.gz
 
-lab4-testsuite.tar.gz : build-tarball.sh bad/*.hs $(goodhs) progs-test-lab4.hs
+lab4-testsuite.tar.gz : build-tarball.sh bad/*.hs $(goodhs) plt-test-lab4.hs
 	./build-tarball.sh
 
 www : index.html
@@ -41,7 +41,7 @@ test : \
   test-9.0.1  \
 # end test
 
-test-% : progs-test-lab4.hs
+test-% : plt-test-lab4.hs
 	ghc-$* -fno-code $<
 	touch $@
 
