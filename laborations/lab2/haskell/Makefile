@@ -4,7 +4,7 @@
 ###########################################################################
 
 # Files of solution.  Add more files as needed.  'lab2.hs'  has to be first!
-files=lab2.hs CMM.cf Makefile TypeChecker.hs Interpreter.hs
+files=lab2.hs lab2.cabal CMM.cf Makefile TypeChecker.hs Interpreter.hs
 
 ###########################################################################
 

@@ -4,7 +4,7 @@
 ###########################################################################
 
 # Files of solution.  Add/remove files as needed.  'lab3.hs'  has to be first!
-files=lab3.hs jasmin.jar Runtime.java Makefile CMM.cf \
+files=lab3.hs lab3.cabal jasmin.jar Runtime.java Makefile CMM.cf \
   Annotated.hs TypeChecker.hs Compiler.hs
 
 ###########################################################################

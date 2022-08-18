@@ -4,7 +4,7 @@
 ###########################################################################
 
 # Files of solution.  Add more files as needed.  'lab4.hs'  has to be first!
-files=lab4.hs Fun.cf Makefile Interpreter.hs
+files=lab4.hs lab4.cabal Fun.cf Makefile Interpreter.hs
 
 ###########################################################################
 
