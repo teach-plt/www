@@ -1,3 +1,5 @@
+{-# LANGUAGE LambdaCase #-}
+
 -- | lab2: Interpreter and type checker for C--.
 
 import Control.Exception
