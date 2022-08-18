@@ -1,0 +1,26 @@
+cabal-version:             2.4
+name:                      plt-run-java-lab
+version:                   0.0
+license:                   Unlicense
+
+synopsis:
+  Runner for PLT lab solutions written in Java
+description:
+  Runner Programming Language Technology (Chalmers DAT151 / GU DIT231) lab solutions written in Java.
+
+executable plt-run-java-lab
+  main-is:                 JavaLabRunner.hs
+  hs-source-dirs:          .
+
+  default-language:   Haskell2010
+
+  build-depends:
+      base       >= 4.9.1 && < 5
+    -- , directory  >= 1.3.0 && < 1.4
+    , filepath   >= 1.4.1 && < 1.5
+    , process    >= 1.4.3 && < 1.7
+
+  ghc-options:
+    -Wall
+    -Wcompat
+

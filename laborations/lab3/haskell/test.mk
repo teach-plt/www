@@ -2,6 +2,8 @@
 
 include ../../mk/test.mk
 
+test : test-build
+
 test-% : lab3.hs TypeChecker.hs Compiler.hs CMM/Lex.hs CMM/Par.hs
 	@-rm CMM/*.hi CMM/*.o *.hi *.o 2> /dev/null
 	ghc-$* -fno-code $<

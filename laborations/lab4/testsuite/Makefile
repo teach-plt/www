@@ -32,6 +32,8 @@ good-haskell: $(goodgolden)
 
 include ../../mk/test.mk
 
+test : test-build
+
 test-% : plt-test-lab4.hs
 	ghc-$* -fno-code $<
 	@touch $@

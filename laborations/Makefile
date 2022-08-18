@@ -13,18 +13,10 @@ www% :
 
 ## Test
 
-.PHONY : test test%
+include mk/test.mk
 
-test : test1 test2 test3 test4 \
-  test-7.10.3 \
-  test-8.0.2  \
-  test-8.2.2  \
-  test-8.4.4  \
-  test-8.6.5  \
-  test-8.8.4  \
-  test-8.10.7 \
-  test-9.0.1  \
-# end test
+.PHONY : test test%
+test : test-build test1 test2 test3 test4
 
 # Test compilation of JavaLabRunner
 test-% : JavaLabRunner.hs

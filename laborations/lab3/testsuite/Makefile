@@ -23,6 +23,8 @@ www : index.html
 
 include ../../mk/test.mk
 
+test : test-build
+
 test-% : plt-test-lab3.hs
 	ghc-$* -fno-code $<
 	@touch $@

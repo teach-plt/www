@@ -12,7 +12,8 @@ test-goals = \
   test-9.4.1  \
 # end test
 
-test : test-cabal $(test-goals)
+.PHONY: test-build
+test-build : test-cabal $(test-goals)
 
 .PHONY: test-cabal
 test-cabal:
