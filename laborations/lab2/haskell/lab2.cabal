@@ -2,6 +2,10 @@ cabal-version:        2.4
 name:                 lab2
 version:              0.0
 
+extra-source-files:
+  CMM.cf
+  Makefile
+
 executable lab2
   main-is:            lab2.hs
   hs-source-dirs:     .

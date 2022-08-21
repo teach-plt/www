@@ -2,6 +2,12 @@ cabal-version:        2.4
 name:                 lab3
 version:              0.0
 
+extra-source-files:
+  CMM.cf
+  Makefile
+  Runtime.java
+  jasmin.jar
+
 executable lab3
   main-is:            lab3.hs
   hs-source-dirs:     .

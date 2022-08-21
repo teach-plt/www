@@ -2,6 +2,10 @@ cabal-version:        2.4
 name:                 lab4
 version:              0.0
 
+extra-source-files:
+  Fun.cf
+  Makefile
+
 executable lab4
   main-is:            lab4.hs
   hs-source-dirs:     .
