@@ -12,6 +12,10 @@ extra-source-files:
   bad/*.cc
   good/*.cc
   good-CMM/*.cc
+  run-test-ghc.sh
+  run-test-cabal.sh
+  run-test-stack.sh
+  stack.yaml
 
 executable plt-test-lab1
   main-is:                 plt-test-lab1.hs
@@ -28,4 +32,3 @@ executable plt-test-lab1
   ghc-options:
     -Wall
     -Wcompat
-

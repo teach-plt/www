@@ -1,0 +1,13 @@
+*~
+*.lock
+.stack-work
+dist-newstyle
+lab1-test-dir#/
+
+progs-test-lab1
+*.hi
+*.o
+lab1-test-dir/
+good/fractal.pgm
+good/fractal.ppm
+good/mandelbrot.exe
