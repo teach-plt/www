@@ -21,6 +21,8 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 /
 [Schedule https://cloud.timeedit.net/chalmers/web/public/ri1Y73yQZ05ZZ3Q7X96v9Q015Q0Yx30YfgQ6.html]
 /
+[Slack https://plt-iyn7311.slack.com/]
+/
 [Chalmers studieportal https://www.student.chalmers.se/sp/course?course_id=33079]
 % https://www.student.chalmers.se/sp/course?course_id=32788]
 % 31181]
@@ -416,7 +418,7 @@ You are also welcome to answer questions by others.
 % In the future, just a zoom session where students are taken to breakout rooms seems more robust.
 % Students can draw a "nummerlap" by putting their supervision request on the chat.
 
-Lab supervision is also available in room [ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093] on Tue, Thu and Fri.
+Lab supervision is available in room [ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093] and online on Tue, Thu and Fri.
 || Day | Time        | Location     | Supervisors       |
  | Tue | 15:15-17:00 | Zoom, ED3354 | Andreas, Prabhat |
 % | Wed | 15:15-17:00 | Zoom only    | Shreyash, Oskar   |
@@ -431,11 +433,28 @@ except for Fri 04 Nov which is a half-day.
 %Extra supervision sessions (Zoom) are planned for January 2023, 15:15-17:00, at the following days:
 %Tue 17th, Wed 18th, Jan 24th, Jan 25th.
 
-**Attendance in these classes is optional**.
-Normally, each student should attend **at most one** supervised laboration time each week.
-Since attendance is not compulsory, there may be room for more
-times. But, if there is lack of room, those who attend their first
-supervision of the week have priority to get a place and supervisor help.
+% **Attendance in these classes is optional**.
+% Normally, each student should attend **at most one** supervised laboration time each week.
+% Since attendance is not compulsory, there may be room for more
+% times. But, if there is lack of room, those who attend their first
+% supervision of the week have priority to get a place and supervisor help.
+
+We use [Slack https://plt-iyn7311.slack.com/] to organize the lab supervision.
+Please [join https://join.slack.com/t/plt-iyn7311/shared_invite/zt-1i08mnlyb-quW_CK31LOAn9b4Y8befHA]
+our Slack workspace.
+
+The TAs will be present in lab rooms during lab supervision slots, available for help both in-person and virtually. To ask for help,  just send a ticket request through the ``#queue`` Slack channel.
+- For in-person attendance, writing your names is sufficient.
+- For online help, start a Zoom meeting and invite your group partner to join.
+  Please then sign up by providing a clickable URL to your Zoom meeting (e.g., ``https://chalmers.zoom.us/j/6435657890/pwd=OXlBcGxMZjkzNGsyplpYZENYWlVodi09``), so that the TA knows where to find you.
+- Monitor the queue, the TA will join you/your Zoom meeting as soon as it’s your turn.
+
+
+You are expected to find a lab partner, with whom you will do the labs.
+If you have difficulties finding a partner, please use Slack channel ``#lab-partner``.
+
+
+
 
 
 =Laborations=
