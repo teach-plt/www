@@ -419,10 +419,10 @@ You are also welcome to answer questions by others.
 
 Lab supervision is available in room [ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093] and online on Tue, Thu and Fri.
 || Day | Time        | Location     | Supervisors       |
- | Tue | 15:15-17:00 | Zoom, ED3354 | Andreas, Prabhat |
+ | Tue | 15:15-17:00 | Zoom, ED3354 | Andreas, Eric, Prabhat |
 % | Wed | 15:15-17:00 | Zoom only    | Shreyash, Oskar   |
- | Thu | 15:15-17:00 | Zoom, ED3354 | Mohammad, Robert   |
- | Fri | 13:15-15:00 | Zoom, ED3354 | Prabhat, Robert       |
+ | Thu | 15:15-17:00 | Zoom, ED3354 | Eric, Mohammad, Robert   |
+ | Fri | 13:15-15:00 | Zoom, ED3354 | Mohammad, Prabhat, Robert       |
 
 
 The lab rooms and supervision are
