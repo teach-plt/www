@@ -259,7 +259,7 @@ Slides follow closely the plt book.
 %, live coding [start live/2019/live-1-mini-start.zip] [lecture live/2019/live-1-as-far-as-we-got.zip] [finish live/2019/live-1-mini-finish.zip]
 %, [live coding live/2018/lec1-happy-live-2018.zip]
 | Thu 03/11     | 13-15 **[SB-H5 https://maps.chalmers.se/#f85ee0cd-e87b-403f-acf9-bd30f6b3339d]**  | Grammars / BNFC / Hands-on with Lab 1    | [slides plt-book/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3, [git notes/git-primer.md], live coding [start live/2022/live-2-bnfc-start.zip] |
-| Tue 08/11     | 13-15          | Formal languages and parsing                  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4, [LL parser code live/2021/LL-parsing.zip] [LR-table notes/LR-table.html] |
+| Tue 08/11     | 13-15          | Formal languages and parsing                  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4, [shift-reduce parsing notes/sr-states.md] [LR-table notes/LR-table.html] [LL parser code live/2021/LL-parsing.zip] |
 %[LR parse table live/2019/LR-parsetable.txt] for [grammar live/2019/LR.cf] |
 %| Thu 10/11     | 10-16       | [DATE-IT 2017 fair https://www.date-it.se/] | No class! |
 | Thu 10/11     | 13-15          | Theory of lexing //(lecture: Prabhat)//    | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
