@@ -1,14 +1,14 @@
 .PHONY: all
 all: index.html
 
-files = type-checking.html interpreter.html monads.html compilation.html cbn-cbv.html typing.html
+files = type-checking.html interpreter.html monads.html compilation.html cbn-cbv.html typing.html LR-table.html
 
 index.html : $(files)
 	tree -H '.' -L 2 --noreport --charset utf-8 > $@
 # -L <depth>
 
 %.html : %.md Makefile
-	pandoc -f gfm -t html -o $@ -s $<
+	pandoc --css pandoc.css -f gfm -t html -o $@ --standalone $<
 
 # visualize-cbn
 
