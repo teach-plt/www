@@ -9,9 +9,17 @@ Introduction
 ------------
 
 Why an interpreter if we can have a compiler?
+- (In the end of a compilation chain, there is always _some_ interpreter.)
 - Defines the meaning of the language.
 - Can serve as a reference implementation.
-- (In the end of a compilation chain, there is always _some_ interpreter.)
+- Can help _boot strapping_ (self-implementating) a language.
+  1. Write interpreter `I` for new language `X` in existing language `Y`.
+  2. Write simple compiler `C` for `X` in `X`.
+  3. Run (via `I`) `C` on `I` to get a compiled interpreter `I'`.
+  4. Run (via `I'`) `C` on `C` to get a compiled compiler `C'`.
+  5. Write an optimizing compiler `O` for `X` in `X`.
+  6. Run `C'` on `O` to get an a compiled optimizing compiler `Cₒ`.
+  7. Run `Cₒ` on `Cₒ` to get an optimized optimizing compiler `Cₒ'`.
 
 An interpreter should be _compositional_!
 
@@ -120,14 +128,15 @@ order, even in parallel!
 ### Correctness properties
 
 - Type soundness (weak correctness):
-  If `e : t` and `e ⇓ v` then `v : t`.
+  > If `e : t` and `e ⇓ v` then `v : t`.
+
   "If expression `e` has type `t` and `e` evaluates to value `v` then `v` also has type `t`."
 
 - Termination (strong correctness):
-  If `e : t` then `e ⇓ v` for some `v : t`.
+  > If `e : t` then `e ⇓ v` for some `v : t`.
 
 - Allowing non-termination:
-  If `e : t` then either evaluation of `e` diverges, or `e ⇓ v` with `v : t`.
+  > If `e : t` then either evaluation of `e` diverges, or `e ⇓ v` with `v : t`.
 
 
 Effects
@@ -231,7 +240,7 @@ In Haskell, we can use the _state monad_ for the same purpose.
 
     eval (EId x) = do
       γ ← get
-      lookupVar γ x
+      return (lookupVar γ x)
 
     eval (EAssign x e) = do
       v ← eval e
@@ -274,11 +283,12 @@ We need to start with _good_ environments `γ : Γ`.
 This is defined pointwise: `γ(x) : Γ(x)` for all `x` in scope.
 
 - Type soundness (weak correctness):
-  If `Γ ⊢ e : t` and `γ : Γ` and `γ ⊢ e ⇓ ⟨v; γ'⟩` then `v : t` and `γ' : Γ`.
+  > If `Γ ⊢ e : t` and `γ : Γ` and `γ ⊢ e ⇓ ⟨v; γ'⟩` then `v : t` and `γ' : Γ`.
+
   "If expression `e` has type `t` in context `Γ` and `γ` is an environment matching `Γ` and `e` evaluates to value `v` and `γ'` then `v` also has type `t` and `γ'` also matches `Γ`."
 
 - Termination (strong correctness):
-  If `Γ ⊢ e : t` and `γ : Γ` then `γ ⊢ e ⇓ ⟨v; γ'⟩` for some `v : t` and `γ' : Γ`.
+  > If `Γ ⊢ e : t` and `γ : Γ` then `γ ⊢ e ⇓ ⟨v; γ'⟩` for some `v : t` and `γ' : Γ`.
 
 - Allowing non-termination:
   ... (Exercise)
@@ -472,16 +482,16 @@ In Java, we can use Java's exception mechanism.
 ```java
 
    eval(ECall f es):
-     vs     ← eval(es)
-     (Δ,ss) ← lookupFun(f)
-     γ      ← saveEnv()
-     setEnv(makeEnv(Δ,vs))
+     vs     ← eval(es)        // Evaluate list of arguments
+     (Δ,ss) ← lookupFun(f)    // Get parameters and body of function
+     γ      ← saveEnv()       // Save current environment
+     setEnv(makeEnv(Δ,vs))    // New environment binding the parameters
      try {
-        execStms(ss)
+        execStms(ss)          // Run function body
      } catch {
        ReturnException v:
-         setEnv(γ)
-         return v
+         setEnv(γ)            // Restore environment
+         return v             // Evaluation result is returned value
      }
 
    execStm(SReturn e):
