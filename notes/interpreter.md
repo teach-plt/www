@@ -11,7 +11,7 @@ Introduction
 Why an interpreter if we can have a compiler?
 - Defines the meaning of the language.
 - Can serve as a reference implementation.
-- (In the end, of a compilation chain, there is always _some_ interpreter.)
+- (In the end of a compilation chain, there is always _some_ interpreter.)
 
 An interpreter should be _compositional_!
 
@@ -79,10 +79,11 @@ several blocks `δ` of `γ`.
 ```c
     { double z = 3.14;       // (z=3.14)
       int    y = 1;          // (z=3.14,y=1)
-      { int z = 0;           // (z=3.14,y=1).(z=0)
-        int x = y + z;       // (z=3.14,y=1).(z=0,x=1)
-        printInt(x);         // 1
+      { int x = 0;           // (z=3.14,y=1).(x=0)
+        int z = x + y;       // (z=3.14,y=1).(x=0,z=1)
+        printInt(z);         // 1
       }
+      printDouble(z);        // 3.14
     }
 ```
 
@@ -148,7 +149,7 @@ We return the updated environment along with the value:
 >    and updates environment to `γ'`."
 
 We write `γ[x=v]` for environment `γ'` with `γ'(x) = v` and
-`γ'(y) = γ(y)` when `y ≠ x`.
+`γ'(z) = γ(z)` when `z ≠ x`.
 
 Note that we update the "topmost" `x` only --- it may appear in
 several blocks `δ` of `γ`.
@@ -304,88 +305,6 @@ mathematical function?
 Hint:
 - The input and the output both could be a stream of strings.
 - Exceptions need to propagate.  (See `return` statement below.)
-
-
-Shortcutting
-------------
-
-What is wrong with this rule?
-
-> ```
->   γ ⊢ e₁ ⇓ ⟨b₁;γ₁⟩    γ₁ ⊢ e₂ ⇓ ⟨b₂;γ₂⟩
->   ------------------------------------ b = b₁ ∧ b₂
->   γ ⊢ e₁ && e₂ ⇓ ⟨b;γ₂⟩
-> ```
-
-Here are some examples where we would like to _shortcut_ computation:
-```c
-    int b = 1;
-    if (b == 0 && the_goldbach_conjecture_holds_up_to_10E100) { ... }
-    int x = 0 * number_of_atoms_on_the_moon;
-```
-
-Short-cutting logical operators like `&&` is essentially used in C, e.g.:
-```c
-    if (p != NULL && p[0] > 10)
-```
-Without short-cutting, the program would crash in `p[0]` by accessing
-a `NULL` pointer.
-
-Rules with short-cutting:
-
-> ```
->   γ ⊢ e₁ ⇓ ⟨false; γ₁⟩
->   -------------------------
->   γ ⊢ e₁ && e₂ ⇓ ⟨false; γ₁⟩
->
->   γ ⊢ e₁ ⇓ ⟨true; γ₁⟩    γ₁ ⊢ e₂ ⇓ ⟨b; γ₂⟩
->   ----------------------------------------
->   γ ⊢ e₁ && e₂ ⇓ ⟨b; γ₂⟩
-> ```
-
-The effects of `e₂` are not executed if `e₁` already evaluated to `false`.
-
-Example:
-```c
-  while (x < 10 && f(x++)) { ... }
-```
-
-You can circumvent this by defining your own `and`:
-```c
-  bool and (bool x, bool y) { return x && y; }
-
-  while (and (x < 10, f(x++))) { ... }
-```
-
-Digression on:  call-by-name  (call-by-need)  call-by-value
-- call-by-value: evaluate function arguments, pass values to function
-- call-by-name: pass expressions to function unevaluated (substitution)
-- call-by-need: like call-by-name, only evaluate each argument when it
-  is used the first time.
-  If it is used a second time, reuse the value computed the first time.
-
-Example 1:
-```
-    double (x) = x + x
-    double (1+2)
-```
-- call-by-value: `... = double (3) = 3 + 3 = 6`
-- call-by-name:  `... = (1+2) + (1+2) = 3 + (1+2) = 3 + 3 = 6`
-- call-by-need:  `... = let x=1+2 in x + x = let x = 3 in x + x = 3 + 3 = 6`
-
-Example 2:
-```
-    zero (x) = 0
-    zero (1+2)
-```
-- call-by-value: `... = zero (3) = 0`
-- call-by-name:  `... = 0`
-- call-by-need:  `... = let x=1+2 in 0 = 0`
-
-
-Languages with effects (such as C/C++) mostly use call-by-value.
-Haskell is pure (no effects) and uses call-by-need, which refines call-by-name.
-
 
 
 Statements
@@ -600,3 +519,85 @@ Programs
 
 A program is interpreted by executing the statements of the `main`
 function in an environment with just one empty block.
+
+
+
+Shortcutting
+------------
+
+What is wrong with this rule?
+
+> ```
+>   γ ⊢ e₁ ⇓ ⟨b₁;γ₁⟩    γ₁ ⊢ e₂ ⇓ ⟨b₂;γ₂⟩
+>   ------------------------------------ b = b₁ ∧ b₂
+>   γ ⊢ e₁ && e₂ ⇓ ⟨b;γ₂⟩
+> ```
+
+Here are some examples where we would like to _shortcut_ computation:
+```c
+    int b = 1;
+    if (b == 0 && the_goldbach_conjecture_holds_up_to_10E100) { ... }
+    int x = 0 * number_of_atoms_on_the_moon;
+```
+
+Short-cutting logical operators like `&&` is essentially used in C, e.g.:
+```c
+    if (p != NULL && p[0] > 10)
+```
+Without short-cutting, the program would crash in `p[0]` by accessing
+a `NULL` pointer.
+
+Rules with short-cutting:
+
+> ```
+>   γ ⊢ e₁ ⇓ ⟨false; γ₁⟩
+>   -------------------------
+>   γ ⊢ e₁ && e₂ ⇓ ⟨false; γ₁⟩
+>
+>   γ ⊢ e₁ ⇓ ⟨true; γ₁⟩    γ₁ ⊢ e₂ ⇓ ⟨b; γ₂⟩
+>   ----------------------------------------
+>   γ ⊢ e₁ && e₂ ⇓ ⟨b; γ₂⟩
+> ```
+
+The effects of `e₂` are not executed if `e₁` already evaluated to `false`.
+
+Example:
+```c
+  while (x < 10 && f(x++)) { ... }
+```
+
+You can circumvent this by defining your own `and`:
+```c
+  bool and (bool x, bool y) { return x && y; }
+
+  while (and (x < 10, f(x++))) { ... }
+```
+
+Digression on:  call-by-name  (call-by-need)  call-by-value
+- call-by-value: evaluate function arguments, pass values to function
+- call-by-name: pass expressions to function unevaluated (substitution)
+- call-by-need: like call-by-name, only evaluate each argument when it
+  is used the first time.
+  If it is used a second time, reuse the value computed the first time.
+
+Example 1:
+```
+    double (x) = x + x
+    double (1+2)
+```
+- call-by-value: `... = double (3) = 3 + 3 = 6`
+- call-by-name:  `... = (1+2) + (1+2) = 3 + (1+2) = 3 + 3 = 6`
+- call-by-need:  `... = let x=1+2 in x + x = let x = 3 in x + x = 3 + 3 = 6`
+
+Example 2:
+```
+    zero (x) = 0
+    zero (1+2)
+```
+- call-by-value: `... = zero (3) = 0`
+- call-by-name:  `... = 0`
+- call-by-need:  `... = let x=1+2 in 0 = 0`
+
+
+Languages with effects (such as C/C++) mostly use call-by-value.
+Haskell is pure (no effects) and uses call-by-need, which refines call-by-name.
