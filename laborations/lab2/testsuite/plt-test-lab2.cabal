@@ -8,6 +8,10 @@ synopsis:
 description:
   Test suite for Programming Language Technology lab2 (Chalmers DAT151 / GU DIT231).
 
+tested-with:
+  GHC == 9.4.3 || ==9.2.5 || ==9.0.2
+   || ==8.10.7 || ==8.8.4 || ==8.6.5 || ==8.4.4 || ==8.2.2 || ==8.0.2
+
 extra-source-files:
   bad/*.cc
   bad-runtime/*.cc
@@ -26,6 +30,18 @@ executable plt-test-lab2
     , directory  >= 1.3.0 && < 1.4
     , filepath   >= 1.4.1 && < 1.5
     , process    >= 1.4.3 && < 1.7
+
+  -- These following tools are not needed to _build_ the testsuite runner,
+  -- but to _run_ it, namely to build the parser from the given LBNF file.
+  -- Putting them here means they need not be separately installed
+  -- when invoking the runner with `cabal run` or `stack run`.
+
+  build-tool-depends:
+      BNFC:bnfc   >= 2.8.1  && < 2.10
+    -- Not sure about the lower bounds, so we pick alex and happy versions
+    -- that work at least with GHC 8.0.
+    , alex:alex   >= 3.1.4  && < 3.3
+    , happy:happy >= 1.19.5 && < 1.21
 
   ghc-options:
     -Wall
