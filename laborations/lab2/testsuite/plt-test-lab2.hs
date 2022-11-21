@@ -46,15 +46,17 @@ whenJust :: Applicative m => Maybe a -> (a -> m ()) -> m ()
 whenJust (Just a) k = k a
 whenJust Nothing  _ = pure ()
 
-list :: [a] -> b -> ([a] -> b) -> b
-list [] b _ = b
-list as _ f = f as
+ifNull :: [a] -> b -> ([a] -> b) -> b
+ifNull [] b _ = b
+ifNull as _ f = f as
 
-fromList :: [a] -> [a] -> [a]
-fromList as xs = list as xs id
+-- | @replaceNull xs def@ returns @def@ if @xs@ is 'null' and @xs@ otherwise.
+replaceNull :: [a] -> [a] -> [a]
+replaceNull as xs = ifNull as xs id
 
+-- | 'Nothing' if list is 'null', otherwise 'Just'.
 nullMaybe :: [a] -> Maybe [a]
-nullMaybe as = list as Nothing Just
+nullMaybe as = ifNull as Nothing Just
 
 {-# NOINLINE doDebug #-}
 doDebug :: IORef Bool
@@ -371,13 +373,13 @@ reportErrorColor col c m f i o e =
     whenJust f prFile
     whenJust i $ \i -> do
                        putStrLn "Given this input:"
-                       putStrLn $ color blue $ fromList i "<nothing>"
+                       putStrLn $ color blue $ replaceNull i "<nothing>"
     whenJust o $ \o -> do
                        putStrLn "It printed this to standard output:"
-                       putStrLn $ color blue $ fromList o "<nothing>"
+                       putStrLn $ color blue $ replaceNull o "<nothing>"
     whenJust e $ \e -> do
                        putStrLn "It printed this to standard error:"
-                       putStrLn $ color blue $ fromList e "<nothing>"
+                       putStrLn $ color blue $ replaceNull e "<nothing>"
 
 reportError :: String         -- ^ command that failed
             -> String         -- ^ how it failed
