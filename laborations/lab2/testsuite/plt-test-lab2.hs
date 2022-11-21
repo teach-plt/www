@@ -2,6 +2,9 @@
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE TupleSections #-}
 
+{-# OPTIONS_GHC -Wno-name-shadowing #-}
+{-# OPTIONS_GHC -Wno-unused-top-binds #-}
+
 -- GHC needs -threaded
 
 import Control.Applicative
@@ -10,7 +13,7 @@ import Control.Monad
 
 import Data.Char
 import Data.IORef
-import Data.List
+import Data.List (isInfixOf, partition, sort)
 import Data.Maybe
 
 import System.Console.GetOpt
@@ -196,7 +199,7 @@ disableMake options = options { makeFlag = False }
 disableCmp :: Options -> Options
 disableCmp options = options { cmpFlag = False }
 
-addGood, addBad :: FilePath -> Options -> Options
+addGood, addBad, addBadRuntime :: FilePath -> Options -> Options
 addGood       f options = options { testSuiteOption = Just $ maybe ([f],[],[]) (first3  (f:)) $ testSuiteOption options }
 addBad        f options = options { testSuiteOption = Just $ maybe ([],[f],[]) (second3 (f:)) $ testSuiteOption options }
 addBadRuntime f options = options { testSuiteOption = Just $ maybe ([],[],[f]) (third3  (f:)) $ testSuiteOption options }
