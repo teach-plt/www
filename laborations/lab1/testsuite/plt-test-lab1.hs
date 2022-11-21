@@ -284,8 +284,15 @@ color :: Color -> String -> String
 #if defined(mingw32_HOST_OS)
 color _ s = s
 #else
-color c s = fgcol c ++ s ++ normal
+color c s
+  | haveColors = fgcol c ++ s ++ normal
+  | otherwise  = s
 #endif
+
+-- | Colors are disabled if the terminal does not support them.
+{-# NOINLINE haveColors #-}
+haveColors :: Bool
+haveColors = unsafePerformIO supportsPretty
 
 highlight, bold, underline, normal :: String
 highlight = "\ESC[7m"
@@ -404,3 +411,24 @@ report n rs = do
   when (not successful) $ do
     putStrLn $ show (t - p) ++ " tests failed:"
     forM_ failedTests $ \(fp,_) -> putStrLn $ "- " ++ fp
+
+
+-- Inlined from https://hackage.haskell.org/package/pretty-terminal-0.1.0.0/docs/src/System-Console-Pretty.html#supportsPretty :
+
+-- | Whether or not the current terminal supports pretty-terminal
+supportsPretty :: IO Bool
+supportsPretty =
+  hSupportsANSI stdout
+  where
+    -- | Use heuristics to determine whether the functions defined in this
+    -- package will work with a given handle.
+    --
+    -- The current implementation checks that the handle is a terminal, and
+    -- that the @TERM@ environment variable doesn't say @dumb@ (whcih is what
+    -- Emacs sets for its own terminal).
+    hSupportsANSI :: Handle -> IO Bool
+    -- Borrowed from an HSpec patch by Simon Hengel
+    -- (https://github.com/hspec/hspec/commit/d932f03317e0e2bd08c85b23903fb8616ae642bd)
+    hSupportsANSI h = (&&) <$> hIsTerminalDevice h <*> (not <$> isDumb)
+      where
+        isDumb = (== Just "dumb") <$> lookupEnv "TERM"
