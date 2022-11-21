@@ -34,13 +34,13 @@ tripleM :: Applicative m => (a -> m b) -> (a,a,a) -> m (b,b,b)
 tripleM f (x,y,z) = liftA3 (,,) (f x) (f y) (f z)
 
 first3 :: (a -> d) -> (a,b,c) -> (d,b,c)
-first3 f (a,b,c) = (f a,b,c)
+first3 f (a, b, c) = (f a, b, c)
 
 second3 :: (b -> d) -> (a,b,c) -> (a,d,c)
-second3 f (a,b,c) = (a,f b,c)
+second3 f (a, b, c) = (a, f b, c)
 
 third3 :: (c -> d) -> (a,b,c) -> (a,b,d)
-third3 f (a,b,c) = (a,b,f c)
+third3 f (a, b, c) = (a, b, f c)
 
 whenJust :: Applicative m => Maybe a -> (a -> m ()) -> m ()
 whenJust (Just a) k = k a
@@ -87,7 +87,7 @@ listDirectoryRecursive dir = do
       (fs ++) <$> concatMapM listDirectoryRecursive fs
 
 welcome :: IO ()
-welcome = do putStrLn $ "This is the test program for Programming Languages Lab 2"
+welcome = putStrLn $ "This is the test program for Programming Languages Lab 2"
 
 runMake :: FilePath -> IO ()
 runMake dir = do checkDirectoryExists dir
@@ -96,18 +96,18 @@ runMake dir = do checkDirectoryExists dir
 type TestSuite = ([FilePath],[FilePath],[FilePath])
 
 runTests :: FilePath -> TestSuite -> IO ([(FilePath,Bool)],[(FilePath,Bool)],[(FilePath,Bool)])
-runTests dir (goodProgs,badProgs,badRuntimeProgs) = do
-  let prog = joinPath [dir,executable_name]
+runTests dir (goodProgs, badProgs, badRuntimeProgs) = do
+  let prog = dir </> executable_name
   checkFileExists prog
   good       <- mapM (\f -> (f,) <$> testGoodProgram       prog f) goodProgs
   bad        <- mapM (\f -> (f,) <$> testBadProgram        prog f) badProgs
   badRuntime <- mapM (\f -> (f,) <$> testBadRuntimeProgram prog f) badRuntimeProgs
-  return (good,bad,badRuntime)
+  return (good, bad, badRuntime)
 
 testGoodProgram :: FilePath -> FilePath -> IO Bool
 testGoodProgram prog f = do
-  input <- readFileIfExists (f++".input")
-  output <- readFileIfExists (f++".output")
+  input  <- readFileIfExists $ f ++ ".input"
+  output <- readFileIfExists $ f ++ ".output"
   putStr $ "Running " ++ f ++ "... "
   (s,out,err) <- readProcessWithExitCode prog [f] input
   putStrLnExitCode s "."
@@ -129,7 +129,7 @@ testGoodProgram prog f = do
 
 testBadProgram :: FilePath -> FilePath -> IO Bool
 testBadProgram prog f = do
-  input <- readFileIfExists (f++".input")
+  input <- readFileIfExists $ f ++ ".input"
   putStr $ "Running " ++ f ++ "... "
   (s,out,err) <- readProcessWithExitCode prog [f] input
   putStrLnExitCode s "."
@@ -147,7 +147,7 @@ testBadProgram prog f = do
 
 testBadRuntimeProgram :: FilePath -> FilePath -> IO Bool
 testBadRuntimeProgram prog f = do
-  input <- readFileIfExists (f++".input")
+  input <- readFileIfExists $ f++ ".input"
   putStr $ "Running " ++ f ++ "... "
   (s,out,err) <- readProcessWithExitCode prog [f] input
   putStrLnExitCode s "."
@@ -178,10 +178,12 @@ main = setup >> getArgs >>= parseArgs >>= uncurry mainOpts
 setup :: IO ()
 setup = hSetBuffering stdout LineBuffering
 
-data Options = Options { debugFlag       :: Bool
-                       , makeFlag        :: Bool
-                       , cmpFlag         :: Bool
-                       , testSuiteOption :: Maybe TestSuite }
+data Options = Options
+  { debugFlag       :: Bool
+  , makeFlag        :: Bool
+  , cmpFlag         :: Bool
+  , testSuiteOption :: Maybe TestSuite
+  }
 
 enableDebug :: Options -> Options
 enableDebug options = options { debugFlag = True }
