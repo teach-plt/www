@@ -278,7 +278,7 @@ Slides follow closely the plt book.
 %| Thu 24/11     | 13-14          | Hands-on with Lab 2 (Haskell)     |  |
 %[lab2 PM laborations/lab2/index.html]
 %| Thu 24/11     | 14-15 **[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]**  | Hands-on with Lab 2 (Java)        |  |
-| Thu 24/11     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [notes notes/compilation.html], [prime.c notes/prime.c], [prime.j notes/prime.j]
+| Thu 24/11     | 13-15  **[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]**        | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [notes notes/compilation.html], [prime.c notes/prime.c], [prime.j notes/prime.j]
 | //Mon 28/11// | //23//         | //Lab 2 deadline//                |  |
 %[lab2 PM laborations/lab2/index.html] |
 %| Tue 29/11     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [script notes/compilation.html]
@@ -543,9 +543,9 @@ The written exam determines the course grade, the usual grading scales apply:
 Chalmers: 5, 4, 3, U; Gothenburg University: VG, G, U.
 
 Exam dates:
- 13 Jan 2023 am J,
- 12 Apr 2023 am J,
- 25 Aug 2023 pm J.
+ 12 Jan 2023 am J,
+ 04 Apr 2023 am J,
+ 24 Aug 2023 pm J.
 
 The exam tests the understanding of the course contents from a more high-level view,
 e.g., the underlying theoretical concepts.
