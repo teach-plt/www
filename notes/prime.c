@@ -1,11 +1,11 @@
-// Does p divide q?
-bool divides (int p, int q) {
-  return (q / p) * p == q;
+// Does q divide p?
+bool divides (int q, int p) {
+  return (p / q) * q == p;
 }
 
 // Is p prime?
 bool prime (int p) {
-  if (p <= 2) return p == 2;
+  if (p <= 1 || divides(2,p)) return false;
   else {
     int q = 3;
     while (q * q <= p)
@@ -13,4 +13,8 @@ bool prime (int p) {
       else q = q + 2;
   }
   return true;
+}
+
+int main () {
+  if (prime(641)) printInt(641); else printInt(0);
 }

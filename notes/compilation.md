@@ -1,10 +1,28 @@
 Compiling C-- to JVM
 ====================
 
+(Additional notes complementing the slides.)
+
+Tasks of the compiler
+---------------------
+
+0. Produce binary code or symbolic assembly.
+   - We produce symbolic JVM that gets assembled into a `.class` file by `jasmin`.
+
+1. Translate variable names to addresses
+   - Subtask: Compute space needed to hold local variables
+
+2. Translate expression trees to stack instruction sequences
+   - Subtask: Compute stack space needed to run stack instructions
+
+3. Translate control structures and boolean operations to jumps
+
+4. Translate function calls into machine-level calls
+
 Infrastructure of the compiler
 ------------------------------
 
-Signature:
+Signature (global symbol table):
 - name and type of functions suitable for Jasmin
 - Jasmin types:
   * `I`: `int`
@@ -12,9 +30,14 @@ Signature:
   * `V`: `void`
   * `Z`: `boolean`
 
-Context (state):
+Context (local symbol table):
+1. allocate local variables (`newLocal`)
+2. resolve variable names to addresses (`lookupVar`)
+3. free variables when exiting a block (`newBlock`, `popBlock`)
+
+State
 1. generate new labels
-2. allocate local variables; free variables when exiting a block
+2. manage local variable context
 3. keep track of maximum stack use
 4. append generated code (`emit`)
 
@@ -30,6 +53,8 @@ The `emit` function:
 - you can "invent" abstract JVM instructions that can be printed easily
   to a sequence of concrete JVM instructions
 
+We specify the compiler by so-called __compilation schemes__ (pseudo-code describing syntax-directed traversal).
+
 Compiling expressions
 ---------------------
 
@@ -38,6 +63,9 @@ to leave a new value of type `t` on top of the stack, and leave the
 rest of the stack unchanged.
 
 ```haskell
+  compileExp(EInt i):
+    emit(iconst i)
+
   compileExp(EAdd t e₁ e₂):
     compileExp(e₁)
     compileExp(e₂)
@@ -46,6 +74,12 @@ rest of the stack unchanged.
   compileExp(EVar x):
     a <- lookupVar
     emit(t-load a)         -- either iload or dload
+
+  compileExp(ECall x es)
+    for (e ∈ es):          -- compile function arguments
+      compileExp(e)
+    f <- lookupFun(x)      -- get the Jasmin name of function x
+    emit(invokestatic f)   -- emit function call
 
   compileExp(EAss x e):
     a <- lookupVar x
@@ -65,14 +99,23 @@ JVM Small-step semantics without jumps:
     V / V' : variable store before/after
     S / S' : stack before/after
 ```
-We say  γ ~ V  if environment γ translates to variable store V.
+We say `γ ~ V`  if environment `γ` translates to variable store `V`.
 
 Correctness statement (simplified):
 
-  If         γ ⊢ e ⇓ ⟨v, γ'⟩
-  and        γ ~ V
-  then       compileExp(e) : ⟨V,S⟩ →* ⟨V',S.v⟩
-  such that  γ' ~ V'.
+>  If         γ ⊢ e ⇓ ⟨v, γ'⟩
+>  and        γ ~ V
+>  then       compileExp(e) : ⟨V,S⟩ →* ⟨V',S.v⟩
+>  such that  γ' ~ V'.
+
+Correct translation of assignment:
+```haskell
+  compileExp(EAss x e):
+    a <- lookupVar x
+    compileExp(e)
+    emit(t-store a)
+    emit(t-load a)
+```
 
 Compiling statements
 --------------------
