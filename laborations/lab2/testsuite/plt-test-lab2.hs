@@ -300,9 +300,9 @@ bgcol col = "\ESC[0" ++ show (40+col) ++ "m"
 
 red, green, blue, black :: Color
 black = 0
-red = 1
+red   = 1
 green = 2
-blue = 6
+blue  = 6
 
 --
 -- * Run programs
@@ -337,16 +337,18 @@ runPrgNoFail exe flags file = do
 --
 
 checkFileExists :: FilePath -> IO ()
-checkFileExists f =
-    do e <- doesFileExist f
-       when (not e) $ do putStrLn $ color red $ quote f ++ " is not an existing file."
-                         exitFailure
+checkFileExists f = do
+  e <- doesFileExist f
+  unless e $ do
+    putStrLn $ color red $ quote f ++ " is not an existing file."
+    exitFailure
 
 checkDirectoryExists :: FilePath -> IO ()
-checkDirectoryExists f =
-    do e <- doesDirectoryExist f
-       when (not e) $ do putStrLn $ color red $ quote f ++ " is not an existing directory."
-                         exitFailure
+checkDirectoryExists f = do
+  e <- doesDirectoryExist f
+  unless e $ do
+    putStrLn $ color red $ quote f ++ " is not an existing directory."
+    exitFailure
 
 --
 -- * Error reporting and output checking
@@ -395,13 +397,13 @@ reportError = reportErrorColor red
 
 prFile :: FilePath -> IO ()
 prFile f = do
-           e <- doesFileExist f
-           when e $ do putStrLn $ "For input file " ++ f ++ ":"
-                       putStrLn $ "---------------- begin " ++ f ++ " ------------------"
-                       s <- readFile f
-                       putStrLn $ color green s
-                       putStrLn $ "----------------- end " ++ f ++ " -------------------"
-
+  e <- doesFileExist f
+  when e $ do
+    putStrLn $ "For input file " ++ f ++ ":"
+    putStrLn $ "---------------- begin " ++ f ++ " ------------------"
+    s <- readFile f
+    putStrLn $ color green s
+    putStrLn $ "----------------- end " ++ f ++ " -------------------"
 
 -- | Report how many tests passed and which tests failed (if any).
 report :: String -> [(FilePath,Bool)] -> IO ()
