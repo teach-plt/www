@@ -101,6 +101,7 @@ cabal.sandbox.config
 *.prof
 *.hp
 *.eventlog
+stack*.yaml.lock
 .stack-work/
 cabal.project.local
 cabal.project.local~

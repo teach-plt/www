@@ -1,6 +1,6 @@
 # Test compilation of the stub under various GHC versions.
 
-test-goals = \
+test-goals =  \
   test-8.0.2  \
   test-8.2.2  \
   test-8.4.4  \
@@ -8,9 +8,9 @@ test-goals = \
   test-8.8.4  \
   test-8.10.7 \
   test-9.0.2  \
-  test-9.2.4  \
-  test-9.4.1  \
-# end test
+  test-9.2.5  \
+  test-9.4.3  \
+# end test-goals
 
 .PHONY: test-build
 test-build : test-cabal $(test-goals)
