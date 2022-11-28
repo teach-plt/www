@@ -1,5 +1,9 @@
 {-# LANGUAGE CPP #-}
-{-# LANGUAGE LambdaCase, TupleSections #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE TupleSections #-}
+
+{-# OPTIONS_GHC -Wno-name-shadowing #-}
+{-# OPTIONS_GHC -Wno-unused-top-binds #-}
 
 -- GHC needs -threaded
 
@@ -8,7 +12,7 @@ import Control.Monad
 
 import Data.Char
 import Data.IORef
-import Data.List
+import Data.List (isInfixOf, partition, sort)
 import Data.Maybe
 
 import System.Console.GetOpt
@@ -35,15 +39,15 @@ whenJust :: Applicative m => Maybe a -> (a -> m ()) -> m ()
 whenJust (Just a) k = k a
 whenJust Nothing  _ = pure ()
 
-list :: [a] -> b -> ([a] -> b) -> b
-list [] b _ = b
-list as _ f = f as
+ifNull :: [a] -> b -> ([a] -> b) -> b
+ifNull [] b _ = b
+ifNull as _ f = f as
 
-fromList :: [a] -> [a] -> [a]
-fromList as xs = list as xs id
+replaceNull :: [a] -> [a] -> [a]
+replaceNull as xs = ifNull as xs id
 
 nullMaybe :: [a] -> Maybe [a]
-nullMaybe as = list as Nothing Just
+nullMaybe as = ifNull as Nothing Just
 
 --
 -- * Main
@@ -230,9 +234,11 @@ trim = f . f
   where f = reverse . dropWhile isSpace
 
 cleanDirectory :: FilePath -> [String] -> IO ()
-cleanDirectory path exts = listDirectory path >>=
-                           mapM_ (\f -> do let pathf = path </> f
-                                           when (takeExtension f `elem` exts) $ cleanFile pathf)
+cleanDirectory path exts = do
+  files <- listDirectory path
+  forM_ files $ \ f -> do
+    when (takeExtension f `elem` exts) $
+      cleanFile $ path </> f
 
 cleanFile :: FilePath -> IO ()
 cleanFile file = whenM (doesFileExist file) $ removeFile file
@@ -373,13 +379,13 @@ reportErrorColor col c m f i o e =
     whenJust f prFile
     whenJust i $ \i -> do
                        putStrLn "Given this input:"
-                       putStrLn $ color blue $ fromList i "<nothing>"
+                       putStrLn $ color blue $ replaceNull i "<nothing>"
     whenJust o $ \o -> do
                        putStrLn "It printed this to standard output:"
-                       putStrLn $ color blue $ fromList o "<nothing>"
+                       putStrLn $ color blue $ replaceNull o "<nothing>"
     whenJust e $ \e -> do
                        putStrLn "It printed this to standard error:"
-                       putStrLn $ color blue $ fromList e "<nothing>"
+                       putStrLn $ color blue $ replaceNull e "<nothing>"
 
 reportError :: String         -- ^ command that failed
             -> String         -- ^ how it failed
