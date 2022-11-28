@@ -23,13 +23,26 @@ executable plt-test-lab3
 
   default-language:   Haskell2010
 
+  ghc-options:
+    -Wall
+    -Wcompat
+
   build-depends:
       base       >= 4.9.1 && < 5
     , directory  >= 1.3.0 && < 1.4
     , filepath   >= 1.4.1 && < 1.5
     , process    >= 1.4.3 && < 1.7
 
-  ghc-options:
-    -Wall
-    -Wcompat
+  -- These following tools are not needed to _build_ the testsuite runner,
+  -- but to _run_ it, namely to build the parser from the given LBNF file.
+  -- Putting them here means they need not be separately installed
+  -- when invoking the runner with `cabal run` or `stack run`.
+
+  build-tool-depends:
+    -- BNFC 2.8.4 dropped the Err custom type in favor of the standard Either.
+      BNFC:bnfc   >= 2.8.4  && < 2.10
+    -- Not sure about the lower bounds, so we pick alex and happy versions
+    -- that work at least with GHC 8.0.
+    , alex:alex   >= 3.1.4  && < 3.3
+    , happy:happy >= 1.19.5 && < 1.21
 
