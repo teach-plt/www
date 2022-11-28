@@ -1,0 +1,6 @@
+# Any snapshot for GHC >= 7.10 should work, we pick a recent stable one:
+# (recent as of 2022-11-28)
+resolver: lts-20.2
+
+# See https://www.stackage.org/ "Latest releases per GHC version"
+# for alternatives.
