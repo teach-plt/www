@@ -1,0 +1,58 @@
+diff --git a/src-haskell/Compiler.hs b/src-haskell/Compiler.hs
+index 2957142..de9ac7d 100644
+--- a/src-haskell/Compiler.hs
++++ b/src-haskell/Compiler.hs
+@@ -157,6 +157,23 @@ compileStm s0 = do
+   -- Compile the statement.
+   case s0 of
+ 
++    -- SInit t x e -> do
++    --   newVar x t
++    --   compileExp e
++    --   (a, _) <- lookupVar x
++    --   emit $ Store t a
++
++    SDecl t x -> do
++      newVar x t
++
++    SExp t e -> do
++      compileExp e
++      emit $ Pop t
++
++    SReturn t e -> do
++      compileExp e
++      emit $ Return t
++
+     s -> error $ "Not yet implemented: compileStm " ++ printTree s
+ 
+ 
+@@ -177,8 +194,29 @@ compileCond cond l = \case
+ compileExp :: Exp -> Compile ()
+ compileExp = \case
+ 
++    EInt i -> emit $ IConst i
++
++    EId x  -> do
++      (a, t) <- lookupVar x
++      emit $ Load t a
++
++    EAss x e -> do
++      compileExp e
++      (a, t) <- lookupVar x
++      emit $ Store t a
++      emit $ Load  t a
++
++    EApp t x es -> do
++      mapM_ compileExp es
++      f <- lookupFun x
++      emit $ Call f
++
+     e -> error $ "Not yet implemented: compileExp " ++ printTree e
+ 
++lookupFun :: Id -> Compile Fun
++lookupFun x = do
++  m <- gets sig
++  return $ Map.findWithDefault (error $ "unknown function" ++ printTree x) x m
+ ------------------------------------------------------------------------
+ -- * Manipulating the state
+ 

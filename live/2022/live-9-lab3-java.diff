@@ -1,0 +1,64 @@
+diff --git a/src-java/Compiler.java b/src-java/Compiler.java
+index 99668e3..fc2ffa5 100644
+--- a/src-java/Compiler.java
++++ b/src-java/Compiler.java
+@@ -172,7 +172,8 @@ public class Compiler
+     public Void visit(cmm.Absyn.SExp p, Void arg)
+     {
+       emit (new Comment(cmm.PrettyPrinter.print(p)));
+-      if (true) throw new RuntimeException ("Not yet implemented: compile statement " + PrettyPrinter.print(p));
++      p.exp_.accept (new ExpVisitor(), null);
++      emit (new Pop(p.exp_.getType()));
+       return null;
+     }
+ 
+@@ -187,7 +188,9 @@ public class Compiler
+     public Void visit(cmm.Absyn.SInit p, Void arg)
+     {
+       emit (new Comment(cmm.PrettyPrinter.print(p)));
+-      if (true) throw new RuntimeException ("Not yet implemented: compile statement " + PrettyPrinter.print(p));
++      int addr = newVar(p.id_, p.type_);
++      p.exp_.accept (new ExpVisitor(), null);
++      emit (new Store(p.type_, addr));
+       return null;
+     }
+ 
+@@ -196,7 +199,8 @@ public class Compiler
+     public Void visit(cmm.Absyn.SReturn p, Void arg)
+     {
+       emit (new Comment(cmm.PrettyPrinter.print(p)));
+-      if (true) throw new RuntimeException ("Not yet implemented: compile statement " + PrettyPrinter.print(p));
++      p.exp_.accept (new ExpVisitor(), null);
++      emit (new Return(p.exp_.getType()));
+       return null;
+     }
+ 
+@@ -237,7 +241,7 @@ public class Compiler
+     // 5
+     public Void visit(cmm.Absyn.EInt p, Void arg)
+     {
+-      if (true) throw new RuntimeException ("Not yet implemented: compile expression " + PrettyPrinter.print(p));
++      emit (new IConst(p.integer_));
+       return null;
+     }
+ 
+@@ -251,14 +255,17 @@ public class Compiler
+     // x
+     public Void visit(cmm.Absyn.EId p, Void arg)
+     {
+-      if (true) throw new RuntimeException ("Not yet implemented: compile expression " + PrettyPrinter.print(p));
++      CxtEntry ce = lookupVar(p.id_);
++      emit (new Load(ce.type, ce.addr));
+       return null;
+     }
+ 
+     // f (e_1, ..., e_n)
+     public Void visit(cmm.Absyn.EApp p, Void arg)
+     {
+-      if (true) throw new RuntimeException ("Not yet implemented: compile expression " + PrettyPrinter.print(p));
++      for (Exp e: p.listexp_) e.accept (this, null);
++      Fun fun = sig.get(p.id_);
++      emit (new Call (fun));
+       return null;
+     }
+ 
