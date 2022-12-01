@@ -54,7 +54,7 @@ Convenient syntactic sugar:
 - let with arguments:
   `let f x₁ ... xₙ = e in ...` for `let f = λ x₁ ... xₙ → e in ...`
 
-Example:
+Running example:
 ```haskell
     let
       double x     = x + x
@@ -64,7 +64,7 @@ Example:
     in
         twice twice double 2
 ```
-Example:
+Example (Church numerals):
 ```haskell
     never  f = λ x → x
     once   f = λ x → f x
@@ -84,7 +84,7 @@ They can be:
 E.g. 2. in C:
 
 ```c
-int comp  (int f(int n), int g(int n), int x) {
+int comp  (int f(int), int g(int), int x) {
   return f(g(x));
 }
 ```
@@ -93,7 +93,7 @@ Trying 3. `let twice f = comp f f in twice double` in C:
 
 - Attempt 1: illegal type
   ```c
-  int twice (int f(int n)) (int x) {
+  int twice (int f(int)) (int x) {
     return comp(f,f,x);
   }
   ... twice(double) ...
@@ -101,7 +101,7 @@ Trying 3. `let twice f = comp f f in twice double` in C:
 
 - Attempt 2: Cannot partially apply
   ```c
-  int twice (int f(int n), int x) {
+  int twice (int f(int), int x) {
     return comp(f,f,x);
   }
   ... twice(double,??) ...
@@ -120,7 +120,7 @@ Can be written as anonymous function `λ y → 1 + y`.
 ### Free and bound variables
 
 In `λ x → x y`, variable `y` is considered _free_ while `x` is _bound_ by the `λ`.
-In `let x = y in x`, `y` is free and `x` is bound by the `let`.
+In `let x = y in x`, variable `y` is free and `x` is bound by the `let`.
 Both `let` and `λ` are _binders_.
 
 Free variable computation:
@@ -133,11 +133,12 @@ Free variable computation:
 An expression without free variables is called _closed_, otherwise _open_.
 For closed expression, we are interested in their _value_.
 
-E.g.:
+Running example continued:
   - `let ... in double 2` has value `4`
   - `let ... in twice double 2` has value `8`
   - `let ... in twice twice double 2` has value ??
-  - `let ... in twice double` has value `λ x → (x + x) + (x + x)`
+  - `let ... in twice double` has value `λ x → e` where `e` computes `4*x`.
+    (It has _normal form_ (maximally simplified form) `λ x → (x + x) + (x + x)`.)
 
 A value `v` (in our language) can be a numeral (`int` value) or a λ (function value).
 
@@ -185,7 +186,7 @@ _Strategy_ question: where and under which conditions can these rules be applied
 
 ### Substitution
 
-Substitution `f[x=e]` of course does not substitute bound occurrences of `x` in `f`:
+Substitution `f[x=e]` of course does not substitute _bound_ occurrences of `x` in `f`:
 ```
       (λ x → (λ x → x)) 1
     ↦ (λ x → x)[x=1]
@@ -193,7 +194,7 @@ Substitution `f[x=e]` of course does not substitute bound occurrences of `x` in 
 ```
 Still substitution has some pitfalls related to shadowing:
 
-Example:
+Example: `let x = 1 in (λ f x → f x) (λ y → x)`
 
 - Reducing the `let` first:
 
@@ -223,7 +224,7 @@ Here, the free variable `x` is captured by the binder `λ x`.
 
 Solutions:
 
-1. Never substitute open expressions under a binder.
+1. Never substitute _open_ expressions under a binder.
 
    For evaluation of closed expressions, we can use strategies
    that respect this imperative.
@@ -314,8 +315,17 @@ Rules for integer expressions:
      γ ⊢ e₁ + e₂ ⇓ n
 ```
 
+Drawback of call-by-value: unused arguments are still evalutated.
+
+Example:
+
+    (\ y -> 1) (twice twice double 2)
+
+The result is `1`, but call-by-value will first compute the value of `twice twice double 2`.
 
 ### Call-by-name
+
+Idea: only evaluate expressions when needed.
 
 Call by name differs from call-by-value by not evaluating arguments
 when calling functions, but to form a closure.  An environment entry
@@ -338,7 +348,7 @@ Let:
      ------------------------- c = let γ in e₁
      γ ⊢ let x = e₁ in e₂ ⇓ v₂
 ```
-Lambda:
+Lambda (unchanged):
 ```
      --------------------------------
      γ ⊢ (λx → f) ⇓ (let γ in λx → f)
@@ -366,7 +376,7 @@ Comparing cbn (call-by-name) with cbv (call-by-value):
   `double x = x + x`
 
 
-### call-by-need
+### Call-by-need
 
 Synthesis of call-by-name and call-by-value: _call-by-need_ (Haskell)
 
@@ -378,9 +388,9 @@ Call-by-need example:
 ```haskell
     twice twice double 2
 
-    double = (\ x -> add x x)
-    comp   = (\ f -> \ g -> \ x -> f (g x))
-    twice  = (\ f -> comp f f)
+    double x = add x x
+    comp   f = \ g x -> f (g x)
+    twice  f = comp f f
 ```
 
 Step visualization with https://github.com/well-typed/visualize-cbn:
