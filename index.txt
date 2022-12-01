@@ -314,7 +314,7 @@ Slides follow closely the plt book.
 | //Mon 09/01// | //23//         | //Lab 4 deadline//                |  |
 | //Thu 12/01// | //8.30-12.30// | //Exam//             | [Exam exams/exam-plt-2023-1.pdf] |
 %| //Mon 23/01// | //13.30-15.00//      | //Exam review (EDIT 6128)// | [Solution exams/solutions-plt-2023-1.pdf] |
-%| //Fri 27/01// | //23//         | //Final lab deadline//            | //all lab returns//
+| //Fri 27/01// | //23//         | //Final lab deadline//            | //all lab returns//
 %| //Fri 27/01// | //10-11// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
 %| //Fri 24/03// |                | //Lab resubmission intent deadline//       |  |
 %| //Mon 03/04// |                | //Late final lab deadline//       |  |
