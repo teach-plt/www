@@ -94,9 +94,61 @@ listDirectoryRecursive dir = do
 welcome :: IO ()
 welcome = putStrLn $ "This is the test program for Programming Languages Lab 2"
 
+-- | Try to build the solution, first with @make@ and then with @cabal@.
 runMake :: FilePath -> IO ()
-runMake dir = do checkDirectoryExists dir
-                 runPrgNoFail_ "make" ["-C"] dir
+runMake dir = do
+  checkDirectoryExists dir
+  withCurrentDirectory dir $ do
+
+    -- Check if there is a cabal file.
+    haveCabal <- doesFileExist "lab2.cabal"
+
+    -- Run "make" first.
+    hPutStrLn stderr $ unwords [ dir, "$", "make" ]
+    (exit, out, err) <- readProcessWithExitCode "make" [] ""
+    case exit of
+
+      -- "make" succeeded, all is well.
+      ExitSuccess -> do
+        hPutStrLn stderr $ "Running make succeeded"
+        debug $ "Standard output:\n" ++ out
+        debug $ "Standard error:\n" ++ err
+
+      -- "make" failed.
+      ExitFailure makeExitCode
+
+        -- If we do not have a .cabal file, we have to give up.
+        | not haveCabal -> do
+            makeErr
+            exitFailure
+
+        -- Otherwise, try building with "cabal".
+        | otherwise     -> do
+            let cmd = "cabal install --installdir=."
+            hPutStrLn stderr $ unwords [ dir, "$", cmd ]
+            (exit2, out2, err2) <- readProcessWithExitCode "cabal" ["install", "--installdir=."] ""
+            case exit2 of
+
+              -- "cabal" succeeded, all is well.
+              ExitSuccess -> do
+                hPutStrLn stderr $ unwords ["Running", cmd, "after make succeeded"]
+                debug $ "Standard output (make):\n" ++ out
+                debug $ "Standard error  (make):\n" ++ err
+                debug $ "Standard output (cabal):\n" ++ out2
+                debug $ "Standard error  (cabal):\n" ++ err2
+
+              -- "cabal" failed; we exhausted our options.
+              ExitFailure cabalExitCode -> do
+                -- Both failed, so we crash.
+                makeErr
+                cabalErr
+                exitFailure
+                where
+                cabalErr = reportError cmd ("with status " ++ show cabalExitCode) (Just dir) Nothing (nullMaybe out2) (nullMaybe err2)
+
+        where
+        makeErr  = reportError "make" ("with status " ++ show makeExitCode) (Just dir) Nothing (nullMaybe out) (nullMaybe err)
+
 
 type TestSuite = ([FilePath],[FilePath],[FilePath])
 
