@@ -65,11 +65,6 @@ nullMaybe as = ifNull as Nothing Just
 doDebug :: IORef Bool
 doDebug = unsafePerformIO $ newIORef False
 
--- | Whether to run make
-{-# NOINLINE doMake  #-}
-doMake :: IORef Bool
-doMake = unsafePerformIO $ newIORef True
-
 -- | Whether to compare actual with expected output
 {-# NOINLINE doCmp  #-}
 doCmp :: IORef Bool
@@ -95,13 +90,13 @@ welcome :: IO ()
 welcome = putStrLn $ "This is the test program for Programming Languages Lab 2"
 
 -- | Try to build the solution, first with @make@ and then with @cabal@.
-runMake :: FilePath -> IO ()
-runMake dir = do
+runMake :: Bool -> FilePath -> IO ()
+runMake tryCabal dir = do
   checkDirectoryExists dir
   withCurrentDirectory dir $ do
 
     -- Check if there is a cabal file.
-    haveCabal <- doesFileExist "lab2.cabal"
+    haveCabal <- if tryCabal then doesFileExist "lab2.cabal" else pure False
 
     -- Run "make" first.
     hPutStrLn stderr $ unwords [ dir, "$", "make" ]
@@ -229,7 +224,10 @@ testBadRuntimeProgram prog f = do
 --
 
 main :: IO ()
-main = setup >> getArgs >>= parseArgs >>= uncurry mainOpts
+main = do
+  setup
+  (options, dir, testSuite) <- parseArgs =<< getArgs
+  mainOpts options dir testSuite
 
 -- | In various contexts this is guessed incorrectly
 setup :: IO ()
@@ -237,6 +235,8 @@ setup = hSetBuffering stdout LineBuffering
 
 data Options = Options
   { debugFlag       :: Bool
+  , cabalFlag       :: Bool
+      -- ^ Try building with @cabal@ if @make@ failed?
   , makeFlag        :: Bool
   , cmpFlag         :: Bool
   , testSuiteOption :: Maybe TestSuite
@@ -244,6 +244,9 @@ data Options = Options
 
 enableDebug :: Options -> Options
 enableDebug options = options { debugFlag = True }
+
+enableCabal :: Options -> Options
+enableCabal options = options { cabalFlag = True }
 
 disableMake :: Options -> Options
 disableMake options = options { makeFlag = False }
@@ -258,6 +261,7 @@ addBadRuntime f options = options { testSuiteOption = Just $ maybe ([],[],[f]) (
 
 optDescr :: [OptDescr (Options -> Options)]
 optDescr = [ Option []    ["debug"]       (NoArg  enableDebug         ) "print debug messages"
+           , Option []    ["try-cabal"]   (NoArg  enableCabal         ) "try building with cabal after make failed"
            , Option []    ["no-make"]     (NoArg  disableMake         ) "do not run make"
            , Option []    ["no-cmp"]      (NoArg  disableCmp          ) "do not compare actual with expected output"
            , Option ['g'] ["good"]        (ReqArg addGood       "FILE") "good test case FILE"
@@ -266,18 +270,17 @@ optDescr = [ Option []    ["debug"]       (NoArg  enableDebug         ) "print d
            ]
 
 -- | Filter out and process options, return the argument.
-parseArgs :: [String] -> IO (FilePath,TestSuite)
+parseArgs :: [String] -> IO (Options, FilePath, TestSuite)
 parseArgs argv = case getOpt RequireOrder optDescr argv of
   (o,[cfFile],[]) -> do
-    let defaultOptions = Options False True True Nothing
+    let defaultOptions = Options False False True True Nothing
         options = foldr ($) defaultOptions o
     when (debugFlag options)      $ writeIORef doDebug True
-    when (not $ makeFlag options) $ writeIORef doMake  False
     when (not $ cmpFlag  options) $ writeIORef doCmp   False
     let testSuite    = fromMaybe (["good"],["bad"],["bad-runtime"]) $ testSuiteOption options
         expandPath f = doesDirectoryExist f >>= \b -> if b then listCCFiles f else return [f]
     testSuite' <- tripleM (concatMapM expandPath) testSuite
-    return (cfFile,testSuite')
+    return (options, cfFile, testSuite')
   (_,_,_) -> do
     usage
     exitFailure
@@ -289,17 +292,16 @@ usage = do
   hPutStrLn stderr "           interpreter_code_directory"
   exitFailure
 
-mainOpts :: FilePath -> TestSuite -> IO ()
-mainOpts dir testSuite =
-    do welcome
-       domake <- readIORef doMake
-       when domake $ runMake dir
-       (good,bad,badRuntime) <- runTests dir testSuite
-       putStrLn ""
-       putStrLn "------------------------------------------------------------"
-       report "Good programs: " good
-       report "Bad programs: " bad
-       report "Bad runtime programs: " badRuntime
+mainOpts :: Options -> FilePath -> TestSuite -> IO ()
+mainOpts options dir testSuite = do
+  welcome
+  when (makeFlag options) $ runMake (cabalFlag options) dir
+  (good, bad, badRuntime) <- runTests dir testSuite
+  putStrLn ""
+  putStrLn "------------------------------------------------------------"
+  report "Good programs: " good
+  report "Bad programs: " bad
+  report "Bad runtime programs: " badRuntime
 
 --
 -- * Utilities
