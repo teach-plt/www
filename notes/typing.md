@@ -35,7 +35,7 @@ Order of a function type:
 ```
 Examples:
 
-  - 1st order function:  Takes base values as inputs
+  - 1st order function:  Takes base values as inputs.
 
         int → int
         int → int → int
@@ -45,14 +45,14 @@ Examples:
           = max { ord(int)+1, ord(int)+1, ord(int) }
           = max {1,1,0} = 1
 
-  - 2nd order function: Accepts even 1st order functions
+  - 2nd order function: Accepts even 1st order functions.
 
         (int → int) → int
         (int → int) → int → int
         (int → int) → (int → int) → int
         (int → int → int) → int → int
 
-  - 3rd order function: Has a 2nd order function as argument
+  - 3rd order function: Has a 2nd order function as argument.
 
         ((int → int) → int) → int
 
@@ -82,13 +82,6 @@ Context Γ maps variables to types.
         -------------
         Γ ⊢ f e : t
 
-  Alternatively:
-
-        Γ ⊢ f : s₁ → t
-        Γ ⊢ e : s₂
-        -------------- s₁ = s₂
-        Γ ⊢ f e : t
-
 - Let:
 
         Γ ⊢ e₁ : s
@@ -98,21 +91,21 @@ Context Γ maps variables to types.
 
 Example:  Deriving `⊢ λ f → λ x → f (f x) : (int → int) → int → int`
 
-                                                 -------------------  -------------
-                                                 ... ⊢ f : int → int  ... ⊢ x : int
-    --------------------------------------       ----------------------------------
-    f : int → int, x : int ⊢ f : int → int       f : int → int, x : int ⊢ f x : int
-    -------------------------------------------------------------------------------
-    f : int → int, x : int ⊢ f (f x) : int
-    -------------------------------------------
-    f : int → int  ⊢  λ x → f (f x) : int → int
+                                           -----------------    --------------
+                                           ... ⊢ f : int→int    ... ⊢ x : int
+    --------------------------------       -----------------------------------
+    f:int→int, x:int ⊢ f : int → int       f:int→int, x:int ⊢ f x : int
+    --------------------------------------------------------------------
+    f:int→int, x:int ⊢ f (f x) : int
+    ---------------------------------------
+    f:int→int  ⊢  λ x → f (f x) : int → int
     -----------------------------------------------
     ⊢ λ f → λ x → f (f x) : (int → int) → int → int
 
 
 ### Difficulties with implementing the typing rules
 
-Naive type checking gets stuck at application.
+Naive type **checking** gets stuck at application.
 
     void check(Cxt Γ, Exp e, Type t)
 
@@ -126,7 +119,7 @@ Naive type checking gets stuck at application.
       check(Γ, f, s→t)
       check(Γ, e, s)
 
-Naive inference gets stuck at abstraction.
+Naive **inference** gets stuck at abstraction.
 
     Type infer(Cxt Γ, Exp e)
 
@@ -146,16 +139,16 @@ Solutions:
 
   1. Bidirectional type-checking:
      * two modes: checking and inference
-     * check lambdas,
-     * infer applications: infer function part, check argument part
-     * `let x = e₁ in e₂`:
-        - `e₁` needs to be inferred
-        - `e₂` can be checked or inferred
+       * check lambdas,
+       * infer applications: infer function part, check argument part
+       * `let x = e₁ in e₂`:
+          - `e₁` needs to be inferred
+          - `e₂` can be checked or inferred
      + simple, easy to understand, good error messages
      - cannot handle β-redexes in general: `(λ x → f) e`
-     - in practice, too weak
+     - in practice, often too weak
 
-  2. Typed λ  `λ(x:s) → e` and let `let x:s = e₁ in e₂`
+  2. Type-annotated binders: `λ(x:s) → e` and `let x:s = e₁ in e₂`
      * Allows inferring λs and lets, e.g.
        ```
          infer(Γ, λ(x:s)→e):
@@ -169,7 +162,7 @@ Solutions:
          let x:int = 3 in x + x
        ```
 
-  3. Inference with type variables
+  3. Inference with type variables:
      * Treat the `???`s as variables for types
      * Collect constraints on the type variables
      * Solve constraints by _unification_
@@ -178,20 +171,27 @@ Example:  Inferring the `comp` function.
 
     ⊢ λ f → λ g → λ x → f (g x) : A
     A = B → C
-    f:B ⊢  λ g → λ x → f (g x) : C
+
+    f:B  ⊢  λ g → λ x → f (g x) : C
     C = D → E
-    f:B, g:D ⊢  λ x → f (g x) : E
+
+    f:B, g:D  ⊢  λ x → f (g x) : E
     E = F → G
-    f:B, g:D, x:F ⊢ f (g x) : G
-    - f:B, g:D, x:F ⊢ f : H → G
+
+    f:B, g:D, x:F  ⊢  f (g x) : G
+
+    - f:B, g:D, x:F  ⊢  f : H → G
       B = H → G
-    - f:B, g:D, x:F ⊢ g x : H
-      * f:B, g:D, x:F ⊢ g : I → H
+
+    - f:B, g:D, x:F  ⊢  g x : H
+
+      * f:B, g:D, x:F  ⊢  g : I → H
         D = I → H
-      * f:B, g:D, x:F ⊢ x : I
+
+      * f:B, g:D, x:F  ⊢  x : I
         F = I
 
-Constraints (solved constraints above the bar):
+Constraint solving steps (solved constraints above the bar):
 
     A = B → C
     C = D → E
@@ -248,12 +248,19 @@ Constraints (solved constraints above the bar):
     F = I
     ---------
 
+Solution
+
     ⊢ λ f → λ g → λ x → f (g x) : (H → G) → ((I → H) → (I → G))
+
+Generalization
+
     ⊢ λ f → λ g → λ x → f (g x) : ∀ α β γ. (β → γ) → ((α → β) → (α → γ))
 
 
 Type inference with type variables and unification
 --------------------------------------------------
+
+### Type variables and substitution
 
 Extended type grammar:
 
@@ -270,7 +277,7 @@ The application of a substitution `σ` to a type `t` is written `tσ`.
      (s → t) σ = sσ → tσ
 
 A substitution `σ` is usually given by a finite list of mappings `X₁=s₁,...Xₙ=sₙ`.
-Then `σ(Xᵢ) = sᵢ` and `σ(Y)=Y` if `Y ∉ {X₁,...Xₙ}`.
+Then `σ(Xᵢ) = sᵢ`, and `σ(Y) = Y` if `Y ∉ {X₁,...Xₙ}`.
 
 Example:
 
@@ -290,14 +297,16 @@ Example for substitution composition:
      [X=Y→int][Y=int] = [X=int→int,Y=int]
 
         X[X=Y→int][Y=int] = (Y→int)[Y=int] = int → int
-        Y[X=Y→int][Y=int] = Y[Y=int] = int
-        Z[X=Y→int][Y=int] = Z[Y=int] = Z
+        Y[X=Y→int][Y=int] = Y[Y=int]       = int
+        Z[X=Y→int][Y=int] = Z[Y=int]       = Z
 
+
+### Phase 1: Extract constraints
 
 State of the type inference:
 
-1. Potentially infinite supply of type variables (e.g. X₀, X₁, ...)
-    Allows allocation of new type variable
+1. Potentially infinite supply of type variables (e.g. X₀, X₁, ...).
+    Allows allocation of new type variable.
 
         Type newTypeVariable
 
@@ -321,6 +330,15 @@ Inference phase:  Build up store of constraints.
 
     infer(Γ, f e):
       r ← infer(Γ, f)
+      s ← infer(Γ, e)
+      t ← newTypeVariable
+      equal(r,s→t)
+      return t
+
+Optimization of application case:
+
+    infer(Γ, f e):
+      r ← infer(Γ, f)
       case r of
         int    : type error
         (s → t):
@@ -332,17 +350,9 @@ Inference phase:  Build up store of constraints.
            equal(X,s→t)
            return t
 
-Simplification of application case:
 
-    infer(Γ, f e):
-      r ← infer(Γ, f)
-      s ← infer(Γ, e)
-      t ← newTypeVariable
-      equal(r,s→t)
-      return t
+### Phase 2: Solve constraints
 
-
-Solution phase:
 Try to find a substitution σ from type variables to types that solves all constraints.
 
 State of solver:
@@ -386,16 +396,17 @@ Unification:
       if X occurs in t then type error
       else solveVar(X,t)
 
+### Demo
 
-Example:  Compute type of `twice`
+Example 1:  Compute type of `twice`
 
   - Inference phase
 
         infer(ε, λ f → λ x → f (f x)) = F → X → Z
         infer(f:F, λ x → f (f x)) = X → Z
         infer(f:F,x:X, f (f x)) = Z
-        - infer(...,f) = F
-        - infer(...,f x) = Y
+        - infer(..., f) = F
+        - infer(..., f x) = Y
           * infer (..., f) = F
           * infer (..., x) = X
           * F = X → Y
@@ -433,7 +444,7 @@ Example:  Compute type of `twice`
   - Applied to computed type `F → X → Z` gives `(Z → Z) → Z → Z`.
 
 
-Example:  Compute type of `λ x → x x`
+Example 2:  Compute type of `λ x → x x`
 
     infer(ε, λ x → x x)
     infer(x:X, x x)
@@ -441,6 +452,7 @@ Example:  Compute type of `λ x → x x`
     result: Y
 
 The constraint `X = X → Y` is unsolvable as it violates the _occurs check_.
+
 
 Polymorphism
 ------------
@@ -460,15 +472,29 @@ Extension of type-inference (sketch):
   - Extend the grammar by _universal_ variables `α`
     (`X` are _existential_ variables).
 
-  - A type _scheme_ is of the form `∀ α₁...αₙ. t`
+  - A type _scheme_ is of the form `∀ α₁...αₙ. t`.
 
   - Context `Γ` maps variables `x` to schemes.
 
-  - When we lookup a scheme in the context, `Γ(x)`,
+  - **Instantiation**:
+    When we lookup a scheme in the context, `Γ(x)`,
     instantiate the scheme to fresh existential variables `X₁...Xₙ`.
 
-  - When the type `t` of expression `e₁` in `let x = e₁ in e₂`
+  - **Generalization**:
+    When the type `t` of expression `e₁` in `let x = e₁ in e₂`
     has unconstrained existential variables `X₁...Xₙ`
-    that do not appear in the current context `Γ`, replace them
-    by universal variables `α₁...αₙ` and assign `x` the scheme
+    that do not appear in the current context `Γ`,
+    replace them by universal variables `α₁...αₙ` and assign `x` the scheme
     `∀α₁...αₙ.t[α₁...αₙ/X₁...Xₙ]`.
+
+Example:
+
+    twice : ∀α. (α → α) → α → α  ⊢  twice twice (λ x → x)
+
+    - ... ⊢ twice twice :
+      * ... ⊢ twice :
+      * ... ⊢ twice :
+
+    - ... ⊢ λ x → x :
+
+      ..., x:X ⊢ x : X
