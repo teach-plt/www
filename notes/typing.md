@@ -402,46 +402,30 @@ Example 1:  Compute type of `twice`
 
   - Inference phase
 
-        infer(ε, λ f → λ x → f (f x)) = F → X → Z
-        infer(f:F, λ x → f (f x)) = X → Z
-        infer(f:F,x:X, f (f x)) = Z
-        - infer(..., f) = F
-        - infer(..., f x) = Y
-          * infer (..., f) = F
-          * infer (..., x) = X
-          * F = X → Y
-          * result: Y
-        - F = Y → Z
-        - result Z
+        infer(ε, λ f → λ x → f (f x)) =
+        infer(f:F, λ x → f (f x)) =
+        infer(f:F,x:X, f (f x)) =
+        - infer(..., f) =
+        - infer(..., f x) =
+          * infer (..., f) =
+          * infer (..., x) =
+          *
+          * result:
+        -
+        - result:
 
   - Solving phase (substitution on top, constraints on bottom)
 
-        -------------
-        F = X → Y
-        F = Y → Z
 
-        F = X → Y
         -------------
-        X → Y = Y → Z
 
-        F = X → Y
-        -------------
-        X = Y
-        Y = Z
-
-        F = Y → Y
-        X = Y
-        -------------
-        Y = Z
 
     Final substitution:
 
-        F = Z → Z
-        X = Z
-        Y = Z
+
         --------------
 
-  - Applied to computed type `F → X → Z` gives `(Z → Z) → Z → Z`.
+  - Applied to computed type `...` gives `...`.
 
 
 Example 2:  Compute type of `λ x → x x`
