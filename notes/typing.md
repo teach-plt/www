@@ -89,7 +89,8 @@ Context Γ maps variables to types.
         --------------------------
         Γ ⊢ (let x = e₁ in e₂) : t
 
-Example:  Deriving `⊢ λ f → λ x → f (f x) : (int → int) → int → int`
+Example:  Typing of `twice`.
+Deriving `⊢ λ f → λ x → f (f x) : (int → int) → int → int`.
 
                                            -----------------    --------------
                                            ... ⊢ f : int→int    ... ⊢ x : int
@@ -157,8 +158,10 @@ Solutions:
        ```
      + simple, good error messages
      - requires a lot of redundant type annotations from the user (like in Java)
-       ```
+       ```java
          C x = new C(e);
+       ```
+       ```haskell
          let x:int = 3 in x + x
        ```
 
@@ -363,12 +366,12 @@ State of solver:
          Constraint takeConstraint()  -- extract a constraint, removing it from the store
 
 2. A substitution.
-   Invariant:  The substitution is already applied to the state (constaints and itself).
+   Invariant:  The substitution is already applied to the state (constraints and itself).
 
          void solveVar(TypeVariable X, Type t)
 
    `solveVar` applies substitution `[X=t]` to the state
-   (all constraints and the substitution)
+   (all constraints and the substitution).
 
 Algorithm:
 
