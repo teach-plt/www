@@ -148,6 +148,32 @@ OBS! Some closed expressions do not have a value, e.g.
 
 How to compute the value of an expression?
 
+### Digression: Fix-point combinator and Russel paradox
+
+Example (fix-point combinator)
+
+    Y f = (λ x → f (x x)) (λ x → f (x x))
+
+    Y f = f (Y f) = f (f (Y f)) = f (f (f (Y f))) ...
+
+Example (faculty function)
+
+    f n = if n <= 1 then 1 else n * f (n-1)
+
+    Y f n = n!
+
+Russel paradox: read application `x y` as `y ∈ x`.
+Define the Russel set `x ∈ R` if `x ∉ x`:
+
+    R x = not (x x)
+
+Does `R` contain itself?
+
+    R R = (λ x → not (x x)) (λ x → not (x x))
+        = not (R R)
+        = not (not (R R))
+        = not (not (not ...))
+
 
 Reduction
 ---------
@@ -183,6 +209,11 @@ _Strategy_ question: where and under which conditions can these rules be applied
 3. Leftmost-innermost: Reduce the leftmost redex that does not contain any redexes in subexpressions.
 4. Call-by-name: same as 2. but never reduce under λ.
 5. Call-by-value: same as 3. but never reduce under λ, and thus do not consider anything under a λ as a redex.
+
+Example:
+
+    (λ f y → (λ x → x) f (f y))  ((λ z → z) 42)
+
 
 ### Substitution
 
