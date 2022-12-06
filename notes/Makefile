@@ -7,8 +7,13 @@ index.html : $(files)
 	tree -H '.' -L 2 --noreport --charset utf-8 > $@
 # -L <depth>
 
-%.html : %.md Makefile
-	pandoc --css pandoc.css -f gfm -t html -o $@ --standalone $<
+# sed: Insert <br/> tags if line ends with punctuation.
+# Do this via trailing spaces (markdown syntax for line break).
+# (This then does no harm if inside code block.)
+# Inside Makefile, need to use $$ for eol ($).
+%.html : %.md Makefile pandoc.css
+	sed -e 's#\([.,;:!?]\)$$#\1  #' $< | pandoc --css pandoc.css -f gfm -t html -o $@ --standalone
+# --metadata title="$*"
 
 # visualize-cbn
 
@@ -20,5 +25,10 @@ vis-js: twice-double.js
 
 %.js : %.hs
 	visualize-cbn -i $< --javascript $@ --hide-prelude
+
+# debug
+
+br-test:
+	sed -e 's#\([.,!?]\)$$#\1<br/>#'
 
 # EOF
