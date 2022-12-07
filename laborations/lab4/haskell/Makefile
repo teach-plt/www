@@ -12,10 +12,16 @@ files=lab4.hs lab4.cabal Fun.cf Makefile Interpreter.hs
 .PHONY : sdist clean distclean
 
 # 'lab4' is default goal and needs to remain first goal in this file!
-# The extra dependency Fun/Test ensures that the parser is built from Fun.cf
+# The extra dependency Fun/Test ensures that the parser is built from Fun.cf.
+# Building via 'cabal install' ensures that Haskell package dependencies
+# listed in 'lab4.cabal' are picked up.
+# Building via 'ghc lab4' is a bit faster, so if you only use packages
+# shipped with GHC, you can use this as build command.
 
 lab4 : $(files) Fun/Test
-	ghc --make lab4.hs -o lab4
+	cabal install --installdir=.
+# If are only using the packages shipped with GHC, you can replace this by:
+#	ghc lab4
 
 # Rules to build the parser:
 
@@ -23,24 +29,13 @@ Fun/Test.hs Fun/Lex.x Fun/Par.y : Fun.cf
 	bnfc -d $<
 
 %.hs : %.y
-	happy -gcai $<
-#	happy --ghc --coerce --array --info $<
+	happy --ghc --coerce --array --info $<
 
 %.hs : %.x
 	alex --ghc $<
 
 Fun/Test : Fun/Test.hs Fun/Par.hs Fun/Lex.hs
-	ghc --make $< -o $@
-
-# Rules for shipping the solution:
-
-sdist : lab4.tar.gz
-
-tmpdir := $(shell mktemp -d)
-lab4.tar.gz : $(files)
-	mkdir $(tmpdir)/lab4
-	cp $^ $(tmpdir)/lab4/
-	tar -C $(tmpdir) -czhf $@ lab4
+	ghc $@
 
 # Rules for cleaning generated files:
 
@@ -50,6 +45,6 @@ clean :
 distclean : clean
 	-rm -f Fun/Doc.* Fun/Lex.* Fun/Par.* Fun/Layout.* Fun/Skel.* Fun/Print.* Fun/Test.* Fun/Abs.* Fun/Test Fun/ErrM.* Fun/SharedString.* Fun/ComposOp.* Fun/Fun.dtd Fun/XML.* Fun/*.bak
 	-rmdir -p Fun/
-	-rm -f lab4.tar.gz lab4
+	-rm -f lab4
 
 # EOF
