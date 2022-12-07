@@ -1,7 +1,9 @@
 cabal-version:             2.4
 name:                      plt-test-lab4
 version:                   0.0
-license:                   Unlicense
+author:                    Andreas Abel and the PLT team.
+license:                   NONE
+                           -- All rights reserved.
 
 synopsis:
   Test suite for PLT lab4
