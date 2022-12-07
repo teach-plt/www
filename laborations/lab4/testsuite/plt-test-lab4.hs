@@ -1,9 +1,14 @@
 {-# LANGUAGE CPP               #-}
 {-# LANGUAGE ViewPatterns      #-}
+
+{-# OPTIONS_GHC -Wno-name-shadowing #-}
+{-# OPTIONS_GHC -Wno-unused-top-binds #-}
+
 -- Test suite for lab 4
 import Control.Applicative hiding (empty)
 import Control.Monad
 
+import Data.Bifunctor
 import Data.Char
 import Data.Function
 import Data.IORef
@@ -25,23 +30,11 @@ executable_name :: FilePath
 -- You might have to add or remove .exe here if you are using Windows
 executable_name = "lab4" <.> exeExtension
 
-sequenceTuple :: Applicative f => (f a,f b) -> f (a,b)
-sequenceTuple = uncurry $ liftA2 (,)
-
 concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
 concatMapM f = fmap concat . mapM f
 
-mapTuple :: (a -> c) -> (b -> d) -> (a,b) -> (c,d)
-mapTuple f g (a,b) = (f a,g b)
-
 mapTupleM :: Applicative f => (a -> f c) -> (b -> f d) -> (a,b) -> f (c,d)
-mapTupleM f g = sequenceTuple . mapTuple f g
-
-first :: (a -> c) -> (a,b) -> (c,b)
-first f = mapTuple f id
-
-second :: (b -> c) -> (a,b) -> (a,c)
-second f = mapTuple id f
+mapTupleM f g (a,b) = liftA2 (,) (f a) (g b)
 
 first3 :: (a -> d) -> (a,b,c) -> (d,b,c)
 first3 f (a,b,c) = (f a,b,c)
@@ -58,15 +51,15 @@ whenJust :: Applicative m => Maybe a -> (a -> m ()) -> m ()
 whenJust (Just a) k = k a
 whenJust Nothing  _ = pure ()
 
-list :: [a] -> b -> ([a] -> b) -> b
-list [] b _ = b
-list as _ f = f as
+ifNull :: [a] -> b -> ([a] -> b) -> b
+ifNull [] b _ = b
+ifNull as _ f = f as
 
-fromList :: [a] -> [a] -> [a]
-fromList as xs = list as xs id
+replaceNull :: [a] -> [a] -> [a]
+replaceNull as xs = ifNull as xs id
 
 nullMaybe :: [a] -> Maybe [a]
-nullMaybe as = list as Nothing Just
+nullMaybe as = ifNull as Nothing Just
 
 debug :: String -> IO ()
 debug = putStrLn
@@ -162,13 +155,13 @@ reportErrorColor col c m i o e =
     putStrLn $ color col $ c ++ " failed: " ++ m
     whenJust i $ \i -> do
                        putStrLn "Given this input:"
-                       putStrLn $ color blue $ fromList i "<nothing>"
+                       putStrLn $ color blue $ replaceNull i "<nothing>"
     whenJust o $ \o -> do
                        putStrLn "It printed this to standard output:"
-                       putStrLn $ color blue $ fromList o "<nothing>"
+                       putStrLn $ color blue $ replaceNull o "<nothing>"
     whenJust e $ \e -> do
                        putStrLn "It printed this to standard error:"
-                       putStrLn $ color blue $ fromList e "<nothing>"
+                       putStrLn $ color blue $ replaceNull e "<nothing>"
 
 reportError :: String         -- ^ command that failed
             -> String         -- ^ how it failed
