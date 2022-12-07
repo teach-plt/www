@@ -17,7 +17,7 @@ LABOBJ    = $(LABSRC:.java=.class)
 # Variables for the programming environment (edit as needed)
 ###########################################################################
 
-# Name of generated .cup file for bnfc 2.8.1
+# Name of generated .cup file for bnfc >= 2.8.1
 CUPFILE = $(LBNF)/_cup.cup
 # Older BNFC versions may need:
 # CUPFILE = $(LBNF)/$(LBNF).cup

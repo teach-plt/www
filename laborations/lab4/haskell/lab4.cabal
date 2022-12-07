@@ -21,12 +21,12 @@ executable lab4
     LambdaCase
     TupleSections
 
+  ghc-options:
+    -Wall
+    -Wcompat
+
   build-depends:
       base       >= 4.9.1 && < 5
     , array      >= 0.5.1 && < 0.6
     , containers >= 0.5.7 && < 0.7
     , mtl        >= 2.2.2 && < 2.3
-
-  ghc-options:
-    -Wall
-    -Wcompat
