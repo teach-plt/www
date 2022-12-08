@@ -1,0 +1,96 @@
+diff --git a/src-haskell/Interpreter.hs b/src-haskell/Interpreter.hs
+index d69677a..88e7699 100644
+--- a/src-haskell/Interpreter.hs
++++ b/src-haskell/Interpreter.hs
+@@ -1,5 +1,8 @@
++{-# LANGUAGE LambdaCase #-}
++
+ {-# OPTIONS_GHC -Wno-unused-imports #-} -- Turn off unused import warning off in stub
+ {-# OPTIONS_GHC -Wno-unused-matches #-} -- Turn off unused binding warning off in stub
++{-# OPTIONS_GHC -Wno-unused-top-binds #-} -- Turn off unused binding warning off in stub
+ 
+ -- | Interpreter for lambda-calculus with if, +, -, <.
+ --
+@@ -16,6 +19,8 @@ import Data.Functor
+ import Data.Map (Map)
+ import qualified Data.Map as Map
+ 
++import Debug.Trace
++
+ import Fun.Abs
+ import Fun.Print
+ 
+@@ -24,6 +29,7 @@ import Fun.Print
+ data Strategy
+   = CallByName
+   | CallByValue
++  deriving (Eq, Show)
+ 
+ -- | Error monad.
+ 
+@@ -33,4 +39,64 @@ type Err = Except String
+ 
+ interpret :: Strategy -> Program -> Err Integer
+ interpret strategy (Prog defs (DMain mainExp)) = do
+-  throwError $ "TODO: implement interpreter"
++
++    when (strategy == CallByName) $ todo $ "call-by-name"
++
++    -- Run the interpreter.
++    v <- eval cxt mainExp
++
++    -- Return the result.
++    case v of
++      _ -> todo "extract result"
++
++  where
++
++    cxt = todo "initial context"
++
++---------------------------------------------------------------------------
++-- * Data structures for the interpreter.
++---------------------------------------------------------------------------
++
++-- | Context.
++
++data Cxt = Cxt
++  { cxtStrategy :: Strategy  -- ^ Evaluation strategy (fixed).
++  -- TODO environment
++  }
++
++-- | Values.
++data Value = Value_TODO
++
++---------------------------------------------------------------------------
++-- * Interpreter.
++---------------------------------------------------------------------------
++
++-- | Evaluation.
++eval :: Cxt -> Exp -> Err Value
++eval cxt = \case
++
++  -- Call-by-value evaluation rules:
++  --
++  -- Variable:
++  --
++  --      ------------
++  --      γ ⊢ x ⇓ γ(x)
++  --
++  -- Lambda:
++  --
++  --      --------------------------------
++  --      γ ⊢ (λx → f) ⇓ (let γ in λx → f)
++  --
++  -- Application:
++  --
++  --      γ      ⊢ e₁ ⇓ let δ in λx → f
++  --      γ      ⊢ e₂ ⇓ v₂
++  --      δ,x=v₂ ⊢ f ⇓ v
++  --      -----------------------------
++  --      γ ⊢ e₁ e₂ ⇓ v
++
++  e -> error $ unwords [ "Not yet implemented: evaluation of", printTree e ]
++
++-- | TODOs.
++todo :: String -> a
++todo msg = error $ unwords [ "Not yet implemented:", msg ]

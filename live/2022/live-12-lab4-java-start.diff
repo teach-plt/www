@@ -1,0 +1,242 @@
+diff --git a/src-java/Interpreter.java b/src-java/Interpreter.java
+index 7e80a47..a1c69b0 100644
+--- a/src-java/Interpreter.java
++++ b/src-java/Interpreter.java
+@@ -3,14 +3,235 @@ import fun.Absyn.*;
+ 
+ public class Interpreter {
+ 
++  // Strategy
+   final Strategy strategy;
+ 
+-  public Interpreter(Strategy strategy) {
++  // Signature
++  final Map<String,Exp> sig = new TreeMap();
++
++  // Empty environment
++  final Environment EMPTY = new Environment();
++
++  public Interpreter (Strategy strategy) {
++    if (strategy.equals(Strategy.CallByName)) todo("call-by-name");
+     this.strategy = strategy;
+   }
+ 
++  // Entrypoint
+   public void interpret(Program p) {
+-    throw new RuntimeException("Interpreter not implemented yet");
++    Value v = p.accept(new ProgramVisitor(), null);
++    System.out.println(v.intValue());
++  }
++
++  public class ProgramVisitor implements Program.Visitor<Value,Void>
++  {
++    public Value visit(fun.Absyn.Prog p, Void arg)
++    {
++      // build signature
++      for (Def d: p.listdef_) d.accept(new DefVisitor(), null);
++      // execute main expression
++      return p.main_.accept(new MainVisitor(), null);
++    }
++  }
++
++  // Visit definitions to build the signature
++
++  public class DefVisitor implements Def.Visitor<Void,Void>
++  {
++    public Void visit(fun.Absyn.DDef p, Void arg)
++    {
++      Exp e = p.exp_;
++      // p.listident_
++      // abstract over arguments from right to left
++      // f x1 ... xn = e  =====>  f = \ x1 -> ... \ xn -> e
++      // Collections.reverse(p.listident_);
++
++      sig.put(p.ident_, e);
++      return null;
++    }
++  }
++
++  // Evaluate main expression
++
++  public class MainVisitor implements Main.Visitor<Value,Void>
++  {
++    public Value visit(fun.Absyn.DMain p, Void arg)
++    {
++      return evalClosed(p.exp_);
++    }
++  }
++
++  // Evaluate a closed expression
++  // |- e ==> v
++
++  public Value evalClosed(Exp e) {
++    return eval(e, EMPTY);
++  }
++
++  // Evaluate an expression
++  // env |- e ==> v
++
++  public Value eval(Exp e, Environment env) {
++    todo("eval");
++    return null;
++  }
++
++  public class EvalVisitor implements Exp.Visitor<Value,Environment>
++  {
++
++    // literal
++    public Value visit(fun.Absyn.EInt p, Environment env)
++    {
++      // p.integer_
++      todo("literal");
++      return null;
++    }
++
++    // Variable (call-by-value):
++    //
++    //      -------------------
++    //      env |- x ==> env(x)
++    //
++    public Value visit(fun.Absyn.EVar p, Environment env)
++    {
++      // p.ident_
++      todo("var");
++      return null;
++    }
++
++    // Lambda:
++    //
++    //      -----------------------------------------
++    //      env |- (\x -> f) ==> (let env in \x -> f)
++    //
++    public Value visit(fun.Absyn.EAbs p, Environment env)
++    {
++      // p.ident_ p.exp_
++      todo("abs");
++      return null;
++    }
++
++    // Application (call-by-value):
++    //
++    //      env       |- e1 ==> let env' in \x -> f
++    //      env       |- e2 ==> v2
++    //      env',x=v2 |- f ==> v
++    //      ---------------------------------------
++    //      env |- e1 e2 ==> v
++    //
++    public Value visit(fun.Absyn.EApp p, Environment env)
++    {
++      // p.exp_1, p.exp_2
++      todo("app");
++      return null;
++    }
++
++    // plus
++    public Value visit(fun.Absyn.EAdd p, Environment env)
++    {
++      // p.exp_1, p.exp_2
++      todo("plus");
++      return null;
++    }
++
++    // minus
++    public Value visit(fun.Absyn.ESub p, Environment env)
++    {
++      // p.exp_1, p.exp_2
++      todo("minus");
++      return null;
++    }
++
++    // less-than
++    public Value visit(fun.Absyn.ELt p, Environment env)
++    {
++      // p.exp_1, p.exp_2
++      todo("less-than");
++      return null;
++    }
++
++    // if
++    public Value visit(fun.Absyn.EIf p, Environment env)
++    {
++      // p.exp_1, p.exp_2, p.exp_3
++      todo("if");
++      return null;
++    }
++  }
++
++  // Environment ///////////////////////////////////////////////////////
++
++  class Environment {
++    Value lookup (String x) throws Unbound { throw new Unbound(x); }
++  }
++
++  class Extend extends Environment {
++    public final String        x;
++    public final Value         v;
++    public final Environment env;
++
++    public Extend (String x, Value v, Environment env) {
++      this.x   = x;
++      this.v   = v;
++      this.env = env;
++    }
++
++    Value lookup (String y) throws Unbound {
++      todo("lookup");
++      return null;
++    }
++  }
++
++  // Exception for unbound identifier
++
++  class Unbound extends Exception {
++    public Unbound(String x) {
++      super("Unbound identifier: " + x);
++    }
++  }
++
++  // Value /////////////////////////////////////////////////////////////
++
++  class Value {
++    public int intValue() {
++      throw new RuntimeException ("value is not an integer");
++    }
++    public Value apply (Value v) {
++      throw new RuntimeException ("value is not a function");
++    }
++  }
++
++  class VInt extends Value {
++    final int i;
++    public VInt (int i) {
++      this.i = i;
++    }
++    public int intValue() {
++      return i;
++    }
++  }
++
++  class VFun extends Value {
++    final String x;
++    final Exp e;
++    final Environment env;
++
++    public VFun(String x, Exp e, Environment env) {
++      this.x = x;
++      this.e = e;
++      this.env = env;
++    }
++
++    public Value apply (Value v) {
++      todo("apply");
++      return null;
++    }
++  }
++
++  // TODOs /////////////////////////////////////////////////////////////
++
++  public void todo(String msg) {
++    throw new RuntimeException ("TODO: " + msg);
+   }
+ 
+ }

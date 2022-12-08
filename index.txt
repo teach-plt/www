@@ -294,9 +294,9 @@ Slides follow closely the plt book.
 %| Tue 06/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
 % %| Tue 06/12     | 13-15          | The language design space         | [slides plt-book/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
 | Tue 06/12     | 13-15          | Type inference and polymorphism   | plt 7.7-9, [script notes/typing.html]
-| Thu 8/12     | 13-14          | Hands-on with Lab 4 (Haskell)     |  |
+| Thu 8/12     | 13-14          | Hands-on with Lab 4 (Haskell)     | live code [start live/2022/live-12-lab4-haskell-start.diff] |
 %live code [start live/2020/hands-on-4-haskell-start.tgz]  [finish live/2020/hands-on-4-haskell-finish.tgz] |
-| Thu 8/12     | 14-15          | Hands-on with Lab 4 (Java)        |  |
+| Thu 8/12     | 14-15          | Hands-on with Lab 4 (Java)        | live code [start live/2022/live-12-lab4-java-start.diff] |
 %live code [start live/2020/hands-on-4-java-start.tgz] [finish live/2020/hands-on-4-java-finish.tgz] |
 %[lab4 PM laborations/lab4/index.html]
 %| //Mon 12/12// | //23//         | //Lab 3 deadline//                |  |
