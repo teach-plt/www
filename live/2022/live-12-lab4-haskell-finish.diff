@@ -1,0 +1,93 @@
+diff --git a/src-haskell/Interpreter.hs b/src-haskell/Interpreter.hs
+index 88e7699..2b03c56 100644
+--- a/src-haskell/Interpreter.hs
++++ b/src-haskell/Interpreter.hs
+@@ -47,11 +47,20 @@ interpret strategy (Prog defs (DMain mainExp)) = do
+ 
+     -- Return the result.
+     case v of
+-      _ -> todo "extract result"
++      VInt i -> return i
++      VAbs{} -> throwError "main should return an integer"
+ 
+   where
+ 
+-    cxt = todo "initial context"
++    cxt = Cxt
++      { cxtStrategy  = strategy
++      , cxtSig       = Map.fromList $ map (\ (DDef f xs e) -> (f, mkDef xs e)) defs
++      , cxtEnv       = Map.empty
++      }
++
++    -- | Turn @f x1 ... xn = e@  into @f = \ x1 -> ... \ xn -> e@.
++    mkDef :: [Ident] -> Exp -> Exp
++    mkDef xs e = foldr EAbs e xs
+ 
+ ---------------------------------------------------------------------------
+ -- * Data structures for the interpreter.
+@@ -61,11 +70,19 @@ interpret strategy (Prog defs (DMain mainExp)) = do
+ 
+ data Cxt = Cxt
+   { cxtStrategy :: Strategy  -- ^ Evaluation strategy (fixed).
+-  -- TODO environment
++  , cxtSig      :: Signature
++  , cxtEnv      :: Env
+   }
+ 
++type Signature = Map Ident Exp
++
++type Env = Map Ident Value
++
+ -- | Values.
+-data Value = Value_TODO
++data Value
++  = VInt Integer
++  | VAbs Env Ident Exp -- ^ Function closure
++
+ 
+ ---------------------------------------------------------------------------
+ -- * Interpreter.
+@@ -75,18 +92,29 @@ data Value = Value_TODO
+ eval :: Cxt -> Exp -> Err Value
+ eval cxt = \case
+ 
++  EInt i -> return $ VInt i
++
+   -- Call-by-value evaluation rules:
+   --
+   -- Variable:
+   --
+   --      ------------
+   --      γ ⊢ x ⇓ γ(x)
++
++  EVar x -> do
++     case Map.lookup x (cxtEnv cxt) of
++       Just v  -> return v
++       Nothing -> case Map.lookup x (cxtSig cxt) of
++         Just e -> eval (cxt { cxtEnv = Map.empty }) e
++         Nothing -> throwError $ unwords ["unbound variable", printTree x]
++
+   --
+   -- Lambda:
+   --
+   --      --------------------------------
+   --      γ ⊢ (λx → f) ⇓ (let γ in λx → f)
+-  --
++  EAbs x e -> return $ VAbs (cxtEnv cxt) x e
++
+   -- Application:
+   --
+   --      γ      ⊢ e₁ ⇓ let δ in λx → f
+@@ -94,6 +122,12 @@ eval cxt = \case
+   --      δ,x=v₂ ⊢ f ⇓ v
+   --      -----------------------------
+   --      γ ⊢ e₁ e₂ ⇓ v
++  EApp e1 e2 -> do
++    f <- eval cxt e1
++    v <- eval cxt e2
++    case f of
++      VInt{} -> throwError $ unwords [ "cannot apply an integer" ]
++      VAbs delta x e -> eval (cxt { cxtEnv = Map.insert x v delta }) e
+ 
+   e -> error $ unwords [ "Not yet implemented: evaluation of", printTree e ]
+ 

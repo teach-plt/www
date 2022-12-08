@@ -1,0 +1,105 @@
+diff --git a/src-java/Interpreter.java b/src-java/Interpreter.java
+index a1c69b0..11d6fa3 100644
+--- a/src-java/Interpreter.java
++++ b/src-java/Interpreter.java
+@@ -44,8 +44,9 @@ public class Interpreter {
+       // p.listident_
+       // abstract over arguments from right to left
+       // f x1 ... xn = e  =====>  f = \ x1 -> ... \ xn -> e
+-      // Collections.reverse(p.listident_);
+-
++      Collections.reverse(p.listident_);
++      for (String x : p.listident_)
++        e = new EAbs(x, e);
+       sig.put(p.ident_, e);
+       return null;
+     }
+@@ -72,8 +73,7 @@ public class Interpreter {
+   // env |- e ==> v
+ 
+   public Value eval(Exp e, Environment env) {
+-    todo("eval");
+-    return null;
++    return e.accept (new EvalVisitor (), env);
+   }
+ 
+   public class EvalVisitor implements Exp.Visitor<Value,Environment>
+@@ -82,9 +82,7 @@ public class Interpreter {
+     // literal
+     public Value visit(fun.Absyn.EInt p, Environment env)
+     {
+-      // p.integer_
+-      todo("literal");
+-      return null;
++      return new VInt(p.integer_);
+     }
+ 
+     // Variable (call-by-value):
+@@ -94,9 +92,12 @@ public class Interpreter {
+     //
+     public Value visit(fun.Absyn.EVar p, Environment env)
+     {
+-      // p.ident_
+-      todo("var");
+-      return null;
++      try {
++        return env.lookup(p.ident_);
++      } catch (Unbound msg) {
++        Exp e = sig.get(p.ident_);
++        return evalClosed(e);
++      }
+     }
+ 
+     // Lambda:
+@@ -106,24 +107,22 @@ public class Interpreter {
+     //
+     public Value visit(fun.Absyn.EAbs p, Environment env)
+     {
+-      // p.ident_ p.exp_
+-      todo("abs");
+-      return null;
++      return new VFun(p.ident_, p.exp_, env);
+     }
+ 
+     // Application (call-by-value):
+     //
+     //      env       |- e1 ==> let env' in \x -> f
+     //      env       |- e2 ==> v2
+-    //      env',x=v2 |- f ==> v
++    //      env',x=v2 |- f  ==> v
+     //      ---------------------------------------
+-    //      env |- e1 e2 ==> v
++    //      env       |- e1 e2 ==> v
+     //
+     public Value visit(fun.Absyn.EApp p, Environment env)
+     {
+-      // p.exp_1, p.exp_2
+-      todo("app");
+-      return null;
++      Value v1 = eval(p.exp_1, env);
++      Value v2 = eval(p.exp_2, env);
++      return v1.apply(v2);
+     }
+ 
+     // plus
+@@ -177,8 +176,8 @@ public class Interpreter {
+     }
+ 
+     Value lookup (String y) throws Unbound {
+-      todo("lookup");
+-      return null;
++      if (y.equals(x)) return v;
++      else return env.lookup(y);
+     }
+   }
+ 
+@@ -223,8 +222,7 @@ public class Interpreter {
+     }
+ 
+     public Value apply (Value v) {
+-      todo("apply");
+-      return null;
++      return eval(e, new Extend(x, v, env));
+     }
+   }
+ 
