@@ -44,7 +44,7 @@ plus-0 n = {!!}
 ---------------------------------------------------------------------------
 
 {-
--- Bounded numbers: Fin n = { m | n < m }.
+-- Bounded numbers: Fin n = { m | m < n }.
 
 data Fin : Nat → Set where
   zero : {n : Nat} → Fin (suc n)
@@ -102,7 +102,7 @@ Env   = Vec Num
 {-
 -- Interpretation of expressions.
 
-eval : (e : Exp n) (γ : Env n) → Word
+eval : (e : Exp n) (γ : Env n) → Value
 eval e γ = ?
 
 {-
