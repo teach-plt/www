@@ -49,7 +49,7 @@ jobs:
       uses: teatimeguest/setup-texlive-action@v2
       with:
         packages: >-
-          base
+          scheme-basic
           graphics
           hyperref
           lkproof
@@ -57,7 +57,7 @@ jobs:
           ulem
           xcolor
 
-        # scheme-basic
+        # plain
 
     - uses: actions/checkout@v3
 
