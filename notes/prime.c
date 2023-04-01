@@ -5,7 +5,7 @@ bool divides (int q, int p) {
 
 // Is p prime?
 bool prime (int p) {
-  if (p <= 1 || divides(2,p)) return false;
+  if (p == 1 || divides(2,p)) return false;
   else {
     int q = 3;
     while (q * q <= p)
