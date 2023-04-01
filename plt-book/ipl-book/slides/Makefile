@@ -18,4 +18,7 @@ slides: \
 	mv tmp.tex $*-slides-ipl-book.tex
 	pdflatex $*-slides-ipl-book.tex
 
+clean:
+	rm *.aux *.log *.out
+
 # EOF

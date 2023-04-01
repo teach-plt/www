@@ -1,0 +1,130 @@
+name: Deploy PLT www
+
+on:
+  push:         { branches: [ master, ci-* ] }
+  pull_request: { branches: [ master, ci-* ] }
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    # permissions:
+    #   pages:    write   # to deploy to Pages
+    #   id-token: write   # to verify the deployment originates from an appropriate source
+
+    # # Deploy to the github-pages environment
+    # environment:
+    #   name: github-pages
+    #   url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+
+    - name: Install pandoc
+      run: |
+        sudo apt install pandoc
+
+    - name: Set up Python 2
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ '2.7' }}
+
+    - name: Info about the Python setup
+      run: |
+        python --version
+        python2 --version
+
+    - name: Local PATH
+      run: |
+        mkdir -p "${HOME}/.local/bin"
+        echo "${HOME}/.local/bin" >> "${GITHUB_PATH}"
+
+    - name: Install txt2tags
+      run: |
+        wget https://github.com/txt2tags/old/raw/master/txt2tags-2.6.tgz
+        tar xf txt2tags-2.6.tgz
+        mv txt2tags-2.6/txt2tags "${HOME}/.local/bin/"
+        chmod +x "${HOME}/.local/bin/txt2tags"
+        txt2tags --version
+      # not needed: we change the first line to '#!/usr/bin/env python2' by appending a 2
+      # sed -i '2s/$/2/' ~/.local/bin/txt2tags
+
+    - name: Install BNFC
+      run: |
+        wget https://github.com/BNFC/bnfc/releases/download/v2.9.4.1/bnfc-2.9.4.1-linux.binary
+        mv bnfc-2.9.4.1-linux.binary "${HOME}/.local/bin/bnfc"
+        chmod +x "${HOME}/.local/bin/bnfc"
+
+    - name: Setup TeX Live
+      uses: teatimeguest/setup-texlive-action@v2
+      with:
+        packages: >-
+          scheme-basic
+          graphics
+          hyperref
+          lkproof
+          paralist
+          ulem
+          xcolor
+
+        # plain
+
+    - uses: actions/checkout@v3
+
+    - run: make
+
+    # - name: Setup Pages
+    #   uses: actions/configure-pages@v3
+    #   # Needed?
+
+    - uses: actions/upload-pages-artifact@v1
+      with:
+        path: .
+
+    # - name: Deploy to GitHub Pages
+    #   id:   deployment
+    #   uses: actions/deploy-pages@v2
+
+  # Deploy job, see https://github.com/actions/deploy-pages/tree/f81ad71d2e78487340fb3a94726f2a6050466efd#readme
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    # Add a dependency to the build job
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages:    write   # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+
+    # - name: Setup Pages
+    #   uses: actions/configure-pages@v3
+
+    - name: Deploy to GitHub Pages
+      id:   deployment
+      uses: actions/deploy-pages@v2
+
+
+# Old deploy
+#
+    # - name: Deploy
+    #   uses: peaceiris/actions-gh-pages@v3
+    #   # if: github.ref == 'refs/heads/master'
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     publish_dir: .
+    #     force_orphan:  true
+    #     destination_dir: public_html

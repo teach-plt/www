@@ -8,7 +8,7 @@ deps=../../style.css ../../include.html ../../enhance_page.js
 all : www miniJS.zip
 
 miniJS.zip : src
-	zip -r $@ src
+	zip -q -r $@ src
 
 www : index.html
 	make -C src www
