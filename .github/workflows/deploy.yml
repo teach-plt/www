@@ -13,16 +13,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
-    # permissions:
-    #   pages:    write   # to deploy to Pages
-    #   id-token: write   # to verify the deployment originates from an appropriate source
-
-    # # Deploy to the github-pages environment
-    # environment:
-    #   name: github-pages
-    #   url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
 
     - name: Install pandoc
@@ -80,15 +70,11 @@ jobs:
 
     # - name: Setup Pages
     #   uses: actions/configure-pages@v3
-    #   # Needed?
+    #   # Needed? https://github.com/actions/starter-workflows/issues/1996
 
     - uses: actions/upload-pages-artifact@v1
       with:
         path: .
-
-    # - name: Deploy to GitHub Pages
-    #   id:   deployment
-    #   uses: actions/deploy-pages@v2
 
   # Deploy job, see https://github.com/actions/deploy-pages/tree/f81ad71d2e78487340fb3a94726f2a6050466efd#readme
   deploy:
@@ -112,6 +98,7 @@ jobs:
 
     # - name: Setup Pages
     #   uses: actions/configure-pages@v3
+    #   # Needed? https://github.com/actions/starter-workflows/issues/1996
 
     - name: Deploy to GitHub Pages
       id:   deployment
@@ -122,7 +109,7 @@ jobs:
 #
     # - name: Deploy
     #   uses: peaceiris/actions-gh-pages@v3
-    #   # if: github.ref == 'refs/heads/master'
+    #   if: github.ref == 'refs/heads/master'
     #   with:
     #     github_token: ${{ secrets.GITHUB_TOKEN }}
     #     publish_dir: .
