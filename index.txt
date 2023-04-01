@@ -319,7 +319,8 @@ Slides follow closely the plt book.
 | //Tue 04/04// | //8.30-12.30// | //First reexam// |  |
 % ([Canvas https://chalmers.instructure.com/courses/14779])// |  |
 % //Exam (Canvas)//                      |  |
-% //[Solution exams/solutions-plt-2017-2.pdf]// |
+| //Wed 19/04// | //11.00-12.00// | //Exam review (EDIT 6128)// |  |
+% [Solution exams/solutions-plt-2023-2.pdf] |
 | //Thu 24/08// | //14-18//      | //Second reexam// |  |
 % ([Canvas https://chalmers.instructure.com/courses/12065])                      |  |
 % //[Solution exams/solutions-plt-2017-3.pdf]// |
@@ -671,6 +672,10 @@ by storing these jars in
 for DAT151 Programming language technology.
 
 || Program | @student.chalmers.se | Name ||
+|  | ricarl | Carl Ridderstolpe |
+|  |        | Max Hvid Hansen |
+
+
 % | MPALG | burmanj   | Joakim Burman     |
 % | MPCSN | yitao           | Yitao Dong        |
 % | MPALG | syedrahamatulla gmail com      | Rahamatullah Syed |
