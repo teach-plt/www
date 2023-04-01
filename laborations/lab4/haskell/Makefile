@@ -5,6 +5,7 @@
 
 # Files of solution.  Add more files as needed.  'lab4.hs'  has to be first!
 files=lab4.hs lab4.cabal Fun.cf Makefile Interpreter.hs
+parser=Fun/Test.hs Fun/Abs.hs Fun/Lex.x Fun/Par.y Fun/Print.hs
 
 ###########################################################################
 
@@ -25,7 +26,7 @@ lab4 : $(files) Fun/Test
 
 # Rules to build the parser:
 
-Fun/Test.hs Fun/Lex.x Fun/Par.y : Fun.cf
+$(parser) : Fun.cf
 	bnfc -d $<
 
 %.hs : %.y
@@ -34,8 +35,16 @@ Fun/Test.hs Fun/Lex.x Fun/Par.y : Fun.cf
 %.hs : %.x
 	alex --ghc $<
 
-Fun/Test : Fun/Test.hs Fun/Par.hs Fun/Lex.hs
+Fun/Test : $(parser)
 	ghc $@
+
+# Rules for shipping the solution
+
+sdist : lab4.tar.gz
+
+lab4.tar.gz : $(files) $(parser)
+	cabal sdist
+	ln -s -f dist-newstyle/sdist/lab4-0.0.tar.gz $@
 
 # Rules for cleaning generated files:
 
