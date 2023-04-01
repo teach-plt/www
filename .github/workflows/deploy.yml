@@ -24,15 +24,20 @@ jobs:
         python --version
         python2 --version
 
+    - name: Local PATH
+      run: |
+        mkdir -p "${HOME}/.local/bin"
+        echo "${HOME}/.local/bin" >> "${GITHUB_PATH}"
+
     - name: Install txt2tags
       run: |
         wget https://github.com/txt2tags/old/raw/master/txt2tags-2.6.tgz
         tar xf txt2tags-2.6.tgz
-        mv txt2tags-2.6/txt2tags ~/.local/bin
-        chmod +x ~/.local/bin/txt2tags
-        sed -i '2s/$/2/' ~/.local/bin/txt2tags
+        mv txt2tags-2.6/txt2tags "${HOME}/.local/bin/"
+        chmod +x "${HOME}/.local/bin/txt2tags"
         txt2tags --version
-      # note: we change the first line to '#!/usr/bin/env python2' by appending a 2
+      # not needed: we change the first line to '#!/usr/bin/env python2' by appending a 2
+      # sed -i '2s/$/2/' ~/.local/bin/txt2tags
 
     - uses: actions/checkout@v3
 
