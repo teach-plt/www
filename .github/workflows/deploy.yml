@@ -1,8 +1,8 @@
 name: Deploy PLT www
 
 on:
-  push:         [ master, ci-* ]
-  pull_request: [ master, ci-* ]
+  push:         { branches: [ master, ci-* ] }
+  pull_request: { branches: [ master, ci-* ] }
   workflow_dispatch:
 
 defaults:
