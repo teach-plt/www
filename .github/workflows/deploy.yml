@@ -54,7 +54,7 @@ jobs:
           hyperref
           inputenc
           paralist
-          proof
+          lk-proof
           rotating
           ulem
           xcolor

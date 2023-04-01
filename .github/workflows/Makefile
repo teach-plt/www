@@ -1,0 +1,4 @@
+default:
+	actionlint
+
+# EOF
