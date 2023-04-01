@@ -39,6 +39,12 @@ jobs:
       # not needed: we change the first line to '#!/usr/bin/env python2' by appending a 2
       # sed -i '2s/$/2/' ~/.local/bin/txt2tags
 
+    - name: Install BNFC
+      run: |
+        wget https://github.com/BNFC/bnfc/releases/download/v2.9.4.1/bnfc-2.9.4.1-linux.binary
+        mv bnfc-2.9.4.1-linux.binary "${HOME}/.local/bin/bnfc"
+        chmod +x "${HOME}/.local/bin/bnfc"
+
     - uses: actions/checkout@v3
 
     - run: make
