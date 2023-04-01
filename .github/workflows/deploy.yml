@@ -1,0 +1,39 @@
+name: Deploy PLT www
+
+on:
+  push:         [ master, ci-* ]
+  pull_request: [ master, ci-* ]
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set up Python 2
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ '2.7' }}
+
+    - name: Info about the Python setup
+      run: |
+        python --version
+        python2 --version
+
+    - name: Install txt2tags
+      run: |
+        wget https://github.com/txt2tags/old/raw/master/txt2tags-2.6.tgz
+        tar xf txt2tags-2.6.tgz
+        mv txt2tags-2.6/txt2tags ~/.local/bin
+        chmod +x ~/.local/bin/txt2tags
+        sed -i '2s/$/2/' ~/.local/bin/txt2tags
+        txt2tags --version
+      # note: we change the first line to '#!/usr/bin/env python2' by appending a 2
+
+    - uses: actions/checkout@v3
+
+    - run: make
