@@ -14,6 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: Install pandoc
+      run: |
+        sudo apt install pandoc
+
     - name: Set up Python 2
       uses: actions/setup-python@v4
       with:
