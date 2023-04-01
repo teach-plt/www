@@ -49,15 +49,17 @@ jobs:
       uses: teatimeguest/setup-texlive-action@v2
       with:
         packages: >-
-          scheme-basic
+          pdflatex
           graphicx
           hyperref
           inputenc
+          lkproof
           paralist
-          lk-proof
           rotating
           ulem
           xcolor
+
+        # scheme-basic
 
     - uses: actions/checkout@v3
 
