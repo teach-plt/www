@@ -45,6 +45,14 @@ jobs:
         mv bnfc-2.9.4.1-linux.binary "${HOME}/.local/bin/bnfc"
         chmod +x "${HOME}/.local/bin/bnfc"
 
+    - name: Setup TeX Live
+      uses: teatimeguest/setup-texlive-action@v2
+      with:
+        packages: >-
+          scheme-basic
+          cleveref
+          hyperref
+
     - uses: actions/checkout@v3
 
     - run: make
