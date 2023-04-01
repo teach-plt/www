@@ -50,8 +50,14 @@ jobs:
       with:
         packages: >-
           scheme-basic
-          cleveref
+          graphicx
           hyperref
+          inputenc
+          paralist
+          proof
+          rotating
+          ulem
+          xcolor
 
     - uses: actions/checkout@v3
 
