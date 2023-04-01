@@ -66,3 +66,12 @@ jobs:
     - uses: actions/checkout@v3
 
     - run: make
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/master'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: .
+        force_orphan:  true
+        destination_dir: public_html
