@@ -33,6 +33,7 @@ Slides for the book "Implementing Programming Languages. An Introduction to Comp
 
 
 '''
+\newcommand{\htmladdnormallink}[2]{\href{#2}{#1}}
 \newcommand{\indxbf}[1]{\index{#1}{\textbf{#1}}}
 \newcommand{\ixbf}[2]{\index{#2}{\textbf{#1}}}
 \newcommand{\ixnobf}[2]{\index{#2}{#1}}
@@ -49,7 +50,7 @@ Yet another use of syntax-directed translation.
 
 In detail: from imperative language to JVM.
 
-In summary: compiling to native Intel x86 code. 
+In summary: compiling to native Intel x86 code.
 
 All the concepts and tools needed for
 solving Assignment 4, which is a compiler from a fragment of C++ to JVM.
@@ -74,7 +75,7 @@ solving Assignment 4, which is a compiler from a fragment of C++ to JVM.
 General picture: machine code is simpler
 
 The correspondence of concepts is //many-one//:
-  both statements and expressions are compiled to 
+  both statements and expressions are compiled to
   instructions.
 
 
@@ -85,7 +86,7 @@ one statement or expression translates to many instructions.
                bipush 3
                iadd
 ```
-Code generation //ignores// some information in the 
+Code generation //ignores// some information in the
 source language.
 
 But it also needs some information that is not explicit in the source
@@ -125,7 +126,7 @@ Notice: type annotations are assumed to be in place.
 
 More traditional than inference rules.
 
-As the generated code can be long, the rules could become too wide to fit on the page... 
+As the generated code can be long, the rules could become too wide to fit on the page...
 
 Here is the pseudocode for the ``*`` rule above:
 '''
@@ -158,7 +159,7 @@ $  \pseu{Void}\; \compile (\pseu{Exp}\; e)$
 $  \compile([a * b : t]): $\\
 $\ind    \compile(a) $\\
 $\ind    \compile(b) $\\
-$\ind    \ifp\; t = \intp $\\ 
+$\ind    \ifp\; t = \intp $\\
 $\ind\ind       \emit(\ttop{imul}) $\\
 $\ind    \elsep $\\
 $\ind\ind       \emit(\ttop{dmul}) $
@@ -166,7 +167,7 @@ $\ind\ind       \emit(\ttop{dmul}) $
 '''
 This format involves two simplifications:
 - the environment is kept implicit - as a global variable,
-- code is generated as a side effect - by the function ''$\pseu{Void}\;\emit(\pseu{Code}\;c)$'', 
+- code is generated as a side effect - by the function ''$\pseu{Void}\;\emit(\pseu{Code}\;c)$'',
   which writes the code into a file.
 
 
@@ -194,27 +195,27 @@ a code position.
 \begin{center}
 \begin{tabular}{lll}
 \Void &      \compile & $(\Exp\; e)$
-\\  
+\\
 \Void &      \compile & $(\Stm\; s)$
-\\  
+\\
 \Void &      \compile & $(\Def\; d)$
-\\  
+\\
 \Void &      \emit & $(\pseu{Code}\; c)$
-\\  
+\\
 \pseu{Address} &  \lookup & $(\Ident\; x)$
 \\
 \FunType &   \lookup & $(\Ident\; f)$
-\\  
+\\
 \Void &      \extend & $(\Ident\; x, \Type \; t)$
-\\  
+\\
 \Void    &   \extend & $(\Def\; d)$
-\\  
-\Void &      \newBlock & ()   %// new context when entering block 
-\\  
+\\
+\Void &      \newBlock & ()   %// new context when entering block
+\\
 \Void &      \exitBlock &  ()   %// exit from block, discard new context
-\\  
+\\
 \Void &      \emptyEnv &  ()   %// discard all variables
-\\  
+\\
 \pseu{Label} & \newLabel &  ()   %// get fresh code label
 \end{tabular}
 \end{center}
@@ -229,18 +230,18 @@ Each new variable gets a new address.
 
 The next address is incremented by the **size** of the variable.
 
-For integers, booleans, and strings, the size is 1. For doubles, it is 2. 
+For integers, booleans, and strings, the size is 1. For doubles, it is 2.
 
-The first variables are the function parameters, after which the locals follow. 
+The first variables are the function parameters, after which the locals follow.
 
-Blocks can overshadow old variables as usual. 
+Blocks can overshadow old variables as usual.
 
 
 ++Example of addressess++
 
 ``M`` is the counter giving the next available address
 ```
-  int foo (double x, int y) 
+  int foo (double x, int y)
   {               // x -> 0, y -> 2                           M=3
     string i ;    // x -> 0, y -> 2, i -> 3,                  M=4
     bool b ;      // x -> 0, y -> 2, i -> 3, b -> 4           M=5
@@ -257,11 +258,11 @@ needed by the program, here 7. This information is needed in JVM code generation
 ++Compiling integer and double literals++
 
 We can use the instructions
-- ``ldc`` //i//, for pushing an integer or a string //i// 
+- ``ldc`` //i//, for pushing an integer or a string //i//
 - ``ldc2_w`` //d//, for pushing a double //d//
 
 
-These instructions use a separate storage called the **runtime constant pool**. 
+These instructions use a separate storage called the **runtime constant pool**.
 This makes them less efficient than the following special instructions:
 - ``bipush`` //b//, for integers whose size is one byte
 - ``iconst_m1`` for -1,  ``iconst_0`` for 0, ''\ldots'', ``iconst_5`` for 5
@@ -298,9 +299,9 @@ Addition: add string concatenation, compiled as a function call (``invokestatic`
 $\compile([a + b : t]): $ \\
 $\ind \compile(a)$\\
 $\ind \compile(b)$\\
-$\ind    \ifp\; t = \intp $\\ 
+$\ind    \ifp\; t = \intp $\\
 $\ind\ind       \emit(\ttop{iadd}) $\\
-$\ind    \elsep \ifp\; t = \doublep $\\ 
+$\ind    \elsep \ifp\; t = \doublep $\\
 $\ind\ind       \emit(\ttop{dadd}) $\\
 $\ind    \elsep $\\
 $\ind\ind       \emit(\ttop{invokestatic runtime/plusString(Ljava/lang/String;} $\\
@@ -326,9 +327,9 @@ $  \ind \emit(\ttop{aload}\; \lookup(x))$
 Like for constants, there are special instructions available for small addresses.
 
 
-++Assignments++ 
+++Assignments++
 
-Some care needed, since they both have side effects and return values. 
+Some care needed, since they both have side effects and return values.
 
 Simple-minded compilation:
 #BEQU
@@ -349,7 +350,7 @@ instruction ``dup``:
 \angles{\ttop{dup}, P, V, S.v} \longrightarrow \angles{P+1, V, S.v.v}
 \]
 '''
-This works for integers and strings; the variant for doubles is ``dup2``. 
+This works for integers and strings; the variant for doubles is ``dup2``.
 
 
 
@@ -359,10 +360,10 @@ This works for integers and strings; the variant for doubles is ``dup2``.
 \beco
 $\compile([x = e : t]): $ \\
 $\ind \compile(e)$\\
-$\ind    \ifp\; t = \intp $\\ 
+$\ind    \ifp\; t = \intp $\\
 $\ind\ind       \emit(\ttop{dup}) $\\
 $\ind\ind       \emit(\ttop{istore}\; \lookup(x))$\\
-$\ind    \elsep\; \ifp\; t = \doublep $\\ 
+$\ind    \elsep\; \ifp\; t = \doublep $\\
 $\ind\ind       \emit(\ttop{dup2}) $\\
 $\ind\ind       \emit(\ttop{dstore}\; \lookup(x))$\\
 $\ind    \elsep $\\
@@ -381,7 +382,7 @@ Then we can use the ``pop`` instruction,
 \angles{\ttop{pop}, P, V, S.v} \longrightarrow \angles{P+1, V, S}
 \]
 '''
-and its big sister ``pop2``. 
+and its big sister ``pop2``.
 
 
 
@@ -391,11 +392,11 @@ and its big sister ``pop2``.
 \beco
 $\compile([e : t] ;): $ \\
 $\ind \compile(e)$\\
-$\ind    \ifp\; t \in \{\intp,\pseu{bool},\stringp\} $\\ 
+$\ind    \ifp\; t \in \{\intp,\pseu{bool},\stringp\} $\\
 $\ind\ind       \emit(\ttop{pop}) $\\
-$\ind    \elsep\; \ifp\; t = \doublep $\\ 
+$\ind    \elsep\; \ifp\; t = \doublep $\\
 $\ind\ind       \emit(\ttop{pop2}) $\\
-$\ind    \elsep\; \pseu{return}$\\ 
+$\ind    \elsep\; \pseu{return}$\\
 \enco
 '''
 The last case takes case of
@@ -404,7 +405,7 @@ expressions of type ``void`` (typically function calls).
 
 
 
-++Declarations++ 
+++Declarations++
 
 Emit no code, but reserve a place in the variable storage:
 '''
@@ -420,7 +421,7 @@ It also increments the "smallest available address" by the size of the
 type.
 
 
-++Blocks++ 
+++Blocks++
 
 Create a new part of storage, and free it at exit from the block:
 '''
@@ -445,7 +446,7 @@ $\ind \compile(\pseu{exp})$ \\
 $\ind \emit(\ttop{ifeq}\;\pseu{END})$ \\
 $\ind \compile(\pseu{stm})$ \\
 $\ind \emit(\ttop{goto}\;\pseu{TEST})$ \\
-$\ind \emit(\pseu{END:})$ 
+$\ind \emit(\pseu{END:})$
 \enco
 '''
 ```
@@ -461,10 +462,10 @@ $\ind \emit(\pseu{END:})$
 
 As specified in semantics, ``ifeq`` checks
 if the top of the stack is 0. If yes, the execution jumps to the label; if not,
-it continues to the next instruction. 
+it continues to the next instruction.
 
-The checked value is the 
-value of ``exp`` in the ``while`` condition. 
+The checked value is the
+value of ``exp`` in the ``while`` condition.
 - if 0, false: the body is not executed
 - otherwise, true, and the body ``stm`` is executed, and we jump back to the test
 
@@ -472,17 +473,17 @@ value of ``exp`` in the ``while`` condition.
 ++Compiling if statements++
 
 With the minimum of labels:
-```                      
+```
   if (exp)              exp
     stm1                ifeq FALSE
-  else                  stm1   
+  else                  stm1
     stm2                goto TRUE
                       FALSE:
                         stm2
                       TRUE:
 ```
 Idea: have a label for the false case, similar to the label
-``END`` in ``while`` statements. 
+``END`` in ``while`` statements.
 
 But we also need a label for true,
 to prevent the execution of the ``else`` branch.
@@ -491,14 +492,14 @@ The compilation scheme is straightforward to extract from this
 
 ++Comparisons++
 
-JVM has no comparison operations returning boolean values. 
+JVM has no comparison operations returning boolean values.
 
 Therefore, if we want the value of ``exp1 < exp2``, we execute code corresponding to
 ```
-  if (exp1 < exp2) 1 ; else 0 ; 
+  if (exp1 < exp2) 1 ; else 0 ;
 ```
 We use he conditional jump ``if_icmplt`` //LABEL//, which compares the two
-elements on the top of the stack and jumps if the second-last is less 
+elements on the top of the stack and jumps if the second-last is less
 than the last:
 '''
 \bequ
@@ -511,7 +512,7 @@ $\angles{\ttop{if\_icmplt}\; L, P, V, S.v.w} \longrightarrow \angles{P+1, V, S} 
 
 #NEW
 
-To do this with just one label: first push 1 on the stack. 
+To do this with just one label: first push 1 on the stack.
 Overwritten by 0 if the comparison does not succeed:
 ```
 
@@ -521,7 +522,7 @@ Overwritten by 0 if the comparison does not succeed:
     if_icmplt TRUE
     pop
     bipush 0
-  TRUE: 
+  TRUE:
 ```
 There are instructions similar to ``if_icmplt`` for all comparisons
 of integers: ``eq``, ``ne``, ``lt``, ``gt``, ``ge``, and ``le``.
@@ -542,18 +543,18 @@ where ''$v=1 \mbox{ if } d>e, v=0 \mbox{ if } d=e, \mbox{ and } v=-1 \mbox{ if }
 ++Spaghetti code++
 
 ```
-                             TEST:                
-  while (x < 9) stm            bipush 1              
-                               iload 0           
-                               bipush 9        
+                             TEST:
+  while (x < 9) stm            bipush 1
+                               iload 0
+                               bipush 9
                                if_icmplt TRUE
                                pop
                                bipush 0
-                             TRUE: 
+                             TRUE:
                                ifeq goto END
-                               stm                
-                               goto TEST      
-                             END:                
+                               stm
+                               goto TEST
+                             END:
 ```
 Putting together the compilation of comparisons and ``while`` loops gives
 awful code with lots of jumps.
@@ -562,13 +563,13 @@ awful code with lots of jumps.
 
 ```
                              TEST:                TEST:
-  while (x < 9) stm            bipush 1              
+  while (x < 9) stm            bipush 1
                                iload 0              iload 0
                                bipush 9             bipush 9
                                if_icmplt TRUE       if_icmpge END
                                pop
                                bipush 0
-                             TRUE: 
+                             TRUE:
                                ifeq goto END
                                stm                  stm
                                goto TEST            goto TEST
@@ -604,13 +605,13 @@ Simple in Haskell: use deeper patterns,
 ```
   compile (SWhile (ELt exp1 exp2) stm) = ...
 ```
-In Java, another visitor must be written to define what can happen 
+In Java, another visitor must be written to define what can happen
 depending on the condition part of ``while``.
 
 Another approach is to use compositional code generation followed by
 a separate phase of **back-end optimization** of the generated code.
-This technique is more modular and therefore usually preferable to 
-non-compositional code generation. 
+This technique is more modular and therefore usually preferable to
+non-compositional code generation.
 
 
 ++Function calls++
@@ -630,7 +631,7 @@ In a function call ''$f(a,b,c)$'', the stack evolves as follows:
 | //S.v//       | returning from //f//
 
 Entering a function ``f`` means a jump to the code for ``f``, with the arguments
-as the first available variables. 
+as the first available variables.
 
 The evaluation doesn't have
 access to old variables or to the stack of the calling code,
@@ -670,11 +671,11 @@ symbols:
 ```
   I = int, D = double, V = void, Z = boolean
 ```
-There is no difference between integers and booleans in execution, but 
-the JVM interpreter may use the distinction for 
+There is no difference between integers and booleans in execution, but
+the JVM interpreter may use the distinction for
 **.bytecode verification**, that is, type checking at run time.
 
-Complex types (corresponding to classes) 
+Complex types (corresponding to classes)
 have very special encodings:
 ```
   Ljava/lang/String; = string
@@ -694,37 +695,37 @@ Example function and its compilation as a **method**:
                                      iconst_2
                                      idiv
     return ((x+y) / 2) ;             ireturn
-  }                                .end method 
+  }                                .end method
 ```
-Before the body, two limits are specified: the storage needed for 
-local variables (//V// in the semantic rules) 
+Before the body, two limits are specified: the storage needed for
+local variables (//V// in the semantic rules)
 and the storage needed for the evaluation stack (//S// in the semantics).
 
-The only variables are the two arguments. Since they are integers, the limit is 2. 
+The only variables are the two arguments. Since they are integers, the limit is 2.
 
 The stack can be calculated by simulating the JVM: it reaches 2 when
-pushing the two variables, but never beyond that. 
+pushing the two variables, but never beyond that.
 
 The code generator can calculate these limits by maintaining
 them in the environment.
 
 
-++Compilation scheme for function definitions++ 
+++Compilation scheme for function definitions++
 
 We write
 ''$\pseu{funtypeJVM}(\subex{t}{1}, \ldots, \subex{t}{m},t))$'' to create the
 JVM representation for the type of the function.
 '''
 \beco
-$\compile(t \; f(\subex{t}{1}\;\subex{x}{1}, \ldots, \subex{t}{m}\;\subex{x}{m}) 
+$\compile(t \; f(\subex{t}{1}\;\subex{x}{1}, \ldots, \subex{t}{m}\;\subex{x}{m})
    \{ \subex{s}{1}, \ldots, \subex{s}{n} \}): $ \\
-$\ind \emit(\ttop{.method public static}\;f\; 
+$\ind \emit(\ttop{.method public static}\;f\;
    \pseu{funtypeJVM}(\subex{t}{1}, \ldots, \subex{t}{m},t))$\\
-$\ind \emit(\ttop{.limit locals}\; \pseu{locals}(f))$\\ 
-$\ind \emit(\ttop{.limit stack}\; \pseu{stack}(f))$\\ 
+$\ind \emit(\ttop{.limit locals}\; \pseu{locals}(f))$\\
+$\ind \emit(\ttop{.limit stack}\; \pseu{stack}(f))$\\
 $\ind \pseuk{for} \; i = 1,\ldots,m: \extend(\subex{x}{i},\subex{t}{i})$\\
 $\ind \pseuk{for} \; i = 1,\ldots,n: \compile(\subex{s}{i})$\\
-$\ind \emit(\ttop{.end method})$ 
+$\ind \emit(\ttop{.end method})$
 \enco
 '''
 
@@ -734,11 +735,11 @@ $\ind \emit(\ttop{.end method})$
 \beco
 $\compile(\ttop{return}\; [e : t] ;): $ \\
 $\ind \compile(e)$\\
-$\ind    \ifp\; t = \stringp $\\ 
+$\ind    \ifp\; t = \stringp $\\
 $\ind\ind       \emit(\ttop{areturn}) $\\
-$\ind    \elsep\; \ifp\; t = \doublep $\\ 
+$\ind    \elsep\; \ifp\; t = \doublep $\\
 $\ind\ind       \emit(\ttop{dreturn}) $\\
-$\ind    \elsep$\\ 
+$\ind    \elsep$\\
 $\ind\ind       \emit(\ttop{ireturn}) $
 \enco
 
@@ -786,7 +787,7 @@ type signature and reserve address 0 for the array variable. The first
 available address for local variables is 1.
 
 The class name, ``Foo`` in the above template, can be generated
-from the file name (without suffix). 
+from the file name (without suffix).
 
 
 ++IO functions and the runtime class++
@@ -802,7 +803,7 @@ Put them into a separate class, ``runtime``, and call as usual:
 Also a function for string concatenation (``+``) can be included in this class.
 
 To produce the this class, write a Java program
-``runtime.java`` and compile it to ``runtime.class``. 
+``runtime.java`` and compile it to ``runtime.class``.
 
 You will of course be able to run
 "standard" Java code together with code generated by your own compiler!
@@ -822,7 +823,7 @@ To run the program, we write as usual,
 ```
   java Foo
 ```
-This executes the ``main`` function. 
+This executes the ``main`` function.
 
 To get Jasmin: http://jasmin.sourceforge.net/
 
@@ -837,7 +838,7 @@ You can disassemble a Java class file with
 The notation is slightly different from Jasmin, but this is still a good way
 to compare your own compiler with the standard ``javac`` compiler.
 
-The main differences are that jumps use line 
+The main differences are that jumps use line
 numbers instead of labels, and that the ``ldc`` and ``invokestatic`` instructions
 refer to the **runtime constant pool** instead of showing explicit arguments.
 
@@ -846,12 +847,12 @@ refer to the **runtime constant pool** instead of showing explicit arguments.
 
 Our compilation schemes
 leave the environment implicit, and code generation is performed by
-side effects. 
+side effects.
 
 This is simple in Java, as the environment
 can be managed by side effects, and recursive calls to
-the compiler in the visitor need not pass around the environment 
-explicitly. 
+the compiler in the visitor need not pass around the environment
+explicitly.
 
 In Haskell, the standard functional style would
 require each call to return a new environment. This can be avoided
@@ -861,15 +862,15 @@ by using a **state monad**.
 
 ++Code generation in Haskell: the state monad++
 
-In the standard library ``Control.Monad.State``, 
+In the standard library ``Control.Monad.State``,
 the type ``State s v`` is a monad that maintains a state of type
-``s`` and returns a value of type ``v``. 
+``s`` and returns a value of type ``v``.
 
 Internally, it is a function of type
 ```
   s -> (s,v)
 ```
-which takes a state as its input and returns a value and a new state. 
+which takes a state as its input and returns a value and a new state.
 
 The state can be inspected and modified by the library functions
 ```
@@ -890,7 +891,7 @@ Example: multiplication expressions
     compileExp a
     compileExp b
     emit $ case typExp e of
-      Type_int -> imul_Instr 
+      Type_int -> imul_Instr
       Type_double -> dmul_Instr
 ```
 The helper function ``typExp`` is easy to define if the type
@@ -903,7 +904,7 @@ Symbol tables for functions and variables
 
 Counters for variable addresses and labels
 
-Counter for the maximum stack depth 
+Counter for the maximum stack depth
 
 The code that has been generated
 
@@ -950,16 +951,16 @@ compilation schemes is preserved.
 Use a ``CodeGenerator`` class similar to the ``TypeChecker`` class in
 Chapter 4 and the ``Interpreter`` class in Chapter 5.
 
-A visitor takes care of syntax-directed translation. 
+A visitor takes care of syntax-directed translation.
 
 But we now declare an environment as a class variable in
-``CodeGenerator``, so that we can access it by side effects. 
+``CodeGenerator``, so that we can access it by side effects.
 
 Thus we don't pass around an ``Env`` argument,
-but just a dummy ``Object``. 
+but just a dummy ``Object``.
 
 (We could have done so in the
-type checker and the interpreter as well - but we wanted to 
+type checker and the interpreter as well - but we wanted to
 keep the Java code as close to the abstract
 specification as possible.)
 
@@ -970,8 +971,8 @@ Code generation: either print the instructions, or collect them in the environme
 
 ```
   public class CodeGenerator {
-    public void compile(Program p) 
-    private static class Env { 
+    public void compile(Program p)
+    private static class Env {
       private LinkedList<HashMap<String,Integer>> vars;
       private Integer maxvar;
       public Env() {
@@ -1013,7 +1014,7 @@ Code generation: either print the instructions, or collect them in the environme
     private class ExpCompiler implements Exp.Visitor<Object,Object> {
       public Object visit(Mini.Absyn.EMul p, Object arg) {
         p.exp_1.accept(this, arg) ;
-        p.exp_2.accept(this, arg) ;	    
+        p.exp_2.accept(this, arg) ;
         if (typeCodeExp(p.exp_1) == TypeCode.INT) {
           System.err.println("imul");
           } else {
@@ -1047,7 +1048,7 @@ The main difference between x86 and JVM is that x86 has **registers**:
 places for data in the processor itself (as opposed to the memory).
 
 Registers be accessed immediately by
-for instance arithmetic operations: 
+for instance arithmetic operations:
 ```
   add eax, ebx
 ```
@@ -1099,11 +1100,11 @@ that is, the memory segment available for the current function call.
 
 ++Comparisons to JVM code++
 
-The ``while`` loop is similar:  labels and jumps 
+The ``while`` loop is similar:  labels and jumps
 
 Arithmetic operations need fewer instructions than in JVM, if they have the form
 #BEQU
-//dest := dest op src//. 
+//dest := dest op src//.
 #ENQU
 Notice, however, that
 we use three instructions and a temporary register ``ecx``
@@ -1115,11 +1116,11 @@ it is not in this form.
 
 x86 has only a few registers available for integers.
 
-Any number of them may be needed as temporaries when evaluating expressions. 
+Any number of them may be needed as temporaries when evaluating expressions.
 
 Therefore a compiler cannot usually reserve registers for variables, but they are
 stored in memory, and the code becomes less efficient than the idealized
-hand-written code shown above. 
+hand-written code shown above.
 
 **Register allocation** is an optimization that tries to maximize the use of registers (as opposed to the stack).
 
@@ -1133,25 +1134,25 @@ methods corresponding to the structure of Java programs
 
 
 This means more freedom - and more challenge - for the assembly programmer
-and the compiler writer. 
+and the compiler writer.
 
 As a compiler must work for all possible input in a systematic way, it must follow some discipline of
 **calling conventions**: the way in which arguments are passed and values
-are returned. 
+are returned.
 
 
 #NEW
 
 JVM has fixed calling conventions: the arguments are
-pushed on the stack when entering a function, and popped when the function 
-returns and leaves just the value on the stack. 
+pushed on the stack when entering a function, and popped when the function
+returns and leaves just the value on the stack.
 
 In x86, this is just one possible
-convention: one can also use registers. 
+convention: one can also use registers.
 
 For instance, the Fibonacci
 code above uses ``eax`` for the return value of ``fib``, but also for passing
-the argument to ``printInt``. 
+the argument to ``printInt``.
 
 We also stored the variable
 ``hi`` in ``eax``, because ``hi`` was the argument always passed to
@@ -1163,14 +1164,14 @@ instructions. But in general, a compiler cannot assume such lucky coincidences.
 
 Like in JVM, a stack is used for local variables and the temporary values of evaluation.
 
-Unlike in JVM, some values may be held in registers instead of the stack. 
+Unlike in JVM, some values may be held in registers instead of the stack.
 
-Each function call has its own part of the stack, known as its **stack frame**. 
+Each function call has its own part of the stack, known as its **stack frame**.
 
 The address of the beginning of the stack frame is stored in the **frame pointer**, for which the register
-``ebp`` is used. 
+``ebp`` is used.
 
-Another register, ``esp``, is used as the **stack pointer**, which points to the current top of the stack. 
+Another register, ``esp``, is used as the **stack pointer**, which points to the current top of the stack.
 
 As the called function cannot know anything about where it was called from,
 - registers must be saved on the stack before calling
@@ -1207,14 +1208,14 @@ Example: the stack when ``old`` has called ``new``, where
 ```
 
  | ''$\vdots$''  | local variables of the caller of ``old``
- | ''$\vdots$''  | saved registers of the caller of old   
+ | ''$\vdots$''  | saved registers of the caller of old
  | 2    | second argument to ``old``
  | 1    | first argument to ``old``
  | ret  | saved return address for the call of ``old``
  | fp   | saved frame pointer of the caller of ``old``
  | ''\rule{12mm}{0.2mm}'' | ''$\leftarrow$'' frame pointer of ``old``
  | ''$\vdots$''  | local variables of ``old``
- | ''$\vdots$''  | saved registers of ``old``     
+ | ''$\vdots$''  | saved registers of ``old``
  | 3    | argument to ``new``
  | ret  | saved return address for the call of ``new``
  | fp  | saved frame pointer of ``old``
@@ -1226,14 +1227,14 @@ Example: the stack when ``old`` has called ``new``, where
 #NEW
 
 Convention: the stack grows downwards; offsets are positive
-before the frame pointer, negative after it. 
+before the frame pointer, negative after it.
 
-For instance, inside ``old`` before calling ``new``, 
+For instance, inside ``old`` before calling ``new``,
 - the saved frame pointer is in ``[ebp+4]``,
 - the return address is in ``[ebp+8]``,
-- the first argument is ``[ebp+12]``, 
-- the second argument is ``[ebp+16]``; 
-- the first local variable is ``[ebp]``, 
+- the first argument is ``[ebp+12]``,
+- the second argument is ``[ebp+16]``;
+- the first local variable is ``[ebp]``,
 - the second local variable is ``[ebp-4]``.
 - the third local variable is ``[ebp-8]``.
 
@@ -1251,7 +1252,7 @@ Complex instructions, "doing many things", for C-style calling conventions
 
 
 They make the assembly code shorter, but may consume
-more processor time than simpler instructions. 
+more processor time than simpler instructions.
 
 x86 has **CISC** architecture = **Complex Instruction Set Computing**
 
@@ -1267,7 +1268,7 @@ Intermediate code, with back ends to many machines
 
 RISC-style instructions with an infinite supply of **virtual registers**
 
-Compilers can just generate LLVM and leave the generation of native code to LLVM tools. 
+Compilers can just generate LLVM and leave the generation of native code to LLVM tools.
 
 Thus they can share front ends and intermediate code optimizations
 
@@ -1276,10 +1277,10 @@ Thus they can share front ends and intermediate code optimizations
 
 An important part of modern compilers
 
-A magic trick that turns badly written source code into efficient machine code? 
+A magic trick that turns badly written source code into efficient machine code?
 
 Sometimes, yes - but usually not: the main purpose is to tidy up
-the mess that earlier compilation phases have created! 
+the mess that earlier compilation phases have created!
 
 In this way, each phase can be kept timple. Examples:
 - to keep instruction selection compositional
@@ -1302,7 +1303,7 @@ can be optimized to
   int age = 12115 ;
 ```
 Principle of constant folding: operations on constants are carried out at
-compile time. 
+compile time.
 
 
 ++Partial evaluation++
@@ -1326,20 +1327,20 @@ No, because ''$e$'' can have side effects - for instance,
 ```
   i++ - i++
 ```
-or 
+or
 ```
   f() - f()
-``` 
-which prints ``hello`` at each call. 
+```
+which prints ``hello`` at each call.
 
 
-++Pure languages++ 
+++Pure languages++
 
-Expression evaluation doesn't have side effects. 
+Expression evaluation doesn't have side effects.
 
 Example: Haskell
 
-Can be optimized more aggressively than non-pure languages - very much exploited by 
+Can be optimized more aggressively than non-pure languages - very much exploited by
 GHC (Glasgow Haskell Compiler).
 
 Even in pure languages, care is needed - for instance, the expression
@@ -1363,24 +1364,24 @@ Unoptimized compilation of functions creates new stack frames for each call.
 
 In a tail recursive function, this is unnecessary: instead of building a new stack frame, the function
 can just re-run and update the variables of the old stack frame in
-place. 
+place.
 
 
-++Peephole optimization++ 
+++Peephole optimization++
 
 Applied to generated machine code.
 
-Goes through the code and looks for segments that could be improved. 
+Goes through the code and looks for segments that could be improved.
 
 The segments typically have a limited size - e.g. 3 instructions.
 
 Example: constant folding for JVM:
 
-| ``bipush 5`` |                       |               |                       | ''\mbox{}''    
-| ``bipush 6`` |                       | ``bipush 5``  |                       |            
-| ``bipush 7`` | ''$\Longrightarrow$'' | ``bipush 42`` | ''$\Longrightarrow$'' | ``bipush 47`` 
-| ``imul``     |                       | ``iadd``      |                       |    
-| ``iadd``     |                       |               |                       |    
+| ``bipush 5`` |                       |               |                       | ''\mbox{}''
+| ``bipush 6`` |                       | ``bipush 5``  |                       |
+| ``bipush 7`` | ''$\Longrightarrow$'' | ``bipush 42`` | ''$\Longrightarrow$'' | ``bipush 47``
+| ``imul``     |                       | ``iadd``      |                       |
+| ``iadd``     |                       |               |                       |
 
 
 #NEW
@@ -1388,15 +1389,15 @@ Example: constant folding for JVM:
 Another example: elimination of stack duplication for an assignment whose value
 is not needed
 
-|             |                       | ``bipush 6`` |                       | ''\mbox{}'' 
+|             |                       | ``bipush 6`` |                       | ''\mbox{}''
 | ``i = 6 ;`` | ''$\longrightarrow$'' | ``dup``      | ''$\Longrightarrow$'' | ``bipush 6``
 |             |                       | ``istore 4`` |                       | ``istore 4``
-|             |                       | ``pop``      |                       |  
+|             |                       | ``pop``      |                       |
 
 
-++Register allocation++ 
+++Register allocation++
 
-Tries to fit all variables and temporary values to a given set of registers. 
+Tries to fit all variables and temporary values to a given set of registers.
 
 For instance, to the small set of registers in x86.
 
@@ -1404,10 +1405,10 @@ Usually performed on an intermediate language such as LLVM, after first
 letting the code generator use an unlimited supply of registers,
 known as **virtual registers**.
 
-Main technique: **liveness analysis**:  variables 
+Main technique: **liveness analysis**:  variables
 that are "live" at the same time cannot be kept in the same register.
 
-Live = may be needed later in the program. 
+Live = may be needed later in the program.
 
 
 ++Liveness example++
@@ -1430,7 +1431,7 @@ and ``z``?
 #NEW
 
 Answer: two, because ``y`` and ``z`` are never live at the same
-time and can hence be kept in the same register. 
+time and can hence be kept in the same register.
 
 
 ++Register allocation in two steps++
@@ -1450,7 +1451,7 @@ The example program interference graph:
 
 ``y``''\hspace{6mm}''``z``
 #ENCE
-This shows that ``y`` and ``z`` can be given the same colour. 
+This shows that ``y`` and ``z`` can be given the same colour.
 
 
 ++Dataflow analysis++
@@ -1458,7 +1459,7 @@ This shows that ``y`` and ``z`` can be given the same colour.
 The family of techniques related to liveness analysis.
 
 Another example:  **dead-code elimination**: a piece of code is dead if it can never
-be reached when running a program. 
+be reached when running a program.
 
 Assignment to a variable that is not live is dead code, as ``z = f(y)`` in the code above
 
@@ -1469,7 +1470,7 @@ But note: ``f(y)`` may have to be executed for side effects!
 
 In a conditional statement
 #BECE
-``if`` ''(\eop{condition}) \eop{then_branch}'' ``else``  ''\eop{else_branch}''  
+``if`` ''(\eop{condition}) \eop{then_branch}'' ``else``  ''\eop{else_branch}''
 #ENCE
 the ''\eop{else_branch}'' is dead code if ''\eop{condition}'' is uniformly true.
 
