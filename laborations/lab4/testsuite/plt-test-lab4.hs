@@ -4,14 +4,16 @@
 {-# OPTIONS_GHC -Wno-name-shadowing #-}
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 
--- Test suite for lab 4
+-- | Test suite for lab 4
+
+#if !MIN_VERSION_base(4,18,0)
 import Control.Applicative (liftA2)
+#endif
 import Control.Monad
 
 import Data.Bifunctor
 import Data.Char
 import Data.Function
-import Data.IORef
 import qualified Data.List as List
 import Data.Maybe
 import Data.Monoid
@@ -25,180 +27,13 @@ import System.IO
 import System.IO.Unsafe
 import System.Process
 
+-- * Configure
+------------------------------------------------------------------------
+
 -- Executable name
 executable_name :: FilePath
 -- You might have to add or remove .exe here if you are using Windows
 executable_name = "lab4" <.> exeExtension
-
-concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
-concatMapM f = fmap concat . mapM f
-
-mapTupleM :: Applicative f => (a -> f c) -> (b -> f d) -> (a,b) -> f (c,d)
-mapTupleM f g (a,b) = liftA2 (,) (f a) (g b)
-
-first3 :: (a -> d) -> (a,b,c) -> (d,b,c)
-first3 f (a,b,c) = (f a,b,c)
-
-splitOn :: Char -> String -> [String]
-splitOn _   "" = []
-splitOn sep s  = splitOn' s ""
-  where
-    splitOn' []     sub             = [reverse sub]
-    splitOn' (c:cs) sub | c == sep  = reverse sub:splitOn' cs ""
-                        | otherwise = splitOn' cs (c:sub)
-
-whenJust :: Applicative m => Maybe a -> (a -> m ()) -> m ()
-whenJust (Just a) k = k a
-whenJust Nothing  _ = pure ()
-
-ifNull :: [a] -> b -> ([a] -> b) -> b
-ifNull [] b _ = b
-ifNull as _ f = f as
-
-replaceNull :: [a] -> [a] -> [a]
-replaceNull as xs = ifNull as xs id
-
-nullMaybe :: [a] -> Maybe [a]
-nullMaybe as = ifNull as Nothing Just
-
-debug :: String -> IO ()
-debug = putStrLn
-
---
--- * Terminal output colors
---
-
-type Color = Int
-
-color :: Color -> String -> String
-#if defined(mingw32_HOST_OS)
-color _ s = s
-#else
-color c s
-  | haveColors = fgcol c ++ s ++ normal
-  | otherwise  = s
-#endif
-
--- | Colors are disabled if the terminal does not support them.
-{-# NOINLINE haveColors #-}
-haveColors :: Bool
-haveColors = unsafePerformIO supportsPretty
-
-highlight, bold, underline, normal :: String
-highlight = "\ESC[7m"
-bold      = "\ESC[1m"
-underline = "\ESC[4m"
-normal    = "\ESC[0m"
-
-fgcol, bgcol :: Color -> String
-fgcol col = "\ESC[0" ++ show (30+col) ++ "m"
-bgcol col = "\ESC[0" ++ show (40+col) ++ "m"
-
-red, green, blue, cyan, black :: Color
-black = 0
-red = 1
-green = 2
-blue = 4
-cyan = 6
-
---
--- * Run programs
---
-
-runPrgNoFail_ :: FilePath -- ^ Executable
-              -> [String] -- ^ Flags
-              -> String   -- ^ Standard input
-              -> IO ()
-runPrgNoFail_ exe flags input = runPrgNoFail exe flags input >> return ()
-
-runPrgNoFail :: FilePath -- ^ Executable
-             -> [String] -- ^ Flag
-             -> String   -- ^ Standard input
-             -> IO (String,String) -- ^ stdout and stderr
-runPrgNoFail exe flags input = do
-  let c = showCommandForUser exe flags
-  hPutStr stderr $ "Running " ++ c ++ "... "
-  (s,out,err) <- readProcessWithExitCode exe flags input
-  hPutStrLnExitCode s stderr "."
-  case s of
-    ExitFailure x -> do
-      reportError exe ("with status " ++ show x) (nullMaybe input) (nullMaybe out) (nullMaybe err)
-      exitFailure
-    ExitSuccess -> do
-      debug $ "Standard output:\n" ++ out
-      debug $ "Standard error:\n" ++ err
-      return (out,err)
-
---
--- * Error reporting and output checking
---
-
-colorExitCode :: ExitCode -> String -> String
-colorExitCode ExitSuccess     = color green
-colorExitCode (ExitFailure _) = color red
-
-putStrLnExitCode :: ExitCode -> String -> IO ()
-putStrLnExitCode e = putStrLn . colorExitCode e
-
-hPutStrLnExitCode :: ExitCode -> Handle -> String -> IO ()
-hPutStrLnExitCode e h = hPutStrLn h . colorExitCode e
-
-reportErrorColor :: Color
-                 -> String         -- ^ command that failed
-                 -> String         -- ^ how it failed
-                 -> Maybe String   -- ^ given input
-                 -> Maybe String   -- ^ stdout output
-                 -> Maybe String   -- ^ stderr output
-                 -> IO ()
-reportErrorColor col c m i o e =
-    do
-    putStrLn $ color col $ c ++ " failed: " ++ m
-    whenJust i $ \i -> do
-                       putStrLn "Given this input:"
-                       putStrLn $ color blue $ replaceNull i "<nothing>"
-    whenJust o $ \o -> do
-                       putStrLn "It printed this to standard output:"
-                       putStrLn $ color blue $ replaceNull o "<nothing>"
-    whenJust e $ \e -> do
-                       putStrLn "It printed this to standard error:"
-                       putStrLn $ color blue $ replaceNull e "<nothing>"
-
-reportError :: String         -- ^ command that failed
-            -> String         -- ^ how it failed
-            -> Maybe String   -- ^ given input
-            -> Maybe String   -- ^ stdout output
-            -> Maybe String   -- ^ stderr output
-            -> IO ()
-reportError = reportErrorColor red
-
---
-
-empty :: String
-empty = ""
-
-inproc :: FilePath -> [String] -> String -> IO ()
-inproc cmd args _ = runPrgNoFail_ cmd args ""
-
-procStrictWithErr :: FilePath -> [String] -> String -> IO (ExitCode,String,String)
-procStrictWithErr = readProcessWithExitCode
-
-ls :: FilePath -> IO [FilePath]
-ls d = map (d </>) <$> listDirectory d
-
-pwd :: IO FilePath
-pwd = getCurrentDirectory
-
-cd :: FilePath -> IO ()
-cd = setCurrentDirectory
-
-basename :: FilePath -> String
-basename = takeBaseName
-
-stripEnd :: String -> String
-stripEnd = List.dropWhileEnd isSpace
-
-echo :: String -> IO ()
-echo = putStrLn
 
 was_failure :: String -> Bool
 was_failure = ("ERROR" `List.isInfixOf`) . map toUpper
@@ -240,44 +75,180 @@ goodTests =
   , ("good/shadow2.hs","-n", "1"         )
   ]
 
+debug :: String -> IO ()
+debug = putStrLn
+
+-- * Main
+------------------------------------------------------------------------
+
+type TestSuite = ([(FilePath,String,String)],[FilePath])
+
+main :: IO ()
+main = do
+  -- In various contexts this is guessed incorrectly
+  hSetBuffering stdout LineBuffering
+
+  testdir <- getCurrentDirectory
+  (codedir, domake, (goodTests, badTests)) <- parseArgs =<< getArgs
+  let adjustPath f = if isRelative f then joinPath [testdir,f] else f
+      goodTests'   = map (first3 adjustPath) goodTests
+      badTests'    = map adjustPath          badTests
+      lab4         = "." </> executable_name
+
+  setCurrentDirectory codedir
+  when domake $ runPrgNoFail_ "make" [] ""
+
+  let goodtot = length goodTests'
+      badtot  = length badTests'
+  goodpass <- mconcat <$> forM goodTests' (runGood lab4)
+  badpass  <- mconcat <$> forM badTests'  (runBad  lab4)
+
+  putStrLn "### Summary ###"
+  putStrLn $ show (getSum goodpass) <> " of " <> show goodtot <> " good tests passed."
+  putStrLn $ show (getSum badpass)  <> " of " <> show badtot  <> " bad tests passed (approximate check, only checks if any error at all was reported)."
+
+-- * Run programs
+------------------------------------------------------------------------
+
+runPrgNoFail_ :: FilePath -- ^ Executable
+              -> [String] -- ^ Flags
+              -> String   -- ^ Standard input
+              -> IO ()
+runPrgNoFail_ exe flags input = runPrgNoFail exe flags input >> return ()
+
+runPrgNoFail :: FilePath -- ^ Executable
+             -> [String] -- ^ Flag
+             -> String   -- ^ Standard input
+             -> IO (String,String) -- ^ stdout and stderr
+runPrgNoFail exe flags input = do
+  let c = showCommandForUser exe flags
+  hPutStr stderr $ "Running " ++ c ++ "... "
+  (s,out,err) <- readProcessWithExitCode exe flags input
+  hPutStrLnExitCode s stderr "."
+  case s of
+    ExitFailure x -> do
+      reportError exe ("with status " ++ show x) (nullMaybe input) (nullMaybe out) (nullMaybe err)
+      exitFailure
+    ExitSuccess -> do
+      debug $ "Standard output:\n" ++ out
+      debug $ "Standard error:\n" ++ err
+      return (out,err)
+
 runGood :: FilePath -> (FilePath,String,String) -> IO (Sum Int)
 runGood lab4 good = do
   let (file,mode,expect) = good
-  echo $ color blue $ "--- " <> basename file <> " ---"
-  echo $ "     Mode: " <> mode
-  echo $ "Expecting: " <> expect
-  (exitval,stripEnd -> result,_) <- procStrictWithErr lab4 [mode, file] empty
-  goodpass <- if (exitval /= ExitSuccess) then do
-                  echo $ color red "Error"
-                  return 0
-              else
-                  if (result == expect) then do
-                      echo $ "   Output: " ++ color green result
-                      return 1
-                  else do
-                      echo $ "   Output: " ++ color red result
-                      return 0
-  echo ""
-  return goodpass
+  putStrLn $ color blue $ "--- " <> takeBaseName file <> " ---"
+  putStrLn $ "     Mode: " <> mode
+  putStrLn $ "Expecting: " <> expect
+  (exitval,trimEnd -> result,_) <- readProcessWithExitCode lab4 [mode, file] ""
+  if (exitval /= ExitSuccess) then do
+      putStrLn $ color red "Error"
+      putStrLn ""
+      return 0
+  else if (result == expect) then do
+      putStrLn $ "   Output: " ++ color green result
+      putStrLn ""
+      return 1
+  else do
+      putStrLn $ "   Output: " ++ color red result
+      putStrLn ""
+      return 0
 
 runBad :: FilePath -> FilePath -> IO (Sum Int)
 runBad lab4 bad = do
-  echo $ color blue $ "xxx " <> basename bad <> " xxx"
-  (_,stdout1,stderr1) <- procStrictWithErr lab4 ["-v", bad] empty
-  (_,stdout2,stderr2) <- procStrictWithErr lab4 ["-n", bad] empty
-  let result1 = stripEnd $ stdout1 <> stderr1
-      result2 = stripEnd $ stdout2 <> stderr2
-  echo $ "CBV: " <> result1
-  echo $ "CBN: " <> result2
-  badpass <- if was_failure result1 && was_failure result2 then
-                     return 1
-             else
-                     return 0
-  echo ""
-  return badpass
+  putStrLn $ color blue $ "xxx " <> takeBaseName bad <> " xxx"
+  (_,stdout1,stderr1) <- readProcessWithExitCode lab4 ["-v", bad] ""
+  (_,stdout2,stderr2) <- readProcessWithExitCode lab4 ["-n", bad] ""
+  let result1 = trimEnd $ stdout1 <> stderr1
+      result2 = trimEnd $ stdout2 <> stderr2
+  putStrLn $ "CBV: " <> result1
+  putStrLn $ "CBN: " <> result2
+  putStrLn ""
+  return $ if was_failure result1 && was_failure result2 then 1 else 0
 
-data Options = Options { makeFlag        :: Bool
-                       , testSuiteOption :: Maybe TestSuite }
+-- * Terminal output colors
+------------------------------------------------------------------------
+
+type Color = Int
+
+color :: Color -> String -> String
+#if defined(mingw32_HOST_OS)
+color _ s = s
+#else
+color c s
+  | haveColors = fgcol c ++ s ++ normal
+  | otherwise  = s
+#endif
+
+-- | Colors are disabled if the terminal does not support them.
+{-# NOINLINE haveColors #-}
+haveColors :: Bool
+haveColors = unsafePerformIO supportsPretty
+
+highlight, bold, underline, normal :: String
+highlight = "\ESC[7m"
+bold      = "\ESC[1m"
+underline = "\ESC[4m"
+normal    = "\ESC[0m"
+
+fgcol, bgcol :: Color -> String
+fgcol col = "\ESC[0" ++ show (30+col) ++ "m"
+bgcol col = "\ESC[0" ++ show (40+col) ++ "m"
+
+red, green, blue, cyan, black :: Color
+black = 0
+red = 1
+green = 2
+blue = 4
+cyan = 6
+
+-- * Error reporting and output checking
+------------------------------------------------------------------------
+
+colorExitCode :: ExitCode -> String -> String
+colorExitCode ExitSuccess     = color green
+colorExitCode (ExitFailure _) = color red
+
+putStrLnExitCode :: ExitCode -> String -> IO ()
+putStrLnExitCode e = putStrLn . colorExitCode e
+
+hPutStrLnExitCode :: ExitCode -> Handle -> String -> IO ()
+hPutStrLnExitCode e h = hPutStrLn h . colorExitCode e
+
+reportErrorColor :: Color
+                 -> String         -- ^ command that failed
+                 -> String         -- ^ how it failed
+                 -> Maybe String   -- ^ given input
+                 -> Maybe String   -- ^ stdout output
+                 -> Maybe String   -- ^ stderr output
+                 -> IO ()
+reportErrorColor col c m i o e = do
+    putStrLn $ color col $ c ++ " failed: " ++ m
+    whenJust i $ \i -> do
+                       putStrLn "Given this input:"
+                       putStrLn $ color blue $ replaceNull i "<nothing>"
+    whenJust o $ \o -> do
+                       putStrLn "It printed this to standard output:"
+                       putStrLn $ color blue $ replaceNull o "<nothing>"
+    whenJust e $ \e -> do
+                       putStrLn "It printed this to standard error:"
+                       putStrLn $ color blue $ replaceNull e "<nothing>"
+
+reportError :: String         -- ^ command that failed
+            -> String         -- ^ how it failed
+            -> Maybe String   -- ^ given input
+            -> Maybe String   -- ^ stdout output
+            -> Maybe String   -- ^ stderr output
+            -> IO ()
+reportError = reportErrorColor red
+
+-- * Options
+------------------------------------------------------------------------
+
+data Options = Options
+  { makeFlag        :: Bool
+  , testSuiteOption :: Maybe TestSuite
+  }
 
 disableMake :: Options -> Maybe Options
 disableMake options = Just $ options { makeFlag = False }
@@ -297,19 +268,18 @@ optDescr = [ Option []    ["no-make"] (NoArg  disableMake               ) "do no
            , Option ['b'] ["bad"]     (ReqArg addBad  "FILE"            ) "bad test case FILE"
            ]
 
-parseArgs :: [String] -> IO (FilePath,TestSuite)
+parseArgs :: [String] -> IO (FilePath, Bool, TestSuite)
 parseArgs argv = case getOpt RequireOrder optDescr argv of
 
   (o,[codedir],[]) -> do
-    let defaultOptions = Options True Nothing
+    let defaultOptions = Options{ makeFlag = True, testSuiteOption = Nothing }
     options <- maybe usage return $ foldM (&) defaultOptions o
-    when (not $ makeFlag options) $ writeIORef doMake False
     let testSuite              = fromMaybe (goodTests,["bad"]) $ testSuiteOption options
-    let listHSFiles d          = filter (".hs" `List.isSuffixOf`) <$> ls d
+    let listHSFiles d          = map (d </>) . filter (".hs" `List.isSuffixOf`) <$> listDirectory d
     let expandPath  f          = doesDirectoryExist f >>= \b -> if b then listHSFiles f else return [f]
     let expandPathGood (f,m,r) = map (\ f' -> (f',m,r)) <$> expandPath f
     testSuite' <- mapTupleM (concatMapM expandPathGood) (concatMapM expandPath) testSuite
-    return (codedir,testSuite')
+    return (codedir, makeFlag options, testSuite')
 
   (_,_,_) -> usage
 
@@ -319,44 +289,13 @@ usage = do
   hPutStrLn stderr "           path_to_solution" -- "The path to the directory where your solution is located"
   exitFailure
 
--- | In various contexts this is guessed incorrectly
-setup :: IO ()
-setup = hSetBuffering stdout LineBuffering
 
--- | Whether to run make
-{-# NOINLINE doMake  #-}
-doMake :: IORef Bool
-doMake = unsafePerformIO $ newIORef True
-
-type TestSuite = ([(FilePath,String,String)],[FilePath])
-
-main :: IO ()
-main = do
-  setup
-
-  testdir <- pwd
-  (codedir,(goodTests,badTests)) <- parseArgs =<< getArgs
-  let adjustPath f = if isRelative f then joinPath [testdir,f] else f
-      goodTests'   = map (first3 adjustPath) goodTests
-      badTests'    = map adjustPath          badTests
-      lab4         = "." </> executable_name
-
-  cd codedir
-  domake <- readIORef doMake
-  when domake $ inproc "make" [] empty
-
-  let goodtot = length goodTests'
-      badtot  = length badTests'
-  goodpass <- mconcat <$> forM goodTests' (runGood lab4)
-  badpass  <- mconcat <$> forM badTests'  (runBad  lab4)
-
-  echo "### Summary ###"
-  echo $ show (getSum goodpass) <> " of " <> show goodtot <> " good tests passed."
-  echo $ show (getSum badpass)  <> " of " <> show badtot  <> " bad tests passed (approximate check, only checks if any error at all was reported)."
+-- * General utilities
+------------------------------------------------------------------------
 
 -- Inlined from https://hackage.haskell.org/package/pretty-terminal-0.1.0.0/docs/src/System-Console-Pretty.html#supportsPretty :
 
--- | Whether or not the current terminal supports pretty-terminal
+-- | Whether or not the current terminal supports pretty-terminal.
 supportsPretty :: IO Bool
 supportsPretty =
   hSupportsANSI stdout
@@ -373,3 +312,37 @@ supportsPretty =
     hSupportsANSI h = (&&) <$> hIsTerminalDevice h <*> (not <$> isDumb)
       where
         isDumb = (== Just "dumb") <$> lookupEnv "TERM"
+
+concatMapM :: Monad m => (a -> m [b]) -> [a] -> m [b]
+concatMapM f = fmap concat . mapM f
+
+mapTupleM :: Applicative f => (a -> f c) -> (b -> f d) -> (a,b) -> f (c,d)
+mapTupleM f g (a,b) = liftA2 (,) (f a) (g b)
+
+first3 :: (a -> d) -> (a,b,c) -> (d,b,c)
+first3 f (a,b,c) = (f a,b,c)
+
+splitOn :: Char -> String -> [String]
+splitOn _   "" = []
+splitOn sep s  = splitOn' s ""
+  where
+    splitOn' []     sub             = [reverse sub]
+    splitOn' (c:cs) sub | c == sep  = reverse sub:splitOn' cs ""
+                        | otherwise = splitOn' cs (c:sub)
+
+whenJust :: Applicative m => Maybe a -> (a -> m ()) -> m ()
+whenJust (Just a) k = k a
+whenJust Nothing  _ = pure ()
+
+ifNull :: [a] -> b -> ([a] -> b) -> b
+ifNull [] b _ = b
+ifNull as _ f = f as
+
+replaceNull :: [a] -> [a] -> [a]
+replaceNull as xs = ifNull as xs id
+
+nullMaybe :: [a] -> Maybe [a]
+nullMaybe as = ifNull as Nothing Just
+
+trimEnd :: String -> String
+trimEnd = List.dropWhileEnd isSpace
