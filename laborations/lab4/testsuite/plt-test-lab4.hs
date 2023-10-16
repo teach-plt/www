@@ -5,7 +5,7 @@
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 
 -- Test suite for lab 4
-import Control.Applicative hiding (empty)
+import Control.Applicative (liftA2)
 import Control.Monad
 
 import Data.Bifunctor

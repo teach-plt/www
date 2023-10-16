@@ -25,8 +25,8 @@ executable lab2
   build-depends:
       base       >= 4.9.1 && < 5
     , array      >= 0.5.1 && < 0.6
-    , containers >= 0.5.7 && < 0.7
-    , mtl        >= 2.2.2 && < 2.3
+    , containers >= 0.5.7 && < 0.8
+    , mtl        >= 2.2.2 && < 2.4
 
   ghc-options:
     -Wall

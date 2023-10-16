@@ -43,6 +43,7 @@ CVS
 
 /laborations/lab1/testscript/lab1-test-dir/
 /laborations/lab1/testscript/progs-test-lab1
+/laborations/lab1/testscript/plt-test-lab1
 
 /laborations/lab1/testsuite/lab1-test-dir/
 /laborations/lab1/testsuite/lab1-test-dir#/
@@ -64,6 +65,7 @@ CVS
 /laborations/lab2/testsuite/bad/*.cc.exe
 /laborations/lab2/testsuite/bad/*.cc.tmp.cpp
 /laborations/lab2/testsuite/progs-test-lab2
+/laborations/lab2/testsuite/plt-test-lab2
 
 /laborations/lab3/java/CMM/
 /laborations/lab3/java/CPP/
@@ -75,6 +77,8 @@ CVS
 /laborations/lab3/testsuite/*.j
 /laborations/lab3/testsuite/dir-for-path-test/one-more-dir/simple.j
 /laborations/lab3/testsuite/progs-test-lab3-jvm-verify
+/laborations/lab3/testsuite/progs-test-lab3
+/laborations/lab3/testsuite/plt-test-lab3
 
 /laborations/lab4/haskell/Fun/
 /laborations/lab4/haskell/lab4
@@ -84,6 +88,7 @@ CVS
 
 /laborations/lab4/testsuite.tgz
 /laborations/lab4/testsuite/progs-test-lab4
+/laborations/lab4/testsuite/plt-test-lab4
 
 # Haskell
 dist

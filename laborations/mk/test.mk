@@ -8,8 +8,11 @@ test-goals =  \
   test-8.8.4  \
   test-8.10.7 \
   test-9.0.2  \
-  test-9.2.5  \
-  test-9.4.3  \
+  test-9.2.8  \
+  test-9.4.7  \
+  test-9.6.3  \
+  test-9.8.1  \
+
 # end test-goals
 
 .PHONY: test-build
