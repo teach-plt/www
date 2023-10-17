@@ -11,23 +11,26 @@ defaults:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    env:
+      BNFC: 2.9.5
 
     steps:
 
-    - name: Install pandoc
+    - name: Install python 2.7
       run: |
-        sudo apt install pandoc
+        sudo apt update
+        sudo apt install python2
 
-    - name: Set up Python 2
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ '2.7' }}
+    # - name: Set up Python 2
+    #   uses: actions/setup-python@v4
+    #   with:
+    #     python-version: ${{ '2.7' }}
 
     - name: Info about the Python setup
       run: |
-        python --version
-        python2 --version
+        echo "'python' is $(python --version)"
+        echo "'python2' is $(python2 --version)"
 
     - name: Local PATH
       run: |
@@ -36,19 +39,27 @@ jobs:
 
     - name: Install txt2tags
       run: |
+        echo "=== Downloading and patching txt2tags ==="
         wget https://github.com/txt2tags/old/raw/master/txt2tags-2.6.tgz
         tar xf txt2tags-2.6.tgz
         mv txt2tags-2.6/txt2tags "${HOME}/.local/bin/"
+        # we change the first line to '#!/usr/bin/env python2' by appending a 2
+        sed -i '1s/$/2/' "${HOME}/.local/bin/txt2tags"
         chmod +x "${HOME}/.local/bin/txt2tags"
+        echo "=== Info about txt2tags ==="
+        echo "txt2tags is $(which txt2tags)"
+        head "$(which txt2tags)"
         txt2tags --version
-      # not needed: we change the first line to '#!/usr/bin/env python2' by appending a 2
-      # sed -i '2s/$/2/' ~/.local/bin/txt2tags
 
-    - name: Install BNFC
+    - name: Install BNFC ${{ env.BNFC }}
       run: |
-        wget https://github.com/BNFC/bnfc/releases/download/v2.9.4.1/bnfc-2.9.4.1-linux.binary
-        mv bnfc-2.9.4.1-linux.binary "${HOME}/.local/bin/bnfc"
+        wget https://github.com/BNFC/bnfc/releases/download/v${{ env.BNFC }}/bnfc-${{ env.BNFC }}-linux.binary
+        mv bnfc-${{ env.BNFC }}-linux.binary "${HOME}/.local/bin/bnfc"
         chmod +x "${HOME}/.local/bin/bnfc"
+
+    - name: Install pandoc
+      run: |
+        sudo apt install pandoc
 
     - name: Setup TeX Live
       uses: teatimeguest/setup-texlive-action@v2
@@ -64,7 +75,7 @@ jobs:
 
         # plain
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - run: make
 
