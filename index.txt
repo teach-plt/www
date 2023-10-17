@@ -1,6 +1,6 @@
 Programming Language Technology
 DAT151 (Chalmers) / DIT231 (GU)
-Winter Term 2022 (LP2)
+Winter Term 2023 (LP2)
 
 %!target:html
 %!encoding:utf-8
@@ -8,22 +8,22 @@ Winter Term 2022 (LP2)
 '''
 <script src="enhance_page.js" type="text/javascript"></script>
 <p align="center">
-<a href="http://www.cse.chalmers.se/edu/course/DAT151/">
-http://www.cse.chalmers.se/edu/course/DAT151/</a>
+<a href="https://teach-plt.github.io/www/">https://teach-plt.github.io/www/</a>
 </p>
 '''
 
-% [Fire https://plt-lp2-22.fire.cse.chalmers.se/]
+% [Fire https://plt-lp2-23.fire.cse.chalmers.se/]
 % /
-[Canvas https://chalmers.instructure.com/courses/21130]
+[Canvas https://chalmers.instructure.com/courses/26247]
 /
 [GitLab https://git.chalmers.se/courses/dat151]
 /
-[Schedule https://cloud.timeedit.net/chalmers/web/public/ri1Y73yQZ05ZZ3Q7X96v9Q015Q0Yx30YfgQ6.html]
+[Schedule https://cloud.timeedit.net/chalmers/web/public/ri1Y03y5Z65ZZ7Q7766657015Q06x3500gW650QQ537.html]
 /
-[Slack https://plt-iyn7311.slack.com/]
+[Slack https://plt2023lp2.slack.com]
 /
-[Chalmers studieportal https://www.student.chalmers.se/sp/course?course_id=33079]
+[Chalmers studieportal https://www.student.chalmers.se/sp/course?course_id=35818]
+% https://www.student.chalmers.se/sp/course?course_id=33079]
 % https://www.student.chalmers.se/sp/course?course_id=32788]
 % 31181]
 % https://www.student.chalmers.se/sp/course?course_id=29075
@@ -43,7 +43,7 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 /
 [GU course description http://kursplaner.gu.se/pdf/kurs/en/DIT231]
 /
-[Course page 2021 http://www.cse.chalmers.se/edu/year/2021/course/DAT151/]
+[Course page 2022 http://www.cse.chalmers.se/edu/year/2022/course/DAT151/]
 
 
 =News and changes=
@@ -164,13 +164,13 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 
 %  : //2020-11-17//
 %    [Lab 3 laborations/lab3/index.html] description is online.
-
-  : //2022-11-24//
-    The deadline for lab 2 has been extended to Wed 30 Nov 2022 midnight.
-
-  : //2022-11-22//
-    The code from today's "Hands-on for lab 2" session is online: [Haskell live/2022/live-7-lab2-haskell.zip] and [Java live/2022/live-7-lab2-java.zip].
-
+%
+%  : //2022-11-24//
+%    The deadline for lab 2 has been extended to Wed 30 Nov 2022 midnight.
+%
+%  : //2022-11-22//
+%    The code from today's "Hands-on for lab 2" session is online: [Haskell live/2022/live-7-lab2-haskell.zip] and [Java live/2022/live-7-lab2-java.zip].
+%
 %  : //2020-11-17//
 %    The [script notes/type-checking.md] for lecture 5 (type checking) has been updated
 %    to incorporate the changes made in the lecture.
@@ -211,8 +211,8 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 % : //2022-11-15//
 %   Tuesday lecture (2022-11-16) in **HB3**.
 
-: //2022-11-03//
-  Stub for today's live coding [online live/2022/live-2-bnfc-start.zip].
+% : //2022-11-03//
+%   Stub for today's live coding [online live/2022/live-2-bnfc-start.zip].
 
 % : //2022-11-03//
 %   Until further notice, lectures will be streamed on Zoom (link see Canvas).
@@ -234,8 +234,8 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 %   (e.g. if you shy crowds these days, or have symptoms etc).
 %   Zoom link will be published via [Canvas https://chalmers.instructure.com/courses/21130].
 
-  : //2022-10-31//
-    First published version of this page.
+%  : //2022-10-31//
+%    First published version of this page.
 % - mostly a copy of the 2018 material.  Updates forthcoming soon.
 
 
@@ -246,8 +246,8 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 Tuesday lectures are in **[HC2 http://maps.chalmers.se/#23e2df72-cbb9-4aff-825a-1a282e9618d6]**,
 Thursday lectures in
 **[SB-H6 https://maps.chalmers.se/#c613d487-6c0c-4fe2-8a9d-55b858fa137f]**,
-//with exceptions// Thu 3rd Nov in //[SB-H5 https://maps.chalmers.se/#f85ee0cd-e87b-403f-acf9-bd30f6b3339d]//
-and Tue 22nd Nov in //[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]//),
+//with exceptions// Thu 2nd Nov in //[SB-H5 https://maps.chalmers.se/#f85ee0cd-e87b-403f-acf9-bd30f6b3339d]//
+and Thu 23rd Nov in //[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]//),
 % **[HA1 http://maps.chalmers.se/#971e00c6-6f9a-46ce-9894-687adb1fa8ea]**,
 starting at **13:15**.
 
@@ -256,77 +256,87 @@ Slides follow closely the plt book.
 
 
 || Date         | Time           | Title                             | Material                      ||
-| Tue 01/11     | 13-15          | PL Design, Compilation Phases | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1, live coding [start live/2022/live-1-Calc-bnfc-start.zip]
-%, live coding [Calc live/2022/live-1-Calc-bnfc.zip]
+| Tue 31/10     | 13-15          | PL Design, Compilation Phases | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
+% , live coding [start live/2023/live-1-Calc-bnfc-start.zip]
+%, live coding [Calc live/2023/live-1-Calc-bnfc.zip]
 % , [MiniJS laborations/mini/index.html]
 %, live coding [start live/2019/live-1-mini-start.zip] [lecture live/2019/live-1-as-far-as-we-got.zip] [finish live/2019/live-1-mini-finish.zip]
 %, [live coding live/2018/lec1-happy-live-2018.zip]
-| Thu 03/11     | 13-15 **[SB-H5 https://maps.chalmers.se/#f85ee0cd-e87b-403f-acf9-bd30f6b3339d]**  | Grammars / BNFC / Hands-on with Lab 1    | [slides plt-book/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3, [git notes/git-primer.md], live coding [start live/2022/live-2-bnfc-start.zip] |
-| Tue 08/11     | 13-15          | Formal languages and parsing                  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4, [shift-reduce parsing notes/sr-states.md] [LR-table notes/LR-table.html] [LL parser code live/2021/LL-parsing.zip] |
+| Thu 02/11     | 13-15 **[SB-H5 https://maps.chalmers.se/#f85ee0cd-e87b-403f-acf9-bd30f6b3339d]**  | Grammars / BNFC / Hands-on with Lab 1    | [slides plt-book/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3, [git notes/git-primer.md]
+%, live coding [start live/2023/live-2-bnfc-start.zip] |
+| Tue 07/11     | 13-15          | Formal languages and parsing                  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4, [shift-reduce parsing notes/sr-states.md] [LR-table notes/LR-table.html]
+% [LL parser code live/2021/LL-parsing.zip] |
 %[LR parse table live/2019/LR-parsetable.txt] for [grammar live/2019/LR.cf] |
-%| Thu 10/11     | 10-16       | [DATE-IT 2017 fair https://www.date-it.se/] | No class! |
-| Thu 10/11     | 13-15          | Theory of lexing //(lecture: Prabhat)//    | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
-| //Mon 14/11// | //23//         | //Lab 1 deadline//                |  |
+%| Thu 09/11     | 10-16       | [DATE-IT 2017 fair https://www.date-it.se/] | No class! |
+| Thu 09/11     | 13-15          | Theory of lexing    | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
+| //Mon 13/11// | //23//         | //Lab 1 deadline//                |  |
 %[lab1 PM laborations/lab1/index.html] |
-%| Tue 15/11     | 13-15          | Theory of lexing, LR parsing  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
-| Tue 15/11     | 13-15  *       | Type checking //(lecture: Mohammad)//                    | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6, [script notes/type-checking.html] [prime.c notes/prime.c] |
-| Thu 17/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5, [script notes/interpreter.html] |
-| Tue 22/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [live coding live/2022/live-7-lab2-haskell.zip] |
+%| Tue 14/11     | 13-15          | Theory of lexing, LR parsing  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
+| Tue 14/11     | 13-15  *       | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6, [script notes/type-checking.html] [prime.c notes/prime.c] |
+| Thu 16/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5, [script notes/interpreter.html] |
+| Tue 21/11     | 13-14          | Hands-on with Lab 2 (Haskell)  //(lecture: ??)//   | [live coding live/2023/live-7-lab2-haskell.zip] |
 %[lab2 PM laborations/lab2/index.html] [script notes/monads.html] [Monads https://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf] |
-| Tue 22/11     | 14-15          | Hands-on with Lab 2 (Java)        | [live coding live/2022/live-7-lab2-java.zip] |
+| Tue 21/11     | 14-15          | Hands-on with Lab 2 (Java)     //(lecture: ??)//   | [live coding live/2023/live-7-lab2-java.zip] |
 %[live coding live/2019/live-7-lab2.zip] |
-%| Thu 24/11     | 13-14          | Hands-on with Lab 2 (Haskell)     |  |
+%| Thu 23/11     | 13-14          | Hands-on with Lab 2 (Haskell)     |  |
 %[lab2 PM laborations/lab2/index.html]
-%| Thu 24/11     | 14-15 **[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]**  | Hands-on with Lab 2 (Java)        |  |
-| Thu 24/11     | 13-15  **[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]**        | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [notes notes/compilation.html], [prime.c notes/prime.c], [prime.j notes/prime.j]
-| //Mon 28/11// | //23//         | //Lab 2 deadline//                |  |
+%| Thu 23/11     | 14-15 **[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]**  | Hands-on with Lab 2 (Java)        |  |
+| Thu 23/11     | 13-15  **[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]**        | Code generation  //(lecture: ??)//                 | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [notes notes/compilation.html], [prime.c notes/prime.c], [prime.j notes/prime.j]
+| //Mon 27/11// | //23//         | //Lab 2 deadline//                |  |
 %[lab2 PM laborations/lab2/index.html] |
-%| Tue 29/11     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [script notes/compilation.html]
-| Tue 29/11    | 13-14          | Hands-on with Lab 3 (Haskell)     | [live code (diff) live/2022/live-9-lab3-haskell.diff] |
+%| Tue 28/11     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [script notes/compilation.html]
+| Tue 28/11    | 13-14          | Hands-on with Lab 3 (Haskell)     |  |
+%[live code (diff) live/2023/live-9-lab3-haskell.diff] |
 %[lab3 PM laborations/lab3/index.html]
-| Tue 29/11     | 14-15          | Hands-on with Lab 3 (Java)        | [live code (diff) live/2022/live-9-lab3-java.diff] |
+| Tue 28/11     | 14-15          | Hands-on with Lab 3 (Java)        |  |
+%[live code (diff) live/2023/live-9-lab3-java.diff] |
 %[live coding live/2019/live-9-lab3.zip] |
-%| Thu 01/12     | 13-14          | Hands-on with Lab 3 (Haskell)     |
+%| Thu 30/11     | 13-14          | Hands-on with Lab 3 (Haskell)     |  |
 %[lab3 PM laborations/lab3/index.html]
-%| Thu 01/12     | 14-15          | Hands-on with Lab 3 (Java)        |  |
-%| Thu 01/12     | 13-15          | [Domain-specific languages http://www.cse.chalmers.se/~bergert/slides/guest_lecture_DSLs.pdf]  | Guest lecture by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
-| Thu 01/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3, [script notes/cbn-cbv.html]
-%| Tue 06/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
-% %| Tue 06/12     | 13-15          | The language design space         | [slides plt-book/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
-| Tue 06/12     | 13-15          | Type inference and polymorphism   | plt 7.7-9, [script notes/typing.html]
-| Thu 8/12     | 13-14          | Hands-on with Lab 4 (Haskell)     | diff [start live/2022/live-12-lab4-haskell-start.diff] [live live/2022/live-12-lab4-haskell-finish.diff] |
+%| Thu 30/11     | 14-15          | Hands-on with Lab 3 (Java)        |  |
+%| Thu 30/11     | 13-15          | [Domain-specific languages http://www.cse.chalmers.se/~bergert/slides/guest_lecture_DSLs.pdf]  | Guest lecture by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
+| Thu 30/11     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3, [script notes/cbn-cbv.html]
+%| Tue 05/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
+% %| Tue 05/12     | 13-15          | The language design space         | [slides plt-book/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
+| Tue 05/12     | 13-15          | Type inference and polymorphism   | plt 7.7-9, [script notes/typing.html]
+| Thu 07/12     | 13-14          | Hands-on with Lab 4 (Haskell)     |  |
+%diff [start live/2023/live-12-lab4-haskell-start.diff] [live live/2023/live-12-lab4-haskell-finish.diff] |
 %live code [start live/2020/hands-on-4-haskell-start.tgz]  [finish live/2020/hands-on-4-haskell-finish.tgz] |
-| Thu 8/12     | 14-15          | Hands-on with Lab 4 (Java)        | diff [start live/2022/live-12-lab4-java-start.diff] [live live/2022/live-12-lab4-java-finish.diff] |
+| Thu 07/12     | 14-15          | Hands-on with Lab 4 (Java)        |  |
+%diff [start live/2023/live-12-lab4-java-start.diff] [live live/2023/live-12-lab4-java-finish.diff] |
 %live code [start live/2020/hands-on-4-java-start.tgz] [finish live/2020/hands-on-4-java-finish.tgz] |
 %[lab4 PM laborations/lab4/index.html]
-%| //Mon 12/12// | //23//         | //Lab 3 deadline//                |  |
-%| Tue 13/12     | 13-15          | Type inference. A taste of dependent types | Agda demo [Verified compilation ./JVM.agda] |
-| Tue 13/12     | 13-15 | Dependent types (Agda) [video https://chalmers.instructure.com/courses/21130/external_tools/29]  | "Live" coding [start live/2020/JVM-start.agda]  |
+%| //Mon 11/12// | //23//         | //Lab 3 deadline//                |  |
+| Tue 12/12     | 13-15          | Type inference. A taste of dependent types | Agda demo [Verified compilation ./JVM.agda] |
+%| Tue 12/12     | 13-15 | Dependent types (Agda) [video https://chalmers.instructure.com/courses/21130/external_tools/29]  | "Live" coding [start live/2020/JVM-start.agda]  |
 % [stop live/2020/JVM.agda] |
 %and [finish live/2019/live-13-JVM-finish.agda] |
 %Live coding [start live/2019/live-13-JVM-start.agda] and [finish live/2019/live-13-JVM-finish.agda] |
 % Agda demo [start ./BidirectionalTypeChecking-stub.agda] [finish ./BidirectionalTypeChecking.agda] |
-| //Wed 14/12// | //23//         | //Lab 3 deadline//                |  |
-| Thu 15/12     | 13-15          | Preparing for the exam [video https://chalmers.instructure.com/courses/21130/external_tools/29]  | [Training exam exams/exam-plt-2020-1.pdf] [Solution exams/solutions-plt-2020-1.pdf] [Answer Q1 live/2021/exam/CMM.cf] [Q1.c live/2021/exam/Q1.c] [Answer Q3-6 live/2021/exam/Answers.md]  |
-|| 2023 ||||
-| //Mon 09/01// | //23//         | //Lab 4 deadline//                |  |
-| //Thu 12/01// | //8.30-12.30// | //Exam//             | [Exam exams/exam-plt-2023-1.pdf] |
-| //Mon 23/01// | //14.30-15.30// | //Exam review (EDIT 6128)// | [Solution exams/solutions-plt-2023-1.pdf] |
-| //Fri 27/01// | //23//         | //Final lab deadline//            | //all lab returns//
-%| //Fri 27/01// | //10-11// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
-%| //Fri 24/03// |                | //Lab resubmission intent deadline//       |  |
-%| //Mon 03/04// |                | //Late final lab deadline//       |  |
-| //Tue 04/04// | //8.30-12.30// | //First reexam// |  |
+| //Wed 13/12// | //23//         | //Lab 3 deadline//                |  |
+| Thu 14/12     | 13-15          | Preparing for the exam            |  |
+% [video https://chalmers.instructure.com/courses/21130/external_tools/29]  | [Training exam exams/exam-plt-2020-1.pdf] [Solution exams/solutions-plt-2020-1.pdf] [Answer Q1 live/2021/exam/CMM.cf] [Q1.c live/2021/exam/Q1.c] [Answer Q3-6 live/2021/exam/Answers.md]  |
+|| 2024 ||||
+| //Mon 08/01// | //23//         | //Lab 4 deadline//                |  |
+| //Thu 11/01// | //8.30-12.30// | //Exam//             |  |
+%[Exam exams/exam-plt-2024-1.pdf] |
+%| //Mon 22/01// | //14.30-15.30// | //Exam review (EDIT 6128)// | [Solution exams/solutions-plt-2024-1.pdf] |
+| //Fri 26/01// | //23//         | //Final lab deadline//            | //all lab returns//
+%| //Fri 26/01// | //10-11// | //Exam review, EDIT 6128// | [Solution exams/solutions-plt-2018-1.pdf] |
+%| //Fri 22/03// |                | //Lab resubmission intent deadline//       |  |
+%| //Mon 01/04// |                | //Late final lab deadline//       |  |
+| //Thu 04/04// | //8.30-12.30// | //First reexam// |  |
 % ([Canvas https://chalmers.instructure.com/courses/14779])// |  |
 % //Exam (Canvas)//                      |  |
-| //Wed 19/04// | //11.00-12.00// | //Exam review (EDIT 6128)// |  |
-% [Solution exams/solutions-plt-2023-2.pdf] |
-| //Thu 24/08// | //14-18//      | //Second reexam// |  |
+%| //Wed 17/04// | //11.00-12.00// | //Exam review (EDIT 6128)// |  |
+% [Solution exams/solutions-plt-2024-2.pdf] |
+| //Thu 29/08// | //14-18//      | //Second reexam// |  |
 % ([Canvas https://chalmers.instructure.com/courses/12065])                      |  |
 % //[Solution exams/solutions-plt-2017-3.pdf]// |
-%| //Tue 11/09// | //13.30//      | //Exam review//                  |  |
+%| //Tue 10/09// | //13.30//      | //Exam review//                  |  |
 
-The official course schema is in [Time Edit https://cloud.timeedit.net/chalmers/web/public/ri1Y73yQZ05ZZ3Q7X96v9Q015Q0Yx30YfgQ6.html].
+The official course schema is in [Time Edit https://cloud.timeedit.net/chalmers/web/public/ri1Y03y5Z65ZZ7Q7766657015Q06x3500gW650QQ537.html].
+% https://cloud.timeedit.net/chalmers/web/public/ri1Y73yQZ05ZZ3Q7X96v9Q015Q0Yx30YfgQ6.html].
 % https://cloud.timeedit.net/chalmers/web/public/ri1Y23y5Z65ZZ0Q7566655015Q06x3500gW650QQ537.html].
 % https://cloud.timeedit.net/chalmers_test/web/public/ri10Q653575007QQ51ZZ756005yYW56376306008Q650.html].
 % https://cloud.timeedit.net/chalmers/web/public/ri1f7XYQ63ZZ3YQvQc076310y5Y6057Zq7QQ.html].
@@ -379,10 +389,14 @@ passed the course should be able to
 %- [Shreyash Kad (SK) https://se.linkedin.com/in/shreyash-kad], ``shreyash student chalmers se`` //(insert @ and .)//
 %- Anna Romeborn (AR), ``romeborn student chalmers se`` //(insert @ and .)//
 Assistants:
-- [Mohammad Ahmadpanah https://www.chalmers.se/en/Staff/Pages/mohammad-ahmadpanah.aspx]
-- [Prabhat Kumar Jha https://www.chalmers.se/en/staff/Pages/prabhar.aspx]
-- [Robert Krook https://www.chalmers.se/en/staff/Pages/krookr.aspx]
+%- [Mohammad Ahmadpanah https://www.chalmers.se/en/Staff/Pages/mohammad-ahmadpanah.aspx]
+%- [Prabhat Kumar Jha https://www.chalmers.se/en/staff/Pages/prabhar.aspx]
+%- [Robert Krook https://www.chalmers.se/en/staff/Pages/krookr.aspx]
+- [Andras Kovacs https://www.chalmers.se/personer/andrask/]
 - [Eric Olsson https://www.chalmers.se/en/staff/Pages/laro.aspx]
+- [Felix Cherubini https://www.chalmers.se/en/persons/felixche/]
+- Hao Hu ``haohu student chalmers se`` //(insert @ and .)//
+- [Jonas Höfer https://www.chalmers.se/personer/hoferj/]
 
 Questions regarding this class (organization, content, labs)
 should be asked publicly on the Canvas forum in the most cases.
@@ -421,16 +435,16 @@ You are also welcome to answer questions by others.
 Lab supervision is available in room [ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093] and online on Tue, Thu and Fri.
 || Day | Time        | Location     | Supervisors       |
  | Tue | 15:15-17:00 | Zoom, ED3354 | Andreas, Eric, Prabhat |
-% | Wed | 15:15-17:00 | Zoom only    | Shreyash, Oskar   |
+ | Wed | 15:15-17:00 | Zoom only    | Shreyash, Oskar   |
  | Thu | 15:15-17:00 | Zoom, ED3354 | Eric, Mohammad, Robert   |
  | Fri | 13:15-15:00 | Zoom, ED3354 | Mohammad, Prabhat, Robert       |
 
 
 The lab rooms and supervision are
 % Supervision is
-available from Tue 01 Nov till Fri 16 Dec 2022,
-except for Fri 04 Nov which is a half-day.
-%Extra supervision sessions (Zoom) are planned for January 2023, 15:15-17:00, at the following days:
+available from Tue 31 Oct till Fri 15 Dec 2023,
+except for Fri 03 Nov which is a half-day.
+%Extra supervision sessions (Zoom) are planned for January 2024, 15:15-17:00, at the following days:
 %Tue 17th, Wed 18th, Jan 24th, Jan 25th.
 
 % **Attendance in these classes is optional**.
@@ -439,8 +453,8 @@ except for Fri 04 Nov which is a half-day.
 % times. But, if there is lack of room, those who attend their first
 % supervision of the week have priority to get a place and supervisor help.
 
-We use [Slack https://plt-iyn7311.slack.com/] to organize the lab supervision.
-Please [join https://join.slack.com/t/plt-iyn7311/shared_invite/zt-1i08mnlyb-quW_CK31LOAn9b4Y8befHA]
+We use [Slack https://plt2023lp2.slack.com/] to organize the lab supervision.
+Please [join https://join.slack.com/t/plt2023lp2/shared_invite/zt-25dk1rfup-acG09TxebCQGjepXhnNX3A]
 our Slack workspace.
 
 The TAs will be present in lab rooms during lab supervision slots, available for help both in-person and virtually. To ask for help,  just send a ticket request through the ``#queue`` Slack channel.
@@ -461,14 +475,14 @@ If you have difficulties finding a partner, please use Slack channel ``#lab-part
 
 You have to pass the labs to pass the course.
 However, the course grade is determined solely by the exam.
-- Lab 1 - parser  (deadline 14/11)
-% - [Lab 1 - parser laborations/lab1/index.html] (deadline 14/11)
-- Lab 2 - type checker and interpreter (deadline 30/11)
-% - [Lab 2 - type checker and interpreter laborations/lab2/index.html] (deadline 30/11)
-- Lab 3 - code generator (deadline 14/12)
-% - [Lab 3 - code generator laborations/lab3/index.html] (deadline 14/12)
-- Lab 4 - functional language interpreter  (deadline 09/01/2023)
-% - [Lab 4 - functional language interpreter laborations/lab4/index.html] (deadline 09/01/2023)
+- Lab 1 - parser  (deadline 13/11)
+% - [Lab 1 - parser laborations/lab1/index.html] (deadline 13/11)
+- Lab 2 - type checker and interpreter (deadline 27/11)
+% - [Lab 2 - type checker and interpreter laborations/lab2/index.html] (deadline 27/11)
+- Lab 3 - code generator (deadline 13/12)
+% - [Lab 3 - code generator laborations/lab3/index.html] (deadline 13/12)
+- Lab 4 - functional language interpreter  (deadline 08/01/2024)
+% - [Lab 4 - functional language interpreter laborations/lab4/index.html] (deadline 08/01/2024)
 
 
 The labs are quite substantial, so please set aside at least 30 full working hours (4 full working days) before the deadline.  It is recommended to start at least 10 days before the deadline.
@@ -504,7 +518,7 @@ make sure you do not give away the solution.
 % solution.  (Along the same lines, never post your solution on public
 % fora and mailing lists!)
 
-% Reporting is done via [Fire https://plt-lp2-22.fire.cse.chalmers.se/].
+% Reporting is done via [Fire https://plt-lp2-23.fire.cse.chalmers.se/].
 % Before submitting your solution, run your program through the provided **test suite**.
 % Also, make sure that your submission contains all necessary files
 % and the **build succeeds**.  For instance, if you are submitting an archive,
@@ -539,12 +553,12 @@ In particular, make sure you understand all parts of the solution
 =Exam=
 
 The written exam determines the course grade, the usual grading scales apply:
-Chalmers: 5, 4, 3, U; Gothenburg University: VG, G, U.
+Chalmers: 5, 4, 3, U; Gothenburg University: MVG, VG, G, U.
 
 Exam dates:
- 12 Jan 2023 am J,
- 04 Apr 2023 am J,
- 24 Aug 2023 pm J.
+ 11 Jan 2024 am J,
+ 04 Apr 2024 am J,
+ 29 Aug 2024 pm J.
 
 The exam tests the understanding of the course contents from a more high-level view,
 e.g., the underlying theoretical concepts.
@@ -618,7 +632,7 @@ We use the BNF Converter ([Homepage https://bnfc.digitalgrammars.com/] |
 
 Download and installation instructions at https://bnfc.digitalgrammars.com/.
 
-% The latest version of BNFC (2.9.3) can be installed following these [instructions https://github.com/BNFC/bnfc/blob/master/README.md#installation].
+% The latest version of BNFC (2.9.5) can be installed following these [instructions https://github.com/BNFC/bnfc/blob/master/README.md#installation].
 
 When using the Java backend, you will need either
 [ANTLR https://www.antlr.org/]
@@ -646,7 +660,7 @@ by storing these jars in
 %The order matters since ``javatools.jar`` also contains an older version of CUP;
 %make sure that ``javatools.jar`` comes last in the search path.
 
-//(Java/CUP Instructions for BNFC ≤ 2.8.1 (uses CUP v0.10k) can be found on [older versions of this page http://www.cse.chalmers.se/edu/year/2021/course/DAT151/index.html].)//
+%//(Java/CUP Instructions for BNFC ≤ 2.8.1 (uses CUP v0.10k) can be found on [older versions of this page http://www.cse.chalmers.se/edu/year/2021/course/DAT151/index.html].)//
 
 % ===Java/CUP Instructions for BNFC ≤ 2.8.1 (uses CUP v0.10k)===
 %
@@ -671,10 +685,10 @@ by storing these jars in
 [Student representatives https://student.portal.chalmers.se/en/chalmersstudies/courseinformation/courseevaluation/Pages/default.aspx]
 for DAT151 Programming language technology.
 
-|| Program | @student.chalmers.se | Name ||
-|  | ricarl | Carl Ridderstolpe |
-|  |        | Max Hvid Hansen |
-
+%|| Program | @student.chalmers.se | Name ||
+%|  | ricarl | Carl Ridderstolpe |
+%|  |        | Max Hvid Hansen |
+%
 
 % | MPALG | burmanj   | Joakim Burman     |
 % | MPCSN | yitao           | Yitao Dong        |
