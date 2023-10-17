@@ -1,0 +1,52 @@
+## Programming Language Technology (Chalmers DAT 151, GU DIT 231)
+## (C) Andreas Abel, 2023
+## All rights reserved.
+
+# Run `hpack` to generate `lab2.cabal` from this description.
+
+name:      lab2
+version:   0.0.20231017
+synopsis:  Programming Language Technology Lab 2 (Chalmers DAT151, GU DIT231)
+license:   AllRightsReserved
+author:    Andreas Abel <andreas.abel@gu.se>
+category:  Compiler
+
+# hpack version
+spec-version: 0.35
+
+tested-with:
+  - GHC == 9.8.1
+  - GHC == 9.6.3
+  - GHC == 9.4.7
+  - GHC == 9.2.8
+  - GHC == 9.0.2
+  - GHC == 8.10.7
+  - GHC == 8.8.4
+  - GHC == 8.6.5
+  - GHC == 8.4.4
+  - GHC == 8.2.2
+  - GHC == 8.0.2
+
+dependencies:
+  - base >= 4.9 && < 5
+
+executables:
+  lab2:
+    # files in MAlonzo/Code are qualified modules
+    # files in CMM are qualified modules
+    source-dirs:
+      - .
+      - src
+    main: MAlonzo.Code.Qlab2
+    dependencies:
+      - array
+      - text
+      - filepath
+      - process
+
+    # exclude some modules
+    when:
+      condition: false
+      other-modules:
+        - CMM.Skel
+        - CMM.Test

@@ -1,0 +1,7 @@
+-- Programming Language Technology (Chalmers DAT 151, GU DIT 231)
+-- (C) Andreas Abel, 2023
+-- All rights reserved.
+
+name:    lab2
+depend:  standard-library-1.7.1
+include: . src
