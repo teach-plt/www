@@ -17,6 +17,20 @@ jobs:
 
     steps:
 
+    - name: Local PATH
+      run: |
+        mkdir -p "${HOME}/.local/bin"
+        echo "${HOME}/.local/bin" >> "${GITHUB_PATH}"
+
+    - name: Install tectonic
+      run: |
+        cd "${HOME}/.local/bin"
+        curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
+
+    - name: Tectonic version
+      run: |
+        tectonic --version
+
     - name: Install python 2.7
       run: |
         sudo apt update
@@ -31,11 +45,6 @@ jobs:
       run: |
         echo "'python' is $(python --version)"
         echo "'python2' is $(python2 --version)"
-
-    - name: Local PATH
-      run: |
-        mkdir -p "${HOME}/.local/bin"
-        echo "${HOME}/.local/bin" >> "${GITHUB_PATH}"
 
     - name: Install txt2tags
       run: |
@@ -61,23 +70,25 @@ jobs:
       run: |
         sudo apt install pandoc
 
-    - name: Setup TeX Live
-      uses: teatimeguest/setup-texlive-action@v2
-      with:
-        packages: >-
-          scheme-basic
-          graphics
-          hyperref
-          lkproof
-          paralist
-          ulem
-          xcolor
+    # - name: Setup TeX Live
+    #   uses: teatimeguest/setup-texlive-action@v2
+    #   with:
+    #     packages: >-
+    #       scheme-basic
+    #       graphics
+    #       hyperref
+    #       lkproof
+    #       paralist
+    #       ulem
+    #       xcolor
+    #       etoolbox
 
-        # plain
+    #     # plain
 
     - uses: actions/checkout@v4
 
-    - run: make
+    - run: |
+        make pdflatex=tectonic
 
     # - name: Setup Pages
     #   uses: actions/configure-pages@v3
