@@ -1,13 +1,41 @@
-*~
 *.agdai
 *.aux
 *.bak
+*.chi
+*.chs.h
 *.class
+*.dyn_hi
+*.dyn_o
+*.eventlog
+*.exe
 *.hi
+*.hie
+*.hp
 *.log
 *.o
+*.prof
+*~
 \#*\#
+.HTF/
+.cabal-sandbox/
+.ghc.environment.*
+.hpc
+.hsenv
+.stack-work/
+_build/
 a.out
+cabal-dev/
+cabal.project.local
+cabal.project.local~
+cabal.sandbox.config
+dist/
+dist-*/
+MAlonzo/
+stack*.yaml.lock
+
+# Ignore directories that contain generated files
+CMM/
+CPP/
 
 # Don't commit HTML since it's all generated
 *.html
@@ -16,7 +44,7 @@ a.out
 *.tar.gz
 
 # Ignore IPL book sources
-CVS
+CVS/
 
 # Temporarily ignored directories
 /doc/
@@ -50,28 +78,19 @@ CVS
 /laborations/lab1/testsuite/progs-test-lab1
 /laborations/lab1/testsuite/good/fractal.pgm
 /laborations/lab1/testsuite/good/fractal.ppm
-/laborations/lab1/testsuite/good/mandelbrot.exe
 
-/laborations/lab2/java/CMM/
-/laborations/lab2/java/CPP/
-/laborations/lab2/java/lab2
-/laborations/lab2/haskell/CMM/
-/laborations/lab2/haskell/CPP/
+/laborations/lab2/agda/lab2
+/laborations/lab2/agda/lab2.cabal
 /laborations/lab2/haskell/lab2
+/laborations/lab2/java/lab2
 
 /laborations/lab2/testsuite/good/**/*.j
-/laborations/lab2/testsuite/good/*.cc.exe
 /laborations/lab2/testsuite/good/*.cc.tmp.cpp
-/laborations/lab2/testsuite/bad/*.cc.exe
 /laborations/lab2/testsuite/bad/*.cc.tmp.cpp
 /laborations/lab2/testsuite/progs-test-lab2
 /laborations/lab2/testsuite/plt-test-lab2
 
-/laborations/lab3/java/CMM/
-/laborations/lab3/java/CPP/
 /laborations/lab3/java/lab3
-/laborations/lab3/haskell/CMM/
-/laborations/lab3/haskell/CPP/
 /laborations/lab3/haskell/lab3
 
 /laborations/lab3/testsuite/*.j
@@ -89,29 +108,4 @@ CVS
 /laborations/lab4/testsuite.tgz
 /laborations/lab4/testsuite/progs-test-lab4
 /laborations/lab4/testsuite/plt-test-lab4
-
-# Haskell
-dist
-dist-*
-cabal-dev
-*.hie
-*.chi
-*.chs.h
-*.dyn_o
-*.dyn_hi
-.hpc
-.hsenv
-.cabal-sandbox/
-cabal.sandbox.config
-*.prof
-*.hp
-*.eventlog
-stack*.yaml.lock
-.stack-work/
-cabal.project.local
-cabal.project.local~
-.HTF/
-.ghc.environment.*
-
 /laborations/lab4/testsuite/good/*.golden
-/live/2021/exam/CMM
