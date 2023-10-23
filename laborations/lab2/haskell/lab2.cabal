@@ -1,11 +1,10 @@
-cabal-version:        2.4
+cabal-version:        2.2
 name:                 lab2
-version:              0.0
+version:              0.1
 author:               Andreas Abel and the PLT team.
 copyright:            (C) 2022-23 Andreas Abel
 license:              NONE
                       -- All rights reserved.
-
 synopsis:
   Haskell stub for PLT lab2
 description:
@@ -13,11 +12,21 @@ description:
 
 tested-with:
   GHC == 9.8.1 || ==9.6.3 || ==9.4.7 || ==9.2.8 || ==9.0.2
-   || ==8.10.7 || ==8.8.4 || ==8.6.5 || ==8.4.4 || ==8.2.2 || ==8.0.2
+   || ==8.10.7 || ==8.8.4 || ==8.6.5 || ==8.4.4
 
 extra-source-files:
   CMM.cf
   Makefile
+
+build-type: Custom
+custom-setup
+  setup-depends:
+      Cabal   >= 2.0   && < 4
+        -- Distribution.Simple.BuildPaths.autogenPackageModulesDir is new in Cabal-2.0
+    , base    >= 4.10  && < 5
+        -- Restrict to GHC >= 8.2 which ships Cabal-2.0 (otherwise Cabal has to be reinstalled)
+    , process
+    , BNFC    >= 2.8.4 && < 2.10
 
 executable lab2
   main-is:            lab2.hs
@@ -25,6 +34,11 @@ executable lab2
   other-modules:
     Interpreter
     TypeChecker
+    CMM.Abs
+    CMM.Lex
+    CMM.Par
+    CMM.Print
+  autogen-modules:
     CMM.Abs
     CMM.Lex
     CMM.Par
