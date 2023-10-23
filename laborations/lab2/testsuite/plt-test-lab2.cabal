@@ -2,6 +2,7 @@ cabal-version:             2.4
 name:                      plt-test-lab2
 version:                   0.0
 author:                    Andreas Abel and the PLT team.
+copyright:                 (C) 2022-23 Andreas Abel
 license:                   NONE
                            -- All rights reserved.
 
@@ -11,7 +12,7 @@ description:
   Test suite for Programming Language Technology lab2 (Chalmers DAT151 / GU DIT231).
 
 tested-with:
-  GHC == 9.4.3 || ==9.2.5 || ==9.0.2
+  GHC == 9.8.1 || ==9.6.3 || ==9.4.7 || ==9.2.8 || ==9.0.2
    || ==8.10.7 || ==8.8.4 || ==8.6.5 || ==8.4.4 || ==8.2.2 || ==8.0.2
 
 extra-source-files:
@@ -39,13 +40,13 @@ executable plt-test-lab2
   -- when invoking the runner with `cabal run` or `stack run`.
 
   build-tool-depends:
-      BNFC:bnfc   >= 2.8.1  && < 2.10
+    -- Require bnfc >= 2.8.4 to drop the ErrM module
+      BNFC:bnfc   >= 2.8.4  && < 2.10
     -- Not sure about the lower bounds, so we pick alex and happy versions
     -- that work at least with GHC 8.0.
-    , alex:alex   >= 3.1.4  && < 3.3
+    , alex:alex   >= 3.1.4  && < 3.5
     , happy:happy >= 1.19.5 && < 1.21
 
   ghc-options:
     -Wall
     -Wcompat
-

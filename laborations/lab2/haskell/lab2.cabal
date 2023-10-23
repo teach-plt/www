@@ -1,6 +1,19 @@
 cabal-version:        2.4
 name:                 lab2
 version:              0.0
+author:               Andreas Abel and the PLT team.
+copyright:            (C) 2022-23 Andreas Abel
+license:              NONE
+                      -- All rights reserved.
+
+synopsis:
+  Haskell stub for PLT lab2
+description:
+  Haskell stub for Programming Language Technology lab2 (Chalmers DAT151 / GU DIT231).
+
+tested-with:
+  GHC == 9.8.1 || ==9.6.3 || ==9.4.7 || ==9.2.8 || ==9.0.2
+   || ==8.10.7 || ==8.8.4 || ==8.6.5 || ==8.4.4 || ==8.2.2 || ==8.0.2
 
 extra-source-files:
   CMM.cf
