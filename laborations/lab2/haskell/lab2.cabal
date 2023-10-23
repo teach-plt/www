@@ -21,12 +21,14 @@ extra-source-files:
 build-type: Custom
 custom-setup
   setup-depends:
-      Cabal   >= 2.0   && < 4
+    , Cabal   >= 2.0   && < 4
         -- Distribution.Simple.BuildPaths.autogenPackageModulesDir is new in Cabal-2.0
     , base    >= 4.10  && < 5
         -- Restrict to GHC >= 8.2 which ships Cabal-2.0 (otherwise Cabal has to be reinstalled)
     , process
-    , BNFC    >= 2.8.4 && < 2.10
+    -- Adding BNFC here does not help because that only provides the BNFC _library_,
+    -- not the _executable that_ we call from 'Setup.hs'.
+    -- , BNFC    >= 2.8.4 && < 2.10
 
 executable lab2
   main-is:            lab2.hs
@@ -50,7 +52,7 @@ executable lab2
     TupleSections
 
   build-depends:
-      base       >= 4.9.1 && < 5
+    , base       >= 4.9.1 && < 5
     , array      >= 0.5.1 && < 0.6
     , containers >= 0.5.7 && < 0.8
     , mtl        >= 2.2.2 && < 2.4
@@ -58,3 +60,13 @@ executable lab2
   ghc-options:
     -Wall
     -Wcompat
+
+  build-tool-depends:
+   -- The 'bnfc' executable is called from 'Setup.hs' only,
+   -- but 'build-tool-depends' is not uspported in the 'custom-setup' stanza.
+   -- BNFC 2.8.4 dropped the 'Err' custom type in favor of the standard 'Either'.
+    , BNFC:bnfc   >= 2.8.4  && < 2.10
+   -- Not sure about the lower bounds, so we pick alex and happy versions
+   -- that work at least with GHC 8.0.
+    , alex:alex   >= 3.1.4  && < 3.5
+    , happy:happy >= 1.19.5 && < 1.21

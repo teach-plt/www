@@ -1,0 +1,10 @@
+branches: master
+
+installed: +all
+  -- We build with the GHC-shipped libraries.
+
+cabal-check: False
+  -- `cabal check` rejects our package because of `license: NONE`.
+
+haddock: >= 9.0
+  -- The `haddock`s for GHC 8.x choke on `lab2.hs`.
