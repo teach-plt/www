@@ -1,6 +1,6 @@
 packages:
   -- laborations/lab1/testsuite
-  -- laborations/lab2/testsuite
+  laborations/lab2/testsuite
   -- laborations/lab3/testsuite
   -- laborations/lab4/testsuite
 

@@ -29,10 +29,11 @@ executable plt-test-lab2
   default-language:   Haskell2010
 
   build-depends:
-      base       >= 4.9.1 && < 5
-    , directory  >= 1.3.0 && < 1.4
-    , filepath   >= 1.4.1 && < 1.5
-    , process    >= 1.4.3 && < 1.7
+   -- Lower bounds set to versions shipped with GHC 8.4.4
+    , base       >= 4.11.1.0 && < 5
+    , directory  >= 1.3.1.5  && < 1.4
+    , filepath   >= 1.4.2    && < 1.5
+    , process    >= 1.6.3.0  && < 1.7
 
   -- These following tools are not needed to _build_ the testsuite runner,
   -- but to _run_ it, namely to build the parser from the given LBNF file.
@@ -40,12 +41,12 @@ executable plt-test-lab2
   -- when invoking the runner with `cabal run` or `stack run`.
 
   build-tool-depends:
-    -- Require bnfc >= 2.8.4 to drop the ErrM module
+   -- BNFC 2.8.4 dropped the 'Err' custom type in favor of the standard 'Either'.
       BNFC:bnfc   >= 2.8.4  && < 2.10
-    -- Not sure about the lower bounds, so we pick alex and happy versions
-    -- that work at least with GHC 8.0.
-    , alex:alex   >= 3.1.4  && < 3.5
-    , happy:happy >= 1.19.5 && < 1.21
+   -- Not sure about the lower bounds, so we pick alex and happy versions
+   -- that come in the last Stackage LTS (12.26) for GHC 8.4.4.
+    , alex:alex   >= 3.2.4  && < 3.5
+    , happy:happy >= 1.19.9 && < 1.21
 
   ghc-options:
     -Wall
