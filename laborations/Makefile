@@ -2,11 +2,17 @@
 #
 # Distribute goals to the lab% subdirectories
 
+# Files which contribute to the generated .html
+deps=../style.css ../enhance_page.js
+
 ## Build web pages
 
 .PHONY : www www%
 
-www : www1 www2 www3 www4
+www : index.html www1 www2 www3 www4
+
+%.html : %.txt $(deps)
+	txt2tags --style=../style.css -t html $<
 
 www% :
 	make -C lab$* www
