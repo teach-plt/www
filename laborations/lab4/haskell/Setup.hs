@@ -16,7 +16,7 @@ main = defaultMainWithHooks simpleUserHooks
       callProcess "bnfc"
         [ "-o", autogenPackageModulesDir localBuildInfo
         , "-d"
-        , "CMM.cf"
+        , "Fun.cf"
         ]
       -- Run the build process.
       buildHook simpleUserHooks packageDescription localBuildInfo userHooks buildFlags

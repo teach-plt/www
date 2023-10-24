@@ -44,7 +44,7 @@ sdist : lab4.tar.gz
 
 lab4.tar.gz : $(files) $(parser)
 	cabal sdist
-	ln -s -f dist-newstyle/sdist/lab4-0.0.tar.gz $@
+	ln -s -f dist-newstyle/sdist/lab4-*.tar.gz $@
 
 # Rules for cleaning generated files:
 
