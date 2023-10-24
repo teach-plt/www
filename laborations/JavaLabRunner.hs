@@ -1,3 +1,7 @@
+-- Programming Language Technology (Chalmers DAT151 / GU DIT231).
+-- (C) Andreas Abel and Fabian Ruch, 2018-2023
+-- All rights reserved.
+
 {-# LANGUAGE CPP #-}
 
 -- | OS-agnostic runner for Java solutions of PLT labs.
