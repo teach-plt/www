@@ -25,8 +25,11 @@ tested-with:
   - GHC == 8.6.5
   - GHC == 8.4.4
 
-dependencies:
-  - base >= 4.9 && < 5
+custom-setup:
+  dependencies:
+    - Cabal >= 2.0 && < 4
+    - base >= 4.11 && < 5
+    - process
 
 executables:
   lab2:
@@ -34,13 +37,16 @@ executables:
     # files in CMM are qualified modules
     source-dirs:
       - .
-      - src
-    main: MAlonzo.Code.Qlab2
+      # - src
+    main: Main
+    generated-other-modules:
+      - MAlonzo.Code.Qlab2
     dependencies:
+      - base >= 4.11 && < 5
       - array
-      - text
       - filepath
       - process
+      - text
 
     # exclude some modules
     when:
