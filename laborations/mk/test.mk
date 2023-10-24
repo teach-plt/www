@@ -14,11 +14,15 @@ test-goals =  \
 # end test-goals
 
 .PHONY: test-build
-test-build : test-cabal $(test-goals)
+test-build : test-cabal test-stack $(test-goals)
 
 .PHONY: test-cabal
 test-cabal:
 	cabal build
+
+.PHONY: test-stack
+test-stack:
+	stack build
 
 clean-tests :
 	@find . -name "test-*" -empty -delete

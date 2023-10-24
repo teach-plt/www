@@ -22,6 +22,10 @@ jobs:
         mkdir -p "${HOME}/.local/bin"
         echo "${HOME}/.local/bin" >> "${GITHUB_PATH}"
 
+    - name: Setup Stack
+      run: |
+        stack config set system-ghc --global true
+
     - name: Install tectonic
       run: |
         cd "${HOME}/.local/bin"
