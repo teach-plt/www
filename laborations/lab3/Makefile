@@ -2,7 +2,7 @@
 # Andreas, 2018-12-03 Added stubs like for lab2
 
 # Files which contribute to the generated .html
-deps=../../style.css ../../include.html ../../enhance_page.js
+deps=../../style.css ../../enhance_page.js
 
 .PHONY : all www testsuite java haskell
 

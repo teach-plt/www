@@ -1,7 +1,7 @@
 # Makefile for www structure of PLT
 
 # Files which contribute to index.html
-deps=style.css include.html enhance_page.js Makefile
+deps=style.css enhance_page.js Makefile
 
 .PHONY : all ship lab% mini ipl-book notes www
 

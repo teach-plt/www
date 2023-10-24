@@ -2,7 +2,7 @@
 # Andreas, 2018-12-16 Added Haskell and Java stubs
 
 # Files which contribute to the generated .html
-deps=../../style.css ../../include.html ../../enhance_page.js
+deps=../../style.css ../../enhance_page.js
 
 .PHONY : all www testsuite java haskell
 

@@ -1,7 +1,7 @@
 # Andreas, 2014-01-19 Makefile for lab1
 
 # Files which contribute to the generated .html
-deps=../../style.css ../../include.html ../../enhance_page.js
+deps=../../style.css ../../enhance_page.js
 
 .PHONY : all www testsuite
 

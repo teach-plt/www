@@ -1,7 +1,7 @@
 # Andreas, 2019-11-07 Makefile for mini
 
 # Files which contribute to the generated .html
-deps=../../style.css ../../include.html ../../enhance_page.js
+deps=../../style.css ../../enhance_page.js
 
 .PHONY : all www
 
