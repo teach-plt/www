@@ -169,7 +169,12 @@ jobs:
       - name: initial cabal.project for sdist
         run: |
           touch cabal.project
+          echo "packages: $GITHUB_WORKSPACE/source/laborations" >> cabal.project
+          echo "packages: $GITHUB_WORKSPACE/source/laborations/lab1/testsuite" >> cabal.project
+          echo "packages: $GITHUB_WORKSPACE/source/laborations/lab2/testsuite" >> cabal.project
           echo "packages: $GITHUB_WORKSPACE/source/laborations/lab2/haskell" >> cabal.project
+          echo "packages: $GITHUB_WORKSPACE/source/laborations/lab3/haskell" >> cabal.project
+          echo "packages: $GITHUB_WORKSPACE/source/laborations/lab4/haskell" >> cabal.project
           cat cabal.project
       - name: sdist
         run: |
@@ -181,17 +186,42 @@ jobs:
           find sdist -maxdepth 1 -type f -name '*.tar.gz' -exec tar -C $GITHUB_WORKSPACE/unpacked -xzvf {} \;
       - name: generate cabal.project
         run: |
+          PKGDIR_plt_run_java_lab="$(find "$GITHUB_WORKSPACE/unpacked" -maxdepth 1 -type d -regex '.*/plt-run-java-lab-[0-9.]*')"
+          echo "PKGDIR_plt_run_java_lab=${PKGDIR_plt_run_java_lab}" >> "$GITHUB_ENV"
+          PKGDIR_plt_test_lab1="$(find "$GITHUB_WORKSPACE/unpacked" -maxdepth 1 -type d -regex '.*/plt-test-lab1-[0-9.]*')"
+          echo "PKGDIR_plt_test_lab1=${PKGDIR_plt_test_lab1}" >> "$GITHUB_ENV"
+          PKGDIR_plt_test_lab2="$(find "$GITHUB_WORKSPACE/unpacked" -maxdepth 1 -type d -regex '.*/plt-test-lab2-[0-9.]*')"
+          echo "PKGDIR_plt_test_lab2=${PKGDIR_plt_test_lab2}" >> "$GITHUB_ENV"
           PKGDIR_lab2="$(find "$GITHUB_WORKSPACE/unpacked" -maxdepth 1 -type d -regex '.*/lab2-[0-9.]*')"
           echo "PKGDIR_lab2=${PKGDIR_lab2}" >> "$GITHUB_ENV"
+          PKGDIR_lab3="$(find "$GITHUB_WORKSPACE/unpacked" -maxdepth 1 -type d -regex '.*/lab3-[0-9.]*')"
+          echo "PKGDIR_lab3=${PKGDIR_lab3}" >> "$GITHUB_ENV"
+          PKGDIR_lab4="$(find "$GITHUB_WORKSPACE/unpacked" -maxdepth 1 -type d -regex '.*/lab4-[0-9.]*')"
+          echo "PKGDIR_lab4=${PKGDIR_lab4}" >> "$GITHUB_ENV"
           rm -f cabal.project cabal.project.local
           touch cabal.project
           touch cabal.project.local
+          echo "packages: ${PKGDIR_plt_run_java_lab}" >> cabal.project
+          echo "packages: ${PKGDIR_plt_test_lab1}" >> cabal.project
+          echo "packages: ${PKGDIR_plt_test_lab2}" >> cabal.project
           echo "packages: ${PKGDIR_lab2}" >> cabal.project
+          echo "packages: ${PKGDIR_lab3}" >> cabal.project
+          echo "packages: ${PKGDIR_lab4}" >> cabal.project
+          echo "package plt-run-java-lab" >> cabal.project
+          echo "    ghc-options: -Werror=missing-methods" >> cabal.project
+          echo "package plt-test-lab1" >> cabal.project
+          echo "    ghc-options: -Werror=missing-methods" >> cabal.project
+          echo "package plt-test-lab2" >> cabal.project
+          echo "    ghc-options: -Werror=missing-methods" >> cabal.project
           echo "package lab2" >> cabal.project
+          echo "    ghc-options: -Werror=missing-methods" >> cabal.project
+          echo "package lab3" >> cabal.project
+          echo "    ghc-options: -Werror=missing-methods" >> cabal.project
+          echo "package lab4" >> cabal.project
           echo "    ghc-options: -Werror=missing-methods" >> cabal.project
           cat >> cabal.project <<EOF
           EOF
-          $HCPKG list --simple-output --names-only | perl -ne 'for (split /\s+/) { print "constraints: $_ installed\n" unless /^(lab2)$/; }' >> cabal.project.local
+          $HCPKG list --simple-output --names-only | perl -ne 'for (split /\s+/) { print "constraints: $_ installed\n" unless /^(lab2|lab3|lab4|plt-run-java-lab|plt-test-lab1|plt-test-lab2)$/; }' >> cabal.project.local
           cat cabal.project
           cat cabal.project.local
       - name: dump install plan
