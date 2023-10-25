@@ -7,7 +7,7 @@ html {
 body {
   /* position: absolute; */  /* messes up layout since 2018-11-05 */
   background-color: #F9F9F9;
-  margin: 0em 13%;
+  margin: 0em 0em 0em 15%; /* top right bottom left */
   /* min-height: 100%; */  /* no difference */
   box-shadow: 0em 0em 5em #424242;
   padding: 2em 5em;

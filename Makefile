@@ -1,7 +1,7 @@
 # Makefile for www structure of PLT
 
 # Files which contribute to index.html
-deps=style.css enhance_page.js Makefile
+deps=style.css gh-fork-ribbon.css enhance_page.js Makefile
 
 .PHONY : all ship lab% mini ipl-book notes labs-www www
 
@@ -41,7 +41,7 @@ check : all
 # version 3.x produces different html (very different look)
 # and dumps a fixed CSS style into the generated html.
 index.html : %.html : %.txt $(deps)
-	txt2tags --style=style.css -t html $<
+	txt2tags --style=style.css --style=gh-fork-ribbon.css -t html $<
 # --toc
 
 ## Exams
