@@ -1,11 +1,11 @@
 packages:
-  laborations
+  labs
 
-  laborations/lab1/testsuite
-  laborations/lab2/testsuite
-  -- laborations/lab3/testsuite
-  -- laborations/lab4/testsuite
+  labs/lab1/testsuite
+  labs/lab2/testsuite
+  -- labs/lab3/testsuite
+  -- labs/lab4/testsuite
 
-  laborations/lab2/haskell
-  laborations/lab3/haskell
-  laborations/lab4/haskell
+  labs/lab2/haskell
+  labs/lab3/haskell
+  labs/lab4/haskell

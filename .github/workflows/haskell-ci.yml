@@ -169,12 +169,12 @@ jobs:
       - name: initial cabal.project for sdist
         run: |
           touch cabal.project
-          echo "packages: $GITHUB_WORKSPACE/source/laborations" >> cabal.project
-          echo "packages: $GITHUB_WORKSPACE/source/laborations/lab1/testsuite" >> cabal.project
-          echo "packages: $GITHUB_WORKSPACE/source/laborations/lab2/testsuite" >> cabal.project
-          echo "packages: $GITHUB_WORKSPACE/source/laborations/lab2/haskell" >> cabal.project
-          echo "packages: $GITHUB_WORKSPACE/source/laborations/lab3/haskell" >> cabal.project
-          echo "packages: $GITHUB_WORKSPACE/source/laborations/lab4/haskell" >> cabal.project
+          echo "packages: $GITHUB_WORKSPACE/source/labs" >> cabal.project
+          echo "packages: $GITHUB_WORKSPACE/source/labs/lab1/testsuite" >> cabal.project
+          echo "packages: $GITHUB_WORKSPACE/source/labs/lab2/testsuite" >> cabal.project
+          echo "packages: $GITHUB_WORKSPACE/source/labs/lab2/haskell" >> cabal.project
+          echo "packages: $GITHUB_WORKSPACE/source/labs/lab3/haskell" >> cabal.project
+          echo "packages: $GITHUB_WORKSPACE/source/labs/lab4/haskell" >> cabal.project
           cat cabal.project
       - name: sdist
         run: |

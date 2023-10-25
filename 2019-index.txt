@@ -89,13 +89,13 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
    on verified compilation.
 
 %  : //2019-12-16//
-%    [Lab 4 stubs laborations/lab4/index.html#section3] for Haskell and Java are now available.
+%    [Lab 4 stubs labs/lab4/index.html#section3] for Haskell and Java are now available.
 
  : //2019-12-12//
    A bug that caused some test (e.g. the tests in the subtyping directory) to not run has been fixed in the lab 3 test suite. Please re-download the test suite.
 
  : //2019-12-12//
-   [Lab 4 laborations/lab4/index.html] is online.
+   [Lab 4 labs/lab4/index.html] is online.
 
 %  : //2019-12-05//
 %    **Guest lecture** by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
@@ -112,14 +112,14 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
    (Note: should compile, but does not run!)
 
  : //2019-11-29//
-   [Lab 3 laborations/lab3/index.html] is online.
+   [Lab 3 labs/lab3/index.html] is online.
 
  : //2019-11-26//
    The code from today's "Hands-on for lab 2" session is [online live/2019/live-7-lab2.zip] (Haskell and Java).
 
 
 %  : //2019-11-20//
-%    [Lab 2 laborations/lab2/index.html] is online.
+%    [Lab 2 labs/lab2/index.html] is online.
 
  : //2019-11-22//
    For lab2, we clarified in the lab text that there is no need to type annotate the code during type checking. Annotations will become relevant first in lab3.
@@ -142,12 +142,12 @@ http://www.cse.chalmers.se/edu/course/DAT151/</a>
 
 
  : //2019-11-07//
-   [MiniJS laborations/mini/index.html] implementation in Haskell and Java.
+   [MiniJS labs/mini/index.html] implementation in Haskell and Java.
 
  : //2019-11-02//
    First published version of this page.
-   [Lab 1 laborations/lab1/index.html] and
-   [Lab 2 laborations/lab2/index.html] descriptions online.
+   [Lab 1 labs/lab1/index.html] and
+   [Lab 2 labs/lab2/index.html] descriptions online.
 
    Labs are done in groups of 2.  Please look for a lab partner.
 
@@ -165,7 +165,7 @@ Slides follow closely the plt book.
 
 
 || Date         | Time           | Title                             | Material                      ||
-| Tue 05/11     | 13-15          | PL Design, Compilation Phases, [MiniJS laborations/mini/index.html] | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1, live coding [start live/2019/live-1-mini-start.zip] [lecture live/2019/live-1-as-far-as-we-got.zip] [finish live/2019/live-1-mini-finish.zip]
+| Tue 05/11     | 13-15          | PL Design, Compilation Phases, [MiniJS labs/mini/index.html] | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1, live coding [start live/2019/live-1-mini-start.zip] [lecture live/2019/live-1-as-far-as-we-got.zip] [finish live/2019/live-1-mini-finish.zip]
 %, [live coding live/2018/lec1-happy-live-2018.zip]
 | Thu 07/11     | 13-15          | Grammars / BNFC / Hands-on with Lab 1    | [slides plt-book/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
 % [code live-2-bnfc.zip]
@@ -173,29 +173,29 @@ Slides follow closely the plt book.
 %[LL parser code LL-parsing.zip]
 %| Thu 14/11     | 10-16       | [DATE-IT 2017 fair https://www.date-it.se/] | No class! |
 | Thu 14/11     | 13-15          | Theory of lexing     | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
-| //Mon 18/11// | //23//         | //Lab 1 deadline//                | [lab1 PM laborations/lab1/index.html] |
+| //Mon 18/11// | //23//         | //Lab 1 deadline//                | [lab1 PM labs/lab1/index.html] |
 %| Tue 19/11     | 13-15          | Theory of lexing, LR parsing  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
 | Tue 19/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
 %| Thu 21/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
 | Thu 21/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
 %| Tue 26/11     | 13-15          | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
-| Tue 26/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/index.html] [Monads https://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf] |
+| Tue 26/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM labs/lab2/index.html] [Monads https://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf] |
 | Tue 26/11     | 14-15          | Hands-on with Lab 2 (Java)        | [live coding live/2019/live-7-lab2.zip] |
-%| Thu 28/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM laborations/lab2/index.html]
+%| Thu 28/11     | 13-14          | Hands-on with Lab 2 (Haskell)     | [lab2 PM labs/lab2/index.html]
 %| Thu 28/11     | 14-15          | Hands-on with Lab 2 (Java)        |  |
 | Thu 28/11     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
 | //Mon 02/12// | //23//         | //Lab 2 deadline//                |  |
 %| Tue 03/12     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
-| Tue 03/12    | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/index.html]
+| Tue 03/12    | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM labs/lab3/index.html]
 | Tue 03/12     | 14-15          | Hands-on with Lab 3 (Java)        | [live coding live/2019/live-9-lab3.zip] |
-%| Thu 05/12     | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM laborations/lab3/index.html]
+%| Thu 05/12     | 13-14          | Hands-on with Lab 3 (Haskell)     | [lab3 PM labs/lab3/index.html]
 %| Thu 05/12     | 14-15          | Hands-on with Lab 3 (Java)        |  |
 %| Thu 05/12     | 13-15          | [Domain-specific languages http://www.cse.chalmers.se/~bergert/slides/guest_lecture_DSLs.pdf]  | Guest lecture by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
 | Thu 05/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
 %| Tue 10/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
 % %| Tue 10/12     | 13-15          | The language design space         | [slides plt-book/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
 | Tue 10/12     | 13-15          | Type inference and polymorphism   | plt 7.7-9
-| Thu 12/12     | 13-15          | Hands-on with Lab 4               | [lab4 PM laborations/lab4/index.html]
+| Thu 12/12     | 13-15          | Hands-on with Lab 4               | [lab4 PM labs/lab4/index.html]
 | //Mon 16/12// | //23//         | //Lab 3 deadline//                |  |
 %| Tue 17/12     | 13-15          | Type inference. A taste of dependent types | Agda demo [Verified compilation ./JVM.agda] |
 | Tue 17/12     | 13-15          | Dependent types (Agda)            | Live coding [start live/2019/live-13-JVM-start.agda] and [finish live/2019/live-13-JVM-finish.agda] |
@@ -287,7 +287,7 @@ You are also welcome to answer questions by others.
 % This is necessary to identify you as a participant of the course.
 % Please also indicate whether you are GU or Chalmers student.
 
-=Laboration times and supervision=
+=Lab times and supervision=
 
 Lab supervision take place in
 [ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093].
@@ -301,27 +301,27 @@ The lab rooms and supervision
 are available from Thu 07 November till Fri 20 December 2019.
 
 **Attendance in these classes is optional**.
-Normally, each student should attend **at most one** supervised laboration time each week.
+Normally, each student should attend **at most one** supervised lab time each week.
 Since attendance is not compulsory, there may be room for more
 times. But, if there is lack of room, those who attend their first
 supervision of the week have priority to get a place and supervisor help.
 
 
-=Laborations=
+=Labs=
 
-There will be four laborations, written in pairs.
+There will be four labs, written in pairs.
 (Individual solutions are accepted per exception,
 please contact the course responsible.)
 You have to pass the labs to pass the course.
 However, the course grade is determined solely by the exam.
 % - Lab 1 - parser  (deadline 18/11)
-- [Lab 1 - parser laborations/lab1/index.html] (deadline 18/11)
+- [Lab 1 - parser labs/lab1/index.html] (deadline 18/11)
 % - Lab 2 - type checker and interpreter (deadline 02/12)
-- [Lab 2 - type checker and interpreter laborations/lab2/index.html] (deadline 02/12)
+- [Lab 2 - type checker and interpreter labs/lab2/index.html] (deadline 02/12)
 % - Lab 3 - code generator (deadline 16/12)
-- [Lab 3 - code generator laborations/lab3/index.html] (deadline 16/12)
+- [Lab 3 - code generator labs/lab3/index.html] (deadline 16/12)
 % - Lab 4 - functional language interpreter  (deadline 09/01/2020)
-- [Lab 4 - functional language interpreter laborations/lab4/index.html] (deadline 09/01/2020)
+- [Lab 4 - functional language interpreter labs/lab4/index.html] (deadline 09/01/2020)
 
 
 The labs are quite substantial, so please set aside at least 30 full working hours (4 full working days) before the deadline.  It is recommended to start at least 10 days before the deadline.

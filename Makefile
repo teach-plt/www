@@ -16,13 +16,13 @@ ship :
 # 	scp $< abela@remote12.chalmers.se:/chalmers/groups/edu2009/www/www.cse.chalmers.se/year/2019/course/DAT151/
 
 labs-www :
-	make -C laborations index.html
+	make -C labs index.html
 
 lab% :
-	make -C laborations/$@
+	make -C labs/$@
 
 mini :
-	make -C laborations/mini
+	make -C labs/mini
 
 ipl-book :
 	make -C plt-book/ipl-book
@@ -58,7 +58,7 @@ exams.tgz : exams/*.pdf exams/*.txt exams/*.html exams/*.jpg
 .PHONY : test
 
 test :
-	make -C laborations test
+	make -C labs test
 
 ## Cleaning
 
@@ -68,6 +68,6 @@ clean_index :
 	rm -f index.html
 
 clean_% :
-	make clean -C laborations/$*
+	make clean -C labs/$*
 
 # EOF

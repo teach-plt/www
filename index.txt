@@ -131,7 +131,7 @@ Winter Term 2023 (LP2)
 % %    on verified compilation.
 
 % % %  : //2019-12-16//
-% % %    [Lab 4 stubs laborations/lab4/index.html#section3] for Haskell and Java are now available.
+% % %    [Lab 4 stubs labs/lab4/index.html#section3] for Haskell and Java are now available.
 
 % %  : //2019-12-12//
 % %    A bug that caused some test (e.g. the tests in the subtyping directory) to not run has been fixed in the lab 3 test suite. Please re-download the test suite.
@@ -143,10 +143,10 @@ Winter Term 2023 (LP2)
 %    A [script notes/monads.md] about the implementation of the interpreter in Haskell. This completes and extends the hints given in the plt book, and contains a tutorial on monads and monad transformers.
 
 %  : //2020-11-20//
-%    [Lab 4 laborations/lab4/index.html] description is online.
+%    [Lab 4 labs/lab4/index.html] description is online.
 
 %  : //2020-11-20//
-%    The [testsuite runner laborations/lab2/testsuite/progs-test-lab2.hs] for lab2
+%    The [testsuite runner labs/lab2/testsuite/progs-test-lab2.hs] for lab2
 %    has been relaxed to look for ``TYPE ERROR`` and ``INTERPRETER ERROR``
 %    anywhere in ``stdout`` and ``stderr``.
 
@@ -165,7 +165,7 @@ Winter Term 2023 (LP2)
 % %    (Note: should compile, but does not run!)
 
 %  : //2020-11-17//
-%    [Lab 3 laborations/lab3/index.html] description is online.
+%    [Lab 3 labs/lab3/index.html] description is online.
 %
 %  : //2022-11-24//
 %    The deadline for lab 2 has been extended to Wed 30 Nov 2022 midnight.
@@ -178,7 +178,7 @@ Winter Term 2023 (LP2)
 %    to incorporate the changes made in the lecture.
 
 %  : //2020-11-13//
-%    [Lab 2 laborations/lab2/index.html] description is online.
+%    [Lab 2 labs/lab2/index.html] description is online.
 
 %    It differs from the 2019 version in that an //annotating// type checker is needed.
 
@@ -203,7 +203,7 @@ Winter Term 2023 (LP2)
 
 
 % %  : //2019-11-07//
-% %    [MiniJS laborations/mini/index.html] implementation in Haskell and Java.
+% %    [MiniJS labs/mini/index.html] implementation in Haskell and Java.
 
 % : //2022-11-17//
 %   Tuesday lectures on 2 dates, 2022-11-23 (next week) and 2022-12-14 (final Tuesday lecture)
@@ -221,7 +221,7 @@ Winter Term 2023 (LP2)
 %   On-campus attendance is recommended though, for a better lecture experience and better interaction.
 
 %   : //2020-11-02//
-%    [Lab 1 laborations/lab1/index.html] description is online.
+%    [Lab 1 labs/lab1/index.html] description is online.
 
 %    Labs are done in groups of 2.  Please look for a lab partner.
 
@@ -261,7 +261,7 @@ Slides follow closely the plt book.
 | Tue 31/10     | 13-15          | PL Design, Compilation Phases | [slides plt-book/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
 % , live coding [start live/2023/live-1-Calc-bnfc-start.zip]
 %, live coding [Calc live/2023/live-1-Calc-bnfc.zip]
-% , [MiniJS laborations/mini/index.html]
+% , [MiniJS labs/mini/index.html]
 %, live coding [start live/2019/live-1-mini-start.zip] [lecture live/2019/live-1-as-far-as-we-got.zip] [finish live/2019/live-1-mini-finish.zip]
 %, [live coding live/2018/lec1-happy-live-2018.zip]
 | Thu 02/11     | 13-15 **[SB-H5 https://maps.chalmers.se/#f85ee0cd-e87b-403f-acf9-bd30f6b3339d]**  | Grammars / BNFC / Hands-on with Lab 1    | [slides plt-book/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3, [git notes/git-primer.md]
@@ -272,29 +272,29 @@ Slides follow closely the plt book.
 %| Thu 09/11     | 10-16       | [DATE-IT 2017 fair https://www.date-it.se/] | No class! |
 | Thu 09/11     | 13-15          | Theory of lexing    | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
 | //Mon 13/11// | //23//         | //Lab 1 deadline//                |  |
-%[lab1 PM laborations/lab1/index.html] |
+%[lab1 PM labs/lab1/index.html] |
 %| Tue 14/11     | 13-15          | Theory of lexing, LR parsing  | [slides plt-book/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
 | Tue 14/11     | 13-15  *       | Type checking                     | [slides plt-book/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6, [script notes/type-checking.html] [prime.c notes/prime.c] |
 | Thu 16/11     | 13-15          | Interpreting                      | [slides plt-book/ipl-book/slides/5-slides-ipl-book.pdf], plt 5, [script notes/interpreter.html] |
 | Tue 21/11     | 13-14          | Hands-on with Lab 2 (Haskell)  //(lecture: ??)//   | [live coding live/2023/live-7-lab2-haskell.zip] |
-%[lab2 PM laborations/lab2/index.html] [script notes/monads.html] [Monads https://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf] |
+%[lab2 PM labs/lab2/index.html] [script notes/monads.html] [Monads https://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf] |
 | Tue 21/11     | 14-15          | Hands-on with Lab 2 (Java)     //(lecture: ??)//   | [live coding live/2023/live-7-lab2-java.zip] |
 %[live coding live/2019/live-7-lab2.zip] |
 %| Thu 23/11     | 13-14          | Hands-on with Lab 2 (Haskell)     |  |
-%[lab2 PM laborations/lab2/index.html]
+%[lab2 PM labs/lab2/index.html]
 %| Thu 23/11     | 14-15 **[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]**  | Hands-on with Lab 2 (Java)        |  |
 | Thu 23/11     | 13-15  **[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]**        | Code generation  //(lecture: ??)//                 | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [notes notes/compilation.html], [prime.c notes/prime.c], [prime.j notes/prime.j]
 | //Mon 27/11// | //23//         | //Lab 2 deadline//                |  |
-%[lab2 PM laborations/lab2/index.html] |
+%[lab2 PM labs/lab2/index.html] |
 %| Tue 28/11     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [script notes/compilation.html]
 | Tue 28/11    | 13-14          | Hands-on with Lab 3 (Haskell)     |  |
 %[live code (diff) live/2023/live-9-lab3-haskell.diff] |
-%[lab3 PM laborations/lab3/index.html]
+%[lab3 PM labs/lab3/index.html]
 | Tue 28/11     | 14-15          | Hands-on with Lab 3 (Java)        |  |
 %[live code (diff) live/2023/live-9-lab3-java.diff] |
 %[live coding live/2019/live-9-lab3.zip] |
 %| Thu 30/11     | 13-14          | Hands-on with Lab 3 (Haskell)     |  |
-%[lab3 PM laborations/lab3/index.html]
+%[lab3 PM labs/lab3/index.html]
 %| Thu 30/11     | 14-15          | Hands-on with Lab 3 (Java)        |  |
 %| Thu 30/11     | 13-15          | [Domain-specific languages http://www.cse.chalmers.se/~bergert/slides/guest_lecture_DSLs.pdf]  | Guest lecture by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
 | Thu 30/11     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3, [script notes/cbn-cbv.html]
@@ -307,7 +307,7 @@ Slides follow closely the plt book.
 | Thu 07/12     | 14-15          | Hands-on with Lab 4 (Java)        |  |
 %diff [start live/2023/live-12-lab4-java-start.diff] [live live/2023/live-12-lab4-java-finish.diff] |
 %live code [start live/2020/hands-on-4-java-start.tgz] [finish live/2020/hands-on-4-java-finish.tgz] |
-%[lab4 PM laborations/lab4/index.html]
+%[lab4 PM labs/lab4/index.html]
 %| //Mon 11/12// | //23//         | //Lab 3 deadline//                |  |
 | Tue 12/12     | 13-15          | Type inference. A taste of dependent types | Agda demo [Verified compilation ./JVM.agda] |
 %| Tue 12/12     | 13-15 | Dependent types (Agda) [video https://chalmers.instructure.com/courses/21130/external_tools/29]  | "Live" coding [start live/2020/JVM-start.agda]  |
@@ -422,7 +422,7 @@ You are also welcome to answer questions by others.
 % This is necessary to identify you as a participant of the course.
 % Please also indicate whether you are GU or Chalmers student.
 
-=Laboration times and supervision=
+=Lab times and supervision=
 
 % Lab supervision workflow: Start a Zoom meeting and invite your group partner to join. To ask for help, sign up on the [Waglys digital waiting list https://www.waglys.com/bonlYD] with your 10-digit Zoom ID (as "6435657890" from "https://chalmers.zoom.us/j/6435657890"), so that the TAs know where to find you. Please make sure your meeting does **not** require password to get in. A TA will join your Zoom meeting as soon as it's your turn.
 
@@ -450,7 +450,7 @@ except for Fri 03 Nov which is a half-day.
 %Tue 17th, Wed 18th, Jan 24th, Jan 25th.
 
 % **Attendance in these classes is optional**.
-% Normally, each student should attend **at most one** supervised laboration time each week.
+% Normally, each student should attend **at most one** supervised lab time each week.
 % Since attendance is not compulsory, there may be room for more
 % times. But, if there is lack of room, those who attend their first
 % supervision of the week have priority to get a place and supervisor help.
@@ -473,18 +473,18 @@ If you have difficulties finding a partner, please use Slack channel ``#lab-part
 
 
 
-=Laborations=
+=Labs=
 
 You have to pass the labs to pass the course.
 However, the course grade is determined solely by the exam.
 - Lab 1 - parser  (deadline 13/11)
-% - [Lab 1 - parser laborations/lab1/index.html] (deadline 13/11)
+% - [Lab 1 - parser labs/lab1/index.html] (deadline 13/11)
 - Lab 2 - type checker and interpreter (deadline 27/11)
-% - [Lab 2 - type checker and interpreter laborations/lab2/index.html] (deadline 27/11)
+% - [Lab 2 - type checker and interpreter labs/lab2/index.html] (deadline 27/11)
 - Lab 3 - code generator (deadline 13/12)
-% - [Lab 3 - code generator laborations/lab3/index.html] (deadline 13/12)
+% - [Lab 3 - code generator labs/lab3/index.html] (deadline 13/12)
 - Lab 4 - functional language interpreter  (deadline 08/01/2024)
-% - [Lab 4 - functional language interpreter laborations/lab4/index.html] (deadline 08/01/2024)
+% - [Lab 4 - functional language interpreter labs/lab4/index.html] (deadline 08/01/2024)
 
 
 The labs are quite substantial, so please set aside at least 30 full working hours (4 full working days) before the deadline.  It is recommended to start at least 10 days before the deadline.

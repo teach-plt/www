@@ -59,53 +59,53 @@ CVS/
 /2014-index.txt
 /exams.tgz
 
-/laborations/old-lab3/
-/laborations/old-lab4/
-/laborations/old-2015-mini/
+/labs/old-lab3/
+/labs/old-lab4/
+/labs/old-2015-mini/
 
-/laborations/mini/miniJS.zip
+/labs/mini/miniJS.zip
 
-/laborations/test-*.*.*
-/laborations/lab?/*/test-*.*.*
-/laborations/lab?/java/cmm/
+/labs/test-*.*.*
+/labs/lab?/*/test-*.*.*
+/labs/lab?/java/cmm/
 
-/laborations/lab1/testscript/lab1-test-dir/
-/laborations/lab1/testscript/progs-test-lab1
-/laborations/lab1/testscript/plt-test-lab1
+/labs/lab1/testscript/lab1-test-dir/
+/labs/lab1/testscript/progs-test-lab1
+/labs/lab1/testscript/plt-test-lab1
 
-/laborations/lab1/testsuite/lab1-test-dir/
-/laborations/lab1/testsuite/lab1-test-dir#/
-/laborations/lab1/testsuite/progs-test-lab1
-/laborations/lab1/testsuite/good/fractal.pgm
-/laborations/lab1/testsuite/good/fractal.ppm
+/labs/lab1/testsuite/lab1-test-dir/
+/labs/lab1/testsuite/lab1-test-dir#/
+/labs/lab1/testsuite/progs-test-lab1
+/labs/lab1/testsuite/good/fractal.pgm
+/labs/lab1/testsuite/good/fractal.ppm
 
-/laborations/lab2/agda/lab2
-/laborations/lab2/agda/lab2.cabal
-/laborations/lab2/haskell/lab2
-/laborations/lab2/java/lab2
+/labs/lab2/agda/lab2
+/labs/lab2/agda/lab2.cabal
+/labs/lab2/haskell/lab2
+/labs/lab2/java/lab2
 
-/laborations/lab2/testsuite/good/**/*.j
-/laborations/lab2/testsuite/good/*.cc.tmp.cpp
-/laborations/lab2/testsuite/bad/*.cc.tmp.cpp
-/laborations/lab2/testsuite/progs-test-lab2
-/laborations/lab2/testsuite/plt-test-lab2
+/labs/lab2/testsuite/good/**/*.j
+/labs/lab2/testsuite/good/*.cc.tmp.cpp
+/labs/lab2/testsuite/bad/*.cc.tmp.cpp
+/labs/lab2/testsuite/progs-test-lab2
+/labs/lab2/testsuite/plt-test-lab2
 
-/laborations/lab3/java/lab3
-/laborations/lab3/haskell/lab3
+/labs/lab3/java/lab3
+/labs/lab3/haskell/lab3
 
-/laborations/lab3/testsuite/*.j
-/laborations/lab3/testsuite/dir-for-path-test/one-more-dir/simple.j
-/laborations/lab3/testsuite/progs-test-lab3-jvm-verify
-/laborations/lab3/testsuite/progs-test-lab3
-/laborations/lab3/testsuite/plt-test-lab3
+/labs/lab3/testsuite/*.j
+/labs/lab3/testsuite/dir-for-path-test/one-more-dir/simple.j
+/labs/lab3/testsuite/progs-test-lab3-jvm-verify
+/labs/lab3/testsuite/progs-test-lab3
+/labs/lab3/testsuite/plt-test-lab3
 
-/laborations/lab4/haskell/Fun/
-/laborations/lab4/haskell/lab4
-/laborations/lab4/java/fun/
-/laborations/lab4/java/Fun/
-/laborations/lab4/java/lab4
+/labs/lab4/haskell/Fun/
+/labs/lab4/haskell/lab4
+/labs/lab4/java/fun/
+/labs/lab4/java/Fun/
+/labs/lab4/java/lab4
 
-/laborations/lab4/testsuite.tgz
-/laborations/lab4/testsuite/progs-test-lab4
-/laborations/lab4/testsuite/plt-test-lab4
-/laborations/lab4/testsuite/good/*.golden
+/labs/lab4/testsuite.tgz
+/labs/lab4/testsuite/progs-test-lab4
+/labs/lab4/testsuite/plt-test-lab4
+/labs/lab4/testsuite/good/*.golden

@@ -23,9 +23,9 @@ http://www.cse.chalmers.se/edu/year/2014/course/DAT151/index.html
            (building on Hörsalvägen opposite our lecture hall HA2).
            Only aid allowed: English dictionary.
 
-2015-03-03 [Lab4 laborations/lab4/lab4.html] is up.
+2015-03-03 [Lab4 labs/lab4/lab4.html] is up.
 
-2015-02-17 [Lab3 laborations/lab3/lab3.html] is up.
+2015-02-17 [Lab3 labs/lab3/lab3.html] is up.
            Note that you have to submit //something// for the first deadline
            in order to resubmit to the final deadline.
 
@@ -33,14 +33,14 @@ http://www.cse.chalmers.se/edu/year/2014/course/DAT151/index.html
            Deadlines of labs 3 and 4 and final deadline have been shifted back
            to accommodate for the extra week in LP3.
 
-2015-02-10 [Lab2 laborations/lab2/lab2.html]
+2015-02-10 [Lab2 labs/lab2/lab2.html]
            now has the correct test program to compile under ghc-7.6 and up.
            Also, it has seen minor modifications in the expression grammar.
            (However, they are neutral wrt. the testsuite.
            If you already started with the 2014 grammar, you can choose
            to stick with it.)
 
-2015-01-19 [Lab1 laborations/lab1/lab1.html] is up.
+2015-01-19 [Lab1 labs/lab1/lab1.html] is up.
            To submit, first register at [Fire http://xdat09.ce.chalmers.se/plt/].
 
 2015-01-13 First version of this page - mostly a copy of the 2014 material.
@@ -58,20 +58,20 @@ Slides follow closely the plt book.
 || Date    | Time  | Title                             | Material                      ||
 | Tue 20/1 | 13-15 | Introduction: Compilation Phases  | [slides http://www.digitalgrammars.com/ipl-book/slides/1-slides-ipl-book.pdf], plt 1, dragon 1
 | Thu 22/1 | 13-15 | Grammars                          | [slides http://www.digitalgrammars.com/ipl-book/slides/2-slides-ipl-book.pdf], plt 2, dragon 2.8.2,4.1-4.3
-| Tue 27/1 | 13-15 | Hands-on with Lab 1               | [lab1 PM laborations/lab1/lab1.html]
+| Tue 27/1 | 13-15 | Hands-on with Lab 1               | [lab1 PM labs/lab1/lab1.html]
 | Thu 29/1 | 13-15 | Theory of lexing and parsing      | [slides http://www.digitalgrammars.com/ipl-book/slides/3-slides-ipl-book.pdf], plt 3, dragon 3,4
-| //Mon 2/2// | //23// | //Lab 1 deadline//            | //[lab1 PM laborations/lab1/lab1.html]//
+| //Mon 2/2// | //23// | //Lab 1 deadline//            | //[lab1 PM labs/lab1/lab1.html]//
 | Thu  5/2 | 13-15 | Type checking                     | [slides http://www.digitalgrammars.com/ipl-book/slides/4-slides-ipl-book.pdf], plt 4, dragon 5,6
 | Tue 10/2 | 13-15 | Interpreters                      | [slides http://www.digitalgrammars.com/ipl-book/slides/5-slides-ipl-book.pdf], plt 5
-| Thu 12/2 | 13-15 | Hands-on with Lab 2               | [lab2 PM laborations/lab2/lab2.html]
-| //Mon 16/2// | //23// | //Lab 2 deadline//           | //[lab2 PM laborations/lab2/lab2.html]//
+| Thu 12/2 | 13-15 | Hands-on with Lab 2               | [lab2 PM labs/lab2/lab2.html]
+| //Mon 16/2// | //23// | //Lab 2 deadline//           | //[lab2 PM labs/lab2/lab2.html]//
 | Tue 17/2 | 13-15 | Code generation                   | [slides http://www.digitalgrammars.com/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7
-| Tue 24/2 | 13-15 | Hands-on with Lab 3, The language design space         | [slides http://www.digitalgrammars.com/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.  //[lab3 PM laborations/lab3/lab3.html]//
+| Tue 24/2 | 13-15 | Hands-on with Lab 3, The language design space         | [slides http://www.digitalgrammars.com/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.  //[lab3 PM labs/lab3/lab3.html]//
 | Thu 26/2 | 13-15 | Functional programming languages  | [slides http://www.digitalgrammars.com/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
-| //Mon 2/3// | //23// | //Lab 3 deadline//           | //[lab3 PM laborations/lab3/lab3.html]//
-| Tue 3/3 | 13-15 | Hands-on with Lab 4                | [lab4 PM laborations/lab4/lab4.html]
+| //Mon 2/3// | //23// | //Lab 3 deadline//           | //[lab3 PM labs/lab3/lab3.html]//
+| Tue 3/3 | 13-15 | Hands-on with Lab 4                | [lab4 PM labs/lab4/lab4.html]
 | Thu 5/3 | 13-15 | Preparing for the exam             | [Training Exam exams/exam-plt-2013-2.pdf]
-| //Mon 16/3// | //23// | //Lab 4 deadline//           | //[lab4 PM laborations/lab4/lab4.html]//
+| //Mon 16/3// | //23// | //Lab 4 deadline//           | //[lab4 PM labs/lab4/lab4.html]//
 | //Fri 20/3// | 14-18 | //Exam// (in house M)         | [old exams exams/]
 | //Sat 21/3// | //23// | //Final lab deadline//       | //all lab returns//
 | //Wed 15/4// | 8.30-12.30 | //Exam// (in house M)         | [old exams exams/]
@@ -143,7 +143,7 @@ If you are not yet member of the group, you have to
 This is necessary to identify you as a participant of the course.
 
 
-=Laboration times and supervision=
+=Lab times and supervision=
 
 Times:
 - Tuesday 15-17 (no class on 3 February) (Inari, Daniel) , in ED3507.
@@ -155,26 +155,26 @@ The lab rooms and supervision
 are available from Tuesday 20 January till 10 March.
 
 **Attendance in these classes is optional**.
-Normally, each student should attend **at most one** supervised laboration time each week.
+Normally, each student should attend **at most one** supervised lab time each week.
 Since attendance is not compulsory, there may be room for more
 times. But, if there is lack of room, those who attend their first
 supervision of the week have priority to get a place and supervisor help.
 
 
-=Laborations=
+=Labs=
 
-There will be four laborations, written individually or in
+There will be four labs, written individually or in
 pairs.
-- deadline 2/2:  [parser laborations/lab1/lab1.html]
-- deadline 16/2: [type checker and interpreter laborations/lab2/lab2.html]
-- deadline 2/3: [code generator laborations/lab3/lab3.html]
-- deadline 16/3: [functional language interpreter laborations/lab4/lab4.html]
+- deadline 2/2:  [parser labs/lab1/lab1.html]
+- deadline 16/2: [type checker and interpreter labs/lab2/lab2.html]
+- deadline 2/3: [code generator labs/lab3/lab3.html]
+- deadline 16/3: [functional language interpreter labs/lab4/lab4.html]
 
 
 Reporting is done via
 [Fire http://xdat09.ce.chalmers.se/plt/].
 Before reporting, you must run your program through a test suite,
-such as the one for [lab 1 laborations/lab1/testscript/].
+such as the one for [lab 1 labs/lab1/testscript/].
 
 **Final deadline is Saturday 21 March** for all returned and corrected labs.
 No labs will be graded after this deadline.

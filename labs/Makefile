@@ -1,4 +1,4 @@
-# Andreas, 2020-11-03 Makefile for laborations
+# Andreas, 2020-11-03 Makefile for labs
 #
 # Distribute goals to the lab% subdirectories
 
