@@ -393,9 +393,9 @@ Assistants:
 %- [Prabhat Kumar Jha https://www.chalmers.se/en/staff/Pages/prabhar.aspx]
 %- [Robert Krook https://www.chalmers.se/en/staff/Pages/krookr.aspx]
 - [Andras Kovacs https://www.chalmers.se/personer/andrask/]
-- [Eric Olsson https://www.chalmers.se/en/staff/Pages/laro.aspx]
-- [Felix Cherubini https://www.chalmers.se/en/persons/felixche/]
-- Hao Hu ``haohu student chalmers se`` //(insert @ and .)//
+- [Eric Olsson https://www.chalmers.se/personer/laro.aspx]
+- [Felix Cherubini https://www.chalmers.se/personer/felixche/]
+- [Hao Hu https://github.com/himmelhao] ``haohu student chalmers se`` //(insert @ and .)//
 - [Jonas Höfer https://www.chalmers.se/personer/hoferj/]
 
 Questions regarding this class (organization, content, labs)
