@@ -245,13 +245,14 @@ Winter Term 2023 (LP2)
 
 % Lectures take place on Zoom, link see [Canvas https://chalmers.instructure.com/courses/26247].
 
+Lectures are Tuesdays and Thursdays, starting at **13:15**, both on campus and in [Zoom https://chalmers.instructure.com/courses/26247/external_tools/419].
 Tuesday lectures are in **[HC2 http://maps.chalmers.se/#23e2df72-cbb9-4aff-825a-1a282e9618d6]**,
 Thursday lectures in
 **[SB-H6 https://maps.chalmers.se/#c613d487-6c0c-4fe2-8a9d-55b858fa137f]**,
-//with exceptions// Thu 2nd Nov and 23rd Nov in //[SB-H5 https://maps.chalmers.se/#f85ee0cd-e87b-403f-acf9-bd30f6b3339d]//,
+//with exceptions// Thu 2nd Nov and 23rd Nov in //[SB-H5 https://maps.chalmers.se/#f85ee0cd-e87b-403f-acf9-bd30f6b3339d]//.
 % and Thu 23rd Nov in //[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]//),
 % **[HA1 http://maps.chalmers.se/#971e00c6-6f9a-46ce-9894-687adb1fa8ea]**,
-starting at **13:15**.
+
 
 Material: plt = course book, dragon = Dragon book.
 Slides follow closely the plt book.
@@ -283,7 +284,7 @@ Slides follow closely the plt book.
 %| Thu 23/11     | 13-14          | Hands-on with Lab 2 (Haskell)     |  |
 %[lab2 PM labs/lab2/index.html]
 %| Thu 23/11     | 14-15 **[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]**  | Hands-on with Lab 2 (Java)        |  |
-| Thu 23/11     | 13-15  **[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]**        | Code generation  //(lecture: ??)//                 | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [notes notes/compilation.html], [prime.c notes/prime.c], [prime.j notes/prime.j]
+| Thu 23/11     | 13-15  **SB-H5**        | Code generation  //(lecture: ??)//                 | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [notes notes/compilation.html], [prime.c notes/prime.c], [prime.j notes/prime.j]
 | //Mon 27/11// | //23//         | //Lab 2 deadline//                |  |
 %[lab2 PM labs/lab2/index.html] |
 %| Tue 28/11     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [script notes/compilation.html]
@@ -436,10 +437,10 @@ You are also welcome to answer questions by others.
 
 Lab supervision is available in room [ED3354 http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093] and online on Tue, Thu and Fri.
 || Day | Time        | Location     | Supervisors       |
- | Tue | 15:15-17:00 | Zoom, ED3354 | Andreas, Eric, Prabhat |
- | Wed | 15:15-17:00 | Zoom only    | Shreyash, Oskar   |
- | Thu | 15:15-17:00 | Zoom, ED3354 | Eric, Mohammad, Robert   |
- | Fri | 13:15-15:00 | Zoom, ED3354 | Mohammad, Prabhat, Robert       |
+ | Tue | 15:15-17:00 | Zoom, ED3354 | |
+ | Wed | 15:15-17:00 | Zoom only    | |
+ | Thu | 15:15-17:00 | Zoom, ED3354 | |
+ | Fri | 13:15-15:00 | Zoom, ED3354 | |
 
 
 The lab rooms and supervision are
