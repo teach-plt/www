@@ -371,7 +371,7 @@ Therefore, we leave template instantiations out of this assignment.
 The reference operator ``&`` is a
 postfix-operator forming types from types, e.g. ``int &``.
 
-Note that from C++ 11, double references like ``int &&`` are also allowed.
+Note that from C++ 11, rvalue references like ``int &&`` are also allowed.
 It is sufficient to support them with spaces between the ``&``s, e.g. ``int & &``.
 Otherwise, ``x && y;`` would be ambiguous: it could be the declaration ``x & & y;``
 or a conjunction expression as statement.
@@ -383,7 +383,7 @@ It is sufficient to support references and double references in the grammar.  Ho
 
 + Non-negative **Integer** literals, e.g, ``0``, ``00``, ``20``, ``151``. (**1**)
 + Non-negative **Floating point** literals, e.g., ``01.10``, ``3.14``, ``10.0e10``, ``0.00e-00``, ``1.1e-80``. (**3**)
-+ Single-quoted **character** literals, e.g. ``'0'``, ``'a'``, ``'"'``, ``'''``. (**6**)
++ Single-quoted **character** literals, e.g. ``'0'``, ``'a'``, ``'"'``, ``'\''``, ``'\n'``. (**6**)
 + Double-quoted **string** literals, e.g. ``"abc"``,
 ``"This,\n is \"insane\"!"``, ``"LaTeX's \"\\newcommand\""``. (**1**)
 A string literal may consist of many double-quoted character sequences
