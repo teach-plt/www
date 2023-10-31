@@ -224,17 +224,17 @@ Winter Term 2023 (LP2)
 %    [Lab 1 labs/lab1/index.html] description is online.
 
 %    Labs are done in groups of 2.  Please look for a lab partner.
-
-% : //2022-11-01//
 %   Lab supervision is available both via Zoom and in ED3354.
 %   Queueing is via [Waglys https://www.waglys.com/bonlYD] in both cases.
 %   Details see below.
 
-%   The lecture hall HC2 of tomorrow's lecture (Tue 2 Nov 13-15) has only 104 seats.
-%   Thus, I will offer streaming of this lecture via Zoom (hybrid format).
-%   You are welcome to join via Zoom in case you cannot or do not want to attend in person
-%   (e.g. if you shy crowds these days, or have symptoms etc).
-%   Zoom link will be published via [Canvas https://chalmers.instructure.com/courses/21130].
+: //2023-10-31//
+
+  The lecture hall HC2 of todays's lecture has only 104 seats.
+  Thus, I will offer streaming of this lecture via Zoom (hybrid format).
+  You are welcome to join via Zoom in case you cannot or do not want to attend in person
+  (e.g. if you shy crowds these days, or have symptoms etc).
+  Zoom link will be published via [Canvas https://chalmers.instructure.com/courses/26247].
 
 %  : //2022-10-31//
 %    First published version of this page.
@@ -243,13 +243,13 @@ Winter Term 2023 (LP2)
 
 =Schedule=
 
-% Lectures take place on Zoom, link see [Canvas https://chalmers.instructure.com/courses/21130].
+% Lectures take place on Zoom, link see [Canvas https://chalmers.instructure.com/courses/26247].
 
 Tuesday lectures are in **[HC2 http://maps.chalmers.se/#23e2df72-cbb9-4aff-825a-1a282e9618d6]**,
 Thursday lectures in
 **[SB-H6 https://maps.chalmers.se/#c613d487-6c0c-4fe2-8a9d-55b858fa137f]**,
-//with exceptions// Thu 2nd Nov in //[SB-H5 https://maps.chalmers.se/#f85ee0cd-e87b-403f-acf9-bd30f6b3339d]//
-and Thu 23rd Nov in //[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]//),
+//with exceptions// Thu 2nd Nov and 23rd Nov in //[SB-H5 https://maps.chalmers.se/#f85ee0cd-e87b-403f-acf9-bd30f6b3339d]//,
+% and Thu 23rd Nov in //[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]//),
 % **[HA1 http://maps.chalmers.se/#971e00c6-6f9a-46ce-9894-687adb1fa8ea]**,
 starting at **13:15**.
 
@@ -501,7 +501,7 @@ please contact the course responsible.)
 The labs will be published in your Gitlab group and a solution repository will be created for you there.
 Submission of your solution is by creating a ``submission`` tag in the repository.
 Please read the detailed **lab instructions** at:
-https://chalmers.instructure.com/courses/21130/pages/lab-infrastructure-on-chalmers-gitlab
+https://chalmers.instructure.com/courses/26247/pages/lab-infrastructure-on-chalmers-gitlab
 
 %**Lab submission instructions to be decided!**
 %Come back here for the lab submission instructions.
@@ -687,7 +687,10 @@ by storing these jars in
 [Student representatives https://student.portal.chalmers.se/en/chalmersstudies/courseinformation/courseevaluation/Pages/default.aspx]
 for DAT151 Programming language technology.
 
-%|| Program | @student.chalmers.se | Name ||
+|| Program | @student.chalmers.se | Name ||
+| MPALG | kyletoft | Samuel Kyletoft |
+
+
 %|  | ricarl | Carl Ridderstolpe |
 %|  |        | Max Hvid Hansen |
 %
