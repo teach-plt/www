@@ -165,8 +165,10 @@ ADiv.       Arith ::= "/"                          ;
 
 Checking/inference: also return elaborated expression.
 
-    check (Exp e, Type t): Maybe ExpT
-    infer (Exp e) : Maybe (ExpT, Type)
+    check (Exp e, Type t): ExpT
+    infer (Exp e):        (ExpT, Type)
+
+Type errors are _exceptions_.
 
 Example implementation:
 
@@ -232,7 +234,7 @@ ETCoerce.  ExpT ::= "(double)" ExpT ;
 
 Example implementation:
 
-    coerce (ExpT, Type, Type): Maybe ExpT
+    coerce (ExpT, Type, Type): ExpT
     coerce (e, t₁, t₂):
         if t₁ == t₂ then return e
         else if t₁ == TInt and t₂ == TDouble then return (ETCoerce e)
@@ -332,7 +334,7 @@ STWhile.  StmT ::= "while" "(" ExpT ")" StmT ;
 
 Example implementation:
 
-    checkStm (Stm s) : Maybe StmT
+    checkStm (Stm s) : StmT
 
     checkStm (SExp e):
       (e', t) ← infer (e)
@@ -378,11 +380,11 @@ DFunT.  DefT ::= Type Id "(" ")" "{" [StmT] "}"
 
 Checking function definitions (version 1):
 ```
-    checkStm (Type t, Stm s): Maybe StmT
+    checkStm (Type t, Stm s): StmT
 
-    checkStms (Type t, [Stm] ss): Maybe [StmT]
+    checkStms (Type t, [Stm] ss): [StmT]
 
-    checkDef (Def d) : Maybe DefT
+    checkDef (Def d) : DefT
 
     checkDef (DFun t x ss):
       ss' ← checkStms (t, ss)
