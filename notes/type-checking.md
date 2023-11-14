@@ -120,7 +120,7 @@ Inference: Given `e`, compute `t` such that `e : t`.
     check (Exp e, Type t): Bool
     infer (Exp e) : Maybe Type
 
-Example implementation:
+Example implementation (syntax-directed traversal):
 
     check (EInt i, t):
         t == TInt
