@@ -1,9 +1,9 @@
-Programming Language Technology
+Programming Language Technology 2023
 DAT151/DIT231
 Andreas Abel
 
-Type Checking
-=============
+Type Checking and Elaboration
+=============================
 
 Introduction
 ------------
@@ -39,6 +39,8 @@ Introduction
     ```
   * Better code comprehension (documentation)
 
+- Programming language perspective:
+  * Facilitate overloading (like `/` for different division algorithms)
 
 ### Where types make a difference
 
@@ -100,7 +102,7 @@ TDouble. Type ::= "double";
 
 EInt.     Exp6 ::= Integer;
 EDouble.  Exp6 ::= Double;
-EDiv.     Exp2 ::= Exp3 "/" Exp2;
+EDiv.     Exp5 ::= Exp5 "/" Exp6;
 ```
 
     -------------        -------------------
@@ -134,6 +136,59 @@ Example implementation:
         check (e₂, t)
         return t
 
+### Elaboration: produce typed syntax trees
+
+_Typed expressions_ in Haskell:
+```haskell
+data ExpT
+  = ETValue  Val
+  | ETArith  Type ExpT Arith ExpT
+
+data Val
+  = VInt    Integer
+  | VDouble Double
+
+data Arith
+  = ADiv
+```
+
+In LBNF:
+```bnf
+ETValue.    ExpT  ::= Val                          ;
+ETArith.    ExpT  ::= "(" Type ")" ExpT Arith ExpT ;
+
+VInt.       Val   ::= Integer                      ;
+VDouble.    Val   ::= Double                       ;
+
+ADiv.       Arith ::= "/"                          ;
+```
+
+Checking/inference: also return elaborated expression.
+
+    check (Exp e, Type t): Maybe ExpT
+    infer (Exp e) : Maybe (ExpT, Type)
+
+Example implementation:
+
+    check (e, t):
+      (e', t') ← infer (e)
+      if t == t' then return e'
+                 else fail "type mismatch"
+
+    infer (EInt i):
+      return (ETValue (VInt i), TInt)
+
+    infer (EDiv e₁ e₂):
+      (e₁', t₁) ← infer (e₁)
+      (e₂', t₂) ← infer (e₂)
+      case (t₁, t₂) of
+        (TInt   , TInt   ) → return (ETArith TInt    e₁' ADiv e₂', TInt   )
+        (TDouble, TDouble) → return (ETArith TDouble e₁' ADiv e₂', TDouble)
+        _ → fail "illegal types for arithmetic operation"
+
+Slogan: _parse, don't validate_.
+In our case: _elaborate, don't check_.
+
 ### Coercion and subtyping
 
 `int` values can be coerced to `double` values.
@@ -156,51 +211,44 @@ In practice, it often does.  E.g. with coercions to `string`:
     int ≤ string             1 → "1"
     int ≤ double ≤ string    1 → 1.0 → "1.0"
 
-Quiz: What is the value of this expression?
+Quiz: What is the value of this expression?  (menti.com code 83910313)
 
     1 + 2 + "hello" + 1 + 2
 
 This should better be a type error!  The value should not depend on
 the associativity of "+".
 
-### Elaboration in the type checker
+### Coercion in the elaborator
 
-Type checker can insert coercion `ECoerce` when subtyping `int < double` was applied.
-```bnfc
-internal ECoerce.  Exp ::= "(double)" Exp;
+Add a node for coercion to the typed syntax:
 ```
-
-Checking/inference: also return elaborated expression.
-
-    check (Exp e, Type t): Maybe Exp
-    infer (Exp e) : Maybe (Exp, Type)
+data ExpT = ...
+  | ETCoerce ExpT
+```
+In LBNF:
+```
+ETCoerce.  ExpT ::= "(double)" ExpT ;
+```
 
 Example implementation:
 
-    check (EInt i, t):
-        if t == TInt then return (EInt i)
-        else fail "expected int"
+    coerce (ExpT, Type, Type): Maybe ExpT
+    coerce (e, t₁, t₂):
+        if t₁ == t₂ then return e
+        else if t₁ == TInt and t₂ == TDouble then return (ETCoerce e)
+        else fail "cannot coerce"
 
-    check (EDiv e₁ e₂, t):
-        assert (t ∈ {TInt, TDouble})
-        e₁' ← check (e₁, t)
-        e₂' ← check (e₂, t)
-        return (EDiv e₁' e₂')
-
-    infer (EInt i):
-        return (EInt i, TInt)
+    check (e, t):
+      (e', t') ← infer (e)
+      coerce (e', t', t)
 
     infer (EDiv e₁ e₂):
         (e₁', t₁) ← infer (e₁)
         (e₂', t₂) ← infer (e₂)
         t ← max t₁ t₂
-        e₁'' = coerce (e₁', t₁, t)
-        e2'' = coerce (e₂', t₂, t)
-        return (EDiv e₁'' e₂'', t)
-
-    coerce (e, t₁, t₂):
-        if t₁ == TInt and t₂ == TDouble then ECoerce(e)
-        else e
+        e₁'' ← coerce (e₁', t₁, t)
+        e2'' ← coerce (e₂', t₂, t)
+        return (ETArith t e₁'' ADiv e₂'', t)
 
 
 Boolean expressions
@@ -216,6 +264,32 @@ Comparison operators return a boolean:
     ---------------- t ∈ {bool, int, double}
     e₁ == e₂ : bool
 
+Extend typed syntax.
+```
+ETCmp.  ExpT ::= "(" Type ")" ExpT Cmp ExpT ;
+
+CLt.    Cmp  ::= "<"                        ;
+CEq.    Cmp  ::= "=="                       ;
+```
+Example implementation:
+
+    infer (ELt e₁ e₂):
+        (e₁', t₁) ← infer (e₁)
+        (e₂', t₂) ← infer (e₂)
+        t ← max t₁ t₂
+        e₁'' ← coerce (e₁', t₁, t)
+        e2'' ← coerce (e₂', t₂, t)
+        if t /= TInt && t /= TDouble
+        then fail "illegal arithmetic comparison"
+        else return (ETCmp t e₁'' CEq e₂'', t)
+
+    infer (EEq e₁ e₂):
+        (e₁', t₁) ← infer (e₁)
+        (e₂', t₂) ← infer (e₂)
+        t ← max t₁ t₂
+        e₁'' ← coerce (e₁', t₁, t)
+        e2'' ← coerce (e₂', t₂, t)
+        return (ETCmp t e₁'' CEq e₂'', t)
 
 Statements
 ----------
@@ -244,11 +318,30 @@ Statement sequences:
     ---    -----------------
     ⊢ ε    ⊢ s₀ s₁...sₙ
 
-Expressions as statements
+Expressions as statements:
 
     e : t
     -----
     ⊢ e;
+
+Typed statements:
+```
+STExp.    StmT ::= "(" Type ")" ExpT ";"     ;
+STWhile.  StmT ::= "while" "(" ExpT ")" StmT ;
+```
+
+Example implementation:
+
+    checkStm (Stm s) : Maybe StmT
+
+    checkStm (SExp e):
+      (e', t) ← infer (e)
+      return (STExp t e')
+
+    checkStm (SWhile e s):
+      e' ← check (e, TBool)
+      s' ← checkStm (s)
+      return (STWhile e' s')
 
 
 Return statements
@@ -278,19 +371,22 @@ Checking functions
 ------------------
 
 ```lbnf
-DFun.  Def ::= Type Id "(" ")" "{" [Stm] "}"
+DFun.   Def  ::= Type Id "(" ")" "{" [Stm] "}"
+
+DFunT.  DefT ::= Type Id "(" ")" "{" [StmT] "}"
 ```
 
 Checking function definitions (version 1):
 ```
-    checkStm (Type t, Stm s)
+    checkStm (Type t, Stm s): Maybe StmT
 
-    checkStms (Type t, [Stm] ss):
-       for (Stm s ∈ ss):
-           checkStm(t, s)
+    checkStms (Type t, [Stm] ss): Maybe [StmT]
+
+    checkDef (Def d) : Maybe DefT
 
     checkDef (DFun t x ss):
-      checkStms (t, ss)
+      ss' ← checkStms (t, ss)
+      return (DFunT t x ss')
 ```
 
 
@@ -439,38 +535,3 @@ function definition, resulting in an elaborated program.
 
 The result of type checking is a map from function names to their
 types and elaborated definitions.
-
-
-More type annotations
----------------------
-
-Elaboration:
-- insert coercions (already discussed)
-- disambiguate overloaded operators `+`,`*`,...`<`,`<=`,...,`==`,...
-- ...
-
-Type-annotating checker: annotate each subexpression with its type.
-
-- Alternative 1 (book): put an annotation at each subexpression
-  `internal ECast.  Exp ::= "(" Type ")" Exp;`
-
-  ```
-    infer (Context Γ, Exp e): Maybe Exp
-
-    infer (Γ, EDiv e₁ e₂):
-      ECast t₁ e₁' ← infer (Γ, e₁)
-      ECast t₂ e₂' ← infer (Γ, e₂)
-      t = max t₁ t₂
-      return (ECast t (EDiv (ECast t₁ e₁') (ECast t₂ e₂')))
-  ```
-
-- Alternative 2: design a new abstract syntax which type-annotations
-  in the needed places.
-  ```lbnf
-  ...
-  TEDiv.     TExp ::= "div" Type TExp TExp;
-
-  TSExp.     TStm ::= Type TExp ";" ;
-  TSReturn.  TStm ::= "return" Type TExp;
-  ...
-  ```
