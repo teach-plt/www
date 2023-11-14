@@ -445,6 +445,7 @@ The lab rooms and supervision are
 % Supervision is
 available from Tue 31 Oct till Fri 15 Dec 2023,
 except for Fri 03 Nov which is a half-day.
+Starting 08 Nov we offer Zoom supervision on Wednesdays 15:15-17:00, please use the slack channel ``#queue`` to queue for Zoom supervision during that time.
 %Extra supervision sessions (Zoom) are planned for January 2024, 15:15-17:00, at the following days:
 %Tue 17th, Wed 18th, Jan 24th, Jan 25th.
 
