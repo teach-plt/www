@@ -283,7 +283,7 @@ Example implementation:
         e2'' ← coerce (e₂', t₂, t)
         if t /= TInt && t /= TDouble
         then fail "illegal arithmetic comparison"
-        else return (ETCmp t e₁'' CEq e₂'', t)
+        else return (ETCmp t e₁'' CEq e₂'', TBool)
 
     infer (EEq e₁ e₂):
         (e₁', t₁) ← infer (e₁)
@@ -291,7 +291,7 @@ Example implementation:
         t ← max t₁ t₂
         e₁'' ← coerce (e₁', t₁, t)
         e2'' ← coerce (e₂', t₂, t)
-        return (ETCmp t e₁'' CEq e₂'', t)
+        return (ETCmp t e₁'' CEq e₂'', TBool)
 
 Statements
 ----------
@@ -476,7 +476,7 @@ Branches need to be in new scope.
 
     Γ ⊢ᵗ⁰ e : bool    Γ. ⊢ᵗ⁰ s₁ ⇒ Γ₁    Γ. ⊢ᵗ⁰ s₂ ⇒ Γ₂
     -------------------------------------------------
-    Γ ⊢ᵗ⁰ if (e) s₁ else e₂ ⇒ Γ
+    Γ ⊢ᵗ⁰ if (e) s₁ else s₂ ⇒ Γ
 
     Γ ⊢ᵗ⁰ e : bool    Γ. ⊢ᵗ⁰ s ⇒ Γ'
     -----------------------------
