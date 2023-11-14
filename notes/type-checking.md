@@ -393,7 +393,7 @@ Checking function definitions (version 1):
 Variables and blocks
 --------------------
 
-Typing _environments_ (aka _contexts_) assign types to variables.
+Typing _contexts_ (aka _typing environments_) assign types to variables.
 
 Example:
 ```c
@@ -406,7 +406,7 @@ Example:
       int    x = 0;   // legal, shadows function parameter.
       double i = 3 ;  // shadows the previous variable i
       {
-                   // Environment: (x:double,i:int,j:int).(x:int,i:double).()
+                   // Context: (x:double,i:int,j:int).(x:int,i:double).()
       }
       i = i + j;   // the inner i becomes 8.0
       int k;
@@ -416,10 +416,10 @@ Example:
   }
 ```
 
-Environments `Γ` are structured as stack of blocks.
+Contexts `Γ` are structured as stack of blocks.
 Each block `Δ` is a (partial and finite) map from identifier to type.
 
-Example: in the innermost block, the typing environment is a stack of three blocks
+Example: in the innermost block, the typing context is a stack of three blocks.
 
   1. `(x:double,i:int,j:int)`: function parameters and top local variables
   2. `(x:int,i:double)`: variables declared in the first inner block
@@ -435,22 +435,22 @@ E.g. `(x:t),(x:...)` is a clash.
 
 Judgements version 2:
 
-  - `Γ ⊢ e : t`:  In context `Γ`, expression `e` has type `t`.
-  - `Γ ⊢ᵗ s ⇒ Δ`   :  In context `Γ`, statement `s` may return `t` and declares `Δ`.
-  - `Γ ⊢ᵗ ss ⇒ Δ`  :  (ditto)
+  - `Γ ⊢ e : t`     :  In context `Γ`, expression `e` has type `t`.
+  - `Γ ⊢ᵗ s ⇒ Γ'`   :  In context `Γ`, statement `s` may return `t` and extend the context to `Γ'`.
+  - `Γ ⊢ᵗ ss ⇒ Γ'`  :  (ditto)
 
 Rules for declarations and blocks.
 
-    ------------------------------------- no xᵢ ∈ Δ, and xᵢ ≠ xⱼ when i ≠ j
-    Γ.Δ ⊢ᵗ⁰ t x₁,...,xₙ; ⇒ (x₁:t,...xₙ:t)
+    ---------------------------------------- no xᵢ ∈ Δ, and xᵢ ≠ xⱼ when i ≠ j
+    Γ.Δ ⊢ᵗ⁰ t x₁,...,xₙ; ⇒ Γ.(Δ,x₁:t,...xₙ:t)
 
     Γ.(Δ,x:t) ⊢ e : t
-    ------------------------ x ∉ Δ
-    Γ.Δ ⊢ᵗ⁰ t x = e; ⇒ (x:t)
+    ---------------------------- x ∉ Δ
+    Γ.Δ ⊢ᵗ⁰ t x = e; ⇒ Γ.(Δ,x:t)
 
-    Γ.() ⊢ᵗ⁰ ss ⇒ Δ
+    Γ.() ⊢ᵗ⁰ ss ⇒ Γ'
     -----------------
-    Γ ⊢ᵗ⁰ { ss } ⇒ ()
+    Γ ⊢ᵗ⁰ { ss } ⇒ Γ
 
 Valid but pointless example for initialization statement:
 ```c
@@ -465,20 +465,20 @@ Rules for sequences:
     -----------
     Γ ⊢ᵗ⁰ ε ⇒ ()
 
-    Γ ⊢ᵗ⁰ s ⇒ Δ₁    Γ,Δ₁ ⊢ᵗ⁰ ss ⇒ Δ₂
+    Γ ⊢ᵗ⁰ s ⇒ Γ₁    Γ₁ ⊢ᵗ⁰ ss ⇒ Γ₂
     --------------------------------
-    Γ ⊢ᵗ⁰ s ss ⇒ Δ₁,Δ₂
+    Γ ⊢ᵗ⁰ s ss ⇒ Γ₂
 
 Rules for conditional statements:
 Branches need to be in new scope.
 
-    Γ ⊢ᵗ⁰ e : bool    Γ. ⊢ᵗ⁰ s₁ ⇒ Δ₁    Γ. ⊢ᵗ⁰ s₂ ⇒ Δ₂
+    Γ ⊢ᵗ⁰ e : bool    Γ. ⊢ᵗ⁰ s₁ ⇒ Γ₁    Γ. ⊢ᵗ⁰ s₂ ⇒ Γ₂
     -------------------------------------------------
-    Γ ⊢ᵗ⁰ if (e) s₁ else e₂ ⇒ ()
+    Γ ⊢ᵗ⁰ if (e) s₁ else e₂ ⇒ Γ
 
-    Γ ⊢ᵗ⁰ e : bool    Γ. ⊢ᵗ⁰ s ⇒ Δ
+    Γ ⊢ᵗ⁰ e : bool    Γ. ⊢ᵗ⁰ s ⇒ Γ'
     -----------------------------
-    Γ ⊢ᵗ⁰ while (e) s ⇒ ()
+    Γ ⊢ᵗ⁰ while (e) s ⇒ Γ
 
 Example:
 ```
@@ -495,7 +495,7 @@ Functions
 
 When calling a function, we need to provide arguments of the correct type.
 
-Global environment `Σ` (for function _signature_) maps function names to function types.
+Global context `Σ` (for function _signature_) maps function names to function types.
 ```c
    bool foo (int x, double y) { ... }
 ```
@@ -503,10 +503,10 @@ Type of `foo` is `bool(int,double)` also written as `(int,double)→bool`.
 
 Judgements version 3:
 
-  - `Σ;Γ ⊢ e : t`:  In signature `Σ` and context `Γ`, expression `e` has type `t`.
-  - `Σ;Γ ⊢ᵗ s ⇒ Δ`:  ...
-  - `Σ;Γ ⊢ᵗ ss ⇒ Δ`:  ...
-  - `Σ ⊢ d`: In signature `Σ`, function definition `d` is well-formed.
+  - `Σ;Γ ⊢ e : t`   : In signature `Σ` and context `Γ`, expression `e` has type `t`.
+  - `Σ;Γ ⊢ᵗ s ⇒ Γ'` : ...
+  - `Σ;Γ ⊢ᵗ ss ⇒ Γ'`: ...
+  - `Σ ⊢ d`         : In signature `Σ`, function definition `d` is well-formed.
 
 Rule for function application:
 
@@ -516,7 +516,7 @@ Rule for function application:
 
 Rule for function definition:
 
-    Σ; (x₁:t₁,...,xₙ:tₙ) ⊢ᵗ ss ⇒ Δ
+    Σ; (x₁:t₁,...,xₙ:tₙ) ⊢ᵗ ss ⇒ Γ'
     ---------------------------------
     Σ ⊢ t f (t₁ x₁, ... tₙ xₙ) { ss }
 
