@@ -34,8 +34,8 @@ An interpreter should be _compositional_!
 > ```
 
 An interpreter can be specified by:
-1. A mathematical function `⟦_⟧ : Expr → Val` (_domain theory_).
-2. A relation `_⇓_ ⊆ Expr × Val` (_big-step operational semantics_).
+1. A mathematical function `⟦_⟧ : Expr → Value` (_domain theory_).
+2. A relation `_⇓_ ⊆ Expr × Value` (_big-step operational semantics_).
 3. A reduction relation `_→_ ⊆ Expr × Expr` (_small-step operational semantics_).
 4. Pseudo code.
 5. A reference implementation.
@@ -64,13 +64,13 @@ value `null` for being undefined.
 
 This would be an LBNF grammar for our values:
 ```lbnf
-    VInt.    Val  ::= Integer;
-    VDouble. Val  ::= Double;
-    VBool.   Val  ::= Bool;
-    VNull.   Val  ::= "null";
+    VInt.    Value ::= Integer;
+    VDouble. Value ::= Double;
+    VBool.   Value ::= Bool;
+    VNull.   Value ::= "null";
 
-    BTrue.   Bool ::= "true";
-    BFalse.  Bool ::= "false";
+    BTrue.   Bool  ::= "true";
+    BFalse.  Boold ::= "false";
 ```
 (It is possible but not necessary to use BNFC to generate the value
 representation.)
@@ -116,12 +116,12 @@ The meaning of an arithmetic operator depends on its static _type_.
 Judgement `γ ⊢ e ⇓ v` should be read as a function with inputs `γ` and
 `e` and output `v`.
 ```
-    eval(Env γ, ExpT e): Val
+    eval(Env γ, Exp e): Value
 
-    eval(γ, ETId x)        = lookup(γ,x)
-    eval(γ, ETInt i)       = VInt i
-    eval(γ, ETDouble d)    = VDouble d
-    eval(γ, ETDiv t e₁ e₂) = divide(t, eval(γ,e₁), eval(γ,e₂))
+    eval(γ, EId x)        = lookup(γ,x)
+    eval(γ, EInt i)       = VInt i
+    eval(γ, EDouble d)    = VDouble d
+    eval(γ, EDiv t e₁ e₂) = divide(t, eval(γ,e₁), eval(γ,e₂))
 ```
 In the last clause, `eval(γ,e₁)` and `eval(γ,e₂)` can be run in any
 order, even in parallel!
@@ -183,16 +183,16 @@ Rules.
 The last rule shows: we need to _thread_ the environment through the
 judgements.
 ```
-    eval(Env γ, ExpT e): Val × Env
+    eval(Env γ, Exp e): Value × Env
 
-    eval(γ, ETId x)        =
+    eval(γ, EId x)        =
       ⟨ lookup(γ,x), γ ⟩
 
-    eval(γ, ETAssign x e)  = let
+    eval(γ, EAssign x e)  = let
          ⟨v,γ'⟩ = eval(γ,e)
       in ⟨ v, update(γ',x,v) ⟩
 
-    eval(γ, ETDiv t e₁ e₂) = let
+    eval(γ, EDiv t e₁ e₂) = let
          ⟨v₁,γ₁⟩ = eval(γ, e₁)
          ⟨v₂,γ₂⟩ = eval(γ₁,e₂)
       in ⟨ divide(t,v₁,v₂), γ₂ ⟩
@@ -215,17 +215,17 @@ vs.
 E.g. in Java, we can use an environment `env` global to the interpreter and
 mutate it with update.
 ```
-    eval(ExpT e): Val
+    eval(Exp e): Value
 
-    eval(ETId x):
+    eval(EId x):
         return env.lookup(x)
 
-    eval(ETAssign x e):
+    eval(EAssign x e):
         v ← eval(e)
         env.update(x,v)
         return v
 
-    eval(γ, ETDiv t e₁ e₂):
+    eval(γ, EDiv t e₁ e₂):
         v₁ ← eval(e₁)
         v₂ ← eval(e₂)
         return divide(t,v₁,v₂)
@@ -237,23 +237,23 @@ In Haskell, we can use the _state monad_ for the same purpose.
 ```haskell
     import Control.Monad.State (State, get, modify, evalState)
 
-    eval : ExpT → State Env Val
+    eval : Exp → State Env Value
 
-    eval (ETId x) = do
+    eval (EId x) = do
       γ ← get
       return (lookupVar γ x)
 
-    eval (ETAssign x e) = do
+    eval (EAssign x e) = do
       v ← eval e
       modify (λ γ → updateVar γ x v)
       return v
 
-    eval (ETDiv TInt e₁ e₂) = do
+    eval (EDiv TInt e₁ e₂) = do
       VInt i₁ ← eval e₁
       VInt i₂ ← eval e₂
       return (VInt (div i₁ i₂))
 
-    interpret : ExpT → Val
+    interpret : Exp → Value
     interpret e = evalState (eval e) emptyEnv
 ```
 
@@ -419,9 +419,9 @@ regular return from the function.
 >     either asking to return value `v`,
 >     or to continue execution in updated environment `γ'`."
 
-The disjoint union `Val ⊎ Env` could be modeled in LBNF as:
+The disjoint union `Value ⊎ Env` could be modeled in LBNF as:
 ```lbnf
-    Return.   Result ::= "return" Val;
+    Return.   Result ::= "return" Value;
     Continue. Result ::= "continue" Env;
 ```
 
@@ -482,7 +482,7 @@ function names `f` to their definition `t f (t₁ x₁,...,tₙ xₙ) { ss }`.
 In Java, we can use Java's exception mechanism.
 ```java
 
-   eval(ETCall f es):
+   eval(ECall f es):
      vs     ← eval(es)        // Evaluate list of arguments
      (Δ,ss) ← lookupFun(f)    // Get parameters and body of function
      γ      ← saveEnv()       // Save current environment
@@ -505,10 +505,10 @@ In Haskell, we can use the _exception monad_.
     import Control.Monad.Reader
     import Control.Monad.State
 
-    type M = ReaderT Sig (StateT Env (ExceptT Val IO))
+    type M = ReaderT Sig (StateT Env (ExceptT Value IO))
 
-    eval :: ExpT → M Val
-    eval (ETCall f es) = do
+    eval :: Exp → M Value
+    eval (ECall f es) = do
       vs     ← mapM eval es
       (Δ,ss) ← lookupFun f
       γ      ← get
@@ -517,7 +517,7 @@ In Haskell, we can use the _exception monad_.
         put γ
         return v
 
-    execStm :: StmT → M ()
+    execStm :: Stm → M ()
     execStm (SReturn e) = do
       v ← eval e
       throwError v
