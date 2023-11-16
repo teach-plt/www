@@ -1,9 +1,7 @@
-Programming Language Technology
-DAT151/DIT231
-Andreas Abel
-
-Interpretation
-==============
+---
+title: Interpretation
+subtitle: Programming Language Technology, DAT151/DIT231
+---
 
 Introduction
 ------------
@@ -34,15 +32,16 @@ An interpreter should be _compositional_!
 > ```
 
 An interpreter can be specified by:
-1. A mathematical function `⟦_⟧ : Expr → Value` (_domain theory_).
-2. A relation `_⇓_ ⊆ Expr × Value` (_big-step operational semantics_).
-3. A reduction relation `_→_ ⊆ Expr × Expr` (_small-step operational semantics_).
+1. A mathematical function `⟦_⟧ : Exp → Val` (_set theory_, _domain theory_).
+2. A relation `_⇓_ ⊆ Exp × Val` (_big-step operational semantics_).
+3. A reduction relation `_→_ ⊆ Exp × Exp` (_small-step operational semantics_).
 4. Pseudo code.
 5. A reference implementation.
 
 We interpret _type-checked_ programs only, since the meaning of
 overloaded operators depends on their type.
 
+(To avoid clutter, we reuse the names of the untyped ASTs, e.g. `Exp` instead `ExpT` etc.)
 
 Evaluation of arithmetic expressions
 ------------------------------------
@@ -64,13 +63,13 @@ value `null` for being undefined.
 
 This would be an LBNF grammar for our values:
 ```lbnf
-    VInt.    Value ::= Integer;
-    VDouble. Value ::= Double;
-    VBool.   Value ::= Bool;
-    VNull.   Value ::= "null";
+    VInt.    Val  ::= Integer;
+    VDouble. Val  ::= Double;
+    VBool.   Val  ::= Bool;
+    VNull.   Val  ::= "null";
 
-    BTrue.   Bool  ::= "true";
-    BFalse.  Boold ::= "false";
+    BTrue.   Bool ::= "true";
+    BFalse.  Bool ::= "false";
 ```
 (It is possible but not necessary to use BNFC to generate the value
 representation.)
@@ -116,7 +115,7 @@ The meaning of an arithmetic operator depends on its static _type_.
 Judgement `γ ⊢ e ⇓ v` should be read as a function with inputs `γ` and
 `e` and output `v`.
 ```
-    eval(Env γ, Exp e): Value
+    eval(Env γ, Exp e): Val
 
     eval(γ, EId x)        = lookup(γ,x)
     eval(γ, EInt i)       = VInt i
@@ -183,7 +182,7 @@ Rules.
 The last rule shows: we need to _thread_ the environment through the
 judgements.
 ```
-    eval(Env γ, Exp e): Value × Env
+    eval(Env γ, Exp e): Val × Env
 
     eval(γ, EId x)        =
       ⟨ lookup(γ,x), γ ⟩
@@ -215,7 +214,7 @@ vs.
 E.g. in Java, we can use an environment `env` global to the interpreter and
 mutate it with update.
 ```
-    eval(Exp e): Value
+    eval(Exp e): Val
 
     eval(EId x):
         return env.lookup(x)
@@ -231,13 +230,13 @@ mutate it with update.
         return divide(t,v₁,v₂)
 ```
 This keeps the environment _implicit_.
-(But careful with function calls, see below!
+(But careful with function calls, see below!)
 
 In Haskell, we can use the _state monad_ for the same purpose.
 ```haskell
     import Control.Monad.State (State, get, modify, evalState)
 
-    eval : Exp → State Env Value
+    eval : Exp → State Env Val
 
     eval (EId x) = do
       γ ← get
@@ -253,7 +252,7 @@ In Haskell, we can use the _state monad_ for the same purpose.
       VInt i₂ ← eval e₂
       return (VInt (div i₁ i₂))
 
-    interpret : Exp → Value
+    interpret : Exp → Val
     interpret e = evalState (eval e) emptyEnv
 ```
 
@@ -275,7 +274,6 @@ The Haskell state monad is just sugar.  It is implemented roughly by:
          (b, s₂) = q(a) s₁
       in (b, s₂)
 ```
-N.B.: For the Haskell hacker: `(do x ← p; q x) = uncurry q . p`.
 
 
 ### Correctness revisited
@@ -311,7 +309,7 @@ Input and output:
 We do not model input and output mathematically here.
 Note that `read i from stdin` can also abort with an exception.
 
-Exercise: Could we model evaluation with input and output as a
+Bonus exercise: Could we model evaluation with input and output as a
 mathematical function?
 Hint:
 - The input and the output both could be a stream of strings.
@@ -392,11 +390,12 @@ We can exit from the middle of a loop, block etc.!
 ```c
     bool prime (int p) {
       if (p <= 2) return p == 2;
-      else {
+      if (divides(2,p)) return false;
+      {
         int q = 3;
         while (q * q <= p) {
           if (divides(q,p)) return false;
-          else q = q + 2;
+          q = q + 2;
         }
       }
       return true;
@@ -419,9 +418,9 @@ regular return from the function.
 >     either asking to return value `v`,
 >     or to continue execution in updated environment `γ'`."
 
-The disjoint union `Value ⊎ Env` could be modeled in LBNF as:
+The disjoint union `Val ⊎ Env` could be modeled in LBNF as:
 ```lbnf
-    Return.   Result ::= "return" Value;
+    Return.   Result ::= "return" Val;
     Continue. Result ::= "continue" Env;
 ```
 
@@ -501,13 +500,14 @@ In Java, we can use Java's exception mechanism.
 ```
 In Haskell, we can use the _exception monad_.
 ```haskell
+    import Control.Monad
     import Control.Monad.Except
     import Control.Monad.Reader
     import Control.Monad.State
 
-    type M = ReaderT Sig (StateT Env (ExceptT Value IO))
+    type M = ReaderT Sig (StateT Env (ExceptT Val IO))
 
-    eval :: Exp → M Value
+    eval :: Exp → M Val
     eval (ECall f es) = do
       vs     ← mapM eval es
       (Δ,ss) ← lookupFun f
@@ -522,7 +522,6 @@ In Haskell, we can use the _exception monad_.
       v ← eval e
       throwError v
 ```
-More in the hands-on lecture...
 
 
 Programs
@@ -612,3 +611,6 @@ Example 2:
 
 Languages with effects (such as C/C++) mostly use call-by-value.
 Haskell is pure (no effects) and uses call-by-need, which refines call-by-name.
+
+---
+Andreas Abel, updated 2023-11-16
