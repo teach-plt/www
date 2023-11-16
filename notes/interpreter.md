@@ -29,7 +29,7 @@ An interpreter should be _compositional_!
 >   eval (Op(e₁,e₂)):
 >     v₁ ← eval e₁
 >     v₂ ← eval e₂
->     v  ← combine v₁ and v₂ according to Op
+>     v  ← ...combine v₁ and v₂ according to Op...
 >     return v
 > ```
 
@@ -69,7 +69,8 @@ This would be an LBNF grammar for our values:
     VBool.   Value ::= Bool;
     VNull.   Value ::= "null";
 
-    rules    Bool  ::= "true" | "false";
+    BTrue.   Bool  ::= "true";
+    BFalse.  Boold ::= "false";
 ```
 (It is possible but not necessary to use BNFC to generate the value
 representation.)
@@ -157,11 +158,9 @@ We return the updated environment along with the value:
 >   "In environment `γ`, expression `e` has value `v`
 >    and updates environment to `γ'`."
 
-We write `γ[x=v]` for environment `γ'` with `γ'(x) = v` and
-`γ'(z) = γ(z)` when `z ≠ x`.
+We write `γ[x=v]` for updating the _topmost_ occurrence of `x` in environment `γ'` to value `v`.
 
-Note that we update the "topmost" `x` only --- it may appear in
-several blocks `δ` of `γ`.
+(Note `x` may appear in several blocks `δ` of `γ`.)
 
 Rules.
 
@@ -177,15 +176,12 @@ Rules.
 >   γ ⊢ (x = e) ⇓ ⟨v; γ'[x=v]⟩
 >
 >   γ ⊢ e₁ ⇓ ⟨v₁;γ₁⟩    γ₁ ⊢ e₂ ⇓ ⟨v₂;γ₂⟩
->   ------------------------------------ v = divide(t,v₁,v₂)
+>   ------------------------------------- v = divide(t,v₁,v₂)
 >   γ ⊢ e₁ /ₜ e₂ ⇓ ⟨v;γ₂⟩
 > ```
 
-The last rule show: we need to _thread_ the environment through the
+The last rule shows: we need to _thread_ the environment through the
 judgements.
-
-The evaluation _order_ matters now!
-
 ```
     eval(Env γ, Exp e): Value × Env
 
@@ -193,14 +189,18 @@ The evaluation _order_ matters now!
       ⟨ lookup(γ,x), γ ⟩
 
     eval(γ, EAssign x e)  = let
-        ⟨v,γ'⟩ = eval(γ,e)
+         ⟨v,γ'⟩ = eval(γ,e)
       in ⟨ v, update(γ',x,v) ⟩
 
     eval(γ, EDiv t e₁ e₂) = let
-        ⟨v₁,γ₁⟩ = eval(γ, e₁)
-        ⟨v₂,γ₂⟩ = eval(γ₁,e₂)
+         ⟨v₁,γ₁⟩ = eval(γ, e₁)
+         ⟨v₂,γ₂⟩ = eval(γ₁,e₂)
       in ⟨ divide(t,v₁,v₂), γ₂ ⟩
 ```
+
+
+The evaluation _order_ matters now!
+
 Consider
 ```
     x=0 ⊢ x + x++
@@ -212,7 +212,7 @@ vs.
 
 ### State threading behind the scenes
 
-E.g. in Java, we can use a environment `env` global to the interpreter and
+E.g. in Java, we can use an environment `env` global to the interpreter and
 mutate it with update.
 ```
     eval(Exp e): Value
@@ -231,6 +231,7 @@ mutate it with update.
         return divide(t,v₁,v₂)
 ```
 This keeps the environment _implicit_.
+(But careful with function calls, see below!
 
 In Haskell, we can use the _state monad_ for the same purpose.
 ```haskell
@@ -374,7 +375,7 @@ Or:
 
 > ```
 >   γ ⊢ e ⇓ ⟨true; γ₁⟩    γ₁ ⊢ { s } while e (s) ⇓ γ₃
->   -------------------------------------------------------------
+>   -------------------------------------------------
 >   γ ⊢ while (e) s ⇓ γ₃
 > ```
 
