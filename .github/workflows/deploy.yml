@@ -11,11 +11,24 @@ defaults:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     env:
       BNFC: 2.9.5
+      PANDOC: 3.1.9
 
     steps:
+
+    - name: Install pandoc
+      run: |
+        wget https://github.com/jgm/pandoc/releases/download/${PANDOC}/pandoc-${PANDOC}-1-amd64.deb
+        sudo dpkg -i pandoc-${PANDOC}-1-amd64.deb
+    # The ubuntu-shipped pandoc is too old to support e.g. 'title: ...' in md->html
+    #   run: |
+    #     sudo apt install pandoc
+
+    - name: Pandoc version
+      run: |
+        pandoc --version
 
     - name: Local PATH
       run: |
@@ -69,10 +82,6 @@ jobs:
         wget https://github.com/BNFC/bnfc/releases/download/v${{ env.BNFC }}/bnfc-${{ env.BNFC }}-linux.binary
         mv bnfc-${{ env.BNFC }}-linux.binary "${HOME}/.local/bin/bnfc"
         chmod +x "${HOME}/.local/bin/bnfc"
-
-    - name: Install pandoc
-      run: |
-        sudo apt install pandoc
 
     # - name: Setup TeX Live
     #   uses: teatimeguest/setup-texlive-action@v2
