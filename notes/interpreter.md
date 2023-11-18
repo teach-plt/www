@@ -13,11 +13,10 @@ Why an interpreter if we can have a compiler?
 - Can help _boot strapping_ (self-implementating) a language.
   1. Write interpreter `I` for new language `X` in existing language `Y`.
   2. Write simple compiler `C` for `X` in `X`.
-  3. Run (via `I`) `C` on `I` to get a compiled interpreter `I'`.
-  4. Run (via `I'`) `C` on `C` to get a compiled compiler `C'`.
-  5. Write an optimizing compiler `O` for `X` in `X`.
-  6. Run `C'` on `O` to get an a compiled optimizing compiler `Cₒ`.
-  7. Run `Cₒ` on `Cₒ` to get an optimized optimizing compiler `Cₒ'`.
+  3. Run (via `I'`) `C` on `C` to get a compiled compiler `C'`.
+  4. Write an optimizing compiler `O` for `X` in `X`.
+  5. Run `C'` on `O` to get an a compiled optimizing compiler `Cₒ`.
+  6. Run `Cₒ` on `Cₒ` to get an optimized optimizing compiler `Cₒ'`.
 
 An interpreter should be _compositional_!
 
@@ -157,7 +156,7 @@ We return the updated environment along with the value:
 >   "In environment `γ`, expression `e` has value `v`
 >    and updates environment to `γ'`."
 
-We write `γ[x=v]` for updating the _topmost_ occurrence of `x` in environment `γ'` to value `v`.
+We write `γ[x=v]` for updating the _topmost_ (innermost) occurrence of `x` in environment `γ'` to value `v`.
 
 (Note `x` may appear in several blocks `δ` of `γ`.)
 
@@ -224,7 +223,7 @@ mutate it with update.
         env.update(x,v)
         return v
 
-    eval(γ, EDiv t e₁ e₂):
+    eval(EDiv t e₁ e₂):
         v₁ ← eval(e₁)
         v₂ ← eval(e₂)
         return divide(t,v₁,v₂)
