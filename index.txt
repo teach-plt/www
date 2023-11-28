@@ -283,14 +283,15 @@ Slides follow closely the plt book.
 %| Thu 23/11     | 13-14          | Hands-on with Lab 2 (Haskell)     |  |
 %[lab2 PM labs/lab2/index.html]
 %| Thu 23/11     | 14-15 **[SB-H1 https://maps.chalmers.se/#56936c80-6cb7-4a3e-be43-4c6458006683]**  | Hands-on with Lab 2 (Java)        |  |
-| Thu 23/11     | 13-15  **SB-H5**        | Code generation  //(lecture: ??)//                 | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [notes notes/compilation.html], [prime.c notes/prime.c], [prime.j notes/prime.j]
+| Thu 23/11     | 13-15  **SB-H5**        | Code generation  //(lecture: Jonas Höfer)//                 | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [notes notes/compilation.html], [prime.c notes/prime.c], [prime.j notes/prime.j]
 | //Mon 27/11// | //23//         | //Lab 2 deadline//                |  |
 %[lab2 PM labs/lab2/index.html] |
 %| Tue 28/11     | 13-15          | Code generation                   | [slides plt-book/ipl-book/slides/6-slides-ipl-book.pdf], plt 6, dragon 6,7, [script notes/compilation.html]
-| Tue 28/11    | 13-14          | Hands-on with Lab 3 (Haskell)     |  |
+| Tue 28/11     | **no lecture**         | Hands-on with Lab 3: //videos from 2022// | [Media Gallery https://chalmers.instructure.com/courses/26247/external_tools/29] |
+%| Tue 28/11    | 13-14          | Hands-on with Lab 3 (Haskell)     |  |
 %[live code (diff) live/2023/live-9-lab3-haskell.diff] |
 %[lab3 PM labs/lab3/index.html]
-| Tue 28/11     | 14-15          | Hands-on with Lab 3 (Java)        |  |
+%| Tue 28/11     | 14-15          | Hands-on with Lab 3 (Java)        |  |
 %[live code (diff) live/2023/live-9-lab3-java.diff] |
 %[live coding live/2019/live-9-lab3.zip] |
 %| Thu 30/11     | 13-14          | Hands-on with Lab 3 (Haskell)     |  |
