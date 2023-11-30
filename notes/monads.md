@@ -1,5 +1,8 @@
-The interpreter in Haskell
-==========================
+---
+title: The interpreter in Haskell
+subtitle: Programming Language Technology, DAT151/DIT231
+---
+
 
 We implement interpretation of expressions and statements via Haskell functions:
 

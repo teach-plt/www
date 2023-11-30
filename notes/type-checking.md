@@ -1,9 +1,8 @@
-Programming Language Technology 2023
-DAT151/DIT231
-Andreas Abel
+---
+title: Type Checking and Elaboration
+subtitle: Programming Language Technology, DAT151/DIT231
+---
 
-Type Checking and Elaboration
-=============================
 
 Introduction
 ------------

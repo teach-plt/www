@@ -1,5 +1,8 @@
-Compiling C-- to JVM
-====================
+---
+title: Compiling C-- to JVM
+subtitle: Programming Language Technology, DAT151/DIT231
+---
+
 
 (Additional notes complementing the slides.)
 

@@ -1,4 +1,8 @@
-2022-11-03 A little git cheatsheet
+---
+title: A little `git` cheatsheet
+subtitle: Programming Language Technology, DAT151/DIT231
+---
+
 
 Basics
 ======

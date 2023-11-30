@@ -1,5 +1,8 @@
-Typing the lambda calculus
-==========================
+---
+title: Typing the lambda calculus
+subtitle: Programming Language Technology, DAT151/DIT231
+---
+
 
 Lambda calculus with integers:
 ```haskell

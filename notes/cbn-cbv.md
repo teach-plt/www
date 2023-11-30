@@ -1,5 +1,8 @@
-Interpreting functional languages
-=================================
+---
+title: Interpreting functional languages
+subtitle: Programming Language Technology, DAT151/DIT231
+---
+
 
 The lambda-calculus
 -------------------

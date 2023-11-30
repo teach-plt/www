@@ -1,3 +1,10 @@
+---
+title: Example parse table for shift/reduce parsing
+subtitle: Programming Language Technology, DAT151/DIT231
+---
+
+
+
 Grammar
 -------
 
