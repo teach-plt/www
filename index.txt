@@ -298,7 +298,8 @@ Slides follow closely the plt book.
 %[lab3 PM labs/lab3/index.html]
 %| Thu 30/11     | 14-15          | Hands-on with Lab 3 (Java)        |  |
 %| Thu 30/11     | 13-15          | [Domain-specific languages http://www.cse.chalmers.se/~bergert/slides/guest_lecture_DSLs.pdf]  | Guest lecture by [Thorsten Berger http://www.cse.chalmers.se/~bergert/]
-| Thu 30/11     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3, [script notes/cbn-cbv.html]
+| Thu 30/11     | **video from 2022**          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3, [script notes/cbn-cbv.html]
+%| Thu 30/11     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3, [script notes/cbn-cbv.html]
 %| Tue 05/12     | 13-15          | Functional programming languages  | [slides plt-book/ipl-book/slides/7-slides-ipl-book.pdf], plt 7, dragon 6.5,7.3
 % %| Tue 05/12     | 13-15          | The language design space         | [slides plt-book/ipl-book/slides/8-slides-ipl-book.pdf], plt 8, dragon 1.
 | Tue 05/12     | 13-15          | Type inference and polymorphism   | plt 7.7-9, [script notes/typing.html]
