@@ -59,9 +59,10 @@ Examples:
 
         ((int → int) → int) → int
 
-Quiz: What is the order of this type?
+Quiz ([menti.com](https://www.menti.com/aldxaquzewwn) 84 744 66): What is the order of this type?
 
     (int → int) → ((int → int) → int) → int
+
 
 
 Typing rules
@@ -89,20 +90,20 @@ Context Γ maps variables to types.
         -------------
         Γ ⊢ f e : t
 
-  Desugaring of let:
-
-        Γ,x:s ⊢ e₂ : t
-        ---------------------
-        Γ ⊢ (λx → e₂) : s → t    Γ ⊢ e₁ : s
-        -----------------------------------
-        Γ ⊢ (λx → e₂) e₁ : t
-
 - Let:
 
         Γ ⊢ e₁ : s
         Γ,x:s ⊢ e₂ : t
         --------------------------
         Γ ⊢ (let x = e₁ in e₂) : t
+
+Desugaring of let:
+
+        Γ,x:s ⊢ e₂ : t
+        ---------------------
+        Γ ⊢ (λx → e₂) : s → t    Γ ⊢ e₁ : s
+        -----------------------------------
+        Γ ⊢ (λx → e₂) e₁ : t
 
 Example:  Typing of `twice`.
 Deriving `⊢ λ f → λ x → f (f x) : (int → int) → int → int`.
@@ -157,6 +158,22 @@ Solutions:
      * two modes: checking and inference
        * check lambdas,
        * infer applications: infer function part, check argument part
+
+             void check(Cxt Γ, Exp e, Type t)
+             Type infer(Cxt Γ, Exp e)
+
+             check(Γ, λx→e, int  ): type error
+             check(Γ, λx→e, s → t): check (Γ[x:s], e, t)
+             check(Γ, e   , t    ): unless (infer(Γ,e) == t) type error
+
+             infer(Γ, x)  : lookup(Γ,x)
+             infer(Γ, f e):
+               case infer(Γ,f) of
+                 int:     type error
+                 (s → t): check(Γ,e,s)
+                          return t
+
+
        * `let x = e₁ in e₂`:
           - `e₁` needs to be inferred
           - `e₂` can be checked or inferred
@@ -186,6 +203,7 @@ Solutions:
      * Solve constraints by _unification_
 
 Example:  Inferring the `comp` function.
+(`A`, `B`, `C` etc. are type variables.)
 
     ⊢ λ f → λ g → λ x → f (g x) : A
     A = B → C
@@ -420,11 +438,11 @@ Example 1:  Compute type of `twice`
 
   - Inference phase
 
-        infer(ε, λ f → λ x → f (f x)) = F → (X → Z)
-        infer(f:F, λ x → f (f x))     = X → Z
-        infer(f:F,x:X, f (f x))       = Z
+        infer(ε, λ f → λ x → f (f x)) ... = F → (X → Z)
+        infer(f:F, λ x → f (f x))     ... = X → Z
+        infer(f:F,x:X, f (f x))       ... = Z
         - infer(..., f)               = F
-        - infer(..., f x)             = Y
+        - infer(..., f x)             ... = Y
           * infer (..., f)            = F
           * infer (..., x)            = X
           * F = X → Y
