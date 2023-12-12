@@ -1,5 +1,5 @@
 -- Programming Language Technology DAT151/DIT231
--- 2021-12-14 Agda (version ≥2.6.0)
+-- 2023-12-12 Agda (version ≥2.6.0)
 -- From Dependent Types to Verified Compilation
 
 -- A correct compiler for Hutton's Razor
