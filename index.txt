@@ -50,6 +50,9 @@ Winter Term 2023 (LP2)
 
 =News and changes=
 
+: //2024-01-08//
+  Fixed errors in [Jan 2023 exam solution exams/solutions-plt-2023-1.pdf] (Q2 automata and Q4 evaluation of if).
+
 %   : //2022-08-23//
 %    The second reexam will be held 26 August on Canvas organized as
 %    [course 17081 https://chalmers.instructure.com/courses/17081].
