@@ -560,7 +560,7 @@ In particular, make sure you understand all parts of the solution
 =Exam=
 
 The written exam determines the course grade, the usual grading scales apply:
-Chalmers: 5, 4, 3, U; Gothenburg University: MVG, VG, G, U.
+Chalmers: 5, 4, 3, U; Gothenburg University: VG, G, U.
 
 Exam dates:
  11 Jan 2024 am J,
