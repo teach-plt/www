@@ -1,6 +1,6 @@
-# Any snapshot for GHC >= 8.4 should work, we pick a recent stable one:
-# (recent as of 2023-10-24)
-resolver: lts-21.17
+# Any snapshot for GHC >= 8.4 should work, we pick the most recent final LTS:
+# (recent as of 2024-05-28)
+resolver: lts-21.25
 
 # See https://www.stackage.org/ "Latest releases per GHC version"
 # for alternatives.
