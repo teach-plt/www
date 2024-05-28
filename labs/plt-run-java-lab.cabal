@@ -11,7 +11,7 @@ description:
   Runner Programming Language Technology (Chalmers DAT151 / GU DIT231) lab solutions written in Java.
 
 tested-with:
-  GHC == 9.8.1 || ==9.6.3 || ==9.4.7 || ==9.2.8 || ==9.0.2
+  GHC ==9.10.1 || ==9.8.2 || ==9.6.5 || ==9.4.8 || ==9.2.8 || ==9.0.2
    || ==8.10.7 || ==8.8.4 || ==8.6.5 || ==8.4.4
 
 executable plt-run-java-lab
@@ -23,7 +23,7 @@ executable plt-run-java-lab
   build-depends:
    -- Lower bounds set to versions shipped with GHC 8.4.4
     , base       >= 4.11.1.0 && < 5
-    , filepath   >= 1.4.2    && < 1.5
+    , filepath   >= 1.4.2    && < 1.6
     , process    >= 1.6.3.0  && < 1.7
 
   ghc-options:
