@@ -8,8 +8,9 @@ test-goals =  \
   test-9.0.2  \
   test-9.2.8  \
   test-9.4.8  \
-  test-9.6.3  \
-  test-9.8.1  \
+  test-9.6.5  \
+  test-9.8.2  \
+  test-9.10.1  \
 
 # end test-goals
 

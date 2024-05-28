@@ -3,8 +3,8 @@ packages:
 
   labs/lab1/testsuite
   labs/lab2/testsuite
-  -- labs/lab3/testsuite
-  -- labs/lab4/testsuite
+  labs/lab3/testsuite
+  labs/lab4/testsuite
 
   labs/lab2/haskell
   labs/lab3/haskell
