@@ -16,7 +16,7 @@ ALEX_OPTS  = --ghc
 lab2 : transpile lab2.cabal
 	cabal install --installdir=.
 
-lab2.cabal : package.yaml
+lab2.cabal : package.yaml MAlonzo/Code/Qlab2.hs
 	hpack
 
 # Generating the .hs sources from the .agda sources
