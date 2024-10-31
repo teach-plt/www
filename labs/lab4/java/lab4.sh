@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # A simple shell program to run PLT lab4 on Linux/Unix systems.
 

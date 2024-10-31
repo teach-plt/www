@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # A simple shell program to run PLT lab3 on Linux/Unix systems.
 

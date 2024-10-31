@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 dir=`dirname $0`
 exec java -cp "$dir:$CLASSPATH" runmini "$@"

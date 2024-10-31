@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 if [ "$1" == "" -o  "$1" == "-h" -o "$1" == "--help" ]; then
   echo "PLT lab 1 testsuite runner"

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 CONF=/chalmers/sw/sup64/fix_personal_www_rights-1.1/etc
 cd /chalmers/groups/edu2009/www/www.cse.chalmers.se/year/2016/course/DAT151

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 NAME=lab1-testsuite
 
