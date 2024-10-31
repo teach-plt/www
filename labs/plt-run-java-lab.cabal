@@ -1,18 +1,24 @@
-cabal-version:             2.2
+cabal-version: 2.4
+
+-- Programming Language Technology (Chalmers DAT151 / GU DIT231)
+-- (C) 2022-24 Andreas Abel
+-- All rights reserved.
+
 name:                      plt-run-java-lab
 version:                   0.0
 author:                    Andreas Abel, Fabian Ruch and the PLT team.
 copyright:                 (C) 2018-23 Andreas Abel and Fabian Ruch
 license:                   NONE
                            -- All rights reserved.
+
 synopsis:
   Runner for PLT lab solutions written in Java
 description:
   Runner Programming Language Technology (Chalmers DAT151 / GU DIT231) lab solutions written in Java.
 
 tested-with:
-  GHC ==9.10.1 || ==9.8.2 || ==9.6.5 || ==9.4.8 || ==9.2.8 || ==9.0.2
-   || ==8.10.7 || ==8.8.4 || ==8.6.5 || ==8.4.4
+  GHC ==9.10.1 || ==9.8.2 || ==9.6.6 || ==9.4.8 || ==9.2.8 || ==9.0.2
+   || ==8.10.7 || ==8.8.4 || ==8.6.5
 
 executable plt-run-java-lab
   main-is:                 JavaLabRunner.hs

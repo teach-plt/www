@@ -1,14 +1,13 @@
 # Test compilation of the stub under various GHC versions.
 
 test-goals =  \
-  test-8.4.4  \
   test-8.6.5  \
   test-8.8.4  \
   test-8.10.7 \
   test-9.0.2  \
   test-9.2.8  \
   test-9.4.8  \
-  test-9.6.5  \
+  test-9.6.6  \
   test-9.8.2  \
   test-9.10.1  \
 
