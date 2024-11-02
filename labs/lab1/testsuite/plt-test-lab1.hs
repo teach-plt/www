@@ -1,3 +1,7 @@
+-- Programming Language Technology (Chalmers DAT151 / GU DIT231)
+-- (C) 2022-24 Andreas Abel
+-- All rights reserved.
+
 {-# LANGUAGE CPP #-}
 {-# LANGUAGE TupleSections #-}
 
@@ -16,6 +20,9 @@ import Data.Char
 import Data.IORef
 import qualified Data.List as List
 import Data.Maybe
+
+import GHC.Paths
+  ( ghc )
 
 import System.Console.GetOpt
 import System.Directory
@@ -107,9 +114,9 @@ writeDriver grammar = writeFile "testdriver.hs" $ unlines
 
 compileDriver :: IO ()
 #ifdef HC_OPTS
-compileDriver = runPrgNoFail_ "ghc" (["--make"] ++ words HC_OPTS ++ ["-o", "testdriver"]) "testdriver.hs"
+compileDriver = runPrgNoFail_ ghc (["--make"] ++ words HC_OPTS ++ ["-o", "testdriver"]) "testdriver.hs"
 #else
-compileDriver = runPrgNoFail_ "ghc" ["--make", "-o", "testdriver"] "testdriver.hs"
+compileDriver = runPrgNoFail_ ghc ["--make", "-o", "testdriver"] "testdriver.hs"
 #endif
 
 type TestSuite = ([FilePath],[FilePath])
