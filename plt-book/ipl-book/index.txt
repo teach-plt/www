@@ -34,11 +34,13 @@ ISBN 978-1-84890-064-6
 [amazon.com http://www.amazon.com/Implementing-Programming-Languages-Introduction-Interpreters/dp/1848900643/ref=sr_1_5?ie=UTF8&qid=1337270998&sr=8-5] $18.00
 
 [amazon.co.uk http://www.amazon.co.uk/Implementing-Programming-Languages-Introduction-Interpreters/dp/1848900643/ref=sr_1_1?ie=UTF8&qid=1358841845&sr=8-1]
-£11.00
+£13.24
 
-[adlibris.se http://www.adlibris.com/se/product.aspx?isbn=1848900643] SEK 163
+[amazon.se https://www.amazon.se/Implementing-Programming-Languages-Introduction-Interpreters/dp/1848900643/ref=sr_1_5?ie=UTF8&qid=1337270998&sr=8-5] SEK 271
 
-[cremona.se http://www.cremona.se/se/search.php] SEK 135
+[adlibris.se https://www.adlibris.com/se/bok/implementing-programming-languages-an-introduction-to-compilers-and-interpreters-9781848900646] SEK 186
+
+[cremona.se https://www.chalmersstore.se/utlandsk-litteratur/implementing-programming-languages-an-introduction-to-compilers.html] SEK 139
 
 [College Publications http://www.collegepublications.co.uk/], Volume 16 in
 [Computing series http://www.collegepublications.co.uk/computing/]

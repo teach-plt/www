@@ -7,9 +7,9 @@ deps=style.css gh-fork-ribbon.css enhance_page.js Makefile
 
 all : exams mini lab1 lab2 lab3 lab4 ipl-book notes labs-www www # www last for linkchecker
 
-ship :
-	ssh abela@remote12.chalmers.se -t 'bash -l -c up-plt.sh'
-#/chalmers/users/abela/bin/up-plt.sh
+# ship :
+# 	ssh abela@remote12.chalmers.se -t 'bash -l -c up-plt.sh'
+# #/chalmers/users/abela/bin/up-plt.sh
 
 # ship : index.html
 # #	scp $< frelindb@remote12.chalmers.se:/chalmers/groups/edu2009/www/www.cse.chalmers.se/year/2015/course/DAT151-lp2/
@@ -37,12 +37,20 @@ check : all
 	linkchecker --check-extern index.html
 # pip install git+https://github.com/linkchecker/linkchecker.git@v9.4.0
 
-# Note: this needs txt2tags version 2.6 (python2)
-# version 3.x produces different html (very different look)
-# and dumps a fixed CSS style into the generated html.
-index.html : %.html : %.txt $(deps)
-	txt2tags --style=style.css --style=gh-fork-ribbon.css -t html $<
-# --toc
+# # Note: this needs txt2tags version 2.6 (python2)
+# # version 3.x produces different html (very different look)
+# # and dumps a fixed CSS style into the generated html.
+# index.html : %.html : %.txt $(deps)
+# 	txt2tags --style=style.css --style=gh-fork-ribbon.css -t html $<
+# # --toc;
+
+# sed: Insert <br/> tags if line ends with punctuation.
+# Do this via trailing spaces (markdown syntax for line break).
+# (This then does no harm if inside code block.)
+# Inside Makefile, need to use $$ for eol ($).
+index.html : README.md Makefile pandoc.css
+	sed -e 's#\([.,;:!?]\)$$#\1  #' $< | pandoc --css pandoc.css -f gfm -t html -o $@ --standalone
+# --metadata title="Programming Language Technology"  ## This also adds a title to the rendering
 
 ## Exams
 

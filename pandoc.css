@@ -1,3 +1,24 @@
+/* Andreas, 2024-11-03:
+ * Make document title similar its to txt2tags formatting.
+ */
+
+.title {
+  text-align: center;
+  font-size: 3em;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1.5em;
+  line-height: 100%;
+}
+
+.date {
+  text-align: center;
+  font-size: 1.5em;
+  line-height: 100%;
+}
+
 /*
  * I add this to html files generated with pandoc.
  */
@@ -16,7 +37,7 @@ body {
   line-height: 1.7;
   padding: 1em;
   margin: auto;
-  max-width: 54em;
+  max-width: 63em;  /* Adjust me! */
   background: #fefefe;
 }
 

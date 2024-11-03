@@ -11,8 +11,8 @@ index.html : $(files)
 # Do this via trailing spaces (markdown syntax for line break).
 # (This then does no harm if inside code block.)
 # Inside Makefile, need to use $$ for eol ($).
-%.html : %.md Makefile pandoc.css
-	sed -e 's#\([.,;:!?]\)$$#\1  #' $< | pandoc --css pandoc.css -f gfm -t html -o $@ --standalone
+%.html : %.md Makefile ../pandoc.css
+	sed -e 's#\([.,;:!?]\)$$#\1  #' $< | pandoc --css ../pandoc.css -f gfm -t html -o $@ --standalone
 # --metadata title="$*"
 
 # visualize-cbn
