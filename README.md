@@ -30,7 +30,7 @@ campus and in
 Tuesday lectures are in
 **[HC2](http://maps.chalmers.se/#23e2df72-cbb9-4aff-825a-1a282e9618d6)**,
 Thursday lectures in
-**[SB-H6](https://maps.chalmers.se/#c613d487-6c0c-4fe2-8a9d-55b858fa137f)**,
+**[SB-H6](https://maps.chalmers.se/#c613d487-6c0c-4fe2-8a9d-55b858fa137f)**
 *with exceptions* Thu 7nd Nov in
 **[HC3](https://maps.chalmers.se/#eb412b9e-836c-47eb-9d33-1bcff14bca19)** and
 Thu 28rd Nov in
@@ -123,18 +123,19 @@ Don't give away any lab solutions when you ask or answer questions!
 
 # Lab supervision
 
-Lab supervision is available in room
+Lab supervision is offered in room
 [ED3354](http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093)
 and online on Tue, Thu and Fri.
-Starting 14 Nov we offer Zoom only supervision on Wednesdays 15:15-17:00.
+Starting 14 Nov we offer Zoom-only supervision on Wednesdays 15:15-17:00.
 The lab rooms and supervision are available from Tue 05 Nov till Fri 20 Dec 2024.
+Attendance is voluntary.
 
 | Day |    Time     | Location     | Supervisors            |
 |:---:|:-----------:|--------------|------------------------|
-| Tue | 15:15-17:00 | Zoom, ED3354 | TBA                    |
-| Wed | 15:15-17:00 | Zoom only    | TBA                    |
-| Thu | 15:15-17:00 | Zoom, ED3354 | TBA                    |
-| Fri | 13:15-15:00 | Zoom, ED3354 | TBA                    |
+| Tue | 15:15-17:00 | Zoom, ED3354 | Andreas, David, Jonas  |
+| Wed | 15:15-17:00 | Zoom only    | Felix, David, Eric     |
+| Thu | 15:15-17:00 | Zoom, ED3354 | Andras, Jonas, Ruohan  |
+| Fri | 13:15-15:00 | Zoom, ED3354 | Andras, Ruohan, Eric   |
 
 We use [Slack](https://plt202425.slack.com/) to organize the lab supervision. [Please join](https://join.slack.com/t/plt202425/shared_invite/zt-2trexj8cz-mjRl_GiiNNkV2ljpNRLsIg) our Slack workspace and the channel `#queue`.
 
