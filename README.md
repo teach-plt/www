@@ -337,6 +337,10 @@ To set up CUP and JLex, follow these instructions:
 [Student representatives](https://student.portal.chalmers.se/en/chalmersstudies/courseinformation/courseevaluation/Pages/default.aspx)
 for DAT151 Programming language technology.
 
-| Program | @student.chalmers.se |      Name       |
-|:-------:|:--------------------:|:---------------:|
-|  MPALG  |        foo           |    Foo Bar      |
+| Program | @student.chalmers.se |     Name     |
+|:-------:|:--------------------:|:------------:|
+|  MPALG  | fadiab   | Fadi Abunaj              |
+|  MPCSN  | antonand | Anton Andersson          |
+| UTBYTE  | davfern  | David Fernández-Sanguino |
+| MPALG   | tobhag   | Tobias Hägglund          |
+| MPCAS   | erhaka   | Erik Håkansson           |
