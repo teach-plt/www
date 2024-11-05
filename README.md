@@ -158,7 +158,7 @@ You have to pass the labs to pass the course.
 However, the course grade is determined solely by the exam.
 
 - Lab 1 - parser (deadline 18/11)
-- Lab 2 - type checker and interpreter (deadline 02/11)
+- Lab 2 - type checker and interpreter (deadline 02/12)
 - Lab 3 - code generator (deadline 18/12)
 - Lab 4 - functional language interpreter (deadline 12/01/2025)
 
