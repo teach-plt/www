@@ -117,7 +117,7 @@ Assistants:
 - [Jonas Höfer](https://www.chalmers.se/personer/hoferj/)
 - Ruohan Li
 
-Questions regarding this class (organization, content, labs) should be asked publicly on the Canvas forum in the most cases.
+Questions regarding this class (organization, content, labs) should be asked publicly on the Slack forum in the most cases.
 You are also welcome to answer questions by others.
 Don't give away any lab solutions when you ask or answer questions!
 
