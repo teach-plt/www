@@ -119,7 +119,7 @@ Assistants:
 
 Questions regarding this class (organization, content, labs) should be asked publicly on the Slack forum in the most cases.
 You are also welcome to answer questions by others.
-Don't give away any lab solutions when you ask or answer questions!
+Do not give away any lab solutions when you ask or answer questions!
 
 # Lab supervision
 
@@ -247,24 +247,38 @@ To solve the labs, you need a developer environment with the following tools.
 
 ## General tools
 
-We need [make](https://en.wikipedia.org/wiki/Make_(software)) and [git](https://git-scm.com/) as command line tools.
+You need to invoke tools from a [command shell](https://en.wikipedia.org/wiki/Shell_(computing)).
+For one, the  [make](https://en.wikipedia.org/wiki/Make_(software)) build tool
+and the [git](https://git-scm.com/) version control tool are required.
 
-- On **Linux**, these are available by default
-- On **macOS**, you can install them from Xcode
-- On **Windows**, you should install [Git for Windows](https://git-scm.com/downloads/win). This installs Git Bash, a command line shell that mimics Linux and has `make` and `git`. You should generally just work from inside Git Bash in the rest of the course
+- On **Linux**, these are available by default.
+- On **macOS**, you can install them from Xcode (`xcode-select –-install`).
+- On **Windows**, you should install [Git for Windows](https://git-scm.com/downloads/win). This installs Git Bash, a command line shell that mimics Linux and has `make` and `git`. You should generally just work from inside Git Bash in the rest of the course.
+
+### Setting `PATH` and other environment variables
+
+Tools can be invoked from the shell only if they are in the [`PATH`](https://en.wikipedia.org/wiki/PATH_(variable))
+of your command shell.
+You can add directories to the search path by setting the `PATH` variable in the initialization script of your shell.  Such scripts are located in your `$HOME` directory.  The name of the initialization script usually contains the name of the shell.
+- E.g. for the Bash: `.bashrc` or `.bash_profile`
+- E.g. for the Zsh: `.zshrc`
+
+Appending the line `export PATH=/absolute/path/to/dir:${PATH}` to the initialization script will add directory `/absolute/path/to/dir` to the front of the `:`-separated list of search paths.
+- On Windows, this list is `;`-separated because `:` is reserved for drive names.
+  Windows also allows to set environment variables globally for a user through the Control Panel.
+
+Note that updates to the initialization script only take effect when the shell is restarted.
+
 
 ## Haskell tools
 
-Recent versions of the following Haskell tools need to be installed.
+Recent versions of the following Haskell tools need to be installed and in your `PATH`.
 
 - [Haskell Stack](https://docs.haskellstack.org/en/stable/), e.g. version 3.1.1
 - The Haskell compiler [GHC](https://www.haskell.org/ghc/) version 9.4.8
 - BNFC, the [BNF Converter](https://bnfc.digitalgrammars.com/), e.g. version 2.9.5
 - Haskell lexer generator [Alex](https://haskell-alex.readthedocs.io/en/stable/)
 - Haskell parser generator [Happy](https://haskell-happy.readthedocs.io/en/stable/)
-
-These tools need to be in the [`PATH`](https://en.wikipedia.org/wiki/PATH_(variable))
-in your command shell.
 
 We suggest the following installation.
 
@@ -275,13 +289,13 @@ We suggest the following installation.
    ghcup install stack latest
    ghcup install ghc 9.4.8
    ```
-   If you haven't yet done it, add to your system `PATH` the location where GHCup installs tools.
+   If you have not yet done it, add to your system `PATH` the location where GHCup installs tools.
 
 3. Finally, use Stack to install the remaining tools.
    ```
    stack install alex happy BNFC
    ```
-   This will alert you in the end that you don't have the installation directory in your system `PATH`, so go and add it there.
+   This might alert you in the end that you do not have the installation directory in your system `PATH`; in this case, go and add it there.
 
 4. Verify that these tools are working by querying their version:
    ```
@@ -315,10 +329,9 @@ To set up CUP and JLex, follow these instructions:
    and
    [JLex](https://github.com/BNFC/bnfc/raw/master/testing/data/JLex-1.2.6.jar).
 
-2. Make sure they are placed in your CLASSPATH.
+2. Make sure they are placed in your `CLASSPATH`.
 
    For example, in Linux or macOS, store these jars in `${HOME}/java-lib/` and add the following line to your shell initialization file.
-   (This file could be named `.profile`, or for the BASH, `.bashrc` or `.bash_profile` or similar.)
 
         export CLASSPATH=.:${HOME}/java-lib/java-cup-11b.jar:${HOME}/java-lib/java-cup-11b-runtime.jar:${HOME}/java-lib/JLex-1.2.6.jar:${CLASSPATH}
 
