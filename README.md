@@ -110,7 +110,7 @@ Those who have passed the course should be able to
 
 Assistants:
 
-- [Andras Kovacs](https://www.chalmers.se/personer/andrask/)
+- [András Kovács](https://www.chalmers.se/personer/andrask/)
 - [David Wärn](https://www.chalmers.se/personer/warnd/) ([homepage](https://dwarn.se))
 - [Eric Olsson](https://www.chalmers.se/personer/laro.aspx)
 - [Felix Cherubini](https://www.chalmers.se/personer/felixche/)
@@ -247,21 +247,11 @@ To solve the labs, you need a developer environment with the following tools.
 
 ## General tools
 
-You need to invoke tools from a [command shell](https://en.wikipedia.org/wiki/Shell_(computing)).
-Further, you need at least:
+We need [make](https://en.wikipedia.org/wiki/Make_(software)) and [git](https://git-scm.com/) as command line tools.
 
-- [make](https://en.wikipedia.org/wiki/Make_(software)) build tool
-- [git](https://git-scm.com/) version control tool
-
-These are by default available on Linux and can be installed from Xcode on macOS.
-
-On Windows you can for instance install a Linux distro via the Windows Subsystem for
-Linux ([WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux)).
-Another popular option is
-[MSYS2](https://www.msys2.org/) which is also bundeled with
-[Haskell stack](https://docs.haskellstack.org/en/stable/developing_on_windows/).
-Installation of `git` on Windows also installs the _Git Bash_ which you an use as command shell.
-(Unless you are already proficient in the Windows PowerShell.)
+- On **Linux**, these are available by default
+- On **macOS**, you can install them from Xcode
+- On **Windows**, you should install [Git for Windows](https://git-scm.com/downloads/win). This installs Git Bash, a command line shell that mimics Linux and has `make` and `git`. You should generally just work from inside Git Bash in the rest of the course
 
 ## Haskell tools
 
@@ -276,21 +266,22 @@ Recent versions of the following Haskell tools need to be installed.
 These tools need to be in the [`PATH`](https://en.wikipedia.org/wiki/PATH_(variable))
 in your command shell.
 
-Here is a suggestion how to install the prerequisites, if needed.
+We suggest the following installation.
 
-1. First install [GHCup](https://www.haskell.org/ghcup/).
-2. Then use it to install Stack and GHC.
+1. First install [GHCup](https://www.haskell.org/ghcup/). When asked, answer Yes to adding the ghcup installation directory to PATH.
+   - On Windows: copy the install script from the GHCup webpage into PowerShell. The installation might take a long time (10+ minutes), apparently because of the Windows Defender antivirus checking the installation very slowly.
+2. Then use it to install Stack and GHC. On Windows, starting from here, input the commands in Git Bash.
    ```
    ghcup install stack latest
    ghcup install ghc 9.4.8
    ```
-   If needed, add to your system `PATH` the location where GHCup installs tools.
+   If you haven't yet done it, add to your system `PATH` the location where GHCup installs tools.
 
 3. Finally, use Stack to install the remaining tools.
    ```
    stack install alex happy BNFC
    ```
-   If needed, add to your system `PATH` the location where Stack installs tools.
+   This will alert you in the end that you don't have the installation directory in your system `PATH`, so go and add it there.
 
 4. Verify that these tools are working by querying their version:
    ```
