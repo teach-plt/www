@@ -40,8 +40,8 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 
 | Date | Time | Title | Material |
 |----|----|----|----|
-| Tue 05/11 | 13-15 | PL Design, Compilation Phases | [slides](plt-book/ipl-book/slides/1-slides-ipl-book.pdf), plt 1, dragon 1, live coding [start](live/2024/live-1-Calc-bnfc-start.zip), [result](live/2024/live-1-Calc-bnfc.zip) |
-| Thu 07/11 | 13-15 **HC3** | Grammars / BNFC / Hands-on with Lab 1 | [slides](plt-book/ipl-book/slides/2-slides-ipl-book.pdf), plt 2, dragon 2.8.2,4.1-4.3, [git](notes/git-primer.md) |
+| Tue 05/11 | 13-15 | PL Design, Compilation Phases | [slides](plt-book/ipl-book/slides/1-slides-ipl-book.pdf), plt 1, dragon 1, [git](notes/git-primer.md) |
+| Thu 07/11 | 13-15 **HC3** | Grammars / BNFC / Hands-on with Lab 1 | [slides](plt-book/ipl-book/slides/2-slides-ipl-book.pdf), plt 2, dragon 2.8.2,4.1-4.3, live coding [start](live/2024/live-1-Calc-bnfc-start.zip), [result](live/2024/live-1-Calc-bnfc.zip) |
 | Tue 12/11 | 13-15 | Formal languages and parsing | [slides](plt-book/ipl-book/slides/3-slides-ipl-book.pdf), plt 3, dragon 3,4, [shift-reduce parsing](notes/sr-states.md) [LR-table](notes/LR-table.html) |
 | Thu 14/11 | 13-15 | Theory of lexing | [slides](plt-book/ipl-book/slides/3-slides-ipl-book.pdf), plt 3, dragon 3,4 |
 | *Mon 18/11* | *23* | *Lab 1 deadline* |  |
