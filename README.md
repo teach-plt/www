@@ -280,20 +280,20 @@ Recent versions of the following Haskell tools need to be installed and in your 
 - Haskell lexer generator [Alex](https://haskell-alex.readthedocs.io/en/stable/)
 - Haskell parser generator [Happy](https://haskell-happy.readthedocs.io/en/stable/)
 
-We suggest the following installation. 
+We suggest the following installation.
 
 1. First install [GHCup](https://www.haskell.org/ghcup/).
    - When asked, answer Yes to adding the ghcup installation directory to PATH.
    - Also answer Yes to installing `stack`.
    - On Windows: copy the install script from the GHCup webpage into PowerShell. The installation might take a long time (10+ minutes), apparently because of the Windows Defender antivirus checking the installation very slowly. After this is finished, work in Git Bash for all of the following steps.
 2. You can use `ghcup tui` to review your installed versions of Haskell tools and to install/uninstall them. After installing a tool, you have to "set" it to make it visible in your shell. Install and set the latest Stack version, and also GHC 9.4.8.
-4. Use Stack to install the remaining tools.
+3. Use Stack to install the remaining tools.
    ```
    stack install alex happy BNFC
    ```
    This might alert you in the end that you do not have the installation directory in your system `PATH`; in this case, go and add it there.
 
-5. Verify that these tools are working by querying their version:
+4. Verify that these tools are working by querying their version:
    ```
    stack --version
    ghc   --version
