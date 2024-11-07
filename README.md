@@ -282,16 +282,12 @@ Recent versions of the following Haskell tools need to be installed and in your 
 
 We suggest the following installation.
 
-1. First install [GHCup](https://www.haskell.org/ghcup/). When asked, answer Yes to adding the ghcup installation directory to PATH.
-   - On Windows: copy the install script from the GHCup webpage into PowerShell. The installation might take a long time (10+ minutes), apparently because of the Windows Defender antivirus checking the installation very slowly.
-2. Then use it to install Stack and GHC. On Windows, starting from here, input the commands in Git Bash.
-   ```
-   ghcup install stack latest
-   ghcup install ghc 9.4.8
-   ```
-   If you have not yet done it, add to your system `PATH` the location where GHCup installs tools.
-
-3. Finally, use Stack to install the remaining tools.
+1. First install [GHCup](https://www.haskell.org/ghcup/).
+   - When asked, answer Yes to adding the ghcup installation directory to PATH.
+   - Also answer Yes to installing `stack`.
+   - On Windows: copy the install script from the GHCup webpage into PowerShell. The installation might take a long time (10+ minutes), apparently because of the Windows Defender antivirus checking the installation very slowly. After this is finished, work in Git Bash for all of the following steps.
+2. You can use `ghcup tui` to review your installed versions of Haskell tools and to install/uninstall them. After installing a tool, you have to "set" it to make it visible in your shell. Install and set the latest Stack version, and also GHC 9.4.8.
+3. Use Stack to install the remaining tools.
    ```
    stack install alex happy BNFC
    ```
