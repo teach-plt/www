@@ -126,7 +126,7 @@ Do not give away any lab solutions when you ask or answer questions!
 Lab supervision is offered in room
 [ED3354](http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093)
 and online on Tue, Thu and Fri.
-Starting 14 Nov we offer Zoom-only supervision on Wednesdays 15:15-17:00.
+Starting 13 Nov we offer Zoom-only supervision on Wednesdays 15:15-17:00.
 The lab rooms and supervision are available from Tue 05 Nov till Fri 20 Dec 2024.
 Attendance is voluntary.
 
