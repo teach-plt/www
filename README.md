@@ -50,9 +50,9 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | Tue 26/11 | 13-14 | Hands-on with Lab 2 (Haskell) | |
 | Tue 26/11 | 14-15 | Hands-on with Lab 2 (Java)    | |
 | Thu 28/11 | 13-15 **SB-H5** | Code generation | [slides](plt-book/ipl-book/slides/6-slides-ipl-book.pdf), plt 6, dragon 6,7, [notes](notes/compilation.html), [prime.c](notes/prime.c), [prime.j](notes/prime.j) |
-| *Mon 02/12* | *23* | *Lab 2 deadline* |  |
 | Tue 03/12 | 13-14 | Hands-on with Lab 3 (Haskell) |  |
 | Tue 03/12 | 14-15 | Hands-on with Lab 3 (Java)    |  |
+| *Wed 04/12* | *23* | *Lab 2 deadline* |  |
 | Thu 05/12 | 13-15 | Functional programming languages | [slides](plt-book/ipl-book/slides/7-slides-ipl-book.pdf), plt 7, dragon 6.5,7.3, [script](notes/cbn-cbv.html) |
 | Tue 10/12 | 13-15 | Type inference and polymorphism | plt 7.7-9, [script](notes/typing.html) |
 | Thu 12/12 | 13-14 | Hands-on with Lab 4 (Haskell) |  |
@@ -133,7 +133,7 @@ Attendance is voluntary.
 | Day |    Time     | Location     | Supervisors            |
 |:---:|:-----------:|--------------|------------------------|
 | Tue | 15:15-17:00 | Zoom, ED3354 | Andreas, David, Jonas  |
-| Wed | 15:15-17:00 | Zoom only    | Felix, David, Eric     |
+| Wed | 15:15-17:00 | Zoom only    | David, Eric            |
 | Thu | 15:15-17:00 | Zoom, ED3354 | Andras, Jonas, Ruohan  |
 | Fri | 13:15-15:00 | Zoom, ED3354 | Andras, Ruohan, Eric   |
 
@@ -158,7 +158,7 @@ You have to pass the labs to pass the course.
 However, the course grade is determined solely by the exam.
 
 - Lab 1 - parser (deadline 18/11)
-- Lab 2 - type checker and interpreter (deadline 02/12)
+- Lab 2 - type checker and interpreter (deadline 04/12)
 - Lab 3 - code generator (deadline 18/12)
 - Lab 4 - functional language interpreter (deadline 12/01/2025)
 
