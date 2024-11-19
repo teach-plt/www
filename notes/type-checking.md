@@ -18,8 +18,9 @@ Introduction
     ```c
     typedef int (*fun_t)();  // Pointer to function without arguments returning int
 
+    int f() {...}
     int main () {
-      fun_t good = &main;    // Function pointer to main function
+      fun_t good = &f;       // Function pointer to function f
       int i = (*good)();
       fun_t bad  = 12345678; // Function pointer to random address
       int j = (*bad)();
@@ -40,14 +41,37 @@ Introduction
 
 - Programming language perspective:
   * Facilitate overloading (like `/` for different division algorithms)
+  * (Non ad-hoc) polymorphism:
+    - Parametric polymorphism (Haskell `forall`, Java generics)
+    - Subtyping
+
+- Correctness perspective:
+  * Types partially describe behavior (properties, invariants)
+  * Dependent types: Rich property language
+  * Machine-checked documentation / communication of program behavior
+
+### Type-checking, informally
+
+- Goal: type-check programs like [prime.c](prime.c)
+- Perspective: expressions in their own layer: [prime-stms.c](prime-stms.c)
 
 ### Where types make a difference
 
+Code: [divide-untyped.c](divide-untyped.c)
 ```c
 ... divide(... x, ... y) { return x / y; }
 
 printDouble (divide (5, 3));
 ```
+Quiz: In an untyped language, what is printed? [menti.com code 413881](https://www.menti.com/alw5a4m2kgzb)
+
+- 1: 1.0
+- X: 1.6666666666666667
+- 2: 2.0
+
+Some possible typings: [divide.c](divide.c)
+
+Elaborations: [divide-annotated.c](divide-annotated.c)
 
 Judgements and rules
 --------------------
@@ -212,7 +236,7 @@ In practice, it often does.  E.g. with coercions to `string`:
     int ≤ string             1 → "1"
     int ≤ double ≤ string    1 → 1.0 → "1.0"
 
-Quiz: What is the value of this expression?  (menti.com code 83910313)
+Quiz: What is the value of this expression?  [menti.com code 413881](https://www.menti.com/alw5a4m2kgzb)
 
     1 + 2 + "hello" + 1 + 2
 
@@ -248,7 +272,7 @@ Example implementation:
         (e₂', t₂) ← infer (e₂)
         t ← max t₁ t₂
         e₁'' ← coerce (e₁', t₁, t)
-        e2'' ← coerce (e₂', t₂, t)
+        e₂'' ← coerce (e₂', t₂, t)
         return (ETArith t e₁'' ADiv e₂'', t)
 
 
@@ -279,7 +303,7 @@ Example implementation:
         (e₂', t₂) ← infer (e₂)
         t ← max t₁ t₂
         e₁'' ← coerce (e₁', t₁, t)
-        e2'' ← coerce (e₂', t₂, t)
+        e₂'' ← coerce (e₂', t₂, t)
         if t /= TInt && t /= TDouble
         then fail "illegal arithmetic comparison"
         else return (ETCmp t e₁'' CEq e₂'', TBool)
@@ -289,7 +313,7 @@ Example implementation:
         (e₂', t₂) ← infer (e₂)
         t ← max t₁ t₂
         e₁'' ← coerce (e₁', t₁, t)
-        e2'' ← coerce (e₂', t₂, t)
+        e₂'' ← coerce (e₂', t₂, t)
         return (ETCmp t e₁'' CEq e₂'', TBool)
 
 Statements
@@ -478,7 +502,7 @@ Branches need to be in new scope.
     Γ ⊢ᵗ⁰ if (e) s₁ else s₂ ⇒ Γ
 
     Γ ⊢ᵗ⁰ e : bool    Γ. ⊢ᵗ⁰ s ⇒ Γ'
-    -----------------------------
+    ------------------------------
     Γ ⊢ᵗ⁰ while (e) s ⇒ Γ
 
 Example:
