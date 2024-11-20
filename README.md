@@ -142,7 +142,7 @@ We use [Slack](https://plt202425.slack.com/) to organize the lab supervision. [P
 The TAs will be present in lab rooms during lab supervision slots, available for help both in-person and virtually.
 To ask for help, just send a ticket request through the `#queue` Slack channel.
 
-- For in-person attendance, writing your names is sufficient.
+- For in-person attendance, write your name and how to find you (room if not ED3354, number of the PC in front of you (or any other hint how to recognize you)).
 
 - For online help, start a Zoom meeting and invite your group partner to join.
   Please then sign up by providing a clickable URL to your Zoom meeting (e.g.,
