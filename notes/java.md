@@ -13,6 +13,7 @@ switch(exp) {
             case EOr    e -> ... ;
 	    ...
 	    default -> throw new IllegalStateException("Case for " + e + " is not yet implemented.");
+}
 ```
 
 On the right hand side of the ```->``` you can extract further information from ```e```,
@@ -21,7 +22,7 @@ for example, in the case ```EAnd e```, you can use the two operands ```e.exp_1``
 ```switch```, if used like above produces a Java-expression, which means that you can use it in assignments:
 
 ```java
-var typeExpression = switch(exp) { ... }
+var typedExpression = switch(exp) { ... }
 ```
 
 To define the neccessary datatypes, ```record```s are very useful.
@@ -32,7 +33,7 @@ public record TypedAnd(TypedExpr e1, TypedExpr e2) {
 }
 ```
 
-Objects of this type can be constructed with ```new TypedAnd(e1,e2)``` where ```e1``` and ```e2``` are ```TypedExpr```s. For solving the lab, it is reasonable to define an ```interface``` ```TypedExpr``` and with a method which returns the type of an expression and make the datatypes for specific expressions implement it:
+Objects of this type can be constructed with ```new TypedAnd(e1,e2)``` where ```e1``` and ```e2``` are ```TypedExpr```s. For solving the lab, it is reasonable to define an ```interface``` ```TypedExpr``` with a method which returns the type of an expression:
 
 ```java
 public interface TypedExpr {
