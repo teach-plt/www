@@ -13,7 +13,7 @@ Why an interpreter if we can have a compiler?
 - Can help _boot strapping_ (self-implementating) a language.
   1. Write interpreter `I` for new language `X` in existing language `Y`.
   2. Write simple compiler `C` for `X` in `X`.
-  3. Run (via `I'`) `C` on `C` to get a compiled compiler `C'`.
+  3. Run (via `I`) `C` on `C` to get a compiled compiler `C'`.
   4. Write an optimizing compiler `O` for `X` in `X`.
   5. Run `C'` on `O` to get an a compiled optimizing compiler `Cₒ`.
   6. Run `Cₒ` on `Cₒ` to get an optimized optimizing compiler `Cₒ'`.
@@ -136,6 +136,17 @@ order, even in parallel!
 
 - Allowing non-termination:
   > If `e : t` then either evaluation of `e` diverges, or `e ⇓ v` with `v : t`.
+
+Quiz:
+
+- Which of these hold in exceptional cases?
+  * Overflow
+  * Division by zero
+
+- Is this definition type-sound?
+  ```
+    eval(γ, EDiv double e₁ e₂) = VDouble 0.0
+  ```
 
 
 Effects
@@ -475,6 +486,8 @@ Function call.
 To implement the side condition, we need a global map `σ` from
 function names `f` to their definition `t f (t₁ x₁,...,tₙ xₙ) { ss }`.
 
+Quiz: In the last rule, what if `ss` does not contain a `return` statement?
+
 ### Implementation
 
 In Java, we can use Java's exception mechanism.
@@ -521,6 +534,8 @@ In Haskell, we can use the _exception monad_.
       v ← eval e
       throwError v
 ```
+
+N.B.: `makeEnv (x₁:t₁, ..., xₙ:tₙ) (v₁, ..., vₙ) = (x₁=v₁, ... xₙ=tₙ)`.
 
 
 Programs
@@ -582,7 +597,10 @@ You can circumvent this by defining your own `and`:
   while (and (x < 10, f(x++))) { ... }
 ```
 
-Digression on:  call-by-name  (call-by-need)  call-by-value
+### Digression:  call-by-name / call-by-need /  call-by-value
+
+(This is properly covered in the lecture on functional languages and in lab 4.)
+
 - call-by-value: evaluate function arguments, pass values to function
 - call-by-name: pass expressions to function unevaluated (substitution)
 - call-by-need: like call-by-name, only evaluate each argument when it
