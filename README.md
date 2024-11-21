@@ -48,7 +48,7 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | Tue 19/11 | 13-15 | Type checking | [slides](plt-book/ipl-book/slides/4-slides-ipl-book.pdf), plt 4, dragon 5,6, [script](notes/type-checking.html), [prime.c](notes/prime.c), [prime-stms.c](notes/prime-stms.c), [division.c](notes/division.c), [division-annotated.c](notes/division-annotated.c) |
 | Thu 21/11 | 13-15 | Interpreting | [slides](plt-book/ipl-book/slides/5-slides-ipl-book.pdf), plt 5, [script](notes/interpreter.html) |
 | Tue 26/11 | 13-14 | Hands-on with Lab 2 (Haskell) |  [script](notes/monads.html) |
-| Tue 26/11 | 14-15 | Hands-on with Lab 2 (Java)    | |
+| Tue 26/11 | 14-15 | Hands-on with Lab 2 (Java)    | [script](notes/java.html) |
 | Thu 28/11 | 13-15 **SB-H5** | Code generation | [slides](plt-book/ipl-book/slides/6-slides-ipl-book.pdf), plt 6, dragon 6,7, [notes](notes/compilation.html), [prime.c](notes/prime.c), [prime.j](notes/prime.j) |
 | Tue 03/12 | 13-14 | Hands-on with Lab 3 (Haskell) |  |
 | Tue 03/12 | 14-15 | Hands-on with Lab 3 (Java)    |  |
