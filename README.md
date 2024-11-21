@@ -304,33 +304,7 @@ We suggest the following installation.
 
 ## Java
 
-You need the [java](https://en.wikipedia.org/wiki/Java_(programming_language)) virtual machine in your `PATH`.
-```
-java -version
-```
-We will use version 21 of Java.
-
-You might chose to solve the labs in Java.  In this case you need:
-
-- The java compiler `javac`.
-- Parser generator: either [ANTLR](https://www.antlr.org/) or the
-  [CUP](http://www2.cs.tum.edu/projects/cup/) libraries version 0.11b.
-- Lexer generator [JFLex](https://jflex.de/) or the [JLex](https://www.cs.princeton.edu/~appel/modern/java/JLex/) libraries.
-
-To set up CUP and JLex, follow these instructions:
-
-1. Download the JAVA archives for
-   [CUP v11b](https://github.com/BNFC/bnfc/raw/master/testing/data/java-cup-11b.jar),
-   [CUP v11b runtime](https://github.com/BNFC/bnfc/raw/master/testing/data/java-cup-11b-runtime.jar),
-   and
-   [JLex](https://github.com/BNFC/bnfc/raw/master/testing/data/JLex-1.2.6.jar).
-
-2. Make sure they are placed in your `CLASSPATH`.
-
-   For example, in Linux or macOS, store these jars in `${HOME}/java-lib/` and add the following line to your shell initialization file.
-
-        export CLASSPATH=.:${HOME}/java-lib/java-cup-11b.jar:${HOME}/java-lib/java-cup-11b-runtime.jar:${HOME}/java-lib/JLex-1.2.6.jar:${CLASSPATH}
-
+You need to install [java](https://en.wikipedia.org/wiki/Java_(programming_language)). You should use version 21 of Java and you can all neccessary Java dependencies by installing openjdk-21 (e.g. with a package manager on linux and by downloading [here}(https://learn.microsoft.com/en-us/java/openjdk/download) on windows).
 
 # Student representatives
 
