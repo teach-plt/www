@@ -304,7 +304,15 @@ We suggest the following installation.
 
 ## Java
 
-You need to install [java](https://en.wikipedia.org/wiki/Java_(programming_language)). You should use version 21 of Java and you can all neccessary Java dependencies by installing openjdk-21 (e.g. with a package manager on linux and by downloading [here}(https://learn.microsoft.com/en-us/java/openjdk/download) on windows).
+You need the [java](https://en.wikipedia.org/wiki/Java_(programming_language)) virtual machine in your `PATH`.
+```
+java -version
+```
+We will use version 21 of Java.
+
+You might chose to solve the labs in Java.
+In this case, you need the Java Development Kit (JDK). You can get all neccessary Java dependencies by installing `openjdk-21` (e.g. with a package manager on Linux/macOS or by downloading [here](https://learn.microsoft.com/en-us/java/openjdk/download) on Windows).
+We publish Java stubs for the labs that use [Gradle build tool](https://gradle.org/), preconfigured to install the Java parser generator [CUP](http://www2.cs.tum.edu/projects/cup/) and the lexer generator [JFLex](https://jflex.de/).  If you use the stubs, there is not need to install Gradle, CUP and JFlex yourself.
 
 # Student representatives
 
