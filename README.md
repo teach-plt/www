@@ -14,7 +14,7 @@ date: Winter Term 2024 (LP2)
 
 [Canvas](https://chalmers.instructure.com/courses/31854) /
 [GitLab](https://git.chalmers.se/courses/dat151) /
-[Schedule](https://cloud.timeedit.net/chalmers/web/public/riq78Qg6Y03Zx6Q5Q57y8W9665Z8510053q30Z6Q60o60Q5Z9Q65ZQo.html) /
+[Schedule](https://cloud.timeedit.net/chalmers/web/public/ri10783Q056Z06Q605663765yZ066W7318Y63Q5Q7.html) /
 [Slack](https://plt202425.slack.com) ([join!](https://join.slack.com/t/plt202425/shared_invite/zt-2trexj8cz-mjRl_GiiNNkV2ljpNRLsIg)) /
 [Chalmers studieportal](https://www.student.chalmers.se/sp/course?course_id=38635) /
 [GU ad (sv)](https://www.gu.se/studera/hitta-utbildning/programspraksteknik-dit231) /
