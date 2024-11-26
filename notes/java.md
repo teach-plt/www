@@ -78,7 +78,7 @@ sealed interface TypedExpr {
 
 # How to start
 
-This is just one way to start and the ideas given are not complete - be prepared to change everything along the way to a solution that passes all tests. To get started, here is a possible first try at an implementaion of the `typecheck` function in the `TypeChecker`:
+This is just one way to start and the ideas given are not complete - be prepared to change everything along the way to a solution that passes all tests. To get started, here is a possible first try at an implementation of the `typecheck` function in the `TypeChecker`:
 
 ```java
     public AnnotatedProgram typecheck(Program p) {
@@ -91,7 +91,7 @@ This is just one way to start and the ideas given are not complete - be prepared
     }
 ```
 
-The first statement extracts a list of function definitions (from the parser) from `p` and stores it in `funDefs`. The `var` means that the type of `funDefs` is automatically infered. Then the signatures, which are stored in a field in the `TypeChecker` class, are initialized. To make the last line of this functions work, the type `AnnotatedProgram)` was modified to an inner `record` of the `TypeChecker` in the following way (the functions `extractSignatures` and `checkFunDefs` will be explained below):
+The first statement extracts a list of function definitions from (the parse-tree) `p` and stores it in `funDefs`. The `var` means that the type of `funDefs` is automatically infered. Then the signatures, which are stored in a field in the `TypeChecker` class, are initialized. To make the last line of this functions work, the type `AnnotatedProgram)` was modified to an inner `record` of the `TypeChecker` in the following way (the functions `extractSignatures` and `checkFunDefs` will be explained below):
 
 ```java
     record AnnotatedProgram(Map<String, TypedFunDef> defs) { }
@@ -109,7 +109,7 @@ The type `TypedFunDef` is also defined as an inner `record` of `TypeChecker`:
 ```java
 sealed interface Statement {
   record Decl(String varName, CType type) implements Statement {}
-  // TODO: add more cases
+  // TODO: add more records for all the statements we need in the typed syntax
 }
 ```
 
@@ -117,4 +117,51 @@ sealed interface Statement {
 enum CType {
     Int, Double, Bool, Void
 }
+```
+
+A `Type` from the parser syntax can then be translated to a `CType` like this (where this function definition could for example be put into `TypeChecker`):
+
+```java
+    CType typeFrom(Type type) {
+	return switch(type) {
+	    case Type_int ignored -> CType.Int;
+	    // TODO: other cases
+	    default -> throw new IllegalStateException("Unexpected value: " + type);
+	};
+    }
+```
+
+Now, we'll get back to the functions we left unexplained above, `extractSignatures` and `checkFunDefs`. As the name suggests, `extractSignatures` should pass through all function definitions and extract their signatures, which we will need to check the actual function defintions. This is a possible implementaion:
+
+```java
+    void extractSignatures(List<DFun> funDefs) {
+        for(var def : funDefs) {
+            List<CType> argTypes = def.listarg_.stream()
+                    .map(arg -> typeFrom(((ADecl) arg).type_))
+                    .toList();
+            Signature signature = new Signature(typeFrom(def.type_), argTypes);
+            if(signatures.put(def.id_, signature) != null) {
+                throw new TypeException("Signature already defined for " + def.id_);
+            };
+        }
+    }
+```
+
+One thing that could be added here (or somewhere else) is, that there should be exactly one function called "main" which returns `int` and has no arguments. We will only give a sketch of an implementation of `checkFunDefs`. One thing to take care of is dealing with contexts in the right way, which needs some data structure like a stack or list. This is not explained in detail here:
+
+```java
+    HashMap<String, TypedFunDef> checkFunDefs(List<DFun> funDefs) {
+        var checkedFunDefs = new HashMap<String, TypedFunDef>();
+        for(var funDef : funDefs) {
+	    // TODO: produce 'args' which should be a list of argument names with their types
+	    // TODO: produce 'contexts' which should be some datastructure storing types of declared variables
+            TypedFunDef checkedFunDef = new TypedFunDef(typeFrom(funDef.type_),
+	                                                args,
+							checkStms(funDef.liststm_, contexts));
+            if(checkedFunDefs.put(funDef.id_, checkedFunDef) != null) {
+                throw new TypeException("Function " + funDef.id_ + " already defined!");
+            }
+        }
+        return checkedFunDefs;
+
 ```
