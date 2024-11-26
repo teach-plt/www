@@ -63,10 +63,58 @@ interface TypedExpr {
 
 The second record `Var` shows a handy shortcut to overriding the method `type`: if the record has an attribute of the right Type and name ("`type`" in this case), it will automotically become the implementation.
 
-You can work with a variable of type `TypedExpr` like in the example above, by using `switch` expressions. If you want to avoid the `default` case, you can use a `sealed interface` instead. To make that work, you have to declare all implementations using `permits` like this:
+You can work with a variable of type `TypedExpr` like in the example above, by using `switch` expressions. If you want to avoid the `default` case, you can use a `sealed interface` instead. To make that work, you have to declare all implementations inside the interface (or use `permits`):
 
 ```java
-sealed interface TypedExpr permits And, Var {
-...
+sealed interface TypedExpr {
+  record And(TypedExpr e1, TypedExpr e2) implements TypedExpr {
+    Type type() {
+      return new Type.Bool;
+  }
+
+  record Var(String name, Type type) implements TypedExpr { }
+}
+```
+
+# How to start
+
+This is just one way to start and the ideas given are not complete - be prepared to change everything along the way to a solution that passes all tests. To get started, here is a possible first try at an implementaion of the `typecheck` function in the `TypeChecker`:
+
+```java
+    public AnnotatedProgram typecheck(Program p) {
+        var funDefs = ((PDefs) p).listdef_.stream()
+                .map(def -> (DFun) def)
+                .toList();
+        signatures = new HashMap<>();
+        extractSignatures(funDefs);
+        return new AnnotatedProgram(checkFunDefs(funDefs));
+    }
+```
+
+The first statement extracts a list of function definitions (from the parser) from `p` and stores it in `funDefs`. The `var` means that the type of `funDefs` is automatically infered. Then the signatures, which are stored in a field in the `TypeChecker` class, are initialized. To make the last line of this functions work, the type `AnnotatedProgram)` was modified to an inner `record` of the `TypeChecker` in the following way (the functions `extractSignatures` and `checkFunDefs` will be explained below):
+
+```java
+    record AnnotatedProgram(Map<String, TypedFunDef> defs) { }
+```
+
+The type `TypedFunDef` is also defined as an inner `record` of `TypeChecker`:
+
+```java
+    record TypedFunDef(CType returns, List<TypedArg> args, List<Statement> stms) { }
+    record TypedArg(String name, CType type) { }
+```
+
+... and `Statement` and `CType` are defined in separate files:
+
+```java
+sealed interface Statement {
+  record Decl(String varName, CType type) implements Statement {}
+  // TODO: add more cases
+}
+```
+
+```java
+enum CType {
+    Int, Double, Bool, Void
 }
 ```
