@@ -22,16 +22,146 @@ Tasks of the compiler
 
 4. Translate function calls into machine-level calls
 
+### Ad 1. Variable names to addresses
+
+Jasmin types:
+  * `I`: `int`
+  * `D`: `double`
+  * `V`: `void`
+  * `Z`: `boolean`
+
+```c
+void foo                     //          size=0  max=0
+  ( double x                 // x:0      size=2  max=2
+  , int y) {                 // y:2      size=3  max=3
+  int i;                     // i:3      size=4  max=4
+  {                          // newBlock
+     double y;               // y:4      size=6  max=6
+     bool b;                 // b:6      size=7  max=7
+  }                          // popBlock size=4  max=7
+  int j;                     // j:4      size=5  max=7
+}
+```
+```jasmin
+.method public static foo(DI)V
+.limit locals 7
+.end method
+```
+
+### Ad 2. Expressions trees to stack instructions
+
+Example:
+```c
+int main() {
+  int i;                         // i:0
+  double x = 3 * (i = 42) + i++; // x:1
+}
+```
+Translates to JVM:
+```scheme
+.method public static main()I
+.limit stack 4
+
+;; instr   ;; expr                     ;; stack (S)   ;; store (V)
+iconst_3   ;; 3                        ;; 3
+bipush 42  ;; 42                       ;; 3 . 42
+istore_0   ;; i =                      ;; 3           ;; 0:42
+iload_0    ;; i = 42                   ;; 3 . 42
+imul       ;; 3 * (i = 42)             ;; 126
+iload_0    ;; i                        ;; 126 . 42
+dup        ;;                          ;; 126 . 42 . 42
+iconst_1   ;; 1                        ;; 126 . 42 . 42 . 1
+iadd       ;; i + 1                    ;; 126 . 42 . 43
+istore_0   ;; i++                      ;; 126 . 42    ;; 0:43
+iadd       ;; 3 * (i = 42) + i++       ;; 168
+i2d        ;; (double)                 ;; 168.0
+dstore_1   ;; x = 3 * (i = 42) + i++   ;;             ;; 0:43, 1:168.0
+```
+Maximum stack size: 4 (32bit words)
+
+JVM instruction small-step semantics (without jumps):
+```
+    I : ⟨V,S⟩ → ⟨V',S'⟩
+
+    I      : JVM instruction (or instruction sequence)
+    V / V' : variable store before/after
+    S / S' : stack before/after
+```
+
+Some jump-free instructions:
+
+|      I       |  V  |  S      |  V'      |  S'             |
+|--------------|-----|---------|----------|-----------------|
+| `iconst` _i_ | _V_ | _S_     | _V_      | _S.i_           |
+| `bipush` _i_ | _V_ | _S_     | _V_      | _S.i_           |
+| `iadd`       | _V_ | _S.i.j_ | _V_      | _S.(i+j)_       |
+| `imul`       | _V_ | _S.i.j_ | _V_      | _S.(i*j)_       |
+| `i2d`        | _V_ | _S.i_   | _V_      | _S.(double)i_   |
+| `dup`        | _V_ | _S.i_   | _V_      | _S.i.i_         |
+| `istore` _a_ | _V_ | _S.i_   | _V[a:i]_ | _S_             |
+| `dstore` _a_ | _V_ | _S.d_   | _V[a:d]_ | _S_             |
+| `iload` _a_  | _V_ | _S_     | _V_      | _S.V[a]_        |
+| `dload` _a_  | _V_ | _S_     | _V_      | _S.V[a]_        |
+
+
+Ad 3. Booleans and jumps
+------------------------
+
+Example:
+```c
+bool inside(int i, int j, int k) {
+  return i <= j && j < k;
+}
+```
+Machines typically do not have boolean operations; use jumps instead.
+```scheme
+.method public static inside(III)Z
+.limit locals 3
+.limit stack 2
+
+    iload_0             ;; i
+    iload_1             ;; j
+    if_icmpgt Lfalse    ;; i <= j  ;; false if i > j
+    iload_1             ;; j
+    iload_2             ;; k
+    if_icmpge Lfalse    ;; j < k   ;; false if j >= k
+
+    iconst_1            ;; true
+    goto      Ldone
+
+Lfalse:
+    iconst_0            ;; false
+
+Ldone:
+    ireturn             ;; return
+
+.end method
+```
+
+JVM instruction small-step semantics (with jumps):
+```
+    I : ⟨P,V,S⟩ → ⟨P',V',S'⟩
+
+    P / P' : code position (program counter) before/after
+```
+
+| I               | P   | V   | S       | P'    | V'  | S'  | Condition |
+|-----------------|-----|-----|---------|-------|-----|-----|-----------|
+| `goto` _L_      | _P_ | _V_ | _S_     | _L_   | _V_ | _S_ |           |
+| `ifeq` _L_      | _P_ | _V_ | _S.i_   | _L_   | _V_ | _S_ | _i = 0_   |
+| `ifeq` _L_      | _P_ | _V_ | _S.i_   | _P+1_ | _V_ | _S_ | _i ≠ 0_   |
+| `ifne` _L_      | _P_ | _V_ | _S.i_   | _L_   | _V_ | _S_ | _i ≠ 0_   |
+| `ifne` _L_      | _P_ | _V_ | _S.i_   | _P+1_ | _V_ | _S_ | _i = 0_   |
+| `if_icmpgt` _L_ | _P_ | _V_ | _S.i.j_ | _L_   | _V_ | _S_ | _i > j_   |
+| `if_icmpgt` _L_ | _P_ | _V_ | _S.i.j_ | _P+1_ | _V_ | _S_ | _i ≤ j_   |
+
+
+
 Infrastructure of the compiler
 ------------------------------
 
 Signature (global symbol table):
 - name and type of functions suitable for Jasmin
-- Jasmin types:
-  * `I`: `int`
-  * `D`: `double`
-  * `V`: `void`
-  * `Z`: `boolean`
 
 Context (local symbol table):
 1. allocate local variables (`newLocal`)
@@ -90,7 +220,6 @@ rest of the stack unchanged.
     emit(t-store a)        -- either istore or dstore
     -- Problem here
 ```
-(We omit `emit` in the following.)
 
 ## Compiler correctness
 
@@ -130,17 +259,30 @@ stack is nil (no change).
   compileStm(SInit t x e):
     a <- newLocal t x
     compileExp(e)
-    t-store a              -- either istore or dstore
+    emit(t-store a)              -- either istore or dstore
 
   compileStm(SExp t e):
     compileExp(e)
-    t-pop                  -- either pop or pop2
+    emit(t-pop)                  -- either pop or pop2
 
   compileStm(SBlock ss):
     newBlock
     for (s : ss)
       compileStm(s)
     popBlock
+
+  compileStm(SWhile e s):        -- s is a SBlock
+    LStart, LEnd <- newLabel
+
+    emit(LStart:)
+
+    compileExp(e)                -- executing e leaves boolean on stack
+    emit(ifeq LEnd)              -- if "false" end loop
+
+    compileStm(s)                -- body of loop
+    emit(goto LStart)            -- recheck loop condition
+
+    emit(LEnd:)
 ```
 
 Correctness statement (simplified):
@@ -149,6 +291,8 @@ Correctness statement (simplified):
   and        γ ~ V
   then       compileStm(s) : ⟨V,S⟩ →* ⟨V',S⟩
   such that  γ' ~ V'.
+
+(We omit `emit` in the following.)
 
 Compiling booleans
 ------------------

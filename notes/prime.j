@@ -82,21 +82,25 @@ L1:
 
 	iload_0         ;; p
 	iconst_1
-	if_icmple	L4
+	if_icmple	L2
 	iconst_2
 	iload_0
 	invokestatic	prime/divides(II)Z
-	ifne	L4
+	ifne	L2
 
 	;; int q = 3;
 
 	iconst_3
 	istore_1
 
+L0:
 	;; while (q * q <= p)
 
-	goto	L3
-L0:
+	iload_1
+	iload_1
+	imul
+	iload_0
+	if_icmpgt	L3
 
 	;; if (divides (q, p))
 
@@ -111,29 +115,18 @@ L0:
 	iconst_2
 	iadd
 	istore_1
-	goto	L2
+	goto	L0
 L1:
-
 	;; return false;
 
 	iconst_0
 	ireturn
 L2:
-L3:
-	iload_1
-	iload_1
-	imul
-	iload_0
-	if_icmple	L0
-	goto	L5
-L4:
-
 	;; return false;
 
 	iconst_0
 	ireturn
-L5:
-
+L3:
 	;; return true;
 
 	iconst_1
