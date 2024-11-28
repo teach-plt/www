@@ -205,7 +205,7 @@ rest of the stack unchanged.
     emit(t-add)            -- either iadd or dadd
 
   compileExp(EVar x):
-    a <- lookupVar
+    a <- lookupVar x
     emit(t-load a)         -- either iload or dload
 
   compileExp(ECall x es)
@@ -374,10 +374,10 @@ compileStm(SIfElse e s₁ s₂):
 - logical operators:
   ```haskell
   compileBool(ETrue, Ltrue, Lfalse):
-    goto ETrue
+    goto LTrue
 
   compileBool(EFalse, Ltrue, Lfalse):
-    goto EFalse
+    goto LFalse
 
   compileBool(EAnd e₁ e₂, Ltrue, Lfalse):
     Ltrue' ← newLabel
@@ -393,11 +393,16 @@ Sometimes booleans need to be represented by 0 and 1,
 e.g. when assigning to a boolean variable:
 ```haskell
     compileExp(e) | typeOf(e) == bool:
-      Ltrue, Lfalse <- newLabel
-      iconst_1                       -- speculate "true"
+      Ltrue, Lfalse, Ldone <- newLabel
+
       compileBool(e, Ltrue, Lfalse)
-      Lfalse:                        -- no? change to "false"
+      Ltrue:
+      iconst_1
+      goto Ldone
+
+      Lfalse:
       pop
       iconst_0
-      Ltrue:
+
+      Ldone:
 ```
