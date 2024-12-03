@@ -166,7 +166,7 @@ One thing that could be added here (or somewhere else) is, that there should be 
 
 ```
 
-Now we will give an oversimplified sketch of the interpreter. All the functions below should be changed to solve lab 2 and the interface `Value` and its implementation `Value.Void` have to be defined.
+Now we will give an oversimplified sketch of the interpreter. All the functions below should be changed to solve lab 2 and the interface `Value` and its implementations (e.g. `Value.Void`) have to be defined.
 
 ```java
     void interpret(TypeChecker.AnnotatedProgram p) {
