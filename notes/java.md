@@ -165,3 +165,46 @@ One thing that could be added here (or somewhere else) is, that there should be 
         return checkedFunDefs;
 
 ```
+
+Now we will give an oversimplified sketch of the interpreter. All the functions below should be changed to solve lab 2 and the interface `Value` and its implementations (e.g. `Value.Void`) have to be defined.
+
+```java
+    void interpret(TypeChecker.AnnotatedProgram p) {
+        defs = p.defs();
+        if (!defs.containsKey("main")) {
+            throw new RuntimeException("Main function not found");
+        }
+        runFunction(defs.get("main")); // TODO: deal with arguments...
+    }
+
+    // TODO: Extends to functions with arguments
+    Value runFunction(TypeChecker.TypedFunDef f) {
+        var env = new Environment();
+        for (var s : f.stms()) {
+            run(s, env);
+        }
+        return new Value.Void();
+    }
+
+    // TODO: Instead of 'env' there should be a stack or list of environments
+    void run(Statement s, Environment env) {
+        switch (s) {
+            case Statement.Decl decl -> env.setVar(decl.name(), decl.type());
+            case Statement.Expr expr -> evalExpr(expr.typedExpr(), env);
+        };
+    }
+
+```
+
+Depending on how `return` statements are implemented, it might be reasonable to return more information here than just `Value`s. For the following evaluation function for expressions, it should however be enough to return only a `Value`:
+
+```java
+    Value evalExpr(TypedExpr expr, Environment env) {
+        return switch(expr) {
+            case TypedExpr.Int anInt -> new Value.Int(anInt.i());
+            case TypedExpr.Var var -> env.getVar(var.id());
+            case TypedExpr.Assign assign -> // TODO: update environment(s);
+            case TypedExpr.App app -> // TODO: run a function;
+        };
+    }
+```
