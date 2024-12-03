@@ -50,8 +50,8 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | Tue 26/11 | 13-14 | Hands-on with Lab 2 (Haskell) |  [script](notes/monads.html), [live code](live/2024/lab2-live-haskell.zip) |
 | Tue 26/11 | 14-15 | Hands-on with Lab 2 (Java)    | [script](notes/java.html), [Annotated.java](notes/Annotated.java) |
 | Thu 28/11 | 13-15 **SB-H5** | Code generation | [slides](plt-book/ipl-book/slides/6-slides-ipl-book.pdf), plt 6, dragon 6,7, [notes](notes/compilation.html), [prime.c](notes/prime.c), [prime.j](notes/prime.j) |
-| Tue 03/12 | 13-14 | Hands-on with Lab 3 (Haskell) |  |
-| Tue 03/12 | 14-15 | Hands-on with Lab 3 (Java)    |  |
+| Tue 03/12 | 13-14 | Hands-on with Lab 3 (Haskell) | [live code snippet](live/2024/lab3-live-haskell.hs) |
+| Tue 03/12 | 14-15 | Hands-on with Lab 3 (Java)    | [live code snippet](live/2024/lab3-live-java.java) |
 | *Wed 04/12* | *23* | *Lab 2 deadline* |  |
 | Thu 05/12 | 13-15 | Functional programming languages | [slides](plt-book/ipl-book/slides/7-slides-ipl-book.pdf), plt 7, dragon 6.5,7.3, [script](notes/cbn-cbv.html) |
 | Tue 10/12 | 13-15 | Type inference and polymorphism | plt 7.7-9, [script](notes/typing.html) |
