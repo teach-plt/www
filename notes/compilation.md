@@ -406,3 +406,45 @@ e.g. when assigning to a boolean variable:
 
       Ldone:
 ```
+
+
+Compiling booleans with fall-through
+------------------------------------
+
+The `compileBool(e, Ltrue, Lfalse)` function does not utilize fall-through
+in many cases, and thus uses more labels than strictly needed.
+
+An alternative is a `compileBool(e, Lfalse)` that produces code that would jump to `Lfalse`
+whenever `e` evaluates to `false`, and fall through otherwise.
+
+```haskell
+compileBool(EFalse, l):
+  goto l
+
+compileBool(ETrue, l):
+  -- emit nothing
+
+compileBool(EAnd e₁ e₂, l):
+  compileBool(e₁, l)
+  compileBool(e₂, l)
+
+-- if we had negation:
+compileBool(ENot e, l):
+  lTrue ← newLabel
+  compileBool(e, lTrue)
+  goto l
+  lTrue:
+
+compileBool(EOr e₁ e₂, l):
+  lFalse, lTrue <- newLabel
+  compileBool(e₁, lFalse)
+  goto lTrue
+  lFalse:
+  compileBool(e₂, l)
+  lTrue:
+
+compileBool(ELt int e₁ e₂, l):
+  compileExp(e₁)
+  compileExp(e₂)
+  if_icmpge l
+```
