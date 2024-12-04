@@ -67,6 +67,8 @@ You can work with a variable of type `TypedExpr` like in the example above, by u
 
 ```java
 sealed interface TypedExpr {
+  Type type();
+  
   record And(TypedExpr e1, TypedExpr e2) implements TypedExpr {
     Type type() {
       return new Type.Bool;
@@ -166,7 +168,7 @@ One thing that could be added here (or somewhere else) is, that there should be 
 
 ```
 
-Now we will give an oversimplified sketch of the interpreter. All the functions below should be changed to solve lab 2 and the interface `Value` and its implementations (e.g. `Value.Void`) have to be defined.
+Now we will give an oversimplified sketch of the interpreter. All the functions below should still be changed to solve lab 2. We will also give a start for an implementation of `Value` as an interface below and we will assume the `Interpreter` has a field `env` which stores the environment(s).
 
 ```java
     void interpret(TypeChecker.AnnotatedProgram p) {
@@ -189,8 +191,8 @@ Now we will give an oversimplified sketch of the interpreter. All the functions 
 
     void run(Statement s) {
         switch (s) {
-            case Statement.Decl decl -> env.setVar(decl.name(), decl.type());
-            case Statement.Expr expr -> evalExpr(expr.typedExpr(), env);
+            case Statement.Decl decl -> env.addVar(decl.name(), decl.type());
+            case Statement.Expr expr -> evalExpr(expr.typedExpr());
         };
     }
 
@@ -203,8 +205,17 @@ Depending on how `return` statements are implemented, it might be reasonable to 
         return switch(expr) {
             case TypedExpr.Int anInt -> new Value.Int(anInt.i());
             case TypedExpr.Var var -> env.getVar(var.id());
-            case TypedExpr.Assign assign -> // TODO: update environment(s);
+            case TypedExpr.Assign assign -> // TODO: update environment;
             case TypedExpr.App app -> // TODO: run a function;
         };
     }
+```
+
+Here is a start for the value datatypes:
+
+```java
+sealed interface Value {
+    record Int(Integer i) implements Value {}
+    record Void() implements Value {}
+}
 ```
