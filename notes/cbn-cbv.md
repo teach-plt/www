@@ -215,7 +215,7 @@ _Strategy_ question: where and under which conditions can these rules be applied
 
 Example:
 
-    (λ f y → (λ x → x) f (f y))  ((λ z → z) 42)
+    (λ y f → (λ x → x) f (f y))  ((λ z → z) 42)
 
 
 ### Substitution
