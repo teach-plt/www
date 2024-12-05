@@ -32,8 +32,10 @@ Tuesday lectures are in
 Thursday lectures in
 **[SB-H6](https://maps.chalmers.se/#c613d487-6c0c-4fe2-8a9d-55b858fa137f)**
 *with exceptions* Thu 7nd Nov in
-**[HC3](https://maps.chalmers.se/#eb412b9e-836c-47eb-9d33-1bcff14bca19)** and
-Thu 28rd Nov in
+**[HC3](https://maps.chalmers.se/#eb412b9e-836c-47eb-9d33-1bcff14bca19)**
+and Thu 12th Dec in
+**[HC1](https://maps.chalmers.se/#25cbc4e6-aaaf-4680-969d-05c5d22f7f9e)** and
+Thu 28rd Nov and 19th Dec in
 **[SB-H5](https://maps.chalmers.se/#f85ee0cd-e87b-403f-acf9-bd30f6b3339d)**.
 
 Material: plt = course book, dragon = Dragon book. Slides follow closely the plt book.
@@ -57,9 +59,9 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | Tue 10/12 | 13-15 | Type inference and polymorphism | plt 7.7-9, [script](notes/typing.html) |
 | Thu 12/12 | 13-14 | Hands-on with Lab 4 (Haskell) |  |
 | Thu 12/12 | 14-15 | Hands-on with Lab 4 (Java)    |  |
-| Tue 17/12 | 13-15 | Dependent types (Agda) |  |
+| Tue 17/12 **HC1** | 13-15 | Dependent types (Agda) |  |
 | *Wed 18/12* | *23* | *Lab 3 deadline* |  |
-| Thu 19/12 | 13-15 | Preparing for the exam | |
+| Thu 19/12 **SB-H5** | 13-15 | Preparing for the exam | |
 
 |    2024     |              |                      |                   |
 |:-----------:|--------------|----------------------|-------------------|
