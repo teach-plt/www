@@ -63,7 +63,7 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | *Wed 18/12* | *23* | *Lab 3 deadline* |  |
 | Thu 19/12 **SB-H5** | 13-15 | Preparing for the exam | |
 
-|    2024     |              |                      |                   |
+|    2025     |              |                      |                   |
 |:-----------:|--------------|----------------------|-------------------|
 | *Mon 13/01* | *23*         | *Lab 4 deadline*     |                   |
 | *Thu 16/01* | *8.30-12.30* | *Exam*               |                   |
