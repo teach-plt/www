@@ -56,7 +56,7 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | Tue 03/12 | 14-15 | Hands-on with Lab 3 (Java)    | [live code snippet](live/2024/lab3-live-java.java) |
 | *Wed 04/12* | *23* | *Lab 2 deadline* |  |
 | Thu 05/12 | 13-15 | Functional programming languages | [slides](plt-book/ipl-book/slides/7-slides-ipl-book.pdf), plt 7, dragon 6.5,7.3, [script](notes/cbn-cbv.html) |
-| Tue 10/12 | 13-15 | Type inference and polymorphism | plt 7.7-9, [script](notes/typing.html) |
+| Tue 10/12 | 13-15 | Type inference and polymorphism | plt 7.7-9, [script](notes/typing.html), [visualization tool](https://github.com/teach-plt/visualize-type-inference) |
 | Thu 12/12 | 13-14 | Hands-on with Lab 4 (Haskell) |  |
 | Thu 12/12 | 14-15 | Hands-on with Lab 4 (Java)    |  |
 | Tue 17/12 **HC1** | 13-15 | Dependent types (Agda) |  |
