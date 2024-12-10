@@ -11,7 +11,8 @@ defaults:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+      # Need python-2, so cannot use 24.04
     env:
       BNFC: 2.9.5
       PANDOC: 3.5
