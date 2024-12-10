@@ -32,18 +32,18 @@ Example:  `x y z`  should be read `(x y) z`.
 
 We consider an extension by `let`, numerals, and primitive operators:
 ```haskell
-     ...  | let x = e in f
-          | let x₁ = e₁; ...; xₙ = eₙ in f
-          | n                   -- E.g. 0,1,2..
-          | e₁ op e₂            -- op could be +,-,...
+    ...  | let x = e in f
+         | let x₁ = e₁; ...; xₙ = eₙ in f
+         | n                   -- E.g. 0,1,2..
+         | e₁ op e₂            -- op could be +,-,...
 ```
 ```lbnf
-     ELet.  Exp  ::= "let" [Bind] "in" Exp;
-     EInt.  Exp3 ::= Integer;
-     EOp.   Exp1 ::= Exp1 Op Exp2;
+    ELet.  Exp  ::= "let" [Bind] "in" Exp;
+    EInt.  Exp3 ::= Integer;
+    EOp.   Exp1 ::= Exp1 Op Exp2;
 
-     Bind.  Bind ::=  Ident "=" Exp;
-     separator Bind ";";
+    Bind.  Bind ::=  Ident "=" Exp;
+    separator Bind ";";
 ```
 `let x = e in f` could be regarded just syntactic sugar for `(λ x → f) e`,
 and `let x₁ = e₁; ...; xₙ = eₙ in f` as sugar for

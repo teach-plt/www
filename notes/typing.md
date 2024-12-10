@@ -122,7 +122,7 @@ Deriving `⊢ λ f → λ x → f (f x) : (int → int) → int → int`.
 
 ### Difficulties with implementing the typing rules
 
-Naive type **checking** gets stuck at application.
+(Naive) type **checking** works well for abstraction:
 
     void check(Cxt Γ, Exp e, Type t)
 
@@ -131,12 +131,14 @@ Naive type **checking** gets stuck at application.
     check(Γ, λx→e, s → t):
       check (Γ[x:s], e, t)
 
+... but gets stuck at application:
+
     check(Γ, f e, t):
       let s = ???
       check(Γ, f, s→t)
       check(Γ, e, s)
 
-Naive **inference** gets stuck at abstraction.
+Type **inference** works well for application:
 
     Type infer(Cxt Γ, Exp e)
 
@@ -147,6 +149,8 @@ Naive **inference** gets stuck at abstraction.
                    then return t
                    else type error
 
+... but gets stuck at abstraction:
+
     infer(Γ, λx→e):
       let s = ???
       let t = infer(Γ[x:s], e)
@@ -154,7 +158,7 @@ Naive **inference** gets stuck at abstraction.
 
 Solutions:
 
-  1. Bidirectional type-checking:
+  1. __Bidirectional__ type-checking:
      * two modes: checking and inference
        * check lambdas,
        * infer applications: infer function part, check argument part
@@ -179,9 +183,10 @@ Solutions:
           - `e₂` can be checked or inferred
      + simple, easy to understand, good error messages
      - cannot handle β-redexes in general: `(λ x → f) e`
-     - in practice, often too weak
+     - in its pure form, often too weak in practice
 
-  2. Type-annotated binders: `λ(x:s) → e` and `let x:s = e₁ in e₂`
+  2. Inference with __type-annotated binders__:
+     `λ(x:s) → e` and `let x:s = e₁ in e₂`
      * Allows inferring λs and lets, e.g.
        ```
          infer(Γ, λ(x:s)→e):
@@ -197,10 +202,12 @@ Solutions:
          let x:int = 3 in x + x
        ```
 
-  3. Inference with type variables:
+  3. Inference with __type variables__:
      * Treat the `???`s as variables for types
      * Collect constraints on the type variables
      * Solve constraints by _unification_
+     + Complete: covers all simply-typed terms.
+     - Hard to give good error messages.
 
 Example:  Inferring the `comp` function.
 (`A`, `B`, `C` etc. are type variables.)
@@ -342,7 +349,7 @@ Example for substitution composition:
 State of the type inference:
 
 1. Potentially infinite supply of type variables (e.g. X₀, X₁, ...).
-    Allows allocation of new type variable.
+   Allows allocation of new type variable.
 
         Type newTypeVariable
 
