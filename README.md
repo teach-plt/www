@@ -59,7 +59,7 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | Tue 10/12 | 13-15 | Type inference and polymorphism | plt 7.7-9, [script](notes/typing.html), [visualization tool](https://github.com/teach-plt/visualize-type-inference) |
 | Thu 12/12 **HC1** | 13-14 | Hands-on with Lab 4 (Haskell) | [live code](live/2024/lab4/Interpreter.hs) |
 | Thu 12/12 | 14-15 | Hands-on with Lab 4 (Java)    | [live code](live/2024/lab4/Interpreter.java) |
-| Tue 17/12 | 13-15 | Dependent types (Agda) | live coding [start](live/2024/agda/JVM-start.agda)  |
+| Tue 17/12 | 13-15 | Dependent types (Agda) | live coding [start](live/2024/agda/JVM-start.agda) [stop](live/2024/agda/JVM.agda) |
 | *Wed 18/12* | *23* | *Lab 3 deadline* |  |
 | Thu 19/12 **SB-H5** | 13-15 | Preparing for the exam | |
 
