@@ -61,7 +61,7 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | Thu 12/12 | 14-15 | Hands-on with Lab 4 (Java)    | [live code](live/2024/lab4/Interpreter.java) |
 | Tue 17/12 | 13-15 | Dependent types (Agda) | live coding [start](live/2024/agda/JVM-start.agda) [stop](live/2024/agda/JVM.agda) |
 | *Wed 18/12* | *23* | *Lab 3 deadline* |  |
-| Thu 19/12 **SB-H5** | 13-15 | Preparing for the exam | |
+| Thu 19/12 **SB-H5** | 13-15 | Preparing for the exam | [last year's exam](exams/exam-plt-2024-1.pdf) |
 
 |    2025     |              |                      |                   |
 |:-----------:|--------------|----------------------|-------------------|
@@ -138,6 +138,10 @@ Attendance is voluntary.
 | Wed | 15:15-17:00 | Zoom only    | David, Eric            |
 | Thu | 15:15-17:00 | Zoom, ED3354 | Andras, Jonas, Ruohan  |
 | Fri | 13:15-15:00 | Zoom, ED3354 | Andras, Ruohan, Eric   |
+
+Extra Zoom-only supervision session will be provided:
+- Wed 8 Jan 2025 15:15-17:00 (Jonas, David)
+- Thu 9 Jan 2025 15:15-17:00 (Jonas, David, Ruohan)
 
 We use [Slack](https://plt202425.slack.com/) to organize the lab supervision. [Please join](https://join.slack.com/t/plt202425/shared_invite/zt-2trexj8cz-mjRl_GiiNNkV2ljpNRLsIg) our Slack workspace and the channel `#queue`.
 
