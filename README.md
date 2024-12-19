@@ -51,7 +51,7 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | Thu 21/11 | 13-15 | Interpreting | [slides](plt-book/ipl-book/slides/5-slides-ipl-book.pdf), plt 5, [script](notes/interpreter.html) |
 | Tue 26/11 | 13-14 | Hands-on with Lab 2 (Haskell) |  [script](notes/monads.html), [live code](live/2024/lab2-live-haskell.zip) |
 | Tue 26/11 | 14-15 | Hands-on with Lab 2 (Java)    | [script](notes/java.html), [Annotated.java](notes/Annotated.java) |
-| Thu 28/11 | 13-15 **SB-H5** | Code generation | [slides](plt-book/ipl-book/slides/6-slides-ipl-book.pdf), plt 6, dragon 6,7, [notes](notes/compilation.html), [prime.c](notes/prime.c), [prime.j](notes/prime.j) |
+| Thu 28/11 | 13-15 **SB-H5** | Code generation | [slides](plt-book/ipl-book/slides/6-slides-ipl-book.pdf), plt 6, dragon 6,7, [script](notes/compilation.html), [prime.c](notes/prime.c), [prime.j](notes/prime.j) |
 | Tue 03/12 | 13-14 | Hands-on with Lab 3 (Haskell) | [live code snippet](live/2024/lab3-live-haskell.hs) |
 | Tue 03/12 | 14-15 | Hands-on with Lab 3 (Java)    | [live code snippet](live/2024/lab3-live-java.java) |
 | *Wed 04/12* | *23* | *Lab 2 deadline* |  |
@@ -61,7 +61,7 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | Thu 12/12 | 14-15 | Hands-on with Lab 4 (Java)    | [live code](live/2024/lab4/Interpreter.java) |
 | Tue 17/12 | 13-15 | Dependent types (Agda) | live coding [start](live/2024/agda/JVM-start.agda) [stop](live/2024/agda/JVM.agda) |
 | *Wed 18/12* | *23* | *Lab 3 deadline* |  |
-| Thu 19/12 **SB-H5** | 13-15 | Preparing for the exam | [last year's exam](exams/exam-plt-2024-1.pdf) |
+| Thu 19/12 **SB-H5** | 13-15 | Preparing for the exam | last year's [exam](exams/exam-plt-2024-1.pdf), live [solution](live/2024/exam.md) |
 
 |    2025     |              |                      |                   |
 |:-----------:|--------------|----------------------|-------------------|
