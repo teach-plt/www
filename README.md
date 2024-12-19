@@ -36,28 +36,28 @@ Thu 28rd Nov and 19th Dec in
 
 Material: plt = course book, dragon = Dragon book. Slides follow closely the plt book.
 
-| Date | Time | Title | Material |
-|----|----|----|----|
-| Tue 05/11 | 13-15 | PL Design, Compilation Phases | [slides](plt-book/ipl-book/slides/1-slides-ipl-book.pdf), plt 1, dragon 1, [git](notes/git-primer.md) |
-| Thu 07/11 | 13-15 **HC3** | Grammars / BNFC / Hands-on with Lab 1 | [slides](plt-book/ipl-book/slides/2-slides-ipl-book.pdf), plt 2, dragon 2.8.2,4.1-4.3, live coding [start](live/2024/live-1-Calc-bnfc-start.zip), [result](live/2024/live-1-Calc-bnfc.zip) |
-| Tue 12/11 | 13-15 | Formal languages and parsing | [slides](plt-book/ipl-book/slides/3-slides-ipl-book.pdf), plt 3, dragon 3,4, [shift-reduce parsing](notes/sr-states.md), [LR-table](notes/LR-table.html), [lr-demo](https://github.com/teach-plt/lr-demo)|
-| Thu 14/11 | 13-15 | Theory of lexing | [slides](plt-book/ipl-book/slides/3-slides-ipl-book.pdf), plt 3, dragon 3,4 |
-| *Mon 18/11* | *23* | *Lab 1 deadline* |  |
-| Tue 19/11 | 13-15 | Type checking | [slides](plt-book/ipl-book/slides/4-slides-ipl-book.pdf), plt 4, dragon 5,6, [script](notes/type-checking.html), [prime.c](notes/prime.c), [prime-stms.c](notes/prime-stms.c), [division.c](notes/division.c), [division-annotated.c](notes/division-annotated.c) |
-| Thu 21/11 | 13-15 | Interpreting | [slides](plt-book/ipl-book/slides/5-slides-ipl-book.pdf), plt 5, [script](notes/interpreter.html) |
-| Tue 26/11 | 13-14 | Hands-on with Lab 2 (Haskell) |  [script](notes/monads.html), [live code](live/2024/lab2-live-haskell.zip) |
-| Tue 26/11 | 14-15 | Hands-on with Lab 2 (Java)    | [script](notes/java.html), [Annotated.java](notes/Annotated.java) |
-| Thu 28/11 | 13-15 **SB-H5** | Code generation | [slides](plt-book/ipl-book/slides/6-slides-ipl-book.pdf), plt 6, dragon 6,7, [script](notes/compilation.html), [prime.c](notes/prime.c), [prime.j](notes/prime.j) |
-| Tue 03/12 | 13-14 | Hands-on with Lab 3 (Haskell) | [live code snippet](live/2024/lab3-live-haskell.hs) |
-| Tue 03/12 | 14-15 | Hands-on with Lab 3 (Java)    | [live code snippet](live/2024/lab3-live-java.java) |
+| Date | Time | Title | Lecture material | Reading material |
+|------|------|-------|------------------|------------------|
+| Tue 05/11 | 13-15 | PL Design, Compilation Phases |  | [slides](plt-book/ipl-book/slides/1-slides-ipl-book.pdf), plt 1, dragon 1, [git](notes/git-primer.md) |
+| Thu 07/11 | 13-15 **HC3** | Grammars / BNFC / Hands-on with Lab 1 | live coding [start](live/2024/live-1-Calc-bnfc-start.zip), [result](live/2024/live-1-Calc-bnfc.zip) | [slides](plt-book/ipl-book/slides/2-slides-ipl-book.pdf), plt 2, dragon 2.8.2,4.1-4.3 |
+| Tue 12/11 | 13-15 | Formal languages and parsing | [shift-reduce parsing](notes/sr-states.md), [LR-table](notes/LR-table.html), [lr-demo](https://github.com/teach-plt/lr-demo) | [slides](plt-book/ipl-book/slides/3-slides-ipl-book.pdf), plt 3, dragon 3,4 |
+| Thu 14/11 | 13-15 | Theory of lexing |  | [slides](plt-book/ipl-book/slides/3-slides-ipl-book.pdf), plt 3, dragon 3,4 |
+| *Mon 18/11* | *23* | *Lab 1 deadline* |  |  |
+| Tue 19/11 | 13-15 | Type checking | [script](notes/type-checking.html), [prime.c](notes/prime.c), [prime-stms.c](notes/prime-stms.c), [division.c](notes/division.c), [division-annotated.c](notes/division-annotated.c) | [slides](plt-book/ipl-book/slides/4-slides-ipl-book.pdf), plt 4, dragon 5,6 |
+| Thu 21/11 | 13-15 | Interpreting | [script](notes/interpreter.html) | [slides](plt-book/ipl-book/slides/5-slides-ipl-book.pdf), plt 5 |
+| Tue 26/11 | 13-14 | Hands-on with Lab 2 (Haskell) | [live code](live/2024/lab2-live-haskell.zip) | [script: monadic interpreter](notes/monads.html) |
+| Tue 26/11 | 14-15 | Hands-on with Lab 2 (Java)    | [script](notes/java.html), [Annotated.java](notes/Annotated.java) |  |
+| Thu 28/11 | 13-15 **SB-H5** | Code generation | [script](notes/compilation.html), [prime.c](notes/prime.c), [prime.j](notes/prime.j) | [slides](plt-book/ipl-book/slides/6-slides-ipl-book.pdf), plt 6, dragon 6,7 |
+| Tue 03/12 | 13-14 | Hands-on with Lab 3 (Haskell) | [live code snippet](live/2024/lab3-live-haskell.hs) |  |
+| Tue 03/12 | 14-15 | Hands-on with Lab 3 (Java)    | [live code snippet](live/2024/lab3-live-java.java) |  |
 | *Wed 04/12* | *23* | *Lab 2 deadline* |  |
-| Thu 05/12 | 13-15 | Functional programming languages | [slides](plt-book/ipl-book/slides/7-slides-ipl-book.pdf), plt 7, dragon 6.5,7.3, [script](notes/cbn-cbv.html) |
-| Tue 10/12 | 13-15 | Type inference and polymorphism | plt 7.7-9, [script](notes/typing.html), [visualization tool](https://github.com/teach-plt/visualize-type-inference) |
-| Thu 12/12 **HC1** | 13-14 | Hands-on with Lab 4 (Haskell) | [live code](live/2024/lab4/Interpreter.hs) |
-| Thu 12/12 | 14-15 | Hands-on with Lab 4 (Java)    | [live code](live/2024/lab4/Interpreter.java) |
-| Tue 17/12 | 13-15 | Dependent types (Agda) | live coding [start](live/2024/agda/JVM-start.agda) [stop](live/2024/agda/JVM.agda) |
-| *Wed 18/12* | *23* | *Lab 3 deadline* |  |
-| Thu 19/12 **SB-H5** | 13-15 | Preparing for the exam | last year's [exam](exams/exam-plt-2024-1.pdf), live [solution](live/2024/exam.md) |
+| Thu 05/12 | 13-15 | Functional programming languages | [script](notes/cbn-cbv.html) | [slides](plt-book/ipl-book/slides/7-slides-ipl-book.pdf), plt 7, dragon 6.5,7.3 |
+| Tue 10/12 | 13-15 | Type inference and polymorphism | [script](notes/typing.html), [visualization tool](https://github.com/teach-plt/visualize-type-inference) | plt 7.7-9 |
+| Thu 12/12 **HC1** | 13-14 | Hands-on with Lab 4 (Haskell) | [live code](live/2024/lab4/Interpreter.hs) |  |
+| Thu 12/12 | 14-15 | Hands-on with Lab 4 (Java)    | [live code](live/2024/lab4/Interpreter.java) |  |
+| Tue 17/12 | 13-15 | Dependent types (Agda) | live coding [start](live/2024/agda/JVM-start.agda), [result](live/2024/agda/JVM.agda) |  |
+| *Wed 18/12* | *23* | *Lab 3 deadline* |  |  |
+| Thu 19/12 **SB-H5** | 13-15 | Preparing for the exam | last year's [exam](exams/exam-plt-2024-1.pdf), live [solution](live/2024/exam.md) |  |
 
 |    2025     |              |                      |                   |
 |:-----------:|--------------|----------------------|-------------------|

@@ -1,5 +1,5 @@
 /* Andreas, 2024-11-03:
- * Make document title similar its to txt2tags formatting.
+ * Make document title similar to its txt2tags formatting.
  */
 
 .title {
@@ -37,7 +37,7 @@ body {
   line-height: 1.7;
   padding: 1em;
   margin: auto;
-  max-width: 63em;  /* Adjust me! */
+  max-width: 70em;  /* Adjust me! */
   background: #fefefe;
 }
 
