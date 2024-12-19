@@ -49,7 +49,7 @@ check : all
 # (This then does no harm if inside code block.)
 # Inside Makefile, need to use $$ for eol ($).
 index.html : README.md Makefile pandoc.css
-	sed -e 's#\([.,;:!?]\)$$#\1  #' $< | pandoc --css pandoc.css -f gfm -t html -o $@ --standalone
+	sed -e 's#\([.,;:!?]\)$$#\1  #' $< | pandoc --toc --toc-depth 1 --css pandoc.css -f gfm -t html -o $@ --standalone
 # --metadata title="Programming Language Technology"  ## This also adds a title to the rendering
 
 ## Exams

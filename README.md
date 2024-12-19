@@ -8,10 +8,6 @@ date: Winter Term 2024 (LP2)
 <style>.github-fork-ribbon:before { background-color: #333; }</style>
 <a class="github-fork-ribbon" href="https://github.com/teach-plt/www" data-ribbon="Sources on GitHub" title="Sources on GitHub">Sources on GitHub</a>
 
-<p align="center">
-<a href="https://teach-plt.github.io/www/">https://teach-plt.github.io/www/</a>
-</p>
-
 [Canvas](https://chalmers.instructure.com/courses/31854) /
 [GitLab](https://git.chalmers.se/courses/dat151) /
 [Schedule](https://cloud.timeedit.net/chalmers/web/public/ri10783Q056Z06Q605663765yZ066W7318Y63Q5Q7.html) /
@@ -332,3 +328,9 @@ for DAT151 Programming language technology.
 | UTBYTE  | davfern  | David Fernández-Sanguino |
 | MPALG   | tobhag   | Tobias Hägglund          |
 | MPCAS   | erhaka   | Erik Håkansson           |
+
+
+<hr>
+<p>
+<a href="https://teach-plt.github.io/www/">https://teach-plt.github.io/www/</a>, (C) Andreas Abel 2024
+</p>
