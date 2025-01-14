@@ -59,13 +59,14 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | *Wed 18/12* | *23* | *Lab 3 deadline* |  |  |
 | Thu 19/12 **SB-H5** | 13-15 | Preparing for the exam | last year's [exam](exams/exam-plt-2024-1.pdf), live [solution](live/2024/exam.md) |  |
 
-|    2025     |              |                      |                   |
-|:-----------:|--------------|----------------------|-------------------|
-| *Mon 13/01* | *23*         | *Lab 4 deadline*     |                   |
-| *Thu 16/01* | *8.30-12.30* | *Exam*               |                   |
-| *Fri 24/01* | *23*         | *Final lab deadline* | *all lab returns* |
-| *Tue 15/04* | *8.30-12.30* | *First reexam*       |                   |
-| *Thu 28/08* | *14-18*      | *Second reexam*      |                   |
+|    2025     |               |                      |                   |
+|:-----------:|---------------|----------------------|-------------------|
+| *Mon 13/01* | *23*          | *Lab 4 deadline*     |                   |
+| *Thu 16/01* | *8.30-12.30*  | *Exam*               |                   |
+| *Fri 24/01* | *23*          | *Final lab deadline* | *all lab returns* |
+| *Wed 29/01* | *14.30-15.30* | *Exam review*        | EDIT 6128         |
+| *Tue 15/04* | *8.30-12.30*  | *First reexam*       |                   |
+| *Thu 28/08* | *14-18*       | *Second reexam*      |                   |
 
 The official course schema is in
 [Time Edit](https://cloud.timeedit.net/chalmers/web/public/riq78Qg6Y03Zx6Q5Q57y8W9665Z8510053q30Z6Q60o60Q5Z9Q65ZQo.html).
