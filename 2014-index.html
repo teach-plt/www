@@ -1,0 +1,417 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META NAME="generator" CONTENT="http://txt2tags.org">
+<TITLE>Programming Language Technology</TITLE>
+</HEAD><BODY BGCOLOR="white" TEXT="black">
+<CENTER>
+<H1>Programming Language Technology</H1>
+<FONT SIZE="4"><I>Course codes: Chalmers DAT151, GU DIT230</I></FONT><BR>
+<FONT SIZE="4">Spring Term 2014</FONT>
+</CENTER>
+
+<P>
+Official URL: <A HREF="http://www.cse.chalmers.se/edu/course/DAT151/">http://www.cse.chalmers.se/edu/course/DAT151/</A>
+</P>
+<P>
+Google group: <A HREF="http://groups.google.com/group/proglang-course-2014">http://groups.google.com/group/proglang-course-2014</A>
+(<B>please provide your full name and date of birth when requesting membership!</B>)
+</P>
+<P>
+Last year course page:
+<A HREF="http://www.cse.chalmers.se/edu/year/2012/course/DAT150/index.html">http://www.cse.chalmers.se/edu/year/2012/course/DAT150/index.html</A>
+</P>
+
+<H1>News and changes</H1>
+
+<P>
+6/3 Fire opened again for submissions of labs 1,2,3.
+</P>
+<P>
+4/3 Please fill in the <A HREF="https://docs.google.com/forms/d/1hK4__Lbx1Nms1chytU1XC5LBPyPnDZm5FruEaXVcWgM/viewform">survey of lab efforts</A>
+</P>
+<P>
+25/2 There is now a better <A HREF="laborations/lab3/testsuite/">lab3 testsuite</A>, 
+with a Haskell script that can be run in a usual way. Also a few more
+test files in the "good" directory - those named "core".
+</P>
+<P>
+25/2 The <A HREF="http://www.cse.chalmers.se/~aarne/computationalsyntax/">Computational Syntax homepage</A>
+</P>
+<P>
+21/2 Moved lab3 deadline by 2 days and lab4 by 1 day. Moved the
+lecture originally scheduled for 4 March to 25 February, and postponed
+other lectures accordingly.
+</P>
+<P>
+18/2 The <A HREF="laborations/mini">mini</A> example now has an annotating type checker and a compiler.
+</P>
+<P>
+2/2 Updated link to Fire: <A HREF="http://xdat09.ce.chalmers.se/plt/">http://xdat09.ce.chalmers.se/plt/</A>
+</P>
+<P>
+23/1 Location fix: Thursday's lab supervisions are in ED2480.
+</P>
+<P>
+20/1 Please provide your full name and date of birth when requesting
+membership in the group! Otherwise your request will be bounced back
+or ignored!
+</P>
+<P>
+16/1/2014 First version of this page - mostly a copy of the 2013 material. 
+          Updates forthcoming soon. 
+</P>
+
+<H1>Schedule</H1>
+
+<P>
+All lectures are in HA2.
+</P>
+<P>
+Material: plt = course book, dragon = Dragon book. 
+Slides follow closely the plt book.
+</P>
+
+<TABLE BORDER="1" CELLPADDING="4">
+<TR>
+<TH>Date</TH>
+<TH>Time</TH>
+<TH>Title</TH>
+<TH COLSPAN="2">Material</TH>
+</TR>
+<TR>
+<TD>Tue 21/1</TD>
+<TD>13-15</TD>
+<TD>Introduction: Compilation Phases</TD>
+<TD><A HREF="http://www.digitalgrammars.com/ipl-book/slides/1-slides-ipl-book.pdf">slides</A>, plt 1, dragon 1</TD>
+</TR>
+<TR>
+<TD>Thu 23/1</TD>
+<TD>13-15</TD>
+<TD>Grammars</TD>
+<TD><A HREF="http://www.digitalgrammars.com/ipl-book/slides/2-slides-ipl-book.pdf">slides</A>, plt 2, dragon 2.8.2,4.1-4.3</TD>
+</TR>
+<TR>
+<TD>Tue 28/1</TD>
+<TD>13-15</TD>
+<TD>Hands-on with Lab 1</TD>
+<TD><A HREF="laborations/lab1/lab1.html">lab1 PM</A></TD>
+</TR>
+<TR>
+<TD>Thu 30/1</TD>
+<TD>13-15</TD>
+<TD>Theory of lexing and parsing</TD>
+<TD><A HREF="http://www.digitalgrammars.com/ipl-book/slides/3-slides-ipl-book.pdf">slides</A>, plt 3, dragon 3,4</TD>
+</TR>
+<TR>
+<TD><I>Mon 3/2</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Lab 1 deadline</I></TD>
+<TD><I><A HREF="laborations/lab1/lab1.html">lab1 PM</A></I></TD>
+</TR>
+<TR>
+<TD>Thu  6/2</TD>
+<TD>13-15</TD>
+<TD>Type checking</TD>
+<TD><A HREF="http://www.digitalgrammars.com/ipl-book/slides/4-slides-ipl-book.pdf">slides</A>, plt 4, dragon 5,6</TD>
+</TR>
+<TR>
+<TD>Tue 11/2</TD>
+<TD>13-15</TD>
+<TD>Interpreters</TD>
+<TD><A HREF="http://www.digitalgrammars.com/ipl-book/slides/5-slides-ipl-book.pdf">slides</A>, plt 5</TD>
+</TR>
+<TR>
+<TD>Thu 13/2</TD>
+<TD>13-15</TD>
+<TD>Hands-on with Lab 2</TD>
+<TD><A HREF="laborations/lab2/lab2.html">lab2 PM</A></TD>
+</TR>
+<TR>
+<TD><I>Mon 17/2</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Lab 2 deadline</I></TD>
+<TD><I><A HREF="laborations/lab2/lab2.html">lab2 PM</A></I></TD>
+</TR>
+<TR>
+<TD>Tue 18/2</TD>
+<TD>13-15</TD>
+<TD>Code generation</TD>
+<TD><A HREF="http://www.digitalgrammars.com/ipl-book/slides/6-slides-ipl-book.pdf">slides</A>, plt 6, dragon 6,7</TD>
+</TR>
+<TR>
+<TD><I>Tue 18/2</I></TD>
+<TD><I>15-17</I></TD>
+<TD>Hands-on with Lab 3, group 1, <I>in ED-3507</I></TD>
+<TD><A HREF="laborations/lab3/lab3.html">lab3 PM</A></TD>
+</TR>
+<TR>
+<TD><I>Fri 21/2</I></TD>
+<TD><I>13-15</I></TD>
+<TD>Hands-on with Lab 3, group 2,  <I>in ED-3507</I></TD>
+<TD><A HREF="laborations/lab3/lab3.html">lab3 PM</A></TD>
+</TR>
+<TR>
+<TD>Tue 25/2</TD>
+<TD>13-15</TD>
+<TD>The language design space</TD>
+<TD><A HREF="http://www.digitalgrammars.com/ipl-book/slides/8-slides-ipl-book.pdf">slides</A>, plt 8, dragon 1</TD>
+</TR>
+<TR>
+<TD><I>Wed 26/2</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Lab 3 deadline</I></TD>
+<TD><I><A HREF="laborations/lab3/lab3.html">lab3 PM</A></I></TD>
+</TR>
+<TR>
+<TD>Thu 27/2</TD>
+<TD>13-15</TD>
+<TD>Functional programming languages</TD>
+<TD><A HREF="http://www.digitalgrammars.com/ipl-book/slides/7-slides-ipl-book.pdf">slides</A>, plt 7, dragon 6.5,7.3</TD>
+</TR>
+<TR>
+<TD>Tue 4/3</TD>
+<TD>13-15</TD>
+<TD>Hands-on with Lab 4</TD>
+<TD><A HREF="laborations/lab4/lab4.html">lab4 PM</A></TD>
+</TR>
+<TR>
+<TD>Thu  6/3</TD>
+<TD>13-15</TD>
+<TD>Preparing for the exam</TD>
+<TD><A HREF="exams/exam-plt-2013-2.pdf">Training Exam</A></TD>
+</TR>
+<TR>
+<TD><I>Tue 11/3</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Lab 4 deadline</I></TD>
+<TD><I><A HREF="laborations/lab4/lab4.html">lab4 PM</A></I></TD>
+</TR>
+<TR>
+<TD><I>Fri 14/3</I></TD>
+<TD>14-18</TD>
+<TD><I>Exam</I> (in house M)</TD>
+<TD><A HREF="exams/">old exams</A></TD>
+</TR>
+<TR>
+<TD><I>Sat 15/3</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Final lab deadline</I></TD>
+<TD><I>all lab returns</I></TD>
+</TR>
+</TABLE>
+
+<P>
+The official course schema is in <A HREF="https://se.timeedit.net/web/chalmers/db1/public/ri157XQQ708Z50Qv17033gZ6y6Y7003Q5Y61Y7.html">Time Edit</A>
+</P>
+
+<H1>Description</H1>
+
+<P>
+The aim of the course is to give understanding of how programming
+languages are designed, documented, and implemented. The course covers
+the basic techniques and tools needed to write interpreters, and
+gives a summary introduction to compilation as well.  Those who have
+passed the course should be able to
+</P>
+
+<OL>
+<LI>define the lexical structure of programming languages by using
+  regular expressions, explain the functioning of finite automata,
+  and implement lexical analysers by using standard tools;
+<LI>define the syntax of programming languages by using context-free
+  grammars, explain the principles of LL and LR parsing, and implement
+  parsers by using standard tools;
+<LI>define and implement abstract syntax;
+<LI>master the technique of syntax-directed translation and its
+  efficient implementation in their chosen programming language;
+<LI>formulate typing rules and implement type checkers;
+<LI>formulate operational semantic rules and implement interpreters;
+<LI>write simple code generators;
+<LI>be familiar with the basic implementation issues of both
+  imperative and functional languages;
+<LI>design and implement special-purpose programming languages.
+<LI>master the principles of polymorphic type checking by unification
+<LI>implement an interpreter for a functional language
+</OL>
+
+<H1>Teachers</H1>
+
+<P>
+<A HREF="http://www.cse.chalmers.se/~aarne/">Aarne Ranta</A>, course responsible.
+</P>
+<P>
+John Camilleri,
+Grégoire Détrez, 
+Daniel Hausknecht, 
+Inari Listenmaa,
+assistants.
+</P>
+<P>
+The fastest way to get an answer is to mail the course's
+Google group
+<A HREF="http://groups.google.com/group/proglang-course-2014">http://groups.google.com/group/proglang-course-2014</A>.
+<B>Please provide your full name and date of birth when requesting membership!</B>
+Otherwise your request will be bounced back or ignored.
+</P>
+
+<H1>Google Group</H1>
+
+<P>
+If you have any general questions regarding the course, the labs or the exercises, 
+please ask them in our
+Google group 
+<A HREF="http://groups.google.com/group/proglang-course-2014">http://groups.google.com/group/proglang-course-2014</A>.
+This will reach all teachers and fellow students. 
+If you are not yet member of the group, you have to
+</P>
+
+<UL>
+<LI>get a google account (if you don't have it yet)
+<LI>go to <A HREF="http://groups.google.com/group/proglang-course-2014">http://groups.google.com/group/proglang-course-2014</A>.
+<LI>request an invitation to the proglang-course-2014 group.
+</UL>
+
+<P>
+<B>You will have to give your real name and your person number (or date of birth) when you register,</B>
+<B>otherwise your membership is not approved.</B>
+This is necessary to identify you as a participant of the course.
+</P>
+
+<H1>Laboration times and supervision</H1>
+
+<P>
+All classes in ED3507.
+</P>
+<P>
+Times:
+</P>
+
+<UL>
+<LI>Tuesday 15-17 (no class on 4 February) (John) , in ED3507
+<LI>Thursday 15-17 (no class on 20 February) (Daniel), in ED2480
+<LI>Friday 13-15 (Grégoire) , in ED3507
+</UL>
+
+<P>
+Inari will assist most of the times.
+The labs rooms and supervision
+are available from Tuesday 21 January till 7 March.
+</P>
+<P>
+<B>Attendance in these classes is optional</B>.
+Normally, each student should attend <B>at most one</B> supervised laboration time each week.
+Since attendance is not compulsory, there may be room for more 
+times. But, if there is lack of room, those who attend their first 
+supervision of the week have priority to get a place and supervisor help.
+</P>
+
+<H1>Laborations</H1>
+
+<P>
+There will be four laborations, written individually or in
+pairs. 
+</P>
+
+<UL>
+<LI>deadline 3/2:  <A HREF="laborations/lab1/lab1.html">parser</A>
+<LI>deadline 17/2: <A HREF="laborations/lab2/lab2.html">type checker and interpreter</A>
+<LI>deadline 26/2: <A HREF="laborations/lab3/lab3.html">code generator</A>
+<LI>deadline 11/3: <A HREF="laborations/lab4/lab4.html">functional language interpreter</A>
+</UL>
+
+<P>
+Reporting is done via 
+Fire <A HREF="http://xdat09.ce.chalmers.se/plt/">http://xdat09.ce.chalmers.se/plt/</A>.
+Before reporting, you must run your program through a test suite,
+such as the one for <A HREF="laborations/lab1/testscript/">lab 1</A>.
+</P>
+<P>
+<B>Final deadline is Saturday 15 March</B> for all returned and corrected labs.
+No labs will be graded after this deadline.
+</P>
+<P>
+We guarantee two gradings per lab: one for the version submitted before the
+ordinary deadline for that lab, the other for a resubmission before
+the final deadline. If your first submission is after the lab
+deadline, only one grading is guaranteed.
+</P>
+
+<H1>Literature</H1>
+
+<P>
+The main book will be one that developed from earlier editions of this course:
+</P>
+
+<UL>
+<LI>Ranta:
+<I>Implementing Programming Languages. An Introductions to Compilers and Interpreters</I>,
+College Publications,
+London,
+2012.
+Web page (with extra material and links to selling sites):
+<A HREF="http://www.digitalgrammars.com/ipl-book/">http://www.digitalgrammars.com/ipl-book/</A>
+</UL>
+
+<P>
+If you are really interested in the topic, for instance, if you want
+to continue with the Compiler Construction course, you should also
+consider <I>the Dragon book</I>,
+</P>
+
+<UL>
+<LI>Aho, Lam, Sethi &amp; Ullman:
+<I>Compilers Principles, Techniques &amp; Tools</I>
+<B>Second edition</B>,
+Pearson/Addison Wesley
+2007.
+</UL>
+
+<P>
+Both books are available
+at web bookshops. The main book will also be sold at Cremona.
+</P>
+
+<H1>Exercises</H1>
+
+<P>
+There will be a new electronic system for self-study exercises. No
+exercise classes, no bonus points (as in some previous years).
+</P>
+<P>
+Here is a set of old
+<A HREF="http://www.digitalgrammars.com/ipl-book/course-exercises/exx.html">exercises</A>
+and <A HREF="http://www.digitalgrammars.com/ipl-book/course-exercises/sol.html">solutions</A>.
+</P>
+
+<H1>Exam</H1>
+
+<P>
+Written exam, usual grading scales.
+<B>No more extra points from exercises.</B>
+</P>
+<P>
+Date: 14 March
+</P>
+<P>
+Time: 2:00 afternoon
+</P>
+<P>
+Place: M (Hörsalsvägen 5)
+</P>
+<P>
+The exam has the same structure as these <A HREF="exams/">old exams</A>.
+</P>
+
+<H1>Software</H1>
+
+<P>
+BNF Converter, <A HREF="http://bnfc.digitalgrammars.com/">http://bnfc.digitalgrammars.com/</A>
+</P>
+<P>
+Precompiled <A HREF="doc/javatools.tgz">Java tools (Cup and JLex)</A> 
+</P>
+
+<!-- html code generated by txt2tags 2.6 (http://txt2tags.org) -->
+<!-- cmdline: txt2tags -thtml index.txt -->
+</BODY></HTML>

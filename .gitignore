@@ -40,6 +40,9 @@ CPP/
 # Don't commit HTML since it's all generated
 *.html
 
+# Commit some generated HTML as it might be hard to reconstruct
+!/*-index.html
+
 # Ignore testsuite archives
 *.tar.gz
 

@@ -1,0 +1,555 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META NAME="generator" CONTENT="http://txt2tags.org">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="gh-fork-ribbon.css">
+<TITLE>Programming Language Technology</TITLE>
+</HEAD><BODY BGCOLOR="white" TEXT="black">
+<CENTER>
+<H1>Programming Language Technology</H1>
+<FONT SIZE="4"><I>DAT151 (Chalmers) / DIT231 (GU)</I></FONT><BR>
+<FONT SIZE="4">Winter Term 2023 (LP2)</FONT>
+</CENTER>
+
+<script src="enhance_page.js" type="text/javascript"></script>
+<style>.github-fork-ribbon:before { background-color: #333; }</style>
+<a class="github-fork-ribbon" href="https://github.com/teach-plt/www" data-ribbon="Sources on GitHub" title="Sources on GitHub">Sources on GitHub</a>
+<p align="center">
+<a href="https://teach-plt.github.io/www/">https://teach-plt.github.io/www/</a>
+</p>
+<P>
+<A HREF="https://chalmers.instructure.com/courses/26247">Canvas</A>
+/
+<A HREF="https://git.chalmers.se/courses/dat151">GitLab</A>
+/
+<A HREF="https://cloud.timeedit.net/chalmers/web/public/ri1Y03y5Z65ZZ7Q7766657015Q06x3500gW650QQ537.html">Schedule</A>
+/
+<A HREF="https://plt2023lp2.slack.com">Slack</A>
+/
+<A HREF="https://www.student.chalmers.se/sp/course?course_id=35818">Chalmers studieportal</A>
+/
+<A HREF="https://www.gu.se/studera/hitta-utbildning/programspraksteknik-dit231">GU ad (sv)</A>
+/
+<A HREF="http://kursplaner.gu.se/pdf/kurs/sv/DIT231">GU kursplan</A>
+/
+<A HREF="http://kursplaner.gu.se/pdf/kurs/en/DIT231">GU course description</A>
+/
+<A HREF="http://www.cse.chalmers.se/edu/year/2022/course/DAT151/">Course page 2022</A>
+</P>
+
+<H1>News and changes</H1>
+
+<DL>
+<DT><I>2024-01-08</I></DT><DD>
+  Fixed errors in <A HREF="exams/solutions-plt-2023-1.pdf">Jan 2023 exam solution</A> (Q2 automata and Q4 evaluation of if).
+</DL>
+
+<DL>
+<DT><I>2023-10-31</I></DT><DD>
+<P></P>
+  The lecture hall HC2 of todays's lecture has only 104 seats.
+  Thus, I will offer streaming of this lecture via Zoom (hybrid format).
+  You are welcome to join via Zoom in case you cannot or do not want to attend in person
+  (e.g. if you shy crowds these days, or have symptoms etc).
+  Zoom link will be published via <A HREF="https://chalmers.instructure.com/courses/26247">Canvas</A>.
+</DL>
+
+<H1>Schedule</H1>
+
+<P>
+Lectures are Tuesdays and Thursdays, starting at <B>13:15</B>, both on campus and in <A HREF="https://chalmers.instructure.com/courses/26247/external_tools/419">Zoom</A>.
+Tuesday lectures are in <B><A HREF="http://maps.chalmers.se/#23e2df72-cbb9-4aff-825a-1a282e9618d6">HC2</A></B>,
+Thursday lectures in
+<B><A HREF="https://maps.chalmers.se/#c613d487-6c0c-4fe2-8a9d-55b858fa137f">SB-H6</A></B>,
+<I>with exceptions</I> Thu 2nd Nov and 23rd Nov in <I><A HREF="https://maps.chalmers.se/#f85ee0cd-e87b-403f-acf9-bd30f6b3339d">SB-H5</A></I>.
+</P>
+<P>
+Material: plt = course book, dragon = Dragon book.
+Slides follow closely the plt book.
+</P>
+
+<TABLE BORDER="1" CELLPADDING="4">
+<TR>
+<TH>Date</TH>
+<TH>Time</TH>
+<TH>Title</TH>
+<TH COLSPAN="2">Material</TH>
+</TR>
+<TR>
+<TD>Tue 31/10</TD>
+<TD>13-15</TD>
+<TD>PL Design, Compilation Phases</TD>
+<TD><A HREF="plt-book/ipl-book/slides/1-slides-ipl-book.pdf">slides</A>, plt 1, dragon 1, live coding <A HREF="live/2023/live-1-Calc-bnfc-start.zip">start</A>, <A HREF="live/2023/live-1-Calc-bnfc.zip">result</A></TD>
+</TR>
+<TR>
+<TD>Thu 02/11</TD>
+<TD>13-15 <B><A HREF="https://maps.chalmers.se/#f85ee0cd-e87b-403f-acf9-bd30f6b3339d">SB-H5</A></B></TD>
+<TD>Grammars / BNFC / Hands-on with Lab 1</TD>
+<TD><A HREF="plt-book/ipl-book/slides/2-slides-ipl-book.pdf">slides</A>, plt 2, dragon 2.8.2,4.1-4.3, <A HREF="notes/git-primer.md">git</A></TD>
+</TR>
+<TR>
+<TD>Tue 07/11</TD>
+<TD>13-15</TD>
+<TD>Formal languages and parsing</TD>
+<TD><A HREF="plt-book/ipl-book/slides/3-slides-ipl-book.pdf">slides</A>, plt 3, dragon 3,4, <A HREF="notes/sr-states.md">shift-reduce parsing</A> <A HREF="notes/LR-table.html">LR-table</A></TD>
+</TR>
+<TR>
+<TD>Thu 09/11</TD>
+<TD>13-15</TD>
+<TD>Theory of lexing</TD>
+<TD><A HREF="plt-book/ipl-book/slides/3-slides-ipl-book.pdf">slides</A>, plt 3, dragon 3,4</TD>
+</TR>
+<TR>
+<TD><I>Mon 13/11</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Lab 1 deadline</I></TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Tue 14/11</TD>
+<TD>13-15</TD>
+<TD>Type checking</TD>
+<TD><A HREF="plt-book/ipl-book/slides/4-slides-ipl-book.pdf">slides</A>, plt 4, dragon 5,6, <A HREF="notes/type-checking.html">script</A> <A HREF="notes/prime.c">prime.c</A></TD>
+</TR>
+<TR>
+<TD>Thu 16/11</TD>
+<TD>13-15</TD>
+<TD>Interpreting</TD>
+<TD><A HREF="plt-book/ipl-book/slides/5-slides-ipl-book.pdf">slides</A>, plt 5, <A HREF="notes/interpreter.html">script</A></TD>
+</TR>
+<TR>
+<TD>Tue 21/11</TD>
+<TD><B>no lecture</B></TD>
+<TD>Hands-on with Lab 2: <I>video from 2021</I></TD>
+<TD><A HREF="https://chalmers.instructure.com/courses/26247/external_tools/29">Media Gallery</A></TD>
+</TR>
+<TR>
+<TD>Thu 23/11</TD>
+<TD>13-15  <B>SB-H5</B></TD>
+<TD>Code generation  <I>(lecture: Jonas Höfer)</I></TD>
+<TD><A HREF="plt-book/ipl-book/slides/6-slides-ipl-book.pdf">slides</A>, plt 6, dragon 6,7, <A HREF="notes/compilation.html">notes</A>, <A HREF="notes/prime.c">prime.c</A>, <A HREF="notes/prime.j">prime.j</A></TD>
+</TR>
+<TR>
+<TD><I>Mon 27/11</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Lab 2 deadline</I></TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Tue 28/11</TD>
+<TD><B>no lecture</B></TD>
+<TD>Hands-on with Lab 3: <I>videos from 2022</I></TD>
+<TD><A HREF="https://chalmers.instructure.com/courses/26247/external_tools/29">Media Gallery</A></TD>
+</TR>
+<TR>
+<TD>Thu 30/11</TD>
+<TD><B>video from 2022</B></TD>
+<TD>Functional programming languages</TD>
+<TD><A HREF="plt-book/ipl-book/slides/7-slides-ipl-book.pdf">slides</A>, plt 7, dragon 6.5,7.3, <A HREF="notes/cbn-cbv.html">script</A></TD>
+</TR>
+<TR>
+<TD>Tue 05/12</TD>
+<TD>13-15</TD>
+<TD>Type inference and polymorphism</TD>
+<TD>plt 7.7-9, <A HREF="notes/typing.html">script</A></TD>
+</TR>
+<TR>
+<TD>Thu 07/12</TD>
+<TD>13-14</TD>
+<TD>Hands-on with Lab 4 (Haskell)</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Thu 07/12</TD>
+<TD>14-15</TD>
+<TD>Hands-on with Lab 4 (Java)</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Tue 12/12</TD>
+<TD>13-15</TD>
+<TD>Dependent types (Agda)</TD>
+<TD>Live coding <A HREF="live/2023/agda/JVM-start.agda">start</A> <A HREF="live/2023/agda/JVM.agda">finish</A></TD>
+</TR>
+<TR>
+<TD><I>Wed 13/12</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Lab 3 deadline</I></TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Thu 14/12</TD>
+<TD><A HREF="https://chalmers.instructure.com/courses/26247/external_tools/29">video from 2021</A></TD>
+<TD>Preparing for the exam</TD>
+<TD><A HREF="exams/exam-plt-2020-1.pdf">Training exam</A> <A HREF="exams/solutions-plt-2020-1.pdf">Solution</A> <A HREF="live/2021/exam/CMM.cf">Answer Q1</A> <A HREF="live/2021/exam/Q1.c">Q1.c</A> <A HREF="live/2021/exam/Answers.md">Answer Q3-6</A></TD>
+</TR>
+<TR>
+<TH COLSPAN="4">2024</TH>
+</TR>
+<TR>
+<TD><I>Mon 08/01</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Lab 4 deadline</I></TD>
+<TD></TD>
+</TR>
+<TR>
+<TD><I>Thu 11/01</I></TD>
+<TD><I>8.30-12.30</I></TD>
+<TD><I>Exam</I></TD>
+<TD></TD>
+</TR>
+<TR>
+<TD><I>Fri 26/01</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Final lab deadline</I></TD>
+<TD><I>all lab returns</I></TD>
+</TR>
+<TR>
+<TD><I>Thu 04/04</I></TD>
+<TD><I>8.30-12.30</I></TD>
+<TD><I>First reexam</I></TD>
+<TD></TD>
+</TR>
+<TR>
+<TD><I>Thu 29/08</I></TD>
+<TD><I>14-18</I></TD>
+<TD><I>Second reexam</I></TD>
+<TD></TD>
+</TR>
+</TABLE>
+
+<P>
+The official course schema is in <A HREF="https://cloud.timeedit.net/chalmers/web/public/ri1Y03y5Z65ZZ7Q7766657015Q06x3500gW650QQ537.html">Time Edit</A>.
+</P>
+
+<H1>Description</H1>
+
+<P>
+The aim of the course is to give understanding of how programming
+languages are designed, documented, and implemented. The course covers
+the basic techniques and tools needed to write interpreters, and
+gives a summary introduction to compilation as well.  Those who have
+passed the course should be able to
+</P>
+
+<OL>
+<LI>define the lexical structure of programming languages by using
+  regular expressions, explain the functioning of finite automata,
+  and implement lexical analysers by using standard tools;
+<LI>define the syntax of programming languages by using context-free
+  grammars, explain the principles of LL and LR parsing, and implement
+  parsers by using standard tools;
+<LI>define and implement abstract syntax;
+<LI>master the technique of syntax-directed translation and its
+  efficient implementation in their chosen programming language;
+<LI>formulate typing rules and implement type checkers;
+<LI>formulate operational semantic rules and implement interpreters;
+<LI>write simple code generators;
+<LI>be familiar with the basic implementation issues of both
+  imperative and functional languages;
+<LI>master the principles of polymorphic type checking by unification;
+<LI>implement an interpreter for a functional language.
+</OL>
+
+<H1>Teachers</H1>
+
+<P>
+<A HREF="http://www.cse.chalmers.se/~abela/">Andreas Abel</A>, responsible course teacher and examiner.
+</P>
+<P>
+Assistants:
+</P>
+
+<UL>
+<LI><A HREF="https://www.chalmers.se/personer/andrask/">Andras Kovacs</A>
+<LI><A HREF="https://www.chalmers.se/personer/laro.aspx">Eric Olsson</A>
+<LI><A HREF="https://www.chalmers.se/personer/felixche/">Felix Cherubini</A>
+<LI><A HREF="https://github.com/himmelhao">Hao Hu</A> <CODE>haohu student chalmers se</CODE> <I>(insert @ and .)</I>
+<LI><A HREF="https://www.chalmers.se/personer/hoferj/">Jonas Höfer</A>
+<P></P>
+Questions regarding this class (organization, content, labs)
+should be asked publicly on the Canvas forum in the most cases.
+You are also welcome to answer questions by others.
+(Don't give away any lab solutions when you ask or answer questions!)
+</UL>
+
+<H1>Lab times and supervision</H1>
+
+<P>
+Lab supervision is available in room <A HREF="http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093">ED3354</A> and online on Tue, Thu and Fri.
+</P>
+
+<TABLE BORDER="1" CELLPADDING="4">
+<TR>
+<TH>Day</TH>
+<TH>Time</TH>
+<TH>Location</TH>
+<TH>Supervisors</TH>
+</TR>
+<TR>
+<TD>Tue</TD>
+<TD>15:15-17:00</TD>
+<TD>Zoom, ED3354</TD>
+<TD>Andreas, Andras, Jonas</TD>
+</TR>
+<TR>
+<TD>Wed</TD>
+<TD>15:15-17:00</TD>
+<TD>Zoom only</TD>
+<TD>Eric, Felix</TD>
+</TR>
+<TR>
+<TD>Thu</TD>
+<TD>15:15-17:00</TD>
+<TD>Zoom, ED3354</TD>
+<TD>Felix, Hao, Jonas|</TD>
+</TR>
+<TR>
+<TD>Fri</TD>
+<TD>13:15-15:00</TD>
+<TD>Zoom, ED3354</TD>
+<TD>Andras, Eric, Hao</TD>
+</TR>
+</TABLE>
+
+<P>
+The lab rooms and supervision are
+available from Tue 31 Oct till Fri 15 Dec 2023,
+except for Fri 03 Nov which is a half-day.
+Starting 08 Nov we offer Zoom supervision on Wednesdays 15:15-17:00, please use the slack channel <CODE>#queue</CODE> to queue for Zoom supervision during that time.
+</P>
+<P>
+We use <A HREF="https://plt2023lp2.slack.com/">Slack</A> to organize the lab supervision.
+Please <A HREF="https://join.slack.com/t/plt2023lp2/shared_invite/zt-25dk1rfup-acG09TxebCQGjepXhnNX3A">join</A>
+our Slack workspace.
+</P>
+<P>
+The TAs will be present in lab rooms during lab supervision slots, available for help both in-person and virtually. To ask for help,  just send a ticket request through the <CODE>#queue</CODE> Slack channel.
+</P>
+
+<UL>
+<LI>For in-person attendance, writing your names is sufficient.
+<LI>For online help, start a Zoom meeting and invite your group partner to join.
+  Please then sign up by providing a clickable URL to your Zoom meeting (e.g., <CODE>https://chalmers.zoom.us/j/6435657890/pwd=OXlBcGxMZjkzNGsyplpYZENYWlVodi09</CODE>), so that the TA knows where to find you.
+<LI>Monitor the queue, the TA will join you/your Zoom meeting as soon as it’s your turn.
+</UL>
+
+<P>
+You are expected to find a lab partner, with whom you will do the labs.
+If you have difficulties finding a partner, please use Slack channel <CODE>#lab-partner</CODE>.
+</P>
+
+<H1>Labs</H1>
+
+<P>
+You have to pass the labs to pass the course.
+However, the course grade is determined solely by the exam.
+</P>
+
+<UL>
+<LI>Lab 1 - parser  (deadline 13/11)
+<LI>Lab 2 - type checker and interpreter (deadline 27/11)
+<LI>Lab 3 - code generator (deadline 13/12)
+<LI>Lab 4 - functional language interpreter  (deadline 08/01/2024)
+</UL>
+
+<P>
+The labs are quite substantial, so please set aside at least 30 full working hours (4 full working days) before the deadline.  It is recommended to start at least 10 days before the deadline.
+</P>
+<P>
+Labs are to be solved in <B>groups of two</B>.
+(Individual solutions are accepted per exception,
+please contact the course responsible.)
+Groups are formed on Canvas and then recreated automatically on
+<A HREF="https://git.chalmers.se/courses/dat151">Chalmers GitLab</A>.
+After the first lab has been submitted, the groups are fixed.
+(Should you nevertheless need to urgently change to group,
+please contact the course responsible.)
+</P>
+<P>
+The labs will be published in your Gitlab group and a solution repository will be created for you there.
+Submission of your solution is by creating a <CODE>submission</CODE> tag in the repository.
+Please read the detailed <B>lab instructions</B> at:
+<A HREF="https://chalmers.instructure.com/courses/26247/pages/lab-infrastructure-on-chalmers-gitlab">https://chalmers.instructure.com/courses/26247/pages/lab-infrastructure-on-chalmers-gitlab</A>
+</P>
+<P>
+Keep your lab solutions confidential!
+If you post problems and discussions around the labs on Canvas etc.,
+make sure you do not give away the solution.
+</P>
+<P>
+We guarantee two gradings per lab: one for the version submitted before the
+ordinary deadline for that lab, the other for a resubmission before
+the final deadline.
+If your first submission does not build or does not pass the testsuite,
+you will just get <I>fails testsuite</I> as grading.
+</P>
+<P>
+As part of the grading, you may be asked to explain your solution in person
+to a course teacher.  Be prepared to get a call for such an explanation meeting.
+In particular, make sure you understand all parts of the solution
+(good documentation helps!).
+</P>
+
+<H1>Exam</H1>
+
+<P>
+The written exam determines the course grade, the usual grading scales apply:
+Chalmers: 5, 4, 3, U; Gothenburg University: VG, G, U.
+</P>
+<P>
+Exam dates:
+ 11 Jan 2024 am J,
+ 04 Apr 2024 am J,
+ 29 Aug 2024 pm J.
+</P>
+<P>
+The exam tests the understanding of the course contents from a more high-level view,
+e.g., the underlying theoretical concepts.
+The exam has the same structure as these <A HREF="exams/">old exams</A>
+(download as <A HREF="exams.tgz">archive</A>).
+</P>
+<P>
+Further, here are some old
+<A HREF="plt-book/ipl-book/course-exercises/exx.html">exercises</A>
+and <A HREF="plt-book/ipl-book/course-exercises/sol.html">solutions</A>
+to prepare for the exam.
+</P>
+
+<H1>Literature</H1>
+
+<P>
+The main book will be one that developed from earlier editions of this course:
+</P>
+
+<DL>
+<DT>Aarne Ranta</DT><DD>
+  <I>Implementing Programming Languages. An Introduction to Compilers and Interpreters</I>,
+  College Publications,
+  London,
+  2012.
+  <A HREF="plt-book/ipl-book/">Web page (with extra material and links to selling sites)</A>
+<P></P>
+  Please also check the <A HREF="https://github.com/andreasabel/plt-errata/">errata</A> page
+  (welcome to submit errata not covered there yet).
+</DL>
+
+<P>
+If you are really interested in the topic, for instance, if you want
+to continue with the <A HREF="http://www.cse.chalmers.se/edu/course/TDA283/">Compiler Construction</A>
+course, you should also consider <I>the Dragon book</I>,
+</P>
+
+<DL>
+<DT>Aho, Lam, Sethi &amp; Ullman</DT><DD>
+  <I>Compilers Principles, Techniques &amp; Tools</I>,
+  <B>Second edition</B>,
+  Pearson/Addison Wesley
+  2007.
+</DL>
+
+<P>
+Both books are available at web bookshops.
+The main book will also be sold at Cremona.
+</P>
+<P>
+A good (yet slightly dated) introduction to monads in Haskell, useful for implementing interpreters, type checkers, and compilers, is this article:
+</P>
+
+<DL>
+<DT>Philip Wadler</DT><DD>
+  <A HREF="https://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf">Monads for functional programming</A>.
+  In <I>Advanced Functional Programming</I>,
+  First International Spring School on Advanced Functional Programming Techniques, Båstad, Sweden, May 24-30, 1995.
+</DL>
+
+<P>
+It also contains an introduction to parser combinators.
+</P>
+
+<H1>Software</H1>
+
+<P>
+If you are solving the labs on your own Windows machine, you might have to obtain some
+command-line developer tools stemming from the Unix world, like <CODE>make</CODE>, <CODE>tar</CODE>, etc.
+(These are by default available on Linux and can be installed from Xcode on macOS.)
+Windows from version 10 offers installation of a Linux distro via the
+Windows Subsystem for Linux
+(<A HREF="https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux">WSL</A>).
+Another popular option is <A HREF="https://www.msys2.org/">MSYS2</A> which is also bundeled with
+<A HREF="https://docs.haskellstack.org/en/stable/developing_on_windows/">Haskell stack</A>.
+</P>
+
+<H2>BNFC</H2>
+
+<P>
+We use the BNF Converter (<A HREF="https://bnfc.digitalgrammars.com/">Homepage</A> |
+<A HREF="https://hackage.haskell.org/package/BNFC">Hackage</A> |
+<A HREF="https://www.stackage.org/package/BNFC">Stackage</A> |
+<A HREF="https://github.com/BNFC/bnfc">GitHub</A>)
+in version 2.8.4 or above.
+Download and installation instructions at <A HREF="https://bnfc.digitalgrammars.com/">https://bnfc.digitalgrammars.com/</A>.
+</P>
+<P>
+When using the Java backend, you will need either
+<A HREF="https://www.antlr.org/">ANTLR</A>
+or the <A HREF="http://www2.cs.tum.edu/projects/cup/">CUP</A> libraries
+and either
+<A HREF="https://jflex.de/">JFLex</A> or the
+<A HREF="https://www.cs.princeton.edu/~appel/modern/java/JLex/">JLex</A> libraries.
+CUP has seen incompatible changes in its interface; thus, the version you need
+may depend on your BNFC version.
+</P>
+
+<H3>Java/CUP Instructions for BNFC ≥ 2.8.2 (uses CUP v0.11b)</H3>
+
+<P>
+Download the JAVA archives for
+<A HREF="https://github.com/BNFC/bnfc/raw/master/testing/data/java-cup-11b.jar">CUP v11b</A>,
+<A HREF="https://github.com/BNFC/bnfc/raw/master/testing/data/java-cup-11b-runtime.jar">CUP v11b runtime</A>, and
+<A HREF="https://github.com/BNFC/bnfc/raw/master/testing/data/JLex-1.2.6.jar">JLex</A>.
+Make sure they are placed in your classpath, for example (Linux / macOS)
+by storing these jars in
+<CODE>$HOME/java-lib/</CODE> and adding the following line (or a suitable variant) to <CODE>.bashrc</CODE>
+(could also be <CODE>.bash_profile</CODE> or similar):
+</P>
+
+<PRE>
+    export CLASSPATH=.:${HOME}/java-lib/java-cup-11b.jar:${HOME}/java-lib/java-cup-11b-runtime.jar:${HOME}/java-lib/JLex-1.2.6.jar:${CLASSPATH}
+</PRE>
+
+<H1>Student representatives</H1>
+
+<P>
+<A HREF="https://student.portal.chalmers.se/en/chalmersstudies/courseinformation/courseevaluation/Pages/default.aspx">Student representatives</A>
+for DAT151 Programming language technology.
+</P>
+
+<TABLE BORDER="1" CELLPADDING="4">
+<TR>
+<TH>Program</TH>
+<TH>@student.chalmers.se</TH>
+<TH COLSPAN="2">Name</TH>
+</TR>
+<TR>
+<TD>MPALG</TD>
+<TD>pingu</TD>
+<TD>Nor Führ</TD>
+</TR>
+<TR>
+<TD>MPALG</TD>
+<TD>kyletoft</TD>
+<TD>Samuel Kyletoft</TD>
+</TR>
+<TR>
+<TD>MPALG</TD>
+<TD>yijiaz</TD>
+<TD>Yijia Zhang</TD>
+</TR>
+</TABLE>
+
+<!-- html code generated by txt2tags 2.6 (http://txt2tags.org) -->
+<!-- cmdline: txt2tags -\-style=style.css -\-style=gh-fork-ribbon.css -t html index.txt -->
+</BODY></HTML>

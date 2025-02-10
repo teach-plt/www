@@ -1,0 +1,556 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META NAME="generator" CONTENT="http://txt2tags.org">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<TITLE>Programming Language Technology</TITLE>
+</HEAD><BODY BGCOLOR="white" TEXT="black">
+<CENTER>
+<H1>Programming Language Technology</H1>
+<FONT SIZE="4"><I>DAT151 (Chalmers) / DIT231 (GU)</I></FONT><BR>
+<FONT SIZE="4">Winter Term 2017 (LP2)</FONT>
+</CENTER>
+
+<script src="enhance_page.js"></script>
+<p align="center">
+<a href="http://www.cse.chalmers.se/edu/course/DAT151/">
+http://www.cse.chalmers.se/edu/course/DAT151/</a>
+</p>
+<P>
+Google group: <A HREF="http://groups.google.com/group/plt-2017">http://groups.google.com/group/plt-2017</A>
+<I>(please provide your full name and date of birth when requesting membership!)</I>
+</P>
+<P>
+<A HREF="https://plt-lp2-17.frs.cse.chalmers.se/">Fire</A>
+/
+<A HREF="https://www.student.chalmers.se/sp/course?course_id=26971">Chalmers studieportal</A>
+/
+<A HREF="http://kursplaner.gu.se/english/DIT231.pdf">GU course description</A>
+/
+<A HREF="https://gul.gu.se/public/courseId/79766/coursePath/38212/38407/40149/ecp/lang-sv/publicPage.do">GU course page stub</A>
+/
+<A HREF="http://utbildning.gu.se/education/courses-and-programmes/Course_detail?courseId=DIT231">GU ad</A>
+/
+<A HREF="http://kursplaner.gu.se/pdf/kurs/sv/DIT231">GU kursplan</A>
+/
+<A HREF="http://kursplaner.gu.se/pdf/kurs/en/DIT231">GU course plan</A>
+/
+<A HREF="http://www.cse.chalmers.se/edu/year/2016/course/DAT151/">Course page 2016</A>
+</P>
+
+<H1>News and changes</H1>
+
+ <DL>
+ <DT><I>2018-03-22</I></DT><DD>
+   The Fire deadline for late submission has been extended until
+   Sunday 25th.
+ <P></P>
+   The reexam will be held 5 April in building SB.
+ <P></P>
+ <DT><I>2018-03-14</I></DT><DD>
+   Fire is open for the late submission of labs.
+ <P></P>
+ <DT><I>2018-01-16</I></DT><DD>
+   <A HREF="exams/exam-plt-2018-1.pdf">Exam text</A> and <A HREF="exams/solutions-plt-2018-1.pdf">solution</A>.
+   I am very pleased with the outcome, thanks for studying well!
+ <P></P>
+   Please submit outstanding lab solutions by Friday!
+ <P></P>
+ <DT><I>2017-12-19</I></DT><DD>
+   The exam will be held 8 January 2018, 8.30-12.30 in building M on the Johanneberg campus.
+ <P></P>
+ <DT><I>2017-12-13</I></DT><DD>
+   In the last lecture, we will walk through an
+   <A HREF="exams/exam-plt-2017-3.pdf">example exam</A>.
+ <P></P>
+ <DT><I>2017-12-05</I></DT><DD>
+   <A HREF="laborations/lab4/lab4.html">Lab 4</A> is online.
+ <P></P>
+ <DT><I>2017-11-23</I></DT><DD>
+   <A HREF="laborations/lab3/lab3.html">Lab 3</A> is online.
+ <P></P>
+ <DT><I>2017-11-23</I></DT><DD>
+   The code from today's "Hands-on for lab 2" session has been posted in the plt-2017 group.
+ <P></P>
+ <DT><I>2017-11-23</I></DT><DD>
+   The schedule has been updated (see below).
+ <P></P>
+ <DT><I>2017-11-18</I></DT><DD>
+   Change in text for <A HREF="laborations/lab2/lab2.html">Lab 2</A>:
+   The <CODE>return</CODE> statement can also return a void value.
+   (If you stick to the old text and disallow this, it is also fine, but it makes more sense to allow it.)
+ <P></P>
+ <DT><I>2017-11-18</I></DT><DD>
+   Ad: <A HREF="http://www.gu.se/english/about_the_university/job-opportunities/vacancies-details/?id=1516">Apply for teaching assistent LP3/4!</A>
+   Deadline is 2017-11-30.
+ <P></P>
+ <DT><I>2017-11-14</I></DT><DD>
+   <A HREF="laborations/lab2/lab2.html">Lab 2</A> is online.
+ </DL>
+
+<H1>Tentative Schedule</H1>
+
+<P>
+All lectures are in <B><A HREF="http://maps.chalmers.se/#23e2df72-cbb9-4aff-825a-1a282e9618d6">HC2</A></B>, starting at <B>13:15</B>.
+</P>
+<P>
+Material: plt = course book, dragon = Dragon book.
+Slides follow closely the plt book.
+</P>
+
+<TABLE BORDER="1" CELLPADDING="4">
+<TR>
+<TH>Date</TH>
+<TH>Time</TH>
+<TH>Title</TH>
+<TH COLSPAN="2">Material</TH>
+</TR>
+<TR>
+<TD>Tue 31/10</TD>
+<TD>13-15</TD>
+<TD>PL Design, Compilation Phases, calculator</TD>
+<TD><A HREF="ipl-book/slides/1-slides-ipl-book.pdf">slides</A>, plt 1, dragon 1, <A HREF="live-2017-10-31.zip">live coding</A></TD>
+</TR>
+<TR>
+<TD>Thu 02/11</TD>
+<TD>13-15</TD>
+<TD>Grammars / BNFC / Hands-on with Lab 1</TD>
+<TD><A HREF="live-2-bnfc.zip">code</A> <A HREF="ipl-book/slides/2-slides-ipl-book.pdf">slides</A>, plt 2, dragon 2.8.2,4.1-4.3</TD>
+</TR>
+<TR>
+<TD>Tue 07/11</TD>
+<TD>13-15</TD>
+<TD>Formal languages and parsing</TD>
+<TD><A HREF="LL-parsing.zip">LL parser code</A></TD>
+</TR>
+<TR>
+<TD>Thu 09/11</TD>
+<TD>10-16</TD>
+<TD><A HREF="https://www.date-it.se/">DATE-IT 2017 fair</A></TD>
+<TD>No class!</TD>
+</TR>
+<TR>
+<TD><I>Mon 13/11</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Lab 1 deadline</I></TD>
+<TD><A HREF="laborations/lab1/lab1.html">lab1 PM</A></TD>
+</TR>
+<TR>
+<TD>Tue 14/11</TD>
+<TD>13-15</TD>
+<TD>Theory of lexing, LR parsing</TD>
+<TD><A HREF="ipl-book/slides/3-slides-ipl-book.pdf">slides</A>, plt 3, dragon 3,4</TD>
+</TR>
+<TR>
+<TD>Thu 16/11</TD>
+<TD>13-15</TD>
+<TD>Interpreting</TD>
+<TD><A HREF="ipl-book/slides/5-slides-ipl-book.pdf">slides</A>, plt 5</TD>
+</TR>
+<TR>
+<TD>Tue 21/11</TD>
+<TD>13-15</TD>
+<TD>Type checking</TD>
+<TD><A HREF="ipl-book/slides/4-slides-ipl-book.pdf">slides</A>, plt 4, dragon 5,6</TD>
+</TR>
+<TR>
+<TD>Thu 23/11</TD>
+<TD>13-14</TD>
+<TD>Hands-on with Lab 2 (Haskell)</TD>
+<TD><A HREF="laborations/lab2/lab2.html">lab2 PM</A></TD>
+</TR>
+<TR>
+<TD>Thu 23/11</TD>
+<TD>14-15</TD>
+<TD>Hands-on with Lab 2 (Java)</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD><I>Mon 27/11</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Lab 2 deadline</I></TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Tue 28/11</TD>
+<TD>13-15</TD>
+<TD>Code generation</TD>
+<TD><A HREF="ipl-book/slides/6-slides-ipl-book.pdf">slides</A>, plt 6, dragon 6,7</TD>
+</TR>
+<TR>
+<TD>Thu 30/11</TD>
+<TD>13-14</TD>
+<TD>Hands-on with Lab 3 (Haskell)</TD>
+<TD><A HREF="laborations/lab3/lab3.html">lab3 PM</A></TD>
+</TR>
+<TR>
+<TD>Thu 30/11</TD>
+<TD>14-15</TD>
+<TD>Hands-on with Lab 3 (Java)</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Tue 05/12</TD>
+<TD>13-15</TD>
+<TD>Functional programming languages</TD>
+<TD><A HREF="ipl-book/slides/7-slides-ipl-book.pdf">slides</A>, plt 7, dragon 6.5,7.3</TD>
+</TR>
+<TR>
+<TD>Thu 07/12</TD>
+<TD>13-15</TD>
+<TD>Hands-on with Lab 4</TD>
+<TD><A HREF="laborations/lab4/lab4.html">lab4 PM</A></TD>
+</TR>
+<TR>
+<TD><I>Mon 11/12</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Lab 3 deadline</I></TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>Tue 12/12</TD>
+<TD>13-15</TD>
+<TD>Type inference. A taste of dependent types</TD>
+<TD>Agda demo <A HREF="./JVM.agda">Verified compilation</A></TD>
+</TR>
+<TR>
+<TD>Thu 14/12</TD>
+<TD>13-15</TD>
+<TD>Preparing for the exam</TD>
+<TD><A HREF="exams/exam-plt-2017-3.pdf">Training Exam</A></TD>
+</TR>
+<TR>
+<TH COLSPAN="4">2018</TH>
+</TR>
+<TR>
+<TD><I>Fri 05/01</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Lab 4 deadline</I></TD>
+<TD></TD>
+</TR>
+<TR>
+<TD><I>Mon 08/01</I></TD>
+<TD><I>8.30-12.30</I></TD>
+<TD><I>Exam (building M)</I></TD>
+<TD><A HREF="exams/exam-plt-2018-1.pdf">Exam</A></TD>
+</TR>
+<TR>
+<TD><I>Tue 16/01</I></TD>
+<TD><I>10.30-12.00</I></TD>
+<TD><I>Exam review, EDIT 6128</I></TD>
+<TD><A HREF="exams/solutions-plt-2018-1.pdf">Solution</A></TD>
+</TR>
+<TR>
+<TD><I>Fri 19/01</I></TD>
+<TD><I>23</I></TD>
+<TD><I>Final lab deadline</I></TD>
+<TD><I>all lab returns</I></TD>
+</TR>
+<TR>
+<TD><I>Thu 15/03</I></TD>
+<TD></TD>
+<TD><I>Lab resubmission intent deadline</I></TD>
+<TD></TD>
+</TR>
+<TR>
+<TD><I>Sun 25/03</I></TD>
+<TD></TD>
+<TD><I>Late final lab deadline</I></TD>
+<TD></TD>
+</TR>
+<TR>
+<TD><I>Thu 05/04</I></TD>
+<TD><I>8.30-12.30</I></TD>
+<TD><I>Exam (SB)</I></TD>
+<TD></TD>
+</TR>
+<TR>
+<TD><I>Thu 30/08</I></TD>
+<TD><I>14-18</I></TD>
+<TD><I>Exam (J)</I></TD>
+<TD></TD>
+</TR>
+</TABLE>
+
+<P>
+The official course schema is in <A HREF="https://se.timeedit.net/web/chalmers/db1/public/ri177255X90Z56Q5Z36g0Y65yZ036Y31Q07gQY5Q5076q072cQ.html">Time Edit</A>.
+</P>
+
+<H1>Description</H1>
+
+<P>
+The aim of the course is to give understanding of how programming
+languages are designed, documented, and implemented. The course covers
+the basic techniques and tools needed to write interpreters, and
+gives a summary introduction to compilation as well.  Those who have
+passed the course should be able to
+</P>
+
+<OL>
+<LI>define the lexical structure of programming languages by using
+  regular expressions, explain the functioning of finite automata,
+  and implement lexical analysers by using standard tools;
+<LI>define the syntax of programming languages by using context-free
+  grammars, explain the principles of LL and LR parsing, and implement
+  parsers by using standard tools;
+<LI>define and implement abstract syntax;
+<LI>master the technique of syntax-directed translation and its
+  efficient implementation in their chosen programming language;
+<LI>formulate typing rules and implement type checkers;
+<LI>formulate operational semantic rules and implement interpreters;
+<LI>write simple code generators;
+<LI>be familiar with the basic implementation issues of both
+  imperative and functional languages;
+<LI>master the principles of polymorphic type checking by unification;
+<LI>implement an interpreter for a functional language.
+</OL>
+
+<H1>Teachers</H1>
+
+<P>
+<A HREF="http://www.cse.chalmers.se/~abela/">Andreas Abel</A>, course teacher and examiner.
+</P>
+<P>
+<A HREF="http://www.cse.chalmers.se/~loow/">Andreas Lööw</A>,
+<A HREF="https://schoepe.org/~daniel/">Daniel Schoepe</A>,
+<A HREF="https://www.chalmers.se/en/staff/Pages/fabian-ruch.aspx">Fabian Ruch</A>,
+assistants.
+</P>
+
+<H1>Google Group</H1>
+
+<P>
+If you have any general questions regarding the course, the labs or the exercises,
+please ask them in our
+<A HREF="http://groups.google.com/group/plt-2017">Google group</A>.
+This will reach all teachers and fellow students.
+If you are not yet member of the group, you have to
+</P>
+
+<UL>
+<LI>get a google account (if you don't have it yet)
+<LI>go to <A HREF="http://groups.google.com/group/plt-2017">http://groups.google.com/group/plt-2017</A>
+<LI>request an invitation to the plt-2017 group (make sure to use "apply for membership" rather than "contact the owner")
+</UL>
+
+<P>
+<B>You will have to give your real name and your person number (or date of birth) when you register,</B>
+<B>otherwise your membership is not approved.</B>
+This is necessary to identify you as a participant of the course.
+</P>
+
+<H1>Laboration times and supervision</H1>
+
+<P>
+Lab supervision take place in
+<A HREF="http://maps.chalmers.se/#45ea04d0-4a90-4a18-9842-55599dbbb093">ED3354</A>.
+</P>
+
+<TABLE BORDER="1" CELLPADDING="4">
+<TR>
+<TH>Day</TH>
+<TH>Time</TH>
+<TH>Supervisors</TH>
+</TR>
+<TR>
+<TD>Tue</TD>
+<TD>15:15-17:00</TD>
+<TD>AL DS</TD>
+</TR>
+<TR>
+<TD>Thu</TD>
+<TD>15:15-17:00</TD>
+<TD>FR DS</TD>
+</TR>
+<TR>
+<TD>Fri</TD>
+<TD>13:15-15:00</TD>
+<TD>FR AL</TD>
+</TR>
+</TABLE>
+
+<P>
+The lab rooms and supervision
+are available from Tue 31 October till Fri 15 December 2017.
+</P>
+<P>
+<B>Attendance in these classes is optional</B>.
+Normally, each student should attend <B>at most one</B> supervised laboration time each week.
+Since attendance is not compulsory, there may be room for more
+times. But, if there is lack of room, those who attend their first
+supervision of the week have priority to get a place and supervisor help.
+</P>
+
+<H1>Laborations</H1>
+
+<P>
+There will be four laborations, written individually or in
+pairs.
+You have to pass the labs to pass the course.
+However, the course grade is determined solely by the exam.
+</P>
+
+<UL>
+<LI><A HREF="laborations/lab1/lab1.html">Lab 1 - parser</A> (deadline 13/11)
+<LI><A HREF="laborations/lab2/lab2.html">Lab 2 - type checker and interpreter</A> (deadline 27/11)
+<LI><A HREF="laborations/lab3/lab3.html">Lab 3 - code generator</A> (deadline 11/12)
+<LI><A HREF="laborations/lab4/lab4.html">Lab 4 - functional language interpreter</A> (deadline 05/01 2018)
+</UL>
+
+<P>
+The labs are quite substantial, so please set aside at least 30 full working hours before the deadline.
+</P>
+<P>
+Reporting is done via <A HREF="https://plt-lp2-17.frs.cse.chalmers.se/">Fire</A>.
+Before reporting, you must run your program through a test suite.
+</P>
+<P>
+We guarantee two gradings per lab: one for the version submitted before the
+ordinary deadline for that lab, the other for a resubmission before
+the final deadline. If your first submission is after the lab
+deadline, only one grading is guaranteed.
+</P>
+<P>
+If you did not pass the labs by the end of the course you will have another opportunity in connection with the re-exam in April.
+The deadline will be Thursday, 22 March 2018.
+If you intend to re-submit labs then, please contact the course responsible via email on 15 March at the latest.
+If you need help you should also contact the course responsible, not the teaching assistants.
+Note however that you can only expect limited support.
+If you need a substantial amount of help, it is probably better to wait until next time the course is given.
+</P>
+
+<H1>Literature</H1>
+
+<P>
+The main book will be one that developed from earlier editions of this course:
+</P>
+
+<DL>
+<DT>Aarne Ranta</DT><DD>
+  <I>Implementing Programming Languages. An Introduction to Compilers and Interpreters</I>,
+  College Publications,
+  London,
+  2012.
+  <A HREF="ipl-book/">Web page (with extra material and links to selling sites)</A>
+<P></P>
+  <A HREF="https://github.com/andreasabel/plt-errata/">Errata</A>
+</DL>
+
+<P>
+If you are really interested in the topic, for instance, if you want
+to continue with the <A HREF="http://www.cse.chalmers.se/edu/course/TDA282/">Compiler Construction</A>
+course, you should also consider <I>the Dragon book</I>,
+</P>
+
+<DL>
+<DT>Aho, Lam, Sethi &amp; Ullman</DT><DD>
+  <I>Compilers Principles, Techniques &amp; Tools</I>
+  <B>Second edition</B>,
+  Pearson/Addison Wesley
+  2007.
+</DL>
+
+<P>
+Both books are available at web bookshops.
+The main book will also be sold at Cremona.
+</P>
+
+<H1>Exam</H1>
+
+<P>
+Written exam, usual grading scales.
+</P>
+<P>
+Exam dates:
+ 08 Jan 2018 fm J,
+ 05 Apr 2018 fm J,
+ 30 Aug 2018 em J.
+</P>
+<P>
+The exam has the same structure as these <A HREF="exams/">old exams</A>
+(download as <A HREF="exams.tgz">archive</A>).
+</P>
+<P>
+Further, here are some
+<A HREF="ipl-book/course-exercises/exx.html">exercises</A>
+and <A HREF="ipl-book/course-exercises/sol.html">solutions</A>
+to prepare for the exam.
+</P>
+
+<H1>Software</H1>
+
+<P>
+BNF Converter 2.8.1, <A HREF="http://bnfc.digitalgrammars.com/">http://bnfc.digitalgrammars.com/</A> |
+<A HREF="https://hackage.haskell.org/package/BNFC">Hackage</A> |
+<A HREF="https://github.com/BNFC/bnfc">github</A>
+</P>
+<P>
+If using the Java backend, you will need the <B>Cup</B> and <B>JLex</B> libraries.
+You can download pre-compiled versions <A HREF="doc/javatools.tgz">here</A>.
+Make sure they are placed in your classpath, for example by extracting to <CODE>~/javatools/</CODE> adding the following to <CODE>.bashrc</CODE>:
+</P>
+
+<PRE>
+    export CLASSPATH=.:~/javatools/:~/javatools/Cup/:${CLASSPATH}
+</PRE>
+
+<P>
+On Debian-style Linux (like Ubuntu), the following now also works to install these libaries:
+</P>
+
+<PRE>
+    sudo apt install jlex cup
+</PRE>
+
+<P>
+Then the class path needs to be set as follows (bash):
+</P>
+
+<PRE>
+    export CLASSPATH=.:/usr/share/java/JLex.jar:/usr/share/java/cup.jar
+  
+</PRE>
+
+<H1>Student representatives</H1>
+
+<P>
+Student representatives for DAT151 Programming language technology.
+</P>
+
+<TABLE BORDER="1" CELLPADDING="4">
+<TR>
+<TH>Program</TH>
+<TH>@student.chalmers.se</TH>
+<TH COLSPAN="2">Name</TH>
+</TR>
+<TR>
+<TD>MPALG</TD>
+<TD>rahela</TD>
+<TD>Rahel Ahmed</TD>
+</TR>
+<TR>
+<TD>MPALG</TD>
+<TD>rezaal</TD>
+<TD>Reza Alikhani Najafabadi</TD>
+</TR>
+<TR>
+<TD>MPALG</TD>
+<TD>shruthi</TD>
+<TD>Shruthi Dinakaran</TD>
+</TR>
+<TR>
+<TD>MPALG</TD>
+<TD>laro</TD>
+<TD>Lars Olsson</TD>
+</TR>
+<TR>
+<TD>MPCSN</TD>
+<TD>subasha</TD>
+<TD>Akilandeshwari Subash</TD>
+</TR>
+</TABLE>
+
+<!-- html code generated by txt2tags 2.6 (http://txt2tags.org) -->
+<!-- cmdline: txt2tags -\-style=style.css -t html index.txt -->
+</BODY></HTML>
