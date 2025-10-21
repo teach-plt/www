@@ -16,6 +16,7 @@
 *.prof
 *~
 \#*\#
+.DS_Store
 .HTF/
 .cabal-sandbox/
 .ghc.environment.*
@@ -112,3 +113,4 @@ CVS/
 /labs/lab4/testsuite/progs-test-lab4
 /labs/lab4/testsuite/plt-test-lab4
 /labs/lab4/testsuite/good/*.golden
+
