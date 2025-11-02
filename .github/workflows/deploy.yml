@@ -14,15 +14,15 @@ jobs:
     runs-on: ubuntu-22.04
       # Need python-2, so cannot use 24.04
     env:
-      BNFC: 2.9.5
-      PANDOC: 3.5
+      BNFC: 2.9.6.1
+      PANDOC: 3.8.2.1
 
     steps:
 
     - name: Install pandoc
       run: |
-        wget https://github.com/jgm/pandoc/releases/download/${PANDOC}/pandoc-${PANDOC}-1-amd64.deb
-        sudo dpkg -i pandoc-${PANDOC}-1-amd64.deb
+        wget "https://github.com/jgm/pandoc/releases/download/${PANDOC}/pandoc-${PANDOC}-1-amd64.deb"
+        sudo dpkg -i "pandoc-${PANDOC}-1-amd64.deb"
     # The ubuntu-shipped pandoc is too old to support e.g. 'title: ...' in md->html
     #   run: |
     #     sudo apt install pandoc
@@ -99,7 +99,7 @@ jobs:
 
     #     # plain
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
 
     - name: Build pages
       run: |
@@ -109,7 +109,7 @@ jobs:
     #   uses: actions/configure-pages@v3
     #   # Needed? https://github.com/actions/starter-workflows/issues/1996
 
-    - uses: actions/upload-pages-artifact@v3
+    - uses: actions/upload-pages-artifact@v4
       with:
         path: .
 
