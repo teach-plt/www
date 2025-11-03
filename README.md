@@ -29,29 +29,28 @@ and in
 
 Material: plt = course book, dragon = Dragon book. Slides follow closely the plt book.
 
-| Date | Time | Title | Lecture material | Reading material |
-|------|------|-------|------------------|------------------|
-| Tue 04/11 | 13-15 | PL Design, Compilation Phases |  | [slides](plt-book/ipl-book/slides/1-slides-ipl-book.pdf), plt 1, dragon 1, [git](notes/git-primer.md) |
-| Thu 06/11 | 13-15 | Grammars / BNFC / Hands-on with Lab 1 | live coding [start](live/2025/live-1-Calc-bnfc-start.zip), [result](live/2025/live-1-Calc-bnfc.zip) | [slides](plt-book/ipl-book/slides/2-slides-ipl-book.pdf), plt 2, dragon 2.8.2,4.1-4.3 |
-| Tue 11/11 | 13-15 | Formal languages and parsing | [shift-reduce parsing](notes/sr-states.md), [LR-table](notes/LR-table.html), [lr-demo](https://github.com/teach-plt/lr-demo) | [slides](plt-book/ipl-book/slides/3-slides-ipl-book.pdf), plt 3, dragon 3,4 |
-| Tue 11/11 | 13-15 | Theory of lexing |  | [slides](plt-book/ipl-book/slides/3-slides-ipl-book.pdf), plt 3, dragon 3,4 |
-| Thu 13/11 | 13-15 | Type checking | [script](notes/type-checking.html), [prime.c](notes/prime.c), [prime-stms.c](notes/prime-stms.c), [division.c](notes/division.c), [division-annotated.c](notes/division-annotated.c) | [slides](plt-book/ipl-book/slides/4-slides-ipl-book.pdf), plt 4, dragon 5,6 |
-| *Mon 18/11* | *23* | *Lab 1 deadline* |  |  |
-| Tue 18/11 | 10-17 | [DatE-IT](https://date-it.se/), no lecture, no labs |  |
-| Thu 20/11 | 13-15 | Interpreting | [script](notes/interpreter.html) | [slides](plt-book/ipl-book/slides/5-slides-ipl-book.pdf), plt 5 |
-| Tue 25/11 | 13-14 | Hands-on with Lab 2 (Haskell) | [live code](live/2025/lab2-live-haskell.zip) | [script: monadic interpreter](notes/monads.html) |
-| Tue 25/11 | 14-15 | Hands-on with Lab 2 (Java)    | [script](notes/java.html), [Annotated.java](notes/Annotated.java) |  |
-| Thu 27/11 | 13-15 | Code generation | [script](notes/compilation.html), [prime.c](notes/prime.c), [prime.j](notes/prime.j) | [slides](plt-book/ipl-book/slides/6-slides-ipl-book.pdf), plt 6, dragon 6,7 |
-| Tue 02/12 | 13-14 | Hands-on with Lab 3 (Haskell) | [live code snippet](live/2025/lab3-live-haskell.hs) |  |
-| Tue 02/12 | 14-15 | Hands-on with Lab 3 (Java)    | [live code snippet](live/2025/lab3-live-java.java) |  |
-| *Wed 04/12* | *23* | *Lab 2 deadline* |  |
-| Thu 04/12 | 13-15 | Functional programming languages | [script](notes/cbn-cbv.html) | [slides](plt-book/ipl-book/slides/7-slides-ipl-book.pdf), plt 7, dragon 6.5,7.3 |
-| Tue 09/12 | 13-15 | Type inference and polymorphism | [script](notes/typing.html), [visualization tool](https://github.com/teach-plt/visualize-type-inference) | plt 7.7-9 |
-| Thu 11/12 | 13-14 | Hands-on with Lab 4 (Haskell) | [live code](live/2025/lab4/Interpreter.hs) |  |
-| Thu 11/12 | 14-15 | Hands-on with Lab 4 (Java)    | [live code](live/2025/lab4/Interpreter.java) |  |
-| Tue 16/12 | 13-15 | Dependent types (Agda) | live coding [start](live/2025/agda/JVM-start.agda), [result](live/2025/agda/JVM.agda) |  |
-| *Wed 17/12* | *23* | *Lab 3 deadline* |  |  |
-| Thu 18/12 | 13-15 | Preparing for the exam | last year's [exam](exams/exam-plt-2025-1.pdf), live [solution](live/2025/exam.md) |  |
+| Date | Time | Title | Who | Lecture material | Reading material |
+|------|------|-------|-----|------------------|------------------|
+| Tue 04/11 | 13-15 | [AA] | PL Design, Compilation Phases |  | [slides](plt-book/ipl-book/slides/1-slides-ipl-book.pdf), plt 1, dragon 1, [git](notes/git-primer.md) |
+| Thu 06/11 | 13-15 | [AA] | Grammars / BNFC / Hands-on with Lab 1 | live coding [start](live/2025/live-1-Calc-bnfc-start.zip), [result](live/2025/live-1-Calc-bnfc.zip) | [slides](plt-book/ipl-book/slides/2-slides-ipl-book.pdf), plt 2, dragon 2.8.2,4.1-4.3 |
+| Tue 11/11 | 13-15 | [AA] | Formal languages, lexing, and parsing | [shift-reduce parsing](notes/sr-states.md), [LR-table](notes/LR-table.html), [lr-demo](https://github.com/teach-plt/lr-demo) | [slides](plt-book/ipl-book/slides/3-slides-ipl-book.pdf), plt 3, dragon 3,4 |
+| Thu 13/11 | 13-15 | [MM] | Type checking | [script](notes/type-checking.html), [prime.c](notes/prime.c), [prime-stms.c](notes/prime-stms.c), [division.c](notes/division.c), [division-annotated.c](notes/division-annotated.c) | [slides](plt-book/ipl-book/slides/4-slides-ipl-book.pdf), plt 4, dragon 5,6 |
+| *Mon 17/11* | *23* |     | *Lab 1 deadline* |  |  |
+| Tue 18/11 | 10-17 |      | [DatE-IT](https://date-it.se/), no lecture, no labs |  |
+| Thu 20/11 | 13-15 | [MM] | Interpreting | [script](notes/interpreter.html) | [slides](plt-book/ipl-book/slides/5-slides-ipl-book.pdf), plt 5 |
+| Tue 25/11 | 13-14 | [MM] | Hands-on with Lab 2 (Haskell) | [live code](live/2025/lab2-live-haskell.zip) | [script: monadic interpreter](notes/monads.html) |
+| Tue 25/11 | 14-15 | [MM] | Hands-on with Lab 2 (Java) | [script](notes/java.html), [Annotated.java](notes/Annotated.java) |  |
+| Thu 27/11 | 13-15 | [MM] | Code generation | [script](notes/compilation.html), [prime.c](notes/prime.c), [prime.j](notes/prime.j) | [slides](plt-book/ipl-book/slides/6-slides-ipl-book.pdf), plt 6, dragon 6,7 |
+| Tue 02/12 | 13-14 | [MM] | Hands-on with Lab 3 (Haskell) | [live code snippet](live/2025/lab3-live-haskell.hs) |  |
+| Tue 02/12 | 14-15 | [MM] | Hands-on with Lab 3 (Java)   | [live code snippet](live/2025/lab3-live-java.java) |  |
+| *Wed 03/12* | *23* |     | *Lab 2 deadline* |  |
+| Thu 04/12 | 13-15 | [AA] | Functional programming languages | [script](notes/cbn-cbv.html) | [slides](plt-book/ipl-book/slides/7-slides-ipl-book.pdf), plt 7, dragon 6.5,7.3 |
+| Tue 09/12 | 13-15 | [AA] | Type inference and polymorphism | [script](notes/typing.html), [visualization tool](https://github.com/teach-plt/visualize-type-inference) | plt 7.7-9 |
+| Thu 11/12 | 13-14 | [AA] | Hands-on with Lab 4 (Haskell) | [live code](live/2025/lab4/Interpreter.hs) |  |
+| Thu 11/12 | 14-15 | [AA] | Hands-on with Lab 4 (Java)    | [live code](live/2025/lab4/Interpreter.java) |  |
+| Tue 16/12 | 13-15 | [AA] | Dependent types (Agda) | live coding [start](live/2025/agda/JVM-start.agda), [result](live/2025/agda/JVM.agda) |  |
+| *Wed 17/12* | *23* |     | *Lab 3 deadline* |  |  |
+| Thu 18/12 | 13-15 | [AA] | Preparing for the exam | last year's [exam](exams/exam-plt-2025-1.pdf), live [solution](live/2025/exam.md) |  |
 
 |    2026     |               |                      |                   |
 |:-----------:|---------------|----------------------|-------------------|
@@ -100,8 +99,11 @@ Those who have passed the course should be able to
 
 # Teachers
 
-- [Andreas Abel](https://www.chalmers.se/en/persons/abela/) ([homepage](https://www.cse.chalmers.se/~abela/)), responsible course teacher and examiner.
-- [Magnus Myréen](https://www.chalmers.se/en/persons/myreen/) ([homepage](https://www.cse.chalmers.se/~myreen/)), course teacher.
+- [Andreas Abel][AA] ([homepage](https://www.cse.chalmers.se/~abela/)), responsible course teacher and examiner.
+- [Magnus Myréen][MM] ([homepage](https://www.cse.chalmers.se/~myreen/)), course teacher.
+
+[AA]: https://www.chalmers.se/en/persons/abela/
+[MM]: https://www.chalmers.se/en/persons/myreen/
 
 Assistants:
 
@@ -125,16 +127,14 @@ Attendance is voluntary.
 
 | Day |    Time     | Location     | Supervisors            |
 |:---:|:-----------:|--------------|------------------------|
-| Tue | 15:15-17:00 | Zoom, ED3354 | TBD Andreas, David, Jonas  |
-| Wed | 15:15-17:00 | Zoom         | TBD                        |
-| Thu | 15:15-17:00 | Zoom, ED3354 | TBD Andras, Jonas, Jeremy  |
-| Fri | 13:15-15:00 | Zoom, ED3354 | TBD Andras, Jeremy, David  |
+| Tue | 15:15-17:00 | Zoom, ED3354 | Andreas, David, Jonas  |
+| Wed | 15:15-17:00 | Zoom         | Jeremy, Jonas          |
+| Thu | 15:15-17:00 | Zoom, ED3354 | Magnus, Andras         |
+| Fri | 13:15-15:00 | Zoom, ED3354 | Andras, Jeremy, David  |
 
-<!--
 Extra Zoom-only supervision session will be provided:
-- Wed 7 Jan 2026 15:15-17:00 (Jonas, David)
-- Thu 8 Jan 2026 15:15-17:00 (Jonas, David, Ruohan)
--->
+- Wed 7 Jan 2026 15:15-17:00 (Jeremy, Jonas)
+- Thu 8 Jan 2026 15:15-17:00 (Andras, David)
 
 We use [Slack](https://plt2025.slack.com/) to organize the lab supervision. [Please join](https://join.slack.com/t/plt2025/shared_invite/zt-3hapcdtfn-fToy857Q_ELojF7F3Q5WEQ) our Slack workspace and the channel `#queue`.
 
@@ -176,8 +176,17 @@ Submission of your solution is by creating a `submission` tag in the repository.
 Please read the detailed **lab instructions** at:
 <https://chalmers.instructure.com/courses/36705/pages/lab-infrastructure-on-chalmers-gitlab>
 
-Keep your lab solutions confidential!
-If you post problems and discussions around the labs on Canvas etc., make sure you do not give away the solution.
+## AI policy
+
+The use of AI helpers such as CoPilot is permitted when solving the labs.
+However, you need to disclose AI use in your submission.
+If you used AI, write a comment explaining the extent of its use:
+
+- What tools did you use?  (E.g. GitHub Copilot for completion, Copilot chat, AI chat XYZ (name the model!))
+- What were they used for?  (E.g. advice on libraries, advice on the solution, refactoring, writing entire definitions...)
+- Any definitions written by AI should be labeled as such in a comment.
+
+## Lab grading
 
 We guarantee two gradings per lab: one for the version submitted before
 the ordinary deadline for that lab, the other for a resubmission before
@@ -187,6 +196,15 @@ If your first submission does not build or does not pass the testsuite, you will
 As part of the grading, you may be asked to explain your solution in person to a course teacher.
 Be prepared to get a call for such an explanation meeting.
 In particular, make sure you understand all parts of the solution (good documentation helps!).
+
+## Lab confidentiality
+
+Keep your lab solutions confidential!
+
+- If you post problems and discussions around the labs on Canvas etc., make sure you do not give away the solution.
+- Publishing the solution on the internet (e.g. in a GitHub repo) is **forbidden**.
+- *Even after the course is completed*, publishing remains forbidden, because labs are reused every year.
+
 
 # Exam
 
