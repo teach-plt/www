@@ -29,10 +29,10 @@ and in
 
 Material: plt = course book, dragon = Dragon book. Slides follow closely the plt book.
 
-| Date | Time | Who   | Title | Lecture material | Reading material |
-|------|------|-------|-------|------------------|------------------|
-| Tue 04/11 | 13-15 | [AA] | PL Design, Compilation Phases |  | [slides](plt-book/ipl-book/slides/1-slides-ipl-book.pdf), plt 1, dragon 1, [git](notes/git-primer.html) |
-| Thu 06/11 | 13-15 | [AA] | Grammars / BNFC / Hands-on with Lab 1 | live coding [start](live/2025/live-1-Calc-bnfc-start.zip), [result](live/2025/live-1-Calc-bnfc.zip) | [slides](plt-book/ipl-book/slides/2-slides-ipl-book.pdf), plt 2, dragon 2.8.2,4.1-4.3 |
+| Date | Time | Who | Title | Lecture material | Reading material |
+|------|------|-----|-------|------------------|------------------|
+| Tue 04/11 | 13-15 | [AA] | PL Design, Compilation Phases | [live coding](live/2025/live-1-Calc-bnfc.zip) | [slides](plt-book/ipl-book/slides/1-slides-ipl-book.pdf), plt 1, dragon 1, [git](notes/git-primer.html) |
+| Thu 06/11 | 13-15 | [AA] | Grammars / BNFC / Hands-on with Lab 1 |  | [slides](plt-book/ipl-book/slides/2-slides-ipl-book.pdf), plt 2, dragon 2.8.2,4.1-4.3 |
 | Tue 11/11 | 13-15 | [AA] | Formal languages, lexing, and parsing | [shift-reduce parsing](notes/sr-states.md), [LR-table](notes/LR-table.html), [lr-demo](https://github.com/teach-plt/lr-demo) | [slides](plt-book/ipl-book/slides/3-slides-ipl-book.pdf), plt 3, dragon 3,4 |
 | Thu 13/11 | 13-15 | [MM] | Type checking | [script](notes/type-checking.html), [prime.c](notes/prime.c), [prime-stms.c](notes/prime-stms.c), [division.c](notes/division.c), [division-annotated.c](notes/division-annotated.c) | [slides](plt-book/ipl-book/slides/4-slides-ipl-book.pdf), plt 4, dragon 5,6 |
 | *Mon 17/11* | *23* |     | *Lab 1 deadline* |  |  |
@@ -355,8 +355,7 @@ for DAT151 Programming language technology.
 | MPALG  | ali0408mousa@gmail.com   | Ali Mousa Baqer Al-Muslim |
 | MPSOF  | aoxinyan@gmail.com       | Xinyan Ao                 |
 | MPALG  | matistjati@outlook.com   | Joshua Bergman Andersson  |
-| MPCSN  | albin.hallin1@gmail.com  | Albin Hallin              |
-| UTBYTE | ajyarmus@uwaterloo.ca    | Aubrey Yarmus             |
+| MPCSN  | hallinal                 | Albin Hallin              |
 
 <hr>
 <p>
