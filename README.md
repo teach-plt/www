@@ -29,8 +29,8 @@ and in
 
 Material: plt = course book, dragon = Dragon book. Slides follow closely the plt book.
 
-| Date | Time | Title | Who | Lecture material | Reading material |
-|------|------|-------|-----|------------------|------------------|
+| Date | Time | Who   | Title | Lecture material | Reading material |
+|------|------|-------|-------|------------------|------------------|
 | Tue 04/11 | 13-15 | [AA] | PL Design, Compilation Phases |  | [slides](plt-book/ipl-book/slides/1-slides-ipl-book.pdf), plt 1, dragon 1, [git](notes/git-primer.html) |
 | Thu 06/11 | 13-15 | [AA] | Grammars / BNFC / Hands-on with Lab 1 | live coding [start](live/2025/live-1-Calc-bnfc-start.zip), [result](live/2025/live-1-Calc-bnfc.zip) | [slides](plt-book/ipl-book/slides/2-slides-ipl-book.pdf), plt 2, dragon 2.8.2,4.1-4.3 |
 | Tue 11/11 | 13-15 | [AA] | Formal languages, lexing, and parsing | [shift-reduce parsing](notes/sr-states.md), [LR-table](notes/LR-table.html), [lr-demo](https://github.com/teach-plt/lr-demo) | [slides](plt-book/ipl-book/slides/3-slides-ipl-book.pdf), plt 3, dragon 3,4 |
