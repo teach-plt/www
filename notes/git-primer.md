@@ -11,15 +11,18 @@ Basics
 
 Picture 1:
 
-    Working dir - Git database - Remotes
-    project/      project/.git   git@git.chalmers.se:user/project
-    - README                     https://github.com/joe/project
+    Working dir    Git database   Remotes
+    -----------    ------------   -------
+    project/       project/.git   git@git.chalmers.se:user/project
+    - README                      https://github.com/joe/project
     - File1
     - Dir1/File2
 
 Picture 2: a version tree
 
-    ...
+    * - * - * - * - * main
+        |           \ * - * - * develop
+        * - * - * experiment
 
 Commit identifiers: `<commit>`
 - hash (absolute)   `4fab561`
@@ -55,8 +58,8 @@ and then bundled into a commit.  Usally, this is done with GUI support.
 - `git commit -m <msg>` : create a new commit from the staged changes
 - `git commit --amend`  : add staged changes to the last commit
 
-- `git push`                      : push current branch to its remote (default `origin`)
-- `git pull`                      : pull current branch from its remote
+- `git push`            : push current branch to its remote (default `origin`)
+- `git pull`            : pull current branch from its remote
 
 
 ## Tags
@@ -75,10 +78,10 @@ Default branch is often named `master` or `main`.
 - `git branch -v`             : list branches
 - `git branch <branch>`       : fork of new branch, but stay on current branch
 - `git checkout <branch>`     : switch to existing branch
-- `git checkout -b <branch>`  : create new branch and switch to it
 
 - `git checkout <commit>`     : switch to an arbitray commit in the commit tree
-- `git switch -c <branch>`    : create a new branch at the current commit
+- `git switch -c <branch>`    : create a new branch at the current commit and switch to it
+- `git checkout -b <branch>`  : same
 
 - `git push <remote> <branch>`    : push branch to remote
 - `git push -u <remote> <branch>` : push branch to remote which is set as default remote
