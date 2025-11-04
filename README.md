@@ -176,16 +176,6 @@ Submission of your solution is by creating a `submission` tag in the repository.
 Please read the detailed **lab instructions** at:
 <https://chalmers.instructure.com/courses/36705/pages/lab-infrastructure-on-chalmers-gitlab>
 
-## AI policy
-
-The use of AI helpers such as CoPilot is permitted when solving the labs.
-However, you need to disclose AI use in your submission.
-If you used AI, write a comment explaining the extent of its use:
-
-- What tools did you use?  (E.g. GitHub Copilot for completion, Copilot chat, AI chat XYZ (name the model!))
-- What were they used for?  (E.g. advice on libraries, advice on the solution, refactoring, writing entire definitions...)
-- Any definitions written by AI should be labeled as such in a comment.
-
 ## Lab grading
 
 We guarantee two gradings per lab: one for the version submitted before
@@ -204,6 +194,30 @@ Keep your lab solutions confidential!
 - If you post problems and discussions around the labs on Canvas etc., make sure you do not give away the solution.
 - Publishing the solution on the internet (e.g. in a GitHub repo) is **forbidden**.
 - *Even after the course is completed*, publishing remains forbidden, because labs are reused every year.
+
+## AI policy
+
+**Mild use of AI** is permitted when solving the labs.
+For example:
+
+- You may ask a chatbot to explain some concept or library functions to you.
+- You may use CoPilot (or similar) for code completion in a modest way.
+- You may ask CoPilot (or simliar) to refactor your code.
+
+**Heavy use of AI** (such as _vibe coding_) is not permitted.
+Heavy use of AI jeopardizes your learning experience.
+It can be regarded as implicit plagiarism from the authors of the code the AI was trained on.
+Some examples of heavy AI use:
+
+- Feeding the lab description into an AI chat (e.g. ChatGPT) and using the produced code.
+- Writing a comment and let AI implement the method/function.
+
+In any case, you need to disclose AI use in your submission.
+If you used AI, write a comment explaining the extent of its use:
+
+- What tools did you use?  (E.g. GitHub Copilot for completion, Copilot chat, AI chat XYZ (name the model!))
+- What were they used for?  (E.g. advice on libraries, advice on the problem, refactoring, completing definitions...)
+- Any definitions written with AI help should be labeled as such in a comment.
 
 
 # Exam
