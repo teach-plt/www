@@ -123,13 +123,13 @@ See:
 - https://bnfc.readthedocs.io/en/latest/lbnf.html#the-token-rule
 - https://bnfc.readthedocs.io/en/latest/lbnf.html#the-lexical-structure-of-bnf
 
-The documentation sweeps under the carpet that _difference_ `r₁ - r₂`
+The documentation sweeps under the carpet that _difference_ _r₁_ `-` _r₂_
 is only implemented for character classes, so here is a more precise grammar
 of regular expressions to be used in `token` pragmas:
 
-- Character classes `c` denote sets of characters.
+- Character classes _c_ denote sets of characters.
 
-  | character class `c` | meaning                         |
+  | character class _c_ | meaning                         |
   |---------------------|---------------------------------|
   | `'a'`               | exactly character `'a'`         |
   | `digit`             | `'0' \| ... \| '9'`             |
@@ -137,19 +137,19 @@ of regular expressions to be used in `token` pragmas:
   | `lower`             | lower case latin letter         |
   | `upper`             | upper case latin letter         |
   | `char`              | any character                   |
-  | `c₁ - c₂`           | exclusion: `c₁` but not `c₂`    |
-  | `c₁ \| c₂`          | alternative: in `c₁` or `c₂`    |
+  | _c₁_ `-` _c₂_       | exclusion: _c₁_ but not _c₂_    |
+  | _c₁_ `\|` _c₂_      | alternative: in _c₁_ or _c₂_    |
   | `["ABC"]`           | alternative `'A' \| 'B' \| 'C'` |
 
-- Regular expressions `r` denote sets of words (character sequences).
+- Regular expressions _r_ denote sets of words (character sequences).
 
-  | regex      | meaning                                             |
-  |------------|-----------------------------------------------------|
-  | `c`        | single character from class `c`                     |
-  | `r₁ \| r₂` | alternative: `r₁` or `r₂`                           |
-  | `r₁ r₂`    | sequence: `r₁` followed by `r₂`                     |
-  | `eps`      | empty sequence                                      |
-  | `{"abc"}`  | sequence `'a' 'b' 'c'`                              |
-  | `r ?`      | maybe: zero or one repetitions of `r`               |
-  | `r *`      | iteration: zero or more repetitions of `r`          |
-  | `r +`      | non-empty iteration: one or more repetitions of `r` |
+  | regex          | meaning                                             |
+  |----------------|-----------------------------------------------------|
+  | _c_            | single character from class _c_                     |
+  | _r₁_ `\|` _r₂_ | alternative: _r₁_ or _r₂_                           |
+  | _r₁ r₂_        | sequence: _r₁_ followed by _r₂_                     |
+  | `eps`          | empty sequence                                      |
+  | `{"abc"}`      | sequence `'a' 'b' 'c'`                              |
+  | _r_ `?`        | optional: zero or one repetitions of _r_            |
+  | _r_ `*`        | iteration: zero or more repetitions of _r_          |
+  | _r_ `+`        | non-empty iteration: one or more repetitions of _r_ |
