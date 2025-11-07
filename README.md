@@ -281,10 +281,10 @@ To solve the labs, you need a developer environment with the following tools.
 You need to invoke tools from a [command shell](https://en.wikipedia.org/wiki/Shell_(computing)).
 For one, the  [make](https://en.wikipedia.org/wiki/Make_(software)) build tool
 and the [git](https://git-scm.com/) version control tool are required.
-
 - On **Linux**, these are available by default.
 - On **macOS**, you can install them from Xcode (`xcode-select –-install`).
-- On **Windows**, you should install [Git for Windows](https://git-scm.com/downloads/win). This installs Git Bash, a command line shell that mimics Linux and has `make` and `git`. You should generally just work from inside Git Bash in the rest of the course.
+- On **Windows**, you should install [Git for Windows](https://git-scm.com/downloads/win). This installs Git Bash, a command line shell that mimics Linux and has `git`. It doesn't have `make` by default, so install it as follows:
+  extract [this archive](https://sourceforge.net/projects/ezwinports/files/make-4.4.1-without-guile-w32-bin.zip/download) and copy its contents into `Git\mingw64\` in your Git installation location (which is probably in `Program Files`). In the rest of the course, you should generally work in Git Bash.
 
 ### Setting `PATH` and other environment variables
 
