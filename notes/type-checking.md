@@ -79,7 +79,7 @@ Judgements and rules
 Rule format:
 
     J₁ ... Jₙ
-    --------- C
+    ––––––––– C
         J
 
 - J : conclusion
