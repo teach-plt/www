@@ -105,17 +105,17 @@ Judgement version 1: "expression `e` has type `t`"
 Rules may be written using concrete syntax:
 
     e₁ : int    e₂ : int
-    --------------------
+    ––––––––––––––––––––
     e₁ / e₂ : int
 
     e₁ : double    e₂ : double
-    --------------------------
+    ––––––––––––––––––––––––––
     e₁ / e₂ : double
 
 Generic version, using side condition:
 
     e₁ : t    e₂ : t
-    ---------------- t ∈ {int, double}
+    –––––––––––––––– t ∈ {int, double}
     e₁ / e₂ : t
 
 Using abstract syntax:
@@ -128,11 +128,11 @@ EDouble.  Exp6 ::= Double;
 EDiv.     Exp5 ::= Exp5 "/" Exp6;
 ```
 
-    -------------        -------------------
+    –––––––––––––        –––––––––––––––––––
     EInt i : TInt        EDouble d : TDouble
 
     e₁ : t    e₂ : t
-    ---------------- t ∈ {TInt, TDouble}
+    –––––––––––––––– t ∈ {TInt, TDouble}
     EDiv e₁ e₂ : t
 
 ### Type checking and type inference
@@ -221,7 +221,7 @@ In our case: _elaborate, don't check_.
 Subtyping `t₁ ≤ t₂` is a preorder, i.e., a reflexive-transitive relation.
 
     e : t₁
-    ------ t₁ ≤ t₂
+    –––––– t₁ ≤ t₂
     e : t₂
 
 Subtyping should be coherent, up-casting via an intermediate type
@@ -282,11 +282,11 @@ Boolean expressions
 Comparison operators return a boolean:
 
     e₁ : t    e₂ : t
-    ---------------- t ∈ {int, double}
+    –––––––––––––––– t ∈ {int, double}
     e₁ < e₂ : bool
 
     e₁ : t    e₂ : t
-    ---------------- t ∈ {bool, int, double}
+    –––––––––––––––– t ∈ {bool, int, double}
     e₁ == e₂ : bool
 
 Extend typed syntax.
@@ -330,23 +330,23 @@ NB: ⊢ = "turnstile" (With TeX input mode: \vdash)
 Rules for conditional statements:
 
     e : bool    ⊢ s
-    ---------------
+    –––––––––––––––
     ⊢ while (e) s
 
     e : bool    ⊢ s₁    ⊢ s₂
-    ------------------------
+    ––––––––––––––––––––––––
     ⊢ if (e) s₁ else s₂
 
 Statement sequences:
 
            ⊢ s₀    ⊢ s₁...sₙ
-    ---    -----------------
+    –––    ––––––––––––––––
     ⊢ ε    ⊢ s₀ s₁...sₙ
 
 Expressions as statements:
 
     e : t
-    -----
+    –––––
     ⊢ e;
 
 Typed statements:
@@ -388,7 +388,7 @@ Judgements version 1.5:
 Rule:
 
     e : t
-    -----------
+    –––––––––––
     ⊢ᵗ return e;
 
 
@@ -466,15 +466,15 @@ Judgements version 2:
 
 Rules for declarations and blocks.
 
-    ---------------------------------------- no xᵢ ∈ Δ, and xᵢ ≠ xⱼ when i ≠ j
+    –––––––––––––––––––––––––––––––––––––––––– no xᵢ ∈ Δ, and xᵢ ≠ xⱼ when i ≠ j
     Γ.Δ ⊢ᵗ⁰ t x₁,...,xₙ; ⇒ Γ.(Δ,x₁:t,...xₙ:t)
 
     Γ.(Δ,x:t) ⊢ e : t
-    ---------------------------- x ∉ Δ
+    –––––––––––––––––––––––––––– x ∉ Δ
     Γ.Δ ⊢ᵗ⁰ t x = e; ⇒ Γ.(Δ,x:t)
 
     Γ.() ⊢ᵗ⁰ ss ⇒ Γ'
-    -----------------
+    ––––––––––––––––
     Γ ⊢ᵗ⁰ { ss } ⇒ Γ
 
 Valid but pointless example for initialization statement:
@@ -487,22 +487,22 @@ int main () {
 
 Rules for sequences:
 
-    -----------
+    ––––––––––––
     Γ ⊢ᵗ⁰ ε ⇒ ()
 
     Γ ⊢ᵗ⁰ s ⇒ Γ₁    Γ₁ ⊢ᵗ⁰ ss ⇒ Γ₂
-    --------------------------------
+    ––––––––––––––––––––––––––––––
     Γ ⊢ᵗ⁰ s ss ⇒ Γ₂
 
 Rules for conditional statements:
 Branches need to be in new scope.
 
     Γ ⊢ᵗ⁰ e : bool    Γ. ⊢ᵗ⁰ s₁ ⇒ Γ₁    Γ. ⊢ᵗ⁰ s₂ ⇒ Γ₂
-    -------------------------------------------------
+    –––––––––––––––––––––––––––––––––––––––––––––––––
     Γ ⊢ᵗ⁰ if (e) s₁ else s₂ ⇒ Γ
 
     Γ ⊢ᵗ⁰ e : bool    Γ. ⊢ᵗ⁰ s ⇒ Γ'
-    ------------------------------
+    ––––––––––––––––––––––––––––––
     Γ ⊢ᵗ⁰ while (e) s ⇒ Γ
 
 Example:
@@ -536,13 +536,13 @@ Judgements version 3:
 Rule for function application:
 
     Σ;Γ ⊢ e₁ : t₁ ... Σ;Γ ⊢ eₙ : tₙ
-    ------------------------------- Σ(f) = t(t₁,...,tₙ)
+    ––––––––––––––––––––––––––––––– Σ(f) = t(t₁,...,tₙ)
     Σ;Γ ⊢ f(e₁,...,eₙ) : t
 
 Rule for function definition:
 
     Σ; (x₁:t₁,...,xₙ:tₙ) ⊢ᵗ ss ⇒ Γ'
-    ---------------------------------
+    ––––––––––––––––––––––––––––––––––
     Σ ⊢ t f (t₁ x₁, ... tₙ xₙ) { ss }
 
 The correctness of the signature, `Σ(f) = t(t₁,...,tₙ)`, can be assumed in the last rule.
