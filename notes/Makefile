@@ -1,7 +1,7 @@
 .PHONY: all
 all: index.html
 
-files = type-checking.html interpreter.html monads.html compilation.html cbn-cbv.html typing.html LR-table.html git-primer.html java.html git-primer.html bnfc.html
+files = type-checking.html interpreter.html monads.html compilation.html cbn-cbv.html typing.html LR-table.html git-primer.html java.html git-primer.html bnfc.html 2025/lec4-type-checking.html
 
 index.html : $(files)
 	tree -H '.' -L 2 --noreport --charset utf-8 > $@
