@@ -63,7 +63,7 @@ Code: [divide-untyped.c](divide-untyped.c)
 
 printDouble (divide (5, 3));
 ```
-Quiz: In an untyped language, what is printed? [menti.com code 413881](https://www.menti.com/alw5a4m2kgzb)
+Question: In an untyped language, what is printed?
 
 - 1: 1.0
 - X: 1.6666666666666667
@@ -236,7 +236,7 @@ In practice, it often does.  E.g. with coercions to `string`:
     int ≤ string             1 → "1"
     int ≤ double ≤ string    1 → 1.0 → "1.0"
 
-Quiz: What is the value of this expression?  [menti.com code 413881](https://www.menti.com/alw5a4m2kgzb)
+Question: What is the value of this expression?
 
     1 + 2 + "hello" + 1 + 2
 
