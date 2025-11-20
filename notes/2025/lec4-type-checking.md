@@ -41,18 +41,18 @@ Format:
 ### Example: even numbers
 
                    even n
-        ------     ------------
+        ––––––     ––––––––––––
         even 0     even (n + 2)
 
 Claim: `even 6`.  Has to be proven with the rules.
 
-        ------
+        ––––––
         even 0
-        ------
+        ––––––
         even 2
-        ------
+        ––––––
         even 4
-        ------
+        ––––––
         even 6
 
 More rules, e.g.
