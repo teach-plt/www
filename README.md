@@ -39,11 +39,10 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | *Mon 17/11* | *23* |     | *Lab 1 deadline* |  |  |
 | Tue 18/11 | 10-17 |      | [DatE-IT](https://date-it.se/), no lecture, no labs |  |
 | Thu 20/11 | 13-15 | [MM] | Interpreting | [new slides](https://www.cse.chalmers.se/~myreen/talks/05-interpreter.pdf), [script](notes/interpreter.html) | [old slides](plt-book/ipl-book/slides/5-slides-ipl-book.pdf), plt 5 |
-| Tue 25/11 | 13-14 | [MM] | Hands-on with Lab 2 (Haskell) | [live code](live/2025/lab2-live-haskell.zip) | [script: monadic interpreter](notes/monads.html) |
-| Tue 25/11 | 14-15 | [MM] | Hands-on with Lab 2 (Java) | [script](notes/java.html), [Annotated.java](notes/Annotated.java) |  |
-| Thu 27/11 | 13-15 | [MM] | Code generation | [script](notes/compilation.html), [prime.c](notes/prime.c), [prime.j](notes/prime.j) | [slides](plt-book/ipl-book/slides/6-slides-ipl-book.pdf), plt 6, dragon 6,7 |
-| Tue 02/12 | 13-14 | [MM] | Hands-on with Lab 3 (Haskell) | [live code snippet](live/2025/lab3-live-haskell.hs) |  |
-| Tue 02/12 | 14-15 | [MM] | Hands-on with Lab 3 (Java)   | [live code snippet](live/2025/lab3-live-java.java) |  |
+| Tue 25/11 | 13-15 |      | *lecture postponed due to illness* |  |
+| Thu 27/11 | 13-14 | [MM] | Hands-on with Lab 2 (Haskell) | [live code](live/2025/lab2-live-haskell.zip) | [script: monadic interpreter](notes/monads.html) |
+| Thu 27/11 | 14-15 | [MM] | Hands-on with Lab 2 (Java) | [script](notes/java.html), [Annotated.java](notes/Annotated.java) |  |
+| Tue 02/12 | 13-15 | [MM] | Code generation + live coding | [script](notes/compilation.html), [prime.c](notes/prime.c), [prime.j](notes/prime.j) | [slides](plt-book/ipl-book/slides/6-slides-ipl-book.pdf), plt 6, dragon 6,7 |
 | *Wed 03/12* | *23* |     | *Lab 2 deadline* |  |
 | Thu 04/12 | 13-15 | [AA] | Functional programming languages | [script](notes/cbn-cbv.html) | [slides](plt-book/ipl-book/slides/7-slides-ipl-book.pdf), plt 7, dragon 6.5,7.3 |
 | Tue 09/12 | 13-15 | [AA] | Type inference and polymorphism | [script](notes/typing.html), [visualization tool](https://github.com/teach-plt/visualize-type-inference) | plt 7.7-9 |
