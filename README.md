@@ -42,7 +42,7 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | Tue 25/11 | 13-15 |      | *lecture postponed due to illness* |  |
 | Thu 27/11 | 13-14 | [MM] | Hands-on with Lab 2 (Haskell) | [zip of code](https://www.cse.chalmers.se/~myreen/zips/interpreter-live-code.zip) | [script: monadic interpreter](notes/monads.html) |
 | Thu 27/11 | 14-15 | [MM] | Hands-on with Lab 2 (Java) | [script](notes/java.html), [Annotated.java](notes/Annotated.java) |  |
-| Tue 02/12 | 13-15 | [MM] | Code generation + live coding | [script](notes/compilation.html), [prime.c](notes/prime.c), [prime.j](notes/prime.j) | [slides](plt-book/ipl-book/slides/6-slides-ipl-book.pdf), plt 6, dragon 6,7 |
+| Tue 02/12 | 13-15 | [MM] | Code generation + live coding | [zip of code](https://www.cse.chalmers.se/~myreen/zips/live-coding-codegen.zip) [script](notes/compilation.html), [prime.c](notes/prime.c), [prime.j](notes/prime.j) | [slides](plt-book/ipl-book/slides/6-slides-ipl-book.pdf), plt 6, dragon 6,7 |
 | *Wed 03/12* | *23* |     | *Lab 2 deadline* |  |
 | Thu 04/12 | 13-15 | [AA] | Functional programming languages | [script](notes/cbn-cbv.html) | [slides](plt-book/ipl-book/slides/7-slides-ipl-book.pdf), plt 7, dragon 6.5,7.3 |
 | Tue 09/12 | 13-15 | [AA] | Type inference and polymorphism | [script](notes/typing.html), [visualization tool](https://github.com/teach-plt/visualize-type-inference) | plt 7.7-9 |
