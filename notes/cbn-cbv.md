@@ -170,9 +170,11 @@ Example (fix-point combinator `Y`)
 
 Example (faculty function)
 
-    f n = if n <= 1 then 1 else n * f (n-1)
+    f g n = if n <= 1 then 1 else n * g (n-1)
 
     Y f n = n!
+
+    Y f n = f (Y f) n = if n <= 1 then 1 else n * Y f (n-1)
 
 Russell paradox: read application `x y` as `y ∈ x`.
 Define the Russell set `x ∈ R` if `x ∉ x`:
