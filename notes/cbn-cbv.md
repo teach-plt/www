@@ -43,7 +43,7 @@ We consider an extension by `let`, numerals, and primitive operators:
     EOp.   Exp1 ::= Exp1 Op Exp2;
 
     Bind.  Bind ::=  Ident "=" Exp;
-    separator Bind ";";
+    separator nonempty Bind ";";
 ```
 `let x = e in f` could be regarded just syntactic sugar for `(λ x → f) e`,
 and `let x₁ = e₁; ...; xₙ = eₙ in f` as sugar for
@@ -75,6 +75,11 @@ Example (Church numerals):
     thrice f = λ x → f (f (f x))
 ```
 
+_Note:_ Church numerals are named after
+[Alonzo Church (1903-1995)](https://en.wikipedia.org/wiki/Alonzo_Church)
+who is considered the inventor of λ-calculus.
+
+
 ### Functional languages vs. imperative languages
 
 In λ-calculus and functional languages, functions are _first class_.
@@ -94,7 +99,7 @@ int comp  (int f(int), int g(int), int x) {
 
 Trying 3. `let twice f = comp f f in twice double` in C:
 
-- Attempt 1: illegal type
+- Attempt 1 (curried form): illegal type
   ```c
   int twice (int f(int)) (int x) {
     return comp(f,f,x);
@@ -102,7 +107,7 @@ Trying 3. `let twice f = comp f f in twice double` in C:
   ... twice(double) ...
   ```
 
-- Attempt 2: Cannot partially apply
+- Attempt 2 (uncurried form): Cannot partially apply
   ```c
   int twice (int f(int), int x) {
     return comp(f,f,x);
@@ -119,6 +124,10 @@ Example:  The increment function:
     let plus x y = x + y in plus 1
 ```
 Can be written as anonymous function `λ y → 1 + y`.
+
+_Note:_ Currying is named after [Haskell Curry (1900-1982)](https://en.wikipedia.org/wiki/Haskell_Curry)
+but goes back to [Moses Schönfinkel (1888-1942)](https://en.wikipedia.org/wiki/Moses_Sch%C3%B6nfinkel)
+and [Gottlob Frege (1848-1925)](https://en.wikipedia.org/wiki/Gottlob_Frege).
 
 ### Free and bound variables
 
@@ -153,7 +162,7 @@ How to compute the value of an expression?
 
 ### Digression: Fix-point combinator and Russel paradox
 
-Example (fix-point combinator)
+Example (fix-point combinator `Y`)
 
     Y f = (λ x → f (x x)) (λ x → f (x x))
 
@@ -165,8 +174,8 @@ Example (faculty function)
 
     Y f n = n!
 
-Russel paradox: read application `x y` as `y ∈ x`.
-Define the Russel set `x ∈ R` if `x ∉ x`:
+Russell paradox: read application `x y` as `y ∈ x`.
+Define the Russell set `x ∈ R` if `x ∉ x`:
 
     R x = not (x x)
 
@@ -176,6 +185,11 @@ Does `R` contain itself?
         = not (R R)
         = not (not (R R))
         = not (not (not ...))
+
+_Note_: The Russell paradox is named after
+[Bertrand Russell](https://en.wikipedia.org/wiki/Bertrand_Russell).
+It pointed out an inconsistency in
+[Georg Cantor](https://en.wikipedia.org/wiki/Georg_Cantor)'s naive set theory.
 
 
 Reduction
@@ -213,9 +227,17 @@ _Strategy_ question: where and under which conditions can these rules be applied
 4. Call-by-name: same as 2. but never reduce under λ.
 5. Call-by-value: same as 3. but never reduce under λ, and thus do not consider anything under a λ as a redex.
 
-Example:
+Example redex:
 
     (λ y f → (λ x → x) f (f y))  ((λ z → z) 42)
+
+Possible reducts:
+
+1. `(λ y f → f (f y))  ((λ z → z) 42)`
+2. `λ f → (λ x → x) f (f ((λ z → z) 42)))`
+3. `(λ y f → (λ x → x) f (f y)) 42`
+
+[menti.com 2933 3511](https://www.menti.com/al84fn73xr94)
 
 
 ### Substitution
@@ -349,7 +371,7 @@ Rules for integer expressions:
      γ ⊢ e₁ + e₂ ⇓ n
 ```
 
-Drawback of call-by-value: unused arguments are still evalutated.
+Drawback of call-by-value: unused arguments are still evaluated.
 
 Example:
 
