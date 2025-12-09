@@ -1,6 +1,7 @@
 ---
 title: Typing the lambda calculus
 subtitle: Programming Language Technology, DAT151/DIT231
+date: 2025-12-09 (last updated)
 ---
 
 
@@ -35,6 +36,10 @@ Order of a function type:
 ```
     ord(int)   = 0
     ord(s → t) = max { ord(s) + 1, ord(t) }
+```
+Or:
+```
+    ord(t₁ → ... → tₙ → int) = max { ord(tᵢ) + 1 | i=1..n }
 ```
 Examples:
 
@@ -126,7 +131,7 @@ Deriving `⊢ λ f → λ x → f (f x) : (int → int) → int → int`.
 
     void check(Cxt Γ, Exp e, Type t)
 
-    check(Γ, λx→e, int): type error
+    check(Γ, λx→e, int): type-error
 
     check(Γ, λx→e, s → t):
       check (Γ[x:s], e, t)
@@ -144,10 +149,10 @@ Type **inference** works well for application:
 
     infer(Γ, f e):
       case infer(Γ,f) of
-        int:     type error
+        int:     type-error
         (s → t): if s == infer(Γ,e)
                    then return t
-                   else type error
+                   else type-error
 
 ... but gets stuck at abstraction:
 
@@ -166,14 +171,14 @@ Solutions:
              void check(Cxt Γ, Exp e, Type t)
              Type infer(Cxt Γ, Exp e)
 
-             check(Γ, λx→e, int  ): type error
+             check(Γ, λx→e, int  ): type-error
              check(Γ, λx→e, s → t): check (Γ[x:s], e, t)
-             check(Γ, e   , t    ): unless (infer(Γ,e) == t) type error
+             check(Γ, e   , t    ): unless (infer(Γ,e) == t) type-error
 
              infer(Γ, x)  : lookup(Γ,x)
              infer(Γ, f e):
                case infer(Γ,f) of
-                 int:     type error
+                 int:     type-error
                  (s → t): check(Γ,e,s)
                           return t
 
@@ -333,6 +338,7 @@ This is also called the _composition_ of substitutions and written `σ ∘ τ` (
 
 So:
 
+     X(τσ)   = (Xτ)σ
      (τσ)(X) = (τ(X))σ
 
 Example for substitution composition:
@@ -383,7 +389,7 @@ Optimization of application case:
     infer(Γ, f e):
       r ← infer(Γ, f)
       case r of
-        int    : type error
+        int    : type-error
         (s → t):
            s' ← infer(Γ, e)
            equal(s,s')
@@ -432,11 +438,11 @@ Unification:
 
     unify(int,s→t)
     unify(s→t,int):
-      type error
+      type-error
 
     unify(X,t)
     unify(t,X):
-      if X occurs in t then type error
+      if X occurs in t then type-error
       else solveVar(X,t)
 
 ### Demo
