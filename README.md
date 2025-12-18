@@ -50,7 +50,7 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | Thu 11/12 | 14-15 | [AA] | Hands-on with Lab 4 (Java)    | [live code](live/2025/lab4/Interpreter.java) |  |
 | Tue 16/12 | 13-15 | [AA] | Dependent types (Agda) | live coding [start](live/2025/agda/JVM-start.agda), [result](live/2025/agda/JVM.agda) |  |
 | *Wed 17/12* | *23* |     | *Lab 3 deadline* |  |  |
-| Thu 18/12 | 13-15 | [AA] | Preparing for the exam | last year's [exam](exams/exam-plt-2025-1.pdf), live [solution](live/2025/exam.md) |  |
+| Thu 18/12 | 13-15 | [AA] | Preparing for the exam | last year's [exam](exams/exam-plt-2025-3.pdf), live [solution](live/2025/exam.md) |  |
 
 |    2026     |               |                      |                   |
 |:-----------:|---------------|----------------------|-------------------|
