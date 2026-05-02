@@ -1,8 +1,8 @@
 name: Deploy PLT www
 
 on:
-  push:         { branches: [ master, ci-* ] }
-  pull_request: { branches: [ master, ci-* ] }
+  push:         { branches: [ master ] }
+  pull_request: { branches: [ master ] }
   workflow_dispatch:
 
 defaults:
@@ -15,7 +15,7 @@ jobs:
       # Need python-2, so cannot use 24.04
     env:
       BNFC: 2.9.6.1
-      PANDOC: 3.8.2.1
+      PANDOC: 3.9.0.2
 
     steps:
 
@@ -40,24 +40,34 @@ jobs:
       run: |
         stack config set system-ghc --global true
 
-    - name: Install tectonic
-      run: |
-        cd "${HOME}/.local/bin"
-        curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
+    # - name: Install tectonic
+    #   run: |
+    #     cd "${HOME}/.local/bin"
+    #     curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
 
-    - name: Tectonic version
-      run: |
-        tectonic --version
+    # - name: Install tectonic
+    #   uses: wtfjoke/setup-tectonic@v4
+
+    # - name: Tectonic version
+    #   run: |
+    #     tectonic --version
+
+    # - name: Set up Python 2
+    #   uses: actions/setup-python@v4
+    #   with:
+    #     python-version: ${{ '2.7' }}
 
     - name: Install python 2.7
       run: |
         sudo apt update
         sudo apt install python2
 
+    # To use this action, we need to actions/checkout first, I think.
+    # https://github.com/teach-plt/www/actions/runs/25242318089/job/74020307834#step:12:30
+    # File was unable to be removed Error: EACCES: permission denied, rmdir '/home/runner/work/www/www/Python-2.7.18/build/lib.linux-x86_64-2.7'
+    #
     # - name: Set up Python 2
-    #   uses: actions/setup-python@v4
-    #   with:
-    #     python-version: ${{ '2.7' }}
+    #   uses: peasoft/setup-python2@master
 
     - name: Info about the Python setup
       run: |
@@ -84,32 +94,31 @@ jobs:
         mv bnfc-${{ env.BNFC }}-linux.binary "${HOME}/.local/bin/bnfc"
         chmod +x "${HOME}/.local/bin/bnfc"
 
-    # - name: Setup TeX Live
-    #   uses: teatimeguest/setup-texlive-action@v2
-    #   with:
-    #     packages: >-
-    #       scheme-basic
-    #       graphics
-    #       hyperref
-    #       lkproof
-    #       paralist
-    #       ulem
-    #       xcolor
-    #       etoolbox
+    - name: Setup TeX Live
+      uses:  TeX-Live/setup-texlive-action@v4
+      with:
+        packages: >-
+          scheme-basic
+          graphics
+          hyperref
+          lkproof
+          paralist
+          ulem
+          xcolor
+          etoolbox
 
-    #     # plain
-
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
 
     - name: Build pages
       run: |
-        make pdflatex=tectonic
+        make
+      #  make pdflatex=tectonic
 
     # - name: Setup Pages
     #   uses: actions/configure-pages@v3
     #   # Needed? https://github.com/actions/starter-workflows/issues/1996
 
-    - uses: actions/upload-pages-artifact@v4
+    - uses: actions/upload-pages-artifact@v5
       with:
         path: .
 
