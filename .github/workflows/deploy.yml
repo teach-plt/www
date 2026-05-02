@@ -11,7 +11,7 @@ defaults:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
       # Need python-2, so cannot use 24.04
     env:
       BNFC: 2.9.6.1
@@ -57,13 +57,17 @@ jobs:
     #   with:
     #     python-version: ${{ '2.7' }}
 
-    # - name: Install python 2.7
-    #   run: |
-    #     sudo apt update
-    #     sudo apt install python2
+    - name: Install python 2.7
+      run: |
+        sudo apt update
+        sudo apt install python2
 
-    - name: Set up Python 2
-      uses: peasoft/setup-python2@master
+    # To use this action, we need to actions/checkout first, I think.
+    # https://github.com/teach-plt/www/actions/runs/25242318089/job/74020307834#step:12:30
+    # File was unable to be removed Error: EACCES: permission denied, rmdir '/home/runner/work/www/www/Python-2.7.18/build/lib.linux-x86_64-2.7'
+    #
+    # - name: Set up Python 2
+    #   uses: peasoft/setup-python2@master
 
     - name: Info about the Python setup
       run: |
