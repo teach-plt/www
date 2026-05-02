@@ -45,12 +45,12 @@ jobs:
     #     cd "${HOME}/.local/bin"
     #     curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
 
-    - name: Install tectonic
-      uses: wtfjoke/setup-tectonic@v4
+    # - name: Install tectonic
+    #   uses: wtfjoke/setup-tectonic@v4
 
-    - name: Tectonic version
-      run: |
-        tectonic --version
+    # - name: Tectonic version
+    #   run: |
+    #     tectonic --version
 
     # - name: Set up Python 2
     #   uses: actions/setup-python@v4
@@ -94,24 +94,25 @@ jobs:
         mv bnfc-${{ env.BNFC }}-linux.binary "${HOME}/.local/bin/bnfc"
         chmod +x "${HOME}/.local/bin/bnfc"
 
-    # - name: Setup TeX Live
-    #   uses:  TeX-Live/setup-texlive-action@v4
-    #   with:
-    #     packages: >-
-    #       scheme-basic
-    #       graphics
-    #       hyperref
-    #       lkproof
-    #       paralist
-    #       ulem
-    #       xcolor
-    #       etoolbox
+    - name: Setup TeX Live
+      uses:  TeX-Live/setup-texlive-action@v4
+      with:
+        packages: >-
+          scheme-basic
+          graphics
+          hyperref
+          lkproof
+          paralist
+          ulem
+          xcolor
+          etoolbox
 
     - uses: actions/checkout@v6
 
     - name: Build pages
       run: |
-        make pdflatex=tectonic
+        make
+      #  make pdflatex=tectonic
 
     # - name: Setup Pages
     #   uses: actions/configure-pages@v3
