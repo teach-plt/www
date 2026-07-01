@@ -107,7 +107,7 @@ jobs:
           xcolor
           etoolbox
 
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: Build pages
       run: |
