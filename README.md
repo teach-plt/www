@@ -58,7 +58,7 @@ Material: plt = course book, dragon = Dragon book. Slides follow closely the plt
 | *Thu 15/01* | *8.30-12.30*  | *Exam*               | [solution](exams/solutions-plt-2026-1.pdf) |
 | *Fri 23/01* | *23*          | *Final lab deadline* | *all lab returns* |
 | *Wed 28/01* | *14.30-15.30* | *Exam review*        | EDIT 6128         |
-| *Mon 31/03* | *23*          | *Reexam lab deadline*|                   |
+| *Mon 30/03* | *23*          | *Reexam lab deadline*|                   |
 | *Thu 09/04* | *8.30-12.30*  | *First reexam*       |                   |
 | *Thu 27/08* | *14-18*       | *Second reexam*      |                   |
 
