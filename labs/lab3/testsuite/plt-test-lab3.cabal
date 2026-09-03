@@ -56,4 +56,4 @@ executable plt-test-lab3
    -- Not sure about the lower bounds, so we pick alex and happy versions
    -- that come in the last Stackage LTS (12.26) for GHC 8.4.4.
     , alex:alex   >= 3.2.4  && < 3.6
-    , happy:happy >= 1.19.9 && < 2.2
+    , happy:happy >= 1.19.9 && < 2.3

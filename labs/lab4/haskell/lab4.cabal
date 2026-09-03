@@ -59,7 +59,7 @@ executable lab4
    -- Lower bounds set to versions shipped with GHC 8.4.4
     , base       >= 4.11.1.0 && < 5
     , array      >= 0.5.2.0  && < 0.6
-    , containers >= 0.5.11.0 && < 0.8
+    , containers >= 0.5.11.0 && < 0.9
     , mtl        >= 2.2.2    && < 2.4
 
   ghc-options:
@@ -75,4 +75,4 @@ executable lab4
    -- Not sure about the lower bounds, so we pick alex and happy versions
    -- that come in the last Stackage LTS (12.26) for GHC 8.4.4.
     , alex:alex   >= 3.2.4  && < 3.6
-    , happy:happy >= 1.19.9 && < 2.2
+    , happy:happy >= 1.19.9 && < 2.3
